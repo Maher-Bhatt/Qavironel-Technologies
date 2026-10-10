@@ -2,80 +2,92 @@ import { Project } from '../types';
 
 export const projects: Project[] = [
   {
-    slug: 'classic-infrastructure',
-    title: 'Classic Infrastructure Projects',
-    eyebrow: 'Heavy Civil & Engineering Contractor Platform · Enterprise Client',
-    category: 'Client Work',
-    categoryLabel: 'Client Work · Industrial & Corporate Infrastructure',
-    status: 'Corporate Client Platform',
+    slug: 'kalki',
+    title: 'K.A.L.K.I.',
+    eyebrow: 'Local-First AI Desktop Assistant · Microsoft Store & Open Source',
+    category: 'AI & Software',
+    categoryLabel: 'Applied AI · Software Engineering',
+    status: 'Active Open Source · Live on Microsoft Store',
     featured: true,
     order: 1,
-    year: '2026',
-    summary: 'A full-scale corporate web application and qualification credential showcase for Classic Infrastructure Projects (CIP), an established engineering contracting firm (Est. 2008) executing pipeline networks, municipal drainage, heavy civil works, and mechanical installations.',
-    audience: 'Government procurement officers, municipal corporations, public sector utilities, and industrial plant heads evaluating prequalification credentials and technical execution capacity for tenders.',
-    challenge: 'Classic Infrastructure Projects has over 15 years of proven field execution—including multi-kilometer pipeline networks and municipal storm water RCC box culverts—yet lacked an institutional digital presence. In high-stakes tenders, decision-makers demand immediate, verifiable evidence of past execution, machinery fleets, safety standards, and structured bid inquiry channels.',
+    year: '2025–2026',
+    summary: 'A voice-capable desktop assistant combining a tactical HUD, multi-model inference router (Groq LLaMA-3.3-70B, LLaMA-4-Scout vision, offline Ollama fallback), hardware-bound DPAPI vault, local memory, and guarded platform actions.',
+    audience: 'Power users, developers, and security-conscious creators who want an intelligent desktop companion that operates close to the machine without sending sensitive credentials or unverified actions to uncontrolled third parties.',
+    challenge: 'Most desktop AI assistants either rely entirely on cloud-hosted closed models that log user prompts, or they are fragile CLI scripts with no intuitive graphical interface. K.A.L.K.I. needed to unify voice interaction, multi-model flexibility, and local hardware awareness inside an aesthetic dashboard—while enforcing strict boundary controls over local shell execution.',
     objectives: [
-      'Design an authoritative corporate presence reflecting 15+ years of infrastructure contracting experience.',
-      'Showcase real high-resolution field photography categorized by discipline: Pipeline, Storm Water Drainage, Protection Works, Roads, and Mechanical Engineering.',
-      'Implement an interactive RFP/quotation request system with automated email notifications for corporate bid inquiries.',
-      'Guarantee fast loading speeds for field inspectors and municipal officials reviewing profiles on mobile devices in the field.'
+      'Engineer a responsive visual HUD providing real-time telemetry, model status, and memory state.',
+      'Support swappable inference providers: local models (Ollama/Llama 3) and cloud APIs (Groq LLaMA-3.3-70B, LLaMA-4-Scout, OpenAI, Gemini).',
+      'Implement an authenticated localhost communication layer with DPAPI hardware-bound vault protection.',
+      'Protect system resources by keeping host command execution explicitly sandboxed and gated behind confirmation flags.'
     ],
-    solution: 'Engineered a full-stack corporate platform using TanStack Start, React 19, and Tailwind CSS v4. Features comprehensive project portfolios, verified technical specifications, downloadable company profiles, and structured quotation request workflows.',
-    whyItMatters: 'Proves Qavironel’s capability to serve established heavy-industry contractors and commercial enterprises. We translate complex engineering credentials, machinery assets, and compliance documentation into an authoritative, modern digital experience.',
+    solution: 'Built an architecture centered on an authenticated local daemon paired with a rich tactical PWA HUD. Features voice input with wake-word detection, local SQLite conversational memory, vision-assisted screen analysis, network/security diagnostic utilities (Shodan OSINT, CVE intelligence, Webscan), Telegram remote control, and guarded execution adapters.',
+    whyItMatters: 'AI assistants must not become uninspected backdoors into personal operating systems. By engineering transparent trust boundaries, DPAPI hardware-bound token protection, and local model support, K.A.L.K.I. proves how applied AI and security engineering belong together.',
     workflow: [
-      'Procurement officers review corporate profile, client track record, and verified contracting strengths.',
-      'Filter dynamic project gallery by sector (Pipeline, Drainage, Civil/Structural, Mechanical, Industrial Roads).',
-      'Inspect high-resolution field execution photography and technical scope specifications.',
-      'Submit structured RFP inquiries via integrated quote modal with instant email dispatch to CIP management.'
+      'Daemon startup initializes hardware-bound DPAPI vault and verifies provider availability.',
+      'User triggers interaction via hotkey or voice command.',
+      'Intent engine routes task to either local Ollama daemon or remote model based on task sensitivity.',
+      'System actions execute through guarded adapters with explicit logging and confirmation.'
     ],
     buildNotes: [
-      'Engineered with TanStack Start, React 19, and Tailwind CSS v4.',
-      'High-density webp image pipeline compressing dozens of field photography assets without visual degradation.',
-      'Backend quote API powered by server functions and Nodemailer with enterprise input validation.',
-      'Strict adherence to verified client facts: no fabricated statistics, exaggerated capacities, or synthetic awards.'
+      'Local-first runtime ensures basic offline utilities operate without active internet access.',
+      'Speech recognition powered by offline VOSK models alongside optional cloud Whisper.',
+      'Cybersecurity toolkit includes IP lookups, port checks, and password entropy testers.',
+      'Published live on the Microsoft Store (Package ID: 9P6HJPQZBGFQ), with continuous open-source releases on GitHub.'
     ],
-    scopeNote: 'Engineered for Classic Infrastructure Projects (CIP), established 2008.',
-    technologies: ['React 19', 'TanStack Start', 'Tailwind CSS v4', 'Nodemailer', 'High-Density WebP Pipeline', 'Lucide Icons', 'Zod Validation'],
-    heroImage: '/images/projects/cip/cip-new-1-hero.webp',
+    scopeNote: 'Experimental capabilities such as deep operating system automation remain strictly guarded behind manual confirmation flags to ensure device safety.',
+    technologies: ['Python', 'Local LLMs (Ollama)', 'Groq (LLaMA-3.3-70B)', 'DPAPI Vault', 'VOSK Voice Recognition', 'Custom HUD Architecture', 'Security Boundaries'],
+    heroImage: '/images/projects/kalki/KALKI - Microsoft Store Marketing Kit@2x.png',
     gallery: [
       {
-        src: '/images/projects/cip/cip-pipeline-110-hero.webp',
-        alt: 'Large-diameter pipeline network excavation and laying',
-        caption: 'Pipeline transmission network execution featuring heavy mechanical excavation and precision joint welding.'
+        src: '/images/projects/kalki/01 Hero.png',
+        alt: 'K.A.L.K.I. main desktop HUD interface and active cognitive status',
+        caption: 'The reactive desktop HUD displaying active model connection, memory state, and core interaction center.'
       },
       {
-        src: '/images/projects/cip/cip-drainage-040-hero.webp',
-        alt: 'Municipal storm water RCC box drain construction',
-        caption: 'Heavy reinforced cement concrete (RCC) storm water drainage channel constructed for municipal flood management.'
+        src: '/images/projects/kalki/02 Ask.png',
+        alt: 'K.A.L.K.I. conversational intelligence interface and multi-model prompting',
+        caption: 'Conversational intelligence workspace with multi-model prompt orchestration and real-time streaming telemetry.'
       },
       {
-        src: '/images/projects/cip/cip-protection-107-hero.webp',
-        alt: 'Gabion river retaining wall and embankment protection',
-        caption: 'Engineered gabion retaining wall system providing structural embankment reinforcement against erosion.'
+        src: '/images/projects/kalki/03 Today.png',
+        alt: 'K.A.L.K.I. tactical daily briefing and agenda oversight',
+        caption: 'Autonomous daily agenda tracking, task synthesis, and proactive desktop notification intelligence.'
       },
       {
-        src: '/images/projects/cip/cip-roads-117.webp',
-        alt: 'Industrial asphalt roadway construction and compaction',
-        caption: 'Heavy-duty industrial bitumen roadway surfacing and mechanical compaction for plant transport corridors.'
+        src: '/images/projects/kalki/04 Memory.png',
+        alt: 'K.A.L.K.I. local vector memory vault and semantic retrieval indexing',
+        caption: 'Local-first vector memory vault keeping conversational indexing strictly on physical hardware.'
       },
       {
-        src: '/images/projects/cip/cip-mechanical-115.webp',
-        alt: 'Plant mechanical piping and structural installation',
-        caption: 'Industrial mechanical piping fabrication and valve manifold assembly for chemical and utility installations.'
+        src: '/images/projects/kalki/05 Workbench.png',
+        alt: 'K.A.L.K.I. developer workbench and guarded code execution studio',
+        caption: 'Execution workbench with sandboxed code compilation, system utilities, and diagnostic adapters.'
       },
       {
-        src: '/images/projects/cip/cip-new-2-hero.webp',
-        alt: 'Deep trench pipeline alignment and safety shoring',
-        caption: 'Deep trench pipeline alignment with structural earth retention and laser level alignment.'
+        src: '/images/projects/kalki/06 Oversight.png',
+        alt: 'K.A.L.K.I. runtime telemetry and inference oversight monitor',
+        caption: 'Real-time telemetry monitor tracking token latency, model provider health, and daemon operations.'
+      },
+      {
+        src: '/images/projects/kalki/07 Settings.png',
+        alt: 'K.A.L.K.I. hardware-bound DPAPI vault configuration and preferences',
+        caption: 'DPAPI hardware-bound secrets vault and localhost authorization settings.'
+      },
+      {
+        src: '/images/projects/kalki/KALKI - Microsoft Store Marketing Kit@2x.png',
+        alt: 'K.A.L.K.I. Microsoft Store official release architecture kit',
+        caption: 'Official Microsoft Store release presentation highlighting offline voice recognition, local privacy, and multi-model flexibility.'
       }
     ],
     metrics: [
-      { value: 'Est. 2008', label: 'Company Heritage', context: '15+ years of verified infrastructure contracting' },
-      { value: '62+', label: 'Field Photo Assets', context: 'High-resolution project gallery documentation' },
-      { value: 'TanStack', label: 'Start Architecture', context: 'React 19 full-stack performance' }
+      { value: 'v1.0.24', label: 'Store Version', context: 'Live on Microsoft Store (ID: 9P6HJPQZBGFQ)' },
+      { value: 'Local-First', label: 'Architecture', context: 'Data and credentials stay on your hardware' },
+      { value: 'Multi-LLM', label: 'Inference Routing', context: 'Ollama, Groq LLaMA 3.3, LLaMA-4-Scout, OpenAI' }
     ],
     links: [
-      { label: 'Client Category: Heavy Civil EPC', url: '/contact', type: 'external' }
+      { label: 'View on Microsoft Store', url: 'https://apps.microsoft.com/detail/9P6HJPQZBGFQ', type: 'live' },
+      { label: 'View Repository on GitHub', url: 'https://github.com/Maher-Bhatt/KALKI', type: 'github' },
+      { label: 'View Releases on GitHub', url: 'https://github.com/Maher-Bhatt/KALKI/releases', type: 'live' }
     ]
   },
   {
@@ -154,92 +166,75 @@ export const projects: Project[] = [
     ]
   },
   {
-    slug: 'kalki',
-    title: 'K.A.L.K.I.',
-    eyebrow: 'Local-First AI Desktop Assistant · Microsoft Store & Open Source',
-    category: 'AI & Software',
-    categoryLabel: 'Applied AI · Software Engineering',
-    status: 'Active Open Source · Live on Microsoft Store',
+    slug: 'classic-infrastructure',
+    title: 'Classic Infrastructure Projects',
+    eyebrow: 'Enterprise Contracting Platform · Full-Stack Platform',
+    category: 'Client Work',
+    categoryLabel: 'Client Work · Industrial & Corporate Infrastructure',
+    status: 'Corporate Client Platform',
     featured: true,
-    order: 3,
-    year: '2025–2026',
-    summary: 'A voice-capable desktop assistant combining a tactical HUD, multi-model inference router (Groq LLaMA-3.3-70B, LLaMA-4-Scout vision, offline Ollama fallback), hardware-bound DPAPI vault, local memory, and guarded platform actions.',
-    audience: 'Power users, developers, and security-conscious creators who want an intelligent desktop companion that operates close to the machine without sending sensitive credentials or unverified actions to uncontrolled third parties.',
-    challenge: 'Most desktop AI assistants either rely entirely on cloud-hosted closed models that log user prompts, or they are fragile CLI scripts with no intuitive graphical interface. K.A.L.K.I. needed to unify voice interaction, multi-model flexibility, and local hardware awareness inside an aesthetic dashboard—while enforcing strict boundary controls over local shell execution.',
+    order: 5,
+    year: '2026',
+    summary: 'A full-scale corporate web application and qualification credential showcase for Classic Infrastructure Projects (CIP), an established engineering contracting firm (Est. 2008) executing pipeline networks, municipal drainage, heavy civil works, and mechanical installations.',
+    audience: 'Government procurement officers, municipal corporations, public sector utilities, and industrial plant heads evaluating prequalification credentials and technical execution capacity for tenders.',
+    challenge: 'Classic Infrastructure Projects has over 15 years of proven field execution—including multi-kilometer pipeline networks and municipal storm water RCC box culverts—yet lacked an institutional digital presence. In high-stakes tenders, decision-makers demand immediate, verifiable evidence of past execution, machinery fleets, safety standards, and structured bid inquiry channels.',
     objectives: [
-      'Engineer a responsive visual HUD providing real-time telemetry, model status, and memory state.',
-      'Support swappable inference providers: local models (Ollama/Llama 3) and cloud APIs (Groq LLaMA-3.3-70B, LLaMA-4-Scout, OpenAI, Gemini).',
-      'Implement an authenticated localhost communication layer with DPAPI hardware-bound vault protection.',
-      'Protect system resources by keeping host command execution explicitly sandboxed and gated behind confirmation flags.'
+      'Design an authoritative corporate presence reflecting 15+ years of infrastructure contracting experience.',
+      'Showcase real high-resolution field photography categorized by discipline: Pipeline, Storm Water Drainage, Protection Works, Roads, and Mechanical Engineering.',
+      'Implement an interactive RFP/quotation request system with automated email notifications for corporate bid inquiries.',
+      'Guarantee fast loading speeds for field inspectors and municipal officials reviewing profiles on mobile devices in the field.'
     ],
-    solution: 'Built an architecture centered on an authenticated local daemon paired with a rich tactical PWA HUD. Features voice input with wake-word detection, local SQLite conversational memory, vision-assisted screen analysis, network/security diagnostic utilities (Shodan OSINT, CVE intelligence, Webscan), Telegram remote control, and guarded execution adapters.',
-    whyItMatters: 'AI assistants must not become uninspected backdoors into personal operating systems. By engineering transparent trust boundaries, DPAPI hardware-bound token protection, and local model support, K.A.L.K.I. proves how applied AI and security engineering belong together.',
+    solution: 'Engineered a full-stack corporate platform using TanStack Start, React 19, and Tailwind CSS v4. Features comprehensive project portfolios, verified technical specifications, downloadable company profiles, and structured quotation request workflows.',
+    whyItMatters: 'Proves Qavironel’s capability to serve established heavy-industry contractors and commercial enterprises. We translate complex engineering credentials, machinery assets, and compliance documentation into an authoritative, modern digital experience.',
     workflow: [
-      'Daemon startup initializes hardware-bound DPAPI vault and verifies provider availability.',
-      'User triggers interaction via hotkey or voice command.',
-      'Intent engine routes task to either local Ollama daemon or remote model based on task sensitivity.',
-      'System actions execute through guarded adapters with explicit logging and confirmation.'
+      'Procurement officers review corporate profile, client track record, and verified contracting strengths.',
+      'Filter dynamic project gallery by sector (Pipeline, Drainage, Civil/Structural, Mechanical, Industrial Roads).',
+      'Inspect high-resolution field execution photography and technical scope specifications.',
+      'Submit structured RFP inquiries via integrated quote modal with instant email dispatch to CIP management.'
     ],
     buildNotes: [
-      'Local-first runtime ensures basic offline utilities operate without active internet access.',
-      'Speech recognition powered by offline VOSK models alongside optional cloud Whisper.',
-      'Cybersecurity toolkit includes IP lookups, port checks, and password entropy testers.',
-      'Published live on the Microsoft Store (Package ID: 9P6HJPQZBGFQ), with continuous open-source releases on GitHub.'
+      'Engineered with TanStack Start, React 19, and Tailwind CSS v4.',
+      'High-density webp image pipeline compressing dozens of field photography assets without visual degradation.',
+      'Backend quote API powered by server functions and Nodemailer with enterprise input validation.',
+      'Strict adherence to verified client facts: no fabricated statistics, exaggerated capacities, or synthetic awards.'
     ],
-    scopeNote: 'Experimental capabilities such as deep operating system automation remain strictly guarded behind manual confirmation flags to ensure device safety.',
-    technologies: ['Python', 'Local LLMs (Ollama)', 'Groq (LLaMA-3.3-70B)', 'DPAPI Vault', 'VOSK Voice Recognition', 'Custom HUD Architecture', 'Security Boundaries'],
-    heroImage: '/images/projects/kalki/01 Hero.png',
+    scopeNote: 'Engineered for Classic Infrastructure Projects (CIP), established 2008.',
+    technologies: ['React 19', 'TanStack Start', 'Tailwind CSS v4', 'Nodemailer', 'High-Density WebP Pipeline', 'Lucide Icons', 'Zod Validation'],
+    heroImage: '/images/projects/cip/cip-new-1-hero.webp',
     gallery: [
       {
-        src: '/images/projects/kalki/01 Hero.png',
-        alt: 'K.A.L.K.I. main desktop HUD interface and active cognitive status',
-        caption: 'The reactive desktop HUD displaying active model connection, memory state, and core interaction center.'
+        src: '/images/projects/cip/cip-pipeline-110-hero.webp',
+        alt: 'Large-diameter pipeline network excavation and laying',
+        caption: 'Pipeline transmission network execution featuring heavy mechanical excavation and precision joint welding.'
       },
       {
-        src: '/images/projects/kalki/02 Ask.png',
-        alt: 'K.A.L.K.I. conversational intelligence interface and multi-model prompting',
-        caption: 'Conversational intelligence workspace with multi-model prompt orchestration and real-time streaming telemetry.'
+        src: '/images/projects/cip/cip-drainage-040-hero.webp',
+        alt: 'Municipal storm water RCC box drain construction',
+        caption: 'Heavy reinforced cement concrete (RCC) storm water drainage channel constructed for municipal flood management.'
       },
       {
-        src: '/images/projects/kalki/03 Today.png',
-        alt: 'K.A.L.K.I. tactical daily briefing and agenda oversight',
-        caption: 'Autonomous daily agenda tracking, task synthesis, and proactive desktop notification intelligence.'
+        src: '/images/projects/cip/cip-roads-117.webp',
+        alt: 'Industrial asphalt roadway construction and compaction',
+        caption: 'Heavy-duty industrial bitumen roadway surfacing and mechanical compaction for plant transport corridors.'
       },
       {
-        src: '/images/projects/kalki/04 Memory.png',
-        alt: 'K.A.L.K.I. local vector memory vault and semantic retrieval indexing',
-        caption: 'Local-first vector memory vault keeping conversational indexing strictly on physical hardware.'
+        src: '/images/projects/cip/cip-mechanical-115.webp',
+        alt: 'Plant mechanical piping and structural installation',
+        caption: 'Industrial mechanical piping fabrication and valve manifold assembly for chemical and utility installations.'
       },
       {
-        src: '/images/projects/kalki/05 Workbench.png',
-        alt: 'K.A.L.K.I. developer workbench and guarded code execution studio',
-        caption: 'Execution workbench with sandboxed code compilation, system utilities, and diagnostic adapters.'
-      },
-      {
-        src: '/images/projects/kalki/06 Oversight.png',
-        alt: 'K.A.L.K.I. runtime telemetry and inference oversight monitor',
-        caption: 'Real-time telemetry monitor tracking token latency, model provider health, and daemon operations.'
-      },
-      {
-        src: '/images/projects/kalki/07 Settings.png',
-        alt: 'K.A.L.K.I. hardware-bound DPAPI vault configuration and preferences',
-        caption: 'DPAPI hardware-bound secrets vault and localhost authorization settings.'
-      },
-      {
-        src: '/images/projects/kalki/KALKI - Microsoft Store Marketing Kit@2x.png',
-        alt: 'K.A.L.K.I. Microsoft Store official release architecture kit',
-        caption: 'Official Microsoft Store release presentation highlighting offline voice recognition, local privacy, and multi-model flexibility.'
+        src: '/images/projects/cip/cip-new-2-hero.webp',
+        alt: 'Deep trench pipeline alignment and safety shoring',
+        caption: 'Deep trench pipeline alignment with structural earth retention and laser level alignment.'
       }
     ],
     metrics: [
-      { value: 'v1.0.24', label: 'Store Version', context: 'Live on Microsoft Store (ID: 9P6HJPQZBGFQ)' },
-      { value: 'Local-First', label: 'Architecture', context: 'Data and credentials stay on your hardware' },
-      { value: 'Multi-LLM', label: 'Inference Routing', context: 'Ollama, Groq LLaMA 3.3, LLaMA-4-Scout, OpenAI' }
+      { value: 'Est. 2008', label: 'Company Heritage', context: '15+ years of verified infrastructure contracting' },
+      { value: '62+', label: 'Field Photo Assets', context: 'High-resolution project gallery documentation' },
+      { value: 'TanStack', label: 'Start Architecture', context: 'React 19 full-stack performance' }
     ],
     links: [
-      { label: 'View on Microsoft Store', url: 'https://apps.microsoft.com/detail/9P6HJPQZBGFQ', type: 'live' },
-      { label: 'View Repository on GitHub', url: 'https://github.com/Maher-Bhatt/KALKI', type: 'github' },
-      { label: 'View Releases on GitHub', url: 'https://github.com/Maher-Bhatt/KALKI/releases', type: 'live' }
+      { label: 'Client Category: Heavy Civil EPC', url: '/contact', type: 'external' }
     ]
   },
   {

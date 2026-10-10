@@ -8,7 +8,7 @@ import { services } from '../data/services';
 import { companyConfig } from '../data/company';
 import { VideoShowreel } from '../components/media/VideoShowreel';
 import { AmbientHeroCanvas } from '../components/media/AmbientHeroCanvas';
-import { Hero3DCanvas } from '../components/3d/Hero3DCanvas';
+import { Hero3DArchitectureStack } from '../components/3d/Hero3DArchitectureStack';
 import { Interactive3DSphere } from '../components/3d/Interactive3DSphere';
 import { ProjectCard } from '../components/work/ProjectCard';
 import { 
@@ -200,24 +200,16 @@ export const HomePage: React.FC = () => {
               </motion.div>
             </div>
 
-            {/* Right Column: Interactive 3D WebGL Sculpture (5 Cols) */}
+            {/* Right Column: Interactive 3D Digital Product Architecture Stack (5 Cols) */}
             <div className="lg:col-span-5 relative flex items-center justify-center">
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.9, delay: 0.2 }}
-                className="relative w-full max-w-[460px] aspect-square flex items-center justify-center rounded-2xl bg-radial from-[#F8F9FA]/80 to-transparent p-2 border border-[#E5E7EB]/40 shadow-xs"
+                className="relative w-full max-w-[480px] aspect-square flex items-center justify-center rounded-2xl bg-radial from-[#F8F9FA]/90 to-transparent p-2 border border-[#E5E7EB]/60 shadow-xs"
               >
-                {/* 3D WebGL Canvas */}
-                <Hero3DCanvas className="w-full h-full" />
-
-                {/* Interactive Telemetry Pill Badge */}
-                <div className="absolute -bottom-3 px-4 py-1.5 rounded-full glass-card border border-white/80 shadow-md text-[0.7rem] font-mono text-[#52525B] flex items-center gap-2 backdrop-blur-md">
-                  <span className="w-2 h-2 rounded-full bg-[#E0561B] animate-pulse" />
-                  <span className="font-semibold text-[#0A0A0A]">3D SPATIAL KINETICS</span>
-                  <span className="text-[#A1A1AA]">·</span>
-                  <span>INTERACTIVE LIGHTING</span>
-                </div>
+                {/* 3D WebGL Connected Architecture Engine */}
+                <Hero3DArchitectureStack className="w-full h-full" />
               </motion.div>
             </div>
           </div>

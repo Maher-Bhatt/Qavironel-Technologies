@@ -18,7 +18,7 @@ export const SEO: React.FC<SEOProps> = ({
   url = 'https://qavironel.com'
 }) => {
   const defaultTitle = 'Qavironel Technologies | Advanced Digital Studio';
-  const defaultDesc = companyConfig.shortDescription || 'We engineer high-velocity digital products, brands, and AI architectures.';
+  const defaultDesc = companyConfig.description || 'We engineer high-velocity digital products, brands, and AI architectures.';
   
   const siteTitle = title ? `${title} | Qavironel` : defaultTitle;
   const siteDesc = description || defaultDesc;

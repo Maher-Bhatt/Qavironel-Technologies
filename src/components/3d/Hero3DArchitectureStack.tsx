@@ -55,6 +55,9 @@ export const Hero3DArchitectureStack: React.FC<Hero3DArchitectureStackProps> = (
     // CUSTOM CURVE (Precision Torsion Ribbon)
     // ─────────────────────────────────────────────────────────────
     class InfinityCurve extends THREE.Curve<THREE.Vector3> {
+      constructor() {
+        super();
+      }
       getPoint(t: number, optionalTarget = new THREE.Vector3()) {
         const p = 2; // lobes
         const q = 3;

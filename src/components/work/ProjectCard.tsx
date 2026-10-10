@@ -132,7 +132,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                 const target = e.currentTarget;
                 if (!target.dataset.fallback) {
                   target.dataset.fallback = 'true';
-                  target.src = '/images/projects/kalki/kalki-hero.png';
+                  target.src = 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=2000&auto=format&fit=crop';
                 }
               }}
               className={`max-w-full max-h-full w-auto h-auto object-contain drop-shadow-md transition-transform duration-500 ease-out group-hover:scale-[1.02] ${

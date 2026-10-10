@@ -10,7 +10,7 @@ export const SiteFooter: React.FC = () => {
 
   return (
     <footer className="bg-[#F8F9FA] text-[#0A0A0A] border-t border-[#E5E7EB] pt-24 pb-12">
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+      <div className="max-w-[1800px] w-full mx-auto px-5 sm:px-8 lg:px-12">
         {/* Massive Editorial Brand Statement */}
         <div className="pb-16 border-b border-[#E5E7EB] flex flex-col lg:flex-row lg:items-end justify-between gap-8">
           <div>
@@ -158,3 +158,4 @@ export const SiteFooter: React.FC = () => {
     </footer>
   );
 };
+

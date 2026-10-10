@@ -62,3 +62,4 @@ export const ImageLightbox: React.FC<ImageLightboxProps> = ({ item, onClose }) =
     </div>
   );
 };
+

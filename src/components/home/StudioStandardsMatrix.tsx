@@ -28,7 +28,7 @@ export const StudioStandardsMatrix: React.FC<StudioStandardsMatrixProps> = ({ on
         aria-hidden="true" 
       />
 
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 relative z-10">
+      <div className="max-w-[1800px] w-full mx-auto px-5 sm:px-8 lg:px-12 relative z-10">
         {/* Section Header */}
         <div className="max-w-3xl mb-16">
           <span className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-[#E0561B] block mb-3">
@@ -212,3 +212,4 @@ export const StudioStandardsMatrix: React.FC<StudioStandardsMatrixProps> = ({ on
     </section>
   );
 };
+

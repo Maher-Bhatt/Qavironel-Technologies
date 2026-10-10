@@ -47,3 +47,4 @@ export const SEO: React.FC<SEOProps> = ({
     </Helmet>
   );
 };
+

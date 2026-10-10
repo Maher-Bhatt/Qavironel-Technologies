@@ -43,3 +43,4 @@ export const ProjectFilters: React.FC<ProjectFiltersProps> = ({
     </div>
   );
 };
+

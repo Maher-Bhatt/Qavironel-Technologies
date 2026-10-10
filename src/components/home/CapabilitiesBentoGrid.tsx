@@ -19,7 +19,7 @@ export const CapabilitiesBentoGrid: React.FC = () => {
 
   return (
     <section className="py-24 sm:py-32 border-b border-[#E5E7EB] bg-white">
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+      <div className="max-w-[1800px] w-full mx-auto px-5 sm:px-8 lg:px-12">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 border-b border-[#E5E7EB]">
           <div>
@@ -254,3 +254,4 @@ export const CapabilitiesBentoGrid: React.FC = () => {
   );
 };
 export default CapabilitiesBentoGrid;
+

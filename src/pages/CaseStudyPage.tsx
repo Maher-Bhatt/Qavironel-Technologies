@@ -49,7 +49,7 @@ export const CaseStudyPage: React.FC = () => {
 
   return (
     <article className="bg-white text-[#0A0A0A] pt-28 sm:pt-36 pb-24 selection:bg-[#E0561B] selection:text-white">
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+      <div className="max-w-[1800px] w-full mx-auto px-5 sm:px-8 lg:px-12">
         {/* Back Link */}
         <div className="mb-8">
           <Link 
@@ -434,4 +434,5 @@ export const CaseStudyPage: React.FC = () => {
     </article>
   );
 };
+
 

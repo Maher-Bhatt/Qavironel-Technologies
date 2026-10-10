@@ -62,3 +62,4 @@ export const RevealHeadline: React.FC<RevealHeadlineProps> = ({
   );
 };
 export default RevealHeadline;
+

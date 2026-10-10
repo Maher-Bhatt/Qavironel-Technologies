@@ -160,3 +160,4 @@ export const Spatial3DPrism: React.FC<Spatial3DPrismProps> = ({
 };
 
 export default Spatial3DPrism;
+

@@ -180,3 +180,4 @@ export const Hero3DArchitectureStack: React.FC<Hero3DArchitectureStackProps> = (
 };
 
 export default Hero3DArchitectureStack;
+

@@ -148,3 +148,4 @@ export const Spatial3DTorus: React.FC<Spatial3DTorusProps> = ({
 };
 
 export default Spatial3DTorus;
+

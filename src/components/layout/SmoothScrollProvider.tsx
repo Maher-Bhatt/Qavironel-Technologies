@@ -33,3 +33,4 @@ export const SmoothScrollProvider: React.FC<{ children: React.ReactNode }> = ({ 
   return <>{children}</>;
 };
 export default SmoothScrollProvider;
+

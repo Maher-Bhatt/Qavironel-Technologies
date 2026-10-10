@@ -13,7 +13,7 @@ export const SiteHeader: React.FC = () => {
   const [soundOn, setSoundOn] = useState(false);
   const location = useLocation();
 
-  const isDarkRoute = location.pathname === '/contact';
+  const isDarkRoute = false;
 
   useEffect(() => {
     setSoundOn(isAudioEnabled());
@@ -59,7 +59,7 @@ export const SiteHeader: React.FC = () => {
       <header 
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${headerBgClass}`}
       >
-        <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 flex items-center justify-between">
+        <div className="max-w-[1800px] w-full mx-auto px-5 sm:px-8 lg:px-12 flex items-center justify-between">
           <Logo variant="horizontal" theme={isDarkRoute ? 'dark' : 'light'} size="lg" />
 
           {/* Desktop Navigation */}
@@ -247,3 +247,4 @@ export const SiteHeader: React.FC = () => {
     </>
   );
 };
+

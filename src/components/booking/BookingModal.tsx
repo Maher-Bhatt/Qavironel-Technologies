@@ -788,3 +788,4 @@ export const BookingModal: React.FC<BookingModalProps> = ({
     </div>
   );
 };
+

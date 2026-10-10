@@ -284,3 +284,4 @@ export const Clay3DSculpture: React.FC<Clay3DSculptureProps> = ({
     </div>
   );
 };
+

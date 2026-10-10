@@ -77,7 +77,7 @@ export const HomePage: React.FC = () => {
           aria-hidden="true" 
         />
 
-        <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 relative z-10">
+        <div className="max-w-[1800px] w-full mx-auto px-5 sm:px-8 lg:px-12 relative z-10">
           {/* Top Status Pill & Kinetic Tags */}
           <motion.div 
             initial={{ opacity: 0, y: 16 }}
@@ -267,7 +267,7 @@ export const HomePage: React.FC = () => {
 
       {/* 04. STUDIO MANIFESTO & PHILOSOPHY (ESTABLISHING THE BRAND) */}
       <section className="py-24 sm:py-32 border-b border-[#E5E7EB] bg-[#F8F9FA] relative">
-        <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+        <div className="max-w-[1800px] w-full mx-auto px-5 sm:px-8 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
             <div className="lg:col-span-5 space-y-6">
               <div>
@@ -378,7 +378,7 @@ export const HomePage: React.FC = () => {
 
       {/* 05. CURATED WORK (SLEEK, REFINED AGENCY SHOWCASE — CLAY STYLE) */}
       <section className="py-24 sm:py-32 border-b border-[#E5E7EB] bg-white relative">
-        <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+        <div className="max-w-[1800px] w-full mx-auto px-5 sm:px-8 lg:px-12">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-10 border-b border-[#E5E7EB]">
             <div>
               <div className="flex items-center gap-2 mb-2">
@@ -494,7 +494,7 @@ export const HomePage: React.FC = () => {
 
       {/* 07. HOW WE BUILD — THE 4-STAGE GLOBAL DELIVERY MODEL */}
       <section className="py-24 sm:py-32 border-b border-[#E5E7EB] bg-white">
-        <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+        <div className="max-w-[1800px] w-full mx-auto px-5 sm:px-8 lg:px-12">
           <div className="max-w-3xl mb-16">
             <span className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-[#E0561B] block mb-2">
               Our Process
@@ -590,4 +590,5 @@ export const HomePage: React.FC = () => {
     </>
   );
 };
+
 

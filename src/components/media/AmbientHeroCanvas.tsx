@@ -228,3 +228,4 @@ export const AmbientHeroCanvas: React.FC = () => {
     />
   );
 };
+

@@ -60,3 +60,4 @@ export const LegalPage: React.FC = () => {
   );
 };
 
+

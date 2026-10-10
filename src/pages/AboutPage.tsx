@@ -28,7 +28,7 @@ export const AboutPage: React.FC = () => {
     <>
       <SEO title="About" />
       <div className="bg-white text-[#0A0A0A] pt-28 sm:pt-36 pb-24 selection:bg-[#E0561B] selection:text-white">
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+      <div className="max-w-[1800px] w-full mx-auto px-5 sm:px-8 lg:px-12">
         {/* Header with 3D Spatial Crystalline Prism */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pb-12 border-b border-[#E5E7EB]">
           <div className="lg:col-span-8 max-w-3xl">
@@ -260,4 +260,5 @@ export const AboutPage: React.FC = () => {
     </>
   );
 };
+
 

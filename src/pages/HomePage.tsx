@@ -10,8 +10,7 @@ import { projects } from '../data/projects';
 import { services } from '../data/services';
 import { companyConfig } from '../data/company';
 import { VideoShowreel } from '../components/media/VideoShowreel';
-import { AmbientHeroCanvas } from '../components/media/AmbientHeroCanvas';
-import { Hero3DArchitectureStack } from '../components/3d/Hero3DArchitectureStack';
+import { Clay3DSculpture } from '../components/3d/Clay3DSculpture';
 import { Interactive3DSphere } from '../components/3d/Interactive3DSphere';
 import { ProjectCard } from '../components/work/ProjectCard';
 import { 
@@ -63,117 +62,67 @@ export const HomePage: React.FC = () => {
 
   return (
     <div className="bg-white text-[#0A0A0A] overflow-hidden selection:bg-[#E0561B] selection:text-white">
-      {/* 01. BRAND-FIRST EDITORIAL HERO SECTION (CLAY.GLOBAL PURE WHITE CANVAS) */}
-      <section className="relative pt-32 sm:pt-40 pb-20 sm:pb-28 border-b border-[#E5E7EB]">
-        {/* Interactive Ambient Fluid Wave Canvas */}
-        <AmbientHeroCanvas />
-
-        {/* Subtle Ambient Radial Highlight */}
-        <div 
-          className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-[#E0561B]/5 rounded-full blur-[140px] pointer-events-none" 
-          aria-hidden="true" 
-        />
-
+      {/* 01. BRAND-FIRST EDITORIAL HERO SECTION (CLAY.GLOBAL LUXURY STANDARD) */}
+      <section className="relative pt-32 sm:pt-40 pb-20 sm:pb-28 border-b border-[#E5E7EB] bg-white">
         <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 relative z-10">
-          {/* Top Status Pill & Kinetic Tags */}
-          <motion.div 
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="flex flex-wrap items-center gap-2.5 mb-8"
-          >
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F8F9FA] border border-[#E5E7EB] text-xs font-mono text-[#52525B] shadow-xs">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="font-semibold text-[#0A0A0A]">GLOBAL REMOTE STUDIO</span>
-              <span className="text-[#E0561B]">·</span>
-              <span className="text-[#E0561B] font-medium">AVAILABLE FOR NEW BUILDS</span>
-            </div>
-
-            <div className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#F8F9FA] border border-[#E5E7EB] text-xs font-mono text-[#52525B]">
-              <span className="text-[#E0561B]">✦</span>
-              <span>Applied AI & Multimodal Workflows</span>
-            </div>
-
-            <div className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#F8F9FA] border border-[#E5E7EB] text-xs font-mono text-[#52525B]">
-              <span className="text-emerald-500">⚡</span>
-              <span>Sub-0.8s Core Web Vitals</span>
-            </div>
-          </motion.div>
-
-          {/* Hero Two-Column Grid: Bold Editorial Typography + Interactive 3D WebGL Sculpture */}
+          {/* Hero Two-Column Grid: Bold Editorial Typography + Interactive 3D Tactile Porcelain Sculpture */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            {/* Left Column: Editorial Typography & Actions (7 Cols) */}
+            {/* Left Column: Pure Editorial Typography & Actions (7 Cols) */}
             <div className="lg:col-span-7">
-              <RevealHeadline
-                className="font-sans font-extrabold text-4xl sm:text-6xl lg:text-6xl xl:text-7xl tracking-tight text-[#0A0A0A] leading-[1.04] mb-6"
-                delay={0.1}
-                highlightWord={['applied', 'ai']}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
               >
-                {"We engineer digital products,\napplied AI & high-velocity web systems."}
-              </RevealHeadline>
+                <h1 className="font-sans font-extrabold text-4xl sm:text-6xl lg:text-7xl xl:text-[4.6rem] tracking-tight text-[#0A0A0A] leading-[1.05] mb-8">
+                  Qavironel is an applied AI and digital product studio
+                </h1>
+              </motion.div>
 
               <motion.div
-                initial={{ opacity: 0, y: 24 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.2 }}
+                transition={{ duration: 0.7, delay: 0.15 }}
               >
-                <p className="text-base sm:text-lg lg:text-xl text-[#52525B] font-light leading-relaxed max-w-2xl">
-                  Qavironel Technologies transforms ambitious ideas into thoughtfully architected, high-velocity digital products. We partner directly with visionary founders, startups, and companies worldwide—combining digital craftsmanship, modern full-stack engineering, and practical AI.
+                <p className="text-lg sm:text-xl lg:text-2xl text-[#52525B] font-light leading-relaxed max-w-2xl mb-10">
+                  We engineer bespoke digital experiences, high-velocity web platforms, and applied AI systems for visionary founders and brands worldwide.
                 </p>
               </motion.div>
 
-              {/* Action CTAs (Magnetic Physics + Micro-Acoustics) */}
+              {/* Action CTAs (Clay Standard: Restrained & High Craft) */}
               <motion.div
-                initial={{ opacity: 0, y: 24 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.3 }}
-                className="mt-8 sm:mt-10 flex flex-wrap items-center gap-4"
+                transition={{ duration: 0.7, delay: 0.25 }}
+                className="flex flex-wrap items-center gap-5"
               >
                 <MagneticButton
-                  onClick={() => navigate('/contact')}
-                  className="px-8 py-4 rounded-full bg-[#E0561B] hover:bg-[#d04a14] text-white text-xs font-bold uppercase tracking-wider shadow-[0_8px_25px_rgba(224,86,27,0.3)] group"
+                  onClick={() => openBookingModal('call')}
+                  className="px-8 py-4 rounded-full bg-[#0A0A0A] hover:bg-[#E0561B] text-white text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-md group"
                 >
                   <span>Start a Project</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </MagneticButton>
 
-                <MagneticButton
-                  onClick={() => openBookingModal('call')}
-                  className="px-6 py-4 rounded-full bg-[#0A0A0A] hover:bg-black text-white text-xs font-bold uppercase tracking-wider shadow-xs group"
-                >
-                  <Calendar className="w-4 h-4 text-[#E0561B] group-hover:scale-110 transition-transform" />
-                  <span>Book Discovery (30m)</span>
-                </MagneticButton>
-
-                <MagneticButton
-                  onClick={() => openBookingModal('quotation')}
-                  className="px-6 py-4 rounded-full bg-[#F4F4F5] hover:bg-[#E5E7EB] text-[#0A0A0A] text-xs font-bold uppercase tracking-wider border border-[#E5E7EB]"
-                >
-                  <FileText className="w-4 h-4 text-[#E0561B]" />
-                  <span>Instant Quote</span>
-                </MagneticButton>
-
                 <Link 
                   to="/work" 
-                  className="px-4 py-3 text-xs font-mono text-[#52525B] hover:text-[#E0561B] transition-colors flex items-center gap-1.5 font-semibold"
+                  className="inline-flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-widest text-[#52525B] hover:text-[#0A0A0A] transition-colors py-3 px-2 group"
                 >
-                  <span>Selected Work</span>
-                  <ArrowUpRight className="w-3.5 h-3.5" />
+                  <span>Explore Selected Work</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-[#E0561B] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </Link>
               </motion.div>
             </div>
 
-            {/* Right Column: Hero 3D Spatial Architecture Core (5 Cols) */}
+            {/* Right Column: Tactile 3D Porcelain Sculpture Core (5 Cols) */}
             <div className="lg:col-span-5 relative flex items-center justify-center">
               <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
+                initial={{ opacity: 0, scale: 0.94 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
+                transition={{ duration: 0.9, delay: 0.2 }}
                 className="relative w-full max-w-[500px] flex items-center justify-center"
               >
-                {/* Ambient Subtle Radial Glow */}
-                <div className="absolute inset-0 bg-[#E0561B]/5 rounded-full blur-[90px] pointer-events-none" />
-                <Hero3DArchitectureStack className="w-full relative z-10" />
+                <Clay3DSculpture className="w-full relative z-10" />
               </motion.div>
             </div>
           </div>

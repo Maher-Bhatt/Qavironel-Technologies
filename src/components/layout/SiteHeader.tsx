@@ -84,43 +84,17 @@ export const SiteHeader: React.FC = () => {
             ))}
           </nav>
 
-          {/* Desktop Right: Sound Toggle + Minimal CTA */}
-          <div className="hidden md:flex items-center gap-2.5">
-
-            <button
-              type="button"
-              onClick={handleToggleSound}
-              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[0.68rem] font-mono transition-all border ${
-                soundOn
-                  ? 'bg-[#E0561B]/10 border-[#E0561B]/30 text-[#E0561B]'
-                  : 'bg-[#F4F4F5] hover:bg-[#E5E7EB] border-[#E5E7EB] text-[#71717A]'
-              }`}
-              title={soundOn ? 'Mute audio micro-haptics' : 'Enable audio micro-haptics'}
-              aria-label="Toggle micro-haptic sound effects"
-            >
-              {soundOn ? (
-                <>
-                  <Volume2 className="w-3.5 h-3.5 text-[#E0561B] animate-pulse" />
-                  <span className="font-bold">SFX ON</span>
-                </>
-              ) : (
-                <>
-                  <VolumeX className="w-3.5 h-3.5" />
-                  <span>SFX OFF</span>
-                </>
-              )}
-            </button>
-
+          {/* Desktop Right: Pure Minimal Black Pill CTA (Clay.global Standard) */}
+          <div className="hidden md:flex items-center gap-4">
             <button
               type="button"
               onClick={() => {
                 if (soundOn) playClickSound();
                 openBookingModal('call');
               }}
-              className="group relative inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#0A0A0A] hover:bg-[#E0561B] text-white text-xs font-semibold uppercase tracking-[0.14em] transition-all duration-300 shadow-sm hover:shadow-md hover:shadow-[#E0561B]/25"
+              className="inline-flex items-center justify-center px-6 py-2.5 rounded-full bg-[#0A0A0A] hover:bg-[#E0561B] text-white text-xs font-semibold uppercase tracking-[0.12em] transition-all duration-300 shadow-xs hover:shadow-md hover:shadow-[#E0561B]/20"
             >
-              <span>Let's Talk</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-[#E0561B] group-hover:bg-white transition-colors" />
+              Contact
             </button>
           </div>
 

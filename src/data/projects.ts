@@ -188,32 +188,47 @@ export const projects: Project[] = [
     ],
     scopeNote: 'Experimental capabilities such as deep operating system automation remain strictly guarded behind manual confirmation flags to ensure device safety.',
     technologies: ['Python', 'Local LLMs (Ollama)', 'Groq (LLaMA-3.3-70B)', 'DPAPI Vault', 'VOSK Voice Recognition', 'Custom HUD Architecture', 'Security Boundaries'],
-    heroImage: '/images/projects/kalki/kalki-hud.png',
+    heroImage: '/images/projects/kalki/01 Hero.png',
     gallery: [
       {
-        src: '/images/projects/kalki/kalki-hud.png',
-        alt: 'K.A.L.K.I. tactical desktop HUD displaying cognitive router state',
-        caption: 'The reactive desktop HUD displaying active model connection, memory index, and telemetry.'
+        src: '/images/projects/kalki/01 Hero.png',
+        alt: 'K.A.L.K.I. main desktop HUD interface and active cognitive status',
+        caption: 'The reactive desktop HUD displaying active model connection, memory state, and core interaction center.'
       },
       {
-        src: '/images/projects/kalki/hud_tactical.png',
-        alt: 'K.A.L.K.I. tactical telemetry panel and audio visualizer',
-        caption: 'Real-time audio waveform visualizer and cognitive status telemetry monitors.'
+        src: '/images/projects/kalki/02 Ask.png',
+        alt: 'K.A.L.K.I. conversational intelligence interface and multi-model prompting',
+        caption: 'Conversational intelligence workspace with multi-model prompt orchestration and real-time streaming telemetry.'
       },
       {
-        src: '/images/projects/kalki/hud_models.png',
-        alt: 'K.A.L.K.I. multi-model selection and inference routing panel',
-        caption: 'Model routing selector supporting Ollama local inference, Groq LLaMA, OpenAI, and Gemini.'
+        src: '/images/projects/kalki/03 Today.png',
+        alt: 'K.A.L.K.I. tactical daily briefing and agenda oversight',
+        caption: 'Autonomous daily agenda tracking, task synthesis, and proactive desktop notification intelligence.'
       },
       {
-        src: '/images/projects/kalki/settings_general.png',
-        alt: 'K.A.L.K.I. general preferences and secure token configuration',
-        caption: 'System settings interface managing hardware-bound secrets and localhost authorization tokens.'
+        src: '/images/projects/kalki/04 Memory.png',
+        alt: 'K.A.L.K.I. local vector memory vault and semantic retrieval indexing',
+        caption: 'Local-first vector memory vault keeping conversational indexing strictly on physical hardware.'
       },
       {
-        src: '/images/projects/kalki/marketing_1.png',
-        alt: 'K.A.L.K.I. Microsoft Store release showcase slide',
-        caption: 'Official product presentation highlighting offline voice recognition, local vault, and security tools.'
+        src: '/images/projects/kalki/05 Workbench.png',
+        alt: 'K.A.L.K.I. developer workbench and guarded code execution studio',
+        caption: 'Execution workbench with sandboxed code compilation, system utilities, and diagnostic adapters.'
+      },
+      {
+        src: '/images/projects/kalki/06 Oversight.png',
+        alt: 'K.A.L.K.I. runtime telemetry and inference oversight monitor',
+        caption: 'Real-time telemetry monitor tracking token latency, model provider health, and daemon operations.'
+      },
+      {
+        src: '/images/projects/kalki/07 Settings.png',
+        alt: 'K.A.L.K.I. hardware-bound DPAPI vault configuration and preferences',
+        caption: 'DPAPI hardware-bound secrets vault and localhost authorization settings.'
+      },
+      {
+        src: '/images/projects/kalki/KALKI - Microsoft Store Marketing Kit@2x.png',
+        alt: 'K.A.L.K.I. Microsoft Store official release architecture kit',
+        caption: 'Official Microsoft Store release presentation highlighting offline voice recognition, local privacy, and multi-model flexibility.'
       }
     ],
     metrics: [

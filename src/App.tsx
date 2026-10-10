@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { SiteHeader } from './components/layout/SiteHeader';
 import { SiteFooter } from './components/layout/SiteFooter';
@@ -29,7 +29,17 @@ const ScrollToTop = () => {
   return null;
 };
 
+import { BookingModal } from './components/booking/BookingModal';
+
 export const App: React.FC = () => {
+  const [isBookingOpen, setIsBookingOpen] = useState(false);
+
+  useEffect(() => {
+    const handleOpenBooking = () => setIsBookingOpen(true);
+    window.addEventListener('open-booking-modal', handleOpenBooking);
+    return () => window.removeEventListener('open-booking-modal', handleOpenBooking);
+  }, []);
+
   return (
     <div className="flex flex-col min-h-screen bg-white text-[#0A0A0A]">
       <ScrollToTop />
@@ -48,6 +58,7 @@ export const App: React.FC = () => {
         </Routes>
       </main>
       <SiteFooter />
+      <BookingModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
     </div>
   );
 };

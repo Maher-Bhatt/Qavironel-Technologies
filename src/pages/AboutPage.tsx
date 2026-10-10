@@ -9,12 +9,14 @@ import {
   ShieldCheck, 
   Terminal, 
   Award, 
-  ExternalLink,
-  Code2,
-  Cpu,
-  Lock
+  ExternalLink, 
+  Code2, 
+  Cpu, 
+  Lock,
+  Calendar
 } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from '../components/ui/Icons';
+import { openBookingModal } from '../components/booking/BookingModal';
 
 export const AboutPage: React.FC = () => {
   const founder = teamMembers[0];
@@ -110,17 +112,17 @@ export const AboutPage: React.FC = () => {
           </div>
         </section>
 
-        {/* Sole Founder Leadership Section */}
+        {/* Technical Leadership & Architecture Direction */}
         <section className="py-20 border-b border-[#E5E7EB]">
           <div className="max-w-3xl mb-12">
             <span className="text-xs font-mono font-semibold uppercase tracking-[0.2em] text-[#E0561B] block mb-2">
-              Studio Leadership
+              Studio Leadership & Direction
             </span>
             <h2 className="font-sans font-bold text-3xl sm:text-4xl text-[#0A0A0A] tracking-tight">
-              Direct founder engineering.
+              Technical Direction & Systems Architecture
             </h2>
             <p className="mt-3 text-base text-[#52525B]">
-              Direct communication. No intermediaries. Tap directly into the lead engineer architecting your product.
+              Direct communication. No intermediaries. Tap directly into the systems engineer architecting your code.
             </p>
           </div>
 
@@ -190,7 +192,7 @@ export const AboutPage: React.FC = () => {
 
             <div className="mt-8 pt-6 border-t border-[#E5E7EB] space-y-3">
               <p className="text-xs font-mono font-semibold uppercase tracking-wider text-[#0A0A0A]">
-                Verified Credentials & Highlights:
+                Verified Technical Credentials:
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-[#52525B]">
                 {founder.credentials.map((cred, i) => (
@@ -221,9 +223,19 @@ export const AboutPage: React.FC = () => {
             <h3 className="font-sans font-bold text-2xl text-[#0A0A0A]">Let's build something exceptional.</h3>
             <p className="text-sm text-[#52525B] mt-1 font-light">Direct collaboration with the engineer who cares about the craft.</p>
           </div>
-          <Button to="/contact" variant="primary" size="lg" showArrow>
-            Start a Conversation
-          </Button>
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              onClick={openBookingModal}
+              className="px-6 py-3.5 rounded-full bg-[#0A0A0A] hover:bg-black text-white text-xs font-bold uppercase tracking-wider transition-colors flex items-center gap-2 shadow-xs"
+            >
+              <Calendar className="w-3.5 h-3.5 text-[#E0561B]" />
+              <span>Schedule 30-Min Call</span>
+            </button>
+            <Button to="/contact" variant="primary" size="lg" showArrow>
+              Start a Conversation
+            </Button>
+          </div>
         </div>
       </div>
     </div>

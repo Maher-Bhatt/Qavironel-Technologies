@@ -3,7 +3,8 @@ import { NavLink, Link, useLocation } from 'react-router-dom';
 import { Logo } from '../brand/Logo';
 import { Button } from '../ui/Button';
 import { companyConfig } from '../../data/company';
-import { Menu, X, ArrowRight, Globe } from 'lucide-react';
+import { Menu, X, ArrowRight, Globe, Calendar } from 'lucide-react';
+import { openBookingModal } from '../booking/BookingModal';
 
 export const SiteHeader: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -70,11 +71,15 @@ export const SiteHeader: React.FC = () => {
           </nav>
 
           {/* Desktop Status & CTA */}
-          <div className="hidden md:flex items-center gap-5">
-            <div className="hidden lg:flex items-center gap-2 px-3 py-1 bg-[#F8F9FA] border border-[#E5E7EB] text-[0.68rem] font-mono text-[#52525B] shadow-xs">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-              <span>GLOBAL · AVAILABLE</span>
-            </div>
+          <div className="hidden md:flex items-center gap-4">
+            <button
+              type="button"
+              onClick={openBookingModal}
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-[#F8F9FA] hover:bg-white border border-[#E5E7EB] hover:border-[#E0561B]/40 text-xs font-semibold uppercase tracking-wider text-[#0A0A0A] hover:text-[#E0561B] transition-colors"
+            >
+              <Calendar className="w-3.5 h-3.5 text-[#E0561B]" />
+              <span>Book Call</span>
+            </button>
             <Button to="/contact" variant="primary" size="sm" showArrow>
               Start a Project
             </Button>
@@ -136,7 +141,18 @@ export const SiteHeader: React.FC = () => {
               </nav>
             </div>
 
-            <div className="pt-8 border-t border-[#E5E7EB] space-y-5">
+            <div className="pt-8 border-t border-[#E5E7EB] space-y-3">
+              <button
+                type="button"
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  openBookingModal();
+                }}
+                className="w-full py-3 rounded-full bg-[#0A0A0A] hover:bg-black text-white text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-colors"
+              >
+                <Calendar className="w-4 h-4 text-[#E0561B]" />
+                <span>Book a Discovery Call</span>
+              </button>
               <Button to="/contact" variant="primary" size="md" className="w-full" showArrow>
                 Start a Project
               </Button>

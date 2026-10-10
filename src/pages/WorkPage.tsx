@@ -5,7 +5,7 @@ import { ProjectFilters } from '../components/work/ProjectFilters';
 import { Button } from '../components/ui/Button';
 import { projects, categories } from '../data/projects';
 import { ProjectCategory } from '../types';
-import { ArrowUpRight, Github, Code, Shield } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 
 export const WorkPage: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<ProjectCategory>('All Work');

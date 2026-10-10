@@ -5,7 +5,7 @@ import { Button } from '../components/ui/Button';
 import { Badge } from '../components/ui/Badge';
 import { projects } from '../data/projects';
 import { services } from '../data/services';
-import { companyConfig, teamMembers } from '../data/company';
+import { companyConfig } from '../data/company';
 import { VideoShowreel } from '../components/media/VideoShowreel';
 import { AmbientHeroCanvas } from '../components/media/AmbientHeroCanvas';
 import { 
@@ -28,14 +28,17 @@ import {
   Gauge,
   Bot,
   LayoutGrid,
-  Film
+  Film,
+  Calendar
 } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from '../components/ui/Icons';
+import { openBookingModal } from '../components/booking/BookingModal';
+import { StudioEngineConsole } from '../components/home/StudioEngineConsole';
+import { StudioStandardsMatrix } from '../components/home/StudioStandardsMatrix';
 
 export const HomePage: React.FC = () => {
   // Take 6 curated projects for sleek agency showcase
   const curatedProjects = projects.filter((p) => p.featured).slice(0, 6);
-  const founder = teamMembers[0];
 
   // Interactive Capability Matrix Tab State (Clay.global signature feature)
   const [activeCapability, setActiveCapability] = useState<number>(0);
@@ -108,18 +111,28 @@ export const HomePage: React.FC = () => {
         />
 
         <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 relative z-10">
-          {/* Top Status Pill */}
+          {/* Top Status Pill & Kinetic Tags */}
           <motion.div 
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="flex items-center gap-2.5 mb-8"
+            className="flex flex-wrap items-center gap-2.5 mb-8"
           >
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F8F9FA] border border-[#E5E7EB] text-xs font-mono text-[#52525B] shadow-xs">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
               <span className="font-semibold text-[#0A0A0A]">GLOBAL REMOTE STUDIO</span>
               <span className="text-[#E0561B]">·</span>
               <span className="text-[#E0561B] font-medium">AVAILABLE FOR NEW BUILDS</span>
+            </div>
+
+            <div className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#F8F9FA] border border-[#E5E7EB] text-xs font-mono text-[#52525B]">
+              <span className="text-[#E0561B]">✦</span>
+              <span>Applied AI & Multimodal Workflows</span>
+            </div>
+
+            <div className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#F8F9FA] border border-[#E5E7EB] text-xs font-mono text-[#52525B]">
+              <span className="text-emerald-500">⚡</span>
+              <span>Sub-0.8s Core Web Vitals</span>
             </div>
           </motion.div>
 
@@ -131,7 +144,7 @@ export const HomePage: React.FC = () => {
             className="max-w-5xl"
           >
             <h1 className="font-sans font-extrabold text-4xl sm:text-6xl lg:text-7xl xl:text-8xl tracking-tight text-[#0A0A0A] leading-[1.03] mb-8">
-              We engineer digital products, <span className="text-[#E0561B]">applied AI</span> & web systems for the world.
+              We architect digital products, <span className="text-[#E0561B]">applied AI</span> & high-velocity web systems.
             </h1>
           </motion.div>
 
@@ -147,7 +160,7 @@ export const HomePage: React.FC = () => {
             </p>
           </motion.div>
 
-          {/* Action CTAs */}
+          {/* Action CTAs with Direct Book Call Trigger */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
@@ -157,6 +170,14 @@ export const HomePage: React.FC = () => {
             <Button to="/contact" variant="primary" size="lg" showArrow>
               Start a Project
             </Button>
+            <button
+              type="button"
+              onClick={openBookingModal}
+              className="px-6 py-4 rounded-full bg-[#0A0A0A] hover:bg-black text-white text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 shadow-xs group"
+            >
+              <Calendar className="w-4 h-4 text-[#E0561B] group-hover:scale-110 transition-transform" />
+              <span>Book a Discovery Call (30m)</span>
+            </button>
             <Button to="/services" variant="secondary" size="lg">
               Explore Capabilities
             </Button>
@@ -188,8 +209,8 @@ export const HomePage: React.FC = () => {
             </div>
             <div className="space-y-1">
               <p className="text-2xl sm:text-3xl font-extrabold font-sans text-[#0A0A0A]">Direct</p>
-              <p className="text-xs font-mono uppercase tracking-wider text-[#E0561B] font-semibold">Founder Led</p>
-              <p className="text-[0.75rem] text-[#71717A]">Maher Bhatt · No agency telephone</p>
+              <p className="text-xs font-mono uppercase tracking-wider text-[#E0561B] font-semibold">Senior Engineering</p>
+              <p className="text-[0.75rem] text-[#71717A]">Zero junior account-manager fog</p>
             </div>
             <div className="space-y-1">
               <p className="text-2xl sm:text-3xl font-extrabold font-sans text-[#0A0A0A]">Global</p>
@@ -198,12 +219,31 @@ export const HomePage: React.FC = () => {
             </div>
           </motion.div>
 
-          {/* 01.1 HERO ANIMATED SHOWREEL / VIDEO REEL PLAYER */}
+          {/* 01.1 LIVE ARCHITECTURE TELEMETRY & RUNTIME BENCHMARK */}
+          <motion.div
+            initial={{ opacity: 0, y: 36 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.45 }}
+            className="mt-16 sm:mt-20"
+          >
+            <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center gap-2">
+                <Terminal className="w-4 h-4 text-[#E0561B]" />
+                <span className="text-xs font-mono font-semibold uppercase tracking-wider text-[#0A0A0A]">
+                  Studio Runtime & Telemetry Console
+                </span>
+              </div>
+              <span className="text-xs font-mono text-[#71717A]">INTERACTIVE PREVIEW // CLICK TABS</span>
+            </div>
+            <StudioEngineConsole />
+          </motion.div>
+
+          {/* 01.2 HERO ANIMATED SHOWREEL / VIDEO REEL PLAYER */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            className="mt-16 sm:mt-24"
+            transition={{ duration: 0.8, delay: 0.55 }}
+            className="mt-16 sm:mt-20"
           >
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
@@ -704,81 +744,8 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* 06. SOLE FOUNDER LEADERSHIP SPOTLIGHT */}
-      <section className="py-24 sm:py-32 border-b border-[#E5E7EB] bg-[#F8F9FA] relative">
-        <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-            <div className="lg:col-span-5 space-y-6">
-              <span className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-[#E0561B] block">
-                Engineering Leadership
-              </span>
-              <h2 className="font-sans font-extrabold text-3xl sm:text-5xl text-[#0A0A0A] tracking-tight leading-tight">
-                One founder. Direct engineering. No intermediaries.
-              </h2>
-              <p className="text-base text-[#52525B] leading-relaxed font-light">
-                When you partner with Qavironel, you don't talk to account managers or salespeople. You work directly with Maher Bhatt—from architecture and UI crafting to backend hardening and deployment.
-              </p>
-
-              <div className="pt-2 flex items-center gap-3">
-                <a
-                  href={founder.links.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2.5 bg-white rounded-lg border border-[#E5E7EB] text-[#0A0A0A] hover:text-[#E0561B] hover:border-[#E0561B] shadow-xs transition-colors"
-                  aria-label="Founder GitHub"
-                >
-                  <GithubIcon className="w-4 h-4" />
-                </a>
-                <a
-                  href={founder.links.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2.5 bg-white rounded-lg border border-[#E5E7EB] text-[#0A0A0A] hover:text-[#E0561B] hover:border-[#E0561B] shadow-xs transition-colors"
-                  aria-label="Founder LinkedIn"
-                >
-                  <LinkedinIcon className="w-4 h-4" />
-                </a>
-                <Button to="/about" variant="secondary" size="sm" showArrow>
-                  Read Founder Story
-                </Button>
-              </div>
-            </div>
-
-            <div className="lg:col-span-7 bg-white rounded-2xl border border-[#E5E7EB] p-8 sm:p-10 space-y-6 shadow-[0_4px_24px_rgba(0,0,0,0.03)]">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#E5E7EB]">
-                <div>
-                  <h3 className="font-sans font-bold text-2xl text-[#0A0A0A]">{founder.name}</h3>
-                  <p className="text-xs font-mono text-[#E0561B] uppercase tracking-wider mt-0.5 font-semibold">
-                    {founder.role}
-                  </p>
-                </div>
-                <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#F8F9FA] rounded-full border border-[#E5E7EB] text-xs font-mono text-[#52525B]">
-                  <Globe className="w-3.5 h-3.5 text-[#E0561B]" />
-                  <span>Remote-First Studio</span>
-                </div>
-              </div>
-
-              <p className="text-sm text-[#52525B] leading-relaxed">
-                {founder.bio}
-              </p>
-
-              <div className="space-y-3 pt-4 border-t border-[#E5E7EB]">
-                <p className="text-xs font-mono uppercase tracking-wider text-[#0A0A0A] font-semibold">
-                  Verified Technical Credentials:
-                </p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-[#52525B]">
-                  {founder.credentials.slice(0, 4).map((cred, i) => (
-                    <div key={i} className="flex items-start gap-2 bg-[#F8F9FA] p-2.5 rounded-lg border border-[#E5E7EB]">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[#E0561B] shrink-0 mt-0.5" />
-                      <span className="text-[#0A0A0A] leading-snug">{cred}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* 06. STUDIO ENGINEERING BENCHMARKS & COMPARISON MATRIX */}
+      <StudioStandardsMatrix onOpenBooking={openBookingModal} />
 
       {/* 07. HOW WE BUILD — THE 4-STAGE GLOBAL DELIVERY MODEL */}
       <section className="py-24 sm:py-32 border-b border-[#E5E7EB] bg-white">

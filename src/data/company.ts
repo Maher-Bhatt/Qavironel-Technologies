@@ -7,7 +7,7 @@ export const companyConfig = {
   eyebrow: 'Global Technology & Digital Product Studio',
   description: 'Qavironel Technologies is a remote-first software engineering and digital product studio. We partner with ambitious founders, startups, and companies worldwide to engineer high-performance web systems, custom digital products, and applied AI applications.',
   foundedLocation: 'Global · Remote-First Studio',
-  email: 'contact@qavironel.com',
+  email: 'qavironeltechnologies@gmail.com',
   secondaryEmail: 'maherbhatt01@gmail.com',
   phone: '+91 98795 29957',
   whatsappUrl: 'https://wa.me/919879529957',

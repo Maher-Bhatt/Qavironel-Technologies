@@ -6,22 +6,22 @@
 
   --color-primary-dark: #171717;
   --color-deep-charcoal: #20201E;
-  --color-warm-off-white: #F6F3ED;
+  --color-warm-off-white: #FBF9F5;
   --color-pure-white: #FFFFFF;
   --color-copper: #C7612E;
   --color-copper-dark: #98431F;
   --color-copper-hover: #D96F3B;
-  --color-warm-grey: #77746F;
-  --color-subtle-border: #DEDAD3;
+  --color-warm-grey: #6E6B65;
+  --color-subtle-border: #E5E2DC;
   --color-border-dark: #2A2A28;
 }
 
 :root {
-  --bg-primary: #F6F3ED;
+  --bg-primary: #FBF9F5;
   --text-primary: #171717;
   --color-copper: #C7612E;
-  --color-charcoal: #20201E;
-  --color-border: #DEDAD3;
+  --color-charcoal: #171717;
+  --color-border: #E5E2DC;
 }
 
 body {
@@ -55,10 +55,10 @@ body {
 }
 
 .subtle-grid {
-  background-size: 32px 32px;
+  background-size: 40px 40px;
   background-image: 
-    linear-gradient(to right, rgba(222, 218, 211, 0.4) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(222, 218, 211, 0.4) 1px, transparent 1px);
+    linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
 }
 
 .dark-subtle-grid {

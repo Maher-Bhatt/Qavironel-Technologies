@@ -7,22 +7,22 @@ export const LegalPage: React.FC = () => {
   const isTerms = location.pathname.includes('terms');
 
   return (
-    <div className="bg-[#121212] text-[#F6F3ED] pt-32 sm:pt-40 pb-24 selection:bg-[#C7612E] selection:text-white">
+    <div className="bg-[#FBF9F5] text-[#171717] pt-32 sm:pt-40 pb-24 selection:bg-[#C7612E] selection:text-white">
       <div className="max-w-4xl mx-auto px-5 sm:px-8">
         <span className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-[#C7612E] block mb-2">
           {isTerms ? 'Terms of Service' : 'Privacy Policy'}
         </span>
-        <h1 className="font-sans font-extrabold text-3xl sm:text-5xl text-white tracking-tight mb-8">
+        <h1 className="font-sans font-extrabold text-3xl sm:text-5xl text-[#171717] tracking-tight mb-8">
           {isTerms ? 'Terms of Service' : 'Privacy Policy'}
         </h1>
 
-        <div className="space-y-6 text-sm text-[#A3A099] leading-relaxed font-light">
+        <div className="space-y-6 text-sm text-[#6E6B65] leading-relaxed font-light">
           <p>
             Last Updated: March 2026
           </p>
 
-          <section className="space-y-3 pt-6 border-t border-[#262624]">
-            <h2 className="text-lg font-bold text-white font-sans">
+          <section className="space-y-3 pt-6 border-t border-[#E5E2DC]">
+            <h2 className="text-lg font-bold text-[#171717] font-sans">
               1. Overview & Operating Model
             </h2>
             <p>
@@ -30,8 +30,8 @@ export const LegalPage: React.FC = () => {
             </p>
           </section>
 
-          <section className="space-y-3 pt-6 border-t border-[#262624]">
-            <h2 className="text-lg font-bold text-white font-sans">
+          <section className="space-y-3 pt-6 border-t border-[#E5E2DC]">
+            <h2 className="text-lg font-bold text-[#171717] font-sans">
               2. Data Protection & Confidentiality
             </h2>
             <p>
@@ -39,13 +39,13 @@ export const LegalPage: React.FC = () => {
             </p>
           </section>
 
-          <section className="space-y-3 pt-6 border-t border-[#262624]">
-            <h2 className="text-lg font-bold text-white font-sans">
+          <section className="space-y-3 pt-6 border-t border-[#E5E2DC]">
+            <h2 className="text-lg font-bold text-[#171717] font-sans">
               3. Contact Information
             </h2>
             <p>
               For any legal or privacy inquiries, contact the studio directly at{' '}
-              <a href={`mailto:${companyConfig.email}`} className="text-[#C7612E] hover:underline font-mono">
+              <a href={`mailto:${companyConfig.email}`} className="text-[#C7612E] hover:underline font-mono font-semibold">
                 {companyConfig.email}
               </a>.
             </p>

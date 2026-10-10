@@ -31,7 +31,7 @@ const ScrollToTop = () => {
 
 export const App: React.FC = () => {
   return (
-    <div className="flex flex-col min-h-screen bg-[#121212] text-[#F6F3ED]">
+    <div className="flex flex-col min-h-screen bg-[#FBF9F5] text-[#171717]">
       <ScrollToTop />
       <SiteHeader />
       <main className="flex-grow">

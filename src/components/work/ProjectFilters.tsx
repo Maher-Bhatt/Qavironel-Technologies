@@ -27,13 +27,13 @@ export const ProjectFilters: React.FC<ProjectFiltersProps> = ({
             onClick={() => onSelectCategory(cat.id)}
             className={`px-4 py-2 text-xs font-semibold uppercase tracking-widest transition-all duration-200 shrink-0 flex items-center gap-2 border ${
               isActive
-                ? 'bg-[#C7612E] text-white border-[#C7612E] shadow-sm'
-                : 'bg-[#171717] text-[#A3A099] border-[#2E2E2B] hover:border-white/40 hover:text-white'
+                ? 'bg-[#171717] text-white border-[#171717] shadow-xs'
+                : 'bg-white text-[#6E6B65] border-[#E5E2DC] hover:border-[#171717] hover:text-[#171717]'
             }`}
           >
             <span>{cat.label}</span>
             <span className={`text-[0.68rem] font-mono px-1.5 py-0.5 ${
-              isActive ? 'bg-[#121212] text-white' : 'bg-[#20201E] text-[#77746F]'
+              isActive ? 'bg-[#C7612E] text-white' : 'bg-[#F5F2EB] text-[#8E8B84]'
             }`}>
               {count}
             </span>

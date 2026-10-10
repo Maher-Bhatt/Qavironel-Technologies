@@ -14,9 +14,11 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
   title,
   description,
   align = 'left',
-  theme = 'dark',
+  theme = 'light',
   className = '',
 }) => {
+  const isLight = theme === 'light';
+
   return (
     <div className={`max-w-3xl ${align === 'center' ? 'mx-auto text-center' : ''} ${className}`}>
       {eyebrow && (
@@ -25,11 +27,15 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
           <span className="text-[#C7612E]">{eyebrow}</span>
         </div>
       )}
-      <h2 className="font-sans font-extrabold tracking-tight text-3xl sm:text-4xl md:text-5xl text-white leading-tight">
+      <h2 className={`font-sans font-extrabold tracking-tight text-3xl sm:text-4xl md:text-5xl leading-tight ${
+        isLight ? 'text-[#171717]' : 'text-white'
+      }`}>
         {title}
       </h2>
       {description && (
-        <p className="mt-4 sm:mt-5 text-base sm:text-lg leading-relaxed font-light text-[#A3A099]">
+        <p className={`mt-4 sm:mt-5 text-base sm:text-lg leading-relaxed font-light ${
+          isLight ? 'text-[#6E6B65]' : 'text-[#A3A099]'
+        }`}>
           {description}
         </p>
       )}

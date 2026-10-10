@@ -64,12 +64,8 @@ export const ContactForm: React.FC<ContactFormProps> = ({ theme = 'light' }) => 
   const whatsappMessage = encodeURIComponent(`Hi Qavironel Team, I'm interested in discussing a project.\n\nName: ${formData.name}\nType: ${formData.projectType}`);
 
   // Theme-specific classes
-  const labelClass = `block text-xs font-mono font-bold uppercase tracking-widest mb-2 ${isDark ? 'text-gray-400' : 'text-[#0A0A0A]'}`;
-  const inputClass = `w-full px-5 py-4 rounded-xl text-sm transition-all shadow-sm focus:outline-none ${
-    isDark 
-      ? 'bg-white/5 border-white/10 text-white placeholder-white/40 focus:bg-white/10 focus:border-[#E0561B]' 
-      : 'bg-white border-[#E5E7EB] text-[#0A0A0A] placeholder-[#71717A] focus:border-[#E0561B]'
-  } border`;
+  const labelClass = `block text-xs font-mono font-bold uppercase tracking-widest mb-2 text-[#0A0A0A] dark:text-zinc-300`;
+  const inputClass = `w-full px-5 py-4 rounded-xl text-sm transition-all shadow-sm focus:outline-none bg-white dark:bg-[#18181D] border border-[#E5E7EB] dark:border-[#27272A] text-[#0A0A0A] dark:text-white placeholder-[#71717A] dark:placeholder-zinc-500 focus:border-[#E0561B] dark:focus:border-[#E0561B]`;
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
@@ -128,12 +124,12 @@ export const ContactForm: React.FC<ContactFormProps> = ({ theme = 'light' }) => 
             onChange={(e) => setFormData({ ...formData, projectType: e.target.value })}
             className={inputClass}
           >
-            <option value="High-Impact Custom Web Platform" className="text-black">High-Impact Custom Web Platform</option>
-            <option value="Full-Stack SaaS MVP / Web Application" className="text-black">Full-Stack SaaS MVP / Web App</option>
-            <option value="Applied AI / LLM & Agentic Workflows" className="text-black">Applied AI / LLM & Agentic Workflows</option>
-            <option value="Bespoke E-Commerce Architecture" className="text-black">Bespoke E-Commerce Architecture</option>
-            <option value="Brand Identity, UX Design & Design Systems" className="text-black">Brand Identity, UX Design & Systems</option>
-            <option value="Performance Engineering & Architecture Audit" className="text-black">Performance Engineering & Audit</option>
+            <option value="High-Impact Custom Web Platform" className="bg-white dark:bg-[#18181D] text-[#0A0A0A] dark:text-white">High-Impact Custom Web Platform</option>
+            <option value="Full-Stack SaaS MVP / Web Application" className="bg-white dark:bg-[#18181D] text-[#0A0A0A] dark:text-white">Full-Stack SaaS MVP / Web App</option>
+            <option value="Applied AI / LLM & Agentic Workflows" className="bg-white dark:bg-[#18181D] text-[#0A0A0A] dark:text-white">Applied AI / LLM & Agentic Workflows</option>
+            <option value="Bespoke E-Commerce Architecture" className="bg-white dark:bg-[#18181D] text-[#0A0A0A] dark:text-white">Bespoke E-Commerce Architecture</option>
+            <option value="Brand Identity, UX Design & Design Systems" className="bg-white dark:bg-[#18181D] text-[#0A0A0A] dark:text-white">Brand Identity, UX Design & Systems</option>
+            <option value="Performance Engineering & Architecture Audit" className="bg-white dark:bg-[#18181D] text-[#0A0A0A] dark:text-white">Performance Engineering & Audit</option>
           </select>
         </div>
       </div>
@@ -149,10 +145,10 @@ export const ContactForm: React.FC<ContactFormProps> = ({ theme = 'light' }) => 
             onChange={(e) => setFormData({ ...formData, timeline: e.target.value })}
             className={inputClass}
           >
-            <option value="Immediate (Next 2-4 Weeks)" className="text-black">Immediate (Next 2-4 Weeks)</option>
-            <option value="1-2 Months (Active Product Sprint)" className="text-black">1-2 Months (Active Product Sprint)</option>
-            <option value="3+ Months (Strategic Roadmap)" className="text-black">3+ Months (Strategic Roadmap)</option>
-            <option value="Flexible / Milestone-Driven" className="text-black">Flexible / Milestone-Driven</option>
+            <option value="Immediate (Next 2-4 Weeks)" className="bg-white dark:bg-[#18181D] text-[#0A0A0A] dark:text-white">Immediate (Next 2-4 Weeks)</option>
+            <option value="1-2 Months (Active Product Sprint)" className="bg-white dark:bg-[#18181D] text-[#0A0A0A] dark:text-white">1-2 Months (Active Product Sprint)</option>
+            <option value="3+ Months (Strategic Roadmap)" className="bg-white dark:bg-[#18181D] text-[#0A0A0A] dark:text-white">3+ Months (Strategic Roadmap)</option>
+            <option value="Flexible / Milestone-Driven" className="bg-white dark:bg-[#18181D] text-[#0A0A0A] dark:text-white">Flexible / Milestone-Driven</option>
           </select>
         </div>
 
@@ -166,10 +162,10 @@ export const ContactForm: React.FC<ContactFormProps> = ({ theme = 'light' }) => 
             onChange={(e) => setFormData({ ...formData, engagementModel: e.target.value })}
             className={inputClass}
           >
-            <option value="Full-Cycle Product Architecture & Build" className="text-black">Full-Cycle Product Architecture & Build</option>
-            <option value="Design & Frontend Engineering Sprint" className="text-black">Design & Frontend Engineering Sprint</option>
-            <option value="AI Integration & Custom Model Fine-Tuning" className="text-black">AI Integration & Custom Workflows</option>
-            <option value="Dedicated Technical Studio Retainer" className="text-black">Dedicated Technical Studio Retainer</option>
+            <option value="Full-Cycle Product Architecture & Build" className="bg-white dark:bg-[#18181D] text-[#0A0A0A] dark:text-white">Full-Cycle Product Architecture & Build</option>
+            <option value="Design & Frontend Engineering Sprint" className="bg-white dark:bg-[#18181D] text-[#0A0A0A] dark:text-white">Design & Frontend Engineering Sprint</option>
+            <option value="AI Integration & Custom Model Fine-Tuning" className="bg-white dark:bg-[#18181D] text-[#0A0A0A] dark:text-white">AI Integration & Custom Workflows</option>
+            <option value="Dedicated Technical Studio Retainer" className="bg-white dark:bg-[#18181D] text-[#0A0A0A] dark:text-white">Dedicated Technical Studio Retainer</option>
           </select>
         </div>
       </div>
@@ -203,9 +199,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ theme = 'light' }) => 
           href={`https://wa.me/919879529957?text=${whatsappMessage}`}
           target="_blank"
           rel="noopener noreferrer"
-          className={`inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider transition-colors font-bold ${
-            isDark ? 'text-gray-400 hover:text-white' : 'text-[#52525B] hover:text-[#E0561B]'
-          }`}
+          className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider transition-colors font-bold text-[#52525B] dark:text-zinc-400 hover:text-[#E0561B] dark:hover:text-[#E0561B]"
         >
           <MessageSquare className="w-4 h-4 text-[#E0561B]" />
           <span>Or chat directly on WhatsApp</span>

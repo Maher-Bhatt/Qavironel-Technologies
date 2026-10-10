@@ -46,7 +46,7 @@ export const ContactPage: React.FC = () => {
   return (
     <>
       <SEO title="Contact" />
-      <div className="relative bg-white text-[#0A0A0A] pt-28 sm:pt-36 pb-24 overflow-hidden selection:bg-[#E0561B] selection:text-[#0A0A0A] min-h-screen">
+      <div className="relative bg-white dark:bg-[#0A0A0C] text-[#0A0A0A] dark:text-[#F4F4F5] pt-28 sm:pt-36 pb-24 overflow-hidden selection:bg-[#E0561B] selection:text-white min-h-screen">
       
       {/* Premium Ambient Background Effects */}
       <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#E0561B]/10 rounded-full blur-[150px] opacity-40 pointer-events-none mix-blend-screen" />
@@ -64,13 +64,13 @@ export const ContactPage: React.FC = () => {
           <span className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-[#E0561B] block mb-3 border border-[#E0561B]/30 bg-[#E0561B]/10 w-fit px-3 py-1 rounded-full">
             Initiate Contact
           </span>
-          <h1 className="font-sans font-black text-5xl sm:text-6xl lg:text-7xl tracking-tight text-[#0A0A0A] leading-[1.05] mb-6">
+          <h1 className="font-sans font-black text-5xl sm:text-6xl lg:text-7xl tracking-tight text-[#0A0A0A] dark:text-white leading-[1.05] mb-6">
             Let's build <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0A0A0A] via-gray-600 to-gray-900">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0A0A0A] via-gray-600 to-gray-900 dark:from-white dark:via-zinc-200 dark:to-zinc-400">
               the extraordinary.
             </span>
           </h1>
-          <p className="text-lg text-[#71717A] font-light leading-relaxed max-w-xl">
+          <p className="text-lg text-[#71717A] dark:text-[#A1A1AA] font-light leading-relaxed max-w-xl">
             Whether you are launching a new digital product, requiring AI integration, or elevating your brand's digital presence—our engineering studio is ready.
           </p>
 
@@ -78,7 +78,7 @@ export const ContactPage: React.FC = () => {
             <button
               type="button"
               onClick={() => openBookingModal('call')}
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-[#0A0A0A] hover:bg-black text-white text-xs font-extrabold uppercase tracking-widest transition-colors shadow-2xl shadow-black/5"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-[#0A0A0A] dark:bg-white hover:bg-black dark:hover:bg-zinc-200 text-white dark:text-[#0A0A0A] text-xs font-extrabold uppercase tracking-widest transition-colors shadow-2xl shadow-black/5"
             >
               <Calendar className="w-4 h-4 text-[#E0561B]" />
               <span>Book Discovery Call (30m)</span>
@@ -86,9 +86,9 @@ export const ContactPage: React.FC = () => {
             <button
               type="button"
               onClick={() => openBookingModal('quotation')}
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-[#F4F4F5] hover:bg-[#E5E7EB] text-[#0A0A0A] border border-[#E5E7EB] text-xs font-extrabold uppercase tracking-widest transition-all backdrop-blur-md"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-[#F4F4F5] dark:bg-[#1C1C22] hover:bg-[#E5E7EB] dark:hover:bg-[#27272A] text-[#0A0A0A] dark:text-white border border-[#E5E7EB] dark:border-white/10 text-xs font-extrabold uppercase tracking-widest transition-all backdrop-blur-md"
             >
-              <FileText className="w-4 h-4 text-[#71717A]" />
+              <FileText className="w-4 h-4 text-[#71717A] dark:text-[#A1A1AA]" />
               <span>Request Quotation</span>
             </button>
           </div>
@@ -99,8 +99,8 @@ export const ContactPage: React.FC = () => {
           
           {/* Main Form Area (7 cols) */}
           <div className="lg:col-span-7">
-            <div className="bg-[#F8F9FA] border border-[#E5E7EB] p-8 sm:p-10 rounded-[2rem] backdrop-blur-3xl shadow-2xl">
-              <h2 className="text-2xl font-bold font-sans text-[#0A0A0A] mb-8 flex items-center gap-3">
+            <div className="bg-[#F8F9FA] dark:bg-[#121216] border border-[#E5E7EB] dark:border-white/10 p-8 sm:p-10 rounded-[2rem] backdrop-blur-3xl shadow-2xl">
+              <h2 className="text-2xl font-bold font-sans text-[#0A0A0A] dark:text-white mb-8 flex items-center gap-3">
                 <span className="w-2 h-2 rounded-full bg-[#E0561B] animate-pulse" />
                 Project Inquiry Form
               </h2>
@@ -112,21 +112,21 @@ export const ContactPage: React.FC = () => {
           <div className="lg:col-span-5 space-y-8">
             
             {/* Quick Chat Callout */}
-            <div className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-[2rem] p-8 sm:p-10 backdrop-blur-3xl">
+            <div className="bg-[#FAFAFA] dark:bg-[#121216] border border-[#E5E7EB] dark:border-white/10 rounded-[2rem] p-8 sm:p-10 backdrop-blur-3xl shadow-xl">
               <span className="text-[0.65rem] font-mono font-bold uppercase tracking-[0.2em] text-[#E0561B] block mb-4">
                 Direct Line
               </span>
-              <h3 className="font-sans font-bold text-2xl text-[#0A0A0A] mb-3">
+              <h3 className="font-sans font-bold text-2xl text-[#0A0A0A] dark:text-white mb-3">
                 Immediate chat?
               </h3>
-              <p className="text-sm text-[#71717A] leading-relaxed font-light mb-8">
+              <p className="text-sm text-[#71717A] dark:text-[#A1A1AA] leading-relaxed font-light mb-8">
                 Skip the form. Message our technical lead directly on WhatsApp to share your brief and get instant architectural feedback.
               </p>
               <a
                 href={companyConfig.whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2.5 px-6 py-4 rounded-full bg-[#E0561B] hover:bg-[#C2410C] text-white text-xs font-bold uppercase tracking-widest transition-colors w-full"
+                className="inline-flex items-center justify-center gap-2.5 px-6 py-4 rounded-full bg-[#E0561B] hover:bg-[#C2410C] text-white text-xs font-bold uppercase tracking-widest transition-colors w-full shadow-xs"
               >
                 <MessageSquare className="w-4 h-4" />
                 <span>WhatsApp Secure Chat</span>
@@ -134,35 +134,35 @@ export const ContactPage: React.FC = () => {
             </div>
 
             {/* Studio Coordinates */}
-            <div className="bg-[#FAFAFA] border border-[#E5E7EB] rounded-[2rem] p-8 sm:p-10 backdrop-blur-3xl">
+            <div className="bg-[#FAFAFA] dark:bg-[#121216] border border-[#E5E7EB] dark:border-white/10 rounded-[2rem] p-8 sm:p-10 backdrop-blur-3xl shadow-xl">
               <h3 className="text-[0.65rem] font-mono font-bold uppercase tracking-[0.2em] text-[#E0561B] mb-8">
                 Studio Coordinates
               </h3>
 
               <div className="space-y-6 text-sm">
                 <div className="flex items-start gap-4">
-                  <Globe className="w-5 h-5 text-[#52525B] mt-1" />
+                  <Globe className="w-5 h-5 text-[#52525B] dark:text-[#E0561B] mt-1 shrink-0" />
                   <div>
-                    <p className="font-bold text-[#0A0A0A] tracking-wide">Operating Model</p>
-                    <p className="text-xs mt-1.5 text-[#71717A] leading-relaxed">Global Remote-First Studio<br/>Serving Ambitious Founders Worldwide</p>
+                    <p className="font-bold text-[#0A0A0A] dark:text-white tracking-wide">Operating Model</p>
+                    <p className="text-xs mt-1.5 text-[#71717A] dark:text-[#A1A1AA] leading-relaxed">Global Remote-First Studio<br/>Serving Ambitious Founders Worldwide</p>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-4 pt-6 border-t border-[#E5E7EB]">
-                  <Mail className="w-5 h-5 text-[#52525B] mt-1" />
+                <div className="flex items-start gap-4 pt-6 border-t border-[#E5E7EB] dark:border-white/10">
+                  <Mail className="w-5 h-5 text-[#52525B] dark:text-[#E0561B] mt-1 shrink-0" />
                   <div>
-                    <p className="font-bold text-[#0A0A0A] tracking-wide">Direct Inquiries</p>
-                    <a href={`mailto:${companyConfig.email}`} className="text-xs text-[#E0561B] hover:text-[#0A0A0A] transition-colors block mt-1.5 font-mono">
+                    <p className="font-bold text-[#0A0A0A] dark:text-white tracking-wide">Direct Inquiries</p>
+                    <a href={`mailto:${companyConfig.email}`} className="text-xs text-[#E0561B] hover:text-[#0A0A0A] dark:hover:text-white transition-colors block mt-1.5 font-mono">
                       {companyConfig.email}
                     </a>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-4 pt-6 border-t border-[#E5E7EB]">
-                  <Clock className="w-5 h-5 text-[#52525B] mt-1" />
+                <div className="flex items-start gap-4 pt-6 border-t border-[#E5E7EB] dark:border-white/10">
+                  <Clock className="w-5 h-5 text-[#52525B] dark:text-[#E0561B] mt-1 shrink-0" />
                   <div>
-                    <p className="font-bold text-[#0A0A0A] tracking-wide">Response Window</p>
-                    <p className="text-xs mt-1.5 text-[#71717A] leading-relaxed">Within 12 hours across<br/>all global time zones.</p>
+                    <p className="font-bold text-[#0A0A0A] dark:text-white tracking-wide">Response Window</p>
+                    <p className="text-xs mt-1.5 text-[#71717A] dark:text-[#A1A1AA] leading-relaxed">Within 12 hours across<br/>all global time zones.</p>
                   </div>
                 </div>
               </div>
@@ -171,68 +171,115 @@ export const ContactPage: React.FC = () => {
         </div>
 
         {/* FAQs */}
-        <section className="mt-32 pt-20 border-t border-[#E5E7EB] relative">
-          <div className="max-w-3xl mb-12">
-            <span className="text-[0.65rem] font-mono font-bold uppercase tracking-[0.2em] text-[#E0561B] block mb-3">
-              FAQ Database
-            </span>
-            <h2 className="font-sans font-bold text-3xl sm:text-4xl lg:text-5xl text-[#0A0A0A] tracking-tight">
-              Operational details.
-            </h2>
-          </div>
+        <section className="mt-32 pt-20 border-t border-[#E5E7EB] dark:border-white/10 relative">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+            
+            {/* Left Column: Heading, Search & Direct Assistance Card (5 cols) */}
+            <div className="lg:col-span-5 space-y-6">
+              <div>
+                <span className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-[#E0561B] block mb-3 border border-[#E0561B]/30 bg-[#E0561B]/10 w-fit px-3 py-1 rounded-full">
+                  FAQ Database
+                </span>
+                <h2 className="font-sans font-bold text-3xl sm:text-4xl lg:text-5xl text-[#0A0A0A] dark:text-white tracking-tight">
+                  Operational details & clarity.
+                </h2>
+                <p className="mt-3 text-sm text-[#71717A] dark:text-[#A1A1AA] font-light leading-relaxed">
+                  Everything you need to know about our engineering standards, milestone billing, IP ownership, and delivery velocities.
+                </p>
+              </div>
 
-          <div className="max-w-3xl mb-8">
-            <div className="relative">
-              <input
-                type="text"
-                value={faqQuery}
-                onChange={(e) => setFaqQuery(e.target.value)}
-                placeholder="Search queries (e.g. 'timeline', 'pricing', 'IP')..."
-                className="w-full px-6 py-4 pl-12 rounded-2xl bg-[#F4F4F5] border border-[#E5E7EB] text-sm text-[#0A0A0A] placeholder-gray-500 focus:outline-none focus:border-[#E0561B] focus:bg-[#E5E7EB] transition-all backdrop-blur-md"
-              />
-              <span className="absolute left-5 top-1/2 -translate-y-1/2 text-xs font-mono text-[#E0561B] font-bold">
-                &gt;
-              </span>
-              {faqQuery && (
-                <button
-                  type="button"
-                  onClick={() => setFaqQuery('')}
-                  className="absolute right-5 top-1/2 -translate-y-1/2 text-[0.65rem] font-mono text-[#71717A] hover:text-[#0A0A0A] tracking-wider"
-                >
-                  CLEAR
-                </button>
-              )}
-            </div>
-          </div>
-
-          <div className="space-y-4 max-w-3xl">
-            {filteredFaqs.map((faq, idx) => {
-              const isOpen = openFaq === idx || faqQuery.length > 0;
-              return (
-                <div 
-                  key={idx}
-                  className="bg-[#F8F9FA] border border-[#E5E7EB] rounded-2xl backdrop-blur-md overflow-hidden transition-colors hover:border-[#E5E7EB]"
-                >
+              {/* Search Bar */}
+              <div className="relative">
+                <input
+                  type="text"
+                  value={faqQuery}
+                  onChange={(e) => setFaqQuery(e.target.value)}
+                  placeholder="Search queries (e.g. 'timeline', 'pricing', 'IP')..."
+                  className="w-full px-5 py-3.5 pl-11 rounded-2xl bg-[#F4F4F5] dark:bg-[#18181D] border border-[#E5E7EB] dark:border-white/10 text-sm text-[#0A0A0A] dark:text-white placeholder-[#71717A] dark:placeholder-[#71717A] focus:outline-none focus:border-[#E0561B] transition-all backdrop-blur-md"
+                />
+                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-xs font-mono text-[#E0561B] font-bold">
+                  &gt;
+                </span>
+                {faqQuery && (
                   <button
                     type="button"
-                    onClick={() => toggleFaq(idx)}
-                    className="w-full p-6 text-left flex items-center justify-between gap-4"
+                    onClick={() => setFaqQuery('')}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-[0.65rem] font-mono text-[#71717A] dark:text-[#A1A1AA] hover:text-[#0A0A0A] dark:hover:text-white tracking-wider"
                   >
-                    <span className="font-sans font-bold text-base sm:text-lg text-[#0A0A0A]/90">
-                      {faq.question}
-                    </span>
-                    <span className="text-[#E0561B] shrink-0">
-                      {isOpen ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
-                    </span>
+                    CLEAR
                   </button>
-                  {isOpen && (
-                    <div className="px-6 pb-6 pt-2 border-t border-[#E5E7EB] text-sm text-[#71717A] leading-relaxed font-light">
-                      {faq.answer}
-                    </div>
-                  )}
+                )}
+              </div>
+
+              {/* Dedicated Support Card */}
+              <div className="p-6 sm:p-8 rounded-2xl bg-[#F8F9FA] dark:bg-[#121216] border border-[#E5E7EB] dark:border-white/10 space-y-4 shadow-sm">
+                <span className="text-[0.68rem] font-mono uppercase tracking-widest text-[#E0561B] font-bold">
+                  Need Direct Scoping?
+                </span>
+                <h3 className="text-lg font-bold text-[#0A0A0A] dark:text-white">
+                  Have a question not listed here?
+                </h3>
+                <p className="text-xs text-[#71717A] dark:text-[#A1A1AA] leading-relaxed font-light">
+                  Talk directly with our lead architects. We evaluate requirements, stack compatibility, and delivery timelines within 12 hours.
+                </p>
+                <div className="pt-2 flex flex-col sm:flex-row gap-3">
+                  <button
+                    type="button"
+                    onClick={() => openBookingModal('call')}
+                    className="flex-1 py-3 px-4 rounded-full bg-[#E0561B] hover:bg-[#C2410C] text-white text-xs font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-2 shadow-xs"
+                  >
+                    <Calendar className="w-3.5 h-3.5" />
+                    <span>Book 30-Min Call</span>
+                  </button>
+                  <a
+                    href={companyConfig.whatsappUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 py-3 px-4 rounded-full bg-white dark:bg-[#18181D] border border-[#E5E7EB] dark:border-white/10 hover:border-[#E0561B]/50 text-[#0A0A0A] dark:text-white text-xs font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-2"
+                  >
+                    <MessageSquare className="w-3.5 h-3.5 text-emerald-500" />
+                    <span>WhatsApp Chat</span>
+                  </a>
                 </div>
-              );
-            })}
+              </div>
+            </div>
+
+            {/* Right Column: FAQ Accordion List (7 cols) */}
+            <div className="lg:col-span-7 space-y-4">
+              {filteredFaqs.length === 0 ? (
+                <div className="p-8 text-center text-sm text-[#71717A] dark:text-[#A1A1AA] bg-[#F8F9FA] dark:bg-[#121216] border border-[#E5E7EB] dark:border-white/10 rounded-2xl">
+                  No FAQs matching "{faqQuery}". Feel free to message our team directly.
+                </div>
+              ) : (
+                filteredFaqs.map((faq, idx) => {
+                  const isOpen = openFaq === idx || faqQuery.length > 0;
+                  return (
+                    <div 
+                      key={idx}
+                      className="bg-[#F8F9FA] dark:bg-[#121216] border border-[#E5E7EB] dark:border-white/10 rounded-2xl overflow-hidden transition-colors hover:border-[#E0561B]/50"
+                    >
+                      <button
+                        type="button"
+                        onClick={() => toggleFaq(idx)}
+                        className="w-full p-6 text-left flex items-center justify-between gap-4"
+                      >
+                        <span className="font-sans font-bold text-base sm:text-lg text-[#0A0A0A] dark:text-white">
+                          {faq.question}
+                        </span>
+                        <span className="text-[#E0561B] shrink-0">
+                          {isOpen ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
+                        </span>
+                      </button>
+                      {isOpen && (
+                        <div className="px-6 pb-6 pt-2 border-t border-[#E5E7EB] dark:border-white/10 text-sm text-[#52525B] dark:text-[#D4D4D8] leading-relaxed font-light">
+                          {faq.answer}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })
+              )}
+            </div>
           </div>
         </section>
       </div>

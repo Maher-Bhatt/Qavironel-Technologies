@@ -200,7 +200,7 @@ export const ServicesPage: React.FC = () => {
                         {svc.deliverables.map((item, idx) => (
                           <div key={idx} className="flex items-start gap-2.5">
                             <CheckCircle2 className="w-4 h-4 text-[#E0561B] shrink-0 mt-0.5" />
-                            <span className="text-xs sm:text-sm text-[#27272A] leading-relaxed">{item}</span>
+                            <span className="text-xs sm:text-sm text-[#27272A] dark:text-[#E4E4E7] leading-relaxed">{item}</span>
                           </div>
                         ))}
                       </div>
@@ -218,10 +218,10 @@ export const ServicesPage: React.FC = () => {
             <span className="text-xs font-mono font-semibold uppercase tracking-[0.2em] text-[#E0561B] block mb-2">
               Transparent Starting Points
             </span>
-            <h2 className="font-sans font-bold text-3xl sm:text-4xl text-[#0A0A0A] tracking-tight">
+            <h2 className="font-sans font-bold text-3xl sm:text-4xl text-[#0A0A0A] dark:text-white tracking-tight">
               Honest project scopes. No hidden agency markup.
             </h2>
-            <p className="mt-3 text-base text-[#52525B] leading-relaxed font-light">
+            <p className="mt-3 text-base text-[#52525B] dark:text-[#A1A1AA] leading-relaxed font-light">
               We align on exact pages, priorities, technical integrations, and deliverables before development begins.
             </p>
           </div>
@@ -230,27 +230,27 @@ export const ServicesPage: React.FC = () => {
             {/* High-Velocity Web Platform */}
             <div className="glass-card rounded-2xl p-8 sm:p-10 flex flex-col justify-between">
               <div>
-                <div className="flex items-center justify-between text-xs font-mono text-[#71717A] pb-4 border-b border-[#E5E7EB]">
-                  <span className="font-semibold text-[#0A0A0A]">WEB & BRAND PLATFORMS</span>
+                <div className="flex items-center justify-between text-xs font-mono text-[#71717A] dark:text-[#A1A1AA] pb-4 border-b border-[#E5E7EB] dark:border-white/10">
+                  <span className="font-semibold text-[#0A0A0A] dark:text-white">WEB & BRAND PLATFORMS</span>
                   <span className="text-[#E0561B] font-semibold">1–2 WEEKS SPRINT</span>
                 </div>
 
-                <h3 className="font-sans font-bold text-2xl text-[#0A0A0A] mt-6">
+                <h3 className="font-sans font-bold text-2xl text-[#0A0A0A] dark:text-white mt-6">
                   High-Impact Web Experience
                 </h3>
-                <p className="mt-2 text-sm text-[#52525B] font-light">
+                <p className="mt-2 text-sm text-[#52525B] dark:text-[#A1A1AA] font-light">
                   A bespoke, high-converting digital storefront or company platform for brands ready to present themselves with authority and sub-second speed.
                 </p>
 
-                <div className="my-6 py-4 border-y border-[#E5E7EB]">
-                  <p className="text-xs font-mono uppercase tracking-wider text-[#71717A]">Engagement Model</p>
-                  <p className="text-2xl font-bold font-sans text-[#0A0A0A] mt-1">
+                <div className="my-6 py-4 border-y border-[#E5E7EB] dark:border-white/10">
+                  <p className="text-xs font-mono uppercase tracking-wider text-[#71717A] dark:text-[#A1A1AA]">Engagement Model</p>
+                  <p className="text-2xl font-bold font-sans text-[#0A0A0A] dark:text-white mt-1">
                     Custom Milestone Scoping
                   </p>
-                  <p className="text-xs text-[#71717A] font-mono mt-0.5">Tailored strictly to project specifications</p>
+                  <p className="text-xs text-[#71717A] dark:text-[#A1A1AA] font-mono mt-0.5">Tailored strictly to project specifications</p>
                 </div>
 
-                <ul className="space-y-3 text-xs sm:text-sm text-[#27272A]">
+                <ul className="space-y-3 text-xs sm:text-sm text-[#27272A] dark:text-[#E4E4E7]">
                   <li className="flex items-center gap-2.5">
                     <CheckCircle2 className="w-4 h-4 text-[#E0561B]" />
                     <span>Bespoke responsive interface architecture (Zero templates)</span>
@@ -274,7 +274,7 @@ export const ServicesPage: React.FC = () => {
                 </ul>
               </div>
 
-              <div className="mt-8 pt-6 border-t border-[#E5E7EB] flex flex-wrap items-center gap-3">
+              <div className="mt-8 pt-6 border-t border-[#E5E7EB] dark:border-white/10 flex flex-wrap items-center gap-3">
                 <button
                   type="button"
                   onClick={() => openBookingModal('quotation')}
@@ -286,7 +286,7 @@ export const ServicesPage: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => openBookingModal('call')}
-                  className="py-3 px-4 rounded-full bg-[#F4F4F5] hover:bg-[#E5E7EB] text-[#0A0A0A] text-xs font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-1.5 border border-[#E5E7EB]"
+                  className="py-3 px-4 rounded-full bg-[#F4F4F5] dark:bg-[#1C1C22] hover:bg-[#E5E7EB] dark:hover:bg-[#27272A] text-[#0A0A0A] dark:text-white text-xs font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-1.5 border border-[#E5E7EB] dark:border-white/10"
                 >
                   <Calendar className="w-3.5 h-3.5 text-[#E0561B]" />
                   <span>Book Call</span>
@@ -295,29 +295,29 @@ export const ServicesPage: React.FC = () => {
             </div>
 
             {/* Custom Application / Platform Plan */}
-            <div className="glass-card rounded-2xl p-8 sm:p-10 text-[#0A0A0A] flex flex-col justify-between border-2 border-[#E0561B]/60 shadow-[0_12px_40px_rgba(224,86,27,0.08)]">
+            <div className="glass-card rounded-2xl p-8 sm:p-10 text-[#0A0A0A] dark:text-white flex flex-col justify-between border-2 border-[#E0561B]/60 shadow-[0_12px_40px_rgba(224,86,27,0.08)]">
               <div>
-                <div className="flex items-center justify-between text-xs font-mono text-[#71717A] pb-4 border-b border-[#E5E7EB]">
+                <div className="flex items-center justify-between text-xs font-mono text-[#71717A] dark:text-[#A1A1AA] pb-4 border-b border-[#E5E7EB] dark:border-white/10">
                   <span className="text-[#E0561B] font-semibold">SAAS & APPLIED AI</span>
-                  <span className="text-[#0A0A0A] font-semibold">2–4 WEEKS SPRINT</span>
+                  <span className="text-[#0A0A0A] dark:text-white font-semibold">2–4 WEEKS SPRINT</span>
                 </div>
 
-                <h3 className="font-sans font-bold text-2xl text-[#0A0A0A] mt-6">
+                <h3 className="font-sans font-bold text-2xl text-[#0A0A0A] dark:text-white mt-6">
                   Custom Platform & AI System
                 </h3>
-                <p className="mt-2 text-sm text-[#52525B] font-light">
+                <p className="mt-2 text-sm text-[#52525B] dark:text-[#A1A1AA] font-light">
                   For startups, platforms, and applications requiring custom data models, role-based portals, or practical applied AI features.
                 </p>
 
-                <div className="my-6 py-4 border-y border-[#E5E7EB]">
-                  <p className="text-xs font-mono uppercase tracking-wider text-[#71717A]">Engagement Model</p>
-                  <p className="text-2xl font-bold font-sans text-[#0A0A0A] mt-1">
+                <div className="my-6 py-4 border-y border-[#E5E7EB] dark:border-white/10">
+                  <p className="text-xs font-mono uppercase tracking-wider text-[#71717A] dark:text-[#A1A1AA]">Engagement Model</p>
+                  <p className="text-2xl font-bold font-sans text-[#0A0A0A] dark:text-white mt-1">
                     Sprint-Based Architecture
                   </p>
-                  <p className="text-xs text-[#71717A] font-mono mt-0.5">Transparent milestones, zero boilerplate</p>
+                  <p className="text-xs text-[#71717A] dark:text-[#A1A1AA] font-mono mt-0.5">Transparent milestones, zero boilerplate</p>
                 </div>
 
-                <ul className="space-y-3 text-xs sm:text-sm text-[#27272A]">
+                <ul className="space-y-3 text-xs sm:text-sm text-[#27272A] dark:text-[#E4E4E7]">
                   <li className="flex items-center gap-2.5">
                     <CheckCircle2 className="w-4 h-4 text-[#E0561B]" />
                     <span>Everything in Web plus full-stack SaaS architecture</span>
@@ -341,7 +341,7 @@ export const ServicesPage: React.FC = () => {
                 </ul>
               </div>
 
-              <div className="mt-8 pt-6 border-t border-[#E5E7EB] flex flex-wrap items-center gap-3">
+              <div className="mt-8 pt-6 border-t border-[#E5E7EB] dark:border-white/10 flex flex-wrap items-center gap-3">
                 <button
                   type="button"
                   onClick={() => openBookingModal('quotation')}
@@ -353,7 +353,7 @@ export const ServicesPage: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => openBookingModal('call')}
-                  className="py-3 px-4 rounded-full bg-[#0A0A0A] hover:bg-black text-white text-xs font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-1.5"
+                  className="py-3 px-4 rounded-full bg-[#0A0A0A] dark:bg-white hover:bg-black dark:hover:bg-zinc-200 text-white dark:text-[#0A0A0A] text-xs font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-1.5"
                 >
                   <Calendar className="w-3.5 h-3.5 text-[#E0561B]" />
                   <span>Schedule Call</span>
@@ -379,26 +379,26 @@ export const ServicesPage: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {processSteps.map((step) => (
-              <div key={step.step} className="p-6 bg-[#F8F9FA] border border-[#E5E7EB] rounded-xl shadow-xs">
+              <div key={step.step} className="p-6 bg-[#F8F9FA] dark:bg-[#121216] border border-[#E5E7EB] dark:border-white/10 rounded-xl shadow-xs">
                 <span className="font-mono text-xl font-bold text-[#E0561B]">{step.step}</span>
-                <h4 className="font-sans font-bold text-lg text-[#0A0A0A] mt-3 mb-2">{step.title}</h4>
-                <p className="text-xs sm:text-sm text-[#52525B] leading-relaxed font-light">{step.summary}</p>
+                <h4 className="font-sans font-bold text-lg text-[#0A0A0A] dark:text-white mt-3 mb-2">{step.title}</h4>
+                <p className="text-xs sm:text-sm text-[#52525B] dark:text-[#A1A1AA] leading-relaxed font-light">{step.summary}</p>
               </div>
             ))}
           </div>
         </section>
 
         {/* Bottom CTA */}
-        <div className="mt-20 p-8 sm:p-12 glass-card rounded-2xl text-[#0A0A0A] flex flex-col lg:flex-row items-center justify-between gap-6">
+        <div className="mt-20 p-8 sm:p-12 glass-card rounded-2xl text-[#0A0A0A] dark:text-white flex flex-col lg:flex-row items-center justify-between gap-6">
           <div>
-            <h3 className="font-sans font-bold text-2xl text-[#0A0A0A]">Ready to scope your project?</h3>
-            <p className="text-sm text-[#52525B] mt-1 font-light">Send us your requirements or pick a time. We reply with a structured scope within 12–24 hours.</p>
+            <h3 className="font-sans font-bold text-2xl text-[#0A0A0A] dark:text-white">Ready to scope your project?</h3>
+            <p className="text-sm text-[#52525B] dark:text-[#A1A1AA] mt-1 font-light">Send us your requirements or pick a time. We reply with a structured scope within 12–24 hours.</p>
           </div>
           <div className="flex flex-wrap items-center gap-3">
             <button
               type="button"
               onClick={() => openBookingModal('call')}
-              className="px-5 py-3 rounded-full bg-[#0A0A0A] hover:bg-black text-white text-xs font-bold uppercase tracking-wider transition-colors flex items-center gap-2 shadow-xs"
+              className="px-5 py-3 rounded-full bg-[#0A0A0A] dark:bg-white hover:bg-black dark:hover:bg-zinc-200 text-white dark:text-[#0A0A0A] text-xs font-bold uppercase tracking-wider transition-colors flex items-center gap-2 shadow-xs"
             >
               <Calendar className="w-3.5 h-3.5 text-[#E0561B]" />
               <span>Schedule Call (30m)</span>
@@ -406,7 +406,7 @@ export const ServicesPage: React.FC = () => {
             <button
               type="button"
               onClick={() => openBookingModal('quotation')}
-              className="px-5 py-3 rounded-full bg-[#F4F4F5] hover:bg-[#E5E7EB] text-[#0A0A0A] text-xs font-bold uppercase tracking-wider transition-colors border border-[#E5E7EB] flex items-center gap-2"
+              className="px-5 py-3 rounded-full bg-[#F4F4F5] dark:bg-[#1C1C22] hover:bg-[#E5E7EB] dark:hover:bg-[#27272A] text-[#0A0A0A] dark:text-white text-xs font-bold uppercase tracking-wider transition-colors border border-[#E5E7EB] dark:border-white/10 flex items-center gap-2"
             >
               <FileText className="w-3.5 h-3.5 text-[#E0561B]" />
               <span>Request Quote</span>

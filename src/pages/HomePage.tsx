@@ -453,15 +453,15 @@ export const HomePage: React.FC = () => {
           </div>
 
           {/* Scope Estimator Quick-Launch Card */}
-          <div className="mt-16 p-8 rounded-2xl bg-gradient-to-r from-[#F8F9FA] via-white to-[#F8F9FA] border border-[#E5E7EB] flex flex-col md:flex-row items-center justify-between gap-6 shadow-xs">
+          <div className="mt-16 p-8 rounded-2xl bg-gradient-to-r from-[#F8F9FA] via-white to-[#F8F9FA] dark:from-[#111115] dark:via-[#16161B] dark:to-[#111115] border border-[#E5E7EB] dark:border-white/10 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xs">
             <div className="space-y-1 text-center md:text-left">
               <span className="text-xs font-mono text-[#E0561B] font-bold uppercase tracking-wider">
                 Instant Architecture Brief
               </span>
-              <h3 className="font-sans font-bold text-xl text-[#0A0A0A]">
+              <h3 className="font-sans font-bold text-xl text-[#0A0A0A] dark:text-white">
                 Have a specific project or platform in mind?
               </h3>
-              <p className="text-xs text-[#52525B]">
+              <p className="text-xs text-[#52525B] dark:text-[#A1A1AA]">
                 Configure deliverables, tech modules, and receive an instant scope breakdown in under 60 seconds.
               </p>
             </div>

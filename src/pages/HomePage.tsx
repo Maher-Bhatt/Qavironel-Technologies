@@ -161,16 +161,16 @@ export const HomePage: React.FC = () => {
               </motion.div>
             </div>
 
-            {/* Right Column: Interactive 3D Digital Product Architecture Stack (5 Cols) */}
+            {/* Right Column: Interactive Multiple AI Intelligence Core (5 Cols) */}
             <div className="lg:col-span-5 relative flex items-center justify-center">
               <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
+                initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.9, delay: 0.2 }}
-                className="relative w-full max-w-[480px] aspect-square flex items-center justify-center rounded-2xl bg-radial from-[#F8F9FA]/90 to-transparent p-2 border border-[#E5E7EB]/60 shadow-xs"
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="relative w-full max-w-[520px] rounded-2xl bg-gradient-to-b from-[#F8F9FA] to-white p-2.5 sm:p-3.5 border border-[#E5E7EB] shadow-[0_8px_30px_rgba(0,0,0,0.04)]"
               >
-                {/* 3D WebGL Connected Architecture Engine */}
-                <Hero3DArchitectureStack className="w-full h-full" />
+                {/* 3D WebGL Multiple AI Intelligence Engine */}
+                <Hero3DArchitectureStack className="w-full" />
               </motion.div>
             </div>
           </div>

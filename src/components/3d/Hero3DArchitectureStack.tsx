@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
+import { Bot, Eye, Database, Shield, Cpu, Mic, Zap, CheckCircle2 } from 'lucide-react';
+import { playClickSound } from '../../utils/soundEffects';
 
 interface Hero3DArchitectureStackProps {
   className?: string;
@@ -7,11 +9,83 @@ interface Hero3DArchitectureStackProps {
 
 export const Hero3DArchitectureStack: React.FC<Hero3DArchitectureStackProps> = ({ className = '' }) => {
   const mountRef = useRef<HTMLDivElement>(null);
-  const [activeTier, setActiveTier] = useState<number>(0); // 0: All, 1: UI, 2: AI, 3: Core
+  const [activeEngine, setActiveEngine] = useState<number>(0); // 0: All Connected Swarm, 1: LLM, 2: Vision, 3: Vector, 4: Air-Gap, 5: Agents, 6: Voice
 
-  // Ref to pass activeTier into animation loop
-  const activeTierRef = useRef<number>(0);
-  activeTierRef.current = activeTier;
+  const activeEngineRef = useRef<number>(0);
+  activeEngineRef.current = activeEngine;
+
+  const aiEngines = [
+    {
+      id: 0,
+      shortLabel: 'ALL CONNECTED',
+      name: 'Unified Multimodal AI Swarm',
+      type: 'Autonomous Core',
+      spec: '6-Engine Orchestration · Synchronized Conduits',
+      status: 'REALTIME STREAMING',
+      throughput: 'SUB-200MS LATENCY',
+      icon: Zap
+    },
+    {
+      id: 1,
+      shortLabel: '01 · LLM REASONING',
+      name: 'Groq LLaMA 3.3 70B & DeepSeek',
+      type: 'Text & Logic Inference',
+      spec: 'High-Velocity Tokens · Guarded Output Schemas',
+      status: 'ACTIVE PIPELINE',
+      throughput: '248 TOKENS/SEC',
+      icon: Bot
+    },
+    {
+      id: 2,
+      shortLabel: '02 · VISION & HUD',
+      name: 'K.A.L.K.I. Scout Vision & OCR',
+      type: 'Spatial Perception',
+      spec: 'Sub-second Desktop & Screen Multimodal Extraction',
+      status: 'SCANNING ACTIVE',
+      throughput: '60 FPS TELEMETRY',
+      icon: Eye
+    },
+    {
+      id: 3,
+      shortLabel: '03 · VECTOR VAULT',
+      name: 'ChromaDB Local Vector Memory',
+      type: 'Contextual RAG Vault',
+      spec: 'High-Dimensional Embeddings & Fast Cosine Index',
+      status: 'HARDWARE BOUND',
+      throughput: '1536-D EMBEDDINGS',
+      icon: Database
+    },
+    {
+      id: 4,
+      shortLabel: '04 · LOCAL AIR-GAP',
+      name: 'Offline Ollama & DPAPI Vault',
+      type: 'Zero-Cloud Sovereignty',
+      spec: 'Hardware-Encrypted Daemon · Air-Gapped Localhost',
+      status: 'ZERO CLOUD LEAKS',
+      throughput: 'LOCAL DAEMON',
+      icon: Shield
+    },
+    {
+      id: 5,
+      shortLabel: '05 · AGENT SWARM',
+      name: 'Autonomous Tool-Calling Agents',
+      type: 'Multi-Agent Execution',
+      spec: 'Sandboxed Shell Tools · Code Compilers & Verification',
+      status: 'GUARDED EXECUTION',
+      throughput: 'DYNAMIC ROUTING',
+      icon: Cpu
+    },
+    {
+      id: 6,
+      shortLabel: '06 · VOICE VAD',
+      name: 'VOSK Offline Voice & Whisper',
+      type: 'Acoustic Intelligence',
+      spec: 'Local Wake-Word Listener · Sub-150ms Speech-To-Text',
+      status: 'LISTENING ENGINE',
+      throughput: '< 150MS STT',
+      icon: Mic
+    }
+  ];
 
   useEffect(() => {
     const container = mountRef.current;
@@ -20,10 +94,10 @@ export const Hero3DArchitectureStack: React.FC<Hero3DArchitectureStackProps> = (
     let width = container.clientWidth;
     let height = container.clientHeight;
 
-    // 1. Scene, Camera, Renderer
+    // 1. Scene, Camera, High-Performance Renderer
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(42, width / height, 0.1, 1000);
-    camera.position.set(0, 1.2, 7.5);
+    const camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 1000);
+    camera.position.set(0, 0.4, 7.2);
     camera.lookAt(0, 0, 0);
 
     const renderer = new THREE.WebGLRenderer({
@@ -37,252 +111,275 @@ export const Hero3DArchitectureStack: React.FC<Hero3DArchitectureStackProps> = (
     renderer.toneMappingExposure = 1.15;
     container.appendChild(renderer.domElement);
 
-    // Master Rotation Group (Isometric tilt)
+    // Master Group anchored firmly in place
     const masterGroup = new THREE.Group();
-    masterGroup.rotation.x = 0.35;
-    masterGroup.rotation.y = -0.45;
+    // Elegant, stable isometric elevation
+    masterGroup.rotation.x = 0.22;
     scene.add(masterGroup);
 
     // ─────────────────────────────────────────────────────────────
-    // TIER 1 (TOP): SPATIAL UI & DIGITAL PRODUCT PLANE (Y = +1.4)
+    // 01. CENTRAL MULTIMODAL NEURAL CORE (Unified Intelligence)
     // ─────────────────────────────────────────────────────────────
-    const uiGroup = new THREE.Group();
-    uiGroup.position.y = 1.4;
-    masterGroup.add(uiGroup);
+    const coreGroup = new THREE.Group();
+    masterGroup.add(coreGroup);
 
-    // Frosted Glass Base Slab
-    const slabGeo = new THREE.BoxGeometry(3.2, 0.08, 2.2);
-    const glassMat = new THREE.MeshPhysicalMaterial({
-      color: new THREE.Color('#FFFFFF'),
-      roughness: 0.12,
-      metalness: 0.05,
-      transmission: 0.88,
-      ior: 1.5,
-      thickness: 1.4,
-      clearcoat: 1.0,
-      clearcoatRoughness: 0.1,
-      transparent: true,
-      opacity: 0.95
-    });
-    const uiSlab = new THREE.Mesh(slabGeo, glassMat);
-    uiGroup.add(uiSlab);
-
-    // UI Wireframe Elements on Top Slab
-    const wireframeMat = new THREE.LineBasicMaterial({ color: new THREE.Color('#E0561B'), transparent: true, opacity: 0.65 });
-    const uiBoxGeo = new THREE.BoxGeometry(1.2, 0.02, 0.8);
-    const uiBoxEdges = new THREE.EdgesGeometry(uiBoxGeo);
-    const uiWidget1 = new THREE.LineSegments(uiBoxEdges, wireframeMat);
-    uiWidget1.position.set(-0.7, 0.06, -0.4);
-    uiGroup.add(uiWidget1);
-
-    const uiWidget2 = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(1.2, 0.02, 0.6)), wireframeMat);
-    uiWidget2.position.set(-0.7, 0.06, 0.5);
-    uiGroup.add(uiWidget2);
-
-    const uiWidget3 = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(1.1, 0.02, 1.5)), wireframeMat);
-    uiWidget3.position.set(0.75, 0.06, 0.05);
-    uiGroup.add(uiWidget3);
-
-    // ─────────────────────────────────────────────────────────────
-    // TIER 2 (MIDDLE): APPLIED AI & NEURAL INFERENCE ENGINE (Y = 0.0)
-    // ─────────────────────────────────────────────────────────────
-    const aiGroup = new THREE.Group();
-    aiGroup.position.y = 0.0;
-    masterGroup.add(aiGroup);
-
-    // Neural Lattice Slab (Tinted Translucent Obsidian)
-    const neuralSlabMat = new THREE.MeshPhysicalMaterial({
-      color: new THREE.Color('#18181B'),
-      roughness: 0.25,
-      metalness: 0.3,
-      transmission: 0.65,
-      ior: 1.45,
-      transparent: true,
-      opacity: 0.88
-    });
-    const neuralSlab = new THREE.Mesh(slabGeo, neuralSlabMat);
-    aiGroup.add(neuralSlab);
-
-    // Neural Nodes & Synapses
-    const nodeCount = 14;
-    const nodeGeo = new THREE.SphereGeometry(0.07, 16, 16);
-    const nodeMat = new THREE.MeshStandardMaterial({
+    // Inner Glowing Pulsating Plasma Heart
+    const heartGeo = new THREE.SphereGeometry(0.52, 32, 32);
+    const heartMat = new THREE.MeshStandardMaterial({
       color: new THREE.Color('#E0561B'),
       emissive: new THREE.Color('#E0561B'),
-      emissiveIntensity: 0.8,
-      metalness: 0.8,
-      roughness: 0.2
+      emissiveIntensity: 1.4,
+      roughness: 0.2,
+      metalness: 0.8
     });
+    const heartMesh = new THREE.Mesh(heartGeo, heartMat);
+    coreGroup.add(heartMesh);
 
-    const nodePositions: THREE.Vector3[] = [];
-    for (let i = 0; i < nodeCount; i++) {
-      const nodeMesh = new THREE.Mesh(nodeGeo, nodeMat);
-      const nx = (Math.random() - 0.5) * 2.6;
-      const ny = 0.15 + Math.random() * 0.25;
-      const nz = (Math.random() - 0.5) * 1.6;
-      nodeMesh.position.set(nx, ny, nz);
-      aiGroup.add(nodeMesh);
-      nodePositions.push(new THREE.Vector3(nx, ny, nz));
-    }
-
-    // Connect nodes with synaptic lines
-    const lineMat = new THREE.LineBasicMaterial({ color: new THREE.Color('#E0561B'), transparent: true, opacity: 0.4 });
-    const lineGeo = new THREE.BufferGeometry();
-    const linePoints: number[] = [];
-    for (let i = 0; i < nodePositions.length; i++) {
-      for (let j = i + 1; j < nodePositions.length; j++) {
-        if (nodePositions[i].distanceTo(nodePositions[j]) < 1.3) {
-          linePoints.push(nodePositions[i].x, nodePositions[i].y, nodePositions[i].z);
-          linePoints.push(nodePositions[j].x, nodePositions[j].y, nodePositions[j].z);
-        }
-      }
-    }
-    lineGeo.setAttribute('position', new THREE.Float32BufferAttribute(linePoints, 3));
-    const synapses = new THREE.LineSegments(lineGeo, lineMat);
-    aiGroup.add(synapses);
-
-    // Orbiting Vector Inference Rings
-    const ringGeo = new THREE.TorusGeometry(1.6, 0.015, 16, 100);
-    const ringMat = new THREE.MeshStandardMaterial({ color: new THREE.Color('#E0561B'), metalness: 0.9, roughness: 0.1 });
-    const aiRing1 = new THREE.Mesh(ringGeo, ringMat);
-    aiRing1.rotation.x = Math.PI / 2;
-    aiGroup.add(aiRing1);
-
-    // ─────────────────────────────────────────────────────────────
-    // TIER 3 (BOTTOM): CLOUD INFRASTRUCTURE & SECURITY BEDROCK (Y = -1.4)
-    // ─────────────────────────────────────────────────────────────
-    const infraGroup = new THREE.Group();
-    infraGroup.position.y = -1.4;
-    masterGroup.add(infraGroup);
-
-    // Solid Brushed Titanium Base Chassis
-    const infraMat = new THREE.MeshStandardMaterial({
-      color: new THREE.Color('#0A0A0A'),
-      metalness: 0.85,
-      roughness: 0.2
+    // Outer Translucent Crystalline Diamond Cage (Icosahedron)
+    const crystalGeo = new THREE.IcosahedronGeometry(0.88, 1);
+    const crystalMat = new THREE.MeshPhysicalMaterial({
+      color: new THREE.Color('#18181B'),
+      roughness: 0.12,
+      metalness: 0.1,
+      transmission: 0.85,
+      ior: 1.52,
+      transparent: true,
+      opacity: 0.92
     });
-    const infraSlab = new THREE.Mesh(slabGeo, infraMat);
-    infraGroup.add(infraSlab);
+    const crystalMesh = new THREE.Mesh(crystalGeo, crystalMat);
+    coreGroup.add(crystalMesh);
 
-    // Server Matrix Grid on Bottom Slab
-    const gridHelper = new THREE.GridHelper(2.6, 10, 0xE0561B, 0x3F3F46);
-    gridHelper.position.y = 0.05;
-    infraGroup.add(gridHelper);
+    // Edge wireframe in signature copper
+    const crystalWireGeo = new THREE.EdgesGeometry(crystalGeo);
+    const crystalWireMat = new THREE.LineBasicMaterial({
+      color: new THREE.Color('#E0561B'),
+      transparent: true,
+      opacity: 0.8
+    });
+    const crystalWire = new THREE.LineSegments(crystalWireGeo, crystalWireMat);
+    coreGroup.add(crystalWire);
+
+    // Gyroscopic Ring 1
+    const ring1Geo = new THREE.TorusGeometry(1.22, 0.012, 16, 80);
+    const ringMat = new THREE.MeshBasicMaterial({ color: new THREE.Color('#E0561B'), transparent: true, opacity: 0.5 });
+    const ring1 = new THREE.Mesh(ring1Geo, ringMat);
+    ring1.rotation.x = Math.PI / 2.8;
+    coreGroup.add(ring1);
+
+    // Gyroscopic Ring 2
+    const ring2Geo = new THREE.TorusGeometry(1.36, 0.012, 16, 80);
+    const ring2Mat = new THREE.MeshBasicMaterial({ color: new THREE.Color('#A1A1AA'), transparent: true, opacity: 0.35 });
+    const ring2 = new THREE.Mesh(ring2Geo, ring2Mat);
+    ring2.rotation.y = Math.PI / 3.2;
+    coreGroup.add(ring2);
 
     // ─────────────────────────────────────────────────────────────
-    // CONNECTIVE DATA CONDUITS (LINKING ALL 3 TIERS TOGETHER)
+    // 02. MULTIPLE SATELLITE AI SUBSYSTEMS (6 Distinct Engines)
     // ─────────────────────────────────────────────────────────────
-    const conduitPositions = [
-      [-1.3, -0.9],
-      [1.3, -0.9],
-      [-1.3, 0.9],
-      [1.3, 0.9],
-      [0.0, 0.0] // Center master pipeline
+    const nodeDefinitions = [
+      { id: 1, pos: new THREE.Vector3(1.85, 0.65, 0.3), color: '#E0561B', name: 'LLM Reasoning', shape: 'dodeca' },
+      { id: 2, pos: new THREE.Vector3(-1.75, 0.85, -0.4), color: '#38BDF8', name: 'Vision & HUD', shape: 'octa' },
+      { id: 3, pos: new THREE.Vector3(1.45, -1.05, 0.85), color: '#10B981', name: 'Vector Vault', shape: 'cube' },
+      { id: 4, pos: new THREE.Vector3(-1.55, -0.95, 0.75), color: '#F59E0B', name: 'Local Air-Gap', shape: 'sphere' },
+      { id: 5, pos: new THREE.Vector3(0.1, 1.75, -0.75), color: '#8B5CF6', name: 'Agent Swarm', shape: 'icosa' },
+      { id: 6, pos: new THREE.Vector3(-0.35, -1.55, -0.85), color: '#EC4899', name: 'Voice VAD', shape: 'torus' }
     ];
 
-    const conduitGeo = new THREE.CylinderGeometry(0.025, 0.025, 3.2, 16);
-    const conduitMat = new THREE.MeshStandardMaterial({
-      color: new THREE.Color('#E0561B'),
-      emissive: new THREE.Color('#E0561B'),
-      emissiveIntensity: 0.5,
-      metalness: 0.8,
-      roughness: 0.2
-    });
+    interface EngineNodeInstance {
+      id: number;
+      group: THREE.Group;
+      coreMesh: THREE.Mesh;
+      basePos: THREE.Vector3;
+      conduitLine: THREE.Line;
+      pulses: { mesh: THREE.Mesh; progress: number; speed: number }[];
+    }
 
-    conduitPositions.forEach(([cx, cz]) => {
-      const conduit = new THREE.Mesh(conduitGeo, conduitMat);
-      conduit.position.set(cx, 0, cz);
-      masterGroup.add(conduit);
-    });
+    const engineNodes: EngineNodeInstance[] = [];
 
-    // Flowing Energy Pulses along conduits
-    const pulseGeo = new THREE.SphereGeometry(0.06, 12, 12);
+    // Materials
+    const conduitMat = new THREE.LineBasicMaterial({ color: new THREE.Color('#E0561B'), transparent: true, opacity: 0.45 });
     const pulseMat = new THREE.MeshBasicMaterial({ color: new THREE.Color('#FFFFFF') });
-    const pulses: { mesh: THREE.Mesh; x: number; z: number; speed: number; progress: number }[] = [];
+    const pulseGeo = new THREE.SphereGeometry(0.045, 12, 12);
 
-    conduitPositions.forEach(([cx, cz], idx) => {
-      const pMesh = new THREE.Mesh(pulseGeo, pulseMat);
-      masterGroup.add(pMesh);
-      pulses.push({
-        mesh: pMesh,
-        x: cx,
-        z: cz,
-        speed: 0.008 + idx * 0.003,
-        progress: idx * 0.2
+    nodeDefinitions.forEach((def) => {
+      const nodeGroup = new THREE.Group();
+      nodeGroup.position.copy(def.pos);
+      masterGroup.add(nodeGroup);
+
+      let geo: THREE.BufferGeometry;
+      if (def.shape === 'dodeca') {
+        geo = new THREE.DodecahedronGeometry(0.22);
+      } else if (def.shape === 'octa') {
+        geo = new THREE.OctahedronGeometry(0.22);
+      } else if (def.shape === 'cube') {
+        geo = new THREE.BoxGeometry(0.26, 0.26, 0.26);
+      } else if (def.shape === 'sphere') {
+        geo = new THREE.SphereGeometry(0.2, 16, 16);
+      } else if (def.shape === 'icosa') {
+        geo = new THREE.IcosahedronGeometry(0.22);
+      } else {
+        geo = new THREE.TorusGeometry(0.18, 0.05, 12, 24);
+      }
+
+      const mat = new THREE.MeshStandardMaterial({
+        color: new THREE.Color(def.color),
+        emissive: new THREE.Color(def.color),
+        emissiveIntensity: 0.9,
+        metalness: 0.7,
+        roughness: 0.25
+      });
+      const coreMesh = new THREE.Mesh(geo, mat);
+      nodeGroup.add(coreMesh);
+
+      // Mini wireframe halo around satellite
+      const wire = new THREE.LineSegments(
+        new THREE.EdgesGeometry(geo),
+        new THREE.LineBasicMaterial({ color: new THREE.Color(def.color), transparent: true, opacity: 0.6 })
+      );
+      nodeGroup.add(wire);
+
+      // Conduits connecting this node to the central core (0, 0, 0)
+      const conduitLineGeo = new THREE.BufferGeometry().setFromPoints([
+        new THREE.Vector3(0, 0, 0),
+        def.pos
+      ]);
+      const conduitLine = new THREE.Line(conduitLineGeo, conduitMat.clone());
+      masterGroup.add(conduitLine);
+
+      // 2 data pulses traveling along the conduit
+      const nodePulses: { mesh: THREE.Mesh; progress: number; speed: number }[] = [];
+      for (let p = 0; p < 2; p++) {
+        const pMesh = new THREE.Mesh(pulseGeo, pulseMat);
+        masterGroup.add(pMesh);
+        nodePulses.push({
+          mesh: pMesh,
+          progress: p * 0.5,
+          speed: 0.009 + Math.random() * 0.004
+        });
+      }
+
+      engineNodes.push({
+        id: def.id,
+        group: nodeGroup,
+        coreMesh,
+        basePos: def.pos.clone(),
+        conduitLine,
+        pulses: nodePulses
       });
     });
 
     // ─────────────────────────────────────────────────────────────
-    // LIGHTING RIG
+    // 03. LIGHTING RIG
     // ─────────────────────────────────────────────────────────────
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1.4);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.3);
     scene.add(ambientLight);
 
-    const copperKeyLight = new THREE.PointLight('#E0561B', 22, 15);
-    copperKeyLight.position.set(4, 4, 4);
+    const copperKeyLight = new THREE.PointLight('#E0561B', 20, 14);
+    copperKeyLight.position.set(3.5, 3.5, 3.5);
     scene.add(copperKeyLight);
 
-    const coolFillLight = new THREE.PointLight('#38BDF8', 8, 12);
-    coolFillLight.position.set(-4, -2, 3);
-    scene.add(coolFillLight);
+    const cyanRimLight = new THREE.PointLight('#38BDF8', 9, 12);
+    cyanRimLight.position.set(-3.5, -2.5, 2.5);
+    scene.add(cyanRimLight);
 
-    const overheadLight = new THREE.DirectionalLight(0xffffff, 1.8);
-    overheadLight.position.set(0, 6, 4);
+    const overheadLight = new THREE.DirectionalLight(0xffffff, 1.6);
+    overheadLight.position.set(0, 5, 4);
     scene.add(overheadLight);
 
     // ─────────────────────────────────────────────────────────────
-    // INTERACTION & ANIMATION LOOP
+    // 04. SMOOTH & STABILIZED 60 FPS ANIMATION LOOP (NO WILD MOUSE TILT)
     // ─────────────────────────────────────────────────────────────
-    let mouseX = 0;
-    let mouseY = 0;
-    let targetRotY = -0.45;
-    let targetRotX = 0.35;
+    // Only a tiny clamped micro-drift when hovering directly inside the canvas container
+    let containerHovered = false;
+    let localMouseX = 0;
+    let localMouseY = 0;
 
-    const handleMouseMove = (event: MouseEvent) => {
+    const handleMouseEnter = () => { containerHovered = true; };
+    const handleMouseLeave = () => { 
+      containerHovered = false; 
+      localMouseX = 0; 
+      localMouseY = 0; 
+    };
+    const handleContainerMouseMove = (e: MouseEvent) => {
       const rect = container.getBoundingClientRect();
-      const nx = (event.clientX - rect.left) / rect.width - 0.5;
-      const ny = (event.clientY - rect.top) / rect.height - 0.5;
-      mouseX = nx * 1.5;
-      mouseY = ny * 1.5;
+      const nx = (e.clientX - rect.left) / rect.width - 0.5;
+      const ny = (e.clientY - rect.top) / rect.height - 0.5;
+      // Clamped micro-parallax only (max 0.03 rad) - rock-solid stability!
+      localMouseX = THREE.MathUtils.clamp(nx * 0.06, -0.04, 0.04);
+      localMouseY = THREE.MathUtils.clamp(ny * 0.06, -0.04, 0.04);
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
+    container.addEventListener('mouseenter', handleMouseEnter);
+    container.addEventListener('mouseleave', handleMouseLeave);
+    container.addEventListener('mousemove', handleContainerMouseMove);
 
     let animationFrameId: number;
     const startTime = performance.now() * 0.001;
+
+    let targetRotY = 0;
+    let currentDriftX = 0;
+    let currentDriftY = 0;
 
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);
       const t = performance.now() * 0.001 - startTime;
 
-      // Smooth camera perspective interpolation
-      targetRotY += (-0.45 + mouseX * 0.6 - targetRotY) * 0.06;
-      targetRotX += (0.35 + mouseY * 0.5 - targetRotX) * 0.06;
+      // 1. Calm, steady, authoritative 60 FPS self-rotation (stays in one place!)
+      targetRotY = t * 0.22;
 
-      masterGroup.rotation.y = targetRotY + Math.sin(t * 0.4) * 0.05;
-      masterGroup.rotation.x = targetRotX + Math.cos(t * 0.3) * 0.03;
+      // Extremely subtle, damped micro-drift only if mouse is inside container
+      currentDriftX += (localMouseX - currentDriftX) * 0.04;
+      currentDriftY += (localMouseY - currentDriftY) * 0.04;
 
-      // Rotate AI neural ring
-      aiRing1.rotation.z = t * 0.25;
+      masterGroup.rotation.y = targetRotY + currentDriftX;
+      masterGroup.rotation.x = 0.22 + currentDriftY;
 
-      // Pulse Energy flow along conduits
-      pulses.forEach((pulse) => {
-        pulse.progress += pulse.speed;
-        if (pulse.progress > 1) pulse.progress = 0;
-        // Y maps from -1.4 (Infra) to +1.4 (UI)
-        const py = -1.4 + pulse.progress * 2.8;
-        pulse.mesh.position.set(pulse.x, py, pulse.z);
+      // 2. Rotate central core crystal and rings
+      crystalMesh.rotation.y = t * 0.35;
+      crystalMesh.rotation.z = Math.sin(t * 0.5) * 0.15;
+      crystalWire.rotation.y = t * 0.35;
+      crystalWire.rotation.z = Math.sin(t * 0.5) * 0.15;
+
+      ring1.rotation.z = t * 0.4;
+      ring2.rotation.x = -t * 0.3;
+
+      // Pulse central plasma heart
+      const heartScale = 1 + Math.sin(t * 3.5) * 0.06;
+      heartMesh.scale.set(heartScale, heartScale, heartScale);
+
+      // 3. Update all 6 Multiple AI Satellite Nodes
+      const selected = activeEngineRef.current;
+
+      engineNodes.forEach((node) => {
+        // Subtle organic floating bob for each AI node
+        const bob = Math.sin(t * 2 + node.id) * 0.06;
+        node.group.position.y = node.basePos.y + bob;
+
+        // Slow self-spin of satellite
+        node.coreMesh.rotation.x = t * 0.8 + node.id;
+        node.coreMesh.rotation.y = t * 0.9 + node.id;
+
+        // Highlight selected node, softly dim others when an engine is selected
+        const isSelected = selected === node.id;
+        const isAll = selected === 0;
+
+        const targetScale = isSelected ? 1.45 : isAll ? 1.0 : 0.75;
+        node.group.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), 0.1);
+
+        // Update Pulses along conduits
+        node.pulses.forEach((p) => {
+          p.progress += p.speed * (isSelected ? 2.0 : 1.0);
+          if (p.progress > 1) p.progress = 0;
+
+          // Interpolate between Core (0, 0, 0) and Node Position
+          const pulsePos = new THREE.Vector3().lerpVectors(
+            new THREE.Vector3(0, 0, 0),
+            node.group.position,
+            p.progress
+          );
+          p.mesh.position.copy(pulsePos);
+        });
       });
-
-      // Active Tier Highlighting
-      const tier = activeTierRef.current;
-      uiGroup.position.y = 1.4 + (tier === 1 ? Math.sin(t * 3) * 0.08 + 0.15 : 0);
-      aiGroup.position.y = 0.0 + (tier === 2 ? Math.sin(t * 3) * 0.08 : 0);
-      infraGroup.position.y = -1.4 - (tier === 3 ? Math.sin(t * 3) * 0.08 + 0.15 : 0);
-
-      // Dynamically move key copper light with cursor
-      copperKeyLight.position.x = 4 + mouseX * 3;
-      copperKeyLight.position.y = 4 - mouseY * 3;
 
       renderer.render(scene, camera);
     };
@@ -301,81 +398,92 @@ export const Hero3DArchitectureStack: React.FC<Hero3DArchitectureStackProps> = (
     window.addEventListener('resize', handleResize);
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('resize', handleResize);
       cancelAnimationFrame(animationFrameId);
-
-      slabGeo.dispose();
-      glassMat.dispose();
-      neuralSlabMat.dispose();
-      infraMat.dispose();
-      nodeGeo.dispose();
-      nodeMat.dispose();
-      conduitGeo.dispose();
-      conduitMat.dispose();
-      renderer.dispose();
-
-      if (container.contains(renderer.domElement)) {
-        container.removeChild(renderer.domElement);
+      window.removeEventListener('resize', handleResize);
+      container.removeEventListener('mouseenter', handleMouseEnter);
+      container.removeEventListener('mouseleave', handleMouseLeave);
+      container.removeEventListener('mousemove', handleContainerMouseMove);
+      if (renderer.domElement.parentNode) {
+        renderer.domElement.parentNode.removeChild(renderer.domElement);
       }
+      renderer.dispose();
     };
   }, []);
 
+  const handleSelect = (idx: number) => {
+    setActiveEngine(idx);
+    try {
+      playClickSound();
+    } catch {
+      // ignore
+    }
+  };
+
+  const currentInfo = aiEngines[activeEngine];
+  const IconComponent = currentInfo.icon;
+
   return (
-    <div className={`relative w-full h-full flex flex-col items-center justify-center ${className}`}>
-      {/* 3D WebGL Canvas */}
-      <div
-        ref={mountRef}
-        className="w-full h-full min-h-[380px] sm:min-h-[440px] cursor-grab active:cursor-grabbing select-none"
-        aria-label="3D Connected Product Architecture Engine: Spatial UI, Neural AI, and Cloud Infrastructure"
+    <div className={`relative flex flex-col items-center justify-between ${className}`}>
+      {/* 3D WebGL Canvas Viewport (Rock-solid centered stability) */}
+      <div 
+        ref={mountRef} 
+        className="w-full h-[320px] sm:h-[380px] lg:h-[400px] cursor-grab active:cursor-grabbing relative"
+        title="Qavironel Unified AI Intelligence Core · Stabilized 60 FPS Orbit"
       />
 
-      {/* Interactive Connected Architecture Tier Selector */}
-      <div className="absolute bottom-2 inset-x-2 sm:inset-x-auto flex flex-wrap items-center justify-center gap-1.5 p-1.5 rounded-full glass-card border border-white/80 shadow-md backdrop-blur-md">
-        <button
-          type="button"
-          onClick={() => setActiveTier(0)}
-          className={`px-3 py-1 rounded-full text-[0.68rem] font-mono font-semibold transition-all ${
-            activeTier === 0
-              ? 'bg-[#E0561B] text-white shadow-xs'
-              : 'text-[#52525B] hover:text-[#0A0A0A] hover:bg-white/60'
-          }`}
-        >
-          ALL CONNECTED
-        </button>
-        <button
-          type="button"
-          onClick={() => setActiveTier(1)}
-          className={`px-3 py-1 rounded-full text-[0.68rem] font-mono font-semibold transition-all ${
-            activeTier === 1
-              ? 'bg-[#0A0A0A] text-white shadow-xs'
-              : 'text-[#52525B] hover:text-[#0A0A0A] hover:bg-white/60'
-          }`}
-        >
-          01 · SPATIAL UI
-        </button>
-        <button
-          type="button"
-          onClick={() => setActiveTier(2)}
-          className={`px-3 py-1 rounded-full text-[0.68rem] font-mono font-semibold transition-all ${
-            activeTier === 2
-              ? 'bg-[#0A0A0A] text-white shadow-xs'
-              : 'text-[#52525B] hover:text-[#0A0A0A] hover:bg-white/60'
-          }`}
-        >
-          02 · NEURAL AI
-        </button>
-        <button
-          type="button"
-          onClick={() => setActiveTier(3)}
-          className={`px-3 py-1 rounded-full text-[0.68rem] font-mono font-semibold transition-all ${
-            activeTier === 3
-              ? 'bg-[#0A0A0A] text-white shadow-xs'
-              : 'text-[#52525B] hover:text-[#0A0A0A] hover:bg-white/60'
-          }`}
-        >
-          03 · CORE CLOUD
-        </button>
+      {/* Top Floating Badge */}
+      <div className="absolute top-2 left-2 z-10 flex items-center gap-2 px-3 py-1 rounded-full bg-white/90 backdrop-blur-md border border-[#E5E7EB] shadow-xs text-[0.65rem] font-mono pointer-events-none">
+        <span className="w-1.5 h-1.5 rounded-full bg-[#E0561B] animate-pulse" />
+        <span className="font-bold text-[#0A0A0A]">MULTIPLE AI ECOSYSTEM</span>
+        <span className="text-[#A1A1AA]">·</span>
+        <span className="text-[#71717A]">6 CONNECTED ENGINES</span>
+      </div>
+
+      {/* Bottom Interactive AI Engine Switcher & Telemetry Card */}
+      <div className="w-full max-w-full px-2 pt-2 space-y-2 z-10">
+        {/* Dynamic Telemetry Status Card for Selected Engine */}
+        <div className="p-3 sm:p-3.5 rounded-xl bg-white border border-[#E5E7EB] shadow-sm flex items-center justify-between gap-3 text-xs">
+          <div className="flex items-center gap-2.5 min-w-0">
+            <div className="w-8 h-8 rounded-lg bg-[#E0561B]/10 border border-[#E0561B]/20 text-[#E0561B] flex items-center justify-center shrink-0">
+              <IconComponent className="w-4 h-4" />
+            </div>
+            <div className="min-w-0">
+              <div className="flex items-center gap-1.5">
+                <span className="font-bold text-[#0A0A0A] truncate text-xs">{currentInfo.name}</span>
+                <span className="text-[0.65rem] font-mono px-1.5 py-0.2 bg-[#F4F4F5] text-[#52525B] rounded border border-[#E5E7EB] hidden sm:inline">
+                  {currentInfo.type}
+                </span>
+              </div>
+              <p className="text-[0.68rem] text-[#71717A] truncate font-mono mt-0.5">{currentInfo.spec}</p>
+            </div>
+          </div>
+
+          <div className="text-right shrink-0">
+            <span className="text-[0.68rem] font-mono font-bold text-emerald-600 block">{currentInfo.status}</span>
+            <span className="text-[0.65rem] font-mono text-[#E0561B] font-semibold">{currentInfo.throughput}</span>
+          </div>
+        </div>
+
+        {/* Interactive Selector Chips for all Multiple AI Engines */}
+        <div className="flex flex-wrap items-center justify-center gap-1.5 p-1.5 rounded-xl bg-[#F8F9FA] border border-[#E5E7EB]">
+          {aiEngines.map((engine) => {
+            const isActive = activeEngine === engine.id;
+            return (
+              <button
+                key={engine.id}
+                type="button"
+                onClick={() => handleSelect(engine.id)}
+                className={`px-2.5 py-1 rounded-lg text-[0.65rem] font-mono uppercase tracking-wider transition-all duration-200 cursor-pointer ${
+                  isActive
+                    ? 'bg-[#E0561B] text-white font-bold shadow-xs'
+                    : 'bg-white text-[#52525B] hover:text-[#0A0A0A] border border-[#E5E7EB] hover:border-[#E0561B]/40'
+                }`}
+              >
+                {engine.shortLabel}
+              </button>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

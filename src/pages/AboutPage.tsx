@@ -1,200 +1,225 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { SectionHeading } from '../components/ui/SectionHeading';
 import { Button } from '../components/ui/Button';
 import { teamMembers, companyConfig } from '../data/company';
 import { 
   CheckCircle2, 
-  MapPin, 
+  Globe, 
   ShieldCheck, 
   Terminal, 
   Award, 
-  ExternalLink
+  ExternalLink,
+  Code2,
+  Cpu,
+  Lock
 } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from '../components/ui/Icons';
 
 export const AboutPage: React.FC = () => {
+  const founder = teamMembers[0];
+
   return (
-    <div className="pt-28 sm:pt-36 pb-24">
+    <div className="bg-[#121212] text-[#F6F3ED] pt-28 sm:pt-36 pb-24 selection:bg-[#C7612E] selection:text-white">
       <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
         {/* Header */}
-        <div className="max-w-4xl pb-12 border-b border-[#DEDAD3]">
-          <SectionHeading
-            eyebrow="Studio Origins & Philosophy"
-            title="Design craftsmanship. Software engineering rigor."
-            description="Qavironel Technologies is an independent technology and digital product studio founded in Gujarat, India. We build thoughtful software, high-impact storefronts, and applied AI systems for clients who value precision."
-          />
+        <div className="max-w-4xl pb-12 border-b border-[#262624]">
+          <span className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-[#C7612E] block mb-3">
+            Studio Origins & Philosophy
+          </span>
+          <h1 className="font-sans font-extrabold text-4xl sm:text-6xl text-white tracking-tight leading-[1.08] mb-6">
+            Design craftsmanship. <br />
+            Software engineering rigor.
+          </h1>
+          <p className="text-lg sm:text-xl text-[#A3A099] font-light leading-relaxed">
+            Qavironel Technologies is a global remote-first technology and digital product studio. We build thoughtful software, high-impact web platforms, and applied AI systems for founders and organizations worldwide who value precision.
+          </p>
         </div>
 
         {/* Narrative Section */}
-        <section className="py-16 border-b border-[#DEDAD3]">
+        <section className="py-20 border-b border-[#262624]">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             <div className="lg:col-span-5 space-y-4">
               <span className="text-xs font-mono font-semibold uppercase tracking-wider text-[#C7612E]">
                 Why Qavironel Exists
               </span>
-              <h2 className="font-sans font-bold text-3xl sm:text-4xl text-[#171717] tracking-tight leading-tight">
+              <h2 className="font-sans font-bold text-3xl sm:text-4xl text-white tracking-tight leading-tight">
                 Ambitious ideas deserve more than generic templates.
               </h2>
-              <div className="flex items-center gap-2 text-xs font-mono text-[#77746F] pt-2">
-                <MapPin className="w-4 h-4 text-[#C7612E]" />
-                <span>Rooted in Vadodara, Gujarat · Serving global clients</span>
+              <div className="flex items-center gap-2 text-xs font-mono text-[#A3A099] pt-2">
+                <Globe className="w-4 h-4 text-[#C7612E]" />
+                <span>Remote-first studio · Catering to clients worldwide</span>
               </div>
             </div>
 
-            <div className="lg:col-span-7 space-y-6 text-[#77746F] text-base sm:text-lg leading-relaxed">
+            <div className="lg:col-span-7 space-y-6 text-[#A3A099] text-base sm:text-lg leading-relaxed font-light">
               <p>
-                The digital web is saturated with low-effort WordPress themes, bloated drag-and-drop page builders, and agency middlemen who charge large markups while farming out the actual code to unvetted contractors.
+                The modern digital landscape is saturated with bloated themes, slow drag-and-drop page builders, and agency middlemen who charge large retainers while outsourcing the actual programming.
               </p>
               <p>
-                We started <span className="text-[#171717] font-semibold">Qavironel Technologies</span> (evolving from Velocity Web) to offer an honest alternative: a direct, founder-led studio that treats every website and software build as a piece of digital craftsmanship.
+                We founded <span className="text-white font-semibold">Qavironel Technologies</span> to offer an uncompromising alternative: a direct, founder-led studio that treats every web application, SaaS MVP, and AI workflow as a piece of digital craftsmanship.
               </p>
               <p>
-                When you partner with us, you speak directly with the engineers writing the code. We take pride in sub-second load times, defensive security boundaries, mobile-first layouts, and clean interfaces that turn visitors into customers.
+                When you partner with us, you collaborate directly with the lead engineer writing your code. We take pride in sub-second load times, defensive security boundaries, mobile-first touch ergonomics, and clean interfaces that turn visitors into active customers.
               </p>
             </div>
           </div>
         </section>
 
         {/* Guiding Principles */}
-        <section className="py-16 border-b border-[#DEDAD3]">
+        <section className="py-20 border-b border-[#262624]">
           <div className="max-w-3xl mb-12">
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#C7612E] block mb-2">
+            <span className="text-xs font-mono font-semibold uppercase tracking-[0.2em] text-[#C7612E] block mb-2">
               Our Principles
             </span>
-            <h2 className="font-sans font-bold text-3xl sm:text-4xl text-[#171717] tracking-tight">
+            <h2 className="font-sans font-bold text-3xl sm:text-4xl text-white tracking-tight">
               The standards we build by.
             </h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-[#FFFFFF] border border-[#DEDAD3] p-8 space-y-4">
-              <div className="w-10 h-10 bg-[#C7612E]/10 text-[#C7612E] flex items-center justify-center font-mono font-bold">
+            <div className="bg-[#171717] border border-[#2E2E2B] p-8 space-y-4">
+              <div className="w-10 h-10 bg-[#C7612E]/10 border border-[#C7612E]/20 text-[#C7612E] flex items-center justify-center font-mono font-bold">
                 01
               </div>
-              <h3 className="font-sans font-bold text-xl text-[#171717]">Radical Honesty</h3>
-              <p className="text-sm text-[#77746F] leading-relaxed">
-                We never fabricate enterprise client logos, inflate project metrics, or pretend to be an 80-person agency. Our work and public repositories speak for themselves.
+              <h3 className="font-sans font-bold text-xl text-white">Radical Honesty</h3>
+              <p className="text-xs sm:text-sm text-[#77746F] leading-relaxed">
+                We never fabricate enterprise client logos, inflate project metrics, or pretend to be an 80-person agency. Our work, open-source repositories, and verified code speak for themselves.
               </p>
             </div>
 
-            <div className="bg-[#FFFFFF] border border-[#DEDAD3] p-8 space-y-4">
-              <div className="w-10 h-10 bg-[#C7612E]/10 text-[#C7612E] flex items-center justify-center font-mono font-bold">
+            <div className="bg-[#171717] border border-[#2E2E2B] p-8 space-y-4">
+              <div className="w-10 h-10 bg-[#C7612E]/10 border border-[#C7612E]/20 text-[#C7612E] flex items-center justify-center font-mono font-bold">
                 02
               </div>
-              <h3 className="font-sans font-bold text-xl text-[#171717]">Security by Default</h3>
-              <p className="text-sm text-[#77746F] leading-relaxed">
-                Cybersecurity is not an afterthought. With a background in ethical hacking, CTFs, and bug bounties, we build every backend, form, and local runtime with defensive boundaries.
+              <h3 className="font-sans font-bold text-xl text-white">Security by Default</h3>
+              <p className="text-xs sm:text-sm text-[#77746F] leading-relaxed">
+                Cybersecurity is not an afterthought. Backed by ethical hacking, CTF competitions, and bug bounties, we build every backend, form, and local runtime with defensive boundaries.
               </p>
             </div>
 
-            <div className="bg-[#FFFFFF] border border-[#DEDAD3] p-8 space-y-4">
-              <div className="w-10 h-10 bg-[#C7612E]/10 text-[#C7612E] flex items-center justify-center font-mono font-bold">
+            <div className="bg-[#171717] border border-[#2E2E2B] p-8 space-y-4">
+              <div className="w-10 h-10 bg-[#C7612E]/10 border border-[#C7612E]/20 text-[#C7612E] flex items-center justify-center font-mono font-bold">
                 03
               </div>
-              <h3 className="font-sans font-bold text-xl text-[#171717]">High-Speed Momentum</h3>
-              <p className="text-sm text-[#77746F] leading-relaxed">
-                We launch marketing sites and commerce storefronts in 1 to 2 weeks because we eliminate bureaucratic review cycles and build with modern, high-velocity tooling.
+              <h3 className="font-sans font-bold text-xl text-white">High-Speed Momentum</h3>
+              <p className="text-xs sm:text-sm text-[#77746F] leading-relaxed">
+                We launch web platforms and commerce storefronts in 1 to 2 weeks because we eliminate bureaucratic review cycles and build with modern, high-velocity tooling.
               </p>
             </div>
           </div>
         </section>
 
-        {/* Founding Team */}
-        <section className="py-16 border-b border-[#DEDAD3]">
+        {/* Sole Founder Leadership Section */}
+        <section className="py-20 border-b border-[#262624]">
           <div className="max-w-3xl mb-12">
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#C7612E] block mb-2">
-              Leadership & Builders
+            <span className="text-xs font-mono font-semibold uppercase tracking-[0.2em] text-[#C7612E] block mb-2">
+              Studio Leadership
             </span>
-            <h2 className="font-sans font-bold text-3xl sm:text-4xl text-[#171717] tracking-tight">
-              Meet the founders writing your code.
+            <h2 className="font-sans font-bold text-3xl sm:text-4xl text-white tracking-tight">
+              Direct founder engineering.
             </h2>
-            <p className="mt-3 text-base text-[#77746F]">
-              Direct communication. No intermediaries. Tap into the specialists executing your product.
+            <p className="mt-3 text-base text-[#A3A099]">
+              Direct communication. No intermediaries. Tap directly into the lead engineer architecting your product.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {teamMembers.map((member) => (
-              <div 
-                key={member.name}
-                className="bg-[#FFFFFF] border border-[#DEDAD3] p-8 flex flex-col justify-between hover:border-[#171717]/40 transition-colors"
-              >
-                <div>
-                  <div className="w-20 h-20 bg-[#20201E] overflow-hidden mb-6 border border-[#2E2E2B]">
-                    <img
-                      src={member.image}
-                      alt={member.name}
-                      className="w-full h-full object-cover object-top"
-                    />
-                  </div>
-
-                  <h3 className="font-sans font-bold text-2xl text-[#171717]">
-                    {member.name}
-                  </h3>
-                  <p className="text-xs font-mono font-semibold uppercase tracking-wider text-[#C7612E] mt-1 mb-4">
-                    {member.role}
-                  </p>
-                  <p className="text-xs sm:text-sm text-[#77746F] leading-relaxed mb-6">
-                    {member.bio}
-                  </p>
-
-                  <div className="space-y-2 pt-4 border-t border-[#DEDAD3]">
-                    <p className="text-[0.68rem] font-mono font-semibold uppercase tracking-wider text-[#171717]">
-                      Verified Proof & Highlights:
-                    </p>
-                    <ul className="space-y-1.5 text-xs text-[#77746F]">
-                      {member.credentials.map((cred, i) => (
-                        <li key={i} className="flex items-start gap-2">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-[#C7612E] shrink-0 mt-0.5" />
-                          <span className="leading-snug">{cred}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+          <div className="max-w-3xl bg-[#171717] border border-[#2E2E2B] p-8 sm:p-12">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 pb-8 border-b border-[#262624]">
+              <div className="flex items-center gap-6">
+                <div className="w-20 h-20 bg-[#20201E] border border-[#2E2E2B] overflow-hidden shrink-0">
+                  <img
+                    src={founder.image}
+                    alt={founder.name}
+                    className="w-full h-full object-cover object-top"
+                  />
                 </div>
-
-                <div className="mt-8 pt-4 border-t border-[#DEDAD3] flex items-center gap-3">
-                  {member.links.website && (
-                    <a
-                      href={member.links.website}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-xs font-mono text-[#171717] hover:text-[#C7612E] inline-flex items-center gap-1"
-                    >
-                      Portfolio <ExternalLink className="w-3 h-3" />
-                    </a>
-                  )}
-                  {member.links.github && (
-                    <a
-                      href={member.links.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-xs font-mono text-[#171717] hover:text-[#C7612E] inline-flex items-center gap-1"
-                    >
-                      GitHub <GithubIcon className="w-3 h-3" />
-                    </a>
-                  )}
-                  {member.links.linkedin && (
-                    <a
-                      href={member.links.linkedin}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-xs font-mono text-[#171717] hover:text-[#C7612E] inline-flex items-center gap-1"
-                    >
-                      LinkedIn <LinkedinIcon className="w-3 h-3" />
-                    </a>
-                  )}
+                <div>
+                  <h3 className="font-sans font-bold text-2xl text-white">
+                    {founder.name}
+                  </h3>
+                  <p className="text-xs font-mono font-semibold uppercase tracking-wider text-[#C7612E] mt-1">
+                    {founder.role}
+                  </p>
+                  <p className="text-xs text-[#77746F] font-mono mt-0.5">
+                    Remote-First Studio
+                  </p>
                 </div>
               </div>
-            ))}
+
+              <div className="flex items-center gap-3">
+                {founder.links.website && (
+                  <a
+                    href={founder.links.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2.5 bg-[#121212] border border-[#2E2E2B] text-white hover:text-[#C7612E] transition-colors"
+                    aria-label="Founder Portfolio"
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                  </a>
+                )}
+                {founder.links.github && (
+                  <a
+                    href={founder.links.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2.5 bg-[#121212] border border-[#2E2E2B] text-white hover:text-[#C7612E] transition-colors"
+                    aria-label="Founder GitHub"
+                  >
+                    <GithubIcon className="w-4 h-4" />
+                  </a>
+                )}
+                {founder.links.linkedin && (
+                  <a
+                    href={founder.links.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2.5 bg-[#121212] border border-[#2E2E2B] text-white hover:text-[#C7612E] transition-colors"
+                    aria-label="Founder LinkedIn"
+                  >
+                    <LinkedinIcon className="w-4 h-4" />
+                  </a>
+                )}
+              </div>
+            </div>
+
+            <p className="mt-8 text-sm sm:text-base text-[#A3A099] leading-relaxed font-light">
+              {founder.bio}
+            </p>
+
+            <div className="mt-8 pt-6 border-t border-[#262624] space-y-3">
+              <p className="text-xs font-mono font-semibold uppercase tracking-wider text-white">
+                Verified Credentials & Highlights:
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-[#77746F]">
+                {founder.credentials.map((cred, i) => (
+                  <div key={i} className="flex items-start gap-2 bg-[#121212] p-2.5 border border-[#2E2E2B]/80">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#C7612E] shrink-0 mt-0.5" />
+                    <span className="text-[#DEDAD3] leading-snug">{cred}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-8 pt-6 border-t border-[#262624] flex flex-wrap gap-2">
+              {founder.skills.map((skill) => (
+                <span
+                  key={skill}
+                  className="px-2.5 py-1 bg-[#121212] border border-[#2E2E2B] text-[0.7rem] font-mono text-[#A3A099]"
+                >
+                  {skill}
+                </span>
+              ))}
+            </div>
           </div>
         </section>
 
         {/* Bottom CTA */}
-        <div className="mt-20 p-8 sm:p-12 bg-[#171717] text-white flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div className="mt-20 p-8 sm:p-12 bg-[#171717] border border-[#2E2E2B] text-white flex flex-col sm:flex-row items-center justify-between gap-6">
           <div>
             <h3 className="font-sans font-bold text-2xl text-white">Let's build something exceptional.</h3>
-            <p className="text-sm text-[#77746F] mt-1">Direct collaboration with engineers who care about the craft.</p>
+            <p className="text-sm text-[#77746F] mt-1 font-light">Direct collaboration with the engineer who cares about the craft.</p>
           </div>
           <Button to="/contact" variant="primary" size="lg" showArrow>
             Start a Conversation

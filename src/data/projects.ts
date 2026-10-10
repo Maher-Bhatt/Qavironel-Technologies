@@ -2,6 +2,83 @@ import { Project } from '../types';
 
 export const projects: Project[] = [
   {
+    slug: 'classic-infrastructure',
+    title: 'Classic Infrastructure Projects',
+    eyebrow: 'Heavy Civil & Engineering Contractor Platform · Enterprise Client',
+    category: 'Client Work',
+    categoryLabel: 'Client Work · Industrial & Corporate Infrastructure',
+    status: 'Corporate Client Platform',
+    featured: true,
+    order: 1,
+    year: '2026',
+    summary: 'A full-scale corporate web application and qualification credential showcase for Classic Infrastructure Projects (CIP), an established engineering contracting firm (Est. 2008) executing pipeline networks, municipal drainage, heavy civil works, and mechanical installations.',
+    audience: 'Government procurement officers, municipal corporations, public sector utilities, and industrial plant heads evaluating prequalification credentials and technical execution capacity for tenders.',
+    challenge: 'Classic Infrastructure Projects has over 15 years of proven field execution—including multi-kilometer pipeline networks and municipal storm water RCC box culverts—yet lacked an institutional digital presence. In high-stakes tenders, decision-makers demand immediate, verifiable evidence of past execution, machinery fleets, safety standards, and structured bid inquiry channels.',
+    objectives: [
+      'Design an authoritative corporate presence reflecting 15+ years of infrastructure contracting experience.',
+      'Showcase real high-resolution field photography categorized by discipline: Pipeline, Storm Water Drainage, Protection Works, Roads, and Mechanical Engineering.',
+      'Implement an interactive RFP/quotation request system with automated email notifications for corporate bid inquiries.',
+      'Guarantee fast loading speeds for field inspectors and municipal officials reviewing profiles on mobile devices in the field.'
+    ],
+    solution: 'Engineered a full-stack corporate platform using TanStack Start, React 19, and Tailwind CSS v4. Features comprehensive project portfolios, verified technical specifications, downloadable company profiles, and structured quotation request workflows.',
+    whyItMatters: 'Proves Qavironel’s capability to serve established heavy-industry contractors and commercial enterprises. We translate complex engineering credentials, machinery assets, and compliance documentation into an authoritative, modern digital experience.',
+    workflow: [
+      'Procurement officers review corporate profile, client track record, and verified contracting strengths.',
+      'Filter dynamic project gallery by sector (Pipeline, Drainage, Civil/Structural, Mechanical, Industrial Roads).',
+      'Inspect high-resolution field execution photography and technical scope specifications.',
+      'Submit structured RFP inquiries via integrated quote modal with instant email dispatch to CIP management.'
+    ],
+    buildNotes: [
+      'Engineered with TanStack Start, React 19, and Tailwind CSS v4.',
+      'High-density webp image pipeline compressing dozens of field photography assets without visual degradation.',
+      'Backend quote API powered by server functions and Nodemailer with enterprise input validation.',
+      'Strict adherence to verified client facts: no fabricated statistics, exaggerated capacities, or synthetic awards.'
+    ],
+    scopeNote: 'Engineered for Classic Infrastructure Projects (CIP), established 2008.',
+    technologies: ['React 19', 'TanStack Start', 'Tailwind CSS v4', 'Nodemailer', 'High-Density WebP Pipeline', 'Lucide Icons', 'Zod Validation'],
+    heroImage: '/images/projects/cip/cip-new-1-hero.webp',
+    gallery: [
+      {
+        src: '/images/projects/cip/cip-pipeline-110-hero.webp',
+        alt: 'Large-diameter pipeline network excavation and laying',
+        caption: 'Pipeline transmission network execution featuring heavy mechanical excavation and precision joint welding.'
+      },
+      {
+        src: '/images/projects/cip/cip-drainage-040-hero.webp',
+        alt: 'Municipal storm water RCC box drain construction',
+        caption: 'Heavy reinforced cement concrete (RCC) storm water drainage channel constructed for municipal flood management.'
+      },
+      {
+        src: '/images/projects/cip/cip-protection-107-hero.webp',
+        alt: 'Gabion river retaining wall and embankment protection',
+        caption: 'Engineered gabion retaining wall system providing structural embankment reinforcement against erosion.'
+      },
+      {
+        src: '/images/projects/cip/cip-roads-117.webp',
+        alt: 'Industrial asphalt roadway construction and compaction',
+        caption: 'Heavy-duty industrial bitumen roadway surfacing and mechanical compaction for plant transport corridors.'
+      },
+      {
+        src: '/images/projects/cip/cip-mechanical-115.webp',
+        alt: 'Plant mechanical piping and structural installation',
+        caption: 'Industrial mechanical piping fabrication and valve manifold assembly for chemical and utility installations.'
+      },
+      {
+        src: '/images/projects/cip/cip-new-2-hero.webp',
+        alt: 'Deep trench pipeline alignment and safety shoring',
+        caption: 'Deep trench pipeline alignment with structural earth retention and laser level alignment.'
+      }
+    ],
+    metrics: [
+      { value: 'Est. 2008', label: 'Company Heritage', context: '15+ years of verified infrastructure contracting' },
+      { value: '62+', label: 'Field Photo Assets', context: 'High-resolution project gallery documentation' },
+      { value: 'TanStack', label: 'Start Architecture', context: 'React 19 full-stack performance' }
+    ],
+    links: [
+      { label: 'Client Category: Heavy Civil EPC', url: '/contact', type: 'external' }
+    ]
+  },
+  {
     slug: 'ztees',
     title: 'Ztees',
     eyebrow: 'E-Commerce Storefront · Production Commerce',
@@ -9,7 +86,7 @@ export const projects: Project[] = [
     categoryLabel: 'Client Work · E-Commerce',
     status: 'Live Storefront',
     featured: true,
-    order: 1,
+    order: 2,
     year: '2026',
     summary: 'A mobile-first editorial storefront for an Indian streetwear brand, designed around quick product discovery and a direct WhatsApp order journey.',
     audience: 'Shoppers looking for graphic and heavyweight oversized streetwear drops, especially users browsing on phones who prefer conversational ordering over high-friction checkout funnels.',
@@ -20,7 +97,7 @@ export const projects: Project[] = [
       'Ship from initial creative brief to production launch within 48 hours.',
       'Maintain lightweight, instant-load performance across 4G and mobile networks.'
     ],
-    solution: 'Designed and engineered a custom editorial storefront combining streetwear visual appeal with immediate conversion mechanics. Features include a dynamic Mirzapur drop campaign banner, structured size guides, high-density product photography grids, WhatsApp pre-populated checkout messaging, and UPI payment guidance.',
+    solution: 'Designed and engineered a custom editorial storefront combining streetwear visual appeal with immediate conversion mechanics. Features include dynamic collection campaigns, structured size guides, high-density product photography grids, WhatsApp pre-populated checkout messaging, and UPI payment guidance.',
     whyItMatters: 'Demonstrates that small consumer brands do not always need an expensive multi-page checkout architecture to build trust. Crafting a high-speed, editorial presentation paired with natural regional payment habits (WhatsApp + UPI) produces higher completion rates than generic templates.',
     workflow: [
       'Editorial drop showcase featuring new arrivals and campaign artwork.',
@@ -77,83 +154,6 @@ export const projects: Project[] = [
     ]
   },
   {
-    slug: 'classic-infrastructure',
-    title: 'Classic Infrastructure Projects',
-    eyebrow: 'Heavy Civil & Engineering Contractor Platform · Client Work',
-    category: 'Client Work',
-    categoryLabel: 'Client Work · Industrial & Infrastructure',
-    status: 'Corporate Client Platform',
-    featured: true,
-    order: 2,
-    year: '2026',
-    summary: 'A full-scale corporate web application and qualification credential showcase for Classic Infrastructure Projects (CIP), a Vadodara-based engineering contracting firm established in 2008 executing pipeline networks, municipal drainage, heavy civil works, and mechanical installations across India.',
-    audience: 'Government procurement officers, municipal corporations (such as Vadodara Municipal Corporation), public sector utilities, and industrial plant heads evaluating prequalification credentials and technical execution capacity for tenders.',
-    challenge: 'Classic Infrastructure Projects has over 15 years of proven field execution across Gujarat and India—including multi-kilometer pipeline networks and municipal storm water RCC box culverts—yet lacked an institutional digital presence. In high-stakes government and industrial tenders, decision-makers demand immediate, verifiable evidence of past execution, machinery fleets, safety standards, and structured bid inquiry channels.',
-    objectives: [
-      'Design an authoritative corporate presence reflecting 15+ years of infrastructure contracting experience.',
-      'Showcase real high-resolution field photography categorized by discipline: Pipeline, Storm Water Drainage, Protection Works, Roads, and Mechanical Engineering.',
-      'Implement an interactive RFP/quotation request system with automated email notifications for corporate bid inquiries.',
-      'Guarantee fast loading speeds for field inspectors and municipal officials reviewing profiles on mobile devices in the field.'
-    ],
-    solution: 'Engineered a full-stack corporate platform using TanStack Start, React 19, and Tailwind CSS v4. Features comprehensive project portfolios, client rosters (VMC, industrial plants, public utilities), verified technical specifications, downloadable company profiles, and structured quotation request workflows.',
-    whyItMatters: 'Proves Qavironel’s capability to serve established heavy-industry contractors and commercial enterprises. We translate complex engineering credentials, machinery assets, and compliance documentation into an authoritative, modern digital experience.',
-    workflow: [
-      'Procurement officers review corporate profile, client track record, and verified contracting strengths.',
-      'Filter dynamic project gallery by sector (Pipeline, Drainage, Civil/Structural, Mechanical, Industrial Roads).',
-      'Inspect high-resolution field execution photography and technical scope specifications.',
-      'Submit structured RFP inquiries via integrated quote modal with instant email dispatch to CIP management.'
-    ],
-    buildNotes: [
-      'Engineered with TanStack Start, React 19, and Tailwind CSS v4.',
-      'High-density webp image pipeline compressing dozens of field photography assets without visual degradation.',
-      'Backend quote API powered by server functions and Nodemailer with enterprise input validation.',
-      'Strict adherence to verified client facts: no fabricated statistics, exaggerated capacities, or synthetic awards.'
-    ],
-    scopeNote: 'Engineered for Classic Infrastructure Projects (CIP), headquartered at 402 Sanket Heights, Sun Pharma Road, Atladara, Vadodara, Gujarat (Est. 2008).',
-    technologies: ['React 19', 'TanStack Start', 'Tailwind CSS v4', 'Nodemailer', 'High-Density WebP Pipeline', 'Lucide Icons', 'Zod Validation'],
-    heroImage: '/images/projects/cip/cip-new-1-hero.webp',
-    gallery: [
-      {
-        src: '/images/projects/cip/cip-pipeline-110-hero.webp',
-        alt: 'Large-diameter pipeline network excavation and laying in Vadodara',
-        caption: 'Pipeline transmission network execution featuring heavy mechanical excavation and precision joint welding.'
-      },
-      {
-        src: '/images/projects/cip/cip-drainage-040-hero.webp',
-        alt: 'Municipal storm water RCC box drain construction',
-        caption: 'Heavy reinforced cement concrete (RCC) storm water drainage channel constructed for municipal flood management.'
-      },
-      {
-        src: '/images/projects/cip/cip-protection-107-hero.webp',
-        alt: 'Gabion river retaining wall and embankment protection',
-        caption: 'Engineered gabion retaining wall system providing structural embankment reinforcement against erosion.'
-      },
-      {
-        src: '/images/projects/cip/cip-roads-117.webp',
-        alt: 'Industrial asphalt roadway construction and compaction',
-        caption: 'Heavy-duty industrial bitumen roadway surfacing and mechanical compaction for plant transport corridors.'
-      },
-      {
-        src: '/images/projects/cip/cip-mechanical-115.webp',
-        alt: 'Plant mechanical piping and structural installation',
-        caption: 'Industrial mechanical piping fabrication and valve manifold assembly for chemical and utility installations.'
-      },
-      {
-        src: '/images/projects/cip/cip-new-2-hero.webp',
-        alt: 'Deep trench pipeline alignment and safety shoring',
-        caption: 'Deep trench pipeline alignment with structural earth retention and laser level alignment.'
-      }
-    ],
-    metrics: [
-      { value: 'Est. 2008', label: 'Company Heritage', context: '15+ years of verified infrastructure contracting' },
-      { value: '62+', label: 'Field Photo Assets', context: 'High-resolution project gallery documentation' },
-      { value: 'TanStack', label: 'Start Architecture', context: 'React 19 full-stack performance' }
-    ],
-    links: [
-      { label: 'Client Origin: Vadodara, Gujarat', url: 'https://velocityweb.online', type: 'external' }
-    ]
-  },
-  {
     slug: 'kalki',
     title: 'K.A.L.K.I.',
     eyebrow: 'Local-First AI Desktop Assistant · Microsoft Store & Open Source',
@@ -163,7 +163,7 @@ export const projects: Project[] = [
     featured: true,
     order: 3,
     year: '2025–2026',
-    summary: 'A voice-capable desktop assistant that combines a responsive sci-fi HUD, multi-model inference router (Groq LLaMA-3.3-70B, LLaMA-4-Scout vision, offline Ollama fallback), DPAPI secure vault, local memory, and guarded platform actions.',
+    summary: 'A voice-capable desktop assistant combining a tactical HUD, multi-model inference router (Groq LLaMA-3.3-70B, LLaMA-4-Scout vision, offline Ollama fallback), hardware-bound DPAPI vault, local memory, and guarded platform actions.',
     audience: 'Power users, developers, and security-conscious creators who want an intelligent desktop companion that operates close to the machine without sending sensitive credentials or unverified actions to uncontrolled third parties.',
     challenge: 'Most desktop AI assistants either rely entirely on cloud-hosted closed models that log user prompts, or they are fragile CLI scripts with no intuitive graphical interface. K.A.L.K.I. needed to unify voice interaction, multi-model flexibility, and local hardware awareness inside an aesthetic dashboard—while enforcing strict boundary controls over local shell execution.',
     objectives: [
@@ -228,14 +228,136 @@ export const projects: Project[] = [
     ]
   },
   {
+    slug: 'finmate-ai',
+    title: 'FinMate AI',
+    eyebrow: 'Full-Stack AI Financial Platform · Product Lab Prototype',
+    category: 'Product Lab',
+    categoryLabel: 'Product Lab Prototype · Fintech & Applied AI',
+    status: 'Product Lab Prototype (Full Codebase Shipped)',
+    featured: true,
+    order: 4,
+    year: '2025–2026',
+    summary: 'A full-stack financial bookkeeping and tax intelligence platform built with TanStack Start, React 19, Supabase, and Groq LLaMA models—featuring automated receipt OCR, GST tax slab categorization, and contextual AI advisory chat.',
+    audience: 'Freelancers, independent contractors, and modern businesses who find legacy accounting software clunky and disconnected from digital receipt workflows.',
+    challenge: 'Micro-businesses and freelancers struggle with timely ledger entry, classifying invoices under correct tax categories, and deciphering monthly cash burn. Existing tools require manual line-item entry and offer zero contextual financial guidance.',
+    objectives: [
+      'Engineer full-stack server functions for instant receipt OCR extraction via Groq vision models.',
+      'Extract total amounts, merchants, tax identification numbers, and suggested expense categories automatically.',
+      'Ground an AI financial advisor in user monthly income, expense summaries, and recent transaction records.',
+      'Build interactive cash-flow dashboards, recurring subscription monitors, and goal trackers using Recharts.'
+    ],
+    solution: 'Designed and built a complete full-stack web application leveraging TanStack Start (SSR & server functions), Supabase (Auth, Storage, and PostgreSQL DB), and Groq AI API. Users snap or upload receipt images which are parsed in seconds, populated into structured transactions, and reflected in real-time cash flow visualizations.',
+    whyItMatters: 'Proves high-velocity execution of modern full-stack engineering, combining bleeding-edge React 19 and TanStack Start with practical applied AI capabilities.',
+    workflow: [
+      'User snaps a photo or uploads a vendor bill/receipt into secure Supabase storage.',
+      'TanStack Start server function invokes Groq API to extract amount, merchant, tax ID, and category.',
+      'Transaction logs to database with one-click verification and automated monthly summary update.',
+      'Conversational AI advisor analyzes monthly burn, recurring subscriptions, and projected tax liabilities.'
+    ],
+    buildNotes: [
+      'Full codebase shipped using React 19, TanStack Start, and Tailwind CSS v4.',
+      'Backend server functions (`advisor.functions.ts`, `receipt.functions.ts`) enforce Supabase authentication.',
+      'Database schema models transactions, categories, recurring subscriptions, goals, and invoices in PostgreSQL.',
+      'Active product lab prototype codebase.'
+    ],
+    scopeNote: 'Full prototype codebase engineered and verified in product lab.',
+    technologies: ['React 19', 'TanStack Start', 'Tailwind CSS v4', 'Supabase (Auth & DB)', 'Groq API (LLaMA-3.3)', 'Receipt OCR', 'Recharts', 'Zod'],
+    heroImage: '/images/work/ztees-hero.webp',
+    gallery: [],
+    metrics: [
+      { value: 'Full-Stack', label: 'Working Codebase', context: 'TanStack Start server functions & Supabase' },
+      { value: 'Groq AI', label: 'Receipt OCR', context: 'Automated receipt data extraction' },
+      { value: 'AI Advisor', label: 'Contextual Chat', context: 'Grounded in monthly income & expense records' }
+    ],
+    links: [
+      { label: 'Qavironel Product Lab Prototype', url: '/contact', type: 'external' }
+    ]
+  },
+  {
+    slug: 'civic-sathi',
+    title: 'Civic Sathi',
+    eyebrow: 'Civic Intelligence & Grievance Platform · Multi-Role System',
+    category: 'Product Lab',
+    categoryLabel: 'Civic Technology · Product Lab Monorepo',
+    status: 'SIH 2026 Build / Product Lab Monorepo',
+    featured: true,
+    order: 5,
+    year: '2026',
+    summary: 'A 4-role civic operations platform connecting citizen grievance reporting, location-tagged photographic evidence, municipal intelligence triage, and contractor dispatch.',
+    audience: 'Citizens reporting neighborhood infrastructure problems, municipal officials tracking remediation progress, and authorized contractors assigned to verified civic work orders.',
+    challenge: 'Civic complaint channels are notoriously broken: citizen reports lack actionable location data or photographic proof, while municipal work orders disappear into opaque internal spreadsheets without public accountability.',
+    objectives: [
+      'Build a public-facing citizen reporting portal with geo-location capture and image evidence uploads.',
+      'Architect role-separated portals for Municipal Officers, Contractors, and Administrators.',
+      'Integrate AI issue clustering (HDBSCAN) to detect duplicate reports and prioritize systemic hazards.'
+    ],
+    solution: 'Designed and implemented an integrated civic monorepo featuring 4 distinct role applications: Citizen Public Portal, Municipal Operations Dashboard, Contractor Dispatch App, and Admin Command Center. Public citizens submit geo-tagged complaints with photographic proof and track resolution progress via unique ticket numbers.',
+    whyItMatters: 'Demonstrates full-stack system architecture, monorepo discipline, and role-based access control (RBAC) applied to real-world municipal problems. Developed for Smart India Hackathon 2026 by Team Vertex.',
+    workflow: [
+      'Citizen submits road hazard or sanitation issue with photo proof and GPS coordinates.',
+      'Public ticket generated for real-time tracking without requiring private user registration.',
+      'Municipal officer verifies report severity, sets priority, and assigns registered contractor.',
+      'Contractor uploads completion proof to close ticket, updating the public status audit trail.'
+    ],
+    buildNotes: [
+      'Engineered as a monorepo containing 4 distinct role applications (admin, municipality, contractor, public).',
+      'Frontend built with React 19, TypeScript, and Tailwind CSS.',
+      'Integrated map coordinate mapping, HDBSCAN clustering heuristics, and photo verification checks.'
+    ],
+    scopeNote: 'Presented as an independent product-lab prototype developed for Smart India Hackathon 2026, with public demo portals accessible online.',
+    technologies: ['React 19', 'FastAPI', 'Neon Postgres', 'HDBSCAN Clustering', 'Leaflet / GIS Mapping', 'Role-Based Access Control'],
+    heroImage: '/images/projects/civic-sathi/vadodara-civic-atmosphere.webp',
+    gallery: [
+      {
+        src: '/images/projects/civic-sathi/civic-sathi-logo.png',
+        alt: 'Civic Sathi brand identity and official project emblem',
+        caption: 'The official Civic Sathi project identity engineered for Smart India Hackathon 2026.'
+      },
+      {
+        src: '/images/projects/civic-sathi/vadodara-civic-atmosphere.webp',
+        alt: 'Civic Sathi municipal pilot context photography',
+        caption: 'Pilot municipal deployment context tailored for municipal flood and sanitation challenges.'
+      },
+      {
+        src: '/images/projects/civic-public-home.png',
+        alt: 'Civic Sathi citizen landing page and issue report launcher',
+        caption: 'The public citizen portal welcoming reports with step-by-step guidance and status lookup.'
+      },
+      {
+        src: '/images/projects/civic-public-how-it-works.png',
+        alt: 'Civic Sathi four-step civic resolution lifecycle walkthrough',
+        caption: 'The public resolution workflow showing the progression from report to contractor verification.'
+      },
+      {
+        src: '/images/projects/civic-municipality-login.png',
+        alt: 'Civic Sathi municipal department officer authentication portal',
+        caption: 'Dedicated municipal portal login with department-specific authentication.'
+      },
+      {
+        src: '/images/projects/civic-contractor-login.png',
+        alt: 'Civic Sathi contractor dispatch and job verification interface',
+        caption: 'Contractor dashboard entrance for assigned field work and resolution proof uploads.'
+      }
+    ],
+    metrics: [
+      { value: '4 Separate', label: 'Role Surfaces', context: 'Citizen, Municipality, Contractor, and Admin' },
+      { value: 'HDBSCAN', label: 'AI Clustering', context: 'Duplicate detection & hotspot ranking' },
+      { value: 'SIH 2026', label: 'Hackathon Concept', context: 'Developed by Team Vertex for national competition' }
+    ],
+    links: [
+      { label: 'View Public Portal Demo', url: 'https://janmind-public.vercel.app/', type: 'live' },
+      { label: 'View Repository on GitHub', url: 'https://github.com/Maher-Bhatt/Civic-Sathi', type: 'github' }
+    ]
+  },
+  {
     slug: 'codedroid',
     title: 'CodeDroid',
-    eyebrow: 'Android Mobile IDE · Open Source',
+    eyebrow: 'Android Mobile IDE · Open Source Developer Tooling',
     category: 'Digital Products',
     categoryLabel: 'Developer Tooling · Mobile Engineering',
     status: 'Active Open Source Build',
     featured: true,
-    order: 4,
+    order: 6,
     year: '2025–2026',
     summary: 'A pocket development environment for Android with an offline CodeMirror editor, integrated terminal, and on-device execution for Python and JavaScript.',
     audience: 'Computer science students, mobile learners, and traveling engineers who need to write, test, and debug scripts from an Android smartphone or tablet without needing a laptop.',
@@ -284,99 +406,67 @@ export const projects: Project[] = [
     ]
   },
   {
-    slug: 'civic-sathi',
-    title: 'Civic Sathi',
-    eyebrow: 'Civic Intelligence & Grievance Platform · Multi-Role System',
+    slug: 'statskill-ai',
+    title: 'StatSkill AI',
+    eyebrow: 'Adaptive Learning & Skill-Gap Analytics · SIH 2026',
     category: 'Product Lab',
-    categoryLabel: 'Civic Technology · Product Lab Monorepo',
-    status: 'SIH 2026 Build / Product Lab Monorepo',
-    featured: true,
-    order: 5,
+    categoryLabel: 'Product Lab Prototype · AI & Workforce Analytics',
+    status: 'SIH 2026 Competitive Build',
+    featured: false,
+    order: 7,
     year: '2026',
-    summary: 'A 4-role civic operations platform connecting citizen grievance reporting, location-tagged photographic evidence, municipal intelligence triage, and contractor dispatch.',
-    audience: 'Citizens reporting neighborhood infrastructure problems, municipal officials tracking remediation progress, and authorized contractors assigned to verified civic work orders.',
-    challenge: 'Civic complaint channels are notoriously broken: citizen reports lack actionable location data or photographic proof, while municipal work orders disappear into opaque internal spreadsheets without public accountability.',
+    summary: 'A skill-gap assessment and adaptive learning platform designed for the statistical workforce, featuring interactive proficiency rubrics, dynamic radar evaluations, and personalized curriculum pathways.',
+    audience: 'Data analysts, government statisticians, and university researchers looking to identify gaps in statistical modeling, survey sampling, and quantitative analysis.',
+    challenge: 'Traditional learning platforms offer static multiple-choice tests that fail to assess real-world data science intuition or model diagnostics. StatSkill AI was conceived to evaluate practical proficiency and adapt training paths in real time.',
     objectives: [
-      'Build a public-facing citizen reporting portal with geo-location capture and image evidence uploads.',
-      'Architect role-separated portals for Municipal Officers, Contractors, and Administrators.',
-      'Create pilot contexts demonstrating support for Vadodara (VMC) and Bengaluru (BBMP).',
-      'Integrate AI issue clustering (HDBSCAN) to detect duplicate reports and prioritize systemic hazards.'
+      'Engineer a multi-dimensional competency radar assessing survey methodology, probability, and inference.',
+      'Visualize skill-gap distributions against benchmark industry roles.',
+      'Deliver fluid, responsive analytics using React, Vite, Recharts, and Framer Motion.',
+      'Collaborate in a cross-functional hackathon team separating frontend analytics from backend services.'
     ],
-    solution: 'Designed and implemented an integrated civic monorepo featuring 4 distinct role applications: Citizen Public Portal, Municipal Operations Dashboard, Contractor Dispatch App, and Admin Command Center. Public citizens submit geo-tagged complaints with photographic proof and track resolution progress via unique ticket numbers. Municipal officers triage complaints on GIS maps and dispatch qualified contractors with SLA accountability.',
-    whyItMatters: 'Demonstrates full-stack system architecture, monorepo discipline, and role-based access control (RBAC) applied to real-world municipal problems. Developed as an ambitious competitive concept for Smart India Hackathon 2026 by Team Vertex.',
+    solution: 'Engineered an interactive analytics and learning dashboard where users complete scenario-based evaluations. Visualizes multidimensional competency profiles and suggests targeted micro-modules to close diagnosed skill deficiencies.',
+    whyItMatters: 'Demonstrates deep capability in complex data visualization, interactive chart design (Recharts), and specialized enterprise dashboard engineering.',
     workflow: [
-      'Citizen submits road hazard or sanitation issue with photo proof and GPS coordinates.',
-      'Public ticket generated for real-time tracking without requiring private user registration.',
-      'Municipal officer verifies report severity, sets priority, and assigns registered contractor.',
-      'Contractor uploads completion proof to close ticket, updating the public status audit trail.'
+      'Practitioner completes diagnostic assessment covering probability, survey sampling, and data governance.',
+      'Adaptive engine calculates score weights across 6 core statistical competency vectors.',
+      'Interactive radar chart displays practitioner capabilities versus target role requirements.',
+      'Personalized modular learning curriculum generates with prioritized improvement topics.'
     ],
     buildNotes: [
-      'Engineered as a monorepo containing 4 distinct role applications (admin, municipality, contractor, public).',
-      'Frontend built with React 19, TypeScript, and Tailwind CSS.',
-      'Integrated map coordinate mapping, HDBSCAN clustering heuristics, and photo verification checks.'
+      'Frontend built with React, TypeScript, Vite, Recharts, and Framer Motion.',
+      'Modular component architecture designed for rapid integration with team backend APIs.',
+      'Engineered for Smart India Hackathon 2026 workforce development problem statements.'
     ],
-    scopeNote: 'Presented as an independent product-lab prototype developed for Smart India Hackathon 2026, with public demo portals accessible online.',
-    technologies: ['React 19', 'FastAPI', 'Neon Postgres', 'HDBSCAN Clustering', 'Leaflet / GIS Mapping', 'Role-Based Access Control'],
-    heroImage: '/images/projects/civic-sathi/vadodara-civic-atmosphere.webp',
-    gallery: [
-      {
-        src: '/images/projects/civic-sathi/civic-sathi-logo.png',
-        alt: 'Civic Sathi brand identity and official project emblem',
-        caption: 'The official Civic Sathi project identity engineered for Smart India Hackathon 2026.'
-      },
-      {
-        src: '/images/projects/civic-sathi/vadodara-civic-atmosphere.webp',
-        alt: 'Civic Sathi Vadodara municipal pilot context photography',
-        caption: 'Pilot municipal deployment context tailored for Vadodara Municipal Corporation (VMC) civic challenges.'
-      },
-      {
-        src: '/images/projects/civic-public-home.png',
-        alt: 'Civic Sathi citizen landing page and issue report launcher',
-        caption: 'The public citizen portal welcoming reports with step-by-step guidance and status lookup.'
-      },
-      {
-        src: '/images/projects/civic-public-how-it-works.png',
-        alt: 'Civic Sathi four-step civic resolution lifecycle walkthrough',
-        caption: 'The public resolution workflow showing the progression from report to contractor verification.'
-      },
-      {
-        src: '/images/projects/civic-municipality-login.png',
-        alt: 'Civic Sathi municipal department officer authentication portal',
-        caption: 'Dedicated municipal portal login with department-specific authentication.'
-      },
-      {
-        src: '/images/projects/civic-contractor-login.png',
-        alt: 'Civic Sathi contractor dispatch and job verification interface',
-        caption: 'Contractor dashboard entrance for assigned field work and resolution proof uploads.'
-      }
-    ],
+    scopeNote: 'Competitive frontend prototype developed for Smart India Hackathon 2026; frontend architecture led by Maher Bhatt.',
+    technologies: ['React', 'TypeScript', 'Vite', 'Recharts', 'Framer Motion', 'Tailwind CSS'],
+    heroImage: '/images/work/codedroid-multidevice.webp',
+    gallery: [],
     metrics: [
-      { value: '4 Separate', label: 'Role Surfaces', context: 'Citizen, Municipality, Contractor, and Admin' },
-      { value: '2 Cities', label: 'Pilot Architectures', context: 'Vadodara (VMC) and Bengaluru (BBMP) models' },
-      { value: 'SIH 2026', label: 'Hackathon Concept', context: 'Developed by Team Vertex for national competition' }
+      { value: 'SIH 2026', label: 'Hackathon Track', context: 'Workforce skill analytics platform' },
+      { value: 'Multi-Vector', label: 'Radar Analytics', context: 'Interactive competency benchmarking' },
+      { value: 'Vite + React', label: 'Frontend Stack', context: 'High-speed component architecture' }
     ],
     links: [
-      { label: 'View Public Portal Demo', url: 'https://janmind-public.vercel.app/', type: 'live' },
-      { label: 'View Repository on GitHub', url: 'https://github.com/Maher-Bhatt/Civic-Sathi', type: 'github' }
+      { label: 'SIH 2026 Product Prototype', url: '/contact', type: 'external' }
     ]
   },
   {
     slug: 'itm-notes',
     title: 'ITM Notes',
-    eyebrow: 'Student Resource Platform · Velocity Web Product',
+    eyebrow: 'Student Resource Platform · Digital Product',
     category: 'Digital Products',
     categoryLabel: 'Digital Products · Education',
     status: 'Live Platform',
-    featured: true,
-    order: 6,
+    featured: false,
+    order: 8,
     year: '2025–2026',
     summary: 'A focused study platform that organizes Semester 2 engineering subjects, materials, practice quizzes, and search for 300+ B.Tech students.',
-    audience: 'Undergraduate engineering students at ITM SLS Baroda University who need unified, instant access to syllabus-aligned study materials without digging through unorganized WhatsApp groups and cloud folders.',
+    audience: 'Undergraduate engineering students who need unified, instant access to syllabus-aligned study materials without digging through unorganized messaging groups and cloud folders.',
     challenge: 'Course materials, previous year exam papers, and laboratory assignments were scattered across disparate cloud drives, messaging groups, and outdated portals. Students routinely struggled to locate accurate study guides during exam preparation cycles.',
     objectives: [
-      'Organize Semester 2 curricula into clean, searchable digital subject modules.',
+      'Organize curricula into clean, searchable digital subject modules.',
       'Provide instant client-side search across chapters, topics, and important exam questions.',
-      'Ensure 100% mobile usability for studying on campus transit and between classes.',
+      'Ensure 100% mobile usability for studying on transit and between classes.',
       'Keep hosting and maintenance zero-cost through an optimized static JAMstack architecture.'
     ],
     solution: 'Designed and deployed a responsive educational hub indexing five core engineering subjects: Python Programming, C Language, Digital Electronics, Probability & Statistics, and Financial Accounting. Includes downloadable lecture PDFs, curated important question banks, and progress tracking.',
@@ -407,160 +497,13 @@ export const projects: Project[] = [
       }
     ],
     metrics: [
-      { value: '300+', label: 'Active University Students', context: 'Adopted across ITM SLS Baroda University' },
+      { value: '300+', label: 'Active University Students', context: 'Adopted across engineering student cohort' },
       { value: '5 Core', label: 'B.Tech Subjects', context: 'Python, C, Digital Electronics, Stats & Accounting' },
       { value: '100%', label: 'Mobile Optimized', context: 'Designed for quick study on phones' }
     ],
     links: [
       { label: 'Visit Live Study Platform', url: 'https://itm-notes-new.vercel.app/', type: 'live' },
       { label: 'View Source on GitHub', url: 'https://github.com/Maher-Bhatt/itm-notes', type: 'github' }
-    ]
-  },
-  {
-    slug: 'finmate-ai',
-    title: 'FinMate AI',
-    eyebrow: 'Full-Stack AI Financial Platform · Product Lab Prototype',
-    category: 'Product Lab',
-    categoryLabel: 'Product Lab Prototype · Fintech & Applied AI',
-    status: 'Product Lab Prototype (Full Codebase Shipped)',
-    featured: false,
-    order: 7,
-    year: '2025–2026',
-    summary: 'A full-stack financial bookkeeping and tax intelligence platform built with TanStack Start, React 19, Supabase, and Groq LLaMA models—featuring automated receipt OCR, GST tax slab categorization, and contextual AI advisory chat.',
-    audience: 'Indian freelancers, independent contractors, and shopkeepers who find legacy desktop software like Tally or expensive SaaS tools like Zoho Books overwhelming and disconnected from modern mobile receipt workflows.',
-    challenge: 'Micro-businesses and freelancers struggle with timely ledger entry, classifying invoices under correct Indian GST tax slabs, and deciphering monthly cash burn. Existing tools require manual line-item entry and offer zero contextual financial guidance.',
-    objectives: [
-      'Engineer full-stack server functions for instant receipt OCR extraction via Groq vision models.',
-      'Extract total amounts, merchants, Indian GSTIN numbers, and suggested expense categories automatically.',
-      'Ground an AI financial advisor in user monthly income, expense summaries, and recent transaction records.',
-      'Build interactive cash-flow dashboards, recurring subscription monitors, and goal trackers using Recharts.'
-    ],
-    solution: 'Designed and built a complete full-stack web application leveraging TanStack Start (SSR & server functions), Supabase (Auth, Storage, and PostgreSQL DB), and Groq AI API. Users snap or upload receipt images which are parsed in seconds, populated into structured transactions, and reflected in real-time cash flow visualizations.',
-    whyItMatters: 'Proves high-velocity execution of modern full-stack engineering, combining bleeding-edge React 19 and TanStack Start with practical applied AI capabilities. Validated against workflows in Zoho Books and Vyapar before being paused for founder academic bandwidth.',
-    workflow: [
-      'User snaps a photo or uploads a vendor bill/receipt into secure Supabase storage.',
-      'TanStack Start server function invokes Groq API to extract amount, merchant, GST number, and category.',
-      'Transaction logs to database with one-click verification and automated monthly summary update.',
-      'Conversational AI advisor analyzes monthly burn, recurring subscriptions, and projected tax liabilities.'
-    ],
-    buildNotes: [
-      'Full codebase shipped using React 19, TanStack Start, and Tailwind CSS v4.',
-      'Backend server functions (`advisor.functions.ts`, `receipt.functions.ts`) enforce Supabase authentication.',
-      'Database schema models transactions, categories, recurring subscriptions, goals, and invoices in PostgreSQL.',
-      'Codebase archived in product lab repository; paused for university bandwidth.'
-    ],
-    scopeNote: 'Full prototype codebase engineered and verified; currently maintained in product lab status pending founder commercial launch schedule.',
-    technologies: ['React 19', 'TanStack Start', 'Tailwind CSS v4', 'Supabase (Auth & DB)', 'Groq API (LLaMA-3.3)', 'Receipt OCR', 'Recharts', 'Zod'],
-    heroImage: '/images/work/ztees-hero.webp',
-    gallery: [],
-    metrics: [
-      { value: 'Full-Stack', label: 'Working Codebase', context: 'TanStack Start server functions & Supabase' },
-      { value: 'Groq AI', label: 'Receipt OCR', context: 'Automated GSTIN, merchant & total extraction' },
-      { value: 'AI Advisor', label: 'Contextual Chat', context: 'Grounded in monthly income & expense records' }
-    ],
-    links: [
-      { label: 'Origin: Qavironel Product Lab', url: 'https://velocityweb.online', type: 'external' }
-    ]
-  },
-  {
-    slug: 'statskill-ai',
-    title: 'StatSkill AI',
-    eyebrow: 'Adaptive Learning & Skill-Gap Analytics · SIH 2026',
-    category: 'Product Lab',
-    categoryLabel: 'Product Lab Prototype · AI & Workforce Analytics',
-    status: 'SIH 2026 Competitive Build',
-    featured: false,
-    order: 8,
-    year: '2026',
-    summary: 'A skill-gap assessment and adaptive learning platform designed for the statistical workforce, featuring interactive proficiency rubrics, dynamic radar evaluations, and personalized curriculum pathways.',
-    audience: 'Data analysts, government statisticians, and university researchers looking to identify gaps in statistical modeling, survey sampling, and quantitative analysis.',
-    challenge: 'Traditional learning platforms offer static multiple-choice tests that fail to assess real-world data science intuition or model diagnostics. StatSkill AI was conceived to evaluate practical proficiency and adapt training paths in real time.',
-    objectives: [
-      'Engineer a multi-dimensional competency radar assessing survey methodology, probability, and inference.',
-      'Visualize skill-gap distributions against benchmark industry roles.',
-      'Deliver fluid, responsive analytics using React, Vite, Recharts, and Framer Motion.',
-      'Collaborate in a cross-functional hackathon team separating frontend analytics from backend services.'
-    ],
-    solution: 'Engineered an interactive analytics and learning dashboard where users complete scenario-based evaluations. Visualizes multidimensional competency profiles and suggests targeted micro-modules to close diagnosed skill deficiencies.',
-    whyItMatters: 'Demonstrates deep capability in complex data visualization, interactive chart design (Recharts), and specialized enterprise dashboard engineering.',
-    workflow: [
-      'Practitioner completes diagnostic assessment covering probability, survey sampling, and data governance.',
-      'Adaptive engine calculates score weights across 6 core statistical competency vectors.',
-      'Interactive radar chart displays practitioner capabilities versus target role requirements.',
-      'Personalized modular learning curriculum generates with prioritized improvement topics.'
-    ],
-    buildNotes: [
-      'Frontend built with React, TypeScript, Vite, Recharts, and Framer Motion.',
-      'Modular component architecture designed for rapid integration with team backend APIs.',
-      'Engineered for Smart India Hackathon 2026 workforce development problem statements.'
-    ],
-    scopeNote: 'Competitive frontend prototype developed for Smart India Hackathon 2026; team project with frontend architecture led by Maher Bhatt.',
-    technologies: ['React', 'TypeScript', 'Vite', 'Recharts', 'Framer Motion', 'Tailwind CSS'],
-    heroImage: '/images/work/codedroid-multidevice.webp',
-    gallery: [],
-    metrics: [
-      { value: 'SIH 2026', label: 'Hackathon Track', context: 'Workforce skill analytics platform' },
-      { value: 'Multi-Vector', label: 'Radar Analytics', context: 'Interactive competency benchmarking' },
-      { value: 'Vite + React', label: 'Frontend Stack', context: 'High-speed component architecture' }
-    ],
-    links: [
-      { label: 'Origin: Team Vertex SIH 2026', url: 'https://velocityweb.online', type: 'external' }
-    ]
-  },
-  {
-    slug: 'itm-campus-retrieve',
-    title: 'ITM Campus Retrieve',
-    eyebrow: 'Campus Lost-and-Found Utility · Academic Build',
-    category: 'Academic Build',
-    categoryLabel: 'Academic Build · Hackathon Project',
-    status: 'Hecatron 2025 Deployment',
-    featured: false,
-    order: 9,
-    year: '2025',
-    summary: 'An academic lost-and-found workflow built for Hecatron 2025 featuring separate report-lost and report-found paths, matching heuristics, and admin verification.',
-    audience: 'University students and faculty who lose or find personal belongings on the university campus.',
-    challenge: 'Belongings misplaced on campus were rarely recovered because notifications were buried in chaotic WhatsApp status messages with no central repository or verification method.',
-    objectives: [
-      'Create structured forms distinguishing "I lost an item" from "I found an item".',
-      'Provide search by item category, location spotted, and timestamp.',
-      'Explore AI-assisted matching between lost descriptions and found inventory.',
-      'Build and deploy within the time limit of the Hecatron 2025 hackathon.'
-    ],
-    solution: 'Engineered a clean campus utility with intuitive dual-action pathways. Features verified submission forms, claim dispute safeguards, and an administrative review panel to prevent unauthorized pickups.',
-    whyItMatters: 'Demonstrates how a targeted product problem can be designed, coded, and deployed live during an intense hackathon sprint.',
-    workflow: [
-      'Finder submits photo and description of item turned into campus security.',
-      'Owner searches catalog or submits lost inquiry.',
-      'Matching algorithm flags potential correlations for security staff verification.',
-      'Owner presents physical proof at security desk to complete handover.'
-    ],
-    buildNotes: [
-      'Built with React and Tailwind CSS.',
-      'Rapid prototype deployed to Vercel for live hackathon judging.',
-      'Explored Gemini API integration for natural-language item matching.'
-    ],
-    technologies: ['React', 'Tailwind CSS', 'Gemini AI Concept', 'Vercel Platform'],
-    heroImage: '/images/work/itm-campus-home.webp',
-    gallery: [
-      {
-        src: '/images/projects/itm-campus-cover.png',
-        alt: 'ITM Campus Retrieve homepage with Report Lost and Report Found buttons',
-        caption: 'The main landing screen with prominent dual pathways for lost or found items.'
-      },
-      {
-        src: '/images/projects/itm-campus-actions.png',
-        alt: 'ITM Campus Retrieve categorized item inventory and claim verification',
-        caption: 'Item listings displaying status, date spotted, location, and claim initiation.'
-      }
-    ],
-    metrics: [
-      { value: 'Hecatron 2025', label: 'Hackathon Sprint', context: 'Built and demonstrated under competition timeline' },
-      { value: 'Dual Flow', label: 'Lost & Found Paths', context: 'Structured workflows for finders and searchers' },
-      { value: 'Live Demo', label: 'Vercel Deployment', context: 'Fully accessible online' }
-    ],
-    links: [
-      { label: 'View Public Build', url: 'https://itm-campus-retrieves.vercel.app/', type: 'live' },
-      { label: 'View Repository on GitHub', url: 'https://github.com/Maher-Bhatt/ITM-CAMPUS-RETRIEVES', type: 'github' }
     ]
   },
   {
@@ -571,7 +514,7 @@ export const projects: Project[] = [
     categoryLabel: 'Open Source · Web3 & Smart Contracts',
     status: 'Open Source Prototype',
     featured: false,
-    order: 10,
+    order: 9,
     year: '2025',
     summary: 'A blockchain verification prototype exploring tamper-proof academic and professional certification issuance on an Ethereum testnet.',
     audience: 'Educational institutions, certification authorities, and students requiring immutable, verifiable proof of achievement.',
@@ -603,7 +546,7 @@ export const projects: Project[] = [
     categoryLabel: 'Open Source · Cybersecurity Education',
     status: 'Open Source Lab',
     featured: false,
-    order: 11,
+    order: 10,
     year: '2026',
     summary: 'An educational login awareness and phishing defense demonstration built with zero network storage, strict CSP boundaries, and security awareness guidance.',
     audience: 'Students and computer users learning to recognize credential harvesting risks and understand web defense boundaries.',
@@ -635,7 +578,7 @@ export const projects: Project[] = [
     categoryLabel: 'Open Source · Security Utility',
     status: 'Open Source Utility',
     featured: false,
-    order: 12,
+    order: 11,
     year: '2025',
     summary: 'A Python cryptographic command-line utility for generating cryptographically secure, high-entropy passwords with custom character constraints.',
     audience: 'System administrators and security-conscious developers needing random keys without reliance on online generators.',
@@ -667,6 +610,5 @@ export const categories: { id: Project['category']; label: string }[] = [
   { id: 'Digital Products', label: 'Digital Products' },
   { id: 'AI & Software', label: 'AI & Software' },
   { id: 'Product Lab', label: 'Product Lab' },
-  { id: 'Academic Build', label: 'Academic Builds' },
   { id: 'Experiments', label: 'Experiments & Labs' }
 ];

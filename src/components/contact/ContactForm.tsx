@@ -8,7 +8,7 @@ export const ContactForm: React.FC = () => {
     name: '',
     email: '',
     organization: '',
-    projectType: 'Custom Website',
+    projectType: 'Custom Website / Web Platform',
     budget: '',
     details: '',
   });
@@ -38,10 +38,8 @@ export const ContactForm: React.FC = () => {
 
     setIsSubmitting(true);
 
-    // Simulate reliable dispatch with local storage backup and direct WhatsApp fallback
     setTimeout(() => {
       try {
-        // Save submission locally for audit
         const existing = JSON.parse(localStorage.getItem('qavironel_inquiries') || '[]');
         existing.push({
           ...formData,
@@ -57,23 +55,22 @@ export const ContactForm: React.FC = () => {
     }, 800);
   };
 
-  // WhatsApp prefilled message
   const whatsappMessage = encodeURIComponent(
     `Hello Qavironel Technologies, I'm reaching out about a project.\n\nName: ${formData.name || 'Not provided'}\nOrganization: ${formData.organization || 'Not provided'}\nType: ${formData.projectType}\nDetails: ${formData.details || 'Let us discuss our project requirements.'}`
   );
 
   if (isSubmitted) {
     return (
-      <div className="bg-[#FFFFFF] border border-[#DEDAD3] p-8 sm:p-12 text-center animate-fade-in space-y-6">
-        <div className="w-16 h-16 bg-[#C7612E]/10 text-[#C7612E] mx-auto flex items-center justify-center">
+      <div className="bg-[#171717] border border-[#2E2E2B] p-8 sm:p-12 text-center animate-fade-in space-y-6 text-white">
+        <div className="w-16 h-16 bg-[#C7612E]/10 border border-[#C7612E]/30 text-[#C7612E] mx-auto flex items-center justify-center">
           <CheckCircle2 className="w-8 h-8" />
         </div>
         <div className="space-y-2">
-          <h3 className="font-sans font-bold text-2xl text-[#171717]">
+          <h3 className="font-sans font-bold text-2xl text-white">
             Thank you, {formData.name}.
           </h3>
-          <p className="text-sm text-[#77746F] max-w-md mx-auto leading-relaxed">
-            Your inquiry has been received. Our founding team will review your project details and reply within 24 hours to <span className="font-semibold text-[#171717]">{formData.email}</span>.
+          <p className="text-sm text-[#A3A099] max-w-md mx-auto leading-relaxed font-light">
+            Your inquiry has been received. Our founder will review your project requirements and reply within 12–24 hours to <span className="font-semibold text-white">{formData.email}</span>.
           </p>
         </div>
 
@@ -95,14 +92,14 @@ export const ContactForm: React.FC = () => {
                 name: '',
                 email: '',
                 organization: '',
-                projectType: 'Custom Website',
+                projectType: 'Custom Website / Web Platform',
                 budget: '',
                 details: '',
               });
             }}
-            className="text-xs font-semibold uppercase tracking-widest text-[#77746F] hover:text-[#171717] transition-colors py-3 px-4"
+            className="px-6 py-3.5 bg-[#121212] border border-[#2E2E2B] text-xs font-semibold uppercase tracking-widest text-white hover:bg-[#20201E] transition-colors"
           >
-            Submit Another Inquiry
+            Submit Another Project
           </button>
         </div>
       </div>
@@ -110,11 +107,11 @@ export const ContactForm: React.FC = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="bg-[#FFFFFF] border border-[#DEDAD3] p-6 sm:p-10 space-y-6">
+    <form onSubmit={handleSubmit} className="space-y-6">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        {/* Name */}
+        {/* Full Name */}
         <div>
-          <label htmlFor="contact-name" className="block text-xs font-semibold uppercase tracking-widest text-[#171717] mb-2">
+          <label htmlFor="contact-name" className="block text-xs font-mono font-semibold uppercase tracking-widest text-[#DEDAD3] mb-2">
             Your Name <span className="text-[#C7612E]">*</span>
           </label>
           <input
@@ -123,16 +120,16 @@ export const ContactForm: React.FC = () => {
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             placeholder="Jane Doe"
-            className={`w-full px-4 py-3 bg-[#F6F3ED] border text-sm text-[#171717] focus:bg-white focus:outline-none transition-colors ${
-              errors.name ? 'border-red-500' : 'border-[#DEDAD3] focus:border-[#C7612E]'
+            className={`w-full px-4 py-3 bg-[#171717] border text-sm text-white placeholder-[#77746F] focus:outline-none transition-colors ${
+              errors.name ? 'border-red-500' : 'border-[#2E2E2B] focus:border-[#C7612E]'
             }`}
           />
-          {errors.name && <p className="mt-1 text-xs text-red-600 font-mono">{errors.name}</p>}
+          {errors.name && <p className="mt-1 text-xs text-red-500 font-mono">{errors.name}</p>}
         </div>
 
         {/* Email */}
         <div>
-          <label htmlFor="contact-email" className="block text-xs font-semibold uppercase tracking-widest text-[#171717] mb-2">
+          <label htmlFor="contact-email" className="block text-xs font-mono font-semibold uppercase tracking-widest text-[#DEDAD3] mb-2">
             Email Address <span className="text-[#C7612E]">*</span>
           </label>
           <input
@@ -141,73 +138,73 @@ export const ContactForm: React.FC = () => {
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
             placeholder="jane@company.com"
-            className={`w-full px-4 py-3 bg-[#F6F3ED] border text-sm text-[#171717] focus:bg-white focus:outline-none transition-colors ${
-              errors.email ? 'border-red-500' : 'border-[#DEDAD3] focus:border-[#C7612E]'
+            className={`w-full px-4 py-3 bg-[#171717] border text-sm text-white placeholder-[#77746F] focus:outline-none transition-colors ${
+              errors.email ? 'border-red-500' : 'border-[#2E2E2B] focus:border-[#C7612E]'
             }`}
           />
-          {errors.email && <p className="mt-1 text-xs text-red-600 font-mono">{errors.email}</p>}
+          {errors.email && <p className="mt-1 text-xs text-red-500 font-mono">{errors.email}</p>}
         </div>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         {/* Organization */}
         <div>
-          <label htmlFor="contact-org" className="block text-xs font-semibold uppercase tracking-widest text-[#171717] mb-2">
-            Company or Organization
+          <label htmlFor="contact-org" className="block text-xs font-mono font-semibold uppercase tracking-widest text-[#DEDAD3] mb-2">
+            Company / Project Name
           </label>
           <input
             id="contact-org"
             type="text"
             value={formData.organization}
             onChange={(e) => setFormData({ ...formData, organization: e.target.value })}
-            placeholder="Studio / Startup / Enterprise"
-            className="w-full px-4 py-3 bg-[#F6F3ED] border border-[#DEDAD3] text-sm text-[#171717] focus:bg-white focus:border-[#C7612E] focus:outline-none transition-colors"
+            placeholder="Acme Inc. / Stealth Startup"
+            className="w-full px-4 py-3 bg-[#171717] border border-[#2E2E2B] text-sm text-white placeholder-[#77746F] focus:border-[#C7612E] focus:outline-none transition-colors"
           />
         </div>
 
         {/* Project Type */}
         <div>
-          <label htmlFor="contact-type" className="block text-xs font-semibold uppercase tracking-widest text-[#171717] mb-2">
-            Project Type
+          <label htmlFor="contact-type" className="block text-xs font-mono font-semibold uppercase tracking-widest text-[#DEDAD3] mb-2">
+            Discipline / Scope
           </label>
           <select
             id="contact-type"
             value={formData.projectType}
             onChange={(e) => setFormData({ ...formData, projectType: e.target.value })}
-            className="w-full px-4 py-3 bg-[#F6F3ED] border border-[#DEDAD3] text-sm text-[#171717] focus:bg-white focus:border-[#C7612E] focus:outline-none transition-colors"
+            className="w-full px-4 py-3 bg-[#171717] border border-[#2E2E2B] text-sm text-white focus:border-[#C7612E] focus:outline-none transition-colors"
           >
-            <option value="Custom Website">Custom Website / E-Commerce</option>
-            <option value="Web Application / SaaS MVP">Web Application / SaaS MVP</option>
-            <option value="Applied AI / Workflow Automation">Applied AI / Workflow Automation</option>
-            <option value="Website Redesign & SEO">Website Redesign & Technical SEO</option>
-            <option value="Product Design & UI/UX">Product Design & UI/UX</option>
-            <option value="Other Scope">Other Specific Scope</option>
+            <option value="Custom Website / Web Platform">High-Impact Custom Web Platform</option>
+            <option value="SaaS MVP / Web Application">Full-Stack SaaS MVP / Web App</option>
+            <option value="Applied AI / Workflow Automation">Applied AI / LLM Integration</option>
+            <option value="E-Commerce Storefront">E-Commerce Storefront</option>
+            <option value="Website Redesign & Technical SEO">Performance Redesign & Technical SEO</option>
+            <option value="Mobile Developer Tooling">Mobile Runtimes & Dev Tooling</option>
           </select>
         </div>
       </div>
 
       {/* Approximate Budget */}
       <div>
-        <label htmlFor="contact-budget" className="block text-xs font-semibold uppercase tracking-widest text-[#171717] mb-2">
-          Estimated Budget (Optional)
+        <label htmlFor="contact-budget" className="block text-xs font-mono font-semibold uppercase tracking-widest text-[#DEDAD3] mb-2">
+          Estimated Budget Range (Optional)
         </label>
         <select
           id="contact-budget"
           value={formData.budget}
           onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-          className="w-full px-4 py-3 bg-[#F6F3ED] border border-[#DEDAD3] text-sm text-[#171717] focus:bg-white focus:border-[#C7612E] focus:outline-none transition-colors"
+          className="w-full px-4 py-3 bg-[#171717] border border-[#2E2E2B] text-sm text-white focus:border-[#C7612E] focus:outline-none transition-colors"
         >
-          <option value="">Select an approximate range...</option>
-          <option value="India: ₹10,000 – ₹25,000 / Global: < $500">India: ₹10,000 – ₹25,000 / Global: &lt; $500</option>
-          <option value="India: ₹25,000 – ₹60,000 / Global: $500 – $1,500">India: ₹25,000 – ₹60,000 / Global: $500 – $1,500</option>
-          <option value="India: ₹60,000 – ₹1,50,000 / Global: $1,500 – $3,500">India: ₹60,000 – ₹1,50,000 / Global: $1,500 – $3,500</option>
-          <option value="Custom Enterprise / Complex Platform">Custom Platform / Comprehensive Scope</option>
+          <option value="">Select an approximate scope range...</option>
+          <option value="< $1,000 / ₹25,000 – ₹80,000">&lt; $1,000 / ₹25,000 – ₹80,000 (Sprint Build)</option>
+          <option value="$1,000 – $3,500 / ₹80,000 – ₹2,50,000">$1,000 – $3,500 / ₹80,000 – ₹2,50,000 (Custom Platform)</option>
+          <option value="$3,500 – $10,000+ / ₹2,50,000+">$3,500 – $10,000+ (Comprehensive Product MVP)</option>
+          <option value="Enterprise / Dedicated Retainer">Dedicated Architecture / Ongoing Retainer</option>
         </select>
       </div>
 
       {/* Project Details */}
       <div>
-        <label htmlFor="contact-details" className="block text-xs font-semibold uppercase tracking-widest text-[#171717] mb-2">
+        <label htmlFor="contact-details" className="block text-xs font-mono font-semibold uppercase tracking-widest text-[#DEDAD3] mb-2">
           Project Details & Goals <span className="text-[#C7612E]">*</span>
         </label>
         <textarea
@@ -215,12 +212,12 @@ export const ContactForm: React.FC = () => {
           rows={5}
           value={formData.details}
           onChange={(e) => setFormData({ ...formData, details: e.target.value })}
-          placeholder="Tell us what you're working on, what needs to improve, your ideal timeline, and any links to existing systems."
-          className={`w-full px-4 py-3 bg-[#F6F3ED] border text-sm text-[#171717] focus:bg-white focus:outline-none transition-colors ${
-            errors.details ? 'border-red-500' : 'border-[#DEDAD3] focus:border-[#C7612E]'
+          placeholder="Tell us what you're working on, what needs to improve, your target timeline, and any links to existing systems or designs."
+          className={`w-full px-4 py-3 bg-[#171717] border text-sm text-white placeholder-[#77746F] focus:outline-none transition-colors ${
+            errors.details ? 'border-red-500' : 'border-[#2E2E2B] focus:border-[#C7612E]'
           }`}
         />
-        {errors.details && <p className="mt-1 text-xs text-red-600 font-mono">{errors.details}</p>}
+        {errors.details && <p className="mt-1 text-xs text-red-500 font-mono">{errors.details}</p>}
       </div>
 
       {/* Submit Button & Direct WhatsApp Link */}
@@ -239,7 +236,7 @@ export const ContactForm: React.FC = () => {
           href={`https://wa.me/919879529957?text=${whatsappMessage}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#77746F] hover:text-[#C7612E] transition-colors py-2"
+          className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-[#A3A099] hover:text-[#C7612E] transition-colors py-2"
         >
           <MessageSquare className="w-4 h-4 text-[#C7612E]" />
           <span>Or chat directly on WhatsApp</span>

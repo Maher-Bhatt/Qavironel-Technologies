@@ -31,9 +31,9 @@ export const Button: React.FC<ButtonProps> = ({
 
   const variantStyles = {
     primary: 'bg-[#C7612E] hover:bg-[#98431F] text-[#FFFFFF] shadow-sm transition-all duration-200 active:scale-[0.98]',
-    secondary: 'bg-[#FFFFFF] hover:bg-[#F6F3ED] text-[#171717] border border-[#DEDAD3] hover:border-[#171717]/40 transition-all duration-200 active:scale-[0.98]',
-    dark: 'bg-[#171717] hover:bg-[#20201E] text-[#F6F3ED] border border-[#2E2E2B] hover:border-[#C7612E]/60 transition-all duration-200 active:scale-[0.98]',
-    ghost: 'bg-transparent text-[#171717] hover:text-[#C7612E] p-0 font-medium tracking-normal normal-case transition-colors duration-200',
+    secondary: 'bg-[#171717] hover:bg-[#20201E] text-white border border-[#2E2E2B] hover:border-white/40 transition-all duration-200 active:scale-[0.98]',
+    dark: 'bg-[#121212] hover:bg-[#1A1A18] text-[#F6F3ED] border border-[#2E2E2B] hover:border-[#C7612E]/60 transition-all duration-200 active:scale-[0.98]',
+    ghost: 'bg-transparent text-[#A3A099] hover:text-[#C7612E] p-0 font-medium tracking-normal normal-case transition-colors duration-200',
   }[variant];
 
   const baseStyles = 'inline-flex items-center justify-center font-sans rounded-none transition-all group focus-visible:outline-2 focus-visible:outline-[#C7612E] focus-visible:outline-offset-2';

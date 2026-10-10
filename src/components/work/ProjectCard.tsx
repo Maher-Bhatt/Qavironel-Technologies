@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { Project } from '../../types';
 import { Badge } from '../ui/Badge';
 import { ArrowUpRight, ArrowRight } from 'lucide-react';
@@ -16,15 +17,17 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   const isFeatured = layout === 'featured';
 
   return (
-    <article 
-      className={`group relative bg-[#FFFFFF] border border-[#DEDAD3] hover:border-[#171717]/40 transition-all duration-300 flex flex-col overflow-hidden ${
+    <motion.article 
+      whileHover={{ y: -4 }}
+      transition={{ duration: 0.2 }}
+      className={`group relative bg-[#171717] border border-[#2E2E2B] hover:border-[#C7612E]/50 transition-all duration-300 flex flex-col overflow-hidden text-white ${
         isFeatured ? 'lg:grid lg:grid-cols-12 gap-0' : ''
       }`}
     >
       {/* Image Preview Container */}
       <div 
         className={`relative overflow-hidden bg-[#20201E] ${
-          isFeatured ? 'lg:col-span-7 aspect-[16/10] lg:aspect-auto min-h-[320px] lg:min-h-[460px]' : 'aspect-[16/10]'
+          isFeatured ? 'lg:col-span-7 aspect-[16/10] lg:aspect-auto min-h-[300px] lg:min-h-[420px]' : 'aspect-[16/10]'
         }`}
       >
         <Link to={`/work/${project.slug}`} className="block w-full h-full">
@@ -32,18 +35,18 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             src={project.heroImage}
             alt={`${project.title} interface preview`}
             loading="lazy"
-            className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+            className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
           />
         </Link>
 
         {/* Status Pill on top of image */}
         <div className="absolute top-4 left-4 z-10 flex flex-wrap gap-2">
-          <Badge variant="charcoal" size="sm">
+          <span className="px-2.5 py-1 text-[0.68rem] font-mono bg-[#121212]/90 backdrop-blur-md text-white border border-[#2E2E2B]">
             {project.status}
-          </Badge>
-          <Badge variant="copper" size="sm">
+          </span>
+          <span className="px-2.5 py-1 text-[0.68rem] font-mono bg-[#C7612E] text-white font-semibold">
             {project.category}
-          </Badge>
+          </span>
         </div>
       </div>
 
@@ -59,22 +62,22 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             <span>{project.year}</span>
           </div>
 
-          <h3 className="font-sans font-bold text-2xl sm:text-3xl text-[#171717] tracking-tight group-hover:text-[#C7612E] transition-colors">
+          <h3 className="font-sans font-bold text-2xl sm:text-3xl text-white tracking-tight group-hover:text-[#C7612E] transition-colors">
             <Link to={`/work/${project.slug}`}>
               {project.title}
             </Link>
           </h3>
 
-          <p className="mt-3 text-sm sm:text-base text-[#77746F] leading-relaxed line-clamp-3">
+          <p className="mt-3 text-sm text-[#A3A099] leading-relaxed line-clamp-3 font-light">
             {project.summary}
           </p>
 
           {/* Key Metrics if available */}
           {project.metrics && project.metrics.length > 0 && (
-            <div className="mt-6 pt-5 border-t border-[#DEDAD3] grid grid-cols-2 gap-4">
+            <div className="mt-6 pt-5 border-t border-[#262624] grid grid-cols-2 gap-4">
               {project.metrics.slice(0, 2).map((m, idx) => (
                 <div key={idx}>
-                  <p className="text-xl sm:text-2xl font-bold font-sans text-[#171717]">{m.value}</p>
+                  <p className="text-xl sm:text-2xl font-bold font-sans text-white">{m.value}</p>
                   <p className="text-xs text-[#77746F] font-mono tracking-tight mt-0.5">{m.label}</p>
                 </div>
               ))}
@@ -86,13 +89,13 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             {project.technologies.slice(0, 4).map((tech) => (
               <span 
                 key={tech} 
-                className="text-[0.7rem] font-mono text-[#77746F] bg-[#F6F3ED] px-2.5 py-1 border border-[#DEDAD3]/60"
+                className="text-[0.68rem] font-mono text-[#77746F] bg-[#121212] px-2.5 py-1 border border-[#2E2E2B]"
               >
                 {tech}
               </span>
             ))}
             {project.technologies.length > 4 && (
-              <span className="text-[0.7rem] font-mono text-[#77746F] px-1 py-1">
+              <span className="text-[0.68rem] font-mono text-[#77746F] px-1 py-1">
                 +{project.technologies.length - 4}
               </span>
             )}
@@ -100,10 +103,10 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         </div>
 
         {/* Action Link Footer */}
-        <div className="mt-8 pt-6 border-t border-[#DEDAD3] flex items-center justify-between">
+        <div className="mt-8 pt-6 border-t border-[#262624] flex items-center justify-between">
           <Link 
             to={`/work/${project.slug}`} 
-            className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#171717] group-hover:text-[#C7612E] transition-colors"
+            className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-white group-hover:text-[#C7612E] transition-colors"
           >
             <span>Explore Case Study</span>
             <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
@@ -123,6 +126,6 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           )}
         </div>
       </div>
-    </article>
+    </motion.article>
   );
 };

@@ -8,6 +8,7 @@ import { CaseStudyPage } from './pages/CaseStudyPage';
 import { ServicesPage } from './pages/ServicesPage';
 import { AboutPage } from './pages/AboutPage';
 import { ContactPage } from './pages/ContactPage';
+import { LegalPage } from './pages/LegalPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 
 // Scroll to top on route transition
@@ -30,7 +31,7 @@ const ScrollToTop = () => {
 
 export const App: React.FC = () => {
   return (
-    <div className="flex flex-col min-h-screen bg-[#F6F3ED] text-[#171717]">
+    <div className="flex flex-col min-h-screen bg-[#121212] text-[#F6F3ED]">
       <ScrollToTop />
       <SiteHeader />
       <main className="flex-grow">
@@ -41,6 +42,8 @@ export const App: React.FC = () => {
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/privacy" element={<LegalPage />} />
+          <Route path="/terms" element={<LegalPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>

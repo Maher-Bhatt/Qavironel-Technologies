@@ -144,7 +144,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           {/* Automatic Z-Axis Hover Video Playback System */}
           <video
             ref={videoRef}
-            src={project.videoSrc || '/videos/project-reel.mp4'}
+            src={project.videoSrc || 'https://cdn.pixabay.com/video/2021/08/04/83866-584758509_large.mp4'}
             muted
             loop
             playsInline

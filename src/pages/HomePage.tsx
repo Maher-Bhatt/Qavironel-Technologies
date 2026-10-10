@@ -12,7 +12,7 @@ import { companyConfig } from '../data/company';
 import { VideoShowreel } from '../components/media/VideoShowreel';
 import { AmbientHeroCanvas } from '../components/media/AmbientHeroCanvas';
 import { Hero3DArchitectureStack } from '../components/3d/Hero3DArchitectureStack';
-import { Interactive3DSphere } from '../components/3d/Interactive3DSphere';
+
 import { ProjectCard } from '../components/work/ProjectCard';
 import { 
   ArrowRight, 
@@ -276,15 +276,7 @@ export const HomePage: React.FC = () => {
                 </h2>
               </div>
 
-              {/* Interactive 3D Spatial Geodesic Sphere */}
-              <div className="pt-2 flex flex-col sm:flex-row items-center gap-4 p-4 rounded-2xl bg-white border border-[#E5E7EB] shadow-xs">
-                <Interactive3DSphere size={140} className="shrink-0" />
-                <div className="space-y-1 text-xs text-center sm:text-left">
-                  <p className="font-mono font-bold text-[#0A0A0A] uppercase tracking-wider">Spatial 3D Constellation</p>
-                  <p className="text-[#52525B]">WebGL geometric nodal matrix. Drag or hover cursor over sphere to inspect facets.</p>
-                  <span className="inline-block font-mono text-[0.7rem] text-[#E0561B] font-semibold">INTERACTIVE SPHERICAL MATH // 60 FPS</span>
-                </div>
-              </div>
+              {/* Removed interactive sphere block as requested to keep 3D elements singular */}
             </div>
 
             <div className="lg:col-span-7 space-y-6 text-[#52525B] text-base sm:text-lg leading-relaxed font-light">

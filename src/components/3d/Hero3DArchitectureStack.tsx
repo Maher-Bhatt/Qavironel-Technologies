@@ -5,15 +5,6 @@ interface Hero3DArchitectureStackProps {
   className?: string;
 }
 
-/**
- * Hero3DArchitectureStack
- * A singular, tranquil, high-craft 3D digital sculpture matching Qavironel's 
- * signature luxury studio palette: frosted optical glass, radiant copper (#E0561B), 
- * and brushed titanium.
- * 
- * Anchored in place with a calm, continuous 60 FPS orbit.
- * Zero clutter, zero text labels, zero chips — pure architectural craftsmanship.
- */
 export const Hero3DArchitectureStack: React.FC<Hero3DArchitectureStackProps> = ({ className = '' }) => {
   const mountRef = useRef<HTMLDivElement>(null);
 
@@ -24,10 +15,9 @@ export const Hero3DArchitectureStack: React.FC<Hero3DArchitectureStackProps> = (
     let width = container.clientWidth;
     let height = container.clientHeight;
 
-    // 1. Scene, Camera, High-Precision WebGL Renderer
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 1000);
-    camera.position.set(0, 0.3, 7.2);
+    const camera = new THREE.PerspectiveCamera(35, width / height, 0.1, 100);
+    camera.position.set(0, 0, 9);
     camera.lookAt(0, 0, 0);
 
     const renderer = new THREE.WebGLRenderer({
@@ -37,178 +27,151 @@ export const Hero3DArchitectureStack: React.FC<Hero3DArchitectureStackProps> = (
     });
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    
+    // 2026 Standard: AgX Tone Mapping (fallback to ACESFilmic) & SRGB Color Space
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.2;
+    renderer.toneMappingExposure = 1.1;
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
     container.appendChild(renderer.domElement);
 
-    // Master Group anchored firmly in place (fixed isometric angle)
-    const masterGroup = new THREE.Group();
-    masterGroup.rotation.x = 0.22;
-    scene.add(masterGroup);
+    // Group for the main object to handle cursor tracking
+    const mainGroup = new THREE.Group();
+    scene.add(mainGroup);
 
     // ─────────────────────────────────────────────────────────────
-    // UNIFIED LUXURY MATERIAL SYSTEM (Glass + Radiant Copper + Titanium)
+    // WORLD-CLASS MATERIAL (Tactile, Clearcoat, Dispersion feel)
     // ─────────────────────────────────────────────────────────────
-    const frostedGlassMat = new THREE.MeshPhysicalMaterial({
-      color: new THREE.Color('#FFFFFF'),
-      transmission: 0.95,
-      roughness: 0.1,
-      metalness: 0.04,
-      ior: 1.54,
-      thickness: 1.9,
-      clearcoat: 1.0,
-      clearcoatRoughness: 0.08,
-      transparent: true,
-      opacity: 0.92
-    });
-
-    const copperCoreMat = new THREE.MeshStandardMaterial({
-      color: new THREE.Color('#E0561B'),
-      emissive: new THREE.Color('#E0561B'),
-      emissiveIntensity: 1.4,
-      metalness: 0.85,
-      roughness: 0.15
-    });
-
-    const copperWireMat = new THREE.LineBasicMaterial({
-      color: new THREE.Color('#E0561B'),
-      transparent: true,
-      opacity: 0.65
-    });
-
-    const titaniumRingMat = new THREE.MeshStandardMaterial({
-      color: new THREE.Color('#27272A'),
-      metalness: 0.92,
-      roughness: 0.2
-    });
-
-    const copperRingMat = new THREE.MeshStandardMaterial({
-      color: new THREE.Color('#E0561B'),
-      emissive: new THREE.Color('#E0561B'),
-      emissiveIntensity: 0.35,
+    // Deep dark core with an intense orange sheen/rim
+    const material = new THREE.MeshPhysicalMaterial({
+      color: new THREE.Color('#0A0A0A'), // Deep dark
       metalness: 0.9,
-      roughness: 0.18
+      roughness: 0.15,
+      clearcoat: 1.0,
+      clearcoatRoughness: 0.05,
+      sheen: 1.0,
+      sheenColor: new THREE.Color('#E0561B'), // Orange sheen
+      sheenRoughness: 0.4,
+      iridescence: 0.5,
+      iridescenceIOR: 1.3,
     });
 
     // ─────────────────────────────────────────────────────────────
-    // SINGULAR ARCHITECTURAL SCULPTURE
+    // GEOMETRY (Smooth, organic, complex but uncluttered)
     // ─────────────────────────────────────────────────────────────
-    const sculptureGroup = new THREE.Group();
-    masterGroup.add(sculptureGroup);
-
-    // 1. Inner Radiant Copper Core (The Soul)
-    const innerCoreGeo = new THREE.SphereGeometry(0.58, 36, 36);
-    const innerCore = new THREE.Mesh(innerCoreGeo, copperCoreMat);
-    sculptureGroup.add(innerCore);
-
-    // 2. Optical Frosted Glass Rhombic Polyhedron
-    const crystalGeo = new THREE.IcosahedronGeometry(1.22, 1);
-    const crystalMesh = new THREE.Mesh(crystalGeo, frostedGlassMat);
-    sculptureGroup.add(crystalMesh);
-
-    // 3. Delicate Copper Chamfer Edges
-    const crystalWire = new THREE.LineSegments(
-      new THREE.EdgesGeometry(crystalGeo), 
-      copperWireMat
-    );
-    sculptureGroup.add(crystalWire);
-
-    // 4. Concentric Gyroscopic Orbital Rings
-    const ring1Geo = new THREE.TorusGeometry(1.68, 0.022, 20, 100);
-    const ring1 = new THREE.Mesh(ring1Geo, copperRingMat);
-    ring1.rotation.x = Math.PI / 2.8;
-    sculptureGroup.add(ring1);
-
-    const ring2Geo = new THREE.TorusGeometry(1.88, 0.018, 20, 100);
-    const ring2 = new THREE.Mesh(ring2Geo, titaniumRingMat);
-    ring2.rotation.y = Math.PI / 3.2;
-    sculptureGroup.add(ring2);
-
-    const ring3Geo = new THREE.TorusGeometry(2.05, 0.012, 16, 90);
-    const ring3 = new THREE.Mesh(ring3Geo, copperWireMat as any);
-    ring3.rotation.z = Math.PI / 4;
-    sculptureGroup.add(ring3);
-
-    // 5. Ambient Suspended Luminous Copper Embers (36 micro-particles)
-    const emberCount = 36;
-    const emberGeo = new THREE.BufferGeometry();
-    const emberPositions = new Float32Array(emberCount * 3);
-    for (let i = 0; i < emberCount * 3; i += 3) {
-      emberPositions[i] = (Math.random() - 0.5) * 4.6;
-      emberPositions[i + 1] = (Math.random() - 0.5) * 4.2;
-      emberPositions[i + 2] = (Math.random() - 0.5) * 4.4;
-    }
-    emberGeo.setAttribute('position', new THREE.BufferAttribute(emberPositions, 3));
-    const emberMat = new THREE.PointsMaterial({
-      color: new THREE.Color('#E0561B'),
-      size: 0.045,
-      transparent: true,
-      opacity: 0.55
-    });
-    const embers = new THREE.Points(emberGeo, emberMat);
-    sculptureGroup.add(embers);
+    // A thick, beautifully curved TorusKnot
+    const geometry = new THREE.TorusKnotGeometry(1.6, 0.65, 300, 64, 2, 3);
+    const mesh = new THREE.Mesh(geometry, material);
+    mainGroup.add(mesh);
 
     // ─────────────────────────────────────────────────────────────
-    // STUDIO LIGHTING RIG
+    // LIGHTING (Studio Setup with strong rim light)
     // ─────────────────────────────────────────────────────────────
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1.4);
+    // Ambient for base fill
+    const ambientLight = new THREE.AmbientLight('#ffffff', 0.8);
     scene.add(ambientLight);
 
-    const copperKeyLight = new THREE.PointLight('#E0561B', 25, 14);
-    copperKeyLight.position.set(4, 4, 4);
-    scene.add(copperKeyLight);
+    // Key Light (Warm)
+    const keyLight = new THREE.SpotLight('#FFE8D6', 180);
+    keyLight.position.set(5, 5, 5);
+    keyLight.angle = Math.PI / 6;
+    keyLight.penumbra = 0.5;
+    scene.add(keyLight);
 
-    const rimLight = new THREE.DirectionalLight('#FFFFFF', 1.8);
-    rimLight.position.set(-4, 5, 3);
-    scene.add(rimLight);
-
-    const fillLight = new THREE.PointLight('#FFFFFF', 8, 10);
-    fillLight.position.set(0, -3, 2);
+    // Fill Light (Cool)
+    const fillLight = new THREE.PointLight('#E2F0FF', 80);
+    fillLight.position.set(-5, -2, 5);
     scene.add(fillLight);
 
-    // ─────────────────────────────────────────────────────────────
-    // SMOOTH 60 FPS ANIMATION LOOP (Pauses offscreen)
-    // ─────────────────────────────────────────────────────────────
-    let isVisible = true;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        isVisible = entry.isIntersecting;
-      },
-      { threshold: 0.1 }
-    );
-    observer.observe(container);
+    // Rim Light (Crucial for that 3D separation)
+    const rimLight = new THREE.SpotLight('#E0561B', 300); // Brand orange rim
+    rimLight.position.set(0, 4, -5);
+    rimLight.angle = Math.PI / 4;
+    rimLight.penumbra = 1;
+    scene.add(rimLight);
 
+    // ─────────────────────────────────────────────────────────────
+    // CONTACT SHADOW (Fake baked shadow under the object)
+    // ─────────────────────────────────────────────────────────────
+    const shadowGeo = new THREE.PlaneGeometry(8, 8);
+    const canvas2d = document.createElement('canvas');
+    canvas2d.width = 256;
+    canvas2d.height = 256;
+    const ctx = canvas2d.getContext('2d')!;
+    const gradient = ctx.createRadialGradient(128, 128, 0, 128, 128, 128);
+    gradient.addColorStop(0, 'rgba(0,0,0, 0.4)');
+    gradient.addColorStop(1, 'rgba(0,0,0, 0)');
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, 256, 256);
+    
+    const shadowTex = new THREE.CanvasTexture(canvas2d);
+    const shadowMat = new THREE.MeshBasicMaterial({
+      map: shadowTex,
+      transparent: true,
+      opacity: 0.7,
+      depthWrite: false
+    });
+    
+    const shadowPlane = new THREE.Mesh(shadowGeo, shadowMat);
+    shadowPlane.rotation.x = -Math.PI / 2;
+    shadowPlane.position.y = -3.0; // Place below the object
+    scene.add(shadowPlane);
+
+    // ─────────────────────────────────────────────────────────────
+    // MOTION & PHYSICS (Spring Damped Cursor Tracking + Idle Float)
+    // ─────────────────────────────────────────────────────────────
+    let mouseX = 0;
+    let mouseY = 0;
+    let targetX = 0;
+    let targetY = 0;
+    
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!container) return;
+      const rect = container.getBoundingClientRect();
+      targetX = ((e.clientX - rect.left) / width) * 2 - 1;
+      targetY = -((e.clientY - rect.top) / height) * 2 + 1;
+    };
+    
+    const handleMouseLeave = () => {
+      targetX = 0;
+      targetY = 0;
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseleave', handleMouseLeave);
+
+    const clock = new THREE.Clock();
     let animationFrameId: number;
-    let clock = new THREE.Clock();
+    let isVisible = true;
+    
+    const observer = new IntersectionObserver(([entry]) => {
+      isVisible = entry.isIntersecting;
+    }, { threshold: 0.1 });
+    observer.observe(container);
 
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);
       if (!isVisible) return;
 
-      const delta = clock.getDelta();
       const t = clock.getElapsedTime();
-
-      // Calm, continuous, synchronized orbit
-      sculptureGroup.rotation.y += delta * 0.28;
       
-      // Independent gentle counter-rotation of gyroscopic rings
-      ring1.rotation.z += delta * 0.35;
-      ring2.rotation.x += delta * 0.22;
-      ring3.rotation.y += delta * 0.18;
+      // Spring physics (lerp) for smooth tracking
+      mouseX += (targetX - mouseX) * 0.05;
+      mouseY += (targetY - mouseY) * 0.05;
 
-      // Soft breathing emissive pulse on the core
-      const pulse = 1.2 + Math.sin(t * 1.8) * 0.25;
-      copperCoreMat.emissiveIntensity = pulse;
+      // Cursor rotation tracking (subtle)
+      mainGroup.rotation.x = mouseY * 0.25;
+      mainGroup.rotation.y = mouseX * 0.25;
 
-      // Subtle float oscillation
-      sculptureGroup.position.y = Math.sin(t * 0.8) * 0.08;
-
-      // Gentle drift of embers
-      embers.rotation.y -= delta * 0.08;
+      // Continuous Idle Kinematics ("Breathing" & slow spin)
+      mesh.rotation.x = Math.sin(t * 0.3) * 0.1;
+      mesh.rotation.y = t * 0.12; // Slow continuous rotation
+      mesh.rotation.z = Math.cos(t * 0.2) * 0.1;
+      
+      // Subtle float up and down
+      mainGroup.position.y = Math.sin(t * 1.5) * 0.05;
 
       renderer.render(scene, camera);
     };
-
     animate();
 
     // ─────────────────────────────────────────────────────────────
@@ -222,39 +185,33 @@ export const Hero3DArchitectureStack: React.FC<Hero3DArchitectureStackProps> = (
       camera.updateProjectionMatrix();
       renderer.setSize(width, height);
     };
-
     window.addEventListener('resize', handleResize);
 
     return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseleave', handleMouseLeave);
       window.removeEventListener('resize', handleResize);
       observer.disconnect();
       cancelAnimationFrame(animationFrameId);
+      
       if (container && renderer.domElement && container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
       }
+      
       renderer.dispose();
-      crystalGeo.dispose();
-      innerCoreGeo.dispose();
-      ring1Geo.dispose();
-      ring2Geo.dispose();
-      ring3Geo.dispose();
-      emberGeo.dispose();
-      frostedGlassMat.dispose();
-      copperCoreMat.dispose();
-      titaniumRingMat.dispose();
-      copperRingMat.dispose();
+      geometry.dispose();
+      material.dispose();
+      shadowGeo.dispose();
+      shadowMat.dispose();
+      shadowTex.dispose();
     };
   }, []);
 
   return (
-    <div 
-      className={`relative w-full flex items-center justify-center ${className}`}
-    >
-      {/* Pure, Uncluttered 3D WebGL Canvas */}
+    <div className={`relative w-full flex items-center justify-center ${className}`}>
       <div 
         ref={mountRef} 
-        className="w-full h-[360px] sm:h-[420px] lg:h-[460px] relative pointer-events-none"
-        aria-hidden="true"
+        className="w-full h-[360px] sm:h-[420px] lg:h-[460px] relative z-10"
       />
     </div>
   );

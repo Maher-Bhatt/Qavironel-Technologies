@@ -1,10 +1,16 @@
 import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
+import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
 
 interface Hero3DArchitectureStackProps {
   className?: string;
 }
 
+/**
+ * Hero3DArchitectureStack
+ * The "Precision Glass Torsion Ribbon". A world-class, mathematically elegant 3D object.
+ * NO MOUSE TRACKING. Pure, continuous, and visually lightweight.
+ */
 export const Hero3DArchitectureStack: React.FC<Hero3DArchitectureStackProps> = ({ className = '' }) => {
   const mountRef = useRef<HTMLDivElement>(null);
 
@@ -16,129 +22,93 @@ export const Hero3DArchitectureStack: React.FC<Hero3DArchitectureStackProps> = (
     let height = container.clientHeight;
 
     const scene = new THREE.Scene();
+    
     const camera = new THREE.PerspectiveCamera(35, width / height, 0.1, 100);
     camera.position.set(0, 0, 9);
     camera.lookAt(0, 0, 0);
 
     const renderer = new THREE.WebGLRenderer({
-      alpha: true,
+      alpha: true, // Transparent background (matches light theme)
       antialias: true,
       powerPreference: 'high-performance'
     });
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     
-    // 2026 Standard: AgX Tone Mapping (fallback to ACESFilmic) & SRGB Color Space
+    // Modern Color Science for natural light falloff
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.1;
+    renderer.toneMappingExposure = 1.0;
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     container.appendChild(renderer.domElement);
 
-    // Group for the main object to handle cursor tracking
+    // Use RoomEnvironment to give the glass beautiful, high-contrast studio reflections
+    const pmremGenerator = new THREE.PMREMGenerator(renderer);
+    pmremGenerator.compileEquirectangularShader();
+    const roomEnv = new RoomEnvironment();
+    scene.environment = pmremGenerator.fromScene(roomEnv).texture;
+    roomEnv.dispose();
+
     const mainGroup = new THREE.Group();
     scene.add(mainGroup);
 
     // ─────────────────────────────────────────────────────────────
-    // WORLD-CLASS MATERIAL (Tactile, Clearcoat, Dispersion feel)
+    // CUSTOM CURVE (Precision Torsion Ribbon)
     // ─────────────────────────────────────────────────────────────
-    // Deep dark core with an intense orange sheen/rim
-    const material = new THREE.MeshPhysicalMaterial({
-      color: new THREE.Color('#0A0A0A'), // Deep dark
-      metalness: 0.9,
-      roughness: 0.15,
-      clearcoat: 1.0,
-      clearcoatRoughness: 0.05,
-      sheen: 1.0,
-      sheenColor: new THREE.Color('#E0561B'), // Orange sheen
-      sheenRoughness: 0.4,
-      iridescence: 0.5,
-      iridescenceIOR: 1.3,
-    });
+    class InfinityCurve extends THREE.Curve<THREE.Vector3> {
+      getPoint(t: number, optionalTarget = new THREE.Vector3()) {
+        const p = 2; // lobes
+        const q = 3;
+        const u = t * Math.PI * 2;
+        
+        // A sophisticated, sweeping knot (Lissajous curve)
+        const x = Math.sin(p * u) * 2.2;
+        const y = Math.sin(q * u) * 1.5;
+        const z = Math.cos(p * u) * 2.2;
+        
+        return optionalTarget.set(x, y, z);
+      }
+    }
+    
+    const curve = new InfinityCurve();
+    
+    // TubeGeometry: path, tubularSegments, radius, radialSegments (4 = sharp prism edges), closed
+    const geometry = new THREE.TubeGeometry(curve, 350, 0.22, 4, true);
 
     // ─────────────────────────────────────────────────────────────
-    // GEOMETRY (Smooth, organic, complex but uncluttered)
+    // ADAPTIVE FROSTED GLASS MATERIAL
     // ─────────────────────────────────────────────────────────────
-    // A thick, beautifully curved TorusKnot
-    const geometry = new THREE.TorusKnotGeometry(1.6, 0.65, 300, 64, 2, 3);
+    const material = new THREE.MeshPhysicalMaterial({
+      color: new THREE.Color('#ffffff'), // Pure white base
+      transmission: 1.0,     // Full glass transparency
+      ior: 1.5,              // Glass index of refraction
+      roughness: 0.12,       // Frosted/Satin finish (not perfectly clear)
+      metalness: 0.05,
+      clearcoat: 1.0,        // Crisp specular highlight over the frosted surface
+      clearcoatRoughness: 0.05,
+      thickness: 1.5,        // Volume for light refraction
+      attenuationColor: new THREE.Color('#E0561B'), // Brand orange internal glow!
+      attenuationDistance: 4.0, // How far light travels before becoming fully orange
+      side: THREE.DoubleSide
+    });
+
     const mesh = new THREE.Mesh(geometry, material);
     mainGroup.add(mesh);
 
     // ─────────────────────────────────────────────────────────────
-    // LIGHTING (Studio Setup with strong rim light)
+    // INTERNAL & SCENE LIGHTING
     // ─────────────────────────────────────────────────────────────
-    // Ambient for base fill
-    const ambientLight = new THREE.AmbientLight('#ffffff', 0.8);
+    // A soft core point light inside the knot to illuminate the frosted glass with the brand color
+    const coreLight = new THREE.PointLight('#E0561B', 150, 8);
+    coreLight.position.set(0, 0, 0);
+    scene.add(coreLight);
+
+    // Subdued ambient for the overall scene
+    const ambientLight = new THREE.AmbientLight('#ffffff', 0.5);
     scene.add(ambientLight);
 
-    // Key Light (Warm)
-    const keyLight = new THREE.SpotLight('#FFE8D6', 180);
-    keyLight.position.set(5, 5, 5);
-    keyLight.angle = Math.PI / 6;
-    keyLight.penumbra = 0.5;
-    scene.add(keyLight);
-
-    // Fill Light (Cool)
-    const fillLight = new THREE.PointLight('#E2F0FF', 80);
-    fillLight.position.set(-5, -2, 5);
-    scene.add(fillLight);
-
-    // Rim Light (Crucial for that 3D separation)
-    const rimLight = new THREE.SpotLight('#E0561B', 300); // Brand orange rim
-    rimLight.position.set(0, 4, -5);
-    rimLight.angle = Math.PI / 4;
-    rimLight.penumbra = 1;
-    scene.add(rimLight);
-
     // ─────────────────────────────────────────────────────────────
-    // CONTACT SHADOW (Fake baked shadow under the object)
+    // ANIMATION LOOP (Strictly Time-Based, ZERO Mouse Tracking)
     // ─────────────────────────────────────────────────────────────
-    const shadowGeo = new THREE.PlaneGeometry(8, 8);
-    const canvas2d = document.createElement('canvas');
-    canvas2d.width = 256;
-    canvas2d.height = 256;
-    const ctx = canvas2d.getContext('2d')!;
-    const gradient = ctx.createRadialGradient(128, 128, 0, 128, 128, 128);
-    gradient.addColorStop(0, 'rgba(0,0,0, 0.4)');
-    gradient.addColorStop(1, 'rgba(0,0,0, 0)');
-    ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, 256, 256);
-    
-    const shadowTex = new THREE.CanvasTexture(canvas2d);
-    const shadowMat = new THREE.MeshBasicMaterial({
-      map: shadowTex,
-      transparent: true,
-      opacity: 0.7,
-      depthWrite: false
-    });
-    
-    const shadowPlane = new THREE.Mesh(shadowGeo, shadowMat);
-    shadowPlane.rotation.x = -Math.PI / 2;
-    shadowPlane.position.y = -3.0; // Place below the object
-    scene.add(shadowPlane);
-
-    // ─────────────────────────────────────────────────────────────
-    // MOTION & PHYSICS (Spring Damped Cursor Tracking + Idle Float)
-    // ─────────────────────────────────────────────────────────────
-    let mouseX = 0;
-    let mouseY = 0;
-    let targetX = 0;
-    let targetY = 0;
-    
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!container) return;
-      const rect = container.getBoundingClientRect();
-      targetX = ((e.clientX - rect.left) / width) * 2 - 1;
-      targetY = -((e.clientY - rect.top) / height) * 2 + 1;
-    };
-    
-    const handleMouseLeave = () => {
-      targetX = 0;
-      targetY = 0;
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mouseleave', handleMouseLeave);
-
     const clock = new THREE.Clock();
     let animationFrameId: number;
     let isVisible = true;
@@ -152,23 +122,15 @@ export const Hero3DArchitectureStack: React.FC<Hero3DArchitectureStackProps> = (
       animationFrameId = requestAnimationFrame(animate);
       if (!isVisible) return;
 
+      const delta = clock.getDelta();
       const t = clock.getElapsedTime();
       
-      // Spring physics (lerp) for smooth tracking
-      mouseX += (targetX - mouseX) * 0.05;
-      mouseY += (targetY - mouseY) * 0.05;
+      // Majestic, incredibly slow autonomous tumble. ZERO mouse tracking.
+      mainGroup.rotation.y += delta * 0.12;
+      mainGroup.rotation.x += delta * 0.08;
 
-      // Cursor rotation tracking (subtle)
-      mainGroup.rotation.x = mouseY * 0.25;
-      mainGroup.rotation.y = mouseX * 0.25;
-
-      // Continuous Idle Kinematics ("Breathing" & slow spin)
-      mesh.rotation.x = Math.sin(t * 0.3) * 0.1;
-      mesh.rotation.y = t * 0.12; // Slow continuous rotation
-      mesh.rotation.z = Math.cos(t * 0.2) * 0.1;
-      
-      // Subtle float up and down
-      mainGroup.position.y = Math.sin(t * 1.5) * 0.05;
+      // Subtle, autonomous hovering effect
+      mainGroup.position.y = Math.sin(t * 1.5) * 0.12;
 
       renderer.render(scene, camera);
     };
@@ -188,8 +150,6 @@ export const Hero3DArchitectureStack: React.FC<Hero3DArchitectureStackProps> = (
     window.addEventListener('resize', handleResize);
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseleave', handleMouseLeave);
       window.removeEventListener('resize', handleResize);
       observer.disconnect();
       cancelAnimationFrame(animationFrameId);
@@ -201,17 +161,16 @@ export const Hero3DArchitectureStack: React.FC<Hero3DArchitectureStackProps> = (
       renderer.dispose();
       geometry.dispose();
       material.dispose();
-      shadowGeo.dispose();
-      shadowMat.dispose();
-      shadowTex.dispose();
+      pmremGenerator.dispose();
     };
   }, []);
 
   return (
     <div className={`relative w-full flex items-center justify-center ${className}`}>
+      {/* Absolute zero mouse interaction allowed */}
       <div 
         ref={mountRef} 
-        className="w-full h-[360px] sm:h-[420px] lg:h-[460px] relative z-10"
+        className="w-full h-[360px] sm:h-[420px] lg:h-[460px] relative z-10 pointer-events-none"
       />
     </div>
   );

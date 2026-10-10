@@ -61,6 +61,7 @@ export interface Project {
   scopeNote?: string;
   technologies: string[];
   heroImage: string;
+  videoSrc?: string;
   gallery: ProjectGalleryItem[];
   metrics?: ProjectMetric[];
   links: ProjectLink[];

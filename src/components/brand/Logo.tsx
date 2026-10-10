@@ -33,7 +33,7 @@ export const Logo: React.FC<LogoProps> = ({
         <img 
           src={markSrc} 
           alt="Qavironel Q Monogram" 
-          className={`${markHeight} w-auto object-contain transition-transform duration-300 group-hover:scale-105`}
+          className={`${markHeight} w-auto object-contain p-[1px] transition-transform duration-300 group-hover:scale-105`}
         />
       </Link>
     );
@@ -45,12 +45,12 @@ export const Logo: React.FC<LogoProps> = ({
         <img 
           src={markSrc} 
           alt="Qavironel" 
-          className={`${markHeight} w-auto object-contain transition-transform duration-300 group-hover:scale-105`}
+          className={`${markHeight} w-auto object-contain p-[1px] transition-transform duration-300 group-hover:scale-105`}
         />
         <img 
           src={wordmarkSrc} 
           alt="Qavironel Technologies" 
-          className={`${wordmarkHeight} w-auto object-contain`}
+          className={`${wordmarkHeight} w-auto object-contain p-[1px]`}
         />
       </Link>
     );
@@ -61,13 +61,13 @@ export const Logo: React.FC<LogoProps> = ({
     <Link 
       to="/" 
       className={`inline-flex items-center gap-3.5 group transition-opacity hover:opacity-95 ${className}`} 
-      aria-label="Qavironel Technologies — Home"
+      aria-label="Qavironel Technologies Home"
     >
       <div className="relative shrink-0">
         <img 
           src={markSrc} 
           alt="Qavironel Mark" 
-          className={`${markHeight} w-auto object-contain transition-transform duration-300 group-hover:scale-105`}
+          className={`${markHeight} w-auto object-contain p-[1px] transition-transform duration-300 group-hover:scale-105`}
         />
       </div>
       <div className="flex flex-col justify-center">

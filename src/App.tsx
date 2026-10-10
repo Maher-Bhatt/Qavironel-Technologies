@@ -1,9 +1,10 @@
 import React, { useState, Suspense } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 import { SiteHeader } from './components/layout/SiteHeader';
 import { SiteFooter } from './components/layout/SiteFooter';
 
-// Code Splitting for performance (Fixes > 500kb Vite Warning)
+// Code Splitting for performance
 const HomePage = React.lazy(() => import('./pages/HomePage').then(module => ({ default: module.HomePage })));
 const WorkPage = React.lazy(() => import('./pages/WorkPage').then(module => ({ default: module.WorkPage })));
 const CaseStudyPage = React.lazy(() => import('./pages/CaseStudyPage').then(module => ({ default: module.CaseStudyPage })));
@@ -18,19 +19,17 @@ import { MobileGlassDock } from './components/layout/MobileGlassDock';
 import { SmoothScrollProvider } from './components/layout/SmoothScrollProvider';
 import { Preloader } from './components/ui/Preloader';
 import { FilmGrainOverlay } from './components/ui/FilmGrainOverlay';
+import { PageTransition } from './components/layout/PageTransition';
 
 // Custom Hooks Abstraction
 import { useScrollToTop } from './hooks/useScrollToTop';
 import { useAmbientCursor } from './hooks/useAmbientCursor';
 import { useBookingModalEvent } from './hooks/useBookingModalEvent';
 
-/**
- * Root Application Component
- * Implements code-splitting, strict custom hook abstraction, and smooth routing boundaries.
- */
 export const App: React.FC = () => {
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [bookingTab, setBookingTab] = useState<BookingModalTab>('call');
+  const location = useLocation();
 
   useScrollToTop();
   useBookingModalEvent(setIsBookingOpen, setBookingTab);
@@ -44,17 +43,19 @@ export const App: React.FC = () => {
         <SiteHeader />
         <main className="flex-grow pb-16 md:pb-0">
           <Suspense fallback={null}>
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/work" element={<WorkPage />} />
-              <Route path="/work/:slug" element={<CaseStudyPage />} />
-              <Route path="/services" element={<ServicesPage />} />
-              <Route path="/about" element={<AboutPage />} />
-              <Route path="/contact" element={<ContactPage />} />
-              <Route path="/privacy" element={<LegalPage />} />
-              <Route path="/terms" element={<LegalPage />} />
-              <Route path="*" element={<NotFoundPage />} />
-            </Routes>
+            <AnimatePresence mode="wait">
+              <Routes location={location} key={location.pathname}>
+                <Route path="/" element={<PageTransition><HomePage /></PageTransition>} />
+                <Route path="/work" element={<PageTransition><WorkPage /></PageTransition>} />
+                <Route path="/work/:slug" element={<PageTransition><CaseStudyPage /></PageTransition>} />
+                <Route path="/services" element={<PageTransition><ServicesPage /></PageTransition>} />
+                <Route path="/about" element={<PageTransition><AboutPage /></PageTransition>} />
+                <Route path="/contact" element={<PageTransition><ContactPage /></PageTransition>} />
+                <Route path="/privacy" element={<PageTransition><LegalPage /></PageTransition>} />
+                <Route path="/terms" element={<PageTransition><LegalPage /></PageTransition>} />
+                <Route path="*" element={<PageTransition><NotFoundPage /></PageTransition>} />
+              </Routes>
+            </AnimatePresence>
           </Suspense>
         </main>
         <SiteFooter />

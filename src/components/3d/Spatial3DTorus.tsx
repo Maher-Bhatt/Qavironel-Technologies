@@ -26,7 +26,7 @@ export const Spatial3DTorus: React.FC<Spatial3DTorusProps> = ({
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 100);
-    camera.position.z = 4.8;
+    camera.position.z = 6.0;
 
     const renderer = new THREE.WebGLRenderer({
       alpha: true,

@@ -10,23 +10,19 @@ interface ProjectCardProps {
   layout?: 'featured' | 'standard';
 }
 
-/**
- * ProjectCard
- * Ultra-crafted editorial project card designed to display full UI screenshots 
- * and production photography with ZERO image cuts or awkward cropping.
- * Uses object-contain inside an Apple/Linear style studio viewport matte.
- */
 export const ProjectCard: React.FC<ProjectCardProps> = ({
   project,
   layout = 'standard',
 }) => {
   const isFeatured = layout === 'featured';
   const cardRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
-  // Subtle interactive 3D spring tilt
+  // Subtle interactive 3D spring tilt & video hover state
   const [rotateX, setRotateX] = useState(0);
   const [rotateY, setRotateY] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return;
@@ -43,9 +39,20 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
     setRotateY(rotY);
   };
 
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+    if (videoRef.current) {
+      videoRef.current.play().catch(e => console.log('Video playback error:', e));
+    }
+  };
+
   const handleMouseLeave = () => {
     setRotateX(0);
     setRotateY(0);
+    setIsHovered(false);
+    if (videoRef.current) {
+      videoRef.current.pause();
+    }
   };
 
   const isDarkProject = project.slug === 'kalki' || project.slug === 'codedroid' || project.slug === 'socialsafe';
@@ -58,6 +65,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
     <motion.article 
       ref={cardRef}
       onMouseMove={handleMouseMove}
+      onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       animate={{
         rotateX,
@@ -98,7 +106,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         </div>
       </div>
 
-      {/* Image Preview Viewport — Zero Image Cuts, Full-Fidelity Display */}
+      {/* Image / Video Preview Viewport */}
       <div 
         className={`relative overflow-hidden z-10 flex items-center justify-center ${
           isFeatured 
@@ -132,6 +140,18 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
               }`}
             />
           </AnimatePresence>
+
+          {/* Automatic Z-Axis Hover Video Playback System */}
+          <video
+            ref={videoRef}
+            src={project.videoSrc || '/videos/project-reel.mp4'}
+            muted
+            loop
+            playsInline
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out pointer-events-none ${
+              isHovered ? 'opacity-100 z-10' : 'opacity-0 z-0'
+            }`}
+          />
         </Link>
 
         {/* Interactive Gallery Switcher Chips for Featured Cards */}

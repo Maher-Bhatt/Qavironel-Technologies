@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Logo } from '../brand/Logo';
+import { ThemeToggle } from '../ui/ThemeToggle';
 import { companyConfig } from '../../data/company';
 import { ArrowUpRight, Mail, Phone, Globe, ShieldCheck } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from '../ui/Icons';
@@ -9,20 +10,20 @@ export const SiteFooter: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#F8F9FA] text-[#0A0A0A] border-t border-[#E5E7EB] pt-24 pb-12">
+    <footer className="bg-[#F8F9FA] dark:bg-[#0A0A0C] text-[#0A0A0A] dark:text-[#F4F4F5] border-t border-[#E5E7EB] dark:border-white/10 pt-24 pb-12 transition-colors duration-300">
       <div className="max-w-[1800px] w-full mx-auto px-5 sm:px-8 lg:px-12">
         {/* Massive Editorial Brand Statement */}
-        <div className="pb-16 border-b border-[#E5E7EB] flex flex-col lg:flex-row lg:items-end justify-between gap-8">
+        <div className="pb-16 border-b border-[#E5E7EB] dark:border-white/10 flex flex-col lg:flex-row lg:items-end justify-between gap-8">
           <div>
             <span className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-[#E0561B] block mb-3">
               Independent Digital Product & Software Studio
             </span>
-            <h2 className="font-sans font-extrabold text-4xl sm:text-6xl lg:text-7xl tracking-tight text-[#0A0A0A] leading-[1.05]">
+            <h2 className="font-sans font-extrabold text-4xl sm:text-6xl lg:text-7xl tracking-tight text-[#0A0A0A] dark:text-[#F4F4F5] leading-[1.05]">
               Ideas. <span className="text-[#E0561B]">Engineered.</span>
             </h2>
           </div>
           <div className="max-w-md space-y-4">
-            <p className="text-sm text-[#52525B] leading-relaxed">
+            <p className="text-sm text-[#52525B] dark:text-[#A1A1AA] leading-relaxed">
               We partner with visionary founders and companies globally to design, architect, and ship high-performance software, custom web systems, and applied AI applications.
             </p>
             <div className="flex items-center gap-2 text-xs font-mono text-[#E0561B] font-semibold">
@@ -33,9 +34,9 @@ export const SiteFooter: React.FC = () => {
         </div>
 
         {/* Middle Grid: Navigation, Services, Direct Line */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 py-16 border-b border-[#E5E7EB]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 py-16 border-b border-[#E5E7EB] dark:border-white/10">
           <div className="lg:col-span-5 space-y-6">
-            <Logo variant="full" theme="light" size="md" />
+            <Logo variant="full" size="md" />
             <p className="text-xs sm:text-sm text-[#52525B] max-w-sm leading-relaxed">
               No account-manager layers. No bloated templates. Direct founder engineering, defensive security standards, and production speed.
             </p>
@@ -142,15 +143,16 @@ export const SiteFooter: React.FC = () => {
           </div>
         </div>
 
-        {/* Lower Row: Copyright & Legal */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#71717A]">
+        {/* Lower Row: Copyright, Theme Switcher & Legal */}
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#71717A] dark:text-[#A1A1AA]">
           <div className="flex items-center gap-2">
             <span>© {currentYear} Qavironel Technologies. All rights reserved.</span>
           </div>
 
-          <div className="flex items-center gap-6">
-            <Link to="/privacy" className="hover:text-[#0A0A0A] transition-colors">Privacy Policy</Link>
-            <Link to="/terms" className="hover:text-[#0A0A0A] transition-colors">Terms of Service</Link>
+          <div className="flex flex-wrap items-center gap-4 sm:gap-6">
+            <ThemeToggle variant="pill" />
+            <Link to="/privacy" className="hover:text-[#0A0A0A] dark:hover:text-white transition-colors">Privacy Policy</Link>
+            <Link to="/terms" className="hover:text-[#0A0A0A] dark:hover:text-white transition-colors">Terms of Service</Link>
             <span className="text-[#E0561B] font-semibold">Global Remote-First Studio</span>
           </div>
         </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useTheme } from '../../context/ThemeContext';
 
 interface LogoProps {
   variant?: 'full' | 'mark' | 'horizontal';
@@ -10,11 +11,19 @@ interface LogoProps {
 
 export const Logo: React.FC<LogoProps> = ({
   variant = 'full',
-  theme = 'light',
+  theme: explicitTheme,
   className = '',
   size = 'md',
 }) => {
-  const isDarkBg = theme === 'dark';
+  let contextTheme = 'light';
+  try {
+    const ctx = useTheme();
+    if (ctx) contextTheme = ctx.theme;
+  } catch {
+    // outside provider fallback
+  }
+
+  const isDarkBg = (explicitTheme || contextTheme) === 'dark';
 
   const markSrc = isDarkBg 
     ? '/brand/qavironel-monogram-light.png' 

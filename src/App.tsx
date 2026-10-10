@@ -39,10 +39,10 @@ export const App: React.FC = () => {
     <SmoothScrollProvider>
       <Preloader />
       <FilmGrainOverlay />
-      <div className="flex flex-col min-h-screen bg-white text-[#0A0A0A]">
+      <div className="flex flex-col min-h-screen bg-white dark:bg-[#0A0A0C] text-[#0A0A0A] dark:text-[#F4F4F5] transition-colors duration-300">
         <SiteHeader />
         <main className="flex-grow pb-16 md:pb-0">
-          <Suspense fallback={<div className="min-h-screen bg-white" />}>
+          <Suspense fallback={<div className="min-h-screen bg-white dark:bg-[#0A0A0C]" />}>
             <AnimatePresence mode="wait">
               <Routes location={location} key={location.pathname}>
                 <Route path="/" element={<PageTransition><HomePage /></PageTransition>} />

@@ -333,27 +333,27 @@ export const BookingModal: React.FC<BookingModalProps> = ({
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.97, y: 12 }}
         transition={{ duration: 0.22, ease: 'easeOut' }}
-        className="relative w-full max-w-4xl max-h-[92vh] overflow-y-auto overscroll-contain bg-white border border-[#E5E7EB] rounded-2xl shadow-2xl text-[#0A0A0A]"
+        className="relative w-full max-w-4xl max-h-[92vh] overflow-y-auto overscroll-contain bg-white dark:bg-[#0E0E12] border border-[#E5E7EB] dark:border-white/10 rounded-2xl shadow-2xl text-[#0A0A0A] dark:text-[#F4F4F5]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Top Header & Tab Switcher */}
-        <div className="sticky top-0 z-20 bg-white/95 backdrop-blur-md border-b border-[#E5E7EB] px-6 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="sticky top-0 z-20 bg-white/95 dark:bg-[#0E0E12]/95 backdrop-blur-md border-b border-[#E5E7EB] dark:border-white/10 px-6 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <span className="w-2.5 h-2.5 rounded-full bg-[#E0561B]" />
-            <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#0A0A0A]">
+            <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#0A0A0A] dark:text-white">
               Qavironel Client Portal
             </span>
           </div>
 
           {/* Dual Tabs Pill Switcher */}
-          <div className="flex items-center bg-[#F4F4F5] p-1 rounded-full border border-[#E5E7EB] self-start sm:self-center">
+          <div className="flex items-center bg-[#F4F4F5] dark:bg-[#18181D] p-1 rounded-full border border-[#E5E7EB] dark:border-[#27272A] self-start sm:self-center">
             <button
               type="button"
               onClick={() => setActiveTab('call')}
               className={`flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all ${
                 activeTab === 'call'
-                  ? 'bg-white text-[#0A0A0A] shadow-xs border border-[#E5E7EB]'
-                  : 'text-[#71717A] hover:text-[#0A0A0A]'
+                  ? 'bg-white dark:bg-[#27272A] text-[#0A0A0A] dark:text-white shadow-xs border border-[#E5E7EB] dark:border-white/10'
+                  : 'text-[#71717A] dark:text-[#A1A1AA] hover:text-[#0A0A0A] dark:hover:text-white'
               }`}
             >
               <CalendarIcon className={`w-3.5 h-3.5 ${activeTab === 'call' ? 'text-[#E0561B]' : ''}`} />
@@ -364,8 +364,8 @@ export const BookingModal: React.FC<BookingModalProps> = ({
               onClick={() => setActiveTab('quotation')}
               className={`flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all ${
                 activeTab === 'quotation'
-                  ? 'bg-white text-[#0A0A0A] shadow-xs border border-[#E5E7EB]'
-                  : 'text-[#71717A] hover:text-[#0A0A0A]'
+                  ? 'bg-white dark:bg-[#27272A] text-[#0A0A0A] dark:text-white shadow-xs border border-[#E5E7EB] dark:border-white/10'
+                  : 'text-[#71717A] dark:text-[#A1A1AA] hover:text-[#0A0A0A] dark:hover:text-white'
               }`}
             >
               <FileText className={`w-3.5 h-3.5 ${activeTab === 'quotation' ? 'text-[#E0561B]' : ''}`} />
@@ -376,7 +376,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
           <button
             type="button"
             onClick={onClose}
-            className="absolute top-4 right-4 sm:static p-2 rounded-full hover:bg-[#F4F4F5] text-[#71717A] hover:text-[#0A0A0A] transition-colors"
+            className="absolute top-4 right-4 sm:static p-2 rounded-full hover:bg-[#F4F4F5] dark:hover:bg-[#1C1C22] text-[#71717A] dark:text-[#A1A1AA] hover:text-[#0A0A0A] dark:hover:text-white transition-colors"
             aria-label="Close modal"
           >
             <X className="w-5 h-5" />

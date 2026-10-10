@@ -84,20 +84,27 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       <div 
         className={`relative overflow-hidden ${
           isFeatured 
-            ? 'lg:col-span-7 p-4 sm:p-6 flex items-center justify-center ' + (isDarkProject ? 'bg-[#0A0A0A]' : 'bg-[#F4F4F5]')
+            ? 'lg:col-span-7 p-4 sm:p-6 flex items-center justify-center self-stretch min-h-[300px] sm:min-h-[400px] lg:min-h-[480px] ' + (isDarkProject ? 'bg-[#0A0A0A]' : 'bg-[#F4F4F5]')
             : 'aspect-[16/10] bg-[#F4F4F5]'
         }`}
       >
         <Link 
           to={`/work/${project.slug}`} 
           className={`block w-full h-full relative overflow-hidden ${
-            isFeatured ? 'rounded-xl shadow-2xl border border-white/10' : ''
+            isFeatured ? 'rounded-xl shadow-2xl border border-white/10 min-h-[280px] sm:min-h-[380px] lg:min-h-[440px]' : ''
           }`}
         >
           <img
             src={project.heroImage}
             alt={`${project.title} interface preview`}
             loading="lazy"
+            onError={(e) => {
+              const target = e.currentTarget;
+              if (!target.dataset.fallback) {
+                target.dataset.fallback = 'true';
+                target.src = '/images/projects/kalki/kalki-hero.png';
+              }
+            }}
             className={`w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-104 ${
               hasVideo ? 'group-hover:opacity-0 transition-opacity duration-300' : ''
             }`}

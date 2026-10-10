@@ -36,45 +36,45 @@ export const projects: Project[] = [
     ],
     scopeNote: 'Experimental capabilities such as deep operating system automation remain strictly guarded behind manual confirmation flags to ensure device safety.',
     technologies: ['Python', 'Local LLMs (Ollama)', 'Groq (LLaMA-3.3-70B)', 'DPAPI Vault', 'VOSK Voice Recognition', 'Custom HUD Architecture', 'Security Boundaries'],
-    heroImage: '/images/projects/kalki/KALKI - Microsoft Store Marketing Kit@2x.png',
+    heroImage: '/images/projects/kalki/kalki-store-marketing.png',
     gallery: [
       {
-        src: '/images/projects/kalki/01 Hero.png',
+        src: '/images/projects/kalki/kalki-hero.png',
         alt: 'K.A.L.K.I. main desktop HUD interface and active cognitive status',
         caption: 'The reactive desktop HUD displaying active model connection, memory state, and core interaction center.'
       },
       {
-        src: '/images/projects/kalki/02 Ask.png',
+        src: '/images/projects/kalki/kalki-ask.png',
         alt: 'K.A.L.K.I. conversational intelligence interface and multi-model prompting',
         caption: 'Conversational intelligence workspace with multi-model prompt orchestration and real-time streaming telemetry.'
       },
       {
-        src: '/images/projects/kalki/03 Today.png',
+        src: '/images/projects/kalki/kalki-today.png',
         alt: 'K.A.L.K.I. tactical daily briefing and agenda oversight',
         caption: 'Autonomous daily agenda tracking, task synthesis, and proactive desktop notification intelligence.'
       },
       {
-        src: '/images/projects/kalki/04 Memory.png',
+        src: '/images/projects/kalki/kalki-memory.png',
         alt: 'K.A.L.K.I. local vector memory vault and semantic retrieval indexing',
         caption: 'Local-first vector memory vault keeping conversational indexing strictly on physical hardware.'
       },
       {
-        src: '/images/projects/kalki/05 Workbench.png',
+        src: '/images/projects/kalki/kalki-workbench.png',
         alt: 'K.A.L.K.I. developer workbench and guarded code execution studio',
         caption: 'Execution workbench with sandboxed code compilation, system utilities, and diagnostic adapters.'
       },
       {
-        src: '/images/projects/kalki/06 Oversight.png',
+        src: '/images/projects/kalki/kalki-oversight.png',
         alt: 'K.A.L.K.I. runtime telemetry and inference oversight monitor',
         caption: 'Real-time telemetry monitor tracking token latency, model provider health, and daemon operations.'
       },
       {
-        src: '/images/projects/kalki/07 Settings.png',
+        src: '/images/projects/kalki/kalki-settings.png',
         alt: 'K.A.L.K.I. hardware-bound DPAPI vault configuration and preferences',
         caption: 'DPAPI hardware-bound secrets vault and localhost authorization settings.'
       },
       {
-        src: '/images/projects/kalki/KALKI - Microsoft Store Marketing Kit@2x.png',
+        src: '/images/projects/kalki/kalki-store-marketing.png',
         alt: 'K.A.L.K.I. Microsoft Store official release architecture kit',
         caption: 'Official Microsoft Store release presentation highlighting offline voice recognition, local privacy, and multi-model flexibility.'
       }

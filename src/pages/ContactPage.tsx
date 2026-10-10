@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { SectionHeading } from '../components/ui/SectionHeading';
 import { ContactForm } from '../components/contact/ContactForm';
 import { companyConfig, faqs } from '../data/company';
-import { Mail, Phone, MessageSquare, ChevronDown, ChevronUp, Clock, Globe } from 'lucide-react';
+import { Mail, Phone, MessageSquare, ChevronDown, ChevronUp, Clock, Globe, Calendar, FileText } from 'lucide-react';
+import { openBookingModal } from '../components/booking/BookingModal';
 
 export const ContactPage: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
@@ -25,6 +26,26 @@ export const ContactPage: React.FC = () => {
           <p className="text-lg sm:text-xl text-[#52525B] font-light leading-relaxed">
             Tell us what you're working on, what needs to improve, and where you want to go. We will shape the right technical blueprint. We typically reply with clear next steps within 12–24 hours.
           </p>
+
+          {/* Quick Action Triggers */}
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            <button
+              type="button"
+              onClick={() => openBookingModal('call')}
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-[#0A0A0A] hover:bg-black text-white text-xs font-bold uppercase tracking-wider transition-colors shadow-xs"
+            >
+              <Calendar className="w-4 h-4 text-[#E0561B]" />
+              <span>Book a Discovery Call (30m)</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => openBookingModal('quotation')}
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-[#F4F4F5] hover:bg-[#E5E7EB] text-[#0A0A0A] text-xs font-bold uppercase tracking-wider transition-colors border border-[#E5E7EB]"
+            >
+              <FileText className="w-4 h-4 text-[#E0561B]" />
+              <span>Request Project Quotation</span>
+            </button>
+          </div>
         </div>
 
         {/* Contact Grid: Form (Left) & Direct Channels (Right) */}

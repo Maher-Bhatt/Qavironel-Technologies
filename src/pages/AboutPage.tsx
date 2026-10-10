@@ -226,7 +226,7 @@ export const AboutPage: React.FC = () => {
           <div className="flex items-center gap-3">
             <button
               type="button"
-              onClick={openBookingModal}
+              onClick={() => openBookingModal('call')}
               className="px-6 py-3.5 rounded-full bg-[#0A0A0A] hover:bg-black text-white text-xs font-bold uppercase tracking-wider transition-colors flex items-center gap-2 shadow-xs"
             >
               <Calendar className="w-3.5 h-3.5 text-[#E0561B]" />

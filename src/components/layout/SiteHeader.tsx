@@ -3,7 +3,7 @@ import { NavLink, Link, useLocation } from 'react-router-dom';
 import { Logo } from '../brand/Logo';
 import { Button } from '../ui/Button';
 import { companyConfig } from '../../data/company';
-import { Menu, X, ArrowRight, Globe, Calendar } from 'lucide-react';
+import { Menu, X, Globe, Calendar, FileText } from 'lucide-react';
 import { openBookingModal } from '../booking/BookingModal';
 
 export const SiteHeader: React.FC = () => {
@@ -71,17 +71,25 @@ export const SiteHeader: React.FC = () => {
           </nav>
 
           {/* Desktop Status & CTA */}
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-3">
             <button
               type="button"
-              onClick={openBookingModal}
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-[#F8F9FA] hover:bg-white border border-[#E5E7EB] hover:border-[#E0561B]/40 text-xs font-semibold uppercase tracking-wider text-[#0A0A0A] hover:text-[#E0561B] transition-colors"
+              onClick={() => openBookingModal('call')}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#F8F9FA] hover:bg-white border border-[#E5E7EB] hover:border-[#E0561B]/40 text-xs font-semibold uppercase tracking-wider text-[#0A0A0A] hover:text-[#E0561B] transition-colors"
             >
               <Calendar className="w-3.5 h-3.5 text-[#E0561B]" />
               <span>Book Call</span>
             </button>
+            <button
+              type="button"
+              onClick={() => openBookingModal('quotation')}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#F8F9FA] hover:bg-white border border-[#E5E7EB] hover:border-[#E0561B]/40 text-xs font-semibold uppercase tracking-wider text-[#0A0A0A] hover:text-[#E0561B] transition-colors"
+            >
+              <FileText className="w-3.5 h-3.5 text-[#E0561B]" />
+              <span>Get Quote</span>
+            </button>
             <Button to="/contact" variant="primary" size="sm" showArrow>
-              Start a Project
+              Start Project
             </Button>
           </div>
 
@@ -146,12 +154,23 @@ export const SiteHeader: React.FC = () => {
                 type="button"
                 onClick={() => {
                   setMobileMenuOpen(false);
-                  openBookingModal();
+                  openBookingModal('call');
                 }}
                 className="w-full py-3 rounded-full bg-[#0A0A0A] hover:bg-black text-white text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-colors"
               >
                 <Calendar className="w-4 h-4 text-[#E0561B]" />
                 <span>Book a Discovery Call</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  openBookingModal('quotation');
+                }}
+                className="w-full py-3 rounded-full bg-[#F4F4F5] hover:bg-[#E5E7EB] text-[#0A0A0A] text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-colors border border-[#E5E7EB]"
+              >
+                <FileText className="w-4 h-4 text-[#E0561B]" />
+                <span>Request Project Quotation</span>
               </button>
               <Button to="/contact" variant="primary" size="md" className="w-full" showArrow>
                 Start a Project

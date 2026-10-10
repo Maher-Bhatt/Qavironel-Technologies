@@ -8,8 +8,9 @@ export const ContactForm: React.FC = () => {
     name: '',
     email: '',
     organization: '',
-    projectType: 'Custom Website / Web Platform',
-    budget: '',
+    projectType: 'High-Impact Custom Web Platform',
+    timeline: '1–2 Months (Active Product Sprint)',
+    engagementModel: 'Full-Cycle Product Architecture & Build',
     details: '',
   });
 
@@ -56,7 +57,7 @@ export const ContactForm: React.FC = () => {
   };
 
   const whatsappMessage = encodeURIComponent(
-    `Hello Qavironel Technologies, I'm reaching out about a project.\n\nName: ${formData.name || 'Not provided'}\nOrganization: ${formData.organization || 'Not provided'}\nType: ${formData.projectType}\nDetails: ${formData.details || 'Let us discuss our project requirements.'}`
+    `Hello Qavironel Technologies, I would like to discuss an engineering project.\n\nName: ${formData.name || 'Not provided'}\nOrganization: ${formData.organization || 'Not provided'}\nFocus: ${formData.projectType}\nTimeline: ${formData.timeline}\nEngagement: ${formData.engagementModel}\nDetails: ${formData.details || 'Let us discuss our project requirements.'}`
   );
 
   if (isSubmitted) {
@@ -92,8 +93,9 @@ export const ContactForm: React.FC = () => {
                 name: '',
                 email: '',
                 organization: '',
-                projectType: 'Custom Website / Web Platform',
-                budget: '',
+                projectType: 'High-Impact Custom Web Platform',
+                timeline: '1–2 Months (Active Product Sprint)',
+                engagementModel: 'Full-Cycle Product Architecture & Build',
                 details: '',
               });
             }}
@@ -165,7 +167,7 @@ export const ContactForm: React.FC = () => {
         {/* Project Type */}
         <div>
           <label htmlFor="contact-type" className="block text-xs font-mono font-semibold uppercase tracking-widest text-[#0A0A0A] mb-2">
-            Discipline / Scope
+            Discipline & Focus Area
           </label>
           <select
             id="contact-type"
@@ -173,33 +175,51 @@ export const ContactForm: React.FC = () => {
             onChange={(e) => setFormData({ ...formData, projectType: e.target.value })}
             className="w-full px-4 py-3 bg-white border border-[#E5E7EB] rounded-lg text-sm text-[#0A0A0A] shadow-xs focus:border-[#E0561B] focus:outline-none transition-colors"
           >
-            <option value="Custom Website / Web Platform">High-Impact Custom Web Platform</option>
-            <option value="SaaS MVP / Web Application">Full-Stack SaaS MVP / Web App</option>
-            <option value="Applied AI / Workflow Automation">Applied AI / LLM Integration</option>
-            <option value="E-Commerce Storefront">E-Commerce Storefront</option>
-            <option value="Website Redesign & Technical SEO">Performance Redesign & Technical SEO</option>
-            <option value="Mobile Developer Tooling">Mobile Runtimes & Dev Tooling</option>
+            <option value="High-Impact Custom Web Platform">High-Impact Custom Web Platform</option>
+            <option value="Full-Stack SaaS MVP / Web Application">Full-Stack SaaS MVP / Web App</option>
+            <option value="Applied AI / LLM & Agentic Workflows">Applied AI / LLM & Agentic Workflows</option>
+            <option value="Bespoke E-Commerce Architecture">Bespoke E-Commerce Architecture</option>
+            <option value="Brand Identity, UX Design & Design Systems">Brand Identity, UX Design & Systems</option>
+            <option value="Performance Engineering & Architecture Audit">Performance Engineering & Audit</option>
           </select>
         </div>
       </div>
 
-      {/* Approximate Budget */}
-      <div>
-        <label htmlFor="contact-budget" className="block text-xs font-mono font-semibold uppercase tracking-widest text-[#0A0A0A] mb-2">
-          Estimated Budget Range (Optional)
-        </label>
-        <select
-          id="contact-budget"
-          value={formData.budget}
-          onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-          className="w-full px-4 py-3 bg-white border border-[#E5E7EB] rounded-lg text-sm text-[#0A0A0A] shadow-xs focus:border-[#E0561B] focus:outline-none transition-colors"
-        >
-          <option value="">Select an approximate scope range...</option>
-          <option value="< $1,000 / ₹25,000 – ₹80,000">&lt; $1,000 / ₹25,000 – ₹80,000 (Sprint Build)</option>
-          <option value="$1,000 – $3,500 / ₹80,000 – ₹2,50,000">$1,000 – $3,500 / ₹80,000 – ₹2,50,000 (Custom Platform)</option>
-          <option value="$3,500 – $10,000+ / ₹2,50,000+">$3,500 – $10,000+ (Comprehensive Product MVP)</option>
-          <option value="Enterprise / Dedicated Retainer">Dedicated Architecture / Ongoing Retainer</option>
-        </select>
+      {/* Target Timeline & Engagement Model Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label htmlFor="contact-timeline" className="block text-xs font-mono font-semibold uppercase tracking-widest text-[#0A0A0A] mb-2">
+            Target Timeline
+          </label>
+          <select
+            id="contact-timeline"
+            value={formData.timeline}
+            onChange={(e) => setFormData({ ...formData, timeline: e.target.value })}
+            className="w-full px-4 py-3 bg-white border border-[#E5E7EB] rounded-lg text-sm text-[#0A0A0A] shadow-xs focus:border-[#E0561B] focus:outline-none transition-colors"
+          >
+            <option value="Immediate (Next 2–4 Weeks)">Immediate (Next 2–4 Weeks)</option>
+            <option value="1–2 Months (Active Product Sprint)">1–2 Months (Active Product Sprint)</option>
+            <option value="3+ Months (Strategic Roadmap)">3+ Months (Strategic Roadmap)</option>
+            <option value="Flexible / Milestone-Driven">Flexible / Milestone-Driven</option>
+          </select>
+        </div>
+
+        <div>
+          <label htmlFor="contact-engagement" className="block text-xs font-mono font-semibold uppercase tracking-widest text-[#0A0A0A] mb-2">
+            Engagement Model
+          </label>
+          <select
+            id="contact-engagement"
+            value={formData.engagementModel}
+            onChange={(e) => setFormData({ ...formData, engagementModel: e.target.value })}
+            className="w-full px-4 py-3 bg-white border border-[#E5E7EB] rounded-lg text-sm text-[#0A0A0A] shadow-xs focus:border-[#E0561B] focus:outline-none transition-colors"
+          >
+            <option value="Full-Cycle Product Architecture & Build">Full-Cycle Product Architecture & Build</option>
+            <option value="Design & Frontend Engineering Sprint">Design & Frontend Engineering Sprint</option>
+            <option value="AI Integration & Custom Model Fine-Tuning">AI Integration & Custom Workflows</option>
+            <option value="Dedicated Technical Studio Retainer">Dedicated Technical Studio Retainer</option>
+          </select>
+        </div>
       </div>
 
       {/* Project Details */}

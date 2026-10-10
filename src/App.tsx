@@ -29,13 +29,22 @@ const ScrollToTop = () => {
   return null;
 };
 
-import { BookingModal } from './components/booking/BookingModal';
+import { BookingModal, BookingModalTab } from './components/booking/BookingModal';
 
 export const App: React.FC = () => {
   const [isBookingOpen, setIsBookingOpen] = useState(false);
+  const [bookingTab, setBookingTab] = useState<BookingModalTab>('call');
 
   useEffect(() => {
-    const handleOpenBooking = () => setIsBookingOpen(true);
+    const handleOpenBooking = (e: Event) => {
+      const customEvent = e as CustomEvent<{ tab?: BookingModalTab }>;
+      if (customEvent.detail?.tab) {
+        setBookingTab(customEvent.detail.tab);
+      } else {
+        setBookingTab('call');
+      }
+      setIsBookingOpen(true);
+    };
     window.addEventListener('open-booking-modal', handleOpenBooking);
     return () => window.removeEventListener('open-booking-modal', handleOpenBooking);
   }, []);
@@ -58,7 +67,11 @@ export const App: React.FC = () => {
         </Routes>
       </main>
       <SiteFooter />
-      <BookingModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
+      <BookingModal 
+        isOpen={isBookingOpen} 
+        initialTab={bookingTab} 
+        onClose={() => setIsBookingOpen(false)} 
+      />
     </div>
   );
 };

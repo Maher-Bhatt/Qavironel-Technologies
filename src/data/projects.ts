@@ -243,52 +243,6 @@ export const projects: Project[] = [
     ]
   },
   {
-    slug: 'finmate-ai',
-    title: 'FinMate AI',
-    eyebrow: 'Full-Stack AI Financial Platform · Product Lab Prototype',
-    category: 'Product Lab',
-    categoryLabel: 'Product Lab Prototype · Fintech & Applied AI',
-    status: 'Product Lab Prototype (Full Codebase Shipped)',
-    featured: true,
-    order: 4,
-    year: '2025–2026',
-    summary: 'A full-stack financial bookkeeping and tax intelligence platform built with TanStack Start, React 19, Supabase, and Groq LLaMA models—featuring automated receipt OCR, GST tax slab categorization, and contextual AI advisory chat.',
-    audience: 'Freelancers, independent contractors, and modern businesses who find legacy accounting software clunky and disconnected from digital receipt workflows.',
-    challenge: 'Micro-businesses and freelancers struggle with timely ledger entry, classifying invoices under correct tax categories, and deciphering monthly cash burn. Existing tools require manual line-item entry and offer zero contextual financial guidance.',
-    objectives: [
-      'Engineer full-stack server functions for instant receipt OCR extraction via Groq vision models.',
-      'Extract total amounts, merchants, tax identification numbers, and suggested expense categories automatically.',
-      'Ground an AI financial advisor in user monthly income, expense summaries, and recent transaction records.',
-      'Build interactive cash-flow dashboards, recurring subscription monitors, and goal trackers using Recharts.'
-    ],
-    solution: 'Designed and built a complete full-stack web application leveraging TanStack Start (SSR & server functions), Supabase (Auth, Storage, and PostgreSQL DB), and Groq AI API. Users snap or upload receipt images which are parsed in seconds, populated into structured transactions, and reflected in real-time cash flow visualizations.',
-    whyItMatters: 'Proves high-velocity execution of modern full-stack engineering, combining bleeding-edge React 19 and TanStack Start with practical applied AI capabilities.',
-    workflow: [
-      'User snaps a photo or uploads a vendor bill/receipt into secure Supabase storage.',
-      'TanStack Start server function invokes Groq API to extract amount, merchant, tax ID, and category.',
-      'Transaction logs to database with one-click verification and automated monthly summary update.',
-      'Conversational AI advisor analyzes monthly burn, recurring subscriptions, and projected tax liabilities.'
-    ],
-    buildNotes: [
-      'Full codebase shipped using React 19, TanStack Start, and Tailwind CSS v4.',
-      'Backend server functions (`advisor.functions.ts`, `receipt.functions.ts`) enforce Supabase authentication.',
-      'Database schema models transactions, categories, recurring subscriptions, goals, and invoices in PostgreSQL.',
-      'Active product lab prototype codebase.'
-    ],
-    scopeNote: 'Full prototype codebase engineered and verified in product lab.',
-    technologies: ['React 19', 'TanStack Start', 'Tailwind CSS v4', 'Supabase (Auth & DB)', 'Groq API (LLaMA-3.3)', 'Receipt OCR', 'Recharts', 'Zod'],
-    heroImage: '/images/work/ztees-hero.webp',
-    gallery: [],
-    metrics: [
-      { value: 'Full-Stack', label: 'Working Codebase', context: 'TanStack Start server functions & Supabase' },
-      { value: 'Groq AI', label: 'Receipt OCR', context: 'Automated receipt data extraction' },
-      { value: 'AI Advisor', label: 'Contextual Chat', context: 'Grounded in monthly income & expense records' }
-    ],
-    links: [
-      { label: 'Qavironel Product Lab Prototype', url: '/contact', type: 'external' }
-    ]
-  },
-  {
     slug: 'civic-sathi',
     title: 'Civic Sathi',
     eyebrow: 'Civic Intelligence & Grievance Platform · Multi-Role System',

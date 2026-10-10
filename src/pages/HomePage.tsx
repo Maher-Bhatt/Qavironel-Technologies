@@ -29,7 +29,8 @@ import {
   Bot,
   LayoutGrid,
   Film,
-  Calendar
+  Calendar,
+  FileText
 } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from '../components/ui/Icons';
 import { openBookingModal } from '../components/booking/BookingModal';
@@ -172,11 +173,19 @@ export const HomePage: React.FC = () => {
             </Button>
             <button
               type="button"
-              onClick={openBookingModal}
+              onClick={() => openBookingModal('call')}
               className="px-6 py-4 rounded-full bg-[#0A0A0A] hover:bg-black text-white text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 shadow-xs group"
             >
               <Calendar className="w-4 h-4 text-[#E0561B] group-hover:scale-110 transition-transform" />
-              <span>Book a Discovery Call (30m)</span>
+              <span>Book Discovery Call (30m)</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => openBookingModal('quotation')}
+              className="px-6 py-4 rounded-full bg-[#F4F4F5] hover:bg-[#E5E7EB] text-[#0A0A0A] text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 border border-[#E5E7EB] group"
+            >
+              <FileText className="w-4 h-4 text-[#E0561B] group-hover:scale-110 transition-transform" />
+              <span>Request Quotation</span>
             </button>
             <Button to="/services" variant="secondary" size="lg">
               Explore Capabilities

@@ -1,3 +1,4 @@
+import { SEO } from '../components/seo/SEO';
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { projects } from '../data/projects';
@@ -433,3 +434,4 @@ export const CaseStudyPage: React.FC = () => {
     </article>
   );
 };
+

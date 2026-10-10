@@ -1,3 +1,4 @@
+import { SEO } from '../components/seo/SEO';
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { companyConfig } from '../data/company';
@@ -7,7 +8,9 @@ export const LegalPage: React.FC = () => {
   const isTerms = location.pathname.includes('terms');
 
   return (
-    <div className="bg-white text-[#0A0A0A] pt-32 sm:pt-40 pb-24 selection:bg-[#E0561B] selection:text-white">
+    <>
+      <SEO title="Legal" />
+      <div className="bg-white text-[#0A0A0A] pt-32 sm:pt-40 pb-24 selection:bg-[#E0561B] selection:text-white">
       <div className="max-w-4xl mx-auto px-5 sm:px-8">
         <span className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-[#E0561B] block mb-2">
           {isTerms ? 'Terms of Service' : 'Privacy Policy'}
@@ -53,5 +56,7 @@ export const LegalPage: React.FC = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
+

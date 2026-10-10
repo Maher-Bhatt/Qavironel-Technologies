@@ -1,3 +1,4 @@
+import { SEO } from '../components/seo/SEO';
 import React, { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { ProjectCard } from '../components/work/ProjectCard';
@@ -30,7 +31,9 @@ export const WorkPage: React.FC = () => {
   const experimentProjects = filteredProjects.filter((p) => p.category === 'Experiments');
 
   return (
-    <div className="bg-white text-[#0A0A0A] pt-28 sm:pt-36 pb-24 selection:bg-[#E0561B] selection:text-white">
+    <>
+      <SEO title="Work" />
+      <div className="bg-white text-[#0A0A0A] pt-28 sm:pt-36 pb-24 selection:bg-[#E0561B] selection:text-white">
       <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
         {/* Header */}
         <div className="max-w-3xl pb-10 border-b border-[#E5E7EB]">
@@ -144,5 +147,7 @@ export const WorkPage: React.FC = () => {
         )}
       </div>
     </div>
+    </>
   );
 };
+

@@ -1,3 +1,4 @@
+import { SEO } from '../components/seo/SEO';
 import React, { useState } from 'react';
 import { Mail, MessageSquare, Globe, Clock, ChevronDown, ChevronUp, Calendar, FileText } from 'lucide-react';
 import { ContactForm } from '../components/contact/ContactForm';
@@ -43,7 +44,9 @@ export const ContactPage: React.FC = () => {
   };
 
   return (
-    <div className="relative bg-[#030303] text-white pt-28 sm:pt-36 pb-24 overflow-hidden selection:bg-[#E0561B] selection:text-white min-h-screen">
+    <>
+      <SEO title="Contact" />
+      <div className="relative bg-[#030303] text-white pt-28 sm:pt-36 pb-24 overflow-hidden selection:bg-[#E0561B] selection:text-white min-h-screen">
       
       {/* Premium Ambient Background Effects */}
       <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#E0561B]/10 rounded-full blur-[150px] opacity-40 pointer-events-none mix-blend-screen" />
@@ -234,7 +237,9 @@ export const ContactPage: React.FC = () => {
         </section>
       </div>
     </div>
+    </>
   );
 };
 
 export default ContactPage;
+

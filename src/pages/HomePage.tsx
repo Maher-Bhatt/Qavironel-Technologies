@@ -1,3 +1,4 @@
+import { SEO } from '../components/seo/SEO';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -62,7 +63,9 @@ export const HomePage: React.FC = () => {
   ];
 
   return (
-    <div className="bg-white text-[#0A0A0A] overflow-hidden selection:bg-[#E0561B] selection:text-white">
+    <>
+      <SEO title="Home" />
+      <div className="bg-white text-[#0A0A0A] overflow-hidden selection:bg-[#E0561B] selection:text-white">
       {/* 01. BRAND-FIRST EDITORIAL HERO SECTION (CLAY.GLOBAL PURE WHITE CANVAS) */}
       <section className="relative pt-32 sm:pt-40 pb-20 sm:pb-28 border-b border-[#E5E7EB]">
         {/* Interactive Ambient Fluid Wave Canvas */}
@@ -584,5 +587,7 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
     </div>
+    </>
   );
 };
+

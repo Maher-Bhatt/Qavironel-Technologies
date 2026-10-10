@@ -1,9 +1,12 @@
+import { SEO } from '../components/seo/SEO';
 import React from 'react';
 import { Button } from '../components/ui/Button';
 
 export const NotFoundPage: React.FC = () => {
   return (
-    <div className="bg-white text-[#0A0A0A] pt-36 pb-32 max-w-xl mx-auto px-6 text-center">
+    <>
+      <SEO title="NotFound" />
+      <div className="bg-white text-[#0A0A0A] pt-36 pb-32 max-w-xl mx-auto px-6 text-center">
       <p className="font-mono text-xs font-semibold text-[#E0561B] tracking-widest uppercase">
         404 — Not Found
       </p>
@@ -22,5 +25,7 @@ export const NotFoundPage: React.FC = () => {
         </Button>
       </div>
     </div>
+    </>
   );
 };
+

@@ -1,3 +1,4 @@
+import { SEO } from '../components/seo/SEO';
 import React from 'react';
 import { motion } from 'framer-motion';
 import { SectionHeading } from '../components/ui/SectionHeading';
@@ -11,7 +12,9 @@ import { Spatial3DTorus } from '../components/3d/Spatial3DTorus';
 
 export const ServicesPage: React.FC = () => {
   return (
-    <div className="bg-white text-[#0A0A0A] pt-28 sm:pt-36 pb-24 selection:bg-[#E0561B] selection:text-white">
+    <>
+      <SEO title="Services" />
+      <div className="bg-white text-[#0A0A0A] pt-28 sm:pt-36 pb-24 selection:bg-[#E0561B] selection:text-white">
       <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
         {/* Header with 3D Spatial Torus Sculpture */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pb-12 border-b border-[#E5E7EB]">
@@ -415,5 +418,7 @@ export const ServicesPage: React.FC = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
+

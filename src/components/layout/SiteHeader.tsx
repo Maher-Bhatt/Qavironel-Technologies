@@ -13,6 +13,8 @@ export const SiteHeader: React.FC = () => {
   const [soundOn, setSoundOn] = useState(false);
   const location = useLocation();
 
+  const isDarkRoute = location.pathname === '/contact';
+
   useEffect(() => {
     setSoundOn(isAudioEnabled());
   }, []);
@@ -33,7 +35,6 @@ export const SiteHeader: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu on route change
   useEffect(() => {
     setMobileMenuOpen(false);
   }, [location.pathname]);
@@ -42,24 +43,27 @@ export const SiteHeader: React.FC = () => {
     { name: 'Work', path: '/work' },
     { name: 'Services', path: '/services' },
     { name: 'About', path: '/about' },
-    { name: 'Contact', path: '/contact' },
+    { name: 'Contact', path: '/contact' }
   ];
+
+  // Dynamic Styles for Light/Dark context
+  const headerBgClass = isScrolled 
+    ? (isDarkRoute ? 'bg-[#030303]/85 backdrop-blur-xl border-white/10 shadow-[0_4px_30px_rgba(255,255,255,0.02)] py-3 sm:py-4' : 'bg-white/85 backdrop-blur-xl border-[#E5E7EB]/80 shadow-[0_4px_30px_rgba(0,0,0,0.03)] py-3 sm:py-4')
+    : 'bg-transparent border-transparent py-4 sm:py-6';
+
+  const textColorClass = isDarkRoute ? 'text-white' : 'text-[#0A0A0A]';
+  const mutedTextColorClass = isDarkRoute ? 'text-white/60 hover:text-white' : 'text-[#52525B] hover:text-[#0A0A0A]';
 
   return (
     <>
       <header 
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled 
-            ? 'bg-white/95 backdrop-blur-md border-b border-[#E5E7EB] py-3.5 shadow-[0_4px_24px_rgba(0,0,0,0.03)]' 
-            : 'bg-transparent py-5 sm:py-6'
-        }`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${headerBgClass}`}
       >
         <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 flex items-center justify-between">
-          {/* Logo */}
-          <Logo variant="full" theme="light" size="md" />
+          <Logo variant="horizontal" theme={isDarkRoute ? 'dark' : 'light'} size="sm" />
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden md:flex flex-1 items-center justify-center gap-10">
             {navLinks.map((link) => (
               <NavLink
                 key={link.name}
@@ -68,7 +72,7 @@ export const SiteHeader: React.FC = () => {
                   `text-xs font-semibold uppercase tracking-[0.16em] transition-colors duration-200 relative py-1 ${
                     isActive 
                       ? 'text-[#E0561B]' 
-                      : 'text-[#52525B] hover:text-[#0A0A0A]'
+                      : mutedTextColorClass
                   }`
                 }
               >
@@ -86,14 +90,13 @@ export const SiteHeader: React.FC = () => {
 
           {/* Desktop Right: Sound Toggle + Minimal CTA */}
           <div className="hidden md:flex items-center gap-2.5">
-
             <button
               type="button"
               onClick={handleToggleSound}
               className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[0.68rem] font-mono transition-all border ${
                 soundOn
                   ? 'bg-[#E0561B]/10 border-[#E0561B]/30 text-[#E0561B]'
-                  : 'bg-[#F4F4F5] hover:bg-[#E5E7EB] border-[#E5E7EB] text-[#71717A]'
+                  : (isDarkRoute ? 'bg-white/5 hover:bg-white/10 border-white/10 text-gray-400' : 'bg-[#F4F4F5] hover:bg-[#E5E7EB] border-[#E5E7EB] text-[#71717A]')
               }`}
               title={soundOn ? 'Mute audio micro-haptics' : 'Enable audio micro-haptics'}
               aria-label="Toggle micro-haptic sound effects"
@@ -117,10 +120,12 @@ export const SiteHeader: React.FC = () => {
                 if (soundOn) playClickSound();
                 openBookingModal('call');
               }}
-              className="group relative inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#0A0A0A] hover:bg-[#E0561B] text-white text-xs font-semibold uppercase tracking-[0.14em] transition-all duration-300 shadow-sm hover:shadow-md hover:shadow-[#E0561B]/25"
+              className={`group relative inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-white text-xs font-semibold uppercase tracking-[0.14em] transition-all duration-300 shadow-sm hover:shadow-md hover:shadow-[#E0561B]/25 ${
+                isDarkRoute ? 'bg-white/10 hover:bg-[#E0561B] border border-white/20' : 'bg-[#0A0A0A] hover:bg-[#E0561B]'
+              }`}
             >
               <span>Let's Talk</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-[#E0561B] group-hover:bg-white transition-colors" />
+              <span className={`w-1.5 h-1.5 rounded-full transition-colors ${isDarkRoute ? 'bg-[#E0561B] group-hover:bg-white' : 'bg-[#E0561B] group-hover:bg-white'}`} />
             </button>
           </div>
 
@@ -132,7 +137,7 @@ export const SiteHeader: React.FC = () => {
               className={`p-2 rounded-full border transition-colors ${
                 soundOn
                   ? 'bg-[#E0561B]/10 border-[#E0561B]/30 text-[#E0561B]'
-                  : 'bg-[#F4F4F5] border-[#E5E7EB] text-[#71717A]'
+                  : (isDarkRoute ? 'bg-white/5 border-white/10 text-gray-400' : 'bg-[#F4F4F5] border-[#E5E7EB] text-[#71717A]')
               }`}
               title="Toggle sound effects"
               aria-label="Toggle sound effects"
@@ -143,7 +148,7 @@ export const SiteHeader: React.FC = () => {
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 text-[#0A0A0A] hover:text-[#E0561B] transition-colors focus-visible:outline-2 focus-visible:outline-[#E0561B]"
+              className={`p-2 transition-colors focus-visible:outline-2 focus-visible:outline-[#E0561B] ${isDarkRoute ? 'text-white hover:text-[#E0561B]' : 'text-[#0A0A0A] hover:text-[#E0561B]'}`}
               aria-label={mobileMenuOpen ? 'Close Menu' : 'Open Menu'}
               aria-expanded={mobileMenuOpen}
             >
@@ -153,7 +158,7 @@ export const SiteHeader: React.FC = () => {
         </div>
       </header>
 
-      {/* Mobile Drawer with Frosted Glassmorphism */}
+      {/* Mobile Drawer with Frosted Glassmorphism (Always Light or dark depending on preference, we'll keep it light for readability consistency) */}
       {mobileMenuOpen && (
         <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-md md:hidden animate-fade-in" onClick={() => setMobileMenuOpen(false)}>
           <div 
@@ -225,7 +230,7 @@ export const SiteHeader: React.FC = () => {
                 Start a Project
               </Button>
 
-              <div className="text-xs text-[#71717A] space-y-1.5">
+              <div className="text-xs text-[#71717A] space-y-1.5 mt-4">
                 <p className="font-semibold uppercase tracking-wider text-[#0A0A0A]">Qavironel Technologies</p>
                 <p className="flex items-center gap-1.5">
                   <Globe className="w-3.5 h-3.5 text-[#E0561B]" />

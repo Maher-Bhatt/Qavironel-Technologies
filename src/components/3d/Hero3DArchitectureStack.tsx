@@ -17,6 +17,8 @@ export const Hero3DArchitectureStack: React.FC<Hero3DArchitectureStackProps> = (
   useEffect(() => {
     const container = mountRef.current;
     if (!container) return;
+    // Skip Three.js on mobile/tablet for performance — hidden via CSS but guard here too
+    if (window.innerWidth < 1024) return;
 
     let width = container.clientWidth;
     let height = container.clientHeight;

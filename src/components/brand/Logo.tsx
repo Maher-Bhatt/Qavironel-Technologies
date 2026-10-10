@@ -41,16 +41,16 @@ export const Logo: React.FC<LogoProps> = ({
 
   if (variant === 'horizontal') {
     return (
-      <Link to="/" className={`inline-flex items-center gap-3 group transition-opacity hover:opacity-90 ${className}`} aria-label="Qavironel Technologies Home">
+      <Link to="/" className={`inline-flex items-center gap-2 sm:gap-3 group transition-opacity hover:opacity-90 ${className}`} aria-label="Qavironel Technologies Home">
         <img 
           src={markSrc} 
           alt="Qavironel" 
-          className={`${markHeight} w-auto object-contain p-[1px] transition-transform duration-300 group-hover:scale-105`}
+          className="h-7 sm:h-8 md:h-9 w-auto object-contain p-[1px] transition-transform duration-300 group-hover:scale-105 shrink-0"
         />
         <img 
           src={wordmarkSrc} 
           alt="Qavironel Technologies" 
-          className={`${wordmarkHeight} w-auto object-contain p-[1px]`}
+          className="h-5 sm:h-5 md:h-6 w-auto object-contain p-[1px] shrink-0"
         />
       </Link>
     );

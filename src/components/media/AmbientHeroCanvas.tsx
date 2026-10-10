@@ -18,6 +18,8 @@ export const AmbientHeroCanvas: React.FC = () => {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+    // Skip expensive canvas particle animation on mobile
+    if (window.innerWidth < 768) return;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 

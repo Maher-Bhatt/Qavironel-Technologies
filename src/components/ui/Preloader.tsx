@@ -17,8 +17,9 @@ export const Preloader: React.FC = () => {
       return;
     }
 
-    // Target duration ~2.4 seconds total for a luxurious, intentional intro
-    const totalDuration = 2200; // 2.2s count + 300ms exit
+    // Faster on mobile - no hardware worth blocking
+    const isMobile = window.innerWidth < 768;
+    const totalDuration = isMobile ? 1400 : 2200;
     const startTime = performance.now();
 
     const stages = [
@@ -243,4 +244,5 @@ export const Preloader: React.FC = () => {
 };
 
 export default Preloader;
+
 

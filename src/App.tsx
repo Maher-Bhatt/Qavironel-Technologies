@@ -42,7 +42,7 @@ export const App: React.FC = () => {
       <div className="flex flex-col min-h-screen bg-white text-[#0A0A0A]">
         <SiteHeader />
         <main className="flex-grow pb-16 md:pb-0">
-          <Suspense fallback={<Preloader />}>
+          <Suspense fallback={<div className="min-h-screen bg-white" />}>
             <AnimatePresence mode="wait">
               <Routes location={location} key={location.pathname}>
                 <Route path="/" element={<PageTransition><HomePage /></PageTransition>} />
@@ -71,4 +71,5 @@ export const App: React.FC = () => {
 };
 
 export default App;
+
 

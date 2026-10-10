@@ -68,7 +68,7 @@ export const services: ServicePillar[] = [
       'Handover specifications and design-to-code alignment for developers'
     ],
     technologies: ['Figma', 'Design Tokens', 'Component Systems', 'Interactive Prototyping'],
-    exampleProjectSlug: 'itm-notes'
+    exampleProjectSlug: 'codedroid'
   },
   {
     id: 'technical-optimization-seo',

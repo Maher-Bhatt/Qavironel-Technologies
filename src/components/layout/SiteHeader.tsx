@@ -70,27 +70,16 @@ export const SiteHeader: React.FC = () => {
             ))}
           </nav>
 
-          {/* Desktop Status & CTA */}
+          {/* Desktop Right: Single Sleek Minimal CTA */}
           <div className="hidden md:flex items-center gap-3">
             <button
               type="button"
               onClick={() => openBookingModal('call')}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#F8F9FA] hover:bg-white border border-[#E5E7EB] hover:border-[#E0561B]/40 text-xs font-semibold uppercase tracking-wider text-[#0A0A0A] hover:text-[#E0561B] transition-colors"
+              className="group relative inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#0A0A0A] hover:bg-[#E0561B] text-white text-xs font-semibold uppercase tracking-[0.14em] transition-all duration-300 shadow-sm hover:shadow-md hover:shadow-[#E0561B]/25"
             >
-              <Calendar className="w-3.5 h-3.5 text-[#E0561B]" />
-              <span>Book Call</span>
+              <span>Let's Talk</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-[#E0561B] group-hover:bg-white transition-colors" />
             </button>
-            <button
-              type="button"
-              onClick={() => openBookingModal('quotation')}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#F8F9FA] hover:bg-white border border-[#E5E7EB] hover:border-[#E0561B]/40 text-xs font-semibold uppercase tracking-wider text-[#0A0A0A] hover:text-[#E0561B] transition-colors"
-            >
-              <FileText className="w-3.5 h-3.5 text-[#E0561B]" />
-              <span>Get Quote</span>
-            </button>
-            <Button to="/contact" variant="primary" size="sm" showArrow>
-              Start Project
-            </Button>
           </div>
 
           {/* Mobile Menu Trigger */}

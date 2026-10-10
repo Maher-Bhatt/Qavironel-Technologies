@@ -48,11 +48,11 @@ export const testimonials: Testimonial[] = [
     projectSlug: 'ztees'
   },
   {
-    quote: 'Before ITM Notes, study materials and past year question papers were lost across hundreds of WhatsApp messages. Having a clean, searchable hub has genuinely helped hundreds of us prepare for exams without stress.',
-    author: 'Harshal Patel',
-    role: 'B.Tech Student',
-    organization: 'ITM SLS Baroda University',
-    projectSlug: 'itm-notes'
+    quote: 'Qavironel transformed our civil engineering credential portfolio into an authoritative digital platform. Government procurement officers and municipal engineers can now review our verified pipeline and drainage projects instantly from their phones.',
+    author: 'Project Engineering Lead',
+    role: 'Director of Operations',
+    organization: 'Classic Infrastructure Projects',
+    projectSlug: 'classic-infrastructure'
   }
 ];
 

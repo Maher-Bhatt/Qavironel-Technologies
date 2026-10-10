@@ -8,6 +8,8 @@ import { services } from '../data/services';
 import { companyConfig } from '../data/company';
 import { VideoShowreel } from '../components/media/VideoShowreel';
 import { AmbientHeroCanvas } from '../components/media/AmbientHeroCanvas';
+import { Hero3DCanvas } from '../components/3d/Hero3DCanvas';
+import { Interactive3DSphere } from '../components/3d/Interactive3DSphere';
 import { ProjectCard } from '../components/work/ProjectCard';
 import { 
   ArrowRight, 
@@ -138,67 +140,87 @@ export const HomePage: React.FC = () => {
             </div>
           </motion.div>
 
-          {/* Main Hero Headline - Clay.global Big Editorial Typography */}
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            className="max-w-5xl"
-          >
-            <h1 className="font-sans font-extrabold text-4xl sm:text-6xl lg:text-7xl xl:text-8xl tracking-tight text-[#0A0A0A] leading-[1.03] mb-8">
-              We architect digital products, <span className="text-[#E0561B]">applied AI</span> & high-velocity web systems.
-            </h1>
-          </motion.div>
+          {/* Hero Two-Column Grid: Bold Editorial Typography + Interactive 3D WebGL Sculpture */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            {/* Left Column: Editorial Typography & Actions (7 Cols) */}
+            <div className="lg:col-span-7">
+              <motion.div
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.1 }}
+              >
+                <h1 className="font-sans font-extrabold text-4xl sm:text-6xl lg:text-6xl xl:text-7xl tracking-tight text-[#0A0A0A] leading-[1.04] mb-6">
+                  We engineer digital products, <span className="text-[#E0561B]">applied AI</span> & high-velocity web systems.
+                </h1>
+              </motion.div>
 
-          {/* Subheadline & Studio Positioning */}
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="max-w-3xl"
-          >
-            <p className="text-lg sm:text-xl lg:text-2xl text-[#52525B] font-light leading-relaxed">
-              Qavironel Technologies transforms ambitious ideas into thoughtfully architected, high-velocity digital products. We partner directly with visionary founders, startups, and companies worldwide—combining digital craftsmanship, modern full-stack engineering, and practical AI.
-            </p>
-          </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.2 }}
+              >
+                <p className="text-base sm:text-lg lg:text-xl text-[#52525B] font-light leading-relaxed max-w-2xl">
+                  Qavironel Technologies transforms ambitious ideas into thoughtfully architected, high-velocity digital products. We partner directly with visionary founders, startups, and companies worldwide—combining digital craftsmanship, modern full-stack engineering, and practical AI.
+                </p>
+              </motion.div>
 
-          {/* Action CTAs with Direct Book Call Trigger */}
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.3 }}
-            className="mt-10 sm:mt-12 flex flex-wrap items-center gap-4"
-          >
-            <Button to="/contact" variant="primary" size="lg" showArrow>
-              Start a Project
-            </Button>
-            <button
-              type="button"
-              onClick={() => openBookingModal('call')}
-              className="px-6 py-4 rounded-full bg-[#0A0A0A] hover:bg-black text-white text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 shadow-xs group"
-            >
-              <Calendar className="w-4 h-4 text-[#E0561B] group-hover:scale-110 transition-transform" />
-              <span>Book Discovery Call (30m)</span>
-            </button>
-            <button
-              type="button"
-              onClick={() => openBookingModal('quotation')}
-              className="px-6 py-4 rounded-full bg-[#F4F4F5] hover:bg-[#E5E7EB] text-[#0A0A0A] text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 border border-[#E5E7EB] group"
-            >
-              <FileText className="w-4 h-4 text-[#E0561B] group-hover:scale-110 transition-transform" />
-              <span>Request Quotation</span>
-            </button>
-            <Button to="/services" variant="secondary" size="lg">
-              Explore Capabilities
-            </Button>
-            <Link 
-              to="/work" 
-              className="px-4 py-3 text-xs font-mono text-[#52525B] hover:text-[#E0561B] transition-colors flex items-center gap-1.5 font-semibold"
-            >
-              <span>View Selected Work</span>
-              <ArrowUpRight className="w-3.5 h-3.5" />
-            </Link>
-          </motion.div>
+              {/* Action CTAs (Sleek, High-Craft, Focused) */}
+              <motion.div
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.3 }}
+                className="mt-8 sm:mt-10 flex flex-wrap items-center gap-4"
+              >
+                <Button to="/contact" variant="primary" size="lg" showArrow>
+                  Start a Project
+                </Button>
+                <button
+                  type="button"
+                  onClick={() => openBookingModal('call')}
+                  className="px-6 py-4 rounded-full bg-[#0A0A0A] hover:bg-black text-white text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 shadow-xs group"
+                >
+                  <Calendar className="w-4 h-4 text-[#E0561B] group-hover:scale-110 transition-transform" />
+                  <span>Book Discovery (30m)</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => openBookingModal('quotation')}
+                  className="px-6 py-4 rounded-full bg-[#F4F4F5] hover:bg-[#E5E7EB] text-[#0A0A0A] text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 border border-[#E5E7EB]"
+                >
+                  <FileText className="w-4 h-4 text-[#E0561B]" />
+                  <span>Instant Quote</span>
+                </button>
+                <Link 
+                  to="/work" 
+                  className="px-4 py-3 text-xs font-mono text-[#52525B] hover:text-[#E0561B] transition-colors flex items-center gap-1.5 font-semibold"
+                >
+                  <span>Selected Work</span>
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                </Link>
+              </motion.div>
+            </div>
+
+            {/* Right Column: Interactive 3D WebGL Sculpture (5 Cols) */}
+            <div className="lg:col-span-5 relative flex items-center justify-center">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.9, delay: 0.2 }}
+                className="relative w-full max-w-[460px] aspect-square flex items-center justify-center rounded-2xl bg-radial from-[#F8F9FA]/80 to-transparent p-2 border border-[#E5E7EB]/40 shadow-xs"
+              >
+                {/* 3D WebGL Canvas */}
+                <Hero3DCanvas className="w-full h-full" />
+
+                {/* Interactive Telemetry Pill Badge */}
+                <div className="absolute -bottom-3 px-4 py-1.5 rounded-full glass-card border border-white/80 shadow-md text-[0.7rem] font-mono text-[#52525B] flex items-center gap-2 backdrop-blur-md">
+                  <span className="w-2 h-2 rounded-full bg-[#E0561B] animate-pulse" />
+                  <span className="font-semibold text-[#0A0A0A]">3D SPATIAL KINETICS</span>
+                  <span className="text-[#A1A1AA]">·</span>
+                  <span>INTERACTIVE LIGHTING</span>
+                </div>
+              </motion.div>
+            </div>
+          </div>
 
           {/* Telemetry Metrics Band */}
           <motion.div
@@ -520,13 +542,25 @@ export const HomePage: React.FC = () => {
       <section className="py-24 sm:py-32 border-b border-[#E5E7EB] bg-[#F8F9FA] relative">
         <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-            <div className="lg:col-span-5 space-y-4">
-              <span className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-[#E0561B] block">
-                The Qavironel Standard
-              </span>
-              <h2 className="font-sans font-extrabold text-3xl sm:text-5xl text-[#0A0A0A] tracking-tight leading-tight">
-                Built for founders who refuse ordinary templates.
-              </h2>
+            <div className="lg:col-span-5 space-y-6">
+              <div>
+                <span className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-[#E0561B] block mb-2">
+                  The Qavironel Standard
+                </span>
+                <h2 className="font-sans font-extrabold text-3xl sm:text-5xl text-[#0A0A0A] tracking-tight leading-tight">
+                  Built for founders who refuse ordinary templates.
+                </h2>
+              </div>
+
+              {/* Interactive 3D Spatial Geodesic Sphere */}
+              <div className="pt-2 flex flex-col sm:flex-row items-center gap-4 p-4 rounded-2xl bg-white border border-[#E5E7EB] shadow-xs">
+                <Interactive3DSphere size={140} className="shrink-0" />
+                <div className="space-y-1 text-xs text-center sm:text-left">
+                  <p className="font-mono font-bold text-[#0A0A0A] uppercase tracking-wider">Spatial 3D Constellation</p>
+                  <p className="text-[#52525B]">WebGL geometric nodal matrix. Drag or hover cursor over sphere to inspect facets.</p>
+                  <span className="inline-block font-mono text-[0.7rem] text-[#E0561B] font-semibold">INTERACTIVE SPHERICAL MATH // 60 FPS</span>
+                </div>
+              </div>
             </div>
 
             <div className="lg:col-span-7 space-y-6 text-[#52525B] text-base sm:text-lg leading-relaxed font-light">

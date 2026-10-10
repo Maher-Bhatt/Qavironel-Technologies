@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Calendar, FileText, MessageSquare, ArrowUpRight } from 'lucide-react';
+import { Calendar, FileText, MessageSquare, LayoutGrid } from 'lucide-react';
 import { openBookingModal } from '../booking/BookingModal';
 import { companyConfig } from '../../data/company';
 
@@ -56,7 +56,7 @@ export const MobileGlassDock: React.FC = () => {
           to="/work"
           className="flex-1 flex flex-col items-center justify-center py-1.5 px-2 rounded-full hover:bg-white/60 text-[#0A0A0A] active:scale-95 transition-transform"
         >
-          <ArrowUpRight className="w-4 h-4 text-[#71717A] mb-0.5" />
+          <LayoutGrid className="w-4 h-4 text-[#71717A] mb-0.5" />
           <span className="text-[0.65rem] font-mono font-bold tracking-tight">Work</span>
         </Link>
       </nav>

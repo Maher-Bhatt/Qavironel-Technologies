@@ -22,10 +22,10 @@ export const teamMembers: TeamMember[] = [
     role: 'Co-Founder · Lead Engineer',
     bio: 'Full-stack software engineer and cybersecurity researcher. Leads architecture, frontend systems, mobile runtimes, and applied AI tooling across all studio builds. 2nd-year B.Tech Computer Engineering student at ITM SLS Baroda University.',
     credentials: [
+      'Published K.A.L.K.I. on Microsoft Store (Store ID: 9P6HJPQZBGFQ)',
       '2nd Place — Bug Bounty, Security BSides Vadodara',
       '4th Place — Capture the Flag (CTF), Security BSides Vadodara',
-      'Top 1,000 of 3,000 teams — National AI Hackathon',
-      '24 Verified Google Cloud Skill Badges',
+      '27+ Industry Badges (~20 Google Cloud, IBM Python/Data)',
       'Conducted live OSINT & cybersecurity awareness seminars'
     ],
     skills: ['React & Next.js', 'TypeScript', 'Python & Chaquopy', 'Applied LLMs', 'Cybersecurity & CTF', 'System Architecture'],

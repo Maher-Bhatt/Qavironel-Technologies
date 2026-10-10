@@ -198,7 +198,7 @@ export const HomePage: React.FC = () => {
               description="Real software, e-commerce storefronts, and independent tools. Each project is clearly labelled with verified evidence, technologies, and public links."
             />
             <Button to="/work" variant="secondary" size="md" showArrow>
-              View All 10+ Projects
+              View All 12 Projects
             </Button>
           </div>
 

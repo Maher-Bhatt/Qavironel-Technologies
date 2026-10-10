@@ -27,7 +27,7 @@ export const VideoShowreel: React.FC = () => {
       title: 'Full-Stack Platform & SaaS Architecture',
       subtitle: 'Recorded client platform sprint demo & responsive user flows',
       category: 'PRODUCTION RUNTIME',
-      src: 'https://cdn.pixabay.com/video/2020/07/22/45371-443315907_large.mp4',
+      src: '/videos/hero-showreel.mp4',
       duration: '0:42',
       tags: ['React 19', 'TypeScript', 'FastAPI', 'Sub-Second'],
     },
@@ -37,7 +37,7 @@ export const VideoShowreel: React.FC = () => {
       title: 'Tactical HUD & Spatial Computer Vision',
       subtitle: 'Real-time object segmentation, token streaming & UI interaction',
       category: 'APPLIED AI SYSTEMS',
-      src: 'https://cdn.pixabay.com/video/2021/08/04/83866-584758509_large.mp4',
+      src: '/videos/project-reel.mp4',
       duration: '1:14',
       tags: ['OpenCV', 'YOLOv8', 'Spatial Tracking', 'Local Inference'],
     },
@@ -47,7 +47,7 @@ export const VideoShowreel: React.FC = () => {
       title: 'Engineering Craftsmanship & Momentum',
       subtitle: 'Design-led execution, micro-interactions & hardware synergy',
       category: 'STUDIO CRAFT',
-      src: 'https://cdn.pixabay.com/video/2023/11/09/188448-883084323_large.mp4',
+      src: '/videos/tech-atmosphere.mp4',
       duration: '0:38',
       tags: ['Clean Code', 'Zero Bloat', 'Global Reach'],
     },
@@ -228,4 +228,5 @@ export const VideoShowreel: React.FC = () => {
     </div>
   );
 };
+
 

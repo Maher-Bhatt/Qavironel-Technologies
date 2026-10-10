@@ -30,10 +30,10 @@ export const Button: React.FC<ButtonProps> = ({
   }[size];
 
   const variantStyles = {
-    primary: 'bg-[#C7612E] hover:bg-[#98431F] text-[#FFFFFF] shadow-xs transition-all duration-200 active:scale-[0.98]',
-    secondary: 'bg-white hover:bg-[#F5F2EB] text-[#171717] border border-[#E5E2DC] hover:border-[#171717] shadow-xs transition-all duration-200 active:scale-[0.98]',
-    dark: 'bg-[#171717] hover:bg-[#20201E] text-white border border-[#171717] hover:border-[#C7612E] transition-all duration-200 active:scale-[0.98]',
-    ghost: 'bg-transparent text-[#6E6B65] hover:text-[#C7612E] p-0 font-medium tracking-normal normal-case transition-colors duration-200',
+    primary: 'bg-[#E0561B] hover:bg-[#C2410C] text-white shadow-xs transition-all duration-200 active:scale-[0.98]',
+    secondary: 'bg-white hover:bg-[#F4F4F5] text-[#0A0A0A] border border-[#E5E7EB] hover:border-[#0A0A0A] shadow-xs transition-all duration-200 active:scale-[0.98]',
+    dark: 'bg-[#0A0A0A] hover:bg-[#18181B] text-white border border-[#0A0A0A] hover:border-[#E0561B] transition-all duration-200 active:scale-[0.98]',
+    ghost: 'bg-transparent text-[#71717A] hover:text-[#E0561B] p-0 font-medium tracking-normal normal-case transition-colors duration-200',
   }[variant];
 
   const baseStyles = 'inline-flex items-center justify-center font-sans rounded-none transition-all group focus-visible:outline-2 focus-visible:outline-[#C7612E] focus-visible:outline-offset-2';

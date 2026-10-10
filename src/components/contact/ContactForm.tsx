@@ -61,16 +61,16 @@ export const ContactForm: React.FC = () => {
 
   if (isSubmitted) {
     return (
-      <div className="bg-white border border-[#E5E2DC] p-8 sm:p-12 text-center animate-fade-in space-y-6 text-[#171717] shadow-[0_4px_24px_rgba(0,0,0,0.03)]">
-        <div className="w-16 h-16 bg-[#C7612E]/10 border border-[#C7612E]/30 text-[#C7612E] mx-auto flex items-center justify-center">
+      <div className="bg-[#F8F9FA] border border-[#E5E7EB] rounded-2xl p-8 sm:p-12 text-center animate-fade-in space-y-6 text-[#0A0A0A] shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
+        <div className="w-16 h-16 rounded-full bg-[#E0561B]/10 border border-[#E0561B]/30 text-[#E0561B] mx-auto flex items-center justify-center">
           <CheckCircle2 className="w-8 h-8" />
         </div>
         <div className="space-y-2">
-          <h3 className="font-sans font-bold text-2xl text-[#171717]">
+          <h3 className="font-sans font-bold text-2xl text-[#0A0A0A]">
             Thank you, {formData.name}.
           </h3>
-          <p className="text-sm text-[#6E6B65] max-w-md mx-auto leading-relaxed font-light">
-            Your inquiry has been received. Our founder will review your project requirements and reply within 12–24 hours to <span className="font-semibold text-[#171717]">{formData.email}</span>.
+          <p className="text-sm text-[#52525B] max-w-md mx-auto leading-relaxed font-light">
+            Your inquiry has been received. Our founder will review your project requirements and reply within 12–24 hours to <span className="font-semibold text-[#0A0A0A]">{formData.email}</span>.
           </p>
         </div>
 
@@ -79,7 +79,7 @@ export const ContactForm: React.FC = () => {
             href={`https://wa.me/919879529957?text=${whatsappMessage}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3.5 bg-[#C7612E] text-white text-xs font-semibold uppercase tracking-widest hover:bg-[#98431F] transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-[#E0561B] text-white text-xs font-semibold uppercase tracking-widest hover:bg-[#C2410C] transition-colors"
           >
             <MessageSquare className="w-4 h-4" />
             <span>Fast-Track on WhatsApp</span>
@@ -97,7 +97,7 @@ export const ContactForm: React.FC = () => {
                 details: '',
               });
             }}
-            className="px-6 py-3.5 bg-white border border-[#E5E2DC] text-xs font-semibold uppercase tracking-widest text-[#171717] hover:bg-[#F5F2EB] transition-colors"
+            className="px-6 py-3.5 rounded-full bg-white border border-[#E5E7EB] text-xs font-semibold uppercase tracking-widest text-[#0A0A0A] hover:bg-[#F4F4F5] transition-colors"
           >
             Submit Another Project
           </button>
@@ -111,8 +111,8 @@ export const ContactForm: React.FC = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         {/* Full Name */}
         <div>
-          <label htmlFor="contact-name" className="block text-xs font-mono font-semibold uppercase tracking-widest text-[#171717] mb-2">
-            Your Name <span className="text-[#C7612E]">*</span>
+          <label htmlFor="contact-name" className="block text-xs font-mono font-semibold uppercase tracking-widest text-[#0A0A0A] mb-2">
+            Your Name <span className="text-[#E0561B]">*</span>
           </label>
           <input
             id="contact-name"
@@ -120,8 +120,8 @@ export const ContactForm: React.FC = () => {
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             placeholder="Jane Doe"
-            className={`w-full px-4 py-3 bg-white border text-sm text-[#171717] placeholder-[#8E8B84] shadow-xs focus:outline-none transition-colors ${
-              errors.name ? 'border-red-500' : 'border-[#E5E2DC] focus:border-[#C7612E]'
+            className={`w-full px-4 py-3 bg-white border rounded-lg text-sm text-[#0A0A0A] placeholder-[#71717A] shadow-xs focus:outline-none transition-colors ${
+              errors.name ? 'border-red-500' : 'border-[#E5E7EB] focus:border-[#E0561B]'
             }`}
           />
           {errors.name && <p className="mt-1 text-xs text-red-500 font-mono">{errors.name}</p>}
@@ -129,8 +129,8 @@ export const ContactForm: React.FC = () => {
 
         {/* Email */}
         <div>
-          <label htmlFor="contact-email" className="block text-xs font-mono font-semibold uppercase tracking-widest text-[#171717] mb-2">
-            Email Address <span className="text-[#C7612E]">*</span>
+          <label htmlFor="contact-email" className="block text-xs font-mono font-semibold uppercase tracking-widest text-[#0A0A0A] mb-2">
+            Email Address <span className="text-[#E0561B]">*</span>
           </label>
           <input
             id="contact-email"
@@ -138,8 +138,8 @@ export const ContactForm: React.FC = () => {
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
             placeholder="jane@company.com"
-            className={`w-full px-4 py-3 bg-white border text-sm text-[#171717] placeholder-[#8E8B84] shadow-xs focus:outline-none transition-colors ${
-              errors.email ? 'border-red-500' : 'border-[#E5E2DC] focus:border-[#C7612E]'
+            className={`w-full px-4 py-3 bg-white border rounded-lg text-sm text-[#0A0A0A] placeholder-[#71717A] shadow-xs focus:outline-none transition-colors ${
+              errors.email ? 'border-red-500' : 'border-[#E5E7EB] focus:border-[#E0561B]'
             }`}
           />
           {errors.email && <p className="mt-1 text-xs text-red-500 font-mono">{errors.email}</p>}
@@ -149,7 +149,7 @@ export const ContactForm: React.FC = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         {/* Organization */}
         <div>
-          <label htmlFor="contact-org" className="block text-xs font-mono font-semibold uppercase tracking-widest text-[#171717] mb-2">
+          <label htmlFor="contact-org" className="block text-xs font-mono font-semibold uppercase tracking-widest text-[#0A0A0A] mb-2">
             Company / Project Name
           </label>
           <input
@@ -158,20 +158,20 @@ export const ContactForm: React.FC = () => {
             value={formData.organization}
             onChange={(e) => setFormData({ ...formData, organization: e.target.value })}
             placeholder="Acme Inc. / Stealth Startup"
-            className="w-full px-4 py-3 bg-white border border-[#E5E2DC] text-sm text-[#171717] placeholder-[#8E8B84] shadow-xs focus:border-[#C7612E] focus:outline-none transition-colors"
+            className="w-full px-4 py-3 bg-white border border-[#E5E7EB] rounded-lg text-sm text-[#0A0A0A] placeholder-[#71717A] shadow-xs focus:border-[#E0561B] focus:outline-none transition-colors"
           />
         </div>
 
         {/* Project Type */}
         <div>
-          <label htmlFor="contact-type" className="block text-xs font-mono font-semibold uppercase tracking-widest text-[#171717] mb-2">
+          <label htmlFor="contact-type" className="block text-xs font-mono font-semibold uppercase tracking-widest text-[#0A0A0A] mb-2">
             Discipline / Scope
           </label>
           <select
             id="contact-type"
             value={formData.projectType}
             onChange={(e) => setFormData({ ...formData, projectType: e.target.value })}
-            className="w-full px-4 py-3 bg-white border border-[#E5E2DC] text-sm text-[#171717] shadow-xs focus:border-[#C7612E] focus:outline-none transition-colors"
+            className="w-full px-4 py-3 bg-white border border-[#E5E7EB] rounded-lg text-sm text-[#0A0A0A] shadow-xs focus:border-[#E0561B] focus:outline-none transition-colors"
           >
             <option value="Custom Website / Web Platform">High-Impact Custom Web Platform</option>
             <option value="SaaS MVP / Web Application">Full-Stack SaaS MVP / Web App</option>
@@ -185,14 +185,14 @@ export const ContactForm: React.FC = () => {
 
       {/* Approximate Budget */}
       <div>
-        <label htmlFor="contact-budget" className="block text-xs font-mono font-semibold uppercase tracking-widest text-[#171717] mb-2">
+        <label htmlFor="contact-budget" className="block text-xs font-mono font-semibold uppercase tracking-widest text-[#0A0A0A] mb-2">
           Estimated Budget Range (Optional)
         </label>
         <select
           id="contact-budget"
           value={formData.budget}
           onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-          className="w-full px-4 py-3 bg-white border border-[#E5E2DC] text-sm text-[#171717] shadow-xs focus:border-[#C7612E] focus:outline-none transition-colors"
+          className="w-full px-4 py-3 bg-white border border-[#E5E7EB] rounded-lg text-sm text-[#0A0A0A] shadow-xs focus:border-[#E0561B] focus:outline-none transition-colors"
         >
           <option value="">Select an approximate scope range...</option>
           <option value="< $1,000 / ₹25,000 – ₹80,000">&lt; $1,000 / ₹25,000 – ₹80,000 (Sprint Build)</option>
@@ -204,8 +204,8 @@ export const ContactForm: React.FC = () => {
 
       {/* Project Details */}
       <div>
-        <label htmlFor="contact-details" className="block text-xs font-mono font-semibold uppercase tracking-widest text-[#171717] mb-2">
-          Project Details & Goals <span className="text-[#C7612E]">*</span>
+        <label htmlFor="contact-details" className="block text-xs font-mono font-semibold uppercase tracking-widest text-[#0A0A0A] mb-2">
+          Project Details & Goals <span className="text-[#E0561B]">*</span>
         </label>
         <textarea
           id="contact-details"
@@ -213,8 +213,8 @@ export const ContactForm: React.FC = () => {
           value={formData.details}
           onChange={(e) => setFormData({ ...formData, details: e.target.value })}
           placeholder="Tell us what you're working on, what needs to improve, your target timeline, and any links to existing systems or designs."
-          className={`w-full px-4 py-3 bg-white border text-sm text-[#171717] placeholder-[#8E8B84] shadow-xs focus:outline-none transition-colors ${
-            errors.details ? 'border-red-500' : 'border-[#E5E2DC] focus:border-[#C7612E]'
+          className={`w-full px-4 py-3 bg-white border rounded-lg text-sm text-[#0A0A0A] placeholder-[#71717A] shadow-xs focus:outline-none transition-colors ${
+            errors.details ? 'border-red-500' : 'border-[#E5E7EB] focus:border-[#E0561B]'
           }`}
         />
         {errors.details && <p className="mt-1 text-xs text-red-500 font-mono">{errors.details}</p>}
@@ -236,9 +236,9 @@ export const ContactForm: React.FC = () => {
           href={`https://wa.me/919879529957?text=${whatsappMessage}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-[#6E6B65] hover:text-[#C7612E] transition-colors py-2 font-semibold"
+          className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-[#52525B] hover:text-[#E0561B] transition-colors py-2 font-semibold"
         >
-          <MessageSquare className="w-4 h-4 text-[#C7612E]" />
+          <MessageSquare className="w-4 h-4 text-[#E0561B]" />
           <span>Or chat directly on WhatsApp</span>
         </a>
       </div>

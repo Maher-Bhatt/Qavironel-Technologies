@@ -72,12 +72,12 @@ export const Logo: React.FC<LogoProps> = ({
       </div>
       <div className="flex flex-col justify-center">
         <div className="flex items-center tracking-[-0.03em] font-extrabold text-[1.05rem] leading-none uppercase">
-          <span className={isDarkBg ? 'text-[#F6F3ED]' : 'text-[#171717]'}>QAVIR</span>
-          <span className="text-[#C7612E]">O</span>
-          <span className={isDarkBg ? 'text-[#F6F3ED]' : 'text-[#171717]'}>NEL</span>
+          <span className={isDarkBg ? 'text-white' : 'text-[#0A0A0A]'}>QAVIR</span>
+          <span className="text-[#E0561B]">O</span>
+          <span className={isDarkBg ? 'text-white' : 'text-[#0A0A0A]'}>NEL</span>
         </div>
         <div className="flex items-center justify-between mt-1 tracking-[0.24em] font-semibold text-[0.55rem] uppercase leading-none">
-          <span className={isDarkBg ? 'text-[#77746F]' : 'text-[#77746F]'}>TECHNOLOGIES</span>
+          <span className="text-[#71717A]">TECHNOLOGIES</span>
         </div>
       </div>
     </Link>

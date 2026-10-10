@@ -18,14 +18,14 @@ export const Badge: React.FC<BadgeProps> = ({
     : 'px-3.5 py-1.5 text-xs font-semibold tracking-wider uppercase';
 
   const variantStyles = {
-    copper: 'bg-[#C7612E]/10 text-[#C7612E] border border-[#C7612E]/30',
-    charcoal: 'bg-[#20201E] text-[#F6F3ED] border border-[#2E2E2B]',
-    outline: 'bg-transparent text-[#171717] border border-[#DEDAD3]',
-    subtle: 'bg-[#F6F3ED] text-[#77746F] border border-[#DEDAD3]',
+    copper: 'bg-[#E0561B]/10 text-[#E0561B] border border-[#E0561B]/30 rounded',
+    charcoal: 'bg-[#0A0A0A] text-white border border-[#27272A] rounded',
+    outline: 'bg-transparent text-[#0A0A0A] border border-[#E5E7EB] rounded',
+    subtle: 'bg-[#F4F4F5] text-[#52525B] border border-[#E5E7EB] rounded',
   }[variant];
 
   return (
-    <span className={`inline-flex items-center gap-1.5 font-mono rounded-none select-none ${sizeStyles} ${variantStyles} ${className}`}>
+    <span className={`inline-flex items-center gap-1.5 font-mono select-none ${sizeStyles} ${variantStyles} ${className}`}>
       {children}
     </span>
   );

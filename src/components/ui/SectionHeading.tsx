@@ -23,18 +23,18 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
     <div className={`max-w-3xl ${align === 'center' ? 'mx-auto text-center' : ''} ${className}`}>
       {eyebrow && (
         <div className="flex items-center gap-2 mb-3 tracking-[0.2em] uppercase font-semibold text-xs font-mono">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#C7612E]" />
-          <span className="text-[#C7612E]">{eyebrow}</span>
+          <span className="w-1.5 h-1.5 rounded-full bg-[#E0561B]" />
+          <span className="text-[#E0561B]">{eyebrow}</span>
         </div>
       )}
       <h2 className={`font-sans font-extrabold tracking-tight text-3xl sm:text-4xl md:text-5xl leading-tight ${
-        isLight ? 'text-[#171717]' : 'text-white'
+        isLight ? 'text-[#0A0A0A]' : 'text-white'
       }`}>
         {title}
       </h2>
       {description && (
         <p className={`mt-4 sm:mt-5 text-base sm:text-lg leading-relaxed font-light ${
-          isLight ? 'text-[#6E6B65]' : 'text-[#A3A099]'
+          isLight ? 'text-[#71717A]' : 'text-[#A1A1AA]'
         }`}>
           {description}
         </p>

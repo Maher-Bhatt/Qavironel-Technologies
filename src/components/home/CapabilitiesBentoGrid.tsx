@@ -12,6 +12,7 @@ import {
   ArrowUpRight 
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { Spatial3DPrism } from '../3d/Spatial3DPrism';
 
 export const CapabilitiesBentoGrid: React.FC = () => {
   const [activeModel, setActiveModel] = useState<'groq' | 'ollama' | 'memory'>('groq');
@@ -107,7 +108,12 @@ export const CapabilitiesBentoGrid: React.FC = () => {
               </div>
             </div>
 
-            <div className="mt-8 pt-4 border-t border-white/10 flex items-center justify-between text-xs font-mono">
+            {/* Ambient 3D Spatial Crystalline Prism */}
+            <div className="absolute top-1/2 right-2 -translate-y-1/2 w-[160px] h-[160px] pointer-events-none opacity-45 hidden sm:block">
+              <Spatial3DPrism size={160} />
+            </div>
+
+            <div className="mt-8 pt-4 border-t border-white/10 flex items-center justify-between text-xs font-mono relative z-10">
               <span className="text-zinc-400">PROVEN BUILD: K.A.L.K.I.</span>
               <Link to="/work/kalki" className="text-[#E0561B] hover:underline flex items-center gap-1 font-semibold">
                 <span>View Architecture</span>

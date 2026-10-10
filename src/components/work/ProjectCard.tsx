@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Project } from '../../types';
-import { ArrowUpRight, ArrowRight, Sparkles, CheckCircle2 } from 'lucide-react';
+import { ArrowUpRight, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { playClickSound } from '../../utils/soundEffects';
 
 interface ProjectCardProps {
@@ -10,12 +10,17 @@ interface ProjectCardProps {
   layout?: 'featured' | 'standard';
 }
 
+/**
+ * ProjectCard
+ * Ultra-crafted editorial project card designed to display full UI screenshots 
+ * and production photography with ZERO image cuts or awkward cropping.
+ * Uses object-contain inside an Apple/Linear style studio viewport matte.
+ */
 export const ProjectCard: React.FC<ProjectCardProps> = ({
   project,
   layout = 'standard',
 }) => {
   const isFeatured = layout === 'featured';
-  const hasVideo = project.slug === 'kalki-hud-vision';
   const cardRef = useRef<HTMLDivElement>(null);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
@@ -31,8 +36,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
 
-    const rotX = ((y - centerY) / centerY) * -2.5;
-    const rotY = ((x - centerX) / centerX) * 2.5;
+    const rotX = ((y - centerY) / centerY) * -2;
+    const rotY = ((x - centerX) / centerX) * 2;
 
     setRotateX(rotX);
     setRotateY(rotY);
@@ -43,7 +48,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
     setRotateY(0);
   };
 
-  const isDarkProject = project.slug === 'kalki' || project.slug === 'codedroid';
+  const isDarkProject = project.slug === 'kalki' || project.slug === 'codedroid' || project.slug === 'socialsafe';
 
   const displayImage = (isFeatured && project.gallery && project.gallery[activeImageIndex])
     ? project.gallery[activeImageIndex].src
@@ -59,7 +64,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         rotateY,
         transformPerspective: 1000,
       }}
-      transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+      transition={{ type: 'spring', stiffness: 320, damping: 26 }}
       className={`group relative glass-card rounded-2xl transition-all duration-300 flex flex-col overflow-hidden text-[#0A0A0A] border border-[#E5E7EB] hover:border-[#E0561B]/40 shadow-xs hover:shadow-xl hover:shadow-[#E0561B]/5 ${
         isFeatured ? 'lg:grid lg:grid-cols-12 gap-0' : ''
       }`}
@@ -70,40 +75,40 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       </span>
 
       {/* Studio Chrome Window Header */}
-      <div className={`col-span-12 flex items-center justify-between px-4 sm:px-5 py-2.5 border-b border-[#E5E7EB] relative z-10 ${
-        isDarkProject && isFeatured ? 'bg-[#18181B] text-white border-white/10' : 'bg-[#FAFAFA]'
-      }`}>
-        <div className="flex items-center gap-1.5">
-          <span className="w-2.5 h-2.5 rounded-full bg-[#EF4444]/80" />
-          <span className="w-2.5 h-2.5 rounded-full bg-[#F59E0B]/80" />
-          <span className="w-2.5 h-2.5 rounded-full bg-[#10B981]/80" />
-          <span className={`ml-2 text-[0.65rem] font-mono tracking-wider ${
-            isDarkProject && isFeatured ? 'text-[#A1A1AA]' : 'text-[#71717A]'
-          }`}>
+      <div className="col-span-12 flex items-center justify-between px-4 sm:px-5 py-2.5 border-b border-[#E5E7EB] bg-[#FAFAFA] relative z-10">
+        <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#EF4444]/80" />
+            <span className="w-2.5 h-2.5 rounded-full bg-[#F59E0B]/80" />
+            <span className="w-2.5 h-2.5 rounded-full bg-[#10B981]/80" />
+          </div>
+          <span className="text-[0.68rem] font-mono tracking-wider text-[#71717A] ml-1">
             sys://qavironel/{project.slug}
           </span>
         </div>
-        <div className="flex items-center gap-2">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#E0561B] animate-pulse" />
+
+        <div className="flex items-center gap-2.5">
           <span className="text-[0.65rem] font-mono font-semibold uppercase tracking-wider text-[#E0561B]">
-            {project.status}
+            {project.category}
+          </span>
+          <span className="text-[#D1D5DB] text-xs">·</span>
+          <span className="text-[0.65rem] font-mono text-[#71717A]">
+            {project.year}
           </span>
         </div>
       </div>
 
-      {/* Image Preview Container with Inner Studio Frame */}
+      {/* Image Preview Viewport — Zero Image Cuts, Full-Fidelity Display */}
       <div 
-        className={`relative overflow-hidden z-10 ${
+        className={`relative overflow-hidden z-10 flex items-center justify-center ${
           isFeatured 
-            ? 'lg:col-span-7 p-4 sm:p-6 flex items-center justify-center self-stretch min-h-[320px] sm:min-h-[420px] lg:min-h-[500px] ' + (isDarkProject ? 'bg-[#0A0A0A]' : 'bg-[#F4F4F5]')
-            : 'aspect-[16/10] bg-[#F4F4F5]'
-        }`}
+            ? 'lg:col-span-7 p-4 sm:p-6 lg:p-8 ' + (isDarkProject ? 'bg-[#0A0A0C]' : 'bg-[#F4F4F6]')
+            : 'p-4 sm:p-5 h-[260px] sm:h-[300px] ' + (isDarkProject ? 'bg-[#0A0A0C]' : 'bg-[#F8F9FA]')
+        } border-b lg:border-b-0 border-[#E5E7EB]`}
       >
         <Link 
           to={`/work/${project.slug}`} 
-          className={`block w-full h-full relative overflow-hidden ${
-            isFeatured ? 'rounded-xl shadow-2xl border border-white/10 min-h-[300px] sm:min-h-[400px] lg:min-h-[460px]' : ''
-          }`}
+          className="relative w-full h-full flex items-center justify-center overflow-hidden rounded-xl"
         >
           <AnimatePresence mode="wait">
             <motion.img
@@ -111,10 +116,10 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
               src={displayImage}
               alt={`${project.title} interface preview`}
               loading="lazy"
-              initial={{ opacity: 0.8 }}
+              initial={{ opacity: 0.85 }}
               animate={{ opacity: 1 }}
-              exit={{ opacity: 0.8 }}
-              transition={{ duration: 0.25 }}
+              exit={{ opacity: 0.85 }}
+              transition={{ duration: 0.2 }}
               onError={(e) => {
                 const target = e.currentTarget;
                 if (!target.dataset.fallback) {
@@ -122,37 +127,16 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                   target.src = '/images/projects/kalki/kalki-hero.png';
                 }
               }}
-              className={`w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-104 ${
-                hasVideo ? 'group-hover:opacity-0 transition-opacity duration-300' : ''
+              className={`max-w-full max-h-full w-auto h-auto object-contain drop-shadow-md transition-transform duration-500 ease-out group-hover:scale-[1.02] ${
+                isFeatured ? 'max-h-[380px] sm:max-h-[440px]' : 'max-h-[230px] sm:max-h-[260px]'
               }`}
             />
           </AnimatePresence>
-
-          {hasVideo && (
-            <video
-              src="/videos/project-reel.mp4"
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-            />
-          )}
-
-          {/* Gradient Gloss Overlay on hover */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
         </Link>
-
-        {/* Floating Category Tag */}
-        <div className="absolute top-4 sm:top-8 left-4 sm:left-8 z-10 flex flex-wrap gap-2 pointer-events-none">
-          <span className="px-3 py-1 text-[0.68rem] font-mono bg-white/90 backdrop-blur-md text-[#0A0A0A] font-bold rounded-full border border-black/5 shadow-sm">
-            {project.category}
-          </span>
-        </div>
 
         {/* Interactive Gallery Switcher Chips for Featured Cards */}
         {isFeatured && project.gallery && project.gallery.length > 1 && (
-          <div className="absolute bottom-4 left-4 right-4 z-20 flex flex-wrap items-center justify-center gap-1.5 p-1.5 rounded-xl bg-black/60 backdrop-blur-md border border-white/10">
+          <div className="absolute bottom-3 left-4 right-4 z-20 flex flex-wrap items-center justify-center gap-1.5 p-1 rounded-xl bg-black/60 backdrop-blur-md border border-white/10">
             {project.gallery.slice(0, 4).map((img, idx) => (
               <button
                 key={idx}
@@ -183,16 +167,16 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         }`}
       >
         <div>
-          <div className="flex items-center justify-between gap-4 text-xs font-mono text-[#71717A] mb-3">
+          <div className="flex items-center justify-between gap-4 text-xs font-mono text-[#71717A] mb-2">
             <span className="uppercase tracking-wider text-[#E0561B] font-semibold">{project.eyebrow}</span>
-            <span>{project.year}</span>
+            <span className="text-[0.68rem] text-emerald-600 font-semibold">{project.status}</span>
           </div>
 
           {/* Microsoft Store Verified Badge for K.A.L.K.I. */}
           {project.slug === 'kalki' && (
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-[0.68rem] font-mono font-bold mb-3">
               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-              <span>STORE VERIFIED · v1.0.4 · 9P6HJPQZBGFQ</span>
+              <span>STORE VERIFIED · v1.0.4 · ID: 9P6HJPQZBGFQ</span>
             </div>
           )}
 
@@ -265,4 +249,3 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
 };
 
 export default ProjectCard;
-

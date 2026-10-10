@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from '../components/ui/Icons';
 import { openBookingModal } from '../components/booking/BookingModal';
+import { Spatial3DPrism } from '../components/3d/Spatial3DPrism';
 
 export const AboutPage: React.FC = () => {
   const founder = teamMembers[0];
@@ -25,18 +26,23 @@ export const AboutPage: React.FC = () => {
   return (
     <div className="bg-white text-[#0A0A0A] pt-28 sm:pt-36 pb-24 selection:bg-[#E0561B] selection:text-white">
       <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
-        {/* Header */}
-        <div className="max-w-4xl pb-12 border-b border-[#E5E7EB]">
-          <span className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-[#E0561B] block mb-3">
-            Studio Origins & Philosophy
-          </span>
-          <h1 className="font-sans font-extrabold text-4xl sm:text-6xl text-[#0A0A0A] tracking-tight leading-[1.08] mb-6">
-            Design craftsmanship. <br />
-            Software engineering rigor.
-          </h1>
-          <p className="text-lg sm:text-xl text-[#52525B] font-light leading-relaxed">
-            Qavironel Technologies is a global remote-first technology and digital product studio. We build thoughtful software, high-impact web platforms, and applied AI systems for founders and organizations worldwide who value precision.
-          </p>
+        {/* Header with 3D Spatial Crystalline Prism */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pb-12 border-b border-[#E5E7EB]">
+          <div className="lg:col-span-8 max-w-3xl">
+            <span className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-[#E0561B] block mb-3">
+              Studio Origins & Philosophy
+            </span>
+            <h1 className="font-sans font-extrabold text-4xl sm:text-6xl text-[#0A0A0A] tracking-tight leading-[1.08] mb-6">
+              Design craftsmanship. <br />
+              Software engineering rigor.
+            </h1>
+            <p className="text-lg sm:text-xl text-[#52525B] font-light leading-relaxed">
+              Qavironel Technologies is a global remote-first technology and digital product studio. We build thoughtful software, high-impact web platforms, and applied AI systems for founders and organizations worldwide who value precision.
+            </p>
+          </div>
+          <div className="lg:col-span-4 flex items-center justify-center">
+            <Spatial3DPrism size={220} />
+          </div>
         </div>
 
         {/* Narrative Section */}

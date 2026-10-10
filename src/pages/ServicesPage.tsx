@@ -7,22 +7,28 @@ import { projects } from '../data/projects';
 import { Link } from 'react-router-dom';
 import { CheckCircle2, ArrowRight, ArrowUpRight, Zap, Shield, Sparkles, Calendar, FileText } from 'lucide-react';
 import { openBookingModal } from '../components/booking/BookingModal';
+import { Spatial3DTorus } from '../components/3d/Spatial3DTorus';
 
 export const ServicesPage: React.FC = () => {
   return (
     <div className="bg-white text-[#0A0A0A] pt-28 sm:pt-36 pb-24 selection:bg-[#E0561B] selection:text-white">
       <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
-        {/* Header */}
-        <div className="max-w-3xl pb-12 border-b border-[#E5E7EB]">
-          <span className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-[#E0561B] block mb-2">
-            Capabilities & Offerings
-          </span>
-          <h1 className="font-sans font-extrabold text-4xl sm:text-6xl text-[#0A0A0A] tracking-tight leading-[1.08] mb-6">
-            Disciplines engineered for real business momentum.
-          </h1>
-          <p className="text-lg sm:text-xl text-[#52525B] font-light leading-relaxed">
-            We combine digital craftsmanship with full-stack software engineering and applied AI. Every service is delivered with direct technical leadership without junior agency fog or outsourced contractors.
-          </p>
+        {/* Header with 3D Spatial Torus Sculpture */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pb-12 border-b border-[#E5E7EB]">
+          <div className="lg:col-span-8 max-w-3xl">
+            <span className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-[#E0561B] block mb-2">
+              Capabilities & Offerings
+            </span>
+            <h1 className="font-sans font-extrabold text-4xl sm:text-6xl text-[#0A0A0A] tracking-tight leading-[1.08] mb-6">
+              Disciplines engineered for real business momentum.
+            </h1>
+            <p className="text-lg sm:text-xl text-[#52525B] font-light leading-relaxed">
+              We combine digital craftsmanship with full-stack software engineering and applied AI. Every service is delivered with direct technical leadership without junior agency fog or outsourced contractors.
+            </p>
+          </div>
+          <div className="lg:col-span-4 flex items-center justify-center">
+            <Spatial3DTorus size={240} />
+          </div>
         </div>
 
         {/* Detailed Service Pillars */}

@@ -67,8 +67,8 @@ export const WorkPage: React.FC = () => {
               />
             )}
 
-            {/* Responsive Grid for All Other Projects */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Responsive Grid for All Other Projects (Expansive 2-Column Showcase) */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10">
               {(activeCategory === 'All Work' ? mainProjects.slice(1) : mainProjects).map((project) => (
                 <ProjectCard 
                   key={project.slug} 

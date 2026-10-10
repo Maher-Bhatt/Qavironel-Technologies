@@ -103,12 +103,12 @@ export const CaseStudyPage: React.FC = () => {
           )}
         </div>
 
-        {/* Hero Showcase Image */}
-        <div className="my-12 sm:my-16 bg-[#F8F9FA] border border-[#E5E7EB] rounded-2xl overflow-hidden shadow-md aspect-[16/9] sm:aspect-[21/9]">
+        {/* Hero Showcase Image — Studio Viewport with Zero Image Cuts */}
+        <div className="my-12 sm:my-16 bg-[#0A0A0C] border border-[#E5E7EB] rounded-2xl p-4 sm:p-8 flex items-center justify-center shadow-lg min-h-[340px] sm:min-h-[460px]">
           <img
             src={project.heroImage}
             alt={`${project.title} hero interface presentation`}
-            className="w-full h-full object-cover object-top"
+            className="max-w-full max-h-[540px] w-auto h-auto object-contain rounded-xl drop-shadow-2xl"
           />
         </div>
 
@@ -328,12 +328,12 @@ export const CaseStudyPage: React.FC = () => {
                   className="bg-[#F8F9FA] border border-[#E5E7EB] rounded-2xl p-4 group cursor-pointer hover:border-[#E0561B]/50 transition-all shadow-xs"
                   onClick={() => setSelectedImage(item)}
                 >
-                  <div className="relative aspect-[16/10] overflow-hidden rounded-xl bg-white">
+                  <div className="relative aspect-[16/10] overflow-hidden rounded-xl bg-[#0D0D10] flex items-center justify-center p-2">
                     <img
                       src={item.src}
                       alt={item.alt}
                       loading="lazy"
-                      className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                      className="max-w-full max-h-full w-auto h-auto object-contain transition-transform duration-500 group-hover:scale-[1.02]"
                     />
                     <div className="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                       <span className="px-3.5 py-2 bg-[#0A0A0A]/90 text-white text-xs font-mono flex items-center gap-1.5 rounded-full border border-white/20">

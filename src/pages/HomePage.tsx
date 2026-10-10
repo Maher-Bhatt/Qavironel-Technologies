@@ -163,16 +163,17 @@ export const HomePage: React.FC = () => {
               </motion.div>
             </div>
 
-            {/* Right Column: Interactive Multiple AI Intelligence Core (5 Cols) */}
+            {/* Right Column: Hero 3D Spatial Architecture Core (5 Cols) */}
             <div className="lg:col-span-5 relative flex items-center justify-center">
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="relative w-full max-w-[520px] rounded-2xl bg-gradient-to-b from-[#F8F9FA] to-white p-2.5 sm:p-3.5 border border-[#E5E7EB] shadow-[0_8px_30px_rgba(0,0,0,0.04)]"
+                className="relative w-full max-w-[500px] flex items-center justify-center"
               >
-                {/* 3D WebGL Multiple AI Intelligence Engine */}
-                <Hero3DArchitectureStack className="w-full" />
+                {/* Ambient Subtle Radial Glow */}
+                <div className="absolute inset-0 bg-[#E0561B]/5 rounded-full blur-[90px] pointer-events-none" />
+                <Hero3DArchitectureStack className="w-full relative z-10" />
               </motion.div>
             </div>
           </div>
@@ -442,8 +443,8 @@ export const HomePage: React.FC = () => {
               </div>
             )}
 
-            {/* Grid for Other Projects */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Grid for Other Projects (Generous 2-Column Editorial Viewport) */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
               {curatedProjects
                 .filter((p) => {
                   if (workFilter === 'all') return p.slug !== 'kalki';

@@ -123,7 +123,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
               key={displayImage}
               src={displayImage}
               alt={`${project.title} interface preview`}
-              loading="lazy"
+              loading="lazy" width="1920" height="1080"
               initial={{ opacity: 0.85 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0.85 }}
@@ -132,7 +132,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                 const target = e.currentTarget;
                 if (!target.dataset.fallback) {
                   target.dataset.fallback = 'true';
-                  target.src = 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=2000&auto=format&fit=crop';
+                  target.src = '/images/projects/kalki/kalki-hero.png';
                 }
               }}
               className={`max-w-full max-h-full w-auto h-auto object-contain drop-shadow-md transition-transform duration-500 ease-out group-hover:scale-[1.02] ${

@@ -36,45 +36,45 @@ export const projects: Project[] = [
     ],
     scopeNote: 'Experimental capabilities such as deep operating system automation remain strictly guarded behind manual confirmation flags to ensure device safety.',
     technologies: ['Python', 'Local LLMs (Ollama)', 'Groq (LLaMA-3.3-70B)', 'DPAPI Vault', 'VOSK Voice Recognition', 'Custom HUD Architecture', 'Security Boundaries'],
-    heroImage: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=2000&auto=format&fit=crop',
+    heroImage: '/images/projects/kalki/kalki-store-marketing.png',
     gallery: [
       {
-        src: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=2000&auto=format&fit=crop',
+        src: '/images/projects/kalki/kalki-hero.png',
         alt: 'K.A.L.K.I. main desktop HUD interface and active cognitive status',
         caption: 'The reactive desktop HUD displaying active model connection, memory state, and core interaction center.'
       },
       {
-        src: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=2000&auto=format&fit=crop',
+        src: '/images/projects/kalki/kalki-ask.png',
         alt: 'K.A.L.K.I. conversational intelligence interface and multi-model prompting',
         caption: 'Conversational intelligence workspace with multi-model prompt orchestration and real-time streaming telemetry.'
       },
       {
-        src: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=2000&auto=format&fit=crop',
+        src: '/images/projects/kalki/kalki-today.png',
         alt: 'K.A.L.K.I. tactical daily briefing and agenda oversight',
         caption: 'Autonomous daily agenda tracking, task synthesis, and proactive desktop notification intelligence.'
       },
       {
-        src: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=2000&auto=format&fit=crop',
+        src: '/images/projects/kalki/kalki-memory.png',
         alt: 'K.A.L.K.I. local vector memory vault and semantic retrieval indexing',
         caption: 'Local-first vector memory vault keeping conversational indexing strictly on physical hardware.'
       },
       {
-        src: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=2000&auto=format&fit=crop',
+        src: '/images/projects/kalki/kalki-workbench.png',
         alt: 'K.A.L.K.I. developer workbench and guarded code execution studio',
         caption: 'Execution workbench with sandboxed code compilation, system utilities, and diagnostic adapters.'
       },
       {
-        src: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=2000&auto=format&fit=crop',
+        src: '/images/projects/kalki/kalki-oversight.png',
         alt: 'K.A.L.K.I. runtime telemetry and inference oversight monitor',
         caption: 'Real-time telemetry monitor tracking token latency, model provider health, and daemon operations.'
       },
       {
-        src: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=2000&auto=format&fit=crop',
+        src: '/images/projects/kalki/kalki-settings.png',
         alt: 'K.A.L.K.I. hardware-bound DPAPI vault configuration and preferences',
         caption: 'DPAPI hardware-bound secrets vault and localhost authorization settings.'
       },
       {
-        src: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=2000&auto=format&fit=crop',
+        src: '/images/projects/kalki/kalki-store-marketing.png',
         alt: 'K.A.L.K.I. Microsoft Store official release architecture kit',
         caption: 'Official Microsoft Store release presentation highlighting offline voice recognition, local privacy, and multi-model flexibility.'
       }
@@ -123,35 +123,35 @@ export const projects: Project[] = [
       'Integrated OpenGraph cards tailored for social media drop shares.'
     ],
     technologies: ['React', 'Vite', 'Tailwind CSS', 'WhatsApp Business Flow', 'UPI Integration', 'Performance SEO'],
-    heroImage: 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?q=80&w=2000&auto=format&fit=crop',
+    heroImage: '/images/work/ztees-hero.webp',
     gallery: [
       {
-        src: 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?q=80&w=2000&auto=format&fit=crop',
+        src: '/images/projects/ztees-cover.jpg',
         alt: 'Ztees streetwear storefront hero drop presentation',
         caption: 'The editorial Mirzapur campaign hero banner highlighting the latest oversized graphic drop.'
       },
       {
-        src: 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?q=80&w=2000&auto=format&fit=crop',
+        src: '/images/projects/ztees-products.png',
         alt: 'Ztees product collection grid with size and pricing tags',
         caption: 'Mobile-first product grid with instant size selectors and direct WhatsApp ordering buttons.'
       },
       {
-        src: 'https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?q=80&w=2000&auto=format&fit=crop',
+        src: '/images/projects/ztees/porsche-911-studio.jpg',
         alt: 'Ztees Porsche 911 studio editorial drop mockup',
         caption: 'Studio editorial mockup showcasing heavy-cotton oversized apparel styling and typography.'
       },
       {
-        src: 'https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?q=80&w=2000&auto=format&fit=crop',
+        src: '/images/projects/ztees/awakened-royal-blue-studio.jpg',
         alt: 'Ztees Awakened Royal Blue graphic tee mockup',
         caption: 'High-contrast studio garment render displaying front graphic placement and fabric texture.'
       },
       {
-        src: 'https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?q=80&w=2000&auto=format&fit=crop',
+        src: '/images/projects/ztees/batman-batmobile-blueprint.jpg',
         alt: 'Ztees Batmobile blueprint conceptual graphic piece',
         caption: 'Technical blueprint graphic edition developed for targeted pop-culture drop campaigns.'
       },
       {
-        src: 'https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?q=80&w=2000&auto=format&fit=crop',
+        src: '/images/projects/ztees/silent-crest-lavender-studio.jpg',
         alt: 'Ztees Silent Crest lavender studio render',
         caption: 'Pastel studio colorway photography prepared for summer drop lookbooks.'
       }
@@ -200,30 +200,30 @@ export const projects: Project[] = [
     ],
     scopeNote: 'Engineered for Classic Infrastructure Projects (CIP), established 2008.',
     technologies: ['React 19', 'TanStack Start', 'Tailwind CSS v4', 'Nodemailer', 'High-Density WebP Pipeline', 'Lucide Icons', 'Zod Validation'],
-    heroImage: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2000&auto=format&fit=crop',
+    heroImage: '/images/projects/cip/cip-new-1-hero.webp',
     gallery: [
       {
-        src: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2000&auto=format&fit=crop',
+        src: '/images/projects/cip/cip-pipeline-110-hero.webp',
         alt: 'Large-diameter pipeline network excavation and laying',
         caption: 'Pipeline transmission network execution featuring heavy mechanical excavation and precision joint welding.'
       },
       {
-        src: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2000&auto=format&fit=crop',
+        src: '/images/projects/cip/cip-drainage-040-hero.webp',
         alt: 'Municipal storm water RCC box drain construction',
         caption: 'Heavy reinforced cement concrete (RCC) storm water drainage channel constructed for municipal flood management.'
       },
       {
-        src: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2000&auto=format&fit=crop',
+        src: '/images/projects/cip/cip-roads-117.webp',
         alt: 'Industrial asphalt roadway construction and compaction',
         caption: 'Heavy-duty industrial bitumen roadway surfacing and mechanical compaction for plant transport corridors.'
       },
       {
-        src: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2000&auto=format&fit=crop',
+        src: '/images/projects/cip/cip-mechanical-115.webp',
         alt: 'Plant mechanical piping and structural installation',
         caption: 'Industrial mechanical piping fabrication and valve manifold assembly for chemical and utility installations.'
       },
       {
-        src: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2000&auto=format&fit=crop',
+        src: '/images/projects/cip/cip-new-2-hero.webp',
         alt: 'Deep trench pipeline alignment and safety shoring',
         caption: 'Deep trench pipeline alignment with structural earth retention and laser level alignment.'
       }
@@ -270,35 +270,35 @@ export const projects: Project[] = [
     ],
     scopeNote: 'Presented as an independent product-lab prototype developed for Smart India Hackathon 2026, with public demo portals accessible online.',
     technologies: ['React 19', 'FastAPI', 'Neon Postgres', 'HDBSCAN Clustering', 'Leaflet / GIS Mapping', 'Role-Based Access Control'],
-    heroImage: 'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?q=80&w=2000&auto=format&fit=crop',
+    heroImage: '/images/projects/civic-sathi/vadodara-civic-atmosphere.webp',
     gallery: [
       {
-        src: 'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?q=80&w=2000&auto=format&fit=crop',
+        src: '/images/projects/civic-sathi/civic-sathi-logo.png',
         alt: 'Civic Sathi brand identity and official project emblem',
         caption: 'The official Civic Sathi project identity engineered for Smart India Hackathon 2026.'
       },
       {
-        src: 'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?q=80&w=2000&auto=format&fit=crop',
+        src: '/images/projects/civic-sathi/vadodara-civic-atmosphere.webp',
         alt: 'Civic Sathi municipal pilot context photography',
         caption: 'Pilot municipal deployment context tailored for municipal flood and sanitation challenges.'
       },
       {
-        src: 'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?q=80&w=2000&auto=format&fit=crop',
+        src: '/images/projects/civic-public-home.png',
         alt: 'Civic Sathi citizen landing page and issue report launcher',
         caption: 'The public citizen portal welcoming reports with step-by-step guidance and status lookup.'
       },
       {
-        src: 'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?q=80&w=2000&auto=format&fit=crop',
+        src: '/images/projects/civic-public-how-it-works.png',
         alt: 'Civic Sathi four-step civic resolution lifecycle walkthrough',
         caption: 'The public resolution workflow showing the progression from report to contractor verification.'
       },
       {
-        src: 'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?q=80&w=2000&auto=format&fit=crop',
+        src: '/images/projects/civic-municipality-login.png',
         alt: 'Civic Sathi municipal department officer authentication portal',
         caption: 'Dedicated municipal portal login with department-specific authentication.'
       },
       {
-        src: 'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?q=80&w=2000&auto=format&fit=crop',
+        src: '/images/projects/civic-contractor-login.png',
         alt: 'Civic Sathi contractor dispatch and job verification interface',
         caption: 'Contractor dashboard entrance for assigned field work and resolution proof uploads.'
       }
@@ -346,15 +346,15 @@ export const projects: Project[] = [
       'Configured with custom soft-keyboard toolbars for quick access to brackets, symbols, and tabs.'
     ],
     technologies: ['Android SDK', 'Java / Kotlin', 'Chaquopy (Python Runtime)', 'Rhino JS Engine', 'CodeMirror', 'Piston API'],
-    heroImage: 'https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?q=80&w=2000&auto=format&fit=crop',
+    heroImage: '/images/work/codedroid-multidevice.webp',
     gallery: [
       {
-        src: 'https://images.unsplash.com/photo-1526498460520-4c246339dccb?q=80&w=2000&auto=format&fit=crop',
+        src: '/images/projects/codedroid-cover.png',
         alt: 'CodeDroid code editing view with syntax highlighting and file tree',
         caption: 'Multi-tab editor interface with line numbers, dark theme, and symbol shortcuts.'
       },
       {
-        src: 'https://images.unsplash.com/photo-1526498460520-4c246339dccb?q=80&w=2000&auto=format&fit=crop',
+        src: '/images/projects/codedroid-devices.png',
         alt: 'CodeDroid responsive interface across Android phone and tablet screens',
         caption: 'Adapts seamlessly across mobile phones and tablet viewports with split terminal views.'
       }
@@ -395,7 +395,7 @@ export const projects: Project[] = [
       'Anyone can verify credential validity against the blockchain contract.'
     ],
     technologies: ['Solidity', 'Ethereum Testnet', 'Web3.js', 'React', 'IPFS'],
-    heroImage: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2000&auto=format&fit=crop',
+    heroImage: '/images/projects/velocity-cover.png',
     gallery: [],
     links: [
       { label: 'View Source on GitHub', url: 'https://github.com/Maher-Bhatt/chain-of-achievements', type: 'github' }
@@ -427,7 +427,7 @@ export const projects: Project[] = [
       'Accompanying security briefing explaining phishing indicators.'
     ],
     technologies: ['HTML5', 'CSS3', 'Modern JavaScript', 'Content Security Policy (CSP)', 'Threat Modeling'],
-    heroImage: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=2000&auto=format&fit=crop',
+    heroImage: '/images/projects/kalki-security.png',
     gallery: [],
     links: [
       { label: 'View Source on GitHub', url: 'https://github.com/Maher-Bhatt/SocialSafe', type: 'github' }
@@ -459,7 +459,7 @@ export const projects: Project[] = [
       'Display estimated entropy bits and crack-time safety margin.'
     ],
     technologies: ['Python', 'Secrets Module', 'Cryptographic Entropy', 'CLI Ergonomics'],
-    heroImage: 'https://images.unsplash.com/photo-1526498460520-4c246339dccb?q=80&w=2000&auto=format&fit=crop',
+    heroImage: '/images/projects/codedroid-cover.png',
     gallery: [],
     links: [
       { label: 'View Source on GitHub', url: 'https://github.com/Maher-Bhatt/Password-Generator', type: 'github' }
@@ -475,4 +475,3 @@ export const categories: { id: Project['category']; label: string }[] = [
   { id: 'Product Lab', label: 'Product Lab' },
   { id: 'Experiments', label: 'Experiments & Labs' }
 ];
-

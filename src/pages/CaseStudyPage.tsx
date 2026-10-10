@@ -333,7 +333,7 @@ export const CaseStudyPage: React.FC = () => {
                     <img
                       src={item.src}
                       alt={item.alt}
-                      loading="lazy"
+                      loading="lazy" width="1920" height="1080"
                       className="max-w-full max-h-full w-auto h-auto object-contain transition-transform duration-500 group-hover:scale-[1.02]"
                     />
                     <div className="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">

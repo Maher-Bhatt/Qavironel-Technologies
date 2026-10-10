@@ -163,7 +163,7 @@ export const ServicesPage: React.FC = () => {
                             src={svc.image} 
                             alt={svc.title}
                             className="w-full h-full object-contain sm:object-cover transition-transform duration-700 group-hover:scale-102"
-                            loading="lazy"
+                            loading="lazy" width="1920" height="1080"
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
                           <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs text-white">

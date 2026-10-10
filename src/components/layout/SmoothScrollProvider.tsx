@@ -13,6 +13,7 @@ export const SmoothScrollProvider: React.FC<{ children: React.ReactNode }> = ({ 
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
     });
+    (window as any).lenis = lenis;
 
     let frameId: number;
     function raf(time: number) {
@@ -25,6 +26,7 @@ export const SmoothScrollProvider: React.FC<{ children: React.ReactNode }> = ({ 
     return () => {
       cancelAnimationFrame(frameId);
       lenis.destroy();
+      (window as any).lenis = null;
     };
   }, []);
 

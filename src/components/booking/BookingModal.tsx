@@ -47,6 +47,23 @@ export const BookingModal: React.FC<BookingModalProps> = ({
     }
   }, [isOpen, initialTab]);
 
+  // Lock body & html scroll and pause Lenis while modal is open (Zero background scroll bleed)
+  useEffect(() => {
+    if (isOpen) {
+      const originalBodyOverflow = document.body.style.overflow;
+      const originalHtmlOverflow = document.documentElement.style.overflow;
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+      (window as any).lenis?.stop();
+
+      return () => {
+        document.body.style.overflow = originalBodyOverflow;
+        document.documentElement.style.overflow = originalHtmlOverflow;
+        (window as any).lenis?.start();
+      };
+    }
+  }, [isOpen]);
+
   // ---------------------------------------------------------------------------
   // TAB 1: CALL BOOKING STATE (Cal.com / sumitx.me style)
   // ---------------------------------------------------------------------------
@@ -202,16 +219,17 @@ export const BookingModal: React.FC<BookingModalProps> = ({
 
   return (
     <div 
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-3 sm:p-6 backdrop-blur-sm animate-fade-in"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-3 sm:p-6 backdrop-blur-sm animate-fade-in overscroll-contain"
       role="dialog"
       aria-modal="true"
+      onClick={onClose}
     >
       <motion.div 
         initial={{ opacity: 0, scale: 0.97, y: 12 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.97, y: 12 }}
         transition={{ duration: 0.22, ease: 'easeOut' }}
-        className="relative w-full max-w-4xl max-h-[92vh] overflow-y-auto bg-white border border-[#E5E7EB] rounded-2xl shadow-2xl text-[#0A0A0A]"
+        className="relative w-full max-w-4xl max-h-[92vh] overflow-y-auto overscroll-contain bg-white border border-[#E5E7EB] rounded-2xl shadow-2xl text-[#0A0A0A]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Top Header & Tab Switcher */}

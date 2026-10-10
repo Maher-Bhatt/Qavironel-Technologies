@@ -51,16 +51,26 @@ export interface Project {
   links: ProjectLink[];
 }
 
+export interface ServiceMetric {
+  value: string;
+  label: string;
+}
+
 export interface ServicePillar {
   id: string;
   number: string;
   title: string;
+  badge?: string;
   tagline: string;
   description: string;
   whoItsFor: string;
   deliverables: string[];
   technologies: string[];
   exampleProjectSlug?: string;
+  image?: string;
+  imageCaption?: string;
+  metrics?: ServiceMetric[];
+  architectureHighlights?: string[];
 }
 
 export interface TeamMember {

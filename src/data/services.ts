@@ -4,10 +4,24 @@ export const services: ServicePillar[] = [
   {
     id: 'web-design-development',
     number: '01',
+    badge: 'FRONTEND CRAFTSMANSHIP',
     title: 'Web Design & Development',
     tagline: 'Marketing sites, commerce storefronts, and business platforms built from scratch.',
     description: 'We design and engineer bespoke web experiences that load instantly, command attention, and turn visitors into qualified business leads. No generic templates, bloated page-builders, or fragile plugins.',
     whoItsFor: 'Founders, established businesses, and ambitious brands looking for an elevated digital presence that accurately reflects their quality of work.',
+    image: '/images/work/ztees-hero.webp',
+    imageCaption: 'Sub-0.8s LCP Streetwear Commerce Frontend & Fluid Product Interaction Architecture',
+    metrics: [
+      { value: '< 0.8s', label: 'Largest Contentful Paint' },
+      { value: '100/100', label: 'Lighthouse Performance' },
+      { value: '0 kB', label: 'Page-Builder Bloat' }
+    ],
+    architectureHighlights: [
+      'Static Edge Render with React 19 selective hydration',
+      'Fluid micro-haptic interactions and spring physics motion',
+      'High-conversion direct commerce pipeline (WhatsApp & Stripe)',
+      'Sub-15ms Interaction to Next Paint (INP) responsiveness'
+    ],
     deliverables: [
       'Custom bespoke UI/UX design tailored to your brand identity',
       'Mobile-first responsive frontend implementation (React, Astro, Tailwind CSS)',
@@ -22,10 +36,24 @@ export const services: ServicePillar[] = [
   {
     id: 'product-software-engineering',
     number: '02',
+    badge: 'SYSTEMS ARCHITECTURE',
     title: 'Product & Software Engineering',
     tagline: 'Custom web applications, dashboards, SaaS MVPs, and internal tooling.',
     description: 'We engineer full-stack digital products from the initial architectural schema to production release. We focus on clean data models, resilient APIs, and intuitive user experiences built to scale.',
     whoItsFor: 'Startups building their minimum viable product (MVP), organizations needing custom operational portals, and founders validating new software ideas.',
+    image: '/images/work/civic-sathi-home.webp',
+    imageCaption: 'Civic Sathi Multi-Role RBAC Governance Portal & Real-Time Incident Mesh',
+    metrics: [
+      { value: '2–4 Wks', label: 'MVP Velocity to Staging' },
+      { value: '100%', label: 'Type-Safe API Contracts' },
+      { value: 'Multi-Tenant', label: 'Strict RBAC Gatekeeping' }
+    ],
+    architectureHighlights: [
+      'FastAPI + PostgreSQL + Supabase backend architecture',
+      'Role-based access control for citizen, contractor, and municipal staff',
+      'Sub-second audit logging and geo-tagged telemetry records',
+      'Automated staging deployment with live preview environments'
+    ],
     deliverables: [
       'Rapid SaaS MVP development from concept to user testing in 2–4 weeks',
       'Role-based access control (RBAC) portals and administrative dashboards',
@@ -39,10 +67,24 @@ export const services: ServicePillar[] = [
   {
     id: 'applied-ai-automation',
     number: '03',
+    badge: 'APPLIED AI & NEURAL OPS',
     title: 'Applied AI & Automation',
     tagline: 'Practical LLM integrations, intelligent workflows, and local-first AI tools.',
     description: 'We cut through the hype to engineer genuinely useful AI capabilities. From local-first desktop assistants and intelligent document extractors to natural language search and automated workflows, we build AI that solves real operational bottlenecks.',
     whoItsFor: 'Businesses wanting to automate repetitive tasks, founders building AI-native features, and teams exploring secure on-premise or edge inference.',
+    image: '/images/projects/kalki/kalki-hero.png',
+    imageCaption: 'K.A.L.K.I. v1.0.4 Microsoft Store Multi-Model AI Assistant with Hardware DPAPI Vault',
+    metrics: [
+      { value: '240 tok/s', label: 'Groq Cloud Inference' },
+      { value: '0 ms Leak', label: 'Local Ollama Air-Gap' },
+      { value: 'DPAPI', label: 'Hardware-Encrypted Keys' }
+    ],
+    architectureHighlights: [
+      'Intelligent dynamic routing between Groq, Gemini 2.5 Flash, and local Ollama',
+      'Offline neural speech recognition powered by VOSK engine',
+      'Hardware-encrypted credential storage via Windows DPAPI',
+      'Live proactive HUD diagnostics and telemetry feedback'
+    ],
     deliverables: [
       'Custom LLM feature integrations using OpenAI, Gemini, and Claude APIs',
       'Local-first AI prototypes with privacy-safe open models (Ollama, Llama 3)',
@@ -56,10 +98,24 @@ export const services: ServicePillar[] = [
   {
     id: 'digital-product-design',
     number: '04',
+    badge: 'PRODUCT CRAFT & DESIGN TOKENS',
     title: 'Digital Product Design & Systems',
     tagline: 'Design systems, product interfaces, and user journeys that reduce cognitive load.',
     description: 'Great software starts with clear thinking. We craft cohesive design languages, intuitive layouts, and interaction systems that make complex software feel effortless for the end user.',
     whoItsFor: 'Teams whose current software feels clunky, dated, or confusing, and early-stage products needing a professional interface before launch.',
+    image: '/images/work/codedroid-multidevice.webp',
+    imageCaption: 'CodeDroid Multi-Device Engineering Companion & Mathematical Design System',
+    metrics: [
+      { value: '4pt / 8pt', label: 'Mathematical Spacing Scale' },
+      { value: 'WCAG AAA', label: 'Contrast & Accessibility' },
+      { value: 'Zero-Drift', label: 'Figma-to-Code Tokens' }
+    ],
+    architectureHighlights: [
+      'Atomic token hierarchy: semantic colors, typography, and elevation',
+      'Micro-interaction states: idle, hover, pressed, focused, disabled',
+      'Multi-device responsive layouts verified across desktop, tablet, and mobile',
+      'Complete developer handover specifications with zero implementation drift'
+    ],
     deliverables: [
       'End-to-end UX architecture and wireframing for complex multi-step workflows',
       'Polished high-fidelity interface design in Figma with strict component tokens',
@@ -73,10 +129,24 @@ export const services: ServicePillar[] = [
   {
     id: 'technical-optimization-seo',
     number: '05',
+    badge: 'EDGE RUNTIME & DISCOVERABILITY',
     title: 'Technical Optimization & SEO Foundation',
     tagline: 'Performance speedups, semantic architecture, and search discoverability.',
     description: 'A great website is useless if nobody can find it or if it takes five seconds to open. We audit, refactor, and engineer websites to achieve top Core Web Vitals and solid organic search visibility.',
     whoItsFor: 'Companies with existing websites suffering from sluggish load times, poor mobile performance, or invisible search rankings.',
+    image: '/images/projects/velocity-cover.png',
+    imageCaption: 'Velocity Framework 100/100 Core Web Vitals Audit & Semantic Schema Engine',
+    metrics: [
+      { value: '100/100', label: 'Core Web Vitals Benchmark' },
+      { value: '< 15 ms', label: 'Interaction to Next Paint' },
+      { value: 'Rich Cards', label: 'Schema.org JSON-LD' }
+    ],
+    architectureHighlights: [
+      'Automated next-gen image conversion (WebP/AVIF) with lazy-load thresholds',
+      'Semantic HTML5 structure with dynamic sitemap.xml and robots.txt',
+      'Comprehensive Schema.org microdata (Organization, LocalBusiness, Breadcrumbs)',
+      'Edge cache stale-while-revalidate headers for sub-second global responses'
+    ],
     deliverables: [
       'Core Web Vitals remediation targeting 95+ performance scores',
       'Comprehensive technical SEO: canonicals, Open Graph, dynamic sitemaps, robots.txt',

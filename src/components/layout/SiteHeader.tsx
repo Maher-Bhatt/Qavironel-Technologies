@@ -11,7 +11,6 @@ export const SiteHeader: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [soundOn, setSoundOn] = useState(false);
-  const [currency, setCurrency] = useState<'USD' | 'EUR' | 'GBP' | 'INR'>('USD');
   const location = useLocation();
 
   useEffect(() => {
@@ -85,26 +84,8 @@ export const SiteHeader: React.FC = () => {
             ))}
           </nav>
 
-          {/* Desktop Right: Currency + Sound Toggle + Minimal CTA */}
+          {/* Desktop Right: Sound Toggle + Minimal CTA */}
           <div className="hidden md:flex items-center gap-2.5">
-            {/* Multi-Currency Global Engine (Blueprint #20) */}
-            <div className="hidden lg:flex items-center rounded-full bg-[#F4F4F5] border border-[#E5E7EB] p-0.5 text-[0.65rem] font-mono">
-              {(['USD', 'EUR', 'GBP', 'INR'] as const).map((c) => (
-                <button
-                  key={c}
-                  type="button"
-                  onClick={() => setCurrency(c)}
-                  className={`px-2 py-0.5 rounded-full transition-colors ${
-                    currency === c
-                      ? 'bg-[#0A0A0A] text-white font-bold shadow-xs'
-                      : 'text-[#71717A] hover:text-[#0A0A0A]'
-                  }`}
-                  title={`Switch to ${c}`}
-                >
-                  {c}
-                </button>
-              ))}
-            </div>
 
             <button
               type="button"

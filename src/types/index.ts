@@ -1,3 +1,6 @@
+/**
+ * Represents the primary categories used for filtering and organizing projects in the portfolio.
+ */
 export type ProjectCategory = 
   | 'All Work'
   | 'Client Work' 
@@ -7,24 +10,36 @@ export type ProjectCategory =
   | 'Academic Build' 
   | 'Experiments';
 
+/**
+ * Quantifiable success metric associated with a project.
+ */
 export interface ProjectMetric {
   value: string;
   label: string;
   context?: string;
 }
 
+/**
+ * Represents an image asset within a project's gallery or case study.
+ */
 export interface ProjectGalleryItem {
   src: string;
   alt: string;
   caption: string;
 }
 
+/**
+ * External URL resource related to a project.
+ */
 export interface ProjectLink {
   label: string;
   url: string;
   type: 'live' | 'github' | 'demo' | 'external';
 }
 
+/**
+ * Core interface defining a full Project or Case Study in the Qavironel Technologies ecosystem.
+ */
 export interface Project {
   slug: string;
   title: string;
@@ -51,11 +66,17 @@ export interface Project {
   links: ProjectLink[];
 }
 
+/**
+ * Quantifiable metric for a service pillar.
+ */
 export interface ServiceMetric {
   value: string;
   label: string;
 }
 
+/**
+ * Defines a core service offering or discipline provided by the agency.
+ */
 export interface ServicePillar {
   id: string;
   number: string;
@@ -73,6 +94,9 @@ export interface ServicePillar {
   architectureHighlights?: string[];
 }
 
+/**
+ * Profile data for an agency team member or founder.
+ */
 export interface TeamMember {
   name: string;
   role: string;
@@ -87,6 +111,9 @@ export interface TeamMember {
   };
 }
 
+/**
+ * Client or user testimonial data.
+ */
 export interface Testimonial {
   quote: string;
   author: string;

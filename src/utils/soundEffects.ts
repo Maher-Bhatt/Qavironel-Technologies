@@ -1,7 +1,7 @@
 // Synthesized Web Audio API micro-acoustics (zero external assets required)
 
 let audioCtx: AudioContext | null = null;
-let soundEnabled = false; // Default to subtle / opt-in
+let soundEnabled = true; // Default to on per user request
 
 export const initAudio = () => {
   if (typeof window === 'undefined') return;

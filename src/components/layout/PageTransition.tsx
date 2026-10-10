@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { playTransitionSound } from '../../utils/soundEffects';
 
 interface PageTransitionProps {
   children: React.ReactNode;
@@ -10,6 +11,10 @@ interface PageTransitionProps {
  * Implements a high-end fade-in / fade-out with a very subtle scale effect.
  */
 export const PageTransition: React.FC<PageTransitionProps> = ({ children }) => {
+  useEffect(() => {
+    playTransitionSound();
+  }, []);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 15 }}

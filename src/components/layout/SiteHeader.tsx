@@ -60,7 +60,7 @@ export const SiteHeader: React.FC = () => {
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${headerBgClass}`}
       >
         <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 flex items-center justify-between">
-          <Logo variant="horizontal" theme={isDarkRoute ? 'dark' : 'light'} size="sm" />
+          <Logo variant="horizontal" theme={isDarkRoute ? 'dark' : 'light'} size="lg" />
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex flex-1 items-center justify-center gap-10">
@@ -167,7 +167,7 @@ export const SiteHeader: React.FC = () => {
           >
             <div>
               <div className="flex items-center justify-between pb-6 border-b border-[#E5E7EB]/80">
-                <Logo variant="full" theme="light" size="sm" />
+                <Logo variant="full" theme="light" size="lg" />
                 <button
                   type="button"
                   onClick={() => setMobileMenuOpen(false)}
@@ -226,7 +226,7 @@ export const SiteHeader: React.FC = () => {
                 <FileText className="w-4 h-4 text-[#E0561B]" />
                 <span>Request Project Quotation</span>
               </button>
-              <Button to="/contact" variant="primary" size="md" className="w-full" showArrow>
+              <Button to="/contact" variant="primary" size="lg" className="w-full" showArrow>
                 Start a Project
               </Button>
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight, ArrowRight } from 'lucide-react';
+import { playClickSound, playHoverSound } from '../../utils/soundEffects';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'dark' | 'ghost';
@@ -21,6 +22,8 @@ export const Button: React.FC<ButtonProps> = ({
   external = false,
   className = '',
   children,
+  onMouseEnter,
+  onClick,
   ...props
 }) => {
   const sizeStyles = {
@@ -51,9 +54,24 @@ export const Button: React.FC<ButtonProps> = ({
     </>
   );
 
+  const handleMouseEnter = (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
+    playHoverSound();
+    if (onMouseEnter) (onMouseEnter as any)(e);
+  };
+
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
+    playClickSound();
+    if (onClick) (onClick as any)(e);
+  };
+
   if (to) {
     return (
-      <Link to={to} className={`${baseStyles} ${sizeStyles} ${variantStyles} ${className}`}>
+      <Link 
+        to={to} 
+        className={`${baseStyles} ${sizeStyles} ${variantStyles} ${className}`}
+        onMouseEnter={handleMouseEnter as any}
+        onClick={handleClick as any}
+      >
         {content}
       </Link>
     );
@@ -66,6 +84,8 @@ export const Button: React.FC<ButtonProps> = ({
         target={external ? '_blank' : undefined} 
         rel={external ? 'noopener noreferrer' : undefined}
         className={`${baseStyles} ${sizeStyles} ${variantStyles} ${className}`}
+        onMouseEnter={handleMouseEnter as any}
+        onClick={handleClick as any}
       >
         {content}
       </a>
@@ -73,7 +93,12 @@ export const Button: React.FC<ButtonProps> = ({
   }
 
   return (
-    <button className={`${baseStyles} ${sizeStyles} ${variantStyles} ${className}`} {...props}>
+    <button 
+      className={`${baseStyles} ${sizeStyles} ${variantStyles} ${className}`}
+      onMouseEnter={handleMouseEnter as any}
+      onClick={handleClick as any}
+      {...props}
+    >
       {content}
     </button>
   );

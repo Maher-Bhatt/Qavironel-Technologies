@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { MessageSquare } from 'lucide-react';
 import { Button } from '../ui/Button';
+import { playSuccessSound, playErrorSound } from '../../utils/soundEffects';
 
 interface ContactFormProps {
   theme?: 'light' | 'dark';
@@ -28,7 +29,12 @@ export const ContactForm: React.FC<ContactFormProps> = ({ theme = 'light' }) => 
     if (!formData.email.trim() || !/^\S+@\S+\.\S+$/.test(formData.email)) newErrors.email = 'Valid email is required';
     if (!formData.details.trim()) newErrors.details = 'Project details are required';
     setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    
+    if (Object.keys(newErrors).length > 0) {
+      playErrorSound();
+      return false;
+    }
+    return true;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -40,6 +46,8 @@ export const ContactForm: React.FC<ContactFormProps> = ({ theme = 'light' }) => 
     console.log('Form submitted:', formData);
     setIsSubmitting(false);
     
+    playSuccessSound();
+
     // Clear form
     setFormData({
       name: '',

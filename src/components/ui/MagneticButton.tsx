@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { playClickSound } from '../../utils/soundEffects';
+import { playClickSound, playHoverSound } from '../../utils/soundEffects';
 
 interface MagneticButtonProps {
   children: React.ReactNode;

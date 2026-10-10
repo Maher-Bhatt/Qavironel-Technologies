@@ -45,7 +45,7 @@ export const SiteFooter: React.FC = () => {
                 href={companyConfig.githubOrg} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="p-2.5 rounded-full bg-white border border-[#E5E7EB] text-[#0A0A0A] hover:text-[#E0561B] hover:border-[#E0561B]/40 shadow-xs transition-colors"
+                className="p-2.5 rounded-full bg-white dark:bg-[#1C1C22] border border-[#E5E7EB] dark:border-white/10 text-[#0A0A0A] dark:text-[#F4F4F5] hover:text-[#E0561B] dark:hover:text-[#E0561B] hover:border-[#E0561B]/40 shadow-xs transition-colors"
                 aria-label="GitHub Profile"
               >
                 <GithubIcon className="w-4 h-4" />
@@ -54,7 +54,7 @@ export const SiteFooter: React.FC = () => {
                 href={companyConfig.linkedinUrl} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="p-2.5 rounded-full bg-white border border-[#E5E7EB] text-[#0A0A0A] hover:text-[#E0561B] hover:border-[#E0561B]/40 shadow-xs transition-colors"
+                className="p-2.5 rounded-full bg-white dark:bg-[#1C1C22] border border-[#E5E7EB] dark:border-white/10 text-[#0A0A0A] dark:text-[#F4F4F5] hover:text-[#E0561B] dark:hover:text-[#E0561B] hover:border-[#E0561B]/40 shadow-xs transition-colors"
                 aria-label="LinkedIn Profile"
               >
                 <LinkedinIcon className="w-4 h-4" />
@@ -63,7 +63,7 @@ export const SiteFooter: React.FC = () => {
                 href={companyConfig.whatsappUrl} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="p-2.5 rounded-full bg-white border border-[#E5E7EB] text-[#0A0A0A] hover:text-[#E0561B] hover:border-[#E0561B]/40 shadow-xs transition-colors"
+                className="p-2.5 rounded-full bg-white dark:bg-[#1C1C22] border border-[#E5E7EB] dark:border-white/10 text-[#0A0A0A] dark:text-[#F4F4F5] hover:text-[#E0561B] dark:hover:text-[#E0561B] hover:border-[#E0561B]/40 shadow-xs transition-colors"
                 aria-label="WhatsApp Direct Line"
               >
                 <Phone className="w-4 h-4" />

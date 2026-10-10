@@ -254,9 +254,38 @@ body {
 }
 
 .dark section.bg-white,
-.dark div.bg-white,
 .dark main.bg-white {
-  background-color: #0A0A0C;
+  background-color: #0A0A0C !important;
+}
+
+.dark div.bg-white:not(.dark\:bg-white) {
+  background-color: #121216;
+}
+
+.dark a.bg-white:not(.dark\:bg-white),
+.dark button.bg-white:not(.dark\:bg-white),
+.dark span.bg-white:not(.dark\:bg-white) {
+  background-color: #1C1C22 !important;
+  color: #F4F4F5 !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+.dark a.bg-white:hover,
+.dark button.bg-white:hover {
+  background-color: #25252E !important;
+  border-color: rgba(224, 86, 27, 0.45) !important;
+  color: #E0561B !important;
+}
+
+.dark a.bg-white svg,
+.dark button.bg-white svg {
+  color: #F4F4F5;
+  transition: color 0.2s ease;
+}
+
+.dark a.bg-white:hover svg,
+.dark button.bg-white:hover svg {
+  color: #E0561B !important;
 }
 
 .dark .bg-\[\#F8F9FA\] {

@@ -31,6 +31,9 @@ const ScrollToTop = () => {
 
 import { BookingModal, BookingModalTab } from './components/booking/BookingModal';
 import { MobileGlassDock } from './components/layout/MobileGlassDock';
+import { SmoothScrollProvider } from './components/layout/SmoothScrollProvider';
+import { Preloader } from './components/ui/Preloader';
+import { FilmGrainOverlay } from './components/ui/FilmGrainOverlay';
 
 export const App: React.FC = () => {
   const [isBookingOpen, setIsBookingOpen] = useState(false);
@@ -51,30 +54,34 @@ export const App: React.FC = () => {
   }, []);
 
   return (
-    <div className="flex flex-col min-h-screen bg-white text-[#0A0A0A]">
-      <ScrollToTop />
-      <SiteHeader />
-      <main className="flex-grow pb-16 md:pb-0">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/work" element={<WorkPage />} />
-          <Route path="/work/:slug" element={<CaseStudyPage />} />
-          <Route path="/services" element={<ServicesPage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/privacy" element={<LegalPage />} />
-          <Route path="/terms" element={<LegalPage />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-      </main>
-      <SiteFooter />
-      <MobileGlassDock />
-      <BookingModal 
-        isOpen={isBookingOpen} 
-        initialTab={bookingTab} 
-        onClose={() => setIsBookingOpen(false)} 
-      />
-    </div>
+    <SmoothScrollProvider>
+      <Preloader />
+      <FilmGrainOverlay />
+      <div className="flex flex-col min-h-screen bg-white text-[#0A0A0A]">
+        <ScrollToTop />
+        <SiteHeader />
+        <main className="flex-grow pb-16 md:pb-0">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/work" element={<WorkPage />} />
+            <Route path="/work/:slug" element={<CaseStudyPage />} />
+            <Route path="/services" element={<ServicesPage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/privacy" element={<LegalPage />} />
+            <Route path="/terms" element={<LegalPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </main>
+        <SiteFooter />
+        <MobileGlassDock />
+        <BookingModal 
+          isOpen={isBookingOpen} 
+          initialTab={bookingTab} 
+          onClose={() => setIsBookingOpen(false)} 
+        />
+      </div>
+    </SmoothScrollProvider>
   );
 };
 

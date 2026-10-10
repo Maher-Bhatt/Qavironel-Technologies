@@ -3,13 +3,27 @@ import { NavLink, Link, useLocation } from 'react-router-dom';
 import { Logo } from '../brand/Logo';
 import { Button } from '../ui/Button';
 import { companyConfig } from '../../data/company';
-import { Menu, X, Globe, Calendar, FileText } from 'lucide-react';
+import { Menu, X, Globe, Calendar, FileText, Volume2, VolumeX } from 'lucide-react';
 import { openBookingModal } from '../booking/BookingModal';
+import { isAudioEnabled, toggleAudio, playClickSound } from '../../utils/soundEffects';
 
 export const SiteHeader: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [soundOn, setSoundOn] = useState(false);
   const location = useLocation();
+
+  useEffect(() => {
+    setSoundOn(isAudioEnabled());
+  }, []);
+
+  const handleToggleSound = () => {
+    const active = toggleAudio();
+    setSoundOn(active);
+    if (active) {
+      playClickSound();
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -70,11 +84,38 @@ export const SiteHeader: React.FC = () => {
             ))}
           </nav>
 
-          {/* Desktop Right: Single Sleek Minimal CTA */}
+          {/* Desktop Right: Sound Toggle + Single Sleek Minimal CTA */}
           <div className="hidden md:flex items-center gap-3">
             <button
               type="button"
-              onClick={() => openBookingModal('call')}
+              onClick={handleToggleSound}
+              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[0.68rem] font-mono transition-all border ${
+                soundOn
+                  ? 'bg-[#E0561B]/10 border-[#E0561B]/30 text-[#E0561B]'
+                  : 'bg-[#F4F4F5] hover:bg-[#E5E7EB] border-[#E5E7EB] text-[#71717A]'
+              }`}
+              title={soundOn ? 'Mute audio micro-haptics' : 'Enable audio micro-haptics'}
+              aria-label="Toggle micro-haptic sound effects"
+            >
+              {soundOn ? (
+                <>
+                  <Volume2 className="w-3.5 h-3.5 text-[#E0561B] animate-pulse" />
+                  <span className="font-bold">SFX ON</span>
+                </>
+              ) : (
+                <>
+                  <VolumeX className="w-3.5 h-3.5" />
+                  <span>SFX OFF</span>
+                </>
+              )}
+            </button>
+
+            <button
+              type="button"
+              onClick={() => {
+                if (soundOn) playClickSound();
+                openBookingModal('call');
+              }}
               className="group relative inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#0A0A0A] hover:bg-[#E0561B] text-white text-xs font-semibold uppercase tracking-[0.14em] transition-all duration-300 shadow-sm hover:shadow-md hover:shadow-[#E0561B]/25"
             >
               <span>Let's Talk</span>
@@ -82,16 +123,32 @@ export const SiteHeader: React.FC = () => {
             </button>
           </div>
 
-          {/* Mobile Menu Trigger */}
-          <button
-            type="button"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 text-[#0A0A0A] hover:text-[#E0561B] transition-colors focus-visible:outline-2 focus-visible:outline-[#E0561B]"
-            aria-label={mobileMenuOpen ? 'Close Menu' : 'Open Menu'}
-            aria-expanded={mobileMenuOpen}
-          >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+          {/* Mobile Right Controls: Sound Toggle + Menu Trigger */}
+          <div className="flex md:hidden items-center gap-2">
+            <button
+              type="button"
+              onClick={handleToggleSound}
+              className={`p-2 rounded-full border transition-colors ${
+                soundOn
+                  ? 'bg-[#E0561B]/10 border-[#E0561B]/30 text-[#E0561B]'
+                  : 'bg-[#F4F4F5] border-[#E5E7EB] text-[#71717A]'
+              }`}
+              title="Toggle sound effects"
+              aria-label="Toggle sound effects"
+            >
+              {soundOn ? <Volume2 className="w-4 h-4 text-[#E0561B]" /> : <VolumeX className="w-4 h-4" />}
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="p-2 text-[#0A0A0A] hover:text-[#E0561B] transition-colors focus-visible:outline-2 focus-visible:outline-[#E0561B]"
+              aria-label={mobileMenuOpen ? 'Close Menu' : 'Open Menu'}
+              aria-expanded={mobileMenuOpen}
+            >
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
         </div>
       </header>
 

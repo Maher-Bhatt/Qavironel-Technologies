@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '../components/ui/Button';
 import { Badge } from '../components/ui/Badge';
+import { RevealHeadline } from '../components/ui/RevealHeadline';
+import { MagneticButton } from '../components/ui/MagneticButton';
+import { CapabilitiesBentoGrid } from '../components/home/CapabilitiesBentoGrid';
 import { projects } from '../data/projects';
 import { services } from '../data/services';
 import { companyConfig } from '../data/company';
@@ -41,54 +44,9 @@ import { StudioEngineConsole } from '../components/home/StudioEngineConsole';
 import { StudioStandardsMatrix } from '../components/home/StudioStandardsMatrix';
 
 export const HomePage: React.FC = () => {
+  const navigate = useNavigate();
   // Take 6 curated projects for sleek agency showcase
   const curatedProjects = projects.filter((p) => p.featured).slice(0, 6);
-
-  // Interactive Capability Matrix Tab State (Clay.global signature feature)
-  const [activeCapability, setActiveCapability] = useState<number>(0);
-
-  const capabilities = [
-    {
-      id: 'digital-products',
-      num: '01',
-      title: 'Digital Products & Platforms',
-      tagline: 'Production SaaS MVPs, client portals & custom web applications',
-      description: 'We architect and build bespoke digital software that solves real business problems. From complex data visualizations to transactional user flows, every view is designed for sub-second performance and frictionless UX.',
-      deliverables: ['Custom React 19 / TypeScript Web Apps', 'Interactive Analytics & Dashboards', 'Scalable Node.js & Python APIs', 'High-Fidelity Component Systems'],
-      tech: ['React 19', 'TypeScript', 'Tailwind CSS', 'PostgreSQL', 'FastAPI'],
-      previewType: 'dashboard',
-    },
-    {
-      id: 'applied-ai',
-      num: '02',
-      title: 'Applied AI & Intelligent Systems',
-      tagline: 'Practical LLMs, local-first inference & agentic automations',
-      description: 'We implement practical generative AI and machine learning that deliver measurable value. No marketing hype—we deploy structured reasoning pipelines, document intelligence, and privacy-first local models.',
-      deliverables: ['Contextual RAG & Vector Retrieval', 'Local LLM Inference (Ollama / LLaMA 3.3)', 'Document OCR & Vision Extraction', 'Autonomous Agent Workflows'],
-      tech: ['Groq LLaMA 3.3', 'Ollama', 'Python', 'LangChain', 'ChromaDB'],
-      previewType: 'ai-agent',
-    },
-    {
-      id: 'web-systems',
-      num: '03',
-      title: 'Bespoke Web Systems & E-Commerce',
-      tagline: 'Custom storefronts, high-converting platforms & brand experiences',
-      description: 'We replace slow, cookie-cutter WordPress themes with blazing-fast custom web platforms. Built with editorial typography, fluid micro-animations, and zero bloatware page builders.',
-      deliverables: ['100/100 Core Web Vitals Audits', 'Custom E-Commerce Architectures', 'Dynamic Product Customizers', 'Defensive Cybersecurity & CSP'],
-      tech: ['Vite', 'React', 'REST APIs', 'Stripe / Razorpay', 'Cloudflare'],
-      previewType: 'vitals',
-    },
-    {
-      id: 'developer-tooling',
-      num: '04',
-      title: 'Mobile Tooling & Developer Runtimes',
-      tagline: 'Native Android environments, compilers & tactical HUD systems',
-      description: 'Engineering systems with deep hardware and OS integration. From native mobile development IDEs to tactical computer vision interfaces, we build software that thrives under demanding constraints.',
-      deliverables: ['Native Android Dev Environments', 'Offline Compiler Toolchains', 'Computer Vision & HUD Interfaces', 'Encrypted Local Storage Layers'],
-      tech: ['Android SDK', 'Java / Kotlin', 'OpenCV', 'NDK', 'SQLite'],
-      previewType: 'terminal',
-    },
-  ];
 
   const marqueeItems = [
     'IDEAS. ENGINEERED.',
@@ -144,15 +102,13 @@ export const HomePage: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Left Column: Editorial Typography & Actions (7 Cols) */}
             <div className="lg:col-span-7">
-              <motion.div
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.1 }}
+              <RevealHeadline
+                className="font-sans font-extrabold text-4xl sm:text-6xl lg:text-6xl xl:text-7xl tracking-tight text-[#0A0A0A] leading-[1.04] mb-6"
+                delay={0.1}
+                highlightWord={['applied', 'ai']}
               >
-                <h1 className="font-sans font-extrabold text-4xl sm:text-6xl lg:text-6xl xl:text-7xl tracking-tight text-[#0A0A0A] leading-[1.04] mb-6">
-                  We engineer digital products, <span className="text-[#E0561B]">applied AI</span> & high-velocity web systems.
-                </h1>
-              </motion.div>
+                {"We engineer digital products,\napplied AI & high-velocity web systems."}
+              </RevealHeadline>
 
               <motion.div
                 initial={{ opacity: 0, y: 24 }}
@@ -164,32 +120,37 @@ export const HomePage: React.FC = () => {
                 </p>
               </motion.div>
 
-              {/* Action CTAs (Sleek, High-Craft, Focused) */}
+              {/* Action CTAs (Magnetic Physics + Micro-Acoustics) */}
               <motion.div
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.3 }}
                 className="mt-8 sm:mt-10 flex flex-wrap items-center gap-4"
               >
-                <Button to="/contact" variant="primary" size="lg" showArrow>
-                  Start a Project
-                </Button>
-                <button
-                  type="button"
+                <MagneticButton
+                  onClick={() => navigate('/contact')}
+                  className="px-8 py-4 rounded-full bg-[#E0561B] hover:bg-[#d04a14] text-white text-xs font-bold uppercase tracking-wider shadow-[0_8px_25px_rgba(224,86,27,0.3)] group"
+                >
+                  <span>Start a Project</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </MagneticButton>
+
+                <MagneticButton
                   onClick={() => openBookingModal('call')}
-                  className="px-6 py-4 rounded-full bg-[#0A0A0A] hover:bg-black text-white text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 shadow-xs group"
+                  className="px-6 py-4 rounded-full bg-[#0A0A0A] hover:bg-black text-white text-xs font-bold uppercase tracking-wider shadow-xs group"
                 >
                   <Calendar className="w-4 h-4 text-[#E0561B] group-hover:scale-110 transition-transform" />
                   <span>Book Discovery (30m)</span>
-                </button>
-                <button
-                  type="button"
+                </MagneticButton>
+
+                <MagneticButton
                   onClick={() => openBookingModal('quotation')}
-                  className="px-6 py-4 rounded-full bg-[#F4F4F5] hover:bg-[#E5E7EB] text-[#0A0A0A] text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 border border-[#E5E7EB]"
+                  className="px-6 py-4 rounded-full bg-[#F4F4F5] hover:bg-[#E5E7EB] text-[#0A0A0A] text-xs font-bold uppercase tracking-wider border border-[#E5E7EB]"
                 >
                   <FileText className="w-4 h-4 text-[#E0561B]" />
                   <span>Instant Quote</span>
-                </button>
+                </MagneticButton>
+
                 <Link 
                   to="/work" 
                   className="px-4 py-3 text-xs font-mono text-[#52525B] hover:text-[#E0561B] transition-colors flex items-center gap-1.5 font-semibold"
@@ -295,240 +256,8 @@ export const HomePage: React.FC = () => {
         </div>
       </div>
 
-      {/* 03. CLAY.GLOBAL SIGNATURE: INTERACTIVE CAPABILITIES MATRIX SHOWCASE */}
-      <section className="py-24 sm:py-32 border-b border-[#E5E7EB] bg-white relative">
-        <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
-          {/* Header */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 border-b border-[#E5E7EB]">
-            <div>
-              <span className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-[#E0561B] block mb-2">
-                Interactive Capabilities Matrix
-              </span>
-              <h2 className="font-sans font-extrabold text-3xl sm:text-5xl text-[#0A0A0A] tracking-tight">
-                Crafted disciplines, interactive depth.
-              </h2>
-            </div>
-            <p className="text-sm text-[#52525B] max-w-md">
-              Explore how we translate high-level product strategy into production-grade systems and applied artificial intelligence.
-            </p>
-          </div>
-
-          {/* Interactive Matrix Tabs & Preview Panel */}
-          <div className="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-            {/* Left Column: Interactive Capability List (5 Cols) */}
-            <div className="lg:col-span-5 flex flex-col gap-3">
-              {capabilities.map((cap, idx) => {
-                const isActive = activeCapability === idx;
-                return (
-                  <motion.div
-                    key={cap.id}
-                    onClick={() => setActiveCapability(idx)}
-                    whileHover={{ x: isActive ? 0 : 4 }}
-                    className={`cursor-pointer p-6 sm:p-7 rounded-xl border transition-all duration-300 relative ${
-                      isActive 
-                        ? 'bg-white border-[#E0561B] shadow-[0_8px_30px_rgba(224,86,27,0.12)] ring-1 ring-[#E0561B]/20' 
-                        : 'bg-[#F8F9FA] border-[#E5E7EB] hover:border-[#E0561B]/40 hover:bg-white'
-                    }`}
-                  >
-                    {isActive && (
-                      <span className="absolute left-0 top-0 bottom-0 w-1.5 bg-[#E0561B] rounded-l-xl" />
-                    )}
-                    <div className="flex items-center justify-between text-xs font-mono mb-2">
-                      <span className={`font-bold ${isActive ? 'text-[#E0561B]' : 'text-[#71717A]'}`}>
-                        {cap.num}
-                      </span>
-                      <span className="text-[0.68rem] text-[#71717A] uppercase tracking-wider">
-                        {isActive ? 'Active View' : 'Click to inspect'}
-                      </span>
-                    </div>
-
-                    <h3 className={`font-sans font-bold text-xl transition-colors ${
-                      isActive ? 'text-[#0A0A0A]' : 'text-[#3F3F46]'
-                    }`}>
-                      {cap.title}
-                    </h3>
-
-                    <p className="mt-2 text-xs sm:text-sm text-[#52525B] leading-relaxed line-clamp-2">
-                      {cap.tagline}
-                    </p>
-
-                    {isActive && (
-                      <motion.div 
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        transition={{ duration: 0.3 }}
-                        className="mt-4 pt-4 border-t border-[#E5E7EB]"
-                      >
-                        <div className="flex flex-wrap gap-1.5">
-                          {cap.tech.map((t) => (
-                            <span key={t} className="text-[0.65rem] font-mono px-2 py-0.5 bg-[#F4F4F5] text-[#52525B] border border-[#E5E7EB]">
-                              {t}
-                            </span>
-                          ))}
-                        </div>
-                      </motion.div>
-                    )}
-                  </motion.div>
-                );
-              })}
-            </div>
-
-            {/* Right Column: Live Interactive Visual Preview Panel (7 Cols) */}
-            <div className="lg:col-span-7 bg-[#F8F9FA] rounded-2xl border border-[#E5E7EB] p-6 sm:p-10 shadow-[0_4px_24px_rgba(0,0,0,0.03)] flex flex-col justify-between relative overflow-hidden">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={capabilities[activeCapability].id}
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -15 }}
-                  transition={{ duration: 0.35 }}
-                  className="space-y-6"
-                >
-                  <div className="flex items-center justify-between pb-4 border-b border-[#E5E7EB]">
-                    <div className="flex items-center gap-2">
-                      <span className="w-2.5 h-2.5 rounded-full bg-[#E0561B]" />
-                      <span className="text-xs font-mono font-semibold uppercase tracking-wider text-[#0A0A0A]">
-                        {capabilities[activeCapability].title}
-                      </span>
-                    </div>
-                    <span className="text-xs font-mono text-[#71717A]">DISCIPLINE #{capabilities[activeCapability].num}</span>
-                  </div>
-
-                  <div>
-                    <h4 className="font-sans font-bold text-2xl sm:text-3xl text-[#0A0A0A] tracking-tight">
-                      {capabilities[activeCapability].tagline}
-                    </h4>
-                    <p className="mt-3 text-sm text-[#52525B] leading-relaxed">
-                      {capabilities[activeCapability].description}
-                    </p>
-                  </div>
-
-                  {/* Dynamic Graphic Simulation based on Tab */}
-                  {capabilities[activeCapability].previewType === 'dashboard' && (
-                    <div className="bg-white rounded-xl border border-[#E5E7EB] p-5 space-y-4 shadow-xs">
-                      <div className="flex items-center justify-between text-xs font-mono text-[#71717A] pb-2 border-b border-[#E5E7EB]">
-                        <span className="flex items-center gap-1.5 text-[#0A0A0A] font-semibold">
-                          <Activity className="w-3.5 h-3.5 text-[#E0561B]" />
-                          System Health & Performance
-                        </span>
-                        <span className="text-emerald-600 font-bold">99.98% UPTIME</span>
-                      </div>
-                      <div className="grid grid-cols-3 gap-3">
-                        <div className="p-3 bg-[#F8F9FA] rounded-lg border border-[#E5E7EB]">
-                          <p className="text-[0.68rem] text-[#71717A] font-mono">P95 LATENCY</p>
-                          <p className="text-lg font-bold text-[#0A0A0A] mt-1">42ms</p>
-                        </div>
-                        <div className="p-3 bg-[#F8F9FA] rounded-lg border border-[#E5E7EB]">
-                          <p className="text-[0.68rem] text-[#71717A] font-mono">THROUGHPUT</p>
-                          <p className="text-lg font-bold text-[#0A0A0A] mt-1">12.4k req/s</p>
-                        </div>
-                        <div className="p-3 bg-[#F8F9FA] rounded-lg border border-[#E5E7EB]">
-                          <p className="text-[0.68rem] text-[#71717A] font-mono">ERROR RATE</p>
-                          <p className="text-lg font-bold text-emerald-600 mt-1">0.001%</p>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {capabilities[activeCapability].previewType === 'ai-agent' && (
-                    <div className="bg-[#0A0A0A] text-white rounded-xl p-5 border border-[#27272A] font-mono text-xs space-y-3 shadow-md">
-                      <div className="flex items-center justify-between text-[0.68rem] text-[#A1A1AA] pb-2 border-b border-[#27272A]">
-                        <span className="flex items-center gap-1.5 text-white">
-                          <Bot className="w-3.5 h-3.5 text-[#E0561B]" />
-                          Groq LLaMA 3.3 70B · Token Pipeline
-                        </span>
-                        <span className="text-emerald-400 font-bold">148 TOKENS/SEC</span>
-                      </div>
-                      <div className="space-y-1 text-[#A1A1AA]">
-                        <p className="text-[#E0561B]">&gt; Input Guardrail: Context Verification PASSED</p>
-                        <p>&gt; Retrieval: Vector similarity cosine = 0.942</p>
-                        <p className="text-white">&gt; Synthesis: "Generating structured JSON schema response without hallucinations..."</p>
-                        <p className="text-emerald-400">&gt; Status: Output sanitized and delivered in 118ms</p>
-                      </div>
-                    </div>
-                  )}
-
-                  {capabilities[activeCapability].previewType === 'vitals' && (
-                    <div className="bg-white rounded-xl border border-[#E5E7EB] p-5 space-y-4 shadow-xs">
-                      <div className="flex items-center justify-between text-xs font-mono text-[#71717A] pb-2 border-b border-[#E5E7EB]">
-                        <span className="flex items-center gap-1.5 text-[#0A0A0A] font-semibold">
-                          <Gauge className="w-3.5 h-3.5 text-[#E0561B]" />
-                          Google Lighthouse Audit
-                        </span>
-                        <span className="text-emerald-600 font-bold">PERFECT 100</span>
-                      </div>
-                      <div className="grid grid-cols-4 gap-2 text-center">
-                        <div className="p-2.5 bg-[#F8F9FA] rounded-lg border border-[#E5E7EB]">
-                          <p className="text-lg font-bold text-emerald-600">100</p>
-                          <p className="text-[0.65rem] text-[#71717A] font-mono mt-0.5">Performance</p>
-                        </div>
-                        <div className="p-2.5 bg-[#F8F9FA] rounded-lg border border-[#E5E7EB]">
-                          <p className="text-lg font-bold text-emerald-600">100</p>
-                          <p className="text-[0.65rem] text-[#71717A] font-mono mt-0.5">Accessibility</p>
-                        </div>
-                        <div className="p-2.5 bg-[#F8F9FA] rounded-lg border border-[#E5E7EB]">
-                          <p className="text-lg font-bold text-emerald-600">100</p>
-                          <p className="text-[0.65rem] text-[#71717A] font-mono mt-0.5">Best Practices</p>
-                        </div>
-                        <div className="p-2.5 bg-[#F8F9FA] rounded-lg border border-[#E5E7EB]">
-                          <p className="text-lg font-bold text-emerald-600">100</p>
-                          <p className="text-[0.65rem] text-[#71717A] font-mono mt-0.5">SEO</p>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {capabilities[activeCapability].previewType === 'terminal' && (
-                    <div className="bg-[#0A0A0A] text-white rounded-xl p-5 border border-[#27272A] font-mono text-xs space-y-3 shadow-md">
-                      <div className="flex items-center justify-between text-[0.68rem] text-[#A1A1AA] pb-2 border-b border-[#27272A]">
-                        <span className="flex items-center gap-1.5 text-white">
-                          <Terminal className="w-3.5 h-3.5 text-[#E0561B]" />
-                          Android Toolchain Runtime
-                        </span>
-                        <span className="text-emerald-400 font-bold">BUILD READY</span>
-                      </div>
-                      <div className="space-y-1 text-[#A1A1AA]">
-                        <p className="text-[#E0561B]">&gt; aapt2 compile --dir res/ -o compiled_res.zip</p>
-                        <p>&gt; d8 --output classes.dex --lib android.jar *.class</p>
-                        <p className="text-white">&gt; zipalign -v -p 4 app-unaligned.apk app-release.apk</p>
-                        <p className="text-emerald-400">&gt; Standalone APK generated on-device with zero server dependency</p>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Deliverables Bullets */}
-                  <div className="space-y-2.5">
-                    <p className="text-xs font-mono font-semibold uppercase tracking-wider text-[#0A0A0A]">
-                      Core Capabilities Delivered:
-                    </p>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-[#52525B]">
-                      {capabilities[activeCapability].deliverables.map((item, i) => (
-                        <div key={i} className="flex items-center gap-2">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-[#E0561B] shrink-0" />
-                          <span>{item}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-
-              <div className="mt-8 pt-6 border-t border-[#E5E7EB] flex items-center justify-between">
-                <Link 
-                  to="/services" 
-                  className="text-xs font-mono text-[#E0561B] hover:underline inline-flex items-center gap-1.5 font-semibold"
-                >
-                  <span>Explore full service specifications</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
-                <Button to="/contact" variant="primary" size="sm" showArrow>
-                  Request Consultation
-                </Button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* 03. INTERACTIVE CAPABILITIES BENTO ARCHITECTURE (BLUEPRINT #03) */}
+      <CapabilitiesBentoGrid />
 
       {/* 04. STUDIO MANIFESTO & PHILOSOPHY (ESTABLISHING THE BRAND) */}
       <section className="py-24 sm:py-32 border-b border-[#E5E7EB] bg-[#F8F9FA] relative">
@@ -750,14 +479,27 @@ export const HomePage: React.FC = () => {
           </p>
 
           <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
-            <Button to="/contact" variant="primary" size="lg" showArrow>
-              Start a Project
-            </Button>
+            <MagneticButton
+              onClick={() => navigate('/contact')}
+              className="px-8 py-4 rounded-full bg-[#E0561B] hover:bg-[#d04a14] text-white text-xs font-bold uppercase tracking-wider shadow-[0_8px_25px_rgba(224,86,27,0.3)] group"
+            >
+              <span>Start a Project</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </MagneticButton>
+
+            <MagneticButton
+              onClick={() => openBookingModal('call')}
+              className="px-6 py-4 rounded-full bg-[#0A0A0A] hover:bg-black text-white text-xs font-bold uppercase tracking-wider shadow-xs group"
+            >
+              <Calendar className="w-4 h-4 text-[#E0561B] group-hover:scale-110 transition-transform" />
+              <span>Book Discovery (30m)</span>
+            </MagneticButton>
+
             <a
               href={companyConfig.whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-6 py-3.5 bg-white hover:bg-[#F4F4F5] text-[#0A0A0A] border border-[#E5E7EB] text-xs font-semibold uppercase tracking-widest transition-colors shadow-xs rounded-none"
+              className="px-6 py-4 rounded-full bg-white hover:bg-[#F4F4F5] text-[#0A0A0A] border border-[#E5E7EB] text-xs font-bold uppercase tracking-wider transition-colors shadow-xs"
             >
               Direct WhatsApp Line
             </a>

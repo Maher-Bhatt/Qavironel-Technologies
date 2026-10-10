@@ -42,9 +42,11 @@ import { GithubIcon, LinkedinIcon } from '../components/ui/Icons';
 import { openBookingModal } from '../components/booking/BookingModal';
 import { StudioEngineConsole } from '../components/home/StudioEngineConsole';
 import { StudioStandardsMatrix } from '../components/home/StudioStandardsMatrix';
+import { playClickSound } from '../utils/soundEffects';
 
 export const HomePage: React.FC = () => {
   const navigate = useNavigate();
+  const [workFilter, setWorkFilter] = useState<'all' | 'ai' | 'client' | 'security'>('all');
   // Take 6 curated projects for sleek agency showcase
   const curatedProjects = projects.filter((p) => p.featured).slice(0, 6);
 
@@ -379,36 +381,114 @@ export const HomePage: React.FC = () => {
       </section>
 
       {/* 05. CURATED WORK (SLEEK, REFINED AGENCY SHOWCASE — CLAY STYLE) */}
-      <section className="py-24 sm:py-32 border-b border-[#E5E7EB] bg-white">
+      <section className="py-24 sm:py-32 border-b border-[#E5E7EB] bg-white relative">
         <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 border-b border-[#E5E7EB]">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-10 border-b border-[#E5E7EB]">
             <div>
-              <span className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-[#E0561B] block mb-2">
-                Selected Work
-              </span>
+              <div className="flex items-center gap-2 mb-2">
+                <span className="w-2 h-2 rounded-full bg-[#E0561B] animate-pulse" />
+                <span className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-[#E0561B]">
+                  Curated Studio Archive
+                </span>
+              </div>
               <h2 className="font-sans font-extrabold text-3xl sm:text-5xl text-[#0A0A0A] tracking-tight">
                 Featured software & digital platforms.
               </h2>
-              <p className="mt-2 text-sm text-[#52525B] max-w-xl">
-                Restrained, honest case studies of production client work, applied AI tools, and product lab prototypes.
+              <p className="mt-2 text-sm text-[#52525B] max-w-xl font-light">
+                Verifiable case studies of client production software, applied AI desktop assistants, and full-stack systems. Zero placeholder mockups.
               </p>
             </div>
-            <Button to="/work" variant="secondary" size="md" showArrow>
-              {`View All ${projects.length} Projects`}
-            </Button>
+
+            {/* Filter Pills */}
+            <div className="flex flex-wrap items-center gap-1.5 p-1.5 rounded-2xl bg-[#F8F9FA] border border-[#E5E7EB]">
+              {[
+                { id: 'all', label: 'All Featured (6)' },
+                { id: 'ai', label: 'Applied AI & Runtimes' },
+                { id: 'client', label: 'Client Commerce' },
+                { id: 'security', label: 'Security & Labs' }
+              ].map((tab) => {
+                const isActive = workFilter === tab.id;
+                return (
+                  <button
+                    key={tab.id}
+                    type="button"
+                    onClick={() => {
+                      playClickSound();
+                      setWorkFilter(tab.id as any);
+                    }}
+                    className={`px-3.5 py-1.5 rounded-xl text-xs font-mono font-semibold transition-all ${
+                      isActive
+                        ? 'bg-[#0A0A0A] text-white shadow-xs'
+                        : 'text-[#71717A] hover:text-[#0A0A0A] hover:bg-white'
+                    }`}
+                  >
+                    {tab.label}
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
-          {/* Sleek 3-Column Agency Grid with 3D Tilt & Glass Badges */}
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {curatedProjects.map((project) => (
-              <ProjectCard key={project.slug} project={project} layout="standard" />
-            ))}
+          {/* Project Display: Flagship Spotlight + Grid */}
+          <div className="mt-12 space-y-10">
+            {/* If all or ai is selected, render Flagship K.A.L.K.I. with Featured Architecture Layout */}
+            {(workFilter === 'all' || workFilter === 'ai') && (
+              <div className="relative">
+                <div className="flex items-center justify-between mb-3 text-xs font-mono text-[#71717A]">
+                  <span className="text-[#E0561B] font-bold">★ FLAGSHIP SHOWCASE · STORE CERTIFIED v1.0.4</span>
+                  <span>CLICK TABS BELOW TO INSPECT SCREENS</span>
+                </div>
+                <ProjectCard project={curatedProjects[0]} layout="featured" />
+              </div>
+            )}
+
+            {/* Grid for Other Projects */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {curatedProjects
+                .filter((p) => {
+                  if (workFilter === 'all') return p.slug !== 'kalki';
+                  if (workFilter === 'ai') return (p.category === 'AI & Software' || p.category === 'Digital Products') && p.slug !== 'kalki';
+                  if (workFilter === 'client') return p.category === 'Client Work';
+                  if (workFilter === 'security') return p.category === 'Product Lab' || p.category === 'Academic Build' || p.category === 'Experiments';
+                  return true;
+                })
+                .map((project) => (
+                  <ProjectCard key={project.slug} project={project} layout="standard" />
+                ))}
+            </div>
           </div>
 
-          <div className="mt-16 text-center">
-            <Button to="/work" variant="primary" size="lg" showArrow>
-              Explore Complete Portfolio & Engineering Labs
-            </Button>
+          {/* Scope Estimator Quick-Launch Card */}
+          <div className="mt-16 p-8 rounded-2xl bg-gradient-to-r from-[#F8F9FA] via-white to-[#F8F9FA] border border-[#E5E7EB] flex flex-col md:flex-row items-center justify-between gap-6 shadow-xs">
+            <div className="space-y-1 text-center md:text-left">
+              <span className="text-xs font-mono text-[#E0561B] font-bold uppercase tracking-wider">
+                Instant Architecture Brief
+              </span>
+              <h3 className="font-sans font-bold text-xl text-[#0A0A0A]">
+                Have a specific project or platform in mind?
+              </h3>
+              <p className="text-xs text-[#52525B]">
+                Configure deliverables, tech modules, and receive an instant scope breakdown in under 60 seconds.
+              </p>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-3">
+              <button
+                type="button"
+                onClick={() => {
+                  playClickSound();
+                  openBookingModal('quotation');
+                }}
+                className="px-5 py-3 rounded-full bg-[#E0561B] hover:bg-[#d04a14] text-white text-xs font-bold uppercase tracking-wider transition-colors shadow-xs flex items-center gap-2"
+              >
+                <FileText className="w-3.5 h-3.5" />
+                <span>Configure Scope Brief</span>
+              </button>
+
+              <Button to="/work" variant="secondary" size="md" showArrow>
+                {`View Complete Archive (${projects.length})`}
+              </Button>
+            </div>
           </div>
         </div>
       </section>

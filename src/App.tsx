@@ -53,6 +53,20 @@ export const App: React.FC = () => {
     return () => window.removeEventListener('open-booking-modal', handleOpenBooking);
   }, []);
 
+  // Ambient Cursor Spotlight Listener for .glass-card elements (Blueprint #12)
+  useEffect(() => {
+    const handleGlobalMouseMove = (e: MouseEvent) => {
+      const target = (e.target as HTMLElement)?.closest?.('.glass-card') as HTMLElement;
+      if (target) {
+        const rect = target.getBoundingClientRect();
+        target.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+        target.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+      }
+    };
+    window.addEventListener('mousemove', handleGlobalMouseMove, { passive: true });
+    return () => window.removeEventListener('mousemove', handleGlobalMouseMove);
+  }, []);
+
   return (
     <SmoothScrollProvider>
       <Preloader />

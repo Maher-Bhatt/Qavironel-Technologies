@@ -80,7 +80,7 @@ export const projects: Project[] = [
       }
     ],
     metrics: [
-      { value: 'v1.0.24', label: 'Store Version', context: 'Live on Microsoft Store (ID: 9P6HJPQZBGFQ)' },
+      { value: 'v1.0.4', label: 'Store Version', context: 'Live on Microsoft Store (ID: 9P6HJPQZBGFQ)' },
       { value: 'Local-First', label: 'Architecture', context: 'Data and credentials stay on your hardware' },
       { value: 'Multi-LLM', label: 'Inference Routing', context: 'Ollama, Groq LLaMA 3.3, LLaMA-4-Scout, OpenAI' }
     ],

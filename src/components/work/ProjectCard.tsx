@@ -1,8 +1,9 @@
 import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Project } from '../../types';
 import { ArrowUpRight, ArrowRight, Sparkles, CheckCircle2 } from 'lucide-react';
+import { playClickSound } from '../../utils/soundEffects';
 
 interface ProjectCardProps {
   project: Project;
@@ -16,6 +17,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   const isFeatured = layout === 'featured';
   const hasVideo = project.slug === 'kalki-hud-vision';
   const cardRef = useRef<HTMLDivElement>(null);
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
 
   // Subtle interactive 3D spring tilt
   const [rotateX, setRotateX] = useState(0);
@@ -29,8 +31,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
 
-    const rotX = ((y - centerY) / centerY) * -3;
-    const rotY = ((x - centerX) / centerX) * 3;
+    const rotX = ((y - centerY) / centerY) * -2.5;
+    const rotY = ((x - centerX) / centerX) * 2.5;
 
     setRotateX(rotX);
     setRotateY(rotY);
@@ -42,6 +44,10 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   };
 
   const isDarkProject = project.slug === 'kalki' || project.slug === 'codedroid';
+
+  const displayImage = (isFeatured && project.gallery && project.gallery[activeImageIndex])
+    ? project.gallery[activeImageIndex].src
+    : project.heroImage;
 
   return (
     <motion.article 
@@ -58,8 +64,13 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         isFeatured ? 'lg:grid lg:grid-cols-12 gap-0' : ''
       }`}
     >
+      {/* Background Watermark Numeral */}
+      <span className="absolute top-10 right-6 text-7xl sm:text-8xl font-sans font-black text-black/[0.03] select-none pointer-events-none tracking-tighter z-0">
+        {String(project.order || 1).padStart(2, '0')}
+      </span>
+
       {/* Studio Chrome Window Header */}
-      <div className={`col-span-12 flex items-center justify-between px-4 sm:px-5 py-2.5 border-b border-[#E5E7EB] ${
+      <div className={`col-span-12 flex items-center justify-between px-4 sm:px-5 py-2.5 border-b border-[#E5E7EB] relative z-10 ${
         isDarkProject && isFeatured ? 'bg-[#18181B] text-white border-white/10' : 'bg-[#FAFAFA]'
       }`}>
         <div className="flex items-center gap-1.5">
@@ -82,33 +93,41 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
 
       {/* Image Preview Container with Inner Studio Frame */}
       <div 
-        className={`relative overflow-hidden ${
+        className={`relative overflow-hidden z-10 ${
           isFeatured 
-            ? 'lg:col-span-7 p-4 sm:p-6 flex items-center justify-center self-stretch min-h-[300px] sm:min-h-[400px] lg:min-h-[480px] ' + (isDarkProject ? 'bg-[#0A0A0A]' : 'bg-[#F4F4F5]')
+            ? 'lg:col-span-7 p-4 sm:p-6 flex items-center justify-center self-stretch min-h-[320px] sm:min-h-[420px] lg:min-h-[500px] ' + (isDarkProject ? 'bg-[#0A0A0A]' : 'bg-[#F4F4F5]')
             : 'aspect-[16/10] bg-[#F4F4F5]'
         }`}
       >
         <Link 
           to={`/work/${project.slug}`} 
           className={`block w-full h-full relative overflow-hidden ${
-            isFeatured ? 'rounded-xl shadow-2xl border border-white/10 min-h-[280px] sm:min-h-[380px] lg:min-h-[440px]' : ''
+            isFeatured ? 'rounded-xl shadow-2xl border border-white/10 min-h-[300px] sm:min-h-[400px] lg:min-h-[460px]' : ''
           }`}
         >
-          <img
-            src={project.heroImage}
-            alt={`${project.title} interface preview`}
-            loading="lazy"
-            onError={(e) => {
-              const target = e.currentTarget;
-              if (!target.dataset.fallback) {
-                target.dataset.fallback = 'true';
-                target.src = '/images/projects/kalki/kalki-hero.png';
-              }
-            }}
-            className={`w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-104 ${
-              hasVideo ? 'group-hover:opacity-0 transition-opacity duration-300' : ''
-            }`}
-          />
+          <AnimatePresence mode="wait">
+            <motion.img
+              key={displayImage}
+              src={displayImage}
+              alt={`${project.title} interface preview`}
+              loading="lazy"
+              initial={{ opacity: 0.8 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0.8 }}
+              transition={{ duration: 0.25 }}
+              onError={(e) => {
+                const target = e.currentTarget;
+                if (!target.dataset.fallback) {
+                  target.dataset.fallback = 'true';
+                  target.src = '/images/projects/kalki/kalki-hero.png';
+                }
+              }}
+              className={`w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-104 ${
+                hasVideo ? 'group-hover:opacity-0 transition-opacity duration-300' : ''
+              }`}
+            />
+          </AnimatePresence>
+
           {hasVideo && (
             <video
               src="/videos/project-reel.mp4"
@@ -130,11 +149,36 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             {project.category}
           </span>
         </div>
+
+        {/* Interactive Gallery Switcher Chips for Featured Cards */}
+        {isFeatured && project.gallery && project.gallery.length > 1 && (
+          <div className="absolute bottom-4 left-4 right-4 z-20 flex flex-wrap items-center justify-center gap-1.5 p-1.5 rounded-xl bg-black/60 backdrop-blur-md border border-white/10">
+            {project.gallery.slice(0, 4).map((img, idx) => (
+              <button
+                key={idx}
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  playClickSound();
+                  setActiveImageIndex(idx);
+                }}
+                className={`px-2.5 py-1 rounded-lg text-[0.65rem] font-mono transition-colors ${
+                  activeImageIndex === idx
+                    ? 'bg-[#E0561B] text-white font-bold shadow-xs'
+                    : 'bg-white/10 text-white/80 hover:bg-white/20'
+                }`}
+              >
+                {idx === 0 ? '01 · HUD' : idx === 1 ? '02 · ASK' : idx === 2 ? '03 · TODAY' : '04 · MEMORY'}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Content Container */}
       <div 
-        className={`p-6 sm:p-8 flex flex-col justify-between ${
+        className={`p-6 sm:p-8 flex flex-col justify-between relative z-10 ${
           isFeatured ? 'lg:col-span-5' : 'flex-1'
         }`}
       >
@@ -143,6 +187,14 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             <span className="uppercase tracking-wider text-[#E0561B] font-semibold">{project.eyebrow}</span>
             <span>{project.year}</span>
           </div>
+
+          {/* Microsoft Store Verified Badge for K.A.L.K.I. */}
+          {project.slug === 'kalki' && (
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-[0.68rem] font-mono font-bold mb-3">
+              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+              <span>STORE VERIFIED · v1.0.4 · 9P6HJPQZBGFQ</span>
+            </div>
+          )}
 
           <h3 className="font-sans font-extrabold text-2xl sm:text-3xl text-[#0A0A0A] tracking-tight group-hover:text-[#E0561B] transition-colors leading-tight">
             <Link to={`/work/${project.slug}`}>
@@ -154,7 +206,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             {project.summary}
           </p>
 
-          {/* Key Metrics if available */}
+          {/* Key Metrics */}
           {project.metrics && project.metrics.length > 0 && (
             <div className="mt-6 pt-5 border-t border-[#E5E7EB] grid grid-cols-2 gap-3">
               {project.metrics.slice(0, 2).map((m, idx) => (
@@ -211,3 +263,6 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
     </motion.article>
   );
 };
+
+export default ProjectCard;
+

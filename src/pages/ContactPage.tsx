@@ -7,10 +7,17 @@ import { openBookingModal } from '../components/booking/BookingModal';
 
 export const ContactPage: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [faqQuery, setFaqQuery] = useState('');
 
   const toggleFaq = (idx: number) => {
     setOpenFaq(openFaq === idx ? null : idx);
   };
+
+  const filteredFaqs = faqs.filter(
+    (faq) =>
+      faq.question.toLowerCase().includes(faqQuery.toLowerCase()) ||
+      faq.answer.toLowerCase().includes(faqQuery.toLowerCase())
+  );
 
   return (
     <div className="bg-white text-[#0A0A0A] pt-28 sm:pt-36 pb-24 selection:bg-[#E0561B] selection:text-white">
@@ -133,9 +140,39 @@ export const ContactPage: React.FC = () => {
             </h2>
           </div>
 
+          {/* Instant FAQ Search Input (Blueprint #21) */}
+          <div className="max-w-4xl mb-8">
+            <div className="relative">
+              <input
+                type="text"
+                value={faqQuery}
+                onChange={(e) => setFaqQuery(e.target.value)}
+                placeholder="Search FAQs (e.g. 'timeline', 'pricing', 'IP handover', 'stack')..."
+                className="w-full px-5 py-3.5 pl-12 rounded-xl bg-[#F8F9FA] border border-[#E5E7EB] text-sm text-[#0A0A0A] placeholder-[#71717A] focus:outline-none focus:border-[#E0561B] transition-colors"
+              />
+              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-xs font-mono text-[#E0561B]">
+                🔍
+              </span>
+              {faqQuery && (
+                <button
+                  type="button"
+                  onClick={() => setFaqQuery('')}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-mono text-[#71717A] hover:text-[#0A0A0A]"
+                >
+                  CLEAR
+                </button>
+              )}
+            </div>
+            {faqQuery && (
+              <p className="mt-2 text-xs font-mono text-[#71717A]">
+                Found {filteredFaqs.length} matching result{filteredFaqs.length === 1 ? '' : 's'}
+              </p>
+            )}
+          </div>
+
           <div className="space-y-4 max-w-4xl">
-            {faqs.map((faq, idx) => {
-              const isOpen = openFaq === idx;
+            {filteredFaqs.map((faq, idx) => {
+              const isOpen = openFaq === idx || faqQuery.length > 0;
               return (
                 <div 
                   key={idx}

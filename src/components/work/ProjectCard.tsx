@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Project } from '../../types';
-import { Badge } from '../ui/Badge';
-import { ArrowUpRight, ArrowRight } from 'lucide-react';
+import { ArrowUpRight, ArrowRight, Sparkles } from 'lucide-react';
 
 interface ProjectCardProps {
   project: Project;
@@ -16,12 +15,44 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
 }) => {
   const isFeatured = layout === 'featured';
   const hasVideo = project.slug === 'kalki-hud-vision';
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  // Subtle interactive 3D tilt
+  const [rotateX, setRotateX] = useState(0);
+  const [rotateY, setRotateY] = useState(0);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const rotX = ((y - centerY) / centerY) * -4;
+    const rotY = ((x - centerX) / centerX) * 4;
+
+    setRotateX(rotX);
+    setRotateY(rotY);
+  };
+
+  const handleMouseLeave = () => {
+    setRotateX(0);
+    setRotateY(0);
+  };
 
   return (
     <motion.article 
-      whileHover={{ y: -4 }}
-      transition={{ duration: 0.2 }}
-      className={`group relative bg-white border border-[#E5E7EB] hover:border-[#E0561B]/60 shadow-[0_4px_24px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] transition-all duration-300 flex flex-col overflow-hidden text-[#0A0A0A] ${
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      animate={{
+        rotateX,
+        rotateY,
+        transformPerspective: 1000,
+      }}
+      transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+      className={`group relative glass-card rounded-2xl transition-all duration-300 flex flex-col overflow-hidden text-[#0A0A0A] ${
         isFeatured ? 'lg:grid lg:grid-cols-12 gap-0' : ''
       }`}
     >
@@ -31,12 +62,12 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           isFeatured ? 'lg:col-span-7 aspect-[16/10] lg:aspect-auto min-h-[300px] lg:min-h-[420px]' : 'aspect-[16/10]'
         }`}
       >
-        <Link to={`/work/${project.slug}`} className="block w-full h-full relative">
+        <Link to={`/work/${project.slug}`} className="block w-full h-full relative overflow-hidden">
           <img
             src={project.heroImage}
             alt={`${project.title} interface preview`}
             loading="lazy"
-            className={`w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105 ${
+            className={`w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-106 ${
               hasVideo ? 'group-hover:opacity-0 transition-opacity duration-300' : ''
             }`}
           />
@@ -52,18 +83,18 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           )}
         </Link>
 
-        {/* Status Pill on top of image */}
+        {/* Frosted Glass Status Pills on top of image */}
         <div className="absolute top-4 left-4 z-10 flex flex-wrap gap-2 pointer-events-none">
-          <span className="px-2.5 py-1 text-[0.68rem] font-mono bg-[#0A0A0A]/90 backdrop-blur-md text-white border border-[#27272A]">
+          <span className="px-3 py-1 text-[0.68rem] font-mono glass-dock text-[#0A0A0A] font-semibold rounded-full border border-white/80 shadow-xs">
             {project.status}
           </span>
-          <span className="px-2.5 py-1 text-[0.68rem] font-mono bg-[#E0561B] text-white font-semibold">
+          <span className="px-3 py-1 text-[0.68rem] font-mono bg-[#E0561B] text-white font-semibold rounded-full shadow-xs">
             {project.category}
           </span>
           {hasVideo && (
-            <span className="px-2 py-1 text-[0.65rem] font-mono bg-white/95 text-[#0A0A0A] font-bold border border-[#E5E7EB] shadow-xs flex items-center gap-1">
+            <span className="px-2.5 py-1 text-[0.65rem] font-mono glass-dock text-[#0A0A0A] font-bold rounded-full shadow-xs flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-[#E0561B] animate-pulse" />
-              VIDEO REEL
+              <span>LIVE REEL</span>
             </span>
           )}
         </div>
@@ -108,7 +139,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             {project.technologies.slice(0, 4).map((tech) => (
               <span 
                 key={tech} 
-                className="text-[0.68rem] font-mono text-[#52525B] bg-[#F8F9FA] px-2.5 py-1 border border-[#E5E7EB]"
+                className="text-[0.68rem] font-mono text-[#52525B] bg-[#F8F9FA] px-2.5 py-1 rounded-md border border-[#E5E7EB]"
               >
                 {tech}
               </span>
@@ -128,7 +159,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#0A0A0A] group-hover:text-[#E0561B] transition-colors"
           >
             <span>Explore Case Study</span>
-            <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+            <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1 text-[#E0561B]" />
           </Link>
 
           {project.links.length > 0 && (

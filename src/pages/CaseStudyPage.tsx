@@ -14,9 +14,11 @@ import {
   Layers, 
   ZoomIn,
   ShieldCheck,
-  Compass
+  Compass,
+  FileText
 } from 'lucide-react';
 import { GithubIcon } from '../components/ui/Icons';
+import { openBookingModal } from '../components/booking/BookingModal';
 
 export const CaseStudyPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -400,14 +402,32 @@ export const CaseStudyPage: React.FC = () => {
         </section>
 
         {/* CTA */}
-        <div className="mt-20 p-8 sm:p-12 bg-[#F8F9FA] border border-[#E5E7EB] rounded-2xl text-[#0A0A0A] shadow-[0_4px_24px_rgba(0,0,0,0.02)] flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div className="mt-20 p-8 sm:p-12 glass-card rounded-2xl text-[#0A0A0A] flex flex-col lg:flex-row items-center justify-between gap-6">
           <div>
             <h3 className="font-sans font-bold text-2xl text-[#0A0A0A]">Have a project with a clear next step?</h3>
             <p className="text-sm text-[#52525B] mt-1 font-light">Tell us what you are trying to build. We will shape the right architecture.</p>
           </div>
-          <Button to="/contact" variant="primary" size="lg" showArrow>
-            Start a Conversation
-          </Button>
+          <div className="flex flex-wrap items-center gap-3">
+            <button
+              type="button"
+              onClick={() => openBookingModal('call')}
+              className="px-5 py-3 rounded-full bg-[#0A0A0A] hover:bg-black text-white text-xs font-bold uppercase tracking-wider transition-colors flex items-center gap-2 shadow-xs"
+            >
+              <Calendar className="w-3.5 h-3.5 text-[#E0561B]" />
+              <span>Schedule Call (30m)</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => openBookingModal('quotation')}
+              className="px-5 py-3 rounded-full bg-[#F4F4F5] hover:bg-[#E5E7EB] text-[#0A0A0A] text-xs font-bold uppercase tracking-wider transition-colors border border-[#E5E7EB] flex items-center gap-2"
+            >
+              <FileText className="w-3.5 h-3.5 text-[#E0561B]" />
+              <span>Get Quote</span>
+            </button>
+            <Button to="/contact" variant="primary" size="md" showArrow>
+              Start Project
+            </Button>
+          </div>
         </div>
       </div>
     </article>

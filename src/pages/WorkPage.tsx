@@ -59,13 +59,24 @@ export const WorkPage: React.FC = () => {
         {/* Primary Projects Grid */}
         {mainProjects.length > 0 && (
           <div className="mt-12 space-y-10">
-            {mainProjects.map((project, idx) => (
+            {/* Featured Hero Project when All Work is active */}
+            {activeCategory === 'All Work' && (
               <ProjectCard 
-                key={project.slug} 
-                project={project} 
-                layout={idx === 0 && activeCategory === 'All Work' ? 'featured' : 'standard'} 
+                project={mainProjects[0]} 
+                layout="featured" 
               />
-            ))}
+            )}
+
+            {/* Responsive Grid for All Other Projects */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {(activeCategory === 'All Work' ? mainProjects.slice(1) : mainProjects).map((project) => (
+                <ProjectCard 
+                  key={project.slug} 
+                  project={project} 
+                  layout="standard" 
+                />
+              ))}
+            </div>
           </div>
         )}
 
@@ -88,7 +99,7 @@ export const WorkPage: React.FC = () => {
               {experimentProjects.map((item) => (
                 <div 
                   key={item.slug}
-                  className="bg-[#F8F9FA] border border-[#E5E7EB] p-6 flex flex-col justify-between hover:border-[#E0561B]/50 hover:bg-white shadow-[0_4px_20px_rgba(0,0,0,0.02)] transition-all duration-300 rounded-lg"
+                  className="glass-card p-6 sm:p-7 flex flex-col justify-between rounded-2xl transition-all duration-300 group"
                 >
                   <div>
                     <div className="flex items-center justify-between text-xs font-mono text-[#71717A] pb-3 border-b border-[#E5E7EB]">

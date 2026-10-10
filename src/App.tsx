@@ -30,6 +30,7 @@ const ScrollToTop = () => {
 };
 
 import { BookingModal, BookingModalTab } from './components/booking/BookingModal';
+import { MobileGlassDock } from './components/layout/MobileGlassDock';
 
 export const App: React.FC = () => {
   const [isBookingOpen, setIsBookingOpen] = useState(false);
@@ -53,7 +54,7 @@ export const App: React.FC = () => {
     <div className="flex flex-col min-h-screen bg-white text-[#0A0A0A]">
       <ScrollToTop />
       <SiteHeader />
-      <main className="flex-grow">
+      <main className="flex-grow pb-16 md:pb-0">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/work" element={<WorkPage />} />
@@ -67,6 +68,7 @@ export const App: React.FC = () => {
         </Routes>
       </main>
       <SiteFooter />
+      <MobileGlassDock />
       <BookingModal 
         isOpen={isBookingOpen} 
         initialTab={bookingTab} 

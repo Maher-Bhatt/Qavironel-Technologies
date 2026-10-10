@@ -8,6 +8,7 @@ import { services } from '../data/services';
 import { companyConfig } from '../data/company';
 import { VideoShowreel } from '../components/media/VideoShowreel';
 import { AmbientHeroCanvas } from '../components/media/AmbientHeroCanvas';
+import { ProjectCard } from '../components/work/ProjectCard';
 import { 
   ArrowRight, 
   ArrowUpRight, 
@@ -270,18 +271,14 @@ export const HomePage: React.FC = () => {
 
       {/* 02. ANIMATED MARQUEE TICKER (CLAY CRISP LIGHT THEME) */}
       <div className="py-4 bg-[#F8F9FA] border-b border-[#E5E7EB] overflow-hidden whitespace-nowrap">
-        <motion.div 
-          className="flex gap-8 items-center"
-          animate={{ x: [0, -1035] }}
-          transition={{ repeat: Infinity, ease: 'linear', duration: 25 }}
-        >
-          {[...marqueeItems, ...marqueeItems, ...marqueeItems].map((item, idx) => (
+        <div className="animate-marquee-smooth flex items-center gap-8">
+          {[...marqueeItems, ...marqueeItems, ...marqueeItems, ...marqueeItems].map((item, idx) => (
             <div key={idx} className="flex items-center gap-8 text-xs font-mono tracking-[0.2em] text-[#71717A]">
               <span className="text-[#0A0A0A] hover:text-[#E0561B] transition-colors font-medium">{item}</span>
               <span className="text-[#E0561B]">✦</span>
             </div>
           ))}
-        </motion.div>
+        </div>
       </div>
 
       {/* 03. CLAY.GLOBAL SIGNATURE: INTERACTIVE CAPABILITIES MATRIX SHOWCASE */}
@@ -642,106 +639,14 @@ export const HomePage: React.FC = () => {
               </p>
             </div>
             <Button to="/work" variant="secondary" size="md" showArrow>
-              View All 11 Projects
+              {`View All ${projects.length} Projects`}
             </Button>
           </div>
 
-          {/* Sleek 3-Column Agency Grid */}
+          {/* Sleek 3-Column Agency Grid with 3D Tilt & Glass Badges */}
           <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {curatedProjects.map((project) => (
-              <motion.article
-                key={project.slug}
-                whileHover={{ y: -6 }}
-                transition={{ duration: 0.2 }}
-                className="bg-white rounded-2xl border border-[#E5E7EB] hover:border-[#E0561B]/50 shadow-[0_4px_24px_rgba(0,0,0,0.03)] hover:shadow-[0_16px_36px_rgba(0,0,0,0.07)] transition-all flex flex-col justify-between group overflow-hidden"
-              >
-                <div>
-                  {/* Image Preview with sleek 16/10 aspect ratio and video hover */}
-                  <div className="relative aspect-[16/10] overflow-hidden bg-[#F4F4F5]">
-                    <img
-                      src={project.heroImage}
-                      alt={project.title}
-                      loading="lazy"
-                      className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
-                    />
-                    {project.slug === 'kalki-hud-vision' && (
-                      <video
-                        src="/videos/project-reel.mp4"
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-                      />
-                    )}
-                    <div className="absolute top-3 left-3 flex items-center gap-2 pointer-events-none">
-                      <span className="px-2 py-0.5 text-[0.65rem] font-mono bg-[#0A0A0A]/90 backdrop-blur-xs text-white border border-[#27272A]">
-                        {project.status}
-                      </span>
-                      <span className="px-2 py-0.5 text-[0.65rem] font-mono bg-[#E0561B] text-white font-semibold">
-                        {project.category}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Card Content */}
-                  <div className="p-6">
-                    <div className="flex items-center justify-between text-[0.7rem] font-mono text-[#71717A] mb-2">
-                      <span className="text-[#E0561B] font-semibold">{project.eyebrow}</span>
-                      <span>{project.year}</span>
-                    </div>
-
-                    <h3 className="font-sans font-bold text-xl text-[#0A0A0A] group-hover:text-[#E0561B] transition-colors">
-                      <Link to={`/work/${project.slug}`}>
-                        {project.title}
-                      </Link>
-                    </h3>
-
-                    <p className="mt-2 text-xs sm:text-sm text-[#52525B] line-clamp-2 leading-relaxed">
-                      {project.summary}
-                    </p>
-
-                    {/* Key Metrics */}
-                    {project.metrics && project.metrics.length > 0 && (
-                      <div className="mt-4 pt-4 border-t border-[#E5E7EB] flex items-center justify-between">
-                        <div>
-                          <p className="text-base font-bold text-[#0A0A0A]">{project.metrics[0].value}</p>
-                          <p className="text-[0.65rem] text-[#71717A] font-mono">{project.metrics[0].label}</p>
-                        </div>
-                        {project.metrics[1] && (
-                          <div className="text-right">
-                            <p className="text-base font-bold text-[#0A0A0A]">{project.metrics[1].value}</p>
-                            <p className="text-[0.65rem] text-[#71717A] font-mono">{project.metrics[1].label}</p>
-                          </div>
-                        )}
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                {/* Card Footer Link */}
-                <div className="px-6 pb-6 pt-2 flex items-center justify-between border-t border-[#E5E7EB]">
-                  <Link
-                    to={`/work/${project.slug}`}
-                    className="text-xs font-mono font-semibold uppercase tracking-wider text-[#0A0A0A] group-hover:text-[#E0561B] inline-flex items-center gap-1.5 transition-colors"
-                  >
-                    <span>Read Case Study</span>
-                    <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
-                  </Link>
-
-                  {project.links.length > 0 && (
-                    <a
-                      href={project.links[0].url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-xs text-[#71717A] hover:text-[#E0561B] transition-colors"
-                      title={project.links[0].label}
-                    >
-                      <ArrowUpRight className="w-3.5 h-3.5" />
-                    </a>
-                  )}
-                </div>
-              </motion.article>
+              <ProjectCard key={project.slug} project={project} layout="standard" />
             ))}
           </div>
 

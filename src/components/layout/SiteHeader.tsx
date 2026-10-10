@@ -106,29 +106,31 @@ export const SiteHeader: React.FC = () => {
         </div>
       </header>
 
-      {/* Mobile Drawer */}
+      {/* Mobile Drawer with Frosted Glassmorphism */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-40 bg-black/40 backdrop-blur-xs md:hidden animate-fade-in" onClick={() => setMobileMenuOpen(false)}>
+        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-md md:hidden animate-fade-in" onClick={() => setMobileMenuOpen(false)}>
           <div 
-            className="fixed inset-y-0 right-0 w-full max-w-sm bg-white border-l border-[#E5E7EB] p-6 sm:p-8 flex flex-col justify-between shadow-2xl text-[#0A0A0A]"
+            className="fixed inset-y-0 right-0 w-full max-w-sm backdrop-blur-2xl bg-white/92 border-l border-white/60 p-6 sm:p-8 flex flex-col justify-between shadow-[0_25px_60px_rgba(0,0,0,0.25)] text-[#0A0A0A]"
             onClick={(e) => e.stopPropagation()}
           >
             <div>
-              <div className="flex items-center justify-between pb-6 border-b border-[#E5E7EB]">
+              <div className="flex items-center justify-between pb-6 border-b border-[#E5E7EB]/80">
                 <Logo variant="full" theme="light" size="sm" />
                 <button
                   type="button"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="p-1.5 text-[#0A0A0A] hover:text-[#E0561B] transition-colors"
+                  className="p-2 rounded-full hover:bg-white/80 text-[#0A0A0A] hover:text-[#E0561B] transition-colors"
                   aria-label="Close menu"
                 >
                   <X className="w-6 h-6" />
                 </button>
               </div>
 
-              <div className="mt-4 py-2 px-3 bg-[#F8F9FA] border border-[#E5E7EB] flex items-center gap-2 text-xs font-mono text-[#52525B]">
+              <div className="mt-4 py-2 px-3.5 glass-pill rounded-full flex items-center gap-2 text-xs font-mono text-[#52525B]">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                <span>GLOBAL STUDIO · ONLINE</span>
+                <span className="font-semibold text-[#0A0A0A]">GLOBAL STUDIO</span>
+                <span className="text-[#E0561B]">·</span>
+                <span>ONLINE 24/7</span>
               </div>
 
               <nav className="mt-8 flex flex-col gap-5">

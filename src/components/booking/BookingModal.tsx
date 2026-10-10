@@ -65,15 +65,101 @@ export const BookingModal: React.FC<BookingModalProps> = ({
   }, [isOpen]);
 
   // ---------------------------------------------------------------------------
+  // ---------------------------------------------------------------------------
   // TAB 1: CALL BOOKING STATE (Cal.com / sumitx.me style)
   // ---------------------------------------------------------------------------
-  const [selectedDate, setSelectedDate] = useState<number>(new Date().getDate());
-  const [selectedMonth, setSelectedMonth] = useState<number>(new Date().getMonth());
-  const [selectedYear, setSelectedYear] = useState<number>(new Date().getFullYear());
-  const [selectedSlot, setSelectedSlot] = useState<string | null>('03:00pm');
+  interface TimeSlotDefinition {
+    id: string;
+    hour: number;
+    minute: number;
+    label12h: string;
+    label24h: string;
+  }
+
+  const ALL_SLOTS: TimeSlotDefinition[] = useMemo(() => [
+    { id: '11-00', hour: 11, minute: 0, label12h: '11:00am', label24h: '11:00' },
+    { id: '11-30', hour: 11, minute: 30, label12h: '11:30am', label24h: '11:30' },
+    { id: '14-00', hour: 14, minute: 0, label12h: '02:00pm', label24h: '14:00' },
+    { id: '14-30', hour: 14, minute: 30, label12h: '02:30pm', label24h: '14:30' },
+    { id: '15-00', hour: 15, minute: 0, label12h: '03:00pm', label24h: '15:00' },
+    { id: '15-30', hour: 15, minute: 30, label12h: '03:30pm', label24h: '15:30' },
+    { id: '16-00', hour: 16, minute: 0, label12h: '04:00pm', label24h: '16:00' },
+    { id: '16-30', hour: 16, minute: 30, label12h: '04:30pm', label24h: '16:30' },
+    { id: '17-00', hour: 17, minute: 0, label12h: '05:00pm', label24h: '17:00' },
+    { id: '17-30', hour: 17, minute: 30, label12h: '05:30pm', label24h: '17:30' },
+    { id: '18-00', hour: 18, minute: 0, label12h: '06:00pm', label24h: '18:00' },
+    { id: '18-30', hour: 18, minute: 30, label12h: '06:30pm', label24h: '18:30' },
+  ], []);
+
+  const isSlotAvailable = (slot: TimeSlotDefinition, year: number, month: number, date: number): boolean => {
+    const now = new Date();
+    const slotDate = new Date(year, month, date, slot.hour, slot.minute, 0, 0);
+    // User must book at least 1 hour from current time
+    const minBookingTime = new Date(now.getTime() + 60 * 60 * 1000);
+    return slotDate.getTime() >= minBookingTime.getTime();
+  };
+
+  const isDateInPast = (year: number, month: number, date: number): boolean => {
+    const now = new Date();
+    const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0);
+    const targetDay = new Date(year, month, date, 0, 0, 0, 0);
+    return targetDay.getTime() < todayStart.getTime();
+  };
+
+  const isDateToday = (year: number, month: number, date: number): boolean => {
+    const now = new Date();
+    return (
+      now.getFullYear() === year &&
+      now.getMonth() === month &&
+      now.getDate() === date
+    );
+  };
+
+  const getInitialBookableDate = () => {
+    const now = new Date();
+    const todaySlotsAvailable = ALL_SLOTS.some((slot) =>
+      isSlotAvailable(slot, now.getFullYear(), now.getMonth(), now.getDate())
+    );
+    if (todaySlotsAvailable) {
+      return {
+        year: now.getFullYear(),
+        month: now.getMonth(),
+        day: now.getDate()
+      };
+    }
+    const tomorrow = new Date(now);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    return {
+      year: tomorrow.getFullYear(),
+      month: tomorrow.getMonth(),
+      day: tomorrow.getDate()
+    };
+  };
+
+  const initialDateObj = getInitialBookableDate();
+  const [selectedDate, setSelectedDate] = useState<number>(initialDateObj.day);
+  const [selectedMonth, setSelectedMonth] = useState<number>(initialDateObj.month);
+  const [selectedYear, setSelectedYear] = useState<number>(initialDateObj.year);
   const [timeFormat, setTimeFormat] = useState<'12h' | '24h'>('12h');
+  const [selectedSlot, setSelectedSlot] = useState<string | null>(() => {
+    const first = ALL_SLOTS.find(s => isSlotAvailable(s, initialDateObj.year, initialDateObj.month, initialDateObj.day));
+    return first ? first.label12h : null;
+  });
   const [timezone, setTimezone] = useState<string>('Asia/Kolkata (IST)');
   const [callStep, setCallStep] = useState<'pick' | 'details' | 'confirmed'>('pick');
+
+  // When modal reopens, ensure valid upcoming bookable date and slot
+  useEffect(() => {
+    if (isOpen) {
+      const validDate = getInitialBookableDate();
+      setSelectedYear(validDate.year);
+      setSelectedMonth(validDate.month);
+      setSelectedDate(validDate.day);
+      const validSlots = ALL_SLOTS.filter(s => isSlotAvailable(s, validDate.year, validDate.month, validDate.day));
+      setSelectedSlot(validSlots.length > 0 ? (timeFormat === '12h' ? validSlots[0].label12h : validSlots[0].label24h) : null);
+      setCallStep('pick');
+    }
+  }, [isOpen]);
 
   const [callForm, setCallForm] = useState({
     name: '',
@@ -95,21 +181,13 @@ export const BookingModal: React.FC<BookingModalProps> = ({
     return new Date(selectedYear, selectedMonth, 1).getDay();
   }, [selectedYear, selectedMonth]);
 
-  const availableSlots12h = [
-    '11:00am', '11:30am', '02:00pm', '02:30pm', 
-    '03:00pm', '03:30pm', '04:00pm', '04:30pm', 
-    '05:00pm', '05:30pm', '06:00pm', '06:30pm'
-  ];
-
-  const availableSlots24h = [
-    '11:00', '11:30', '14:00', '14:30', 
-    '15:00', '15:30', '16:00', '16:30', 
-    '17:00', '17:30', '18:00', '18:30'
-  ];
-
-  const displaySlots = timeFormat === '12h' ? availableSlots12h : availableSlots24h;
+  const now = new Date();
+  const canGoPrevMonth = 
+    selectedYear > now.getFullYear() || 
+    (selectedYear === now.getFullYear() && selectedMonth > now.getMonth());
 
   const handlePrevMonth = () => {
+    if (!canGoPrevMonth) return;
     if (selectedMonth === 0) {
       setSelectedMonth(11);
       setSelectedYear((prev) => prev - 1);
@@ -127,9 +205,35 @@ export const BookingModal: React.FC<BookingModalProps> = ({
     }
   };
 
+  const handleToggleTimeFormat = (fmt: '12h' | '24h') => {
+    setTimeFormat(fmt);
+    if (selectedSlot) {
+      const found = ALL_SLOTS.find(s => s.label12h === selectedSlot || s.label24h === selectedSlot);
+      if (found) {
+        setSelectedSlot(fmt === '12h' ? found.label12h : found.label24h);
+      }
+    }
+  };
+
+  const availableSlotsForSelectedDate = useMemo(() => {
+    return ALL_SLOTS.filter(slot => isSlotAvailable(slot, selectedYear, selectedMonth, selectedDate));
+  }, [ALL_SLOTS, selectedYear, selectedMonth, selectedDate]);
+
   const handleConfirmCall = (e: React.FormEvent) => {
     e.preventDefault();
     if (!callForm.name || !callForm.email) return;
+
+    if (!selectedSlot) {
+      alert('Please select an available time slot.');
+      return;
+    }
+
+    const slotDef = ALL_SLOTS.find(s => s.label12h === selectedSlot || s.label24h === selectedSlot);
+    if (!slotDef || !isSlotAvailable(slotDef, selectedYear, selectedMonth, selectedDate)) {
+      alert('Selected slot is no longer available. Bookings require at least 1 hour advance notice. Please select another time slot.');
+      setCallStep('pick');
+      return;
+    }
 
     setIsSubmittingCall(true);
     setTimeout(() => {
@@ -140,7 +244,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
         const bookings = JSON.parse(localStorage.getItem('qavironel_bookings') || '[]');
         bookings.push({
           ...callForm,
-          date: `${selectedYear}-${selectedMonth + 1}-${selectedDate}`,
+          date: `${selectedYear}-${String(selectedMonth + 1).padStart(2, '0')}-${String(selectedDate).padStart(2, '0')}`,
           slot: selectedSlot,
           timezone,
           bookedAt: new Date().toISOString()
@@ -345,8 +449,15 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                     <div className="flex items-center gap-1">
                       <button 
                         type="button"
+                        disabled={!canGoPrevMonth}
                         onClick={handlePrevMonth}
-                        className="p-1.5 rounded hover:bg-[#F4F4F5] text-[#52525B] hover:text-[#0A0A0A] transition-colors"
+                        className={`p-1.5 rounded transition-colors ${
+                          canGoPrevMonth 
+                            ? 'hover:bg-[#F4F4F5] text-[#52525B] hover:text-[#0A0A0A]' 
+                            : 'opacity-25 cursor-not-allowed text-[#A1A1AA]'
+                        }`}
+                        title={canGoPrevMonth ? 'Previous month' : 'Cannot navigate to past months'}
+                        aria-label="Previous month"
                       >
                         <ChevronLeft className="w-4 h-4" />
                       </button>
@@ -354,6 +465,8 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                         type="button"
                         onClick={handleNextMonth}
                         className="p-1.5 rounded hover:bg-[#F4F4F5] text-[#52525B] hover:text-[#0A0A0A] transition-colors"
+                        title="Next month"
+                        aria-label="Next month"
                       >
                         <ChevronRight className="w-4 h-4" />
                       </button>
@@ -380,25 +493,40 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                     {Array.from({ length: daysInMonth }).map((_, i) => {
                       const day = i + 1;
                       const isSelected = selectedDate === day;
-                      const isToday = day === new Date().getDate() && selectedMonth === new Date().getMonth();
+                      const isPast = isDateInPast(selectedYear, selectedMonth, day);
+                      const isToday = isDateToday(selectedYear, selectedMonth, day);
 
                       return (
                         <button
                           key={day}
                           type="button"
+                          disabled={isPast}
                           onClick={() => {
+                            if (isPast) return;
                             setSelectedDate(day);
-                            setSelectedSlot(null);
+                            const validForDay = ALL_SLOTS.filter(s => isSlotAvailable(s, selectedYear, selectedMonth, day));
+                            const currentStillValid = validForDay.some(s => 
+                              timeFormat === '12h' ? s.label12h === selectedSlot : s.label24h === selectedSlot
+                            );
+                            if (!currentStillValid) {
+                              setSelectedSlot(validForDay.length > 0 ? (timeFormat === '12h' ? validForDay[0].label12h : validForDay[0].label24h) : null);
+                            }
                           }}
-                          className={`h-9 flex items-center justify-center rounded-lg transition-colors font-medium ${
-                            isSelected 
-                              ? 'bg-[#E0561B] text-white font-bold shadow-md shadow-[#E0561B]/20' 
-                              : isToday 
-                                ? 'bg-[#F4F4F5] text-[#0A0A0A] font-bold border border-[#E0561B]' 
-                                : 'hover:bg-[#F4F4F5] text-[#0A0A0A]'
+                          className={`h-9 flex items-center justify-center rounded-lg transition-colors font-medium relative ${
+                            isPast 
+                              ? 'text-[#A1A1AA]/40 cursor-not-allowed bg-transparent hover:bg-transparent' 
+                              : isSelected 
+                                ? 'bg-[#E0561B] text-white font-bold shadow-md shadow-[#E0561B]/20' 
+                                : isToday 
+                                  ? 'bg-[#F4F4F5] text-[#0A0A0A] font-bold border border-[#E0561B]' 
+                                  : 'hover:bg-[#F4F4F5] text-[#0A0A0A]'
                           }`}
+                          title={isPast ? 'Past date cannot be booked' : undefined}
                         >
-                          {day}
+                          <span className={isPast ? 'line-through decoration-[#A1A1AA]/50' : ''}>{day}</span>
+                          {isToday && !isSelected && (
+                            <span className="absolute bottom-1 w-1 h-1 rounded-full bg-[#E0561B]" />
+                          )}
                         </button>
                       );
                     })}
@@ -407,53 +535,96 @@ export const BookingModal: React.FC<BookingModalProps> = ({
 
                 {/* Right Column: Time Slots (3 cols) */}
                 <div className="md:col-span-3 space-y-4 md:border-l md:border-[#E5E7EB] md:pl-6">
-                  <div className="flex items-center justify-between pb-2">
-                    <span className="text-xs font-mono text-[#71717A]">
+                  <div className="flex items-center justify-between pb-1">
+                    <span className="text-xs font-mono font-semibold text-[#0A0A0A]">
                       {months[selectedMonth].slice(0, 3)} {selectedDate}
                     </span>
                     <div className="flex items-center bg-[#F4F4F5] border border-[#E5E7EB] rounded p-0.5 text-[0.65rem] font-mono">
                       <button 
                         type="button"
-                        onClick={() => setTimeFormat('12h')}
-                        className={`px-1.5 py-0.5 rounded ${timeFormat === '12h' ? 'bg-[#E0561B] text-white font-bold' : 'text-[#71717A]'}`}
+                        onClick={() => handleToggleTimeFormat('12h')}
+                        className={`px-1.5 py-0.5 rounded transition-colors ${timeFormat === '12h' ? 'bg-[#E0561B] text-white font-bold' : 'text-[#71717A]'}`}
                       >
                         12h
                       </button>
                       <button 
                         type="button"
-                        onClick={() => setTimeFormat('24h')}
-                        className={`px-1.5 py-0.5 rounded ${timeFormat === '24h' ? 'bg-[#E0561B] text-white font-bold' : 'text-[#71717A]'}`}
+                        onClick={() => handleToggleTimeFormat('24h')}
+                        className={`px-1.5 py-0.5 rounded transition-colors ${timeFormat === '24h' ? 'bg-[#E0561B] text-white font-bold' : 'text-[#71717A]'}`}
                       >
                         24h
                       </button>
                     </div>
                   </div>
 
-                  <div className="space-y-2 max-h-[300px] overflow-y-auto pr-1">
-                    {displaySlots.map((slot) => {
-                      const isSlotSelected = selectedSlot === slot;
-                      return (
-                        <button
-                          key={slot}
-                          type="button"
-                          onClick={() => setSelectedSlot(slot)}
-                          className={`w-full py-2.5 px-3 rounded-lg text-xs font-mono font-medium border transition-all text-center ${
-                            isSlotSelected 
-                              ? 'bg-[#E0561B] border-[#E0561B] text-white font-bold' 
-                              : 'bg-white border-[#E5E7EB] hover:border-[#E0561B]/60 text-[#0A0A0A] hover:bg-[#F8F9FA]'
-                          }`}
-                        >
-                          {slot}
-                        </button>
-                      );
-                    })}
+                  <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-md bg-[#F8F9FA] border border-[#E5E7EB] text-[0.68rem] font-mono text-[#71717A]">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#E0561B] shrink-0" />
+                    <span>Min 1-hr advance notice required</span>
                   </div>
+
+                  {availableSlotsForSelectedDate.length === 0 ? (
+                    <div className="p-4 rounded-xl bg-[#F8F9FA] border border-[#E5E7EB] text-center space-y-2 my-2">
+                      <Clock className="w-5 h-5 text-[#E0561B] mx-auto opacity-80" />
+                      <p className="text-xs font-bold text-[#0A0A0A]">
+                        {isDateToday(selectedYear, selectedMonth, selectedDate)
+                          ? 'No slots remaining today'
+                          : 'No slots available on this date'}
+                      </p>
+                      <p className="text-[0.7rem] text-[#71717A] leading-relaxed">
+                        {isDateToday(selectedYear, selectedMonth, selectedDate)
+                          ? 'Discovery calls require at least 1 hour preparation notice. Please select tomorrow or a future date.'
+                          : 'Please choose another date on the calendar.'}
+                      </p>
+                      {isDateToday(selectedYear, selectedMonth, selectedDate) && (
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const tomorrow = new Date();
+                            tomorrow.setDate(tomorrow.getDate() + 1);
+                            setSelectedYear(tomorrow.getFullYear());
+                            setSelectedMonth(tomorrow.getMonth());
+                            setSelectedDate(tomorrow.getDate());
+                            const tomorrowSlots = ALL_SLOTS.filter(s => 
+                              isSlotAvailable(s, tomorrow.getFullYear(), tomorrow.getMonth(), tomorrow.getDate())
+                            );
+                            if (tomorrowSlots.length > 0) {
+                              setSelectedSlot(timeFormat === '12h' ? tomorrowSlots[0].label12h : tomorrowSlots[0].label24h);
+                            }
+                          }}
+                          className="inline-block mt-1 px-3 py-1.5 rounded-full bg-[#0A0A0A] hover:bg-[#E0561B] text-white text-[0.65rem] font-bold uppercase tracking-wider transition-colors"
+                        >
+                          View Tomorrow's Slots →
+                        </button>
+                      )}
+                    </div>
+                  ) : (
+                    <div className="space-y-2 max-h-[280px] overflow-y-auto pr-1">
+                      {availableSlotsForSelectedDate.map((slotDef) => {
+                        const slotLabel = timeFormat === '12h' ? slotDef.label12h : slotDef.label24h;
+                        const isSlotSelected = selectedSlot === slotLabel;
+                        return (
+                          <button
+                            key={slotDef.id}
+                            type="button"
+                            onClick={() => setSelectedSlot(slotLabel)}
+                            className={`w-full py-2.5 px-3 rounded-lg text-xs font-mono font-medium border transition-all text-center ${
+                              isSlotSelected 
+                                ? 'bg-[#E0561B] border-[#E0561B] text-white font-bold shadow-xs' 
+                                : 'bg-white border-[#E5E7EB] hover:border-[#E0561B]/60 text-[#0A0A0A] hover:bg-[#F8F9FA]'
+                            }`}
+                          >
+                            {slotLabel}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  )}
 
                   {selectedSlot && (
                     <button
                       type="button"
                       onClick={() => setCallStep('details')}
-                      className="w-full mt-4 py-2.5 rounded-full bg-[#E0561B] hover:bg-[#C2410C] text-white text-xs font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-1.5 shadow-xs"
+                      className="w-full mt-3 py-2.5 rounded-full bg-[#E0561B] hover:bg-[#C2410C] text-white text-xs font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-1.5 shadow-xs"
                     >
                       <span>Next: Enter Details</span>
                       <ArrowRight className="w-3.5 h-3.5" />

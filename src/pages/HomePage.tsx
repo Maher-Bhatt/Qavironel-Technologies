@@ -67,7 +67,7 @@ export const HomePage: React.FC = () => {
       <SEO title="Home" />
       <div className="bg-white text-[#0A0A0A] overflow-hidden selection:bg-[#E0561B] selection:text-white">
       {/* 01. BRAND-FIRST EDITORIAL HERO SECTION (CLAY.GLOBAL PURE WHITE CANVAS) */}
-      <section className="relative pt-32 sm:pt-40 pb-20 sm:pb-28 border-b border-[#E5E7EB]">
+      <section className="relative pt-28 sm:pt-40 pb-10 sm:pb-24 border-b border-[#E5E7EB]">
         {/* Interactive Ambient Fluid Wave Canvas */}
         <AmbientHeroCanvas />
 
@@ -167,7 +167,7 @@ export const HomePage: React.FC = () => {
             </div>
 
             {/* Right Column: Hero 3D Spatial Architecture Core (5 Cols) */}
-            <div className="lg:col-span-5 relative flex items-center justify-center">
+            <div className="hidden lg:flex lg:col-span-5 relative items-center justify-center">
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -186,7 +186,7 @@ export const HomePage: React.FC = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.4 }}
-            className="mt-16 sm:mt-20 pt-8 border-t border-[#E5E7EB] grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8"
+            className="mt-10 sm:mt-20 pt-8 border-t border-[#E5E7EB] grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8"
           >
             <div className="space-y-1">
               <p className="text-2xl sm:text-3xl font-extrabold font-sans text-[#0A0A0A]">&lt; 0.8s</p>
@@ -215,9 +215,8 @@ export const HomePage: React.FC = () => {
             initial={{ opacity: 0, y: 36 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.45 }}
-            className="mt-16 sm:mt-20"
-          >
-            <div className="flex items-center justify-between mb-3">
+            className="mt-10 sm:mt-20">
+              <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-2">
                 <Terminal className="w-4 h-4 text-[#E0561B]" />
                 <span className="text-xs font-mono font-semibold uppercase tracking-wider text-[#0A0A0A]">
@@ -234,9 +233,8 @@ export const HomePage: React.FC = () => {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.55 }}
-            className="mt-16 sm:mt-20"
-          >
-            <div className="flex items-center justify-between mb-4">
+            className="mt-10 sm:mt-20">
+              <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
                 <Film className="w-4 h-4 text-[#E0561B]" />
                 <span className="text-xs font-mono font-semibold uppercase tracking-wider text-[#0A0A0A]">
@@ -590,6 +588,9 @@ export const HomePage: React.FC = () => {
     </>
   );
 };
+
+
+
 
 
 

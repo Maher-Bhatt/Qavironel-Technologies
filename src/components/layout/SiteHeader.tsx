@@ -161,12 +161,14 @@ export const SiteHeader: React.FC = () => {
         </div>
       </header>
 
-      {/* Mobile Drawer with Frosted Glassmorphism (Always Light or dark depending on preference, we'll keep it light for readability consistency) */}
+      {/* Mobile Drawer with Frosted Glassmorphism */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-md md:hidden animate-fade-in" onClick={() => setMobileMenuOpen(false)}>
+        <div data-lenis-prevent="true" className="fixed inset-0 z-50 bg-black/50 backdrop-blur-md md:hidden animate-fade-in" onClick={() => setMobileMenuOpen(false)}>
           <div 
-            className="fixed inset-y-0 right-0 w-full max-w-sm backdrop-blur-2xl bg-white/95 dark:bg-[#0E0E12]/95 border-l border-white/60 dark:border-white/10 p-6 sm:p-8 flex flex-col justify-between shadow-[0_25px_60px_rgba(0,0,0,0.25)] text-[#0A0A0A] dark:text-[#F4F4F5]"
+            data-lenis-prevent="true"
+            className="fixed inset-y-0 right-0 w-full max-w-sm backdrop-blur-2xl bg-white/95 dark:bg-[#0E0E12]/95 border-l border-white/60 dark:border-white/10 p-6 sm:p-8 flex flex-col justify-between shadow-[0_25px_60px_rgba(0,0,0,0.25)] text-[#0A0A0A] dark:text-[#F4F4F5] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
+            onWheel={(e) => e.stopPropagation()}
           >
             <div>
               <div className="flex items-center justify-between pb-6 border-b border-[#E5E7EB]/80 dark:border-white/10">

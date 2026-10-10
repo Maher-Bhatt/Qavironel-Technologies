@@ -47,18 +47,15 @@ export const BookingModal: React.FC<BookingModalProps> = ({
     }
   }, [isOpen, initialTab]);
 
-  // Lock body & html scroll and pause Lenis while modal is open (Zero background scroll bleed)
+  // Lock body scroll and pause Lenis while modal is open (Zero background scroll bleed)
   useEffect(() => {
     if (isOpen) {
       const originalBodyOverflow = document.body.style.overflow;
-      const originalHtmlOverflow = document.documentElement.style.overflow;
       document.body.style.overflow = 'hidden';
-      document.documentElement.style.overflow = 'hidden';
       (window as any).lenis?.stop();
 
       return () => {
         document.body.style.overflow = originalBodyOverflow;
-        document.documentElement.style.overflow = originalHtmlOverflow;
         (window as any).lenis?.start();
       };
     }
@@ -323,18 +320,21 @@ export const BookingModal: React.FC<BookingModalProps> = ({
 
   return (
     <div 
+      data-lenis-prevent="true"
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-3 sm:p-6 backdrop-blur-sm animate-fade-in overscroll-contain"
       role="dialog"
       aria-modal="true"
       onClick={onClose}
     >
       <motion.div 
+        data-lenis-prevent="true"
         initial={{ opacity: 0, scale: 0.97, y: 12 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.97, y: 12 }}
         transition={{ duration: 0.22, ease: 'easeOut' }}
         className="relative w-full max-w-4xl max-h-[92vh] overflow-y-auto overscroll-contain bg-white dark:bg-[#0E0E12] border border-[#E5E7EB] dark:border-white/10 rounded-2xl shadow-2xl text-[#0A0A0A] dark:text-[#F4F4F5]"
         onClick={(e) => e.stopPropagation()}
+        onWheel={(e) => e.stopPropagation()}
       >
         {/* Top Header & Tab Switcher */}
         <div className="sticky top-0 z-20 bg-white/95 dark:bg-[#0E0E12]/95 backdrop-blur-md border-b border-[#E5E7EB] dark:border-white/10 px-6 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -391,16 +391,16 @@ export const BookingModal: React.FC<BookingModalProps> = ({
             {callStep === 'pick' && (
               <div className="p-6 sm:p-8 grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
                 {/* Left Column: Meeting Info (4 cols) */}
-                <div className="md:col-span-4 space-y-6 md:border-r md:border-[#E5E7EB] md:pr-6">
+                <div className="md:col-span-4 space-y-6 md:border-r md:border-[#E5E7EB] dark:md:border-white/10 md:pr-6">
                   <div className="space-y-1">
                     <div className="w-10 h-10 rounded-xl bg-[#E0561B]/10 border border-[#E0561B]/20 text-[#E0561B] flex items-center justify-center font-bold font-sans">
                       Q
                     </div>
-                    <h3 className="font-bold text-lg text-[#0A0A0A] pt-2">Qavironel Technologies</h3>
+                    <h3 className="font-bold text-lg text-[#0A0A0A] dark:text-white pt-2">Qavironel Technologies</h3>
                     <p className="text-sm font-semibold text-[#E0561B]">30-Min Discovery & Scoping Session</p>
                   </div>
 
-                  <div className="space-y-3 text-xs text-[#52525B]">
+                  <div className="space-y-3 text-xs text-[#52525B] dark:text-[#A1A1AA]">
                     <div className="flex items-center gap-2.5">
                       <Clock className="w-4 h-4 text-[#E0561B]" />
                       <span className="font-medium">30 Minutes Duration</span>
@@ -414,7 +414,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                       <select
                         value={timezone}
                         onChange={(e) => setTimezone(e.target.value)}
-                        className="bg-[#F8F9FA] border border-[#E5E7EB] rounded px-2.5 py-1 text-xs text-[#0A0A0A] focus:outline-none focus:border-[#E0561B]"
+                        className="bg-[#F8F9FA] dark:bg-[#18181D] border border-[#E5E7EB] dark:border-[#27272A] rounded px-2.5 py-1 text-xs text-[#0A0A0A] dark:text-white focus:outline-none focus:border-[#E0561B]"
                       >
                         <option value="Asia/Kolkata (IST)">Asia / Kolkata (IST)</option>
                         <option value="America/New_York (EST)">America / New York (EST)</option>
@@ -427,12 +427,12 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                     </div>
                   </div>
 
-                  <div className="p-4 bg-[#F8F9FA] border border-[#E5E7EB] rounded-xl text-xs space-y-2">
-                    <p className="font-bold text-[#0A0A0A] flex items-center gap-1.5">
-                      <ShieldCheck className="w-4 h-4 text-emerald-600" />
+                  <div className="p-4 bg-[#F8F9FA] dark:bg-[#18181D] border border-[#E5E7EB] dark:border-[#27272A] rounded-xl text-xs space-y-2">
+                    <p className="font-bold text-[#0A0A0A] dark:text-white flex items-center gap-1.5">
+                      <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                       Direct Technical Leadership
                     </p>
-                    <ul className="space-y-1 text-[#52525B] leading-relaxed">
+                    <ul className="space-y-1 text-[#52525B] dark:text-[#A1A1AA] leading-relaxed">
                       <li>• Discuss architecture & tech stack options</li>
                       <li>• Transparent delivery roadmap & milestones</li>
                       <li>• No junior salespeople or generic scripts</li>
@@ -443,7 +443,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                 {/* Middle Column: Calendar (5 cols) */}
                 <div className="md:col-span-5 space-y-4">
                   <div className="flex items-center justify-between pb-2">
-                    <span className="font-bold text-sm text-[#0A0A0A]">
+                    <span className="font-bold text-sm text-[#0A0A0A] dark:text-white">
                       {months[selectedMonth]} {selectedYear}
                     </span>
                     <div className="flex items-center gap-1">
@@ -453,8 +453,8 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                         onClick={handlePrevMonth}
                         className={`p-1.5 rounded transition-colors ${
                           canGoPrevMonth 
-                            ? 'hover:bg-[#F4F4F5] text-[#52525B] hover:text-[#0A0A0A]' 
-                            : 'opacity-25 cursor-not-allowed text-[#A1A1AA]'
+                            ? 'hover:bg-[#F4F4F5] dark:hover:bg-[#1C1C22] text-[#52525B] dark:text-[#A1A1AA] hover:text-[#0A0A0A] dark:hover:text-white' 
+                            : 'opacity-25 cursor-not-allowed text-[#A1A1AA] dark:text-[#52525B]'
                         }`}
                         title={canGoPrevMonth ? 'Previous month' : 'Cannot navigate to past months'}
                         aria-label="Previous month"
@@ -464,7 +464,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                       <button 
                         type="button"
                         onClick={handleNextMonth}
-                        className="p-1.5 rounded hover:bg-[#F4F4F5] text-[#52525B] hover:text-[#0A0A0A] transition-colors"
+                        className="p-1.5 rounded hover:bg-[#F4F4F5] dark:hover:bg-[#1C1C22] text-[#52525B] dark:text-[#A1A1AA] hover:text-[#0A0A0A] dark:hover:text-white transition-colors"
                         title="Next month"
                         aria-label="Next month"
                       >
@@ -474,7 +474,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                   </div>
 
                   {/* Day headers */}
-                  <div className="grid grid-cols-7 gap-1 text-center text-[0.7rem] font-mono font-semibold text-[#71717A]">
+                  <div className="grid grid-cols-7 gap-1 text-center text-[0.7rem] font-mono font-semibold text-[#71717A] dark:text-[#A1A1AA]">
                     <span>SUN</span>
                     <span>MON</span>
                     <span>TUE</span>
@@ -514,12 +514,12 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                           }}
                           className={`h-9 flex items-center justify-center rounded-lg transition-colors font-medium relative ${
                             isPast 
-                              ? 'text-[#A1A1AA]/40 cursor-not-allowed bg-transparent hover:bg-transparent' 
+                              ? 'text-[#A1A1AA]/40 dark:text-[#52525B]/40 cursor-not-allowed bg-transparent hover:bg-transparent' 
                               : isSelected 
                                 ? 'bg-[#E0561B] text-white font-bold shadow-md shadow-[#E0561B]/20' 
                                 : isToday 
-                                  ? 'bg-[#F4F4F5] text-[#0A0A0A] font-bold border border-[#E0561B]' 
-                                  : 'hover:bg-[#F4F4F5] text-[#0A0A0A]'
+                                  ? 'bg-[#F4F4F5] dark:bg-[#18181D] text-[#0A0A0A] dark:text-white font-bold border border-[#E0561B]' 
+                                  : 'hover:bg-[#F4F4F5] dark:hover:bg-[#1C1C22] text-[#0A0A0A] dark:text-[#E4E4E7]'
                           }`}
                           title={isPast ? 'Past date cannot be booked' : undefined}
                         >
@@ -534,43 +534,43 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                 </div>
 
                 {/* Right Column: Time Slots (3 cols) */}
-                <div className="md:col-span-3 space-y-4 md:border-l md:border-[#E5E7EB] md:pl-6">
+                <div className="md:col-span-3 space-y-4 md:border-l md:border-[#E5E7EB] dark:md:border-white/10 md:pl-6">
                   <div className="flex items-center justify-between pb-1">
-                    <span className="text-xs font-mono font-semibold text-[#0A0A0A]">
+                    <span className="text-xs font-mono font-semibold text-[#0A0A0A] dark:text-white">
                       {months[selectedMonth].slice(0, 3)} {selectedDate}
                     </span>
-                    <div className="flex items-center bg-[#F4F4F5] border border-[#E5E7EB] rounded p-0.5 text-[0.65rem] font-mono">
+                    <div className="flex items-center bg-[#F4F4F5] dark:bg-[#18181D] border border-[#E5E7EB] dark:border-[#27272A] rounded p-0.5 text-[0.65rem] font-mono">
                       <button 
                         type="button"
                         onClick={() => handleToggleTimeFormat('12h')}
-                        className={`px-1.5 py-0.5 rounded transition-colors ${timeFormat === '12h' ? 'bg-[#E0561B] text-white font-bold' : 'text-[#71717A]'}`}
+                        className={`px-1.5 py-0.5 rounded transition-colors ${timeFormat === '12h' ? 'bg-[#E0561B] text-white font-bold' : 'text-[#71717A] dark:text-[#A1A1AA]'}`}
                       >
                         12h
                       </button>
                       <button 
                         type="button"
                         onClick={() => handleToggleTimeFormat('24h')}
-                        className={`px-1.5 py-0.5 rounded transition-colors ${timeFormat === '24h' ? 'bg-[#E0561B] text-white font-bold' : 'text-[#71717A]'}`}
+                        className={`px-1.5 py-0.5 rounded transition-colors ${timeFormat === '24h' ? 'bg-[#E0561B] text-white font-bold' : 'text-[#71717A] dark:text-[#A1A1AA]'}`}
                       >
                         24h
                       </button>
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-md bg-[#F8F9FA] border border-[#E5E7EB] text-[0.68rem] font-mono text-[#71717A]">
+                  <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-md bg-[#F8F9FA] dark:bg-[#18181D] border border-[#E5E7EB] dark:border-[#27272A] text-[0.68rem] font-mono text-[#71717A] dark:text-[#A1A1AA]">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#E0561B] shrink-0" />
                     <span>Min 1-hr advance notice required</span>
                   </div>
 
                   {availableSlotsForSelectedDate.length === 0 ? (
-                    <div className="p-4 rounded-xl bg-[#F8F9FA] border border-[#E5E7EB] text-center space-y-2 my-2">
+                    <div className="p-4 rounded-xl bg-[#F8F9FA] dark:bg-[#18181D] border border-[#E5E7EB] dark:border-[#27272A] text-center space-y-2 my-2">
                       <Clock className="w-5 h-5 text-[#E0561B] mx-auto opacity-80" />
-                      <p className="text-xs font-bold text-[#0A0A0A]">
+                      <p className="text-xs font-bold text-[#0A0A0A] dark:text-white">
                         {isDateToday(selectedYear, selectedMonth, selectedDate)
                           ? 'No slots remaining today'
                           : 'No slots available on this date'}
                       </p>
-                      <p className="text-[0.7rem] text-[#71717A] leading-relaxed">
+                      <p className="text-[0.7rem] text-[#71717A] dark:text-[#A1A1AA] leading-relaxed">
                         {isDateToday(selectedYear, selectedMonth, selectedDate)
                           ? 'Discovery calls require at least 1 hour preparation notice. Please select tomorrow or a future date.'
                           : 'Please choose another date on the calendar.'}
@@ -591,14 +591,23 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                               setSelectedSlot(timeFormat === '12h' ? tomorrowSlots[0].label12h : tomorrowSlots[0].label24h);
                             }
                           }}
-                          className="inline-block mt-1 px-3 py-1.5 rounded-full bg-[#0A0A0A] hover:bg-[#E0561B] text-white text-[0.65rem] font-bold uppercase tracking-wider transition-colors"
+                          className="inline-block mt-1 px-3 py-1.5 rounded-full bg-[#0A0A0A] dark:bg-white hover:bg-[#E0561B] dark:hover:bg-[#E0561B] text-white dark:text-[#0A0A0A] dark:hover:text-white text-[0.65rem] font-bold uppercase tracking-wider transition-colors"
                         >
                           View Tomorrow's Slots →
                         </button>
                       )}
                     </div>
                   ) : (
-                    <div className="space-y-2 max-h-[280px] overflow-y-auto pr-1">
+                    <div 
+                      data-lenis-prevent="true"
+                      onWheel={(e) => e.stopPropagation()}
+                      onTouchMove={(e) => e.stopPropagation()}
+                      className="space-y-2 max-h-[380px] sm:max-h-[420px] overflow-y-auto pr-1.5 touch-pan-y overscroll-contain"
+                      style={{
+                        scrollbarWidth: 'thin',
+                        scrollbarColor: 'rgba(224, 86, 27, 0.4) transparent',
+                      }}
+                    >
                       {availableSlotsForSelectedDate.map((slotDef) => {
                         const slotLabel = timeFormat === '12h' ? slotDef.label12h : slotDef.label24h;
                         const isSlotSelected = selectedSlot === slotLabel;
@@ -610,7 +619,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                             className={`w-full py-2.5 px-3 rounded-lg text-xs font-mono font-medium border transition-all text-center ${
                               isSlotSelected 
                                 ? 'bg-[#E0561B] border-[#E0561B] text-white font-bold shadow-xs' 
-                                : 'bg-white border-[#E5E7EB] hover:border-[#E0561B]/60 text-[#0A0A0A] hover:bg-[#F8F9FA]'
+                                : 'bg-white dark:bg-[#141419] border-[#E5E7EB] dark:border-[#27272A] hover:border-[#E0561B]/60 text-[#0A0A0A] dark:text-[#E4E4E7] hover:bg-[#F8F9FA] dark:hover:bg-[#1F1F24]'
                             }`}
                           >
                             {slotLabel}
@@ -639,15 +648,15 @@ export const BookingModal: React.FC<BookingModalProps> = ({
               <form onSubmit={handleConfirmCall} className="p-8 max-w-xl mx-auto space-y-6">
                 <div className="space-y-1">
                   <span className="text-xs font-mono uppercase tracking-widest text-[#E0561B] font-semibold">Step 2 of 2</span>
-                  <h3 className="text-2xl font-bold font-sans text-[#0A0A0A]">Confirm Discovery Session</h3>
-                  <p className="text-xs text-[#52525B]">
-                    Slot: <span className="text-[#0A0A0A] font-semibold">{months[selectedMonth]} {selectedDate}, {selectedYear}</span> at <span className="text-[#E0561B] font-semibold">{selectedSlot}</span> ({timezone})
+                  <h3 className="text-2xl font-bold font-sans text-[#0A0A0A] dark:text-white">Confirm Discovery Session</h3>
+                  <p className="text-xs text-[#52525B] dark:text-[#A1A1AA]">
+                    Slot: <span className="text-[#0A0A0A] dark:text-white font-semibold">{months[selectedMonth]} {selectedDate}, {selectedYear}</span> at <span className="text-[#E0561B] font-semibold">{selectedSlot}</span> ({timezone})
                   </p>
                 </div>
 
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-xs font-mono uppercase text-[#0A0A0A] font-semibold mb-1.5">
+                    <label className="block text-xs font-mono uppercase text-[#0A0A0A] dark:text-white font-semibold mb-1.5">
                       Your Full Name <span className="text-[#E0561B]">*</span>
                     </label>
                     <input
@@ -656,12 +665,12 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                       value={callForm.name}
                       onChange={(e) => setCallForm({ ...callForm, name: e.target.value })}
                       placeholder="Jane Doe"
-                      className="w-full px-4 py-2.5 bg-white border border-[#E5E7EB] rounded-lg text-sm text-[#0A0A0A] placeholder-[#71717A] focus:outline-none focus:border-[#E0561B] transition-colors"
+                      className="w-full px-4 py-2.5 bg-white dark:bg-[#18181D] border border-[#E5E7EB] dark:border-[#27272A] rounded-lg text-sm text-[#0A0A0A] dark:text-white placeholder-[#71717A] dark:placeholder-[#52525B] focus:outline-none focus:border-[#E0561B] transition-colors"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-mono uppercase text-[#0A0A0A] font-semibold mb-1.5">
+                    <label className="block text-xs font-mono uppercase text-[#0A0A0A] dark:text-white font-semibold mb-1.5">
                       Work Email Address <span className="text-[#E0561B]">*</span>
                     </label>
                     <input
@@ -670,12 +679,12 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                       value={callForm.email}
                       onChange={(e) => setCallForm({ ...callForm, email: e.target.value })}
                       placeholder="jane@company.com"
-                      className="w-full px-4 py-2.5 bg-white border border-[#E5E7EB] rounded-lg text-sm text-[#0A0A0A] placeholder-[#71717A] focus:outline-none focus:border-[#E0561B] transition-colors"
+                      className="w-full px-4 py-2.5 bg-white dark:bg-[#18181D] border border-[#E5E7EB] dark:border-[#27272A] rounded-lg text-sm text-[#0A0A0A] dark:text-white placeholder-[#71717A] dark:placeholder-[#52525B] focus:outline-none focus:border-[#E0561B] transition-colors"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-mono uppercase text-[#0A0A0A] font-semibold mb-1.5">
+                    <label className="block text-xs font-mono uppercase text-[#0A0A0A] dark:text-white font-semibold mb-1.5">
                       Project Notes / Website Link (Optional)
                     </label>
                     <textarea
@@ -683,16 +692,16 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                       value={callForm.notes}
                       onChange={(e) => setCallForm({ ...callForm, notes: e.target.value })}
                       placeholder="Tell us what you're building or links to Figma / existing systems."
-                      className="w-full px-4 py-2.5 bg-white border border-[#E5E7EB] rounded-lg text-sm text-[#0A0A0A] placeholder-[#71717A] focus:outline-none focus:border-[#E0561B] transition-colors"
+                      className="w-full px-4 py-2.5 bg-white dark:bg-[#18181D] border border-[#E5E7EB] dark:border-[#27272A] rounded-lg text-sm text-[#0A0A0A] dark:text-white placeholder-[#71717A] dark:placeholder-[#52525B] focus:outline-none focus:border-[#E0561B] transition-colors"
                     />
                   </div>
                 </div>
 
-                <div className="flex items-center gap-4 pt-4 border-t border-[#E5E7EB]">
+                <div className="flex items-center gap-4 pt-4 border-t border-[#E5E7EB] dark:border-white/10">
                   <button
                     type="button"
                     onClick={() => setCallStep('pick')}
-                    className="px-5 py-2.5 rounded-full bg-[#F4F4F5] hover:bg-[#E5E7EB] text-xs font-semibold uppercase tracking-wider text-[#0A0A0A] transition-colors"
+                    className="px-5 py-2.5 rounded-full bg-[#F4F4F5] dark:bg-[#27272A] hover:bg-[#E5E7EB] dark:hover:bg-[#323238] text-xs font-semibold uppercase tracking-wider text-[#0A0A0A] dark:text-white transition-colors"
                   >
                     Back
                   </button>
@@ -710,16 +719,16 @@ export const BookingModal: React.FC<BookingModalProps> = ({
             {/* Step 3: Confirmed */}
             {callStep === 'confirmed' && (
               <div className="p-10 text-center max-w-md mx-auto space-y-6">
-                <div className="w-16 h-16 rounded-full bg-emerald-100 border border-emerald-300 text-emerald-600 mx-auto flex items-center justify-center">
+                <div className="w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-950/40 border border-emerald-300 dark:border-emerald-800 text-emerald-600 dark:text-emerald-400 mx-auto flex items-center justify-center">
                   <CheckCircle2 className="w-8 h-8" />
                 </div>
 
                 <div className="space-y-2">
-                  <h3 className="text-2xl font-bold font-sans text-[#0A0A0A]">Meeting Scheduled!</h3>
-                  <p className="text-sm text-[#52525B] leading-relaxed">
-                    Thank you, <span className="text-[#0A0A0A] font-semibold">{callForm.name}</span>. A calendar invitation with the Google Meet room link has been dispatched to <span className="text-[#E0561B] font-mono font-semibold">{callForm.email}</span>.
+                  <h3 className="text-2xl font-bold font-sans text-[#0A0A0A] dark:text-white">Meeting Scheduled!</h3>
+                  <p className="text-sm text-[#52525B] dark:text-[#A1A1AA] leading-relaxed">
+                    Thank you, <span className="text-[#0A0A0A] dark:text-white font-semibold">{callForm.name}</span>. A calendar invitation with the Google Meet room link has been dispatched to <span className="text-[#E0561B] font-mono font-semibold">{callForm.email}</span>.
                   </p>
-                  <div className="p-3 bg-[#F8F9FA] border border-[#E5E7EB] rounded-xl text-xs font-mono text-[#0A0A0A] mt-4 font-semibold">
+                  <div className="p-3 bg-[#F8F9FA] dark:bg-[#18181D] border border-[#E5E7EB] dark:border-[#27272A] rounded-xl text-xs font-mono text-[#0A0A0A] dark:text-white mt-4 font-semibold">
                     <span>{months[selectedMonth]} {selectedDate}, {selectedYear} · {selectedSlot} ({timezone})</span>
                   </div>
                 </div>
@@ -738,7 +747,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                   <button
                     type="button"
                     onClick={onClose}
-                    className="py-2.5 px-6 rounded-full bg-[#F4F4F5] hover:bg-[#E5E7EB] text-xs font-semibold text-[#52525B] transition-colors"
+                    className="py-2.5 px-6 rounded-full bg-[#F4F4F5] dark:bg-[#27272A] hover:bg-[#E5E7EB] dark:hover:bg-[#323238] text-xs font-semibold text-[#52525B] dark:text-[#A1A1AA] transition-colors"
                   >
                     Done
                   </button>
@@ -759,17 +768,17 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                   <span className="text-xs font-mono uppercase tracking-widest text-[#E0561B] font-semibold block mb-1">
                     Direct Scope & Quotation Proposal
                   </span>
-                  <h3 className="text-2xl sm:text-3xl font-bold font-sans text-[#0A0A0A]">
+                  <h3 className="text-2xl sm:text-3xl font-bold font-sans text-[#0A0A0A] dark:text-white">
                     Request a Project Quotation
                   </h3>
-                  <p className="text-xs sm:text-sm text-[#52525B] mt-1 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-[#52525B] dark:text-[#A1A1AA] mt-1 leading-relaxed">
                     Select your project requirements and share details below. Our senior engineering team evaluates your scope and delivers an itemized milestone quotation within 24 hours.
                   </p>
                 </div>
 
                 {/* Scope Multi-Select Pills */}
                 <div>
-                  <label className="block text-xs font-mono uppercase text-[#0A0A0A] font-semibold mb-2.5">
+                  <label className="block text-xs font-mono uppercase text-[#0A0A0A] dark:text-white font-semibold mb-2.5">
                     Select Project Deliverables (Click to toggle)
                   </label>
                   <div className="flex flex-wrap gap-2">
@@ -783,7 +792,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                           className={`px-3.5 py-2 rounded-lg text-xs font-medium border transition-all flex items-center gap-1.5 ${
                             active
                               ? 'bg-[#E0561B] border-[#E0561B] text-white font-semibold shadow-xs'
-                              : 'bg-[#F8F9FA] border-[#E5E7EB] text-[#52525B] hover:border-[#E0561B]/40 hover:text-[#0A0A0A]'
+                              : 'bg-[#F8F9FA] dark:bg-[#18181D] border-[#E5E7EB] dark:border-[#27272A] text-[#52525B] dark:text-[#A1A1AA] hover:border-[#E0561B]/40 hover:text-[#0A0A0A] dark:hover:text-white'
                           }`}
                         >
                           {active && <Check className="w-3 h-3 text-white" />}
@@ -797,13 +806,13 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                 {/* Timeline & Engagement Selectors */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-mono uppercase text-[#0A0A0A] font-semibold mb-1.5">
+                    <label className="block text-xs font-mono uppercase text-[#0A0A0A] dark:text-white font-semibold mb-1.5">
                       Target Timeline
                     </label>
                     <select
                       value={quoteForm.timeline}
                       onChange={(e) => setQuoteForm({ ...quoteForm, timeline: e.target.value })}
-                      className="w-full px-3.5 py-2.5 bg-white border border-[#E5E7EB] rounded-lg text-xs text-[#0A0A0A] focus:outline-none focus:border-[#E0561B]"
+                      className="w-full px-3.5 py-2.5 bg-white dark:bg-[#18181D] border border-[#E5E7EB] dark:border-[#27272A] rounded-lg text-xs text-[#0A0A0A] dark:text-white focus:outline-none focus:border-[#E0561B]"
                     >
                       <option value="Immediate (Next 2–4 Weeks)">Immediate (Next 2–4 Weeks)</option>
                       <option value="1–2 Months (Active Product Sprint)">1–2 Months (Active Product Sprint)</option>
@@ -813,13 +822,13 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                   </div>
 
                   <div>
-                    <label className="block text-xs font-mono uppercase text-[#0A0A0A] font-semibold mb-1.5">
+                    <label className="block text-xs font-mono uppercase text-[#0A0A0A] dark:text-white font-semibold mb-1.5">
                       Engagement Model
                     </label>
                     <select
                       value={quoteForm.engagementModel}
                       onChange={(e) => setQuoteForm({ ...quoteForm, engagementModel: e.target.value })}
-                      className="w-full px-3.5 py-2.5 bg-white border border-[#E5E7EB] rounded-lg text-xs text-[#0A0A0A] focus:outline-none focus:border-[#E0561B]"
+                      className="w-full px-3.5 py-2.5 bg-white dark:bg-[#18181D] border border-[#E5E7EB] dark:border-[#27272A] rounded-lg text-xs text-[#0A0A0A] dark:text-white focus:outline-none focus:border-[#E0561B]"
                     >
                       <option value="Full-Cycle Product Architecture & Build">Full-Cycle Product Architecture & Build</option>
                       <option value="Design & Frontend Engineering Sprint">Design & Frontend Engineering Sprint</option>
@@ -832,7 +841,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                 {/* Client Contact Info */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-mono uppercase text-[#0A0A0A] font-semibold mb-1.5">
+                    <label className="block text-xs font-mono uppercase text-[#0A0A0A] dark:text-white font-semibold mb-1.5">
                       Your Name <span className="text-[#E0561B]">*</span>
                     </label>
                     <input
@@ -841,12 +850,12 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                       value={quoteForm.name}
                       onChange={(e) => setQuoteForm({ ...quoteForm, name: e.target.value })}
                       placeholder="Jane Doe"
-                      className="w-full px-3.5 py-2.5 bg-white border border-[#E5E7EB] rounded-lg text-xs text-[#0A0A0A] placeholder-[#71717A] focus:outline-none focus:border-[#E0561B]"
+                      className="w-full px-3.5 py-2.5 bg-white dark:bg-[#18181D] border border-[#E5E7EB] dark:border-[#27272A] rounded-lg text-xs text-[#0A0A0A] dark:text-white placeholder-[#71717A] dark:placeholder-[#52525B] focus:outline-none focus:border-[#E0561B]"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-mono uppercase text-[#0A0A0A] font-semibold mb-1.5">
+                    <label className="block text-xs font-mono uppercase text-[#0A0A0A] dark:text-white font-semibold mb-1.5">
                       Work Email <span className="text-[#E0561B]">*</span>
                     </label>
                     <input
@@ -855,13 +864,13 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                       value={quoteForm.email}
                       onChange={(e) => setQuoteForm({ ...quoteForm, email: e.target.value })}
                       placeholder="jane@company.com"
-                      className="w-full px-3.5 py-2.5 bg-white border border-[#E5E7EB] rounded-lg text-xs text-[#0A0A0A] placeholder-[#71717A] focus:outline-none focus:border-[#E0561B]"
+                      className="w-full px-3.5 py-2.5 bg-white dark:bg-[#18181D] border border-[#E5E7EB] dark:border-[#27272A] rounded-lg text-xs text-[#0A0A0A] dark:text-white placeholder-[#71717A] dark:placeholder-[#52525B] focus:outline-none focus:border-[#E0561B]"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-mono uppercase text-[#0A0A0A] font-semibold mb-1.5">
+                  <label className="block text-xs font-mono uppercase text-[#0A0A0A] dark:text-white font-semibold mb-1.5">
                     Company / Organization (Optional)
                   </label>
                   <input
@@ -869,12 +878,12 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                     value={quoteForm.organization}
                     onChange={(e) => setQuoteForm({ ...quoteForm, organization: e.target.value })}
                     placeholder="Acme Corp / Stealth Startup"
-                    className="w-full px-3.5 py-2.5 bg-white border border-[#E5E7EB] rounded-lg text-xs text-[#0A0A0A] placeholder-[#71717A] focus:outline-none focus:border-[#E0561B]"
+                    className="w-full px-3.5 py-2.5 bg-white dark:bg-[#18181D] border border-[#E5E7EB] dark:border-[#27272A] rounded-lg text-xs text-[#0A0A0A] dark:text-white placeholder-[#71717A] dark:placeholder-[#52525B] focus:outline-none focus:border-[#E0561B]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-mono uppercase text-[#0A0A0A] font-semibold mb-1.5">
+                  <label className="block text-xs font-mono uppercase text-[#0A0A0A] dark:text-white font-semibold mb-1.5">
                     Project Requirements & Scope Description <span className="text-[#E0561B]">*</span>
                   </label>
                   <textarea
@@ -883,12 +892,12 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                     value={quoteForm.requirements}
                     onChange={(e) => setQuoteForm({ ...quoteForm, requirements: e.target.value })}
                     placeholder="Describe what you want to achieve, key user flows, target platform, any third-party APIs or existing designs."
-                    className="w-full px-3.5 py-2.5 bg-white border border-[#E5E7EB] rounded-lg text-xs text-[#0A0A0A] placeholder-[#71717A] focus:outline-none focus:border-[#E0561B]"
+                    className="w-full px-3.5 py-2.5 bg-white dark:bg-[#18181D] border border-[#E5E7EB] dark:border-[#27272A] rounded-lg text-xs text-[#0A0A0A] dark:text-white placeholder-[#71717A] dark:placeholder-[#52525B] focus:outline-none focus:border-[#E0561B]"
                   />
                 </div>
 
-                <div className="flex items-center justify-between pt-4 border-t border-[#E5E7EB]">
-                  <p className="text-[0.75rem] text-[#71717A] font-mono">
+                <div className="flex items-center justify-between pt-4 border-t border-[#E5E7EB] dark:border-white/10">
+                  <p className="text-[0.75rem] text-[#71717A] dark:text-[#A1A1AA] font-mono">
                     ✦ Guaranteed 24h engineering turnaround
                   </p>
                   <button
@@ -905,29 +914,29 @@ export const BookingModal: React.FC<BookingModalProps> = ({
 
             {quoteStep === 'confirmed' && (
               <div className="p-10 text-center max-w-md mx-auto space-y-6">
-                <div className="w-16 h-16 rounded-full bg-emerald-100 border border-emerald-300 text-emerald-600 mx-auto flex items-center justify-center">
+                <div className="w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-950/40 border border-emerald-300 dark:border-emerald-800 text-emerald-600 dark:text-emerald-400 mx-auto flex items-center justify-center">
                   <CheckCircle2 className="w-8 h-8" />
                 </div>
 
                 <div className="space-y-2">
-                  <h3 className="text-2xl font-bold font-sans text-[#0A0A0A]">
+                  <h3 className="text-2xl font-bold font-sans text-[#0A0A0A] dark:text-white">
                     Quotation Request Received!
                   </h3>
-                  <p className="text-sm text-[#52525B] leading-relaxed">
-                    Thank you, <span className="text-[#0A0A0A] font-semibold">{quoteForm.name}</span>. Our technical director is assessing your requirements. An itemized scope & quotation proposal will be delivered to <span className="text-[#E0561B] font-mono font-semibold">{quoteForm.email}</span> within 24 hours.
+                  <p className="text-sm text-[#52525B] dark:text-[#A1A1AA] leading-relaxed">
+                    Thank you, <span className="text-[#0A0A0A] dark:text-white font-semibold">{quoteForm.name}</span>. Our technical director is assessing your requirements. An itemized scope & quotation proposal will be delivered to <span className="text-[#E0561B] font-mono font-semibold">{quoteForm.email}</span> within 24 hours.
                   </p>
                 </div>
 
-                <div className="p-4 bg-[#F8F9FA] border border-[#E5E7EB] rounded-xl text-left text-xs space-y-2">
-                  <p className="font-bold text-[#0A0A0A]">Captured Deliverables:</p>
+                <div className="p-4 bg-[#F8F9FA] dark:bg-[#18181D] border border-[#E5E7EB] dark:border-[#27272A] rounded-xl text-left text-xs space-y-2">
+                  <p className="font-bold text-[#0A0A0A] dark:text-white">Captured Deliverables:</p>
                   <div className="flex flex-wrap gap-1">
                     {quoteForm.selectedScopes.map((s) => (
-                      <span key={s} className="px-2 py-0.5 bg-white border border-[#E5E7EB] rounded text-[0.7rem] text-[#0A0A0A]">
+                      <span key={s} className="px-2 py-0.5 bg-white dark:bg-[#121216] border border-[#E5E7EB] dark:border-[#27272A] rounded text-[0.7rem] text-[#0A0A0A] dark:text-white">
                         {s}
                       </span>
                     ))}
                   </div>
-                  <p className="text-[#71717A] pt-1">Target: {quoteForm.timeline}</p>
+                  <p className="text-[#71717A] dark:text-[#A1A1AA] pt-1">Target: {quoteForm.timeline}</p>
                 </div>
 
                 <div className="pt-4 flex flex-col gap-3">
@@ -946,7 +955,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                   <button
                     type="button"
                     onClick={onClose}
-                    className="py-2.5 px-6 rounded-full bg-[#F4F4F5] hover:bg-[#E5E7EB] text-xs font-semibold text-[#52525B] transition-colors"
+                    className="py-2.5 px-6 rounded-full bg-[#F4F4F5] dark:bg-[#27272A] hover:bg-[#E5E7EB] dark:hover:bg-[#323238] text-xs font-semibold text-[#52525B] dark:text-[#A1A1AA] transition-colors"
                   >
                     Done
                   </button>

@@ -26,6 +26,7 @@ export const ImageLightbox: React.FC<ImageLightboxProps> = ({ item, onClose }) =
 
   return (
     <div 
+      data-lenis-prevent="true"
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 sm:p-8 backdrop-blur-md animate-fade-in"
       role="dialog"
       aria-modal="true"
@@ -33,8 +34,10 @@ export const ImageLightbox: React.FC<ImageLightboxProps> = ({ item, onClose }) =
       onClick={onClose}
     >
       <div 
+        data-lenis-prevent="true"
         className="relative max-w-5xl max-h-[90vh] flex flex-col items-center bg-[#0A0A0A] border border-white/10 rounded-2xl p-2 sm:p-4 shadow-2xl"
         onClick={(e) => e.stopPropagation()}
+        onWheel={(e) => e.stopPropagation()}
       >
         <button
           type="button"

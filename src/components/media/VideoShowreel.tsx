@@ -26,8 +26,19 @@ export const VideoShowreel: React.FC = () => {
 
   const channels: VideoChannel[] = [
     {
-      id: 'platform-build',
+      id: 'studio-atmosphere',
       channelNum: 'CH 01',
+      title: 'Engineering Craftsmanship & Momentum',
+      subtitle: 'Design-led execution, micro-interactions & hardware synergy',
+      category: 'STUDIO CRAFT',
+      src: '/videos/tech-atmosphere.mp4',
+      poster: '/videos/tech-atmosphere-poster.webp',
+      duration: '0:08',
+      tags: ['Clean Architecture', 'Type-Safe', 'Global Studio'],
+    },
+    {
+      id: 'platform-build',
+      channelNum: 'CH 02',
       title: 'Full-Stack Platform & SaaS Architecture',
       subtitle: 'Recorded client platform sprint demo & responsive user flows',
       category: 'PRODUCTION RUNTIME',
@@ -38,7 +49,7 @@ export const VideoShowreel: React.FC = () => {
     },
     {
       id: 'kalki-hud',
-      channelNum: 'CH 02',
+      channelNum: 'CH 03',
       title: 'Tactical HUD & Spatial Computer Vision',
       subtitle: 'Real-time object segmentation, token streaming & UI interaction',
       category: 'APPLIED AI SYSTEMS',
@@ -46,17 +57,6 @@ export const VideoShowreel: React.FC = () => {
       poster: '/videos/project-reel-poster.webp',
       duration: '0:15',
       tags: ['OpenCV', 'YOLOv8', 'Spatial Tracking', 'Local Inference'],
-    },
-    {
-      id: 'studio-atmosphere',
-      channelNum: 'CH 03',
-      title: 'Engineering Craftsmanship & Momentum',
-      subtitle: 'Design-led execution, micro-interactions & hardware synergy',
-      category: 'STUDIO CRAFT',
-      src: '/videos/tech-atmosphere.mp4',
-      poster: '/videos/tech-atmosphere-poster.webp',
-      duration: '0:08',
-      tags: ['Clean Architecture', 'Type-Safe', 'Global Studio'],
     },
   ];
 

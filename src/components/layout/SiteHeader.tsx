@@ -56,11 +56,11 @@ export const SiteHeader: React.FC = () => {
 
   // Dynamic Styles for Light/Dark context
   const headerBgClass = isScrolled 
-    ? 'bg-white/85 dark:bg-[#171717]/85 backdrop-blur-xl border-[#DEDAD3]/80 dark:border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.03)] dark:shadow-[0_4px_30px_rgba(0,0,0,0.5)] py-3 sm:py-4'
+    ? 'bg-white/85 dark:bg-[#0C0C0E]/85 backdrop-blur-xl border-[#DEDAD3]/80 dark:border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.03)] dark:shadow-[0_4px_30px_rgba(0,0,0,0.5)] py-3 sm:py-4'
     : 'bg-transparent border-transparent py-4 sm:py-6';
 
-  const textColorClass = 'text-[#171717] dark:text-[#F6F3ED]';
-  const mutedTextColorClass = 'text-[#77746F] dark:text-[#A1A1AA] hover:text-[#171717] dark:hover:text-[#FFFFFF]';
+  const textColorClass = 'text-[#141414] dark:text-[#F6F3ED]';
+  const mutedTextColorClass = 'text-[#57544E] dark:text-[#A6A29A] hover:text-[#141414] dark:hover:text-[#FFFFFF]';
 
   return (
     <>

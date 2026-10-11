@@ -27,7 +27,7 @@ export const AboutPage: React.FC = () => {
   return (
     <>
       <SEO title="About" />
-      <div className="bg-[#F6F3ED] dark:bg-[#171717] text-[#171717] dark:text-[#F6F3ED] pt-28 sm:pt-36 pb-24 selection:bg-[#C7612E] selection:text-white transition-colors duration-300">
+      <div className="bg-[#F6F3ED] dark:bg-[#0C0C0E] text-[#141414] dark:text-[#F6F3ED] pt-28 sm:pt-36 pb-24 selection:bg-[#C7612E] selection:text-white transition-colors duration-300">
       <div className="max-w-[1800px] w-full mx-auto px-5 sm:px-8 lg:px-12">
         {/* Header with 3D Spatial Crystalline Prism */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pb-12 border-b border-[#DEDAD3] dark:border-white/10">
@@ -35,11 +35,11 @@ export const AboutPage: React.FC = () => {
             <span className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-[#C7612E] block mb-3">
               Studio Origins & Philosophy
             </span>
-            <h1 className="font-sans font-extrabold text-4xl sm:text-6xl text-[#171717] dark:text-[#F6F3ED] tracking-tight leading-[1.08] mb-6">
+            <h1 className="font-display font-extrabold text-4xl sm:text-6xl text-[#141414] dark:text-[#F6F3ED] tracking-tight leading-[1.08] mb-6">
               Design craftsmanship. <br />
               Software engineering rigor.
             </h1>
-            <p className="text-lg sm:text-xl text-[#77746F] dark:text-[#A1A1AA] font-light leading-relaxed">
+            <p className="text-lg sm:text-xl text-[#57544E] dark:text-[#A6A29A] font-light leading-relaxed">
               Qavironel Technologies is a global remote-first technology and digital product studio. We build thoughtful software, high-impact web platforms, and applied AI systems for founders and organizations worldwide who value precision.
             </p>
           </div>
@@ -55,16 +55,16 @@ export const AboutPage: React.FC = () => {
               <span className="text-xs font-mono font-semibold uppercase tracking-wider text-[#C7612E]">
                 Why Qavironel Exists
               </span>
-              <h2 className="font-sans font-bold text-3xl sm:text-4xl text-[#171717] dark:text-[#F6F3ED] tracking-tight leading-tight">
+              <h2 className="font-display font-bold text-3xl sm:text-4xl text-[#141414] dark:text-[#F6F3ED] tracking-tight leading-tight">
                 Ambitious ideas deserve more than generic templates.
               </h2>
-              <div className="flex items-center gap-2 text-xs font-mono text-[#77746F] dark:text-[#A1A1AA] pt-2">
+              <div className="flex items-center gap-2 text-xs font-mono text-[#6E6B65] dark:text-[#A6A29A] pt-2">
                 <Globe className="w-4 h-4 text-[#C7612E]" />
                 <span>Remote-first studio · Catering to clients worldwide</span>
               </div>
             </div>
 
-            <div className="lg:col-span-7 space-y-6 text-[#77746F] dark:text-[#A1A1AA] text-base sm:text-lg leading-relaxed font-light">
+            <div className="lg:col-span-7 space-y-6 text-[#57544E] dark:text-[#A6A29A] text-base sm:text-lg leading-relaxed font-light">
               <p>
                 The modern digital landscape is saturated with bloated themes, slow drag-and-drop page builders, and agency middlemen who charge large retainers while outsourcing the actual programming.
               </p>

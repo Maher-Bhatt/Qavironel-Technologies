@@ -4,23 +4,28 @@
 
 @theme {
   --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Syne', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
-  --color-primary-dark: #171717;
-  --color-deep-charcoal: #20201E;
+  --color-primary-dark: #141414;
+  --color-deep-charcoal: #1E1E22;
   --color-warm-off-white: #F6F3ED;
   --color-pure-white: #FFFFFF;
   --color-copper: #C7612E;
   --color-copper-dark: #98431F;
   --color-copper-hover: #D96F3B;
-  --color-warm-grey: #77746F;
+  --color-warm-grey: #6E6B65;
   --color-subtle-border: #DEDAD3;
-  --color-border-dark: #27272A;
+  --color-border-dark: #26262B;
 }
 
 :root {
   --bg-primary: #F6F3ED;
-  --text-primary: #171717;
+  --bg-surface: #FFFFFF;
+  --bg-surface-secondary: #EFEBE3;
+  --text-primary: #141414;
+  --text-secondary: #57544E;
+  --text-muted: #77746F;
   --color-copper: #C7612E;
   --color-copper-dark: #98431F;
   --color-charcoal: #20201E;
@@ -29,9 +34,13 @@
 }
 
 .dark {
-  --bg-primary: #171717;
+  --bg-primary: #0C0C0E;
+  --bg-surface: #151518;
+  --bg-surface-secondary: #1B1B20;
   --text-primary: #F6F3ED;
-  --color-border: rgba(255, 255, 255, 0.1);
+  --text-secondary: #A6A29A;
+  --text-muted: #7A7771;
+  --color-border: rgba(255, 255, 255, 0.08);
 }
 
 body {
@@ -308,16 +317,32 @@ body {
   background-color: #131317;
 }
 
-.dark .text-\[\#0A0A0A\] {
-  color: #F4F4F5;
+.font-display {
+  font-family: var(--font-display);
 }
 
-.dark .text-\[\#52525B\] {
-  color: #A1A1AA;
+.dark .text-\[\#171717\],
+.dark .text-\[\#141414\],
+.dark .text-\[\#20201E\],
+.dark .text-zinc-900,
+.dark .text-neutral-900 {
+  color: #F6F3ED !important;
 }
 
-.dark .text-\[\#71717A\] {
-  color: #9CA3AF;
+.dark .text-\[\#77746F\],
+.dark .text-\[\#6E6B65\],
+.dark .text-\[\#57544E\],
+.dark .text-zinc-600,
+.dark .text-neutral-600 {
+  color: #A6A29A !important;
+}
+
+.dark .border-\[\#DEDAD3\] {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.dark .bg-\[\#F6F3ED\] {
+  background-color: #141418 !important;
 }
 
 .dark .border-\[\#E5E7EB\] {

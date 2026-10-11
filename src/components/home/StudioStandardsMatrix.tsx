@@ -1,17 +1,12 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { 
-  CheckCircle2, 
   XCircle, 
   Zap, 
   ShieldCheck, 
   Cpu, 
   Calendar, 
-  ArrowRight, 
   MessageSquare,
-  Globe,
-  Award,
-  Layers
+  Globe
 } from 'lucide-react';
 import { companyConfig } from '../../data/company';
 
@@ -21,7 +16,7 @@ interface StudioStandardsMatrixProps {
 
 export const StudioStandardsMatrix: React.FC<StudioStandardsMatrixProps> = ({ onOpenBooking }) => {
   return (
-    <section className="py-24 sm:py-32 border-b border-[#DEDAD3] bg-[#F6F3ED] relative overflow-hidden">
+    <section className="py-24 sm:py-32 border-b border-[#DEDAD3] dark:border-white/10 bg-white dark:bg-[#121215] transition-colors duration-300 relative overflow-hidden">
       {/* Background Radial Glow */}
       <div 
         className="absolute top-1/2 right-0 -translate-y-1/2 w-[600px] h-[600px] bg-[#C7612E]/5 rounded-full blur-[140px] pointer-events-none" 
@@ -34,10 +29,10 @@ export const StudioStandardsMatrix: React.FC<StudioStandardsMatrixProps> = ({ on
           <span className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-[#C7612E] block mb-3">
             Engineering Benchmarks & Governance
           </span>
-          <h2 className="font-sans font-extrabold text-3xl sm:text-5xl lg:text-6xl text-[#171717] tracking-tight leading-[1.08]">
+          <h2 className="font-display font-bold text-3xl sm:text-5xl lg:text-6xl text-[#141414] dark:text-[#F6F3ED] tracking-tight leading-[1.08]">
             Built for companies who refuse ordinary templates.
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-[#77746F] font-light leading-relaxed">
+          <p className="mt-4 text-base sm:text-lg text-[#57544E] dark:text-[#A6A29A] font-light leading-relaxed">
             The difference between a website that merely exists and a high-performance digital asset is in the engineering standards beneath the surface.
           </p>
         </div>
@@ -45,21 +40,21 @@ export const StudioStandardsMatrix: React.FC<StudioStandardsMatrixProps> = ({ on
         {/* Head-to-Head Comparison Architecture */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch mb-16">
           {/* Legacy Agency / Freelancer Column */}
-          <div className="lg:col-span-5 bg-white border border-[#DEDAD3] rounded-2xl p-8 sm:p-10 flex flex-col justify-between shadow-xs">
+          <div className="lg:col-span-5 bg-[#F6F3ED] dark:bg-[#18181E] border border-[#DEDAD3] dark:border-white/10 rounded-2xl p-5 sm:p-8 md:p-10 flex flex-col justify-between shadow-xs">
             <div>
-              <div className="flex items-center justify-between pb-4 border-b border-[#DEDAD3]">
-                <span className="text-xs font-mono text-zinc-400 uppercase tracking-wider font-semibold">The Industry Standard</span>
+              <div className="flex items-center justify-between pb-4 border-b border-[#DEDAD3] dark:border-white/10">
+                <span className="text-xs font-mono text-[#77746F] dark:text-[#A6A29A] uppercase tracking-wider font-semibold">The Industry Standard</span>
                 <span className="text-xs font-mono text-red-500 font-bold">FRAGILE</span>
               </div>
 
-              <h3 className="font-sans font-bold text-2xl text-[#171717] mt-6 mb-2">
+              <h3 className="font-display font-bold text-2xl text-[#141414] dark:text-[#F6F3ED] mt-6 mb-2">
                 Legacy Agencies & Templates
               </h3>
-              <p className="text-xs sm:text-sm text-[#77746F] leading-relaxed mb-6 font-light">
+              <p className="text-xs sm:text-sm text-[#57544E] dark:text-[#A6A29A] leading-relaxed mb-6 font-light">
                 Sluggish page builders, opaque middle managers, and off-the-shelf templates that degrade over time.
               </p>
 
-              <ul className="space-y-4 text-xs sm:text-sm text-zinc-600">
+              <ul className="space-y-4 text-xs sm:text-sm text-[#57544E] dark:text-[#A6A29A]">
                 <li className="flex items-start gap-3">
                   <XCircle className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
                   <span>Bloated WordPress plugins with slow, 3+ second mobile load times</span>
@@ -83,13 +78,13 @@ export const StudioStandardsMatrix: React.FC<StudioStandardsMatrixProps> = ({ on
               </ul>
             </div>
 
-            <div className="mt-8 pt-6 border-t border-[#DEDAD3] text-xs font-mono text-zinc-400">
+            <div className="mt-8 pt-6 border-t border-[#DEDAD3] dark:border-white/10 text-xs font-mono text-[#77746F] dark:text-[#A6A29A]">
               Typical outcome: High maintenance bills, technical debt, and poor conversion.
             </div>
           </div>
 
           {/* Qavironel Technologies Engineering Studio Column */}
-          <div className="lg:col-span-7 bg-[#171717] text-white border-2 border-[#C7612E] rounded-2xl p-8 sm:p-10 flex flex-col justify-between shadow-[0_8px_30px_rgba(199, 97, 46,0.12)] relative overflow-hidden">
+          <div className="lg:col-span-7 bg-[#151518] text-white border-2 border-[#C7612E] rounded-2xl p-5 sm:p-8 md:p-10 flex flex-col justify-between shadow-[0_8px_30px_rgba(199,97,46,0.15)] relative overflow-hidden">
             {/* Top Badge */}
             <div className="absolute top-0 right-0 bg-[#C7612E] text-white px-4 py-1 text-[0.65rem] font-mono font-bold tracking-widest uppercase rounded-bl-xl">
               CRAFTED BY QAVIRONEL
@@ -101,7 +96,7 @@ export const StudioStandardsMatrix: React.FC<StudioStandardsMatrixProps> = ({ on
                 <span className="text-xs font-mono text-emerald-400 font-bold">100% PRODUCTION-GRADE</span>
               </div>
 
-              <h3 className="font-sans font-bold text-2xl text-white mt-6 mb-2">
+              <h3 className="font-display font-bold text-2xl text-white mt-6 mb-2">
                 Disciplined Craftsmanship & High-Velocity Code
               </h3>
               <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed mb-6 font-light">
@@ -173,26 +168,26 @@ export const StudioStandardsMatrix: React.FC<StudioStandardsMatrixProps> = ({ on
         </div>
 
         {/* Global Dispatch Strip */}
-        <div className="bg-white border border-[#E5E2DC] rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xs">
+        <div className="bg-[#F6F3ED] dark:bg-[#18181E] border border-[#DEDAD3] dark:border-white/10 rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xs">
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 rounded-xl bg-[#C7612E]/10 border border-[#C7612E]/20 text-[#C7612E] flex items-center justify-center shrink-0">
               <Calendar className="w-6 h-6" />
             </div>
             <div>
-              <h4 className="font-sans font-bold text-lg text-[#171717]">
+              <h4 className="font-display font-bold text-lg text-[#141414] dark:text-[#F6F3ED]">
                 Have an active roadmap or upcoming project?
               </h4>
-              <p className="text-xs sm:text-sm text-[#77746F] font-light">
+              <p className="text-xs sm:text-sm text-[#57544E] dark:text-[#A6A29A] font-light">
                 Pick a time on our calendar or message directly on WhatsApp to get immediate technical feasibility.
               </p>
             </div>
           </div>
 
-          <div className="flex items-center gap-3 shrink-0">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto shrink-0">
             <button
               type="button"
               onClick={onOpenBooking}
-              className="px-6 py-3 rounded-full bg-[#171717] hover:bg-black text-white text-xs font-bold uppercase tracking-wider transition-colors flex items-center gap-2 shadow-xs"
+              className="px-6 py-3 rounded-full bg-[#141414] dark:bg-white hover:bg-black dark:hover:bg-zinc-100 text-white dark:text-[#141414] text-xs font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-2 shadow-xs"
             >
               <Calendar className="w-3.5 h-3.5 text-[#C7612E]" />
               <span>Schedule Call</span>
@@ -201,7 +196,7 @@ export const StudioStandardsMatrix: React.FC<StudioStandardsMatrixProps> = ({ on
               href={companyConfig.whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-5 py-3 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold uppercase tracking-wider transition-colors flex items-center gap-2"
+              className="px-5 py-3 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-2"
             >
               <MessageSquare className="w-3.5 h-3.5" />
               <span>WhatsApp</span>
@@ -212,4 +207,3 @@ export const StudioStandardsMatrix: React.FC<StudioStandardsMatrixProps> = ({ on
     </section>
   );
 };
-

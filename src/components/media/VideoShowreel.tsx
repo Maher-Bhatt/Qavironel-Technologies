@@ -256,8 +256,45 @@ export const VideoShowreel: React.FC = () => {
           </div>
         </div>
 
-        {/* Channel Selection Matrix (Clay-style interactive strip) */}
-        <div className="p-4 sm:p-5 bg-white border-t border-[#E5E7EB] grid grid-cols-1 sm:grid-cols-3 gap-3">
+        {/* Channel Selection Matrix: Tailored Mobile vs Tablet/Desktop Architecture */}
+        
+        {/* 1. MOBILE-ONLY COMPACT SEGMENTED PILL BAR (< sm) */}
+        <div className="block sm:hidden p-3 bg-white dark:bg-[#151518] border-t border-[#DEDAD3] dark:border-white/10">
+          <div className="flex items-center gap-1.5 p-1 rounded-xl bg-[#F6F3ED] dark:bg-[#1A1A20] border border-[#DEDAD3] dark:border-white/10">
+            {channels.map((chan, idx) => {
+              const isSelected = activeChannelIdx === idx;
+              return (
+                <button
+                  key={chan.id}
+                  type="button"
+                  onClick={() => switchChannel(idx)}
+                  className={`flex-1 py-2 px-1.5 rounded-lg text-center transition-all duration-200 ${
+                    isSelected
+                      ? 'bg-[#141414] dark:bg-white text-white dark:text-[#141414] shadow-xs'
+                      : 'text-[#6E6B65] dark:text-[#A6A29A] hover:text-[#141414] dark:hover:text-white'
+                  }`}
+                >
+                  <div className="flex items-center justify-center gap-1 text-[0.68rem] font-mono font-bold">
+                    {isSelected && <span className="w-1.5 h-1.5 rounded-full bg-[#C7612E] animate-pulse" />}
+                    <span>{chan.channelNum}</span>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+
+          <div className="mt-2.5 px-2 py-1.5 flex items-center justify-between text-xs font-mono">
+            <span className="font-bold text-[#141414] dark:text-[#F6F3ED] truncate text-[0.75rem] max-w-[220px]">
+              {currentChannel.title}
+            </span>
+            <span className="text-[0.65rem] text-[#C7612E] font-semibold shrink-0">
+              PLAYING NOW
+            </span>
+          </div>
+        </div>
+
+        {/* 2. TABLET & DESKTOP 3-COLUMN ARCHITECTURAL MATRIX (sm+) */}
+        <div className="hidden sm:grid sm:grid-cols-3 gap-3 p-4 sm:p-5 bg-white dark:bg-[#151518] border-t border-[#DEDAD3] dark:border-white/10">
           {channels.map((chan, idx) => {
             const isSelected = activeChannelIdx === idx;
             return (
@@ -267,19 +304,19 @@ export const VideoShowreel: React.FC = () => {
                 onClick={() => switchChannel(idx)}
                 className={`p-3.5 rounded-xl text-left border transition-all duration-200 flex flex-col justify-between ${
                   isSelected
-                    ? 'bg-[#0A0A0A] border-[#0A0A0A] text-white shadow-sm'
-                    : 'bg-[#F8F9FA] border-[#E5E7EB] hover:bg-white text-[#0A0A0A]'
+                    ? 'bg-[#141414] dark:bg-white border-[#141414] dark:border-white text-white dark:text-[#141414] shadow-md'
+                    : 'bg-[#F6F3ED] dark:bg-[#1A1A20] border-[#DEDAD3] dark:border-white/10 hover:border-[#C7612E]/40 text-[#141414] dark:text-[#F6F3ED]'
                 }`}
               >
                 <div className="flex items-center justify-between text-[0.68rem] font-mono mb-1.5">
-                  <span className={isSelected ? 'text-[#C7612E] font-bold' : 'text-[#71717A] font-semibold'}>
+                  <span className={isSelected ? 'text-[#C7612E] font-bold' : 'text-[#6E6B65] dark:text-[#A6A29A] font-semibold'}>
                     {chan.channelNum}
                   </span>
-                  <span className={isSelected ? 'text-white/60' : 'text-[#71717A]'}>
+                  <span className={isSelected ? 'text-white/70 dark:text-black/70 font-bold' : 'text-[#6E6B65] dark:text-[#A6A29A]'}>
                     {isSelected ? 'PLAYING NOW' : 'SWITCH'}
                   </span>
                 </div>
-                <p className="font-sans font-bold text-xs sm:text-sm line-clamp-1">
+                <p className="font-display font-bold text-xs sm:text-sm line-clamp-1">
                   {chan.title}
                 </p>
                 <div className="mt-2 flex flex-wrap gap-1">
@@ -288,8 +325,8 @@ export const VideoShowreel: React.FC = () => {
                       key={tag}
                       className={`text-[0.62rem] font-mono px-1.5 py-0.5 rounded-sm ${
                         isSelected 
-                          ? 'bg-white/10 text-white/90' 
-                          : 'bg-white text-[#71717A] border border-[#E5E7EB]'
+                          ? 'bg-white/15 dark:bg-black/10 text-white/90 dark:text-black/90' 
+                          : 'bg-white dark:bg-[#151518] text-[#6E6B65] dark:text-[#A6A29A] border border-[#DEDAD3] dark:border-white/10'
                       }`}
                     >
                       {tag}

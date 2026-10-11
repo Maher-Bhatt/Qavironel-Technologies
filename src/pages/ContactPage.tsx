@@ -46,7 +46,7 @@ export const ContactPage: React.FC = () => {
   return (
     <>
       <SEO title="Contact" />
-      <div className="relative bg-[#F6F3ED] dark:bg-[#171717] text-[#171717] dark:text-[#F6F3ED] pt-28 sm:pt-36 pb-24 overflow-hidden selection:bg-[#C7612E] selection:text-white min-h-screen transition-colors duration-300">
+      <div className="relative bg-[#F6F3ED] dark:bg-[#0C0C0E] text-[#141414] dark:text-[#F6F3ED] pt-28 sm:pt-36 pb-24 overflow-hidden selection:bg-[#C7612E] selection:text-white min-h-screen transition-colors duration-300">
       
       {/* Premium Ambient Background Effects */}
       <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#C7612E]/10 rounded-full blur-[150px] opacity-40 pointer-events-none mix-blend-screen" />
@@ -64,13 +64,13 @@ export const ContactPage: React.FC = () => {
           <span className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-[#C7612E] block mb-3 border border-[#C7612E]/30 bg-[#C7612E]/10 w-fit px-3 py-1 rounded-full">
             Initiate Contact
           </span>
-          <h1 className="font-sans font-black text-5xl sm:text-6xl lg:text-7xl tracking-tight text-[#171717] dark:text-white leading-[1.05] mb-6">
+          <h1 className="font-display font-extrabold text-5xl sm:text-6xl lg:text-7xl tracking-tight text-[#141414] dark:text-[#F6F3ED] leading-[1.05] mb-6">
             Let's build <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#171717] via-gray-600 to-gray-900 dark:from-white dark:via-zinc-200 dark:to-zinc-400">
+            <span className="text-[#C7612E]">
               the extraordinary.
             </span>
           </h1>
-          <p className="text-lg text-[#77746F] dark:text-[#A1A1AA] font-light leading-relaxed max-w-xl">
+          <p className="text-lg text-[#57544E] dark:text-[#A6A29A] font-light leading-relaxed max-w-xl">
             Whether you are launching a new digital product, requiring AI integration, or elevating your brand's digital presence—our engineering studio is ready.
           </p>
 
@@ -78,7 +78,7 @@ export const ContactPage: React.FC = () => {
             <button
               type="button"
               onClick={() => openBookingModal('call')}
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-[#171717] dark:bg-white hover:bg-black dark:hover:bg-zinc-200 text-white dark:text-[#171717] text-xs font-extrabold uppercase tracking-widest transition-colors shadow-2xl shadow-black/5"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-[#141414] dark:bg-white hover:bg-black dark:hover:bg-zinc-200 text-white dark:text-[#141414] text-xs font-extrabold uppercase tracking-widest transition-colors shadow-2xl shadow-black/5"
             >
               <Calendar className="w-4 h-4 text-[#C7612E]" />
               <span>Book Discovery Call (30m)</span>
@@ -86,9 +86,9 @@ export const ContactPage: React.FC = () => {
             <button
               type="button"
               onClick={() => openBookingModal('quotation')}
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-[#F6F3ED] dark:bg-[#1C1C22] hover:bg-[#DEDAD3] dark:hover:bg-[#2D2D2A] text-[#171717] dark:text-white border border-[#DEDAD3] dark:border-white/10 text-xs font-extrabold uppercase tracking-widest transition-all backdrop-blur-md"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white dark:bg-[#1E1E24] hover:bg-[#EFEBE3] dark:hover:bg-[#282830] text-[#141414] dark:text-[#F6F3ED] border border-[#DEDAD3] dark:border-white/10 text-xs font-extrabold uppercase tracking-widest transition-all backdrop-blur-md"
             >
-              <FileText className="w-4 h-4 text-[#77746F] dark:text-[#A1A1AA]" />
+              <FileText className="w-4 h-4 text-[#C7612E]" />
               <span>Request Quotation</span>
             </button>
           </div>
@@ -99,8 +99,8 @@ export const ContactPage: React.FC = () => {
           
           {/* Main Form Area (7 cols) */}
           <div className="lg:col-span-7">
-            <div className="bg-[#F6F3ED] dark:bg-[#121216] border border-[#DEDAD3] dark:border-white/10 p-8 sm:p-10 rounded-[2rem] backdrop-blur-3xl shadow-2xl">
-              <h2 className="text-2xl font-bold font-sans text-[#171717] dark:text-white mb-8 flex items-center gap-3">
+            <div className="bg-white dark:bg-[#151518] border border-[#DEDAD3] dark:border-white/10 p-8 sm:p-10 rounded-[2rem] shadow-2xl">
+              <h2 className="text-2xl font-bold font-display text-[#141414] dark:text-[#F6F3ED] mb-8 flex items-center gap-3">
                 <span className="w-2 h-2 rounded-full bg-[#C7612E] animate-pulse" />
                 Project Inquiry Form
               </h2>
@@ -112,11 +112,11 @@ export const ContactPage: React.FC = () => {
           <div className="lg:col-span-5 space-y-8">
             
             {/* Quick Chat Callout */}
-            <div className="bg-[#FAFAFA] dark:bg-[#121216] border border-[#DEDAD3] dark:border-white/10 rounded-[2rem] p-8 sm:p-10 backdrop-blur-3xl shadow-xl">
+            <div className="bg-white dark:bg-[#151518] border border-[#DEDAD3] dark:border-white/10 rounded-[2rem] p-8 sm:p-10 shadow-xl">
               <span className="text-[0.65rem] font-mono font-bold uppercase tracking-[0.2em] text-[#C7612E] block mb-4">
                 Direct Line
               </span>
-              <h3 className="font-sans font-bold text-2xl text-[#171717] dark:text-white mb-3">
+              <h3 className="font-display font-bold text-2xl text-[#141414] dark:text-[#F6F3ED] mb-3">
                 Immediate chat?
               </h3>
               <p className="text-sm text-[#77746F] dark:text-[#A1A1AA] leading-relaxed font-light mb-8">

@@ -10,7 +10,7 @@ export const SiteFooter: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#F6F3ED] dark:bg-[#171717] text-[#171717] dark:text-[#F6F3ED] border-t border-[#DEDAD3] dark:border-white/10 pt-24 pb-12 transition-colors duration-300">
+    <footer className="bg-[#F6F3ED] dark:bg-[#0C0C0E] text-[#141414] dark:text-[#F6F3ED] border-t border-[#DEDAD3] dark:border-white/10 pt-24 pb-12 transition-colors duration-300">
       <div className="max-w-[1800px] w-full mx-auto px-5 sm:px-8 lg:px-12">
         {/* Massive Editorial Brand Statement */}
         <div className="pb-16 border-b border-[#DEDAD3] dark:border-white/10 flex flex-col lg:flex-row lg:items-end justify-between gap-8">
@@ -18,12 +18,12 @@ export const SiteFooter: React.FC = () => {
             <span className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-[#C7612E] block mb-3">
               Independent Digital Product & Software Studio
             </span>
-            <h2 className="font-sans font-extrabold text-4xl sm:text-6xl lg:text-7xl tracking-tight text-[#171717] dark:text-[#F6F3ED] leading-[1.05]">
+            <h2 className="font-display font-extrabold text-4xl sm:text-6xl lg:text-7xl tracking-tight text-[#141414] dark:text-[#F6F3ED] leading-[1.05]">
               Ideas. <span className="text-[#C7612E]">Engineered.</span>
             </h2>
           </div>
           <div className="max-w-md space-y-4">
-            <p className="text-sm text-[#77746F] dark:text-[#A1A1AA] leading-relaxed">
+            <p className="text-sm text-[#57544E] dark:text-[#A6A29A] leading-relaxed">
               We partner with visionary founders and companies globally to design, architect, and ship high-performance software, custom web systems, and applied AI applications.
             </p>
             <div className="flex items-center gap-2 text-xs font-mono text-[#C7612E] font-semibold">
@@ -37,7 +37,7 @@ export const SiteFooter: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 py-16 border-b border-[#DEDAD3] dark:border-white/10">
           <div className="lg:col-span-5 space-y-6">
             <Logo variant="full" size="md" />
-            <p className="text-xs sm:text-sm text-[#77746F] max-w-sm leading-relaxed">
+            <p className="text-xs sm:text-sm text-[#57544E] dark:text-[#A6A29A] max-w-sm leading-relaxed">
               No account-manager layers. No bloated templates. Direct founder engineering, defensive security standards, and production speed.
             </p>
             <div className="flex items-center gap-3 pt-2">

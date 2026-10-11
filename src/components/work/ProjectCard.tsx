@@ -227,13 +227,13 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             </div>
           )}
 
-          <h3 className="font-sans font-extrabold text-2xl sm:text-3xl text-[#171717] dark:text-[#F6F3ED] tracking-tight group-hover:text-[#C7612E] transition-colors leading-tight">
+          <h3 className="font-display font-bold text-2xl sm:text-3xl text-[#141414] dark:text-[#F6F3ED] tracking-tight group-hover:text-[#C7612E] transition-colors leading-tight">
             <Link to={`/work/${project.slug}`}>
               {project.title}
             </Link>
           </h3>
 
-          <p className="mt-3 text-sm text-[#77746F] dark:text-[#A1A1AA] leading-relaxed line-clamp-3 font-light">
+          <p className="mt-3 text-sm text-[#57544E] dark:text-[#A6A29A] leading-relaxed line-clamp-3 font-light">
             {project.summary}
           </p>
 
@@ -242,8 +242,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             <div className="mt-6 pt-5 border-t border-[#DEDAD3] dark:border-white/10 grid grid-cols-2 gap-3">
               {project.metrics.slice(0, 2).map((m, idx) => (
                 <div key={idx} className="p-3 rounded-xl bg-[#F6F3ED] dark:bg-[#1A1A20] border border-[#DEDAD3]/80 dark:border-white/10">
-                  <p className="text-lg sm:text-xl font-extrabold font-sans text-[#171717] dark:text-[#F6F3ED] tabular-nums">{m.value}</p>
-                  <p className="text-[0.7rem] text-[#77746F] dark:text-[#A1A1AA] font-mono tracking-tight mt-0.5">{m.label}</p>
+                  <p className="text-lg sm:text-xl font-bold font-display text-[#141414] dark:text-[#F6F3ED] tabular-nums">{m.value}</p>
+                  <p className="text-[0.7rem] text-[#6E6B65] dark:text-[#A6A29A] font-mono tracking-tight mt-0.5">{m.label}</p>
                 </div>
               ))}
             </div>

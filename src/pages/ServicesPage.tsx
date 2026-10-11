@@ -14,7 +14,7 @@ export const ServicesPage: React.FC = () => {
   return (
     <>
       <SEO title="Services" />
-      <div className="bg-[#F6F3ED] dark:bg-[#171717] text-[#171717] dark:text-[#F6F3ED] pt-28 sm:pt-36 pb-24 selection:bg-[#C7612E] selection:text-white transition-colors duration-300">
+      <div className="bg-[#F6F3ED] dark:bg-[#0C0C0E] text-[#141414] dark:text-[#F6F3ED] pt-28 sm:pt-36 pb-24 selection:bg-[#C7612E] selection:text-white transition-colors duration-300">
       <div className="max-w-[1800px] w-full mx-auto px-5 sm:px-8 lg:px-12">
         {/* Header with 3D Spatial Torus Sculpture */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pb-12 border-b border-[#DEDAD3] dark:border-white/10">
@@ -22,10 +22,10 @@ export const ServicesPage: React.FC = () => {
             <span className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-[#C7612E] block mb-2">
               Capabilities & Offerings
             </span>
-            <h1 className="font-sans font-extrabold text-4xl sm:text-6xl text-[#171717] dark:text-[#F6F3ED] tracking-tight leading-[1.08] mb-6">
+            <h1 className="font-display font-extrabold text-4xl sm:text-6xl text-[#141414] dark:text-[#F6F3ED] tracking-tight leading-[1.08] mb-6">
               Disciplines engineered for real business momentum.
             </h1>
-            <p className="text-lg sm:text-xl text-[#77746F] dark:text-[#A1A1AA] font-light leading-relaxed">
+            <p className="text-lg sm:text-xl text-[#57544E] dark:text-[#A6A29A] font-light leading-relaxed">
               We combine digital craftsmanship with full-stack software engineering and applied AI. Every service is delivered with direct technical leadership without junior agency fog or outsourced contractors.
             </p>
           </div>
@@ -43,7 +43,7 @@ export const ServicesPage: React.FC = () => {
               <section 
                 key={svc.id} 
                 id={svc.id}
-                className="scroll-mt-32 bg-white dark:bg-[#20201E] border border-[#DEDAD3] dark:border-white/10 p-6 sm:p-10 lg:p-14 rounded-3xl shadow-[0_4px_24px_rgba(0,0,0,0.02)] transition-all hover:border-[#C7612E]/40"
+                className="scroll-mt-32 bg-white dark:bg-[#151518] border border-[#DEDAD3] dark:border-white/10 p-6 sm:p-10 lg:p-14 rounded-3xl shadow-[0_4px_24px_rgba(0,0,0,0.02)] transition-all hover:border-[#C7612E]/40"
               >
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
                   {/* Left Column: Title, Concept, Architecture & Scope (5 Cols) */}
@@ -57,7 +57,7 @@ export const ServicesPage: React.FC = () => {
                       )}
                     </div>
 
-                    <h2 className="font-sans font-extrabold text-3xl sm:text-4xl text-[#171717] dark:text-[#F6F3ED] tracking-tight">
+                    <h2 className="font-display font-bold text-3xl sm:text-4xl text-[#141414] dark:text-[#F6F3ED] tracking-tight">
                       {svc.title}
                     </h2>
 
@@ -65,13 +65,13 @@ export const ServicesPage: React.FC = () => {
                       {svc.tagline}
                     </p>
 
-                    <p className="text-sm sm:text-base text-[#77746F] dark:text-[#A1A1AA] leading-relaxed font-light">
+                    <p className="text-sm sm:text-base text-[#57544E] dark:text-[#A6A29A] leading-relaxed font-light">
                       {svc.description}
                     </p>
 
                     {/* Who It's For Card */}
-                    <div className="p-4 sm:p-5 bg-[#F6F3ED] dark:bg-[#1A1A20] border border-[#DEDAD3] dark:border-white/10 rounded-xl space-y-1.5">
-                      <p className="text-xs font-mono font-semibold uppercase tracking-wider text-[#171717] dark:text-[#F6F3ED]">
+                    <div className="p-4 sm:p-5 bg-[#F6F3ED] dark:bg-[#1C1C22] border border-[#DEDAD3] dark:border-white/10 rounded-xl space-y-1.5">
+                      <p className="text-xs font-mono font-semibold uppercase tracking-wider text-[#141414] dark:text-[#F6F3ED]">
                         Who This Solves For:
                       </p>
                       <p className="text-xs sm:text-sm text-[#77746F] dark:text-[#A1A1AA] leading-relaxed font-light">

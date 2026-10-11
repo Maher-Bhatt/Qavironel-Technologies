@@ -1,6 +1,5 @@
 import React, { useEffect, useLayoutEffect } from 'react';
 import { motion } from 'framer-motion';
-import { playTransitionSound } from '../../utils/soundEffects';
 import { enforceScrollTop } from '../../utils/scroll';
 
 interface PageTransitionProps {
@@ -21,7 +20,7 @@ export const PageTransition: React.FC<PageTransitionProps> = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    playTransitionSound();
+    // Navigation is completely silent to avoid scroll/transition sound
   }, []);
 
   return (

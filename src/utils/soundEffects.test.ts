@@ -75,12 +75,10 @@ describe('Sound Effects Micro-Acoustics Engine', () => {
 
     const cleanup = setupGlobalSoundListeners();
     expect(addEventListenerSpy).toHaveBeenCalledWith('click', expect.any(Function), expect.any(Object));
-    expect(addEventListenerSpy).toHaveBeenCalledWith('pointerover', expect.any(Function), expect.any(Object));
     expect(addEventListenerSpy).toHaveBeenCalledWith('input', expect.any(Function), expect.any(Object));
 
     cleanup();
     expect(removeEventListenerSpy).toHaveBeenCalledWith('click', expect.any(Function), expect.any(Object));
-    expect(removeEventListenerSpy).toHaveBeenCalledWith('pointerover', expect.any(Function), expect.any(Object));
     expect(removeEventListenerSpy).toHaveBeenCalledWith('input', expect.any(Function), expect.any(Object));
   });
 

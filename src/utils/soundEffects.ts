@@ -10,6 +10,19 @@ let soundEnabled = typeof window !== 'undefined'
   ? localStorage.getItem('qavironel_sfx_enabled') !== 'false'
   : true;
 
+let isScrolling = false;
+let scrollTimeout: any = null;
+
+if (typeof window !== 'undefined') {
+  window.addEventListener('scroll', () => {
+    isScrolling = true;
+    if (scrollTimeout) clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+      isScrolling = false;
+    }, 150);
+  }, { passive: true });
+}
+
 /**
  * Initialize and resume Web Audio Context safely across all modern browsers.
  */
@@ -83,7 +96,7 @@ const playOscillator = (
   volEnd: number,
   forcePlay = false
 ) => {
-  if (!soundEnabled && !forcePlay) return;
+  if ((!soundEnabled || isScrolling) && !forcePlay) return;
   try {
     initAudio();
     if (!audioCtx) return;
@@ -140,14 +153,10 @@ export const playClickSound = () => {
 };
 
 /**
- * Soft, subtle glass blip on hover. Throttled to prevent acoustic clutter.
+ * Hover sound is intentionally silent to guarantee scrolling and cursor movement produce zero audio noise.
  */
 export const playHoverSound = () => {
-  const now = Date.now();
-  if (now - lastHoverTime < 60) return;
-  lastHoverTime = now;
-
-  playOscillator('sine', 1200, 1500, 0.035, 0.05, 0.001);
+  // Intentionally silent
 };
 
 /**
@@ -275,21 +284,6 @@ export const setupGlobalSoundListeners = (): (() => void) => {
     }
   };
 
-  // Delegated hover listener for pointer/mouse users
-  const handleDocumentPointerOver = (e: PointerEvent) => {
-    if (!soundEnabled || e.pointerType === 'touch') return;
-    const target = e.target as Element | null;
-    if (!target) return;
-
-    const interactive = target.closest<HTMLElement>(
-      'button, a, [role="button"], [role="tab"], [data-sound-hover="true"]'
-    );
-
-    if (interactive && interactive.getAttribute('data-no-sound') !== 'true') {
-      playHoverSound();
-    }
-  };
-
   // Delegated typing feedback for text inputs and textareas
   const handleDocumentInput = (e: Event) => {
     if (!soundEnabled) return;
@@ -302,12 +296,10 @@ export const setupGlobalSoundListeners = (): (() => void) => {
   };
 
   document.addEventListener('click', handleDocumentClick, { capture: true, passive: true });
-  document.addEventListener('pointerover', handleDocumentPointerOver, { capture: true, passive: true });
   document.addEventListener('input', handleDocumentInput, { capture: true, passive: true });
 
   return () => {
     document.removeEventListener('click', handleDocumentClick, { capture: true });
-    document.removeEventListener('pointerover', handleDocumentPointerOver, { capture: true });
     document.removeEventListener('input', handleDocumentInput, { capture: true });
     window.removeEventListener('pointerdown', unlockAudio);
     window.removeEventListener('keydown', unlockAudio);

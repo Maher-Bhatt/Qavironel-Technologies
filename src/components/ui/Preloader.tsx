@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { playClickSound } from '../../utils/soundEffects';
 import { ArrowRight, Sparkles, Terminal } from 'lucide-react';
 
 export const Preloader: React.FC = () => {
@@ -56,16 +55,11 @@ export const Preloader: React.FC = () => {
       const currentVal = Math.min(Math.floor(eased * 100), 100);
       setPercent(currentVal);
 
-      // Sound ticks on milestones
+      // Progress milestone check
       const milestones = [25, 55, 85, 100];
       milestones.forEach((m) => {
         if (currentVal >= m && !soundPlayedRef.current[m]) {
           soundPlayedRef.current[m] = true;
-          try {
-            playClickSound();
-          } catch {
-            // ignore
-          }
         }
       });
 

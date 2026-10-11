@@ -50,7 +50,7 @@ export const teamMembers: TeamMember[] = [
     }
   },
   {
-    name: 'Founding Team Member',
+    name: 'Dhyani Parikh',
     role: 'Founding Team Member — Frontend & Operations',
     bio: 'Contributing to frontend development and project coordination at Qavironel Technologies, she helps turn design ideas into functional interfaces while supporting project planning, task management, and team collaboration. As she continues developing her technical skills, she brings a collaborative mindset and a commitment to learning, improving, and building thoughtful digital experiences.',
     credentials: [
@@ -70,8 +70,10 @@ export const teamMembers: TeamMember[] = [
       'Sprint Coordination',
       'Team Collaboration'
     ],
-    image: '/images/team/founding-team-member.webp',
-    links: {}
+    image: '/images/team/dhyani-parikh.webp',
+    links: {
+      linkedin: 'https://www.linkedin.com/in/dhyani-parikh-878201377/'
+    }
   }
 ];
 

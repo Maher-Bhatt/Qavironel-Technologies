@@ -33,7 +33,7 @@ export const VideoShowreel: React.FC = () => {
       category: 'STUDIO CRAFT',
       src: '/videos/tech-atmosphere.mp4',
       poster: '/videos/tech-atmosphere-poster.webp',
-      duration: '0:08',
+      duration: '0:15',
       tags: ['Clean Architecture', 'Type-Safe', 'Global Studio'],
     },
     {

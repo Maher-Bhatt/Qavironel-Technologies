@@ -44,7 +44,7 @@ export const VideoShowreel: React.FC = () => {
       category: 'APPLIED AI SYSTEMS',
       src: '/videos/project-reel.mp4',
       poster: '/videos/project-reel-poster.webp',
-      duration: '0:14',
+      duration: '0:15',
       tags: ['OpenCV', 'YOLOv8', 'Spatial Tracking', 'Local Inference'],
     },
     {
@@ -55,7 +55,7 @@ export const VideoShowreel: React.FC = () => {
       category: 'STUDIO CRAFT',
       src: '/videos/tech-atmosphere.mp4',
       poster: '/videos/tech-atmosphere-poster.webp',
-      duration: '0:17',
+      duration: '0:08',
       tags: ['Clean Architecture', 'Type-Safe', 'Global Studio'],
     },
   ];

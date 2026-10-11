@@ -94,6 +94,11 @@ export const VideoShowreel: React.FC = () => {
 
     observer.observe(container);
 
+    // If already in viewport and allowed to play, trigger immediate start on channel change
+    if (isInViewportRef.current && !userPausedRef.current && !prefersReducedMotion && videoRef.current) {
+      videoRef.current.play().then(() => setIsPlaying(true)).catch(() => {});
+    }
+
     // Pause when browser tab is hidden / minimized
     const handleVisibilityChange = () => {
       if (!videoRef.current) return;
@@ -139,12 +144,13 @@ export const VideoShowreel: React.FC = () => {
   const switchChannel = (idx: number) => {
     setActiveChannelIdx(idx);
     userPausedRef.current = false;
-    if (videoRef.current) {
-      videoRef.current.load();
-      if (isInViewportRef.current && !prefersReducedMotion) {
-        videoRef.current.play().then(() => setIsPlaying(true)).catch(() => {});
-      }
-    }
+    setProgress(0);
+  };
+
+  // Automatically advance to the next video when current one finishes (1 -> 2 -> 3 -> 1)
+  const handleVideoEnded = () => {
+    const nextIdx = (activeChannelIdx + 1) % channels.length;
+    switchChannel(nextIdx);
   };
 
   return (
@@ -158,11 +164,18 @@ export const VideoShowreel: React.FC = () => {
             src={currentChannel.src}
             poster={currentChannel.poster}
             autoPlay={!prefersReducedMotion}
-            loop
-            preload="metadata"
+            preload="auto"
             muted={isMuted}
             playsInline
             onTimeUpdate={handleTimeUpdate}
+            onEnded={handleVideoEnded}
+            onCanPlay={() => {
+              if (isInViewportRef.current && !userPausedRef.current && !prefersReducedMotion) {
+                videoRef.current?.play().then(() => setIsPlaying(true)).catch(() => {});
+              }
+            }}
+            onPlay={() => setIsPlaying(true)}
+            onPause={() => setIsPlaying(false)}
             className="w-full h-full object-cover transition-opacity duration-500"
           />
 
@@ -177,7 +190,7 @@ export const VideoShowreel: React.FC = () => {
 
             <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#0A0A0A]/75 backdrop-blur-md border border-white/10 text-white/80 text-[0.68rem] font-mono shadow-lg">
               <Activity className="w-3.5 h-3.5 text-[#C7612E]" />
-              <span>HIGH-DEF RUNTIME REEL</span>
+              <span>CONTINUOUS PLAYLIST · {activeChannelIdx + 1}/{channels.length}</span>
             </div>
           </div>
 

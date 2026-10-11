@@ -112,20 +112,15 @@ export const Hero3DArchitectureStack: React.FC<Hero3DArchitectureStackProps> = (
     scene.add(ambientLight);
 
     // ─────────────────────────────────────────────────────────────
-    // ANIMATION LOOP (Strictly Time-Based, ZERO Mouse Tracking)
+    // ANIMATION LOOP (Strictly Viewport & Time-Based)
     // ─────────────────────────────────────────────────────────────
     const clock = new THREE.Clock();
-    let animationFrameId: number;
-    let isVisible = true;
-    
-    const observer = new IntersectionObserver(([entry]) => {
-      isVisible = entry.isIntersecting;
-    }, { threshold: 0.1 });
-    observer.observe(container);
+    let animationFrameId: number | null = null;
+    let isVisible = false;
 
     const animate = () => {
-      animationFrameId = requestAnimationFrame(animate);
       if (!isVisible) return;
+      animationFrameId = requestAnimationFrame(animate);
 
       const delta = clock.getDelta();
       const t = clock.getElapsedTime();
@@ -139,7 +134,29 @@ export const Hero3DArchitectureStack: React.FC<Hero3DArchitectureStackProps> = (
 
       renderer.render(scene, camera);
     };
-    animate();
+
+    const observer = new IntersectionObserver(([entry]) => {
+      const visible = entry.isIntersecting && entry.intersectionRatio > 0;
+      if (visible && !isVisible) {
+        isVisible = true;
+        if (animationFrameId) cancelAnimationFrame(animationFrameId);
+        animationFrameId = requestAnimationFrame(animate);
+      } else if (!visible && isVisible) {
+        isVisible = false;
+        if (animationFrameId) cancelAnimationFrame(animationFrameId);
+      }
+    }, { threshold: [0, 0.05] });
+    observer.observe(container);
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        if (animationFrameId) cancelAnimationFrame(animationFrameId);
+      } else if (isVisible) {
+        if (animationFrameId) cancelAnimationFrame(animationFrameId);
+        animationFrameId = requestAnimationFrame(animate);
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
 
     // ─────────────────────────────────────────────────────────────
     // RESIZE LISTENER
@@ -156,8 +173,9 @@ export const Hero3DArchitectureStack: React.FC<Hero3DArchitectureStackProps> = (
 
     return () => {
       window.removeEventListener('resize', handleResize);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
       observer.disconnect();
-      cancelAnimationFrame(animationFrameId);
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
       
       if (container && renderer.domElement && container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);

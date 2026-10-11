@@ -20,7 +20,7 @@ export const SmoothScrollProvider: React.FC<{ children: React.ReactNode }> = ({ 
     });
     (window as any).lenis = lenis;
 
-    let frameId: number;
+    let frameId: number | null = null;
     function raf(time: number) {
       lenis.raf(time);
       frameId = requestAnimationFrame(raf);
@@ -28,8 +28,19 @@ export const SmoothScrollProvider: React.FC<{ children: React.ReactNode }> = ({ 
 
     frameId = requestAnimationFrame(raf);
 
+    const handleVisibility = () => {
+      if (document.hidden) {
+        if (frameId) cancelAnimationFrame(frameId);
+      } else {
+        if (frameId) cancelAnimationFrame(frameId);
+        frameId = requestAnimationFrame(raf);
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibility);
+
     return () => {
-      cancelAnimationFrame(frameId);
+      document.removeEventListener('visibilitychange', handleVisibility);
+      if (frameId) cancelAnimationFrame(frameId);
       lenis.destroy();
       (window as any).lenis = null;
     };

@@ -82,22 +82,14 @@ export const Spatial3DTorus: React.FC<Spatial3DTorusProps> = ({
     rimLight.position.set(-3, 3, 2);
     scene.add(rimLight);
 
-    // IntersectionObserver throttling
-    let isVisible = true;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        isVisible = entry.isIntersecting;
-      },
-      { threshold: 0.1 }
-    );
-    observer.observe(container);
-
-    let frameId: number;
-    let clock = new THREE.Clock();
+    // Viewport and Tab Visibility Throttling (0% CPU/GPU when offscreen or tab hidden)
+    let isVisible = false;
+    let frameId: number | null = null;
+    const clock = new THREE.Clock();
 
     const animate = () => {
-      frameId = requestAnimationFrame(animate);
       if (!isVisible) return;
+      frameId = requestAnimationFrame(animate);
 
       const delta = clock.getDelta();
       const t = clock.getElapsedTime();
@@ -109,7 +101,31 @@ export const Spatial3DTorus: React.FC<Spatial3DTorusProps> = ({
       renderer.render(scene, camera);
     };
 
-    animate();
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const visible = entry.isIntersecting && entry.intersectionRatio > 0;
+        if (visible && !isVisible) {
+          isVisible = true;
+          if (frameId) cancelAnimationFrame(frameId);
+          frameId = requestAnimationFrame(animate);
+        } else if (!visible && isVisible) {
+          isVisible = false;
+          if (frameId) cancelAnimationFrame(frameId);
+        }
+      },
+      { threshold: [0, 0.05] }
+    );
+    observer.observe(container);
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        if (frameId) cancelAnimationFrame(frameId);
+      } else if (isVisible) {
+        if (frameId) cancelAnimationFrame(frameId);
+        frameId = requestAnimationFrame(animate);
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
 
     const handleResize = () => {
       if (!container) return;
@@ -124,8 +140,9 @@ export const Spatial3DTorus: React.FC<Spatial3DTorusProps> = ({
 
     return () => {
       window.removeEventListener('resize', handleResize);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
       observer.disconnect();
-      cancelAnimationFrame(frameId);
+      if (frameId) cancelAnimationFrame(frameId);
       if (container && renderer.domElement && container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
       }

@@ -60,16 +60,68 @@ export const VideoShowreel: React.FC = () => {
     },
   ];
 
-  const currentChannel = channels[activeChannelIdx];
+  const currentChannel = channels[activeChannelIdx] || channels[0];
+
+  const containerRef = useRef<HTMLDivElement>(null);
+  const userPausedRef = useRef<boolean>(false);
+  const isInViewportRef = useRef<boolean>(false);
+
+  // Viewport-aware playback: play when visible, pause when scrolled away (upside or downside)
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const isVisible = entry.isIntersecting && entry.intersectionRatio >= 0.2;
+        isInViewportRef.current = isVisible;
+
+        if (videoRef.current) {
+          if (isVisible) {
+            // Only auto-resume if user didn't explicitly pause and doesn't prefer reduced motion
+            if (!userPausedRef.current && !prefersReducedMotion) {
+              videoRef.current.play().then(() => setIsPlaying(true)).catch(() => {});
+            }
+          } else {
+            // Offscreen: pause immediately to save GPU, battery, and memory bandwidth
+            videoRef.current.pause();
+            setIsPlaying(false);
+          }
+        }
+      },
+      { threshold: [0, 0.2, 0.5] }
+    );
+
+    observer.observe(container);
+
+    // Pause when browser tab is hidden / minimized
+    const handleVisibilityChange = () => {
+      if (!videoRef.current) return;
+      if (document.hidden) {
+        videoRef.current.pause();
+        setIsPlaying(false);
+      } else if (isInViewportRef.current && !userPausedRef.current && !prefersReducedMotion) {
+        videoRef.current.play().then(() => setIsPlaying(true)).catch(() => {});
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    return () => {
+      observer.disconnect();
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
+  }, [prefersReducedMotion, activeChannelIdx]);
 
   const togglePlay = () => {
     if (!videoRef.current) return;
     if (isPlaying) {
+      userPausedRef.current = true;
       videoRef.current.pause();
       setIsPlaying(false);
     } else {
-      videoRef.current.play();
-      setIsPlaying(true);
+      userPausedRef.current = false;
+      videoRef.current.play().then(() => setIsPlaying(true)).catch(() => {});
     }
   };
 
@@ -86,15 +138,17 @@ export const VideoShowreel: React.FC = () => {
 
   const switchChannel = (idx: number) => {
     setActiveChannelIdx(idx);
-    setIsPlaying(true);
+    userPausedRef.current = false;
     if (videoRef.current) {
       videoRef.current.load();
-      videoRef.current.play().catch(() => {});
+      if (isInViewportRef.current && !prefersReducedMotion) {
+        videoRef.current.play().then(() => setIsPlaying(true)).catch(() => {});
+      }
     }
   };
 
   return (
-    <div className="w-full relative">
+    <div ref={containerRef} className="w-full relative">
       {/* Video Frame Container */}
       <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden border border-[#E5E7EB] bg-[#0A0A0A] shadow-[0_24px_60px_rgba(0,0,0,0.08)] group">
         {/* HTML5 Video Player */}

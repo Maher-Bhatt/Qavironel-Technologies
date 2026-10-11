@@ -142,11 +142,13 @@ export const Hero3DCanvas: React.FC<Hero3DCanvasProps> = ({ className = '' }) =>
 
     window.addEventListener('mousemove', handleMouseMove);
 
-    // Animation Loop
-    let animationFrameId: number;
+    // Animation Loop with Viewport Throttling
+    let isVisible = false;
+    let animationFrameId: number | null = null;
     const startTime = performance.now() * 0.001;
 
     const animate = () => {
+      if (!isVisible) return;
       animationFrameId = requestAnimationFrame(animate);
       const elapsedTime = performance.now() * 0.001 - startTime;
 
@@ -182,7 +184,29 @@ export const Hero3DCanvas: React.FC<Hero3DCanvasProps> = ({ className = '' }) =>
       renderer.render(scene, camera);
     };
 
-    animate();
+    const observer = new IntersectionObserver(([entry]) => {
+      const visible = entry.isIntersecting && entry.intersectionRatio > 0;
+      if (visible && !isVisible) {
+        isVisible = true;
+        if (animationFrameId) cancelAnimationFrame(animationFrameId);
+        animationFrameId = requestAnimationFrame(animate);
+      } else if (!visible && isVisible) {
+        isVisible = false;
+        if (animationFrameId) cancelAnimationFrame(animationFrameId);
+      }
+    }, { threshold: [0, 0.05] });
+
+    observer.observe(container);
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        if (animationFrameId) cancelAnimationFrame(animationFrameId);
+      } else if (isVisible) {
+        if (animationFrameId) cancelAnimationFrame(animationFrameId);
+        animationFrameId = requestAnimationFrame(animate);
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
 
     // Resize Handler
     const handleResize = () => {
@@ -200,7 +224,9 @@ export const Hero3DCanvas: React.FC<Hero3DCanvasProps> = ({ className = '' }) =>
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('resize', handleResize);
-      cancelAnimationFrame(animationFrameId);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      observer.disconnect();
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
 
       knotGeometry.dispose();
       knotMaterial.dispose();

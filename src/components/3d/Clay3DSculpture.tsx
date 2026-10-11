@@ -197,21 +197,13 @@ export const Clay3DSculpture: React.FC<Clay3DSculptureProps> = ({
     // ─────────────────────────────────────────────────────────────
     // 7. SMOOTH 60 FPS ANIMATION LOOP (Pauses offscreen)
     // ─────────────────────────────────────────────────────────────
-    let isVisible = true;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        isVisible = entry.isIntersecting;
-      },
-      { threshold: 0.1 }
-    );
-    observer.observe(container);
-
-    let animationFrameId: number;
+    let isVisible = false;
+    let animationFrameId: number | null = null;
     const clock = new THREE.Clock();
 
     const animate = () => {
-      animationFrameId = requestAnimationFrame(animate);
       if (!isVisible) return;
+      animationFrameId = requestAnimationFrame(animate);
 
       const delta = clock.getDelta();
       const t = clock.getElapsedTime();
@@ -234,7 +226,31 @@ export const Clay3DSculpture: React.FC<Clay3DSculptureProps> = ({
       renderer.render(scene, camera);
     };
 
-    animate();
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const visible = entry.isIntersecting && entry.intersectionRatio > 0;
+        if (visible && !isVisible) {
+          isVisible = true;
+          if (animationFrameId) cancelAnimationFrame(animationFrameId);
+          animationFrameId = requestAnimationFrame(animate);
+        } else if (!visible && isVisible) {
+          isVisible = false;
+          if (animationFrameId) cancelAnimationFrame(animationFrameId);
+        }
+      },
+      { threshold: [0, 0.05] }
+    );
+    observer.observe(container);
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        if (animationFrameId) cancelAnimationFrame(animationFrameId);
+      } else if (isVisible) {
+        if (animationFrameId) cancelAnimationFrame(animationFrameId);
+        animationFrameId = requestAnimationFrame(animate);
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
 
     // Handle container resize
     const handleResize = () => {
@@ -251,8 +267,9 @@ export const Clay3DSculpture: React.FC<Clay3DSculptureProps> = ({
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('resize', handleResize);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
       observer.disconnect();
-      cancelAnimationFrame(animationFrameId);
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
       if (container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
       }

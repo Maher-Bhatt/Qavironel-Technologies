@@ -88,10 +88,12 @@ export const Interactive3DSphere: React.FC<Interactive3DSphereProps> = ({
 
     container.addEventListener('mousemove', handleMouseMove);
 
-    let frameId: number;
+    let frameId: number | null = null;
+    let isVisible = false;
     const startTime = performance.now() * 0.001;
 
     const animate = () => {
+      if (!isVisible) return;
       frameId = requestAnimationFrame(animate);
       const t = performance.now() * 0.001 - startTime;
 
@@ -104,11 +106,37 @@ export const Interactive3DSphere: React.FC<Interactive3DSphereProps> = ({
       renderer.render(scene, camera);
     };
 
-    animate();
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const visible = entry.isIntersecting && entry.intersectionRatio > 0;
+        if (visible && !isVisible) {
+          isVisible = true;
+          if (frameId) cancelAnimationFrame(frameId);
+          frameId = requestAnimationFrame(animate);
+        } else if (!visible && isVisible) {
+          isVisible = false;
+          if (frameId) cancelAnimationFrame(frameId);
+        }
+      },
+      { threshold: [0, 0.05] }
+    );
+    observer.observe(container);
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        if (frameId) cancelAnimationFrame(frameId);
+      } else if (isVisible) {
+        if (frameId) cancelAnimationFrame(frameId);
+        frameId = requestAnimationFrame(animate);
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
 
     return () => {
       container.removeEventListener('mousemove', handleMouseMove);
-      cancelAnimationFrame(frameId);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      observer.disconnect();
+      if (frameId) cancelAnimationFrame(frameId);
       coreGeo.dispose();
       coreMat.dispose();
       wireGeo.dispose();

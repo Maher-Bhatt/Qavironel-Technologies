@@ -31,6 +31,15 @@ function checkRateLimit(ip: string): boolean {
   return true;
 }
 
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
 
 export default async function handler(req: any, res: any) {
@@ -102,18 +111,18 @@ export default async function handler(req: any, res: any) {
           from: process.env.RESEND_FROM_EMAIL || 'inquiries@qavironel.com',
           to: [targetEmail],
           reply_to: email,
-          subject: `[New Inquiry] ${projectType} - ${name}`,
+          subject: `[New Inquiry] ${escapeHtml(projectType)} - ${escapeHtml(name)}`,
           html: `
             <h2>New Project Inquiry from Qavironel.com</h2>
-            <p><strong>Name:</strong> ${name}</p>
-            <p><strong>Email:</strong> ${email}</p>
-            <p><strong>Organization:</strong> ${organization}</p>
-            <p><strong>Discipline:</strong> ${projectType}</p>
-            <p><strong>Timeline:</strong> ${timeline}</p>
-            <p><strong>Engagement Model:</strong> ${engagementModel}</p>
+            <p><strong>Name:</strong> ${escapeHtml(name)}</p>
+            <p><strong>Email:</strong> ${escapeHtml(email)}</p>
+            <p><strong>Organization:</strong> ${escapeHtml(organization)}</p>
+            <p><strong>Discipline:</strong> ${escapeHtml(projectType)}</p>
+            <p><strong>Timeline:</strong> ${escapeHtml(timeline)}</p>
+            <p><strong>Engagement Model:</strong> ${escapeHtml(engagementModel)}</p>
             <hr />
             <h3>Project Details:</h3>
-            <p style="white-space: pre-wrap;">${details}</p>
+            <p style="white-space: pre-wrap;">${escapeHtml(details)}</p>
           `,
         }),
       });

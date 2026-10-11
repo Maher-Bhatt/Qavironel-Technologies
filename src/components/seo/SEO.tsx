@@ -68,7 +68,6 @@ export const SEO: React.FC<SEOProps> = ({
       <title>{pageTitle}</title>
       <meta name="title" content={pageTitle} />
       <meta name="description" content={pageDesc} />
-      <meta name="theme-color" content="#171717" />
       {keywords && keywords.length > 0 && (
         <meta name="keywords" content={keywords.join(', ')} />
       )}

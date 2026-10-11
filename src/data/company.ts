@@ -48,6 +48,30 @@ export const teamMembers: TeamMember[] = [
       linkedin: 'https://linkedin.com/in/maher-bhatt-206035362',
       website: 'https://maherbhatt.me'
     }
+  },
+  {
+    name: 'Founding Team Member',
+    role: 'Founding Team Member — Frontend & Operations',
+    bio: 'Contributing to frontend development and project coordination at Qavironel Technologies, she helps turn design ideas into functional interfaces while supporting project planning, task management, and team collaboration. As she continues developing her technical skills, she brings a collaborative mindset and a commitment to learning, improving, and building thoughtful digital experiences.',
+    credentials: [
+      'Contributes to responsive website layouts, UI components, and frontend refinements',
+      'Assists with visual consistency, cross-device testing, and design system alignment',
+      'Helps organize project tasks, priority tracking, milestone coordination, and updates',
+      'Assists with meeting preparation, documentation, and workflow communication',
+      'Active collaborator in sprint planning, implementation reviews, and design decisions'
+    ],
+    skills: [
+      'Frontend Development',
+      'Responsive Layouts',
+      'Reusable UI Components',
+      'UI/UX Refinements',
+      'Task Tracking',
+      'Project Operations',
+      'Sprint Coordination',
+      'Team Collaboration'
+    ],
+    image: '/images/team/founding-team-member.webp',
+    links: {}
   }
 ];
 

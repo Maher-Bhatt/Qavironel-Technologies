@@ -149,11 +149,26 @@ export const SiteFooter: React.FC = () => {
             <span>© {currentYear} Qavironel Technologies. All rights reserved.</span>
           </div>
 
-          <div className="flex flex-wrap items-center gap-4 sm:gap-6">
+          <div className="flex flex-wrap items-center gap-3 sm:gap-5 text-[0.72rem] font-mono">
             <ThemeToggle variant="pill" />
-            <Link to="/privacy" className="hover:text-[#171717] dark:hover:text-white transition-colors">Privacy Policy</Link>
-            <Link to="/terms" className="hover:text-[#171717] dark:hover:text-white transition-colors">Terms of Service</Link>
-            <span className="text-[#C7612E] font-semibold">Global Remote-First Studio</span>
+            <span className="text-[#DEDAD3] dark:text-white/15 hidden sm:inline" aria-hidden="true">|</span>
+            <Link 
+              to="/privacy" 
+              className="text-[#6E6B65] dark:text-[#A6A29A] hover:text-[#C7612E] dark:hover:text-[#C7612E] transition-colors inline-flex items-center gap-1 group py-1"
+            >
+              <span>Privacy Policy</span>
+              <span className="opacity-0 group-hover:opacity-100 transition-opacity text-[#C7612E]">↗</span>
+            </Link>
+            <span className="text-[#DEDAD3] dark:text-white/15 hidden sm:inline" aria-hidden="true">·</span>
+            <Link 
+              to="/terms" 
+              className="text-[#6E6B65] dark:text-[#A6A29A] hover:text-[#C7612E] dark:hover:text-[#C7612E] transition-colors inline-flex items-center gap-1 group py-1"
+            >
+              <span>Terms of Service</span>
+              <span className="opacity-0 group-hover:opacity-100 transition-opacity text-[#C7612E]">↗</span>
+            </Link>
+            <span className="text-[#DEDAD3] dark:text-white/15 hidden sm:inline" aria-hidden="true">|</span>
+            <span className="text-[#C7612E] font-semibold tracking-wide">Global Remote-First Studio</span>
           </div>
         </div>
       </div>

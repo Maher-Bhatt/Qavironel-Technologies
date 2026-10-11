@@ -73,34 +73,34 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         transformPerspective: 1000,
       }}
       transition={{ type: 'spring', stiffness: 320, damping: 26 }}
-      className={`group relative glass-card rounded-2xl transition-all duration-300 flex flex-col overflow-hidden text-[#0A0A0A] border border-[#E5E7EB] hover:border-[#E0561B]/40 shadow-xs hover:shadow-xl hover:shadow-[#E0561B]/5 ${
+      className={`group relative glass-card rounded-2xl transition-all duration-300 flex flex-col overflow-hidden text-[#171717] dark:text-[#F6F3ED] bg-white dark:bg-[#20201E] border border-[#DEDAD3] dark:border-white/10 hover:border-[#C7612E]/40 shadow-xs hover:shadow-xl hover:shadow-[#C7612E]/5 ${
         isFeatured ? 'lg:grid lg:grid-cols-12 gap-0' : ''
       }`}
     >
       {/* Background Watermark Numeral */}
-      <span className="absolute top-10 right-6 text-7xl sm:text-8xl font-sans font-black text-black/[0.03] select-none pointer-events-none tracking-tighter z-0">
+      <span className="absolute top-10 right-6 text-7xl sm:text-8xl font-sans font-black text-black/[0.03] dark:text-white/[0.03] select-none pointer-events-none tracking-tighter z-0">
         {String(project.order || 1).padStart(2, '0')}
       </span>
 
       {/* Studio Chrome Window Header */}
-      <div className="col-span-12 flex items-center justify-between px-4 sm:px-5 py-2.5 border-b border-[#E5E7EB] bg-[#FAFAFA] relative z-10">
+      <div className="col-span-12 flex items-center justify-between px-4 sm:px-5 py-2.5 border-b border-[#DEDAD3] dark:border-white/10 bg-[#FAFAFA] dark:bg-[#1C1C22] relative z-10">
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-1.5">
             <span className="w-2.5 h-2.5 rounded-full bg-[#EF4444]/80" />
             <span className="w-2.5 h-2.5 rounded-full bg-[#F59E0B]/80" />
             <span className="w-2.5 h-2.5 rounded-full bg-[#10B981]/80" />
           </div>
-          <span className="text-[0.68rem] font-mono tracking-wider text-[#71717A] ml-1">
+          <span className="text-[0.68rem] font-mono tracking-wider text-[#77746F] dark:text-[#A1A1AA] ml-1">
             sys://qavironel/{project.slug}
           </span>
         </div>
 
         <div className="flex items-center gap-2.5">
-          <span className="text-[0.65rem] font-mono font-semibold uppercase tracking-wider text-[#E0561B]">
+          <span className="text-[0.65rem] font-mono font-semibold uppercase tracking-wider text-[#C7612E]">
             {project.category}
           </span>
           <span className="text-[#D1D5DB] text-xs">·</span>
-          <span className="text-[0.65rem] font-mono text-[#71717A]">
+          <span className="text-[0.65rem] font-mono text-[#77746F]">
             {project.year}
           </span>
         </div>
@@ -110,9 +110,9 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       <div 
         className={`relative overflow-hidden z-10 flex items-center justify-center ${
           isFeatured 
-            ? 'lg:col-span-7 p-4 sm:p-6 lg:p-8 ' + (isDarkProject ? 'bg-[#0A0A0C]' : 'bg-[#F4F4F6]')
-            : 'p-4 sm:p-5 h-[260px] sm:h-[300px] ' + (isDarkProject ? 'bg-[#0A0A0C]' : 'bg-[#F8F9FA]')
-        } border-b lg:border-b-0 border-[#E5E7EB]`}
+            ? 'lg:col-span-7 p-4 sm:p-6 lg:p-8 ' + (isDarkProject ? 'bg-[#171717]' : 'bg-[#F4F4F6]')
+            : 'p-4 sm:p-5 h-[260px] sm:h-[300px] ' + (isDarkProject ? 'bg-[#171717]' : 'bg-[#F6F3ED]')
+        } border-b lg:border-b-0 border-[#DEDAD3]`}
       >
         <Link 
           to={`/work/${project.slug}`} 
@@ -169,7 +169,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                 }}
                 className={`px-2.5 py-1 rounded-lg text-[0.65rem] font-mono transition-colors ${
                   activeImageIndex === idx
-                    ? 'bg-[#E0561B] text-white font-bold shadow-xs'
+                    ? 'bg-[#C7612E] text-white font-bold shadow-xs'
                     : 'bg-white/10 text-white/80 hover:bg-white/20'
                 }`}
               >
@@ -187,36 +187,36 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         }`}
       >
         <div>
-          <div className="flex items-center justify-between gap-4 text-xs font-mono text-[#71717A] mb-2">
-            <span className="uppercase tracking-wider text-[#E0561B] font-semibold">{project.eyebrow}</span>
-            <span className="text-[0.68rem] text-emerald-600 font-semibold">{project.status}</span>
+          <div className="flex items-center justify-between gap-4 text-xs font-mono text-[#77746F] dark:text-[#A1A1AA] mb-2">
+            <span className="uppercase tracking-wider text-[#C7612E] font-semibold">{project.eyebrow}</span>
+            <span className="text-[0.68rem] text-emerald-600 dark:text-emerald-400 font-semibold">{project.status}</span>
           </div>
 
           {/* Microsoft Store Verified Badge for K.A.L.K.I. */}
           {project.slug === 'kalki' && (
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-[0.68rem] font-mono font-bold mb-3">
-              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-400 text-[0.68rem] font-mono font-bold mb-3">
+              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
               <span>STORE VERIFIED · v1.0.4 · ID: 9P6HJPQZBGFQ</span>
             </div>
           )}
 
-          <h3 className="font-sans font-extrabold text-2xl sm:text-3xl text-[#0A0A0A] tracking-tight group-hover:text-[#E0561B] transition-colors leading-tight">
+          <h3 className="font-sans font-extrabold text-2xl sm:text-3xl text-[#171717] dark:text-[#F6F3ED] tracking-tight group-hover:text-[#C7612E] transition-colors leading-tight">
             <Link to={`/work/${project.slug}`}>
               {project.title}
             </Link>
           </h3>
 
-          <p className="mt-3 text-sm text-[#52525B] leading-relaxed line-clamp-3 font-light">
+          <p className="mt-3 text-sm text-[#77746F] dark:text-[#A1A1AA] leading-relaxed line-clamp-3 font-light">
             {project.summary}
           </p>
 
           {/* Key Metrics */}
           {project.metrics && project.metrics.length > 0 && (
-            <div className="mt-6 pt-5 border-t border-[#E5E7EB] grid grid-cols-2 gap-3">
+            <div className="mt-6 pt-5 border-t border-[#DEDAD3] dark:border-white/10 grid grid-cols-2 gap-3">
               {project.metrics.slice(0, 2).map((m, idx) => (
-                <div key={idx} className="p-3 rounded-xl bg-[#F8F9FA] border border-[#E5E7EB]/80">
-                  <p className="text-lg sm:text-xl font-extrabold font-sans text-[#0A0A0A] tabular-nums">{m.value}</p>
-                  <p className="text-[0.7rem] text-[#71717A] font-mono tracking-tight mt-0.5">{m.label}</p>
+                <div key={idx} className="p-3 rounded-xl bg-[#F6F3ED] dark:bg-[#1A1A20] border border-[#DEDAD3]/80 dark:border-white/10">
+                  <p className="text-lg sm:text-xl font-extrabold font-sans text-[#171717] dark:text-[#F6F3ED] tabular-nums">{m.value}</p>
+                  <p className="text-[0.7rem] text-[#77746F] dark:text-[#A1A1AA] font-mono tracking-tight mt-0.5">{m.label}</p>
                 </div>
               ))}
             </div>
@@ -227,13 +227,13 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             {project.technologies.slice(0, 4).map((tech) => (
               <span 
                 key={tech} 
-                className="text-[0.68rem] font-mono text-[#52525B] bg-[#F8F9FA] px-2.5 py-1 rounded-md border border-[#E5E7EB]"
+                className="text-[0.68rem] font-mono text-[#77746F] dark:text-[#A1A1AA] bg-[#F6F3ED] dark:bg-[#1A1A20] px-2.5 py-1 rounded-md border border-[#DEDAD3] dark:border-white/10"
               >
                 {tech}
               </span>
             ))}
             {project.technologies.length > 4 && (
-              <span className="text-[0.68rem] font-mono text-[#71717A] px-1 py-1">
+              <span className="text-[0.68rem] font-mono text-[#77746F] dark:text-[#A1A1AA] px-1 py-1">
                 +{project.technologies.length - 4}
               </span>
             )}
@@ -241,13 +241,13 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         </div>
 
         {/* Action Link Footer */}
-        <div className="mt-8 pt-6 border-t border-[#E5E7EB] flex items-center justify-between">
+        <div className="mt-8 pt-6 border-t border-[#DEDAD3] dark:border-white/10 flex items-center justify-between">
           <Link 
             to={`/work/${project.slug}`} 
-            className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#0A0A0A] group-hover:text-[#E0561B] transition-colors"
+            className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#171717] dark:text-[#F6F3ED] group-hover:text-[#C7612E] transition-colors"
           >
             <span>Explore Case Study</span>
-            <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1 text-[#E0561B]" />
+            <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1 text-[#C7612E]" />
           </Link>
 
           {project.links.length > 0 && (
@@ -255,7 +255,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
               href={project.links[0].url} 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-xs font-mono text-[#71717A] hover:text-[#E0561B] inline-flex items-center gap-1 transition-colors font-medium"
+              className="text-xs font-mono text-[#77746F] dark:text-[#A1A1AA] hover:text-[#C7612E] inline-flex items-center gap-1 transition-colors font-medium"
               title={project.links[0].label}
             >
               <span>{project.links[0].type === 'github' ? 'GitHub' : 'Live'}</span>

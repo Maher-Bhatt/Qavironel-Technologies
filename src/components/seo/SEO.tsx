@@ -1,50 +1,109 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import { useLocation } from 'react-router-dom';
 import { companyConfig } from '../../data/company';
 
 interface SEOProps {
   title?: string;
   description?: string;
-  type?: string;
+  type?: 'website' | 'article' | 'product';
   image?: string;
   url?: string;
+  keywords?: string[];
+  noIndex?: boolean;
+  structuredData?: object;
 }
 
 export const SEO: React.FC<SEOProps> = ({ 
   title, 
   description, 
   type = 'website',
-  image = '/images/brand/og-image.jpg', // Placeholder for actual OG image
-  url = 'https://qavironel.com'
+  image = '/images/brand/og-image.jpg',
+  url,
+  keywords,
+  noIndex = false,
+  structuredData
 }) => {
-  const defaultTitle = 'Qavironel Technologies | Advanced Digital Studio';
-  const defaultDesc = companyConfig.description || 'We engineer high-velocity digital products, brands, and AI architectures.';
-  
-  const siteTitle = title ? `${title} | Qavironel` : defaultTitle;
-  const siteDesc = description || defaultDesc;
+  const location = useLocation();
+  const siteOrigin = (typeof import.meta !== 'undefined' && import.meta.env?.VITE_SITE_URL) || 'https://qavironel.com';
+
+  const defaultTitle = `${companyConfig.name} — ${companyConfig.tagline} | Digital Product & Software Studio`;
+  const defaultDesc = companyConfig.description || 'Global technology and digital product studio architecting high-performance web platforms, SaaS applications, and applied AI systems.';
+
+  const pageTitle = title ? `${title} | ${companyConfig.name}` : defaultTitle;
+  const pageDesc = description || defaultDesc;
+
+  // Resolve canonical URL: use passed url, or current router pathname
+  const canonicalUrl = url || `${siteOrigin}${location.pathname === '/' ? '' : location.pathname}`;
+
+  // Ensure absolute image URL for Open Graph
+  const ogImageUrl = image.startsWith('http') ? image : `${siteOrigin}${image}`;
+
+  const baseSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    '@id': `${siteOrigin}/#organization`,
+    name: companyConfig.name,
+    alternateName: companyConfig.shortName,
+    slogan: companyConfig.tagline,
+    url: siteOrigin,
+    logo: `${siteOrigin}/brand/qavironel-logo-square.png`,
+    email: companyConfig.email,
+    description: companyConfig.description,
+    sameAs: [
+      companyConfig.githubOrg,
+      companyConfig.linkedinUrl
+    ],
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'inquiries',
+      email: companyConfig.email,
+      availableLanguage: ['English', 'Hindi', 'Gujarati']
+    }
+  };
 
   return (
     <Helmet>
-      {/* Primary Meta Tags */}
-      <title>{siteTitle}</title>
-      <meta name="title" content={siteTitle} />
-      <meta name="description" content={siteDesc} />
-      <meta name="theme-color" content="#E0561B" />
+      {/* Primary HTML Meta Tags */}
+      <title>{pageTitle}</title>
+      <meta name="title" content={pageTitle} />
+      <meta name="description" content={pageDesc} />
+      <meta name="theme-color" content="#171717" />
+      {keywords && keywords.length > 0 && (
+        <meta name="keywords" content={keywords.join(', ')} />
+      )}
+      <link rel="canonical" href={canonicalUrl} />
+
+      {/* Robots Directive */}
+      {noIndex ? (
+        <meta name="robots" content="noindex, nofollow" />
+      ) : (
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+      )}
 
       {/* Open Graph / Facebook */}
       <meta property="og:type" content={type} />
-      <meta property="og:url" content={url} />
-      <meta property="og:title" content={siteTitle} />
-      <meta property="og:description" content={siteDesc} />
-      <meta property="og:image" content={image} />
+      <meta property="og:site_name" content={companyConfig.name} />
+      <meta property="og:url" content={canonicalUrl} />
+      <meta property="og:title" content={pageTitle} />
+      <meta property="og:description" content={pageDesc} />
+      <meta property="og:image" content={ogImageUrl} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:locale" content="en_US" />
 
-      {/* Twitter */}
-      <meta property="twitter:card" content="summary_large_image" />
-      <meta property="twitter:url" content={url} />
-      <meta property="twitter:title" content={siteTitle} />
-      <meta property="twitter:description" content={siteDesc} />
-      <meta property="twitter:image" content={image} />
+      {/* Twitter Card */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:site" content="@qavironel" />
+      <meta name="twitter:url" content={canonicalUrl} />
+      <meta name="twitter:title" content={pageTitle} />
+      <meta name="twitter:description" content={pageDesc} />
+      <meta name="twitter:image" content={ogImageUrl} />
+
+      {/* Structured Data (Schema.org) */}
+      <script type="application/ld+json">
+        {JSON.stringify(structuredData || baseSchema)}
+      </script>
     </Helmet>
   );
 };
-

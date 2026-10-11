@@ -3,9 +3,14 @@ import Lenis from 'lenis';
 
 export const SmoothScrollProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   useEffect(() => {
+    // Prevent browser from restoring old scroll positions across SPA route changes
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+
     // Respect user's reduced motion accessibility preference + skip on touch/mobile
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    // Lenis smooth scroll adds overhead on mobile touch - native scroll is better
+    // Native scroll is already optimized on mobile touch
     if ('ontouchstart' in window || navigator.maxTouchPoints > 0) return;
 
     const lenis = new Lenis({
@@ -33,5 +38,3 @@ export const SmoothScrollProvider: React.FC<{ children: React.ReactNode }> = ({ 
   return <>{children}</>;
 };
 export default SmoothScrollProvider;
-
-

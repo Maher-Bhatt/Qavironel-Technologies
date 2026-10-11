@@ -1,5 +1,6 @@
 import React from 'react';
 import { ProjectCategory } from '../../types';
+import { playTabSound } from '../../utils/soundEffects';
 
 interface ProjectFiltersProps {
   categories: { id: ProjectCategory; label: string }[];
@@ -24,16 +25,19 @@ export const ProjectFilters: React.FC<ProjectFiltersProps> = ({
           <button
             key={cat.id}
             type="button"
-            onClick={() => onSelectCategory(cat.id)}
-            className={`px-4 py-2 text-xs font-semibold uppercase tracking-widest transition-all duration-200 shrink-0 flex items-center gap-2 border ${
+            onClick={() => {
+              playTabSound();
+              onSelectCategory(cat.id);
+            }}
+            className={`px-4 py-2 text-xs font-semibold uppercase tracking-widest transition-all duration-200 shrink-0 flex items-center gap-2 border rounded-full ${
               isActive
-                ? 'bg-[#0A0A0A] text-white border-[#0A0A0A] shadow-xs'
-                : 'bg-white text-[#52525B] border-[#E5E7EB] hover:border-[#0A0A0A] hover:text-[#0A0A0A]'
+                ? 'bg-[#171717] dark:bg-white text-white dark:text-[#171717] border-[#171717] dark:border-white shadow-xs'
+                : 'bg-white dark:bg-[#20201E] text-[#77746F] dark:text-[#A1A1AA] border-[#DEDAD3] dark:border-white/10 hover:border-[#171717] dark:hover:border-white/40 hover:text-[#171717] dark:hover:text-white'
             }`}
           >
             <span>{cat.label}</span>
-            <span className={`text-[0.68rem] font-mono px-1.5 py-0.5 ${
-              isActive ? 'bg-[#E0561B] text-white' : 'bg-[#F4F4F5] text-[#71717A]'
+            <span className={`text-[0.68rem] font-mono px-1.5 py-0.5 rounded-full ${
+              isActive ? 'bg-[#C7612E] text-white' : 'bg-[#F6F3ED] dark:bg-[#1A1A20] text-[#77746F] dark:text-[#A1A1AA]'
             }`}>
               {count}
             </span>

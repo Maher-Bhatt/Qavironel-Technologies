@@ -61,8 +61,8 @@ export const Spatial3DTorus: React.FC<Spatial3DTorusProps> = ({
     // Inner Glowing Copper Spline Core
     const coreGeo = new THREE.TorusKnotGeometry(1.2, 0.08, 100, 16, 2, 3);
     const copperMat = new THREE.MeshStandardMaterial({
-      color: new THREE.Color('#E0561B'),
-      emissive: new THREE.Color('#E0561B'),
+      color: new THREE.Color('#C7612E'),
+      emissive: new THREE.Color('#C7612E'),
       emissiveIntensity: 1.3,
       metalness: 0.9,
       roughness: 0.15
@@ -74,7 +74,7 @@ export const Spatial3DTorus: React.FC<Spatial3DTorusProps> = ({
     const ambientLight = new THREE.AmbientLight(0xffffff, 1.4);
     scene.add(ambientLight);
 
-    const pointLight = new THREE.PointLight('#E0561B', 18, 12);
+    const pointLight = new THREE.PointLight('#C7612E', 18, 12);
     pointLight.position.set(3, 4, 3);
     scene.add(pointLight);
 

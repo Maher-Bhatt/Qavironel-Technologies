@@ -1,0 +1,365 @@
+import React, { useState } from 'react';
+import { 
+  FileText, 
+  CheckCircle2, 
+  ArrowRight, 
+  AlertCircle, 
+  Mail, 
+  MessageSquare,
+  Check
+} from 'lucide-react';
+import { 
+  validateQuoteForm, 
+  submitQuoteRequest, 
+  QuoteFormData,
+  buildQuoteMailto 
+} from '../../services/bookingService';
+import { companyConfig } from '../../data/company';
+import { playSuccessSound, playErrorSound, playTabSound } from '../../utils/soundEffects';
+
+interface RequestQuoteFormProps {
+  onSuccess?: () => void;
+  onCancel?: () => void;
+}
+
+const AVAILABLE_DELIVERABLES = [
+  'Custom UI/UX & Responsive Frontend',
+  'Full-Stack Architecture & API Routes',
+  'Authentication & Role-Based Access',
+  'Applied AI / LLM Workflow Integration',
+  'Stripe / Razorpay Payment Integration',
+  'Database Modeling (PostgreSQL / SQLite)',
+  'Defensive Security & Input Validation',
+  'Lighthouse & Core Web Vitals Tuning',
+];
+
+export const RequestQuoteForm: React.FC<RequestQuoteFormProps> = ({ onSuccess, onCancel }) => {
+  const [formData, setFormData] = useState<QuoteFormData>({
+    name: '',
+    email: '',
+    organization: '',
+    projectType: 'High-Impact Custom Web Platform',
+    budgetRange: '$5k – $10k (Core Sprint)',
+    timeline: '1-2 Months (Product Sprint)',
+    scopeDetails: '',
+    features: ['Custom UI/UX & Responsive Frontend', 'Full-Stack Architecture & API Routes'],
+    hpField: '',
+  });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [submissionResult, setSubmissionResult] = useState<{
+    success: boolean;
+    message: string;
+    fallbackMailto?: string;
+    fallbackWhatsApp?: string;
+  } | null>(null);
+
+  const toggleFeature = (feature: string) => {
+    playTabSound();
+    setFormData((prev) => {
+      const current = prev.features || [];
+      const updated = current.includes(feature)
+        ? current.filter((f) => f !== feature)
+        : [...current, feature];
+      return { ...prev, features: updated };
+    });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmissionResult(null);
+
+    const validation = validateQuoteForm(formData);
+    if (!validation.isValid) {
+      playErrorSound();
+      setErrors(validation.errors);
+      return;
+    }
+
+    setErrors({});
+    setIsSubmitting(true);
+
+    try {
+      const res = await submitQuoteRequest(formData);
+      setSubmissionResult(res);
+      if (res.success) {
+        playSuccessSound();
+        if (onSuccess) onSuccess();
+      } else {
+        playErrorSound();
+      }
+    } catch {
+      playErrorSound();
+      setSubmissionResult({
+        success: false,
+        message: 'Network service unavailable. Please dispatch your quotation requirements via direct email or WhatsApp below.',
+        fallbackMailto: buildQuoteMailto(formData),
+        fallbackWhatsApp: `${companyConfig.whatsappUrl}?text=${encodeURIComponent(
+          `Hi Maher, I would like to request an architecture quotation.\nName: ${formData.name}\nProject: ${formData.projectType}`
+        )}`,
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  if (submissionResult?.success) {
+    return (
+      <div className="py-8 text-center space-y-5 animate-in fade-in duration-300">
+        <div className="w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400 mx-auto flex items-center justify-center border border-emerald-300 dark:border-emerald-700/50 shadow-sm">
+          <CheckCircle2 className="w-8 h-8" />
+        </div>
+        <div className="space-y-2 max-w-md mx-auto">
+          <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#C7612E]">
+            Request Transmitted
+          </span>
+          <h3 className="font-sans font-bold text-2xl text-[#171717] dark:text-white">
+            Quotation Request Received
+          </h3>
+          <p className="text-sm text-[#77746F] dark:text-zinc-300 leading-relaxed font-light">
+            {submissionResult.message}
+          </p>
+        </div>
+
+        <div className="p-4 rounded-xl bg-zinc-50 dark:bg-[#18181D] border border-[#DEDAD3] dark:border-white/10 max-w-sm mx-auto text-left text-xs space-y-1 font-mono text-[#171717] dark:text-zinc-300">
+          <p><span className="text-[#77746F] dark:text-zinc-500">Project:</span> {formData.projectType}</p>
+          <p><span className="text-[#77746F] dark:text-zinc-500">Budget Tier:</span> {formData.budgetRange}</p>
+          <p><span className="text-[#77746F] dark:text-zinc-500">Timeline:</span> {formData.timeline}</p>
+          <p><span className="text-[#77746F] dark:text-zinc-500">Contact:</span> {formData.email}</p>
+        </div>
+
+        <div className="pt-2">
+          <a
+            href={`${companyConfig.whatsappUrl}?text=${encodeURIComponent(
+              `Hi Maher, I just submitted an architecture quote request for ${formData.projectType}.`
+            )}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-xs font-mono uppercase font-bold text-[#C7612E] hover:underline"
+          >
+            <MessageSquare className="w-4 h-4" />
+            <span>Notify directly via WhatsApp</span>
+          </a>
+        </div>
+      </div>
+    );
+  }
+
+  const labelClass = `block text-xs font-mono font-bold uppercase tracking-wider mb-2 text-[#171717] dark:text-zinc-300`;
+  const inputClass = `w-full px-4 py-3 rounded-xl text-sm transition-all bg-white dark:bg-[#18181D] border border-[#DEDAD3] dark:border-[#27272A] text-[#171717] dark:text-white placeholder-[#77746F] dark:placeholder-zinc-500 focus:outline-hidden focus:border-[#C7612E] dark:focus:border-[#C7612E]`;
+
+  return (
+    <form onSubmit={handleSubmit} noValidate className="space-y-6">
+      {/* Honeypot field */}
+      <div aria-hidden="true" style={{ position: 'absolute', left: '-9999px', top: '-9999px', height: 0, overflow: 'hidden' }}>
+        <input
+          type="text"
+          name="quote_bot_hp"
+          tabIndex={-1}
+          autoComplete="off"
+          value={formData.hpField}
+          onChange={(e) => setFormData({ ...formData, hpField: e.target.value })}
+        />
+      </div>
+
+      {submissionResult && !submissionResult.success && (
+        <div role="alert" className="p-4 rounded-xl border bg-amber-50 dark:bg-amber-950/30 border-amber-300 dark:border-amber-700/50 text-amber-950 dark:text-amber-200 text-xs space-y-2">
+          <div className="flex items-start gap-2">
+            <AlertCircle className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
+            <p className="font-semibold">{submissionResult.message}</p>
+          </div>
+          {(submissionResult.fallbackMailto || submissionResult.fallbackWhatsApp) && (
+            <div className="flex flex-wrap gap-2 pt-2 border-t border-amber-200/60 dark:border-amber-800/40">
+              {submissionResult.fallbackMailto && (
+                <a
+                  href={submissionResult.fallbackMailto}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#171717] dark:bg-white text-white dark:text-[#171717] text-xs font-mono font-bold uppercase"
+                >
+                  <Mail className="w-3.5 h-3.5" />
+                  <span>Send via Email</span>
+                </a>
+              )}
+              {submissionResult.fallbackWhatsApp && (
+                <a
+                  href={submissionResult.fallbackWhatsApp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#25D366] text-white text-xs font-mono font-bold uppercase"
+                >
+                  <MessageSquare className="w-3.5 h-3.5" />
+                  <span>Send via WhatsApp</span>
+                </a>
+              )}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Row 1: Project Type & Budget Tier */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label htmlFor="quote-type" className={labelClass}>
+            Discipline & Scope
+          </label>
+          <select
+            id="quote-type"
+            value={formData.projectType}
+            onChange={(e) => setFormData({ ...formData, projectType: e.target.value })}
+            className={inputClass}
+          >
+            <option value="High-Impact Custom Web Platform">High-Impact Custom Web Platform</option>
+            <option value="Full-Stack SaaS MVP / Web Application">Full-Stack SaaS MVP / Web App</option>
+            <option value="Applied AI / LLM & Agentic Workflows">Applied AI / LLM & Agentic Workflows</option>
+            <option value="Bespoke E-Commerce Architecture">Bespoke E-Commerce Architecture</option>
+            <option value="Performance Engineering & Architecture Audit">Performance Engineering & Audit</option>
+          </select>
+        </div>
+
+        <div>
+          <label htmlFor="quote-budget" className={labelClass}>
+            Estimated Budget Tier
+          </label>
+          <select
+            id="quote-budget"
+            value={formData.budgetRange}
+            onChange={(e) => setFormData({ ...formData, budgetRange: e.target.value })}
+            className={inputClass}
+          >
+            <option value="$2k – $5k (Sprint MVP)">$2,000 – $5,000 (Sprint MVP)</option>
+            <option value="$5k – $10k (Core Sprint)">$5,000 – $10,000 (Core Sprint)</option>
+            <option value="$10k – $25k (Full Production)">$10,000 – $25,000 (Full Production)</option>
+            <option value="$25k+ (Enterprise Architecture)">$25,000+ (Enterprise Architecture)</option>
+            <option value="Flexible / Retainer Milestone">Flexible / Retainer Milestone</option>
+          </select>
+        </div>
+      </div>
+
+      {/* Deliverable Checkboxes */}
+      <div>
+        <label className={labelClass}>Key Required Deliverables</label>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          {AVAILABLE_DELIVERABLES.map((deliverable) => {
+            const isChecked = formData.features?.includes(deliverable);
+            return (
+              <button
+                key={deliverable}
+                type="button"
+                onClick={() => toggleFeature(deliverable)}
+                className={`p-3 rounded-xl border text-left text-xs font-sans transition-all flex items-center justify-between cursor-pointer ${
+                  isChecked
+                    ? 'bg-[#C7612E]/10 border-[#C7612E] text-[#171717] dark:text-white font-medium'
+                    : 'bg-white dark:bg-[#18181D] border-[#DEDAD3] dark:border-white/10 text-[#77746F] dark:text-zinc-400 hover:border-[#C7612E]'
+                }`}
+              >
+                <span>{deliverable}</span>
+                <span className={`w-4 h-4 rounded-md flex items-center justify-center border transition-all ${
+                  isChecked ? 'bg-[#C7612E] border-[#C7612E] text-white' : 'border-[#DEDAD3] dark:border-zinc-700'
+                }`}>
+                  {isChecked && <Check className="w-3 h-3 stroke-[3]" />}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Scope Details */}
+      <div>
+        <label htmlFor="quote-scope" className={labelClass}>
+          Scope Breakdown & Objectives <span className="text-[#C7612E]">*</span>
+        </label>
+        <textarea
+          id="quote-scope"
+          rows={4}
+          required
+          value={formData.scopeDetails}
+          onChange={(e) => setFormData({ ...formData, scopeDetails: e.target.value })}
+          placeholder="Describe your current system or proposed product, core user journeys, target deadline, and specific technical requirements."
+          className={`${inputClass} ${errors.scopeDetails ? 'border-red-500' : ''}`}
+        />
+        {errors.scopeDetails && <p className="mt-1 text-xs text-red-600">{errors.scopeDetails}</p>}
+      </div>
+
+      {/* Contact Details */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div>
+          <label htmlFor="quote-name" className={labelClass}>
+            Name <span className="text-[#C7612E]">*</span>
+          </label>
+          <input
+            id="quote-name"
+            type="text"
+            required
+            value={formData.name}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            placeholder="Jane Doe"
+            className={`${inputClass} ${errors.name ? 'border-red-500' : ''}`}
+          />
+          {errors.name && <p className="mt-1 text-xs text-red-600">{errors.name}</p>}
+        </div>
+
+        <div>
+          <label htmlFor="quote-email" className={labelClass}>
+            Email <span className="text-[#C7612E]">*</span>
+          </label>
+          <input
+            id="quote-email"
+            type="email"
+            required
+            value={formData.email}
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            placeholder="jane@company.com"
+            className={`${inputClass} ${errors.email ? 'border-red-500' : ''}`}
+          />
+          {errors.email && <p className="mt-1 text-xs text-red-600">{errors.email}</p>}
+        </div>
+
+        <div>
+          <label htmlFor="quote-org" className={labelClass}>
+            Organization
+          </label>
+          <input
+            id="quote-org"
+            type="text"
+            value={formData.organization}
+            onChange={(e) => setFormData({ ...formData, organization: e.target.value })}
+            placeholder="Company / Project"
+            className={inputClass}
+          />
+        </div>
+      </div>
+
+      {/* Submission Actions */}
+      <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-[#C7612E] hover:bg-[#98431F] text-white text-xs font-mono font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-2 shadow-sm cursor-pointer disabled:opacity-70"
+        >
+          {isSubmitting ? (
+            <>
+              <span className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+              <span>Analyzing Scope & Transmitting...</span>
+            </>
+          ) : (
+            <>
+              <FileText className="w-4 h-4" />
+              <span>Submit Quotation Request</span>
+            </>
+          )}
+        </button>
+
+        {onCancel && (
+          <button
+            type="button"
+            onClick={onCancel}
+            className="text-xs font-mono uppercase text-[#77746F] hover:text-[#171717] dark:hover:text-white"
+          >
+            Cancel
+          </button>
+        )}
+      </div>
+    </form>
+  );
+};

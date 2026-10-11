@@ -59,11 +59,11 @@ export const StudioEngineConsole: React.FC = () => {
           onClick={() => setActiveTab('ai')}
           className={`flex items-center gap-2 px-4 py-2.5 font-semibold transition-colors border-b-2 ${
             activeTab === 'ai' 
-              ? 'border-[#E0561B] text-white bg-white/5' 
+              ? 'border-[#C7612E] text-white bg-white/5' 
               : 'border-transparent text-zinc-400 hover:text-zinc-200'
           }`}
         >
-          <Cpu className="w-3.5 h-3.5 text-[#E0561B]" />
+          <Cpu className="w-3.5 h-3.5 text-[#C7612E]" />
           <span>01. Applied AI Orchestrator</span>
         </button>
 
@@ -72,11 +72,11 @@ export const StudioEngineConsole: React.FC = () => {
           onClick={() => setActiveTab('performance')}
           className={`flex items-center gap-2 px-4 py-2.5 font-semibold transition-colors border-b-2 ${
             activeTab === 'performance' 
-              ? 'border-[#E0561B] text-white bg-white/5' 
+              ? 'border-[#C7612E] text-white bg-white/5' 
               : 'border-transparent text-zinc-400 hover:text-zinc-200'
           }`}
         >
-          <Zap className="w-3.5 h-3.5 text-[#E0561B]" />
+          <Zap className="w-3.5 h-3.5 text-[#C7612E]" />
           <span>02. Web Architecture Vitals</span>
         </button>
 
@@ -85,11 +85,11 @@ export const StudioEngineConsole: React.FC = () => {
           onClick={() => setActiveTab('security')}
           className={`flex items-center gap-2 px-4 py-2.5 font-semibold transition-colors border-b-2 ${
             activeTab === 'security' 
-              ? 'border-[#E0561B] text-white bg-white/5' 
+              ? 'border-[#C7612E] text-white bg-white/5' 
               : 'border-transparent text-zinc-400 hover:text-zinc-200'
           }`}
         >
-          <ShieldCheck className="w-3.5 h-3.5 text-[#E0561B]" />
+          <ShieldCheck className="w-3.5 h-3.5 text-[#C7612E]" />
           <span>03. Zero-Trust Security Vault</span>
         </button>
       </div>
@@ -108,7 +108,7 @@ export const StudioEngineConsole: React.FC = () => {
             >
               <div className="flex items-center justify-between text-[0.7rem] text-zinc-400 pb-2 border-b border-white/5">
                 <span>INFERENCE ENGINE: GROQ LLaMA-3.3-70B // HYBRID LOCAL FALLBACK</span>
-                <span className="text-[#E0561B] font-bold">{tokensPerSec} TOKENS/SEC</span>
+                <span className="text-[#C7612E] font-bold">{tokensPerSec} TOKENS/SEC</span>
               </div>
 
               {/* Pipeline Flow Visualization */}
@@ -121,7 +121,7 @@ export const StudioEngineConsole: React.FC = () => {
 
                 <div className="p-3 bg-white/5 border border-white/10 rounded-xl space-y-1">
                   <p className="text-zinc-400">COGNITIVE ROUTER</p>
-                  <p className="font-bold text-[#E0561B]">Dynamic Model Intent</p>
+                  <p className="font-bold text-[#C7612E]">Dynamic Model Intent</p>
                   <span className="text-[0.6rem] text-zinc-400">Context: &lt; 4096 tokens</span>
                 </div>
 
@@ -131,17 +131,17 @@ export const StudioEngineConsole: React.FC = () => {
                   <span className="text-[0.6rem] text-emerald-400">● Zero Cloud Leak</span>
                 </div>
 
-                <div className="p-3 bg-[#E0561B]/10 border border-[#E0561B]/30 rounded-xl space-y-1">
-                  <p className="text-[#E0561B]">STREAMED OUTPUT</p>
+                <div className="p-3 bg-[#C7612E]/10 border border-[#C7612E]/30 rounded-xl space-y-1">
+                  <p className="text-[#C7612E]">STREAMED OUTPUT</p>
                   <p className="font-bold text-white">Guarded Actions Exec</p>
-                  <span className="text-[0.6rem] text-[#E0561B]">● Latency: {latency}ms</span>
+                  <span className="text-[0.6rem] text-[#C7612E]">● Latency: {latency}ms</span>
                 </div>
               </div>
 
               {/* Code / Command Prompt simulation */}
               <div className="p-3.5 bg-black/60 border border-white/10 rounded-xl font-mono text-[0.7rem] text-zinc-300 space-y-1.5 leading-relaxed">
                 <div className="text-zinc-400">
-                  <span className="text-[#E0561B]">$</span> qavironel-ai orchestrate --provider=hybrid --target=production-agent
+                  <span className="text-[#C7612E]">$</span> qavironel-ai orchestrate --provider=hybrid --target=production-agent
                 </div>
                 <div className="text-emerald-400">
                   ✓ Vector memory loaded (14,280 chunks indexed)
@@ -180,9 +180,9 @@ export const StudioEngineConsole: React.FC = () => {
                   <span className="text-2xl font-bold font-sans text-emerald-400">0.00</span>
                   <p className="text-[0.65rem] text-zinc-400 uppercase mt-1">CLS (Zero Layout Shift)</p>
                 </div>
-                <div className="p-3 bg-[#E0561B]/15 border border-[#E0561B]/30 rounded-xl">
-                  <span className="text-2xl font-bold font-sans text-[#E0561B]">Zero</span>
-                  <p className="text-[0.65rem] text-[#E0561B] uppercase mt-1">Bloatware / Plugins</p>
+                <div className="p-3 bg-[#C7612E]/15 border border-[#C7612E]/30 rounded-xl">
+                  <span className="text-2xl font-bold font-sans text-[#C7612E]">Zero</span>
+                  <p className="text-[0.65rem] text-[#C7612E] uppercase mt-1">Bloatware / Plugins</p>
                 </div>
               </div>
 
@@ -204,7 +204,7 @@ export const StudioEngineConsole: React.FC = () => {
             >
               <div className="flex items-center justify-between text-[0.7rem] text-zinc-400 pb-2 border-b border-white/5">
                 <span>SECURITY ARCHITECTURE // HARDENED BY ETHICAL HACKING BENCHMARKS</span>
-                <span className="text-[#E0561B] font-bold">BSIDES CTF VERIFIED</span>
+                <span className="text-[#C7612E] font-bold">BSIDES CTF VERIFIED</span>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-[0.7rem]">
@@ -244,7 +244,7 @@ export const StudioEngineConsole: React.FC = () => {
       {/* Bottom Status Ribbon */}
       <div className="flex items-center justify-between px-4 py-2.5 bg-[#0F0F12] border-t border-white/10 text-[0.68rem] text-zinc-400">
         <div className="flex items-center gap-2">
-          <Activity className="w-3.5 h-3.5 text-[#E0561B]" />
+          <Activity className="w-3.5 h-3.5 text-[#C7612E]" />
           <span>GLOBAL CLUSTER: US-EAST · EU-CENTRAL · AP-SOUTH</span>
         </div>
         <span className="text-zinc-300 font-bold">UPTIME: 99.98%</span>

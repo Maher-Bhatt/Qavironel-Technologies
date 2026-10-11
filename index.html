@@ -12,9 +12,26 @@
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <link rel="canonical" href="https://qavironel.com/" />
     
-    <!-- Theme & Display -->
-    <meta name="theme-color" content="#FFFFFF" />
-    <meta name="color-scheme" content="light" />
+    <!-- Theme & Display — Light mode is the default brand experience -->
+    <meta name="theme-color" content="#F6F3ED" />
+    <meta name="color-scheme" content="light dark" />
+
+    <!-- Flash-prevention: apply dark class ONLY if user previously chose dark.
+         Never auto-apply dark based on OS preference. -->
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem('qavironel_theme');
+          if (stored === 'dark') {
+            document.documentElement.classList.add('dark');
+            document.documentElement.setAttribute('data-theme', 'dark');
+            document.documentElement.style.colorScheme = 'dark';
+          } else {
+            document.documentElement.style.colorScheme = 'light';
+          }
+        } catch (_) {}
+      })();
+    </script>
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
@@ -22,7 +39,9 @@
     <meta property="og:url" content="https://qavironel.com/" />
     <meta property="og:title" content="Qavironel Technologies — Ideas. Engineered. | Digital Product & AI Studio" />
     <meta property="og:description" content="Global technology and digital product studio combining craftsmanship, software engineering, and applied AI for ambitious brands." />
-    <meta property="og:image" content="https://qavironel.com/brand/qavironel-logo-horizontal.png" />
+    <meta property="og:image" content="https://qavironel.com/images/brand/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="en_US" />
 
     <!-- Twitter Card -->
@@ -30,7 +49,7 @@
     <meta name="twitter:site" content="@qavironel" />
     <meta name="twitter:title" content="Qavironel Technologies — Ideas. Engineered." />
     <meta name="twitter:description" content="Global engineering-led digital product and applied AI studio. We transform ambitious ideas into high-velocity digital experiences." />
-    <meta name="twitter:image" content="https://qavironel.com/brand/qavironel-logo-horizontal.png" />
+    <meta name="twitter:image" content="https://qavironel.com/images/brand/og-image.jpg" />
 
     <!-- Favicon & Touch Icons -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -80,7 +99,6 @@
             "@id": "https://qavironel.com/#service",
             "name": "Qavironel Technologies Studio",
             "parentOrganization": { "@id": "https://qavironel.com/#organization" },
-            "priceRange": "$$$$",
             "hasOfferCatalog": {
               "@type": "OfferCatalog",
               "name": "Engineering Services",
@@ -120,8 +138,40 @@
       }
     </script>
   </head>
-  <body class="bg-white text-[#0A0A0A] antialiased selection:bg-[#E0561B] selection:text-white min-h-screen">
-    <div id="root"></div>
+  <body class="bg-[#F6F3ED] dark:bg-[#171717] text-[#171717] dark:text-[#F6F3ED] antialiased selection:bg-[#C7612E] selection:text-white min-h-screen">
+    <div id="root">
+      <!-- Semantic Crawler & Pre-render Fallback Content -->
+      <header style="padding: 24px; border-bottom: 1px solid #DEDAD3; max-width: 1200px; margin: 0 auto;">
+        <h1 style="font-size: 28px; font-weight: 800; color: #171717; margin: 0;">Qavironel Technologies</h1>
+        <p style="font-size: 16px; color: #77746F; margin: 8px 0 0 0;">Ideas. Engineered. — Digital Product &amp; Applied AI Engineering Studio</p>
+      </header>
+      <main style="max-width: 1200px; margin: 0 auto; padding: 40px 24px;">
+        <section>
+          <h2 style="font-size: 22px; color: #171717;">Engineering Services &amp; Capabilities</h2>
+          <p style="color: #77746F; line-height: 1.6;">We architect high-performance web platforms, SaaS applications, and applied AI systems. Focused on design-led craftsmanship, defensive security, and sub-second execution speeds.</p>
+          <ul>
+            <li>Bespoke Web Platform Architecture &amp; Engineering</li>
+            <li>Full-Stack SaaS MVP Development &amp; Cloud Systems</li>
+            <li>Applied AI, Local LLM Inference (Ollama), and Agentic Automation</li>
+            <li>Performance Engineering, Defensive Security, and Core Web Vitals Auditing</li>
+          </ul>
+        </section>
+        <section style="margin-top: 32px;">
+          <h2 style="font-size: 22px; color: #171717;">Selected Work &amp; Verified Portfolio</h2>
+          <ul>
+            <li><strong>K.A.L.K.I.</strong>: Local-first AI desktop assistant with tactical HUD, DPAPI hardware-bound vault, and multi-model inference routing. Live on Microsoft Store.</li>
+            <li><strong>Ztees</strong>: Mobile-first streetwear e-commerce storefront with WhatsApp ordering flow.</li>
+            <li><strong>Classic Infrastructure Projects</strong>: Industrial contracting qualification platform with technical field photography.</li>
+            <li><strong>Civic Sathi</strong>: 4-role civic operations platform engineered for Smart India Hackathon 2026.</li>
+            <li><strong>CodeDroid</strong>: Android mobile development environment with embedded Python and JS runtimes.</li>
+            <li><strong>ITM Notes</strong>: Curated engineering study portal serving 300+ university students.</li>
+          </ul>
+        </section>
+        <footer style="margin-top: 48px; padding-top: 24px; border-top: 1px solid #DEDAD3; font-size: 13px; color: #77746F;">
+          <p>&copy; 2026 Qavironel Technologies. All rights reserved. Direct technical contact: <a href="mailto:qavironeltechnologies@gmail.com">qavironeltechnologies@gmail.com</a></p>
+        </footer>
+      </main>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

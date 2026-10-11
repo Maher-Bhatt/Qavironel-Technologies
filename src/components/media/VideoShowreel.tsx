@@ -9,13 +9,17 @@ interface VideoChannel {
   subtitle: string;
   category: string;
   src: string;
+  poster: string;
   duration: string;
   tags: string[];
 }
 
 export const VideoShowreel: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isPlaying, setIsPlaying] = useState(true);
+  const prefersReducedMotion = typeof window !== 'undefined' 
+    ? window.matchMedia('(prefers-reduced-motion: reduce)').matches 
+    : false;
+  const [isPlaying, setIsPlaying] = useState(!prefersReducedMotion);
   const [isMuted, setIsMuted] = useState(true);
   const [activeChannelIdx, setActiveChannelIdx] = useState(0);
   const [progress, setProgress] = useState(0);
@@ -28,8 +32,9 @@ export const VideoShowreel: React.FC = () => {
       subtitle: 'Recorded client platform sprint demo & responsive user flows',
       category: 'PRODUCTION RUNTIME',
       src: '/videos/hero-showreel.mp4',
-      duration: '0:42',
-      tags: ['React 19', 'TypeScript', 'FastAPI', 'Sub-Second'],
+      poster: '/videos/hero-showreel-poster.webp',
+      duration: '0:12',
+      tags: ['React 19', 'TypeScript', 'FastAPI', 'High-Performance'],
     },
     {
       id: 'kalki-hud',
@@ -38,7 +43,8 @@ export const VideoShowreel: React.FC = () => {
       subtitle: 'Real-time object segmentation, token streaming & UI interaction',
       category: 'APPLIED AI SYSTEMS',
       src: '/videos/project-reel.mp4',
-      duration: '1:14',
+      poster: '/videos/project-reel-poster.webp',
+      duration: '0:14',
       tags: ['OpenCV', 'YOLOv8', 'Spatial Tracking', 'Local Inference'],
     },
     {
@@ -48,8 +54,9 @@ export const VideoShowreel: React.FC = () => {
       subtitle: 'Design-led execution, micro-interactions & hardware synergy',
       category: 'STUDIO CRAFT',
       src: '/videos/tech-atmosphere.mp4',
-      duration: '0:38',
-      tags: ['Clean Code', 'Zero Bloat', 'Global Reach'],
+      poster: '/videos/tech-atmosphere-poster.webp',
+      duration: '0:17',
+      tags: ['Clean Architecture', 'Type-Safe', 'Global Studio'],
     },
   ];
 
@@ -95,8 +102,10 @@ export const VideoShowreel: React.FC = () => {
           <video key={currentChannel.id}
             ref={videoRef}
             src={currentChannel.src}
-            autoPlay
+            poster={currentChannel.poster}
+            autoPlay={!prefersReducedMotion}
             loop
+            preload="metadata"
             muted={isMuted}
             playsInline
             onTimeUpdate={handleTimeUpdate}
@@ -106,15 +115,15 @@ export const VideoShowreel: React.FC = () => {
           {/* Top Glassmorphic HUD Ribbon */}
           <div className="absolute top-4 sm:top-6 left-4 sm:left-6 right-4 sm:right-6 flex items-center justify-between pointer-events-none z-10">
             <div className="flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-[#0A0A0A]/75 backdrop-blur-md border border-white/10 text-white text-[0.68rem] font-mono shadow-lg">
-              <span className="w-2 h-2 rounded-full bg-[#E0561B] animate-pulse" />
+              <span className="w-2 h-2 rounded-full bg-[#C7612E] animate-pulse" />
               <span className="font-bold tracking-wider">{currentChannel.channelNum}</span>
               <span className="text-white/40">·</span>
               <span className="tracking-wide text-white/90 uppercase">{currentChannel.category}</span>
             </div>
 
             <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#0A0A0A]/75 backdrop-blur-md border border-white/10 text-white/80 text-[0.68rem] font-mono shadow-lg">
-              <Activity className="w-3.5 h-3.5 text-[#E0561B]" />
-              <span>4K · 60 FPS CRAFT REEL</span>
+              <Activity className="w-3.5 h-3.5 text-[#C7612E]" />
+              <span>HIGH-DEF RUNTIME REEL</span>
             </div>
           </div>
 
@@ -131,7 +140,7 @@ export const VideoShowreel: React.FC = () => {
                   initial={{ scale: 0.8, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   exit={{ scale: 0.8, opacity: 0 }}
-                  className="w-16 h-16 rounded-full bg-[#E0561B] text-white flex items-center justify-center shadow-2xl"
+                  className="w-16 h-16 rounded-full bg-[#C7612E] text-white flex items-center justify-center shadow-2xl"
                 >
                   <Play className="w-7 h-7 ml-1" />
                 </motion.div>
@@ -142,7 +151,7 @@ export const VideoShowreel: React.FC = () => {
           {/* Bottom Scrub Progress Bar */}
           <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/20 z-10">
             <div 
-              className="h-full bg-[#E0561B] transition-all duration-100 ease-linear"
+              className="h-full bg-[#C7612E] transition-all duration-100 ease-linear"
               style={{ width: `${progress}%` }}
             />
           </div>
@@ -162,7 +171,7 @@ export const VideoShowreel: React.FC = () => {
               <button
                 type="button"
                 onClick={togglePlay}
-                className="p-2.5 rounded-full bg-[#0A0A0A]/80 backdrop-blur-md border border-white/15 text-white hover:text-[#E0561B] transition-colors shadow-lg"
+                className="p-2.5 rounded-full bg-[#0A0A0A]/80 backdrop-blur-md border border-white/15 text-white hover:text-[#C7612E] transition-colors shadow-lg"
                 aria-label={isPlaying ? 'Pause' : 'Play'}
               >
                 {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
@@ -171,7 +180,7 @@ export const VideoShowreel: React.FC = () => {
               <button
                 type="button"
                 onClick={toggleMute}
-                className="p-2.5 rounded-full bg-[#0A0A0A]/80 backdrop-blur-md border border-white/15 text-white hover:text-[#E0561B] transition-colors shadow-lg"
+                className="p-2.5 rounded-full bg-[#0A0A0A]/80 backdrop-blur-md border border-white/15 text-white hover:text-[#C7612E] transition-colors shadow-lg"
                 aria-label={isMuted ? 'Unmute' : 'Mute'}
               >
                 {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
@@ -196,7 +205,7 @@ export const VideoShowreel: React.FC = () => {
                 }`}
               >
                 <div className="flex items-center justify-between text-[0.68rem] font-mono mb-1.5">
-                  <span className={isSelected ? 'text-[#E0561B] font-bold' : 'text-[#71717A] font-semibold'}>
+                  <span className={isSelected ? 'text-[#C7612E] font-bold' : 'text-[#71717A] font-semibold'}>
                     {chan.channelNum}
                   </span>
                   <span className={isSelected ? 'text-white/60' : 'text-[#71717A]'}>

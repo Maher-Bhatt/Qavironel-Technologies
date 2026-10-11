@@ -42,7 +42,7 @@ export const ImageLightbox: React.FC<ImageLightboxProps> = ({ item, onClose }) =
         <button
           type="button"
           onClick={onClose}
-          className="absolute -top-4 -right-4 sm:top-4 sm:right-4 z-10 p-2.5 rounded-full bg-[#E0561B] hover:bg-[#C2410C] text-white transition-colors shadow-lg"
+          className="absolute -top-4 -right-4 sm:top-4 sm:right-4 z-10 p-2.5 rounded-full bg-[#C7612E] hover:bg-[#98431F] text-white transition-colors shadow-lg"
           aria-label="Close screenshot preview"
         >
           <X className="w-5 h-5" />

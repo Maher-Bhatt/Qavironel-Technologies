@@ -106,43 +106,43 @@ export const Clay3DSculpture: React.FC<Clay3DSculptureProps> = ({
     sculptureGroup.add(dishMesh);
 
     // ─────────────────────────────────────────────────────────────
-    // 4. EMBEDDED DUAL JEWEL PEARLS (CLAY AESTHETIC)
+    // 4. EMBEDDED DUAL ACCENT SPHERES (BRAND AESTHETIC)
     // ─────────────────────────────────────────────────────────────
-    // Royal Violet Pearl (Top interior rim)
-    const violetGeo = new THREE.SphereGeometry(0.19, 48, 48);
-    const violetMat = new THREE.MeshPhysicalMaterial({
-      color: new THREE.Color('#9333EA'),
-      emissive: new THREE.Color('#7E22CE'),
-      emissiveIntensity: 0.35,
-      roughness: 0.1,
-      metalness: 0.05,
+    // Deep Charcoal Sphere (Top interior rim)
+    const charcoalGeo = new THREE.SphereGeometry(0.19, 48, 48);
+    const charcoalMat = new THREE.MeshPhysicalMaterial({
+      color: new THREE.Color('#20201E'),
+      emissive: new THREE.Color('#171717'),
+      emissiveIntensity: 0.2,
+      roughness: 0.2,
+      metalness: 0.35,
       clearcoat: 1.0,
-      clearcoatRoughness: 0.05,
-      transmission: 0.15,
-      ior: 1.6
+      clearcoatRoughness: 0.1,
+      reflectivity: 0.7,
+      ior: 1.55
     });
-    const violetPearl = new THREE.Mesh(violetGeo, violetMat);
+    const charcoalPearl = new THREE.Mesh(charcoalGeo, charcoalMat);
     // Nestled inside the upper concave rim
-    violetPearl.position.set(0.68, 1.28, 0.98);
-    sculptureGroup.add(violetPearl);
+    charcoalPearl.position.set(0.68, 1.28, 0.98);
+    sculptureGroup.add(charcoalPearl);
 
-    // Signature Radiant Orange Pearl (Bottom interior wall)
-    const orangeGeo = new THREE.SphereGeometry(0.18, 48, 48);
-    const orangeMat = new THREE.MeshPhysicalMaterial({
-      color: new THREE.Color('#E0561B'),
-      emissive: new THREE.Color('#C2410C'),
-      emissiveIntensity: 0.4,
-      roughness: 0.1,
-      metalness: 0.05,
+    // Signature Radiant Copper Pearl (Bottom interior wall)
+    const copperGeo = new THREE.SphereGeometry(0.18, 48, 48);
+    const copperMat = new THREE.MeshPhysicalMaterial({
+      color: new THREE.Color('#C7612E'),
+      emissive: new THREE.Color('#98431F'),
+      emissiveIntensity: 0.35,
+      roughness: 0.12,
+      metalness: 0.1,
       clearcoat: 1.0,
       clearcoatRoughness: 0.05,
-      transmission: 0.15,
+      transmission: 0.12,
       ior: 1.6
     });
-    const orangePearl = new THREE.Mesh(orangeGeo, orangeMat);
+    const copperPearl = new THREE.Mesh(copperGeo, copperMat);
     // Nestled inside the lower concave wall
-    orangePearl.position.set(-0.72, -0.65, 1.15);
-    sculptureGroup.add(orangePearl);
+    copperPearl.position.set(-0.72, -0.65, 1.15);
+    sculptureGroup.add(copperPearl);
 
     // ─────────────────────────────────────────────────────────────
     // 5. THREE-POINT STUDIO LIGHTING RIG
@@ -165,14 +165,14 @@ export const Clay3DSculpture: React.FC<Clay3DSculptureProps> = ({
     rimLight.position.set(1.5, 6.0, -5.5);
     scene.add(rimLight);
 
-    // Subtle pearl accent point lights for jewel specular gleam
-    const violetGleam = new THREE.PointLight('#C084FC', 3.0, 4.0);
-    violetGleam.position.set(0.9, 1.5, 1.3);
-    scene.add(violetGleam);
+    // Subtle accent point lights for jewel specular gleam
+    const charcoalGleam = new THREE.PointLight('#77746F', 1.8, 4.0);
+    charcoalGleam.position.set(0.9, 1.5, 1.3);
+    scene.add(charcoalGleam);
 
-    const orangeGleam = new THREE.PointLight('#FB923C', 3.2, 4.0);
-    orangeGleam.position.set(-0.9, -0.4, 1.4);
-    scene.add(orangeGleam);
+    const copperGleam = new THREE.PointLight('#D96F3B', 3.0, 4.0);
+    copperGleam.position.set(-0.9, -0.4, 1.4);
+    scene.add(copperGleam);
 
     // ─────────────────────────────────────────────────────────────
     // 6. WEIGHTED MOUSE INTERACTION (SMOOTH PARALLAX)
@@ -227,9 +227,9 @@ export const Clay3DSculpture: React.FC<Clay3DSculptureProps> = ({
       sculptureGroup.position.y = Math.sin(t * 0.75) * 0.07;
       sculptureGroup.rotation.z = Math.sin(t * 0.5) * 0.03;
 
-      // Subtle pulse on jewel pearls
-      violetMat.emissiveIntensity = 0.3 + Math.sin(t * 1.5) * 0.1;
-      orangeMat.emissiveIntensity = 0.35 + Math.cos(t * 1.5) * 0.12;
+      // Subtle pulse on accent spheres
+      charcoalMat.emissiveIntensity = 0.2 + Math.sin(t * 1.5) * 0.05;
+      copperMat.emissiveIntensity = 0.35 + Math.cos(t * 1.5) * 0.1;
 
       renderer.render(scene, camera);
     };
@@ -258,19 +258,19 @@ export const Clay3DSculpture: React.FC<Clay3DSculptureProps> = ({
       }
       dishGeo.dispose();
       porcelainMat.dispose();
-      violetGeo.dispose();
-      violetMat.dispose();
-      orangeGeo.dispose();
-      orangeMat.dispose();
+      charcoalGeo.dispose();
+      charcoalMat.dispose();
+      copperGeo.dispose();
+      copperMat.dispose();
       renderer.dispose();
     };
   }, [size]);
 
   return (
     <div className={`relative flex items-center justify-center ${className}`}>
-      {/* Soft Ambient Clay Diffuse Glow */}
+      {/* Soft Ambient Copper Diffuse Glow */}
       <div 
-        className="absolute w-[80%] h-[80%] rounded-full bg-gradient-to-tr from-[#E0561B]/5 via-purple-500/5 to-transparent blur-[80px] pointer-events-none"
+        className="absolute w-[80%] h-[80%] rounded-full bg-radial from-[#C7612E]/5 to-transparent blur-[80px] pointer-events-none"
         aria-hidden="true"
       />
       {/* 3D Canvas Mount Point */}
@@ -279,7 +279,7 @@ export const Clay3DSculpture: React.FC<Clay3DSculptureProps> = ({
         className="w-full aspect-square max-w-[520px] max-h-[520px] relative z-10 cursor-grab active:cursor-grabbing"
         title="Interactive 3D Porcelain Sculpture"
         role="img"
-        aria-label="Clay porcelain architectural 3D sculpture with radiant orange and violet pearls"
+        aria-label="Tactile porcelain architectural 3D sculpture with copper and charcoal accent spheres"
       />
     </div>
   );

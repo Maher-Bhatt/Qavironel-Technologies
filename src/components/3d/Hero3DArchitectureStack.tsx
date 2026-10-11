@@ -91,7 +91,7 @@ export const Hero3DArchitectureStack: React.FC<Hero3DArchitectureStackProps> = (
       clearcoat: 1.0,        // Crisp specular highlight over the frosted surface
       clearcoatRoughness: 0.05,
       thickness: 1.5,        // Volume for light refraction
-      attenuationColor: new THREE.Color('#E0561B'), // Brand orange internal glow!
+      attenuationColor: new THREE.Color('#C7612E'), // Brand orange internal glow!
       attenuationDistance: 4.0, // How far light travels before becoming fully orange
       side: THREE.DoubleSide
     });
@@ -103,7 +103,7 @@ export const Hero3DArchitectureStack: React.FC<Hero3DArchitectureStackProps> = (
     // INTERNAL & SCENE LIGHTING
     // ─────────────────────────────────────────────────────────────
     // A soft core point light inside the knot to illuminate the frosted glass with the brand color
-    const coreLight = new THREE.PointLight('#E0561B', 150, 8);
+    const coreLight = new THREE.PointLight('#C7612E', 150, 8);
     coreLight.position.set(0, 0, 0);
     scene.add(coreLight);
 

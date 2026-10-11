@@ -59,10 +59,10 @@ export const Hero3DCanvas: React.FC<Hero3DCanvasProps> = ({ className = '' }) =>
     // 2. Wireframe Accent Ring (Inner Gyroscopic Orbit)
     const ringGeometry = new THREE.TorusGeometry(2.2, 0.02, 16, 100);
     const ringMaterial = new THREE.MeshStandardMaterial({
-      color: new THREE.Color('#E0561B'),
+      color: new THREE.Color('#C7612E'),
       metalness: 0.8,
       roughness: 0.2,
-      emissive: new THREE.Color('#E0561B'),
+      emissive: new THREE.Color('#C7612E'),
       emissiveIntensity: 0.2
     });
     const ringMesh1 = new THREE.Mesh(ringGeometry, ringMaterial);
@@ -79,7 +79,7 @@ export const Hero3DCanvas: React.FC<Hero3DCanvasProps> = ({ className = '' }) =>
     const satellites: { mesh: THREE.Mesh; speed: number; orbitRadius: number; angle: number; yOffset: number }[] = [];
     const satGeo = new THREE.IcosahedronGeometry(0.12, 0);
     const satMat = new THREE.MeshStandardMaterial({
-      color: new THREE.Color('#E0561B'),
+      color: new THREE.Color('#C7612E'),
       metalness: 0.9,
       roughness: 0.1,
       wireframe: false
@@ -112,7 +112,7 @@ export const Hero3DCanvas: React.FC<Hero3DCanvasProps> = ({ className = '' }) =>
     scene.add(ambientLight);
 
     // Key Signature Copper/Orange Light
-    const copperLight = new THREE.PointLight('#E0561B', 18, 20);
+    const copperLight = new THREE.PointLight('#C7612E', 18, 20);
     copperLight.position.set(4, 3, 4);
     scene.add(copperLight);
 

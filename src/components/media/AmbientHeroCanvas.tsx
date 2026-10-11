@@ -52,7 +52,7 @@ export const AmbientHeroCanvas: React.FC = () => {
           vy: (Math.random() - 0.5) * 0.4,
           size: isCopper ? Math.random() * 2.2 + 1.2 : Math.random() * 1.8 + 0.8,
           alpha: isCopper ? Math.random() * 0.35 + 0.15 : Math.random() * 0.15 + 0.05,
-          color: isCopper ? '#E0561B' : '#71717A'
+          color: isCopper ? '#C7612E' : '#71717A'
         });
       }
     };
@@ -122,8 +122,8 @@ export const AmbientHeroCanvas: React.FC = () => {
         height * 0.35,
         width * 0.55
       );
-      grad.addColorStop(0, 'rgba(224, 86, 27, 0.045)');
-      grad.addColorStop(0.5, 'rgba(224, 86, 27, 0.015)');
+      grad.addColorStop(0, 'rgba(199, 97, 46, 0.045)');
+      grad.addColorStop(0.5, 'rgba(199, 97, 46, 0.015)');
       grad.addColorStop(1, 'transparent');
       ctx.fillStyle = grad;
       ctx.fillRect(0, 0, width, height);
@@ -136,7 +136,7 @@ export const AmbientHeroCanvas: React.FC = () => {
         const isAccent = i === 1;
 
         ctx.strokeStyle = isAccent 
-          ? 'rgba(224, 86, 27, 0.12)' 
+          ? 'rgba(199, 97, 46, 0.12)' 
           : 'rgba(10, 10, 10, 0.04)';
         ctx.lineWidth = isAccent ? 1.6 : 1.0;
 
@@ -199,7 +199,7 @@ export const AmbientHeroCanvas: React.FC = () => {
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = '#E0561B';
+            ctx.strokeStyle = '#C7612E';
             ctx.globalAlpha = (1 - distNodes / 110) * 0.08;
             ctx.lineWidth = 0.8;
             ctx.stroke();

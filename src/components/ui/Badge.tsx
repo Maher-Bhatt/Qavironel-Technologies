@@ -18,10 +18,10 @@ export const Badge: React.FC<BadgeProps> = ({
     : 'px-3.5 py-1.5 text-xs font-semibold tracking-wider uppercase';
 
   const variantStyles = {
-    copper: 'bg-[#E0561B]/10 text-[#E0561B] border border-[#E0561B]/30 rounded',
-    charcoal: 'bg-[#0A0A0A] text-white border border-[#27272A] rounded',
-    outline: 'bg-transparent text-[#0A0A0A] border border-[#E5E7EB] rounded',
-    subtle: 'bg-[#F4F4F5] text-[#52525B] border border-[#E5E7EB] rounded',
+    copper: 'bg-[#C7612E]/10 text-[#C7612E] border border-[#C7612E]/30 rounded',
+    charcoal: 'bg-[#171717] text-white border border-[#20201E] rounded',
+    outline: 'bg-transparent text-[#171717] dark:text-[#F6F3ED] border border-[#DEDAD3] dark:border-white/10 rounded',
+    subtle: 'bg-[#F6F3ED] dark:bg-[#20201E] text-[#77746F] dark:text-[#A1A1AA] border border-[#DEDAD3] dark:border-white/10 rounded',
   }[variant];
 
   return (

@@ -1,4 +1,4 @@
-import React, { useState, Suspense } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { SiteHeader } from './components/layout/SiteHeader';
@@ -25,6 +25,7 @@ import { PageTransition } from './components/layout/PageTransition';
 import { useScrollToTop } from './hooks/useScrollToTop';
 import { useAmbientCursor } from './hooks/useAmbientCursor';
 import { useBookingModalEvent } from './hooks/useBookingModalEvent';
+import { setupGlobalSoundListeners } from './utils/soundEffects';
 
 export const App: React.FC = () => {
   const [isBookingOpen, setIsBookingOpen] = useState(false);
@@ -35,14 +36,19 @@ export const App: React.FC = () => {
   useBookingModalEvent(setIsBookingOpen, setBookingTab);
   useAmbientCursor();
 
+  useEffect(() => {
+    const cleanup = setupGlobalSoundListeners();
+    return cleanup;
+  }, []);
+
   return (
     <SmoothScrollProvider>
       <Preloader />
       <FilmGrainOverlay />
-      <div className="flex flex-col min-h-screen bg-white dark:bg-[#0A0A0C] text-[#0A0A0A] dark:text-[#F4F4F5] transition-colors duration-300">
+      <div className="flex flex-col min-h-screen bg-[#F6F3ED] dark:bg-[#171717] text-[#171717] dark:text-[#F6F3ED] transition-colors duration-300">
         <SiteHeader />
         <main className="flex-grow pb-16 md:pb-0">
-          <Suspense fallback={<div className="min-h-screen bg-white dark:bg-[#0A0A0C]" />}>
+          <Suspense fallback={<div className="min-h-screen bg-[#F6F3ED] dark:bg-[#171717]" />}>
             <AnimatePresence mode="wait">
               <Routes location={location} key={location.pathname}>
                 <Route path="/" element={<PageTransition><HomePage /></PageTransition>} />

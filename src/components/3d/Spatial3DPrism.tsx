@@ -45,8 +45,8 @@ export const Spatial3DPrism: React.FC<Spatial3DPrismProps> = ({
     // Inner Glowing Copper Pyramidal Core
     const innerGeo = new THREE.OctahedronGeometry(0.7, 0);
     const innerMat = new THREE.MeshStandardMaterial({
-      color: new THREE.Color('#E0561B'),
-      emissive: new THREE.Color('#E0561B'),
+      color: new THREE.Color('#C7612E'),
+      emissive: new THREE.Color('#C7612E'),
       emissiveIntensity: 1.2,
       metalness: 0.85,
       roughness: 0.2
@@ -73,7 +73,7 @@ export const Spatial3DPrism: React.FC<Spatial3DPrismProps> = ({
     // Delicate Copper Edge Bevels
     const wireGeo = new THREE.EdgesGeometry(glassGeo);
     const wireMat = new THREE.LineBasicMaterial({
-      color: new THREE.Color('#E0561B'),
+      color: new THREE.Color('#C7612E'),
       transparent: true,
       opacity: 0.7
     });
@@ -84,7 +84,7 @@ export const Spatial3DPrism: React.FC<Spatial3DPrismProps> = ({
     const ambientLight = new THREE.AmbientLight(0xffffff, 1.3);
     scene.add(ambientLight);
 
-    const pointLight = new THREE.PointLight('#E0561B', 16, 12);
+    const pointLight = new THREE.PointLight('#C7612E', 16, 12);
     pointLight.position.set(3, 3, 3);
     scene.add(pointLight);
 

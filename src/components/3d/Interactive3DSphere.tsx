@@ -53,7 +53,7 @@ export const Interactive3DSphere: React.FC<Interactive3DSphereProps> = ({
     // Outer wireframe constellation
     const wireGeo = new THREE.IcosahedronGeometry(1.4, 1);
     const wireMat = new THREE.MeshBasicMaterial({
-      color: new THREE.Color('#E0561B'),
+      color: new THREE.Color('#C7612E'),
       wireframe: true,
       transparent: true,
       opacity: 0.45
@@ -64,7 +64,7 @@ export const Interactive3DSphere: React.FC<Interactive3DSphereProps> = ({
     // Node vertices
     const pointsGeo = new THREE.IcosahedronGeometry(1.4, 1);
     const pointsMat = new THREE.PointsMaterial({
-      color: new THREE.Color('#E0561B'),
+      color: new THREE.Color('#C7612E'),
       size: 0.08
     });
     const pointsMesh = new THREE.Points(pointsGeo, pointsMat);
@@ -74,7 +74,7 @@ export const Interactive3DSphere: React.FC<Interactive3DSphereProps> = ({
     const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
     scene.add(ambientLight);
 
-    const pointLight = new THREE.PointLight('#E0561B', 12, 10);
+    const pointLight = new THREE.PointLight('#C7612E', 12, 10);
     pointLight.position.set(3, 3, 3);
     scene.add(pointLight);
 

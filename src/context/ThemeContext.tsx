@@ -15,12 +15,9 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [theme, setThemeState] = useState<ThemeMode>(() => {
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('qavironel_theme') as ThemeMode | null;
-      if (saved === 'light' || saved === 'dark') {
-        return saved;
-      }
-      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        return 'dark';
-      }
+      if (saved === 'dark') return 'dark';
+      // Always default to light — do NOT auto-detect OS dark mode.
+      // Dark mode is an explicit user choice, not an automatic one.
     }
     return 'light';
   });
@@ -40,7 +37,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
     const metaThemeColor = document.querySelector('meta[name="theme-color"]');
     if (metaThemeColor) {
-      metaThemeColor.setAttribute('content', theme === 'dark' ? '#0A0A0C' : '#FFFFFF');
+      metaThemeColor.setAttribute('content', theme === 'dark' ? '#171717' : '#F6F3ED');
     }
   }, [theme]);
 

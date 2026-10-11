@@ -10,23 +10,23 @@ export const services: ServicePillar[] = [
     description: 'We design and engineer bespoke web experiences that load instantly, command attention, and turn visitors into qualified business leads. No generic templates, bloated page-builders, or fragile plugins.',
     whoItsFor: 'Founders, established businesses, and ambitious brands looking for an elevated digital presence that accurately reflects their quality of work.',
     image: '/images/work/ztees-hero.webp',
-    imageCaption: 'Sub-0.8s LCP Streetwear Commerce Frontend & Fluid Product Interaction Architecture',
+    imageCaption: 'Streetwear Commerce Frontend & Fluid Product Interaction Architecture',
     metrics: [
-      { value: '< 0.8s', label: 'Largest Contentful Paint' },
-      { value: '100/100', label: 'Lighthouse Performance' },
-      { value: '0 kB', label: 'Page-Builder Bloat' }
+      { value: 'Fast LCP', label: 'Optimized Image Pipeline' },
+      { value: 'High Score', label: 'Performance Engineering' },
+      { value: 'Custom Code', label: 'Zero Builder Bloat' }
     ],
     architectureHighlights: [
       'Static Edge Render with React 19 selective hydration',
       'Fluid micro-haptic interactions and spring physics motion',
       'High-conversion direct commerce pipeline (WhatsApp & Stripe)',
-      'Sub-15ms Interaction to Next Paint (INP) responsiveness'
+      'Low-latency Interaction to Next Paint (INP) tuning'
     ],
     deliverables: [
       'Custom bespoke UI/UX design tailored to your brand identity',
       'Mobile-first responsive frontend implementation (React, Astro, Tailwind CSS)',
       'High-conversion e-commerce storefronts (WhatsApp Commerce, Stripe, UPI)',
-      'Sub-second page speeds, asset optimization, and core web vitals tuning',
+      'Asset optimization, performance engineering, and Core Web Vitals tuning',
       'Production deployment, SSL certification, and custom domain setup',
       'Clean CMS integration or lightweight static architecture for easy updates'
     ],
@@ -135,10 +135,10 @@ export const services: ServicePillar[] = [
     description: 'A great website is useless if nobody can find it or if it takes five seconds to open. We audit, refactor, and engineer websites to achieve top Core Web Vitals and solid organic search visibility.',
     whoItsFor: 'Companies with existing websites suffering from sluggish load times, poor mobile performance, or invisible search rankings.',
     image: '/images/projects/velocity-cover.png',
-    imageCaption: 'Velocity Framework 100/100 Core Web Vitals Audit & Semantic Schema Engine',
+    imageCaption: 'Performance Engineering, Core Web Vitals Audit & Semantic Schema Engine',
     metrics: [
-      { value: '100/100', label: 'Core Web Vitals Benchmark' },
-      { value: '< 15 ms', label: 'Interaction to Next Paint' },
+      { value: 'Targeted', label: 'Core Web Vitals Optimization' },
+      { value: 'Low Latency', label: 'Interaction to Next Paint' },
       { value: 'Rich Cards', label: 'Schema.org JSON-LD' }
     ],
     architectureHighlights: [
@@ -148,7 +148,7 @@ export const services: ServicePillar[] = [
       'Edge cache stale-while-revalidate headers for sub-second global responses'
     ],
     deliverables: [
-      'Core Web Vitals remediation targeting 95+ performance scores',
+      'Core Web Vitals remediation and performance optimization',
       'Comprehensive technical SEO: canonicals, Open Graph, dynamic sitemaps, robots.txt',
       'Schema.org JSON-LD structured data for rich search engine snippets',
       'Image asset compression, modern WebP conversion, and font display tuning',

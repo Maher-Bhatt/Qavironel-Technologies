@@ -49,7 +49,7 @@ export const HomePage: React.FC = () => {
       <div className="bg-[#F6F3ED] dark:bg-[#0C0C0E] text-[#141414] dark:text-[#F6F3ED] overflow-hidden selection:bg-[#C7612E] selection:text-white transition-colors duration-300 pb-20 md:pb-0">
         
         {/* 01. BRAND-FIRST EDITORIAL HERO SECTION */}
-        <section className="relative pt-28 sm:pt-40 pb-10 sm:pb-24 border-b border-[#DEDAD3] dark:border-white/10 bg-[#F6F3ED] dark:bg-[#0C0C0E] transition-colors duration-300">
+        <section className="relative pt-28 sm:pt-32 pb-10 sm:pb-20 border-b border-[#DEDAD3] dark:border-white/10 bg-[#F6F3ED] dark:bg-[#0C0C0E] transition-colors duration-300">
           {/* Subtle Ambient Radial Highlight */}
           <div 
             className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-[#C7612E]/5 rounded-full blur-[140px] pointer-events-none" 
@@ -87,9 +87,9 @@ export const HomePage: React.FC = () => {
               {/* Left Column: Editorial Typography & Actions (7 Cols) */}
               <div className="lg:col-span-7">
                 <RevealHeadline
-                  className="font-display font-extrabold text-4xl sm:text-6xl lg:text-7xl xl:text-8xl tracking-[-0.035em] text-[#141414] dark:text-[#F6F3ED] leading-[1.03] mb-6"
+                  className="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl xl:text-7xl tracking-tight text-[#141414] dark:text-[#F6F3ED] leading-[1.08] mb-6"
                   delay={0.1}
-                  highlightWord={['precisely', 'engineered']}
+                  highlightWord="engineered"
                 >
                   {"Thoughtfully designed.\nPrecisely engineered."}
                 </RevealHeadline>

@@ -2,8 +2,8 @@ import { describe, it, expect } from 'vitest';
 import { projects, categories } from './projects';
 
 describe('Project Inventory & Data Integrity', () => {
-  it('contains exactly 10 verified projects', () => {
-    expect(projects).toHaveLength(10);
+  it('contains exactly 9 verified projects', () => {
+    expect(projects).toHaveLength(9);
   });
 
   it('all projects have required fields and non-empty values', () => {
@@ -51,7 +51,6 @@ describe('Project Inventory & Data Integrity', () => {
       'civic-sathi',
       'codedroid',
       'itm-notes',
-      'itm-campus-retrieve',
       'chain-of-achievements',
       'socialsafe',
       'password-generator',

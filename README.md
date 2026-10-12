@@ -40,10 +40,9 @@ Every project in this repository represents verified work with honest classifica
 4. **Civic Sathi** (`/work/civic-sathi`): Product Lab — Civic Technology. Smart India Hackathon (SIH 2026) competitive prototype featuring 4 role surfaces (Citizen, Municipality, Contractor, Admin) with geo-tagging and photo verification.
 5. **CodeDroid** (`/work/codedroid`): Digital Products — Mobile Developer Tooling. Pocket Android IDE with offline CodeMirror editor, integrated terminal, and embedded on-device Python (Chaquopy) & JS runtimes.
 6. **ITM Notes** (`/work/itm-notes`): Digital Products — Education Platform. Curated study portal organizing five core B.Tech Semester 2 engineering subjects for 300+ university peers.
-7. **ITM Campus Retrieve** (`/work/itm-campus-retrieve`): Academic Build — Campus Utility. Hecatron 2025 hackathon prototype with dual-path lost-and-found reporting and claim verification.
-8. **Chain of Achievements** (`/work/chain-of-achievements`): Engineering Archive — Web3 Prototype. Non-transferable credential issuance prototype on Ethereum testnet.
-9. **SocialSafe** (`/work/socialsafe`): Engineering Archive — Cybersecurity Education. Dependency-free login awareness lab with strict CSP boundaries and instant credential erasure.
-10. **Cryptographic Password Generator** (`/work/password-generator`): Engineering Archive — Security Utility. Python CLI utility for generating cryptographically secure, high-entropy secrets via OS entropy.
+7. **Chain of Achievements** (`/work/chain-of-achievements`): Engineering Archive — Web3 Prototype. Non-transferable credential issuance prototype on Ethereum testnet.
+8. **SocialSafe** (`/work/socialsafe`): Engineering Archive — Cybersecurity Education. Dependency-free login awareness lab with strict CSP boundaries and instant credential erasure.
+9. **Cryptographic Password Generator** (`/work/password-generator`): Engineering Archive — Security Utility. Python CLI utility for generating cryptographically secure, high-entropy secrets via OS entropy.
 
 ---
 

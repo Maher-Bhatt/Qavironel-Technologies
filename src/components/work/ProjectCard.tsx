@@ -169,16 +169,18 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           </AnimatePresence>
 
           {/* Automatic Z-Axis Hover Video Playback System */}
-          <video
-            ref={videoRef}
-            src={project.videoSrc || '/videos/project-reel.mp4'}
-            muted
-            loop
-            playsInline
-            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out pointer-events-none ${
-              isHovered ? 'opacity-100 z-10' : 'opacity-0 z-0'
-            }`}
-          />
+          {project.videoSrc && (
+            <video
+              ref={videoRef}
+              src={project.videoSrc}
+              muted
+              loop
+              playsInline
+              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out pointer-events-none ${
+                isHovered ? 'opacity-100 z-10' : 'opacity-0 z-0'
+              }`}
+            />
+          )}
         </Link>
 
         {/* Interactive Gallery Switcher Chips for Featured Cards */}

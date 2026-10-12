@@ -427,59 +427,6 @@ export const projects: Project[] = [
     ]
   },
   {
-    slug: 'itm-campus-retrieve',
-    title: 'ITM Campus Retrieve',
-    eyebrow: 'Campus Lost & Found Utility · Academic Hackathon Build',
-    category: 'Academic Build',
-    categoryLabel: 'Academic Build · Campus Utility',
-    status: 'Hecatron 2025 Competition Prototype',
-    featured: false,
-    order: 7,
-    year: '2025',
-    summary: 'A campus lost-and-found workflow prototype engineered during the Hecatron 2025 hackathon, featuring dual-path reporting and verification heuristics.',
-    audience: 'University students, faculty, and campus security staff who need a centralized method to log and claim misplaced items.',
-    challenge: 'Misplaced belongings were announced through fragmented WhatsApp statuses that expired in 24 hours, resulting in lost items rarely being returned.',
-    objectives: [
-      'Create structured reporting forms distinguishing finders from seekers.',
-      'Provide instant categorization by location, item type, and timestamp.',
-      'Deploy a rapid, accessible web utility within a strict hackathon sprint.'
-    ],
-    solution: 'Engineered a clear campus utility with intuitive dual-action pathways. Features verified submission forms, claim dispute safeguards, and an administrative review panel.',
-    whyItMatters: 'Demonstrates rapid-fire product scoping, frontend UI craftsmanship, and working deployment under high-pressure hackathon constraints.',
-    workflow: [
-      'Finder submits photo and description of item turned in to security.',
-      'Owner searches catalog or submits lost inquiry.',
-      'Verification staff matches details before physical handover.'
-    ],
-    buildNotes: [
-      'Built with React and Tailwind CSS.',
-      'Deployed to Vercel edge networks for live competition judging.'
-    ],
-    technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Vercel Platform'],
-    heroImage: '/images/work/itm-campus-home.webp',
-    gallery: [
-      {
-        src: '/images/projects/itm-campus-cover.png',
-        alt: 'ITM Campus Retrieve homepage with Report Lost and Report Found actions',
-        caption: 'Landing interface with dual pathways for lost and found items.'
-      },
-      {
-        src: '/images/projects/itm-campus-actions.png',
-        alt: 'ITM Campus Retrieve categorized item inventory and claim verification',
-        caption: 'Categorized item inventory displaying claim states and location telemetry.'
-      }
-    ],
-    metrics: [
-      { value: 'Hecatron 2025', label: 'Hackathon Sprint', context: 'Built under competition time constraints' },
-      { value: 'Dual Flow', label: 'Lost & Found Paths', context: 'Structured workflows for finders and searchers' },
-      { value: 'Live Demo', label: 'Vercel Deployment', context: 'Accessible online prototype' }
-    ],
-    links: [
-      { label: 'View Public Demo', url: 'https://itm-campus-retrieves.vercel.app/', type: 'live' },
-      { label: 'View Repository on GitHub', url: 'https://github.com/Maher-Bhatt/ITM-CAMPUS-RETRIEVES', type: 'github' }
-    ]
-  },
-  {
     slug: 'chain-of-achievements',
     title: 'Chain of Achievements',
     eyebrow: 'Blockchain Credential System · Smart Contract Lab',
@@ -487,7 +434,7 @@ export const projects: Project[] = [
     categoryLabel: 'Open Source · Web3 & Smart Contracts',
     status: 'Open Source Prototype',
     featured: false,
-    order: 8,
+    order: 7,
     year: '2025',
     summary: 'A blockchain verification prototype exploring tamper-proof academic and professional certification issuance on an Ethereum testnet.',
     audience: 'Educational institutions, certification authorities, and students requiring immutable, verifiable proof of achievement.',
@@ -519,7 +466,7 @@ export const projects: Project[] = [
     categoryLabel: 'Open Source · Cybersecurity Education',
     status: 'Open Source Lab',
     featured: false,
-    order: 9,
+    order: 8,
     year: '2026',
     summary: 'An educational login awareness and phishing defense demonstration built with zero network storage, strict CSP boundaries, and security awareness guidance.',
     audience: 'Students and computer users learning to recognize credential harvesting risks and understand web defense boundaries.',
@@ -551,7 +498,7 @@ export const projects: Project[] = [
     categoryLabel: 'Open Source · Security Utility',
     status: 'Open Source Utility',
     featured: false,
-    order: 10,
+    order: 9,
     year: '2025',
     summary: 'A Python cryptographic command-line utility for generating cryptographically secure, high-entropy passwords with custom character constraints.',
     audience: 'System administrators and security-conscious developers needing random keys without reliance on online generators.',

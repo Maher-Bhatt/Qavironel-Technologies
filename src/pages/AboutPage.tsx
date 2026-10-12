@@ -22,6 +22,10 @@ import { openBookingModal } from '../components/booking/BookingModal';
 import { Spatial3DPrism } from '../components/3d/Spatial3DPrism';
 
 export const AboutPage: React.FC = () => {
+  const founder = teamMembers.find((m) => m.name === 'Maher Bhatt') || teamMembers[0];
+  const cofounder = teamMembers.find((m) => m.name === 'Anurag Pandey') || teamMembers[1];
+  const foundingMembers = teamMembers.filter((m) => m.name !== 'Maher Bhatt' && m.name !== 'Anurag Pandey');
+
   return (
     <>
       <SEO title="About" />
@@ -120,72 +124,56 @@ export const AboutPage: React.FC = () => {
           </div>
         </section>
 
-        {/* Meet the Team — Studio Leadership & Founding Profiles */}
+        {/* Editorial Team Presentation */}
         <section className="py-20 border-b border-[#DEDAD3] dark:border-white/10">
-          <div className="max-w-3xl mb-12">
-            <span className="text-xs font-mono font-semibold uppercase tracking-[0.2em] text-[#C7612E] block mb-2">
-              Studio Leadership & Team
+          <div className="max-w-3xl mb-12 sm:mb-16">
+            <span className="text-xs font-mono font-semibold uppercase tracking-[0.2em] text-[#C7612E] block mb-2.5">
+              Studio Leadership & Practice
             </span>
-            <h2 className="font-display font-bold text-3xl sm:text-4xl text-[#141414] dark:text-[#F6F3ED] tracking-tight">
-              Meet the People Behind Qavironel
+            <h2 className="font-display font-bold text-3xl sm:text-5xl text-[#141414] dark:text-[#F6F3ED] tracking-tight leading-[1.1]">
+              People Behind the Engineering
             </h2>
-            <p className="mt-3 text-base text-[#57544E] dark:text-[#A6A29A] font-light leading-relaxed">
-              Different strengths. One shared commitment to building better technology. Direct collaboration and hands-on craftsmanship across every discipline.
+            <p className="mt-4 text-base sm:text-lg text-[#57544E] dark:text-[#A6A29A] font-light leading-relaxed max-w-2xl">
+              Different strengths. One shared commitment to building thoughtful technology.
             </p>
           </div>
 
-          {/* 2-Column Balanced Team Matrix */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
-            {teamMembers.map((member, idx) => (
-              <div 
-                key={member.name}
-                className="bg-[#F6F3ED] dark:bg-[#121216] border border-[#DEDAD3] dark:border-white/10 rounded-2xl p-6 sm:p-8 md:p-10 shadow-[0_4px_24px_rgba(0,0,0,0.02)] flex flex-col justify-between space-y-8"
-              >
+          {/* Primary Leadership: Founder & Co-Founder Wide Editorial Arrangement */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-stretch">
+            {/* Founder Profile */}
+            {founder && (
+              <div className="bg-[#F6F3ED] dark:bg-[#121216] border border-[#DEDAD3] dark:border-white/10 rounded-2xl p-6 sm:p-8 md:p-10 shadow-[0_4px_24px_rgba(0,0,0,0.02)] flex flex-col justify-between hover:border-[#C7612E]/40 transition-colors">
                 <div>
-                  {/* Member Header */}
-                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 pb-6 border-b border-[#DEDAD3] dark:border-white/10">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 pb-6 border-b border-[#DEDAD3] dark:border-white/10">
                     <div className="flex items-center gap-5">
-                      <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-white dark:bg-[#1C1C22] border-2 border-[#DEDAD3] dark:border-white/15 ring-2 ring-[#C7612E]/25 overflow-hidden shrink-0 shadow-md flex items-center justify-center relative">
-                        {member.image ? (
-                          <img
-                            src={member.image}
-                            alt={member.name}
-                            className="w-full h-full object-cover object-top"
-                            onError={(e) => {
-                              e.currentTarget.style.display = 'none';
-                              const next = e.currentTarget.nextElementSibling;
-                              if (next) (next as HTMLElement).style.display = 'flex';
-                            }}
-                          />
-                        ) : null}
-                        <div 
-                          className={`w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-[#FAFAFA] to-[#EBE7DF] dark:from-[#202026] dark:to-[#141418] text-[#171717] dark:text-[#F6F3ED] font-mono font-bold text-xl sm:text-2xl select-none ${
-                            member.image ? 'hidden' : 'flex'
-                          }`}
-                        >
-                          <span className="tracking-tight text-[#C7612E]">
-                            {member.name.split(' ').map((n) => n[0]).join('')}
-                          </span>
-                        </div>
+                      <div className="w-24 h-32 sm:w-28 sm:h-36 rounded-xl overflow-hidden shrink-0 border border-[#DEDAD3] dark:border-white/10 shadow-xs bg-black/5 dark:bg-white/5">
+                        <img
+                          src={founder.image}
+                          alt={founder.name}
+                          className="w-full h-full object-cover object-top"
+                        />
                       </div>
                       <div>
-                        <h3 className="font-display font-bold text-2xl text-[#141414] dark:text-[#F6F3ED]">
-                          {member.name}
+                        <span className="text-[0.68rem] font-mono font-semibold uppercase tracking-widest text-[#77746F] dark:text-[#A6A29A] block mb-1">
+                          FOUNDER · SYSTEMS ARCHITECT
+                        </span>
+                        <h3 className="font-display font-bold text-2xl sm:text-3xl text-[#141414] dark:text-[#F6F3ED]">
+                          {founder.name}
                         </h3>
                         <p className="text-xs font-mono font-semibold uppercase tracking-wider text-[#C7612E] mt-1">
-                          {member.role}
+                          {founder.role}
                         </p>
                         <p className="text-xs text-[#77746F] dark:text-[#A6A29A] font-mono mt-0.5">
-                          Remote-First Studio · Vadodara, IN
+                          Vadodara, IN · Global Studio
                         </p>
                       </div>
                     </div>
 
-                    {/* Social / External Links (if provided) */}
+                    {/* Social links */}
                     <div className="flex items-center gap-2">
-                      {member.links.website && (
+                      {founder.links.website && (
                         <a
-                          href={member.links.website}
+                          href={founder.links.website}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="p-2.5 rounded-full bg-white dark:bg-[#1C1C22] border border-[#DEDAD3] dark:border-white/10 text-[#141414] dark:text-[#F6F3ED] hover:text-[#C7612E] dark:hover:text-[#C7612E] hover:border-[#C7612E]/40 shadow-xs transition-colors"
@@ -195,9 +183,9 @@ export const AboutPage: React.FC = () => {
                           <ExternalLink className="w-4 h-4" />
                         </a>
                       )}
-                      {member.links.github && (
+                      {founder.links.github && (
                         <a
-                          href={member.links.github}
+                          href={founder.links.github}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="p-2.5 rounded-full bg-white dark:bg-[#1C1C22] border border-[#DEDAD3] dark:border-white/10 text-[#141414] dark:text-[#F6F3ED] hover:text-[#C7612E] dark:hover:text-[#C7612E] hover:border-[#C7612E]/40 shadow-xs transition-colors"
@@ -207,9 +195,9 @@ export const AboutPage: React.FC = () => {
                           <GithubIcon className="w-4 h-4" />
                         </a>
                       )}
-                      {member.links.linkedin && (
+                      {founder.links.linkedin && (
                         <a
-                          href={member.links.linkedin}
+                          href={founder.links.linkedin}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="p-2.5 rounded-full bg-white dark:bg-[#1C1C22] border border-[#DEDAD3] dark:border-white/10 text-[#141414] dark:text-[#F6F3ED] hover:text-[#C7612E] dark:hover:text-[#C7612E] hover:border-[#C7612E]/40 shadow-xs transition-colors"
@@ -222,50 +210,201 @@ export const AboutPage: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* Biography */}
                   <p className="mt-6 text-sm sm:text-base text-[#57544E] dark:text-[#A6A29A] leading-relaxed font-light">
-                    {member.bio}
+                    {founder.bio}
                   </p>
-
-                  {/* Credentials / Core Focus Points */}
-                  <div className="pt-6 mt-6 border-t border-[#DEDAD3] dark:border-white/10 space-y-3">
-                    <p className="text-xs font-mono font-semibold uppercase tracking-wider text-[#141414] dark:text-white">
-                      {idx === 0 
-                        ? 'Verified Technical Credentials:' 
-                        : (idx === 1 ? 'Core Architecture & Focus:' : 'Core Focus & Responsibilities:')}
-                    </p>
-                    <div className="grid grid-cols-1 gap-2.5 text-xs text-[#57544E] dark:text-[#A6A29A]">
-                      {member.credentials.map((cred, i) => (
-                        <div key={i} className="flex items-start gap-2.5 bg-white dark:bg-[#1C1C22] rounded-lg p-3 border border-[#DEDAD3] dark:border-white/10 shadow-xs">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-[#C7612E] shrink-0 mt-0.5" />
-                          <span className="text-[#141414] dark:text-[#F6F3ED] leading-snug">{cred}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
                 </div>
 
-                {/* Skills / Tech Stack Chips */}
-                <div className="pt-6 border-t border-[#DEDAD3] dark:border-white/10">
-                  <p className="text-xs font-mono font-semibold uppercase tracking-wider text-[#141414] dark:text-white mb-3">
-                    {idx === 0 
-                      ? 'Applied Tech Stack & Competencies:' 
-                      : (idx === 1 ? 'Backend Tech Stack & Systems Focus:' : 'Technical & Operational Focus:')}
+                <div className="pt-6 mt-6 border-t border-[#DEDAD3] dark:border-white/10">
+                  <p className="text-[0.68rem] font-mono font-semibold uppercase tracking-wider text-[#77746F] dark:text-[#A6A29A] mb-3">
+                    Core Disciplines:
                   </p>
-                  <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                    {member.skills.map((skill) => (
+                  <div className="flex flex-wrap gap-2">
+                    {founder.credentials.map((discipline) => (
                       <span
-                        key={skill}
-                        className="px-2.5 py-1 bg-white dark:bg-[#1C1C22] border border-[#DEDAD3] dark:border-white/10 rounded text-[0.7rem] font-mono text-[#57544E] dark:text-[#A6A29A]"
+                        key={discipline}
+                        className="px-3 py-1.5 bg-white dark:bg-[#1C1C22] border border-[#DEDAD3] dark:border-white/10 rounded-md text-xs font-mono text-[#141414] dark:text-[#F6F3ED] shadow-xs"
                       >
-                        {skill}
+                        {discipline}
                       </span>
                     ))}
                   </div>
                 </div>
               </div>
-            ))}
+            )}
+
+            {/* Backend Co-Founder Profile */}
+            {cofounder && (
+              <div className="bg-[#F6F3ED] dark:bg-[#121216] border border-[#DEDAD3] dark:border-white/10 rounded-2xl p-6 sm:p-8 md:p-10 shadow-[0_4px_24px_rgba(0,0,0,0.02)] flex flex-col justify-between hover:border-[#C7612E]/40 transition-colors">
+                <div>
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 pb-6 border-b border-[#DEDAD3] dark:border-white/10">
+                    <div className="flex items-center gap-5">
+                      <div className="w-24 h-32 sm:w-28 sm:h-36 rounded-xl overflow-hidden shrink-0 border border-[#DEDAD3] dark:border-white/10 shadow-xs bg-black/5 dark:bg-white/5">
+                        <img
+                          src={cofounder.image}
+                          alt={cofounder.name}
+                          className="w-full h-full object-cover object-top"
+                        />
+                      </div>
+                      <div>
+                        <span className="text-[0.68rem] font-mono font-semibold uppercase tracking-widest text-[#C7612E] dark:text-[#d96f3b] flex items-center gap-1.5 mb-1">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#C7612E]" />
+                          CO-FOUNDER · BACKEND LEAD
+                        </span>
+                        <h3 className="font-display font-bold text-2xl sm:text-3xl text-[#141414] dark:text-[#F6F3ED]">
+                          {cofounder.name}
+                        </h3>
+                        <p className="text-xs font-mono font-semibold uppercase tracking-wider text-[#C7612E] mt-1">
+                          {cofounder.role}
+                        </p>
+                        <p className="text-xs text-[#77746F] dark:text-[#A6A29A] font-mono mt-0.5">
+                          Vadodara, IN · Global Studio
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Social links (if available) */}
+                    <div className="flex items-center gap-2">
+                      {cofounder.links.github && (
+                        <a
+                          href={cofounder.links.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="p-2.5 rounded-full bg-white dark:bg-[#1C1C22] border border-[#DEDAD3] dark:border-white/10 text-[#141414] dark:text-[#F6F3ED] hover:text-[#C7612E] dark:hover:text-[#C7612E] hover:border-[#C7612E]/40 shadow-xs transition-colors"
+                          aria-label="GitHub Profile"
+                          title="GitHub Profile"
+                        >
+                          <GithubIcon className="w-4 h-4" />
+                        </a>
+                      )}
+                      {cofounder.links.linkedin && (
+                        <a
+                          href={cofounder.links.linkedin}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="p-2.5 rounded-full bg-white dark:bg-[#1C1C22] border border-[#DEDAD3] dark:border-white/10 text-[#141414] dark:text-[#F6F3ED] hover:text-[#C7612E] dark:hover:text-[#C7612E] hover:border-[#C7612E]/40 shadow-xs transition-colors"
+                          aria-label="LinkedIn Profile"
+                          title="LinkedIn Profile"
+                        >
+                          <LinkedinIcon className="w-4 h-4" />
+                        </a>
+                      )}
+                    </div>
+                  </div>
+
+                  <p className="mt-6 text-sm sm:text-base text-[#57544E] dark:text-[#A6A29A] leading-relaxed font-light">
+                    {cofounder.bio}
+                  </p>
+                </div>
+
+                <div className="pt-6 mt-6 border-t border-[#DEDAD3] dark:border-white/10">
+                  <p className="text-[0.68rem] font-mono font-semibold uppercase tracking-wider text-[#77746F] dark:text-[#A6A29A] mb-3">
+                    Core Disciplines:
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {cofounder.credentials.map((discipline) => (
+                      <span
+                        key={discipline}
+                        className="px-3 py-1.5 bg-white dark:bg-[#1C1C22] border border-[#DEDAD3] dark:border-white/10 rounded-md text-xs font-mono text-[#141414] dark:text-[#F6F3ED] shadow-xs"
+                      >
+                        {discipline}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
+
+          {/* Founding Team Suite */}
+          {foundingMembers.length > 0 && (
+            <div className="mt-8 lg:mt-10">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-stretch">
+                {foundingMembers.map((member) => (
+                  <div
+                    key={member.name}
+                    className="bg-[#F6F3ED] dark:bg-[#121216] border border-[#DEDAD3] dark:border-white/10 rounded-2xl p-6 sm:p-8 md:p-10 shadow-[0_4px_24px_rgba(0,0,0,0.02)] flex flex-col justify-between hover:border-[#C7612E]/40 transition-colors"
+                  >
+                    <div>
+                      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 pb-6 border-b border-[#DEDAD3] dark:border-white/10">
+                        <div className="flex items-center gap-5">
+                          <div className="w-24 h-32 sm:w-28 sm:h-36 rounded-xl overflow-hidden shrink-0 border border-[#DEDAD3] dark:border-white/10 shadow-xs bg-black/5 dark:bg-white/5">
+                            <img
+                              src={member.image}
+                              alt={member.name}
+                              className="w-full h-full object-cover object-top"
+                            />
+                          </div>
+                          <div>
+                            <span className="text-[0.68rem] font-mono font-semibold uppercase tracking-widest text-[#77746F] dark:text-[#A6A29A] block mb-1">
+                              FOUNDING TEAM
+                            </span>
+                            <h3 className="font-display font-bold text-2xl sm:text-3xl text-[#141414] dark:text-[#F6F3ED]">
+                              {member.name}
+                            </h3>
+                            <p className="text-xs font-mono font-semibold uppercase tracking-wider text-[#C7612E] mt-1">
+                              {member.role}
+                            </p>
+                            <p className="text-xs text-[#77746F] dark:text-[#A6A29A] font-mono mt-0.5">
+                              Vadodara, IN · Global Studio
+                            </p>
+                          </div>
+                        </div>
+
+                        {/* Social links (if available) */}
+                        <div className="flex items-center gap-2">
+                          {member.links.linkedin && (
+                            <a
+                              href={member.links.linkedin}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="p-2.5 rounded-full bg-white dark:bg-[#1C1C22] border border-[#DEDAD3] dark:border-white/10 text-[#141414] dark:text-[#F6F3ED] hover:text-[#C7612E] dark:hover:text-[#C7612E] hover:border-[#C7612E]/40 shadow-xs transition-colors"
+                              aria-label={`${member.name} LinkedIn Profile`}
+                              title="LinkedIn Profile"
+                            >
+                              <LinkedinIcon className="w-4 h-4" />
+                            </a>
+                          )}
+                          {member.links.github && (
+                            <a
+                              href={member.links.github}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="p-2.5 rounded-full bg-white dark:bg-[#1C1C22] border border-[#DEDAD3] dark:border-white/10 text-[#141414] dark:text-[#F6F3ED] hover:text-[#C7612E] dark:hover:text-[#C7612E] hover:border-[#C7612E]/40 shadow-xs transition-colors"
+                              aria-label={`${member.name} GitHub Profile`}
+                              title="GitHub Profile"
+                            >
+                              <GithubIcon className="w-4 h-4" />
+                            </a>
+                          )}
+                        </div>
+                      </div>
+
+                      <p className="mt-6 text-sm sm:text-base text-[#57544E] dark:text-[#A6A29A] leading-relaxed font-light">
+                        {member.bio}
+                      </p>
+                    </div>
+
+                    <div className="pt-6 mt-6 border-t border-[#DEDAD3] dark:border-white/10">
+                      <p className="text-[0.68rem] font-mono font-semibold uppercase tracking-wider text-[#77746F] dark:text-[#A6A29A] mb-3">
+                        Core Disciplines:
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {member.credentials.map((discipline) => (
+                          <span
+                            key={discipline}
+                            className="px-3 py-1.5 bg-white dark:bg-[#1C1C22] border border-[#DEDAD3] dark:border-white/10 rounded-md text-xs font-mono text-[#141414] dark:text-[#F6F3ED] shadow-xs"
+                          >
+                            {discipline}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* Direct Architecture Model Strip */}
           <div className="mt-12 bg-[#F6F3ED] dark:bg-[#121216] border border-[#DEDAD3] dark:border-white/10 rounded-2xl p-6 sm:p-8 md:p-10 shadow-[0_4px_24px_rgba(0,0,0,0.02)] space-y-6">

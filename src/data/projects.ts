@@ -37,7 +37,7 @@ export const projects: Project[] = [
     scopeNote: 'Experimental capabilities such as deep operating system automation remain strictly guarded behind manual confirmation flags to ensure device safety.',
     technologies: ['Python', 'Local LLMs (Ollama)', 'Groq (LLaMA-3.3-70B)', 'DPAPI Vault', 'VOSK Voice Recognition', 'Custom HUD Architecture', 'Security Boundaries'],
     heroImage: '/images/projects/kalki/kalki-store-marketing.png',
-    videoSrc: '/videos/project-reel.mp4',
+    videoSrc: '/videos/kalki-video.mp4',
     gallery: [
       {
         src: '/images/projects/kalki/kalki-hero.png',

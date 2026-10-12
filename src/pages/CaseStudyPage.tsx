@@ -173,7 +173,7 @@ export const CaseStudyPage: React.FC = () => {
             <div className="w-full max-w-4xl relative rounded-xl overflow-hidden shadow-2xl border border-white/10 bg-black aspect-video flex items-center justify-center">
               <video
                 src={project.videoSrc}
-                poster="/videos/project-reel-poster.webp"
+                poster={project.slug === 'kalki' ? '/videos/kalki-video-poster.webp' : '/videos/project-reel-poster.webp'}
                 controls
                 autoPlay
                 muted

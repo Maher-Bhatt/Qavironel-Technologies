@@ -50,6 +50,30 @@ export const teamMembers: TeamMember[] = [
     }
   },
   {
+    name: 'Anurag Pandey',
+    role: 'Co-Founder & Backend Engineering Lead',
+    bio: 'As Co-Founder and Backend Engineering Lead at Qavironel Technologies, he focuses on the systems and application logic that power our digital products. From backend development and API integrations to data management and reliable application architecture, he helps turn product ideas into functional software. He works closely with the team to build thoughtful, maintainable technology and dependable digital experiences.',
+    credentials: [
+      'Leads backend engineering, server-side applications, and API architecture',
+      'Designs scalable database structures, schemas, and data management pipelines',
+      'Implements authentication, authorization, and secure boundary controls',
+      'Translates product specifications into maintainable server-side logic and integrations',
+      'Collaborates with the frontend team to ensure end-to-end reliability and performance'
+    ],
+    skills: [
+      'Backend Engineering',
+      'API Design & Integration',
+      'Database Architecture',
+      'Data Modelling',
+      'Authentication & Security',
+      'Server-Side Architecture',
+      'Systems Integration',
+      'Application Reliability'
+    ],
+    image: '/images/team/cofounder.png',
+    links: {}
+  },
+  {
     name: 'Dhyani Parikh',
     role: 'Founding Team Member — Frontend & Operations',
     bio: 'Contributing to frontend development and project coordination at Qavironel Technologies, she helps turn design ideas into functional interfaces while supporting project planning, task management, and team collaboration. As she continues developing her technical skills, she brings a collaborative mindset and a commitment to learning, improving, and building thoughtful digital experiences.',
@@ -74,6 +98,30 @@ export const teamMembers: TeamMember[] = [
     links: {
       linkedin: 'https://www.linkedin.com/in/dhyani-parikh-878201377/'
     }
+  },
+  {
+    name: 'Aayushi Jasani',
+    role: 'Founding Team Member — Frontend & Operations',
+    bio: 'Contributing to frontend development and project coordination at Qavironel Technologies, she helps turn design ideas into functional interfaces while supporting project planning, task management, and team collaboration. As she continues developing her technical skills, she brings a collaborative mindset and a commitment to learning, improving, and building thoughtful digital experiences.',
+    credentials: [
+      'Contributes to responsive website layouts, UI components, and frontend refinements',
+      'Assists with visual consistency, cross-device testing, and design system alignment',
+      'Helps organize project tasks, priority tracking, milestone coordination, and updates',
+      'Assists with meeting preparation, documentation, and workflow communication',
+      'Active collaborator in sprint planning, implementation reviews, and design decisions'
+    ],
+    skills: [
+      'Frontend Development',
+      'Responsive Layouts',
+      'Reusable UI Components',
+      'UI/UX Refinements',
+      'Task Tracking',
+      'Project Operations',
+      'Sprint Coordination',
+      'Team Collaboration'
+    ],
+    image: '',
+    links: {}
   }
 ];
 

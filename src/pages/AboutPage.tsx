@@ -127,10 +127,10 @@ export const AboutPage: React.FC = () => {
               Studio Leadership & Team
             </span>
             <h2 className="font-display font-bold text-3xl sm:text-4xl text-[#141414] dark:text-[#F6F3ED] tracking-tight">
-              Meet the Team
+              Meet the People Behind Qavironel
             </h2>
             <p className="mt-3 text-base text-[#57544E] dark:text-[#A6A29A] font-light leading-relaxed">
-              Thoughtful technology starts with people who care about what they build. Direct collaboration and hands-on craftsmanship across every discipline.
+              Different strengths. One shared commitment to building better technology. Direct collaboration and hands-on craftsmanship across every discipline.
             </p>
           </div>
 
@@ -145,12 +145,28 @@ export const AboutPage: React.FC = () => {
                   {/* Member Header */}
                   <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 pb-6 border-b border-[#DEDAD3] dark:border-white/10">
                     <div className="flex items-center gap-5">
-                      <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-white dark:bg-[#1C1C22] border-2 border-[#DEDAD3] dark:border-white/15 ring-2 ring-[#C7612E]/25 overflow-hidden shrink-0 shadow-md">
-                        <img
-                          src={member.image}
-                          alt={member.name}
-                          className="w-full h-full object-cover object-top"
-                        />
+                      <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-white dark:bg-[#1C1C22] border-2 border-[#DEDAD3] dark:border-white/15 ring-2 ring-[#C7612E]/25 overflow-hidden shrink-0 shadow-md flex items-center justify-center relative">
+                        {member.image ? (
+                          <img
+                            src={member.image}
+                            alt={member.name}
+                            className="w-full h-full object-cover object-top"
+                            onError={(e) => {
+                              e.currentTarget.style.display = 'none';
+                              const next = e.currentTarget.nextElementSibling;
+                              if (next) (next as HTMLElement).style.display = 'flex';
+                            }}
+                          />
+                        ) : null}
+                        <div 
+                          className={`w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-[#FAFAFA] to-[#EBE7DF] dark:from-[#202026] dark:to-[#141418] text-[#171717] dark:text-[#F6F3ED] font-mono font-bold text-xl sm:text-2xl select-none ${
+                            member.image ? 'hidden' : 'flex'
+                          }`}
+                        >
+                          <span className="tracking-tight text-[#C7612E]">
+                            {member.name.split(' ').map((n) => n[0]).join('')}
+                          </span>
+                        </div>
                       </div>
                       <div>
                         <h3 className="font-display font-bold text-2xl text-[#141414] dark:text-[#F6F3ED]">
@@ -214,7 +230,9 @@ export const AboutPage: React.FC = () => {
                   {/* Credentials / Core Focus Points */}
                   <div className="pt-6 mt-6 border-t border-[#DEDAD3] dark:border-white/10 space-y-3">
                     <p className="text-xs font-mono font-semibold uppercase tracking-wider text-[#141414] dark:text-white">
-                      {idx === 0 ? 'Verified Technical Credentials:' : 'Core Focus & Responsibilities:'}
+                      {idx === 0 
+                        ? 'Verified Technical Credentials:' 
+                        : (idx === 1 ? 'Core Architecture & Focus:' : 'Core Focus & Responsibilities:')}
                     </p>
                     <div className="grid grid-cols-1 gap-2.5 text-xs text-[#57544E] dark:text-[#A6A29A]">
                       {member.credentials.map((cred, i) => (
@@ -230,7 +248,9 @@ export const AboutPage: React.FC = () => {
                 {/* Skills / Tech Stack Chips */}
                 <div className="pt-6 border-t border-[#DEDAD3] dark:border-white/10">
                   <p className="text-xs font-mono font-semibold uppercase tracking-wider text-[#141414] dark:text-white mb-3">
-                    {idx === 0 ? 'Applied Tech Stack & Competencies:' : 'Technical & Operational Focus:'}
+                    {idx === 0 
+                      ? 'Applied Tech Stack & Competencies:' 
+                      : (idx === 1 ? 'Backend Tech Stack & Systems Focus:' : 'Technical & Operational Focus:')}
                   </p>
                   <div className="flex flex-wrap gap-1.5 sm:gap-2">
                     {member.skills.map((skill) => (

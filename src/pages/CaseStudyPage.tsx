@@ -16,7 +16,8 @@ import {
   ZoomIn,
   ShieldCheck,
   Compass,
-  FileText
+  FileText,
+  Play
 } from 'lucide-react';
 import { GithubIcon } from '../components/ui/Icons';
 import { openBookingModal } from '../components/booking/BookingModal';
@@ -26,6 +27,7 @@ export const CaseStudyPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   const [selectedImage, setSelectedImage] = useState<ProjectGalleryItem | null>(null);
+  const [activeMediaMode, setActiveMediaMode] = useState<'video' | 'image'>('video');
 
   const project = projects.find((p) => p.slug === slug);
 
@@ -128,13 +130,65 @@ export const CaseStudyPage: React.FC = () => {
           )}
         </div>
 
-        {/* Hero Showcase Image — Studio Viewport with Zero Image Cuts */}
-        <div className="my-12 sm:my-16 bg-[#171717] border border-[#DEDAD3] rounded-2xl p-4 sm:p-8 flex items-center justify-center shadow-lg min-h-[340px] sm:min-h-[460px]">
-          <img
-            src={project.heroImage}
-            alt={`${project.title} hero interface presentation`}
-            className="max-w-full max-h-[540px] w-auto h-auto object-contain rounded-xl drop-shadow-2xl"
-          />
+        {/* Hero Showcase Media — Studio Viewport with Zero Image Cuts */}
+        <div className="my-12 sm:my-16 bg-[#171717] border border-[#DEDAD3] rounded-2xl p-4 sm:p-8 flex flex-col items-center justify-center shadow-lg min-h-[340px] sm:min-h-[460px] relative overflow-hidden">
+          {project.videoSrc && (
+            <div className="w-full flex items-center justify-between mb-4 pb-3 border-b border-white/10 text-xs font-mono">
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[#10B981] animate-pulse" />
+                <span className="text-[#A1A1AA] uppercase tracking-wider">
+                  {activeMediaMode === 'video' ? 'System Showreel (1080p Full HD)' : 'Store Interface & Marketing Kit'}
+                </span>
+              </div>
+              <div className="flex items-center gap-1.5 bg-white/10 p-1 rounded-lg">
+                <button
+                  type="button"
+                  onClick={() => setActiveMediaMode('video')}
+                  className={`px-3 py-1 rounded text-xs transition-colors flex items-center gap-1.5 ${
+                    activeMediaMode === 'video'
+                      ? 'bg-[#C7612E] text-white font-semibold shadow-xs'
+                      : 'text-white/70 hover:text-white'
+                  }`}
+                >
+                  <Play className="w-3 h-3 fill-current" />
+                  <span>1080p Reel</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setActiveMediaMode('image')}
+                  className={`px-3 py-1 rounded text-xs transition-colors flex items-center gap-1.5 ${
+                    activeMediaMode === 'image'
+                      ? 'bg-[#C7612E] text-white font-semibold shadow-xs'
+                      : 'text-white/70 hover:text-white'
+                  }`}
+                >
+                  <FileText className="w-3 h-3" />
+                  <span>Still Frame</span>
+                </button>
+              </div>
+            </div>
+          )}
+
+          {project.videoSrc && activeMediaMode === 'video' ? (
+            <div className="w-full max-w-4xl relative rounded-xl overflow-hidden shadow-2xl border border-white/10 bg-black aspect-video flex items-center justify-center">
+              <video
+                src={project.videoSrc}
+                poster="/videos/project-reel-poster.webp"
+                controls
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="w-full h-full object-contain"
+              />
+            </div>
+          ) : (
+            <img
+              src={project.heroImage}
+              alt={`${project.title} hero interface presentation`}
+              className="max-w-full max-h-[540px] w-auto h-auto object-contain rounded-xl drop-shadow-2xl"
+            />
+          )}
         </div>
 
         {/* Key Metrics / Highlights if available */}

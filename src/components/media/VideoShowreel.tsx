@@ -55,8 +55,8 @@ export const VideoShowreel: React.FC = () => {
       category: 'APPLIED AI SYSTEMS',
       src: '/videos/project-reel.mp4',
       poster: '/videos/project-reel-poster.webp',
-      duration: '0:15',
-      tags: ['OpenCV', 'YOLOv8', 'Spatial Tracking', 'Local Inference'],
+      duration: '0:20',
+      tags: ['1080p FHD', 'OpenCV', 'YOLOv8', 'Spatial Tracking', 'Local Inference'],
     },
   ];
 

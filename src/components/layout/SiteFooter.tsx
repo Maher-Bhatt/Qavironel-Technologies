@@ -10,7 +10,7 @@ export const SiteFooter: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#F6F3ED] dark:bg-[#0C0C0E] text-[#141414] dark:text-[#F6F3ED] border-t border-[#DEDAD3] dark:border-white/10 pt-24 pb-12 transition-colors duration-300">
+    <footer className="bg-[#F6F3ED] dark:bg-[#0C0C0E] text-[#141414] dark:text-[#F6F3ED] border-t border-[#DEDAD3] dark:border-white/10 pt-24 pb-28 sm:pb-32 md:pb-12 transition-colors duration-300">
       <div className="max-w-[1800px] w-full mx-auto px-5 sm:px-8 lg:px-12">
         {/* Massive Editorial Brand Statement */}
         <div className="pb-16 border-b border-[#DEDAD3] dark:border-white/10 flex flex-col lg:flex-row lg:items-end justify-between gap-8">

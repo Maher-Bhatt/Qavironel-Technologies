@@ -30,10 +30,26 @@ export const CaseStudyPage: React.FC = () => {
   const [activeMediaMode, setActiveMediaMode] = useState<'video' | 'image'>('video');
 
   const project = projects.find((p) => p.slug === slug);
+  const videoRef = React.useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     enforceScrollTop();
   }, [slug]);
+
+  useEffect(() => {
+    if (activeMediaMode === 'video' && videoRef.current) {
+      videoRef.current.defaultMuted = true;
+      videoRef.current.muted = true;
+      try {
+        const playPromise = videoRef.current.play();
+        if (playPromise && typeof playPromise.catch === 'function') {
+          playPromise.catch(() => {});
+        }
+      } catch {
+        // Safe fallback for browsers/environments where play() is restricted
+      }
+    }
+  }, [activeMediaMode, project?.videoSrc]);
 
   if (!project) {
     return (
@@ -88,38 +104,38 @@ export const CaseStudyPage: React.FC = () => {
         </div>
 
         {/* Case Study Header */}
-        <div className="border-b border-[#DEDAD3] pb-12 sm:pb-16">
+        <div className="border-b border-[#DEDAD3] dark:border-white/10 pb-12 sm:pb-16">
           <div className="flex flex-wrap items-center gap-3 mb-6">
-            <span className="px-2.5 py-1 text-xs font-mono bg-[#F6F3ED] border border-[#DEDAD3] rounded text-[#171717]">
+            <span className="px-2.5 py-1 text-xs font-mono bg-[#F6F3ED] dark:bg-[#1A1A20] border border-[#DEDAD3] dark:border-white/10 rounded text-[#171717] dark:text-[#F6F3ED]">
               {project.status}
             </span>
             <span className="px-2.5 py-1 text-xs font-mono bg-[#C7612E] text-white font-semibold rounded">
               {project.categoryLabel}
             </span>
-            <span className="text-xs font-mono text-[#77746F]">Year: {project.year}</span>
+            <span className="text-xs font-mono text-[#77746F] dark:text-[#A1A1AA]">Year: {project.year}</span>
           </div>
 
-          <h1 className="font-sans font-extrabold text-4xl sm:text-6xl text-[#171717] tracking-tight leading-[1.08] max-w-5xl">
+          <h1 className="font-sans font-extrabold text-3xl sm:text-5xl lg:text-6xl text-[#171717] dark:text-[#F6F3ED] tracking-tight leading-[1.08] max-w-5xl">
             {project.title}
           </h1>
 
-          <p className="mt-6 text-xl sm:text-2xl text-[#77746F] font-light max-w-4xl leading-relaxed">
+          <p className="mt-6 text-lg sm:text-2xl text-[#77746F] dark:text-[#A1A1AA] font-light max-w-4xl leading-relaxed">
             {project.summary}
           </p>
 
           {/* Quick Action Links */}
           {project.links.length > 0 && (
-            <div className="mt-8 flex flex-wrap items-center gap-4">
+            <div className="mt-8 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 sm:gap-4">
               {project.links.map((link) => (
                 <a
                   key={link.url}
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`inline-flex items-center gap-2 px-6 py-3.5 rounded-full text-xs font-semibold uppercase tracking-widest transition-all ${
+                  className={`inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full text-xs font-semibold uppercase tracking-widest transition-all w-full sm:w-auto ${
                     link.type === 'live'
                       ? 'bg-[#C7612E] hover:bg-[#98431F] text-white shadow-xs'
-                      : 'bg-white hover:bg-[#F6F3ED] text-[#171717] border border-[#DEDAD3]'
+                      : 'bg-white dark:bg-[#1A1A20] hover:bg-[#F6F3ED] dark:hover:bg-[#252528] text-[#171717] dark:text-[#F6F3ED] border border-[#DEDAD3] dark:border-white/10'
                   }`}
                 >
                   {link.type === 'github' ? <GithubIcon className="w-4 h-4" /> : <ExternalLink className="w-4 h-4" />}
@@ -131,16 +147,16 @@ export const CaseStudyPage: React.FC = () => {
         </div>
 
         {/* Hero Showcase Media — Studio Viewport with Zero Image Cuts */}
-        <div className="my-12 sm:my-16 bg-[#171717] border border-[#DEDAD3] rounded-2xl p-4 sm:p-8 flex flex-col items-center justify-center shadow-lg min-h-[340px] sm:min-h-[460px] relative overflow-hidden">
+        <div className="my-12 sm:my-16 bg-[#171717] border border-[#DEDAD3] dark:border-white/10 rounded-2xl p-4 sm:p-8 flex flex-col items-center justify-center shadow-lg min-h-[340px] sm:min-h-[460px] relative overflow-hidden">
           {project.videoSrc && (
-            <div className="w-full flex items-center justify-between mb-4 pb-3 border-b border-white/10 text-xs font-mono">
-              <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[#10B981] animate-pulse" />
-                <span className="text-[#A1A1AA] uppercase tracking-wider">
+            <div className="w-full flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 pb-3 border-b border-white/10 text-xs font-mono">
+              <div className="flex items-center gap-2 min-w-0">
+                <span className="w-2 h-2 rounded-full bg-[#10B981] animate-pulse shrink-0" />
+                <span className="text-[#A1A1AA] uppercase tracking-wider truncate">
                   {activeMediaMode === 'video' ? 'System Showreel (1080p Full HD)' : 'Store Interface & Marketing Kit'}
                 </span>
               </div>
-              <div className="flex items-center gap-1.5 bg-white/10 p-1 rounded-lg">
+              <div className="flex items-center gap-1.5 bg-white/10 p-1 rounded-lg shrink-0 self-start sm:self-auto">
                 <button
                   type="button"
                   onClick={() => setActiveMediaMode('video')}
@@ -172,6 +188,7 @@ export const CaseStudyPage: React.FC = () => {
           {project.videoSrc && activeMediaMode === 'video' ? (
             <div className="w-full max-w-4xl relative rounded-xl overflow-hidden shadow-2xl border border-white/10 bg-black aspect-video flex items-center justify-center">
               <video
+                ref={videoRef}
                 src={project.videoSrc}
                 poster={project.slug === 'kalki' ? '/videos/kalki-video-poster.webp' : '/videos/project-reel-poster.webp'}
                 controls
@@ -193,12 +210,12 @@ export const CaseStudyPage: React.FC = () => {
 
         {/* Key Metrics / Highlights if available */}
         {project.metrics && project.metrics.length > 0 && (
-          <div className="mb-16 p-8 bg-[#F6F3ED] border border-[#DEDAD3] rounded-2xl shadow-[0_4px_24px_rgba(0,0,0,0.02)] grid grid-cols-1 sm:grid-cols-3 gap-8">
+          <div className="mb-16 p-6 sm:p-8 bg-[#F6F3ED] dark:bg-[#1A1A20] border border-[#DEDAD3] dark:border-white/10 rounded-2xl shadow-[0_4px_24px_rgba(0,0,0,0.02)] grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
             {project.metrics.map((m, idx) => (
               <div key={idx} className="space-y-1">
-                <p className="font-sans font-extrabold text-3xl sm:text-4xl text-[#171717]">{m.value}</p>
+                <p className="font-sans font-extrabold text-3xl sm:text-4xl text-[#171717] dark:text-[#F6F3ED]">{m.value}</p>
                 <p className="text-xs font-mono font-semibold uppercase tracking-wider text-[#C7612E]">{m.label}</p>
-                {m.context && <p className="text-xs text-[#77746F]">{m.context}</p>}
+                {m.context && <p className="text-xs text-[#77746F] dark:text-[#A1A1AA]">{m.context}</p>}
               </div>
             ))}
           </div>
@@ -214,43 +231,43 @@ export const CaseStudyPage: React.FC = () => {
                 <span className="w-1.5 h-1.5 rounded-full bg-[#C7612E]" />
                 <span>The Challenge</span>
               </div>
-              <h2 className="font-sans font-bold text-2xl sm:text-3xl text-[#171717]">
+              <h2 className="font-sans font-bold text-2xl sm:text-3xl text-[#171717] dark:text-[#F6F3ED]">
                 What needed solving
               </h2>
-              <p className="text-base sm:text-lg text-[#77746F] leading-relaxed font-light">
+              <p className="text-base sm:text-lg text-[#77746F] dark:text-[#A1A1AA] leading-relaxed font-light">
                 {project.challenge}
               </p>
             </section>
 
             {/* Target Audience */}
-            <section className="space-y-4 pt-8 border-t border-[#DEDAD3]">
+            <section className="space-y-4 pt-8 border-t border-[#DEDAD3] dark:border-white/10">
               <div className="flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-widest text-[#C7612E]">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#C7612E]" />
                 <span>Target Audience</span>
               </div>
-              <h2 className="font-sans font-bold text-2xl sm:text-3xl text-[#171717]">
+              <h2 className="font-sans font-bold text-2xl sm:text-3xl text-[#171717] dark:text-[#F6F3ED]">
                 Who this was engineered for
               </h2>
-              <p className="text-base sm:text-lg text-[#77746F] leading-relaxed font-light">
+              <p className="text-base sm:text-lg text-[#77746F] dark:text-[#A1A1AA] leading-relaxed font-light">
                 {project.audience}
               </p>
             </section>
 
             {/* Objectives */}
             {project.objectives && project.objectives.length > 0 && (
-              <section className="space-y-4 pt-8 border-t border-[#DEDAD3]">
+              <section className="space-y-4 pt-8 border-t border-[#DEDAD3] dark:border-white/10">
                 <div className="flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-widest text-[#C7612E]">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#C7612E]" />
                   <span>Strategic Objectives</span>
                 </div>
-                <h2 className="font-sans font-bold text-2xl sm:text-3xl text-[#171717]">
+                <h2 className="font-sans font-bold text-2xl sm:text-3xl text-[#171717] dark:text-[#F6F3ED]">
                   What the solution had to deliver
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
                   {project.objectives.map((obj, i) => (
-                    <div key={i} className="p-5 bg-[#F6F3ED] border border-[#DEDAD3] rounded-xl flex items-start gap-3 shadow-xs">
+                    <div key={i} className="p-5 bg-[#F6F3ED] dark:bg-[#1A1A20] border border-[#DEDAD3] dark:border-white/10 rounded-xl flex items-start gap-3 shadow-xs">
                       <CheckCircle2 className="w-4 h-4 text-[#C7612E] shrink-0 mt-0.5" />
-                      <span className="text-xs sm:text-sm text-[#171717] leading-relaxed">{obj}</span>
+                      <span className="text-xs sm:text-sm text-[#171717] dark:text-[#F6F3ED] leading-relaxed">{obj}</span>
                     </div>
                   ))}
                 </div>
@@ -258,36 +275,36 @@ export const CaseStudyPage: React.FC = () => {
             )}
 
             {/* The Solution */}
-            <section className="space-y-4 pt-8 border-t border-[#DEDAD3]">
+            <section className="space-y-4 pt-8 border-t border-[#DEDAD3] dark:border-white/10">
               <div className="flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-widest text-[#C7612E]">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#C7612E]" />
                 <span>The Solution & Implementation</span>
               </div>
-              <h2 className="font-sans font-bold text-2xl sm:text-3xl text-[#171717]">
+              <h2 className="font-sans font-bold text-2xl sm:text-3xl text-[#171717] dark:text-[#F6F3ED]">
                 How we architected the system
               </h2>
-              <p className="text-base sm:text-lg text-[#77746F] leading-relaxed font-light">
+              <p className="text-base sm:text-lg text-[#77746F] dark:text-[#A1A1AA] leading-relaxed font-light">
                 {project.solution}
               </p>
             </section>
 
             {/* Workflow / User Journey */}
             {project.workflow && project.workflow.length > 0 && (
-              <section className="space-y-6 pt-8 border-t border-[#DEDAD3]">
+              <section className="space-y-6 pt-8 border-t border-[#DEDAD3] dark:border-white/10">
                 <div className="flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-widest text-[#C7612E]">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#C7612E]" />
                   <span>Workflow Architecture</span>
                 </div>
-                <h2 className="font-sans font-bold text-2xl sm:text-3xl text-[#171717]">
+                <h2 className="font-sans font-bold text-2xl sm:text-3xl text-[#171717] dark:text-[#F6F3ED]">
                   The interactive experience in action
                 </h2>
                 <div className="space-y-4">
                   {project.workflow.map((step, idx) => (
-                    <div key={idx} className="p-5 bg-[#F6F3ED] border border-[#DEDAD3] rounded-xl flex items-start gap-4 shadow-xs">
+                    <div key={idx} className="p-5 bg-[#F6F3ED] dark:bg-[#1A1A20] border border-[#DEDAD3] dark:border-white/10 rounded-xl flex items-start gap-4 shadow-xs">
                       <span className="font-mono text-sm font-bold text-[#C7612E] px-2 py-0.5 bg-[#C7612E]/10 rounded">
                         0{idx + 1}
                       </span>
-                      <p className="text-sm text-[#171717] leading-relaxed">{step}</p>
+                      <p className="text-sm text-[#171717] dark:text-[#F6F3ED] leading-relaxed">{step}</p>
                     </div>
                   ))}
                 </div>
@@ -296,15 +313,15 @@ export const CaseStudyPage: React.FC = () => {
 
             {/* Technical Build Notes */}
             {project.buildNotes && project.buildNotes.length > 0 && (
-              <section className="space-y-4 pt-8 border-t border-[#DEDAD3]">
+              <section className="space-y-4 pt-8 border-t border-[#DEDAD3] dark:border-white/10">
                 <div className="flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-widest text-[#C7612E]">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#C7612E]" />
                   <span>Engineering Highlights</span>
                 </div>
-                <h2 className="font-sans font-bold text-2xl sm:text-3xl text-[#171717]">
+                <h2 className="font-sans font-bold text-2xl sm:text-3xl text-[#171717] dark:text-[#F6F3ED]">
                   Technical craftsmanship & decisions
                 </h2>
-                <ul className="space-y-3 mt-4 text-sm text-[#77746F]">
+                <ul className="space-y-3 mt-4 text-sm text-[#77746F] dark:text-[#A1A1AA]">
                   {project.buildNotes.map((note, idx) => (
                     <li key={idx} className="flex items-start gap-3">
                       <span className="text-[#C7612E] font-bold">•</span>
@@ -316,15 +333,15 @@ export const CaseStudyPage: React.FC = () => {
             )}
 
             {/* Why It Matters */}
-            <section className="space-y-4 pt-8 border-t border-[#DEDAD3] bg-[#F6F3ED] p-8 border border-[#DEDAD3] rounded-2xl">
+            <section className="space-y-4 pt-8 border-t border-[#DEDAD3] dark:border-white/10 bg-[#F6F3ED] dark:bg-[#1A1A20] p-6 sm:p-8 border border-[#DEDAD3] dark:border-white/10 rounded-2xl">
               <div className="flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-widest text-[#C7612E]">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#C7612E]" />
                 <span>The Takeaway</span>
               </div>
-              <h2 className="font-sans font-bold text-xl sm:text-2xl text-[#171717]">
+              <h2 className="font-sans font-bold text-xl sm:text-2xl text-[#171717] dark:text-[#F6F3ED]">
                 Why this build matters
               </h2>
-              <p className="text-sm sm:text-base text-[#77746F] leading-relaxed font-light">
+              <p className="text-sm sm:text-base text-[#77746F] dark:text-[#A1A1AA] leading-relaxed font-light">
                 {project.whyItMatters}
               </p>
             </section>
@@ -332,30 +349,30 @@ export const CaseStudyPage: React.FC = () => {
 
           {/* Sidebar Metadata (Right 4 cols) */}
           <div className="lg:col-span-4 space-y-8">
-            <div className="bg-[#F6F3ED] border border-[#DEDAD3] rounded-2xl p-6 sm:p-8 space-y-6 sticky top-28 shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
+            <div className="bg-[#F6F3ED] dark:bg-[#1A1A20] border border-[#DEDAD3] dark:border-white/10 rounded-2xl p-6 sm:p-8 space-y-6 sticky top-28 shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
               <div>
-                <p className="text-xs font-mono font-semibold uppercase tracking-wider text-[#77746F] mb-1">
+                <p className="text-xs font-mono font-semibold uppercase tracking-wider text-[#77746F] dark:text-[#A1A1AA] mb-1">
                   Project Category
                 </p>
-                <p className="text-base font-bold font-sans text-[#171717]">{project.categoryLabel}</p>
+                <p className="text-base font-bold font-sans text-[#171717] dark:text-[#F6F3ED]">{project.categoryLabel}</p>
               </div>
 
-              <div className="pt-4 border-t border-[#DEDAD3]">
-                <p className="text-xs font-mono font-semibold uppercase tracking-wider text-[#77746F] mb-1">
+              <div className="pt-4 border-t border-[#DEDAD3] dark:border-white/10">
+                <p className="text-xs font-mono font-semibold uppercase tracking-wider text-[#77746F] dark:text-[#A1A1AA] mb-1">
                   Status & Delivery
                 </p>
-                <p className="text-sm font-semibold text-[#171717]">{project.status}</p>
+                <p className="text-sm font-semibold text-[#171717] dark:text-[#F6F3ED]">{project.status}</p>
               </div>
 
-              <div className="pt-4 border-t border-[#DEDAD3]">
-                <p className="text-xs font-mono font-semibold uppercase tracking-wider text-[#77746F] mb-3">
+              <div className="pt-4 border-t border-[#DEDAD3] dark:border-white/10">
+                <p className="text-xs font-mono font-semibold uppercase tracking-wider text-[#77746F] dark:text-[#A1A1AA] mb-3">
                   Technologies Deployed
                 </p>
                 <div className="flex flex-wrap gap-1.5">
                   {project.technologies.map((t) => (
                     <span 
                       key={t}
-                      className="px-2.5 py-1 text-xs font-mono bg-white text-[#77746F] border border-[#DEDAD3] rounded"
+                      className="px-2.5 py-1 text-xs font-mono bg-white dark:bg-[#202025] text-[#77746F] dark:text-[#A1A1AA] border border-[#DEDAD3] dark:border-white/10 rounded"
                     >
                       {t}
                     </span>
@@ -364,17 +381,17 @@ export const CaseStudyPage: React.FC = () => {
               </div>
 
               {project.scopeNote && (
-                <div className="pt-4 border-t border-[#DEDAD3]">
+                <div className="pt-4 border-t border-[#DEDAD3] dark:border-white/10">
                   <p className="text-xs font-mono font-semibold uppercase tracking-wider text-[#C7612E] mb-1">
                     Boundary Note
                   </p>
-                  <p className="text-xs text-[#77746F] leading-relaxed">
+                  <p className="text-xs text-[#77746F] dark:text-[#A1A1AA] leading-relaxed">
                     {project.scopeNote}
                   </p>
                 </div>
               )}
 
-              <div className="pt-6 border-t border-[#DEDAD3]">
+              <div className="pt-6 border-t border-[#DEDAD3] dark:border-white/10">
                 <Button to="/contact" variant="primary" size="md" className="w-full">
                   Start a Similar Project
                 </Button>
@@ -385,17 +402,17 @@ export const CaseStudyPage: React.FC = () => {
 
         {/* Screenshot Gallery */}
         {project.gallery.length > 0 && (
-          <section className="mt-24 pt-16 border-t border-[#DEDAD3]">
+          <section className="mt-24 pt-16 border-t border-[#DEDAD3] dark:border-white/10">
             <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
               <div>
                 <span className="text-xs font-mono font-semibold uppercase tracking-[0.2em] text-[#C7612E] block mb-2">
                   Visual Evidence
                 </span>
-                <h2 className="font-sans font-bold text-3xl sm:text-4xl text-[#171717] tracking-tight">
+                <h2 className="font-sans font-bold text-3xl sm:text-4xl text-[#171717] dark:text-[#F6F3ED] tracking-tight">
                   The interface, in action.
                 </h2>
               </div>
-              <p className="text-xs font-mono text-[#77746F]">
+              <p className="text-xs font-mono text-[#77746F] dark:text-[#A1A1AA]">
                 Click any capture to inspect in high resolution
               </p>
             </div>
@@ -404,7 +421,7 @@ export const CaseStudyPage: React.FC = () => {
               {project.gallery.map((item, idx) => (
                 <div 
                   key={idx}
-                  className="bg-[#F6F3ED] border border-[#DEDAD3] rounded-2xl p-4 group cursor-pointer hover:border-[#C7612E]/50 transition-all shadow-xs"
+                  className="bg-[#F6F3ED] dark:bg-[#1A1A20] border border-[#DEDAD3] dark:border-white/10 rounded-2xl p-4 group cursor-pointer hover:border-[#C7612E]/50 transition-all shadow-xs"
                   onClick={() => setSelectedImage(item)}
                 >
                   <div className="relative aspect-[16/10] overflow-hidden rounded-xl bg-[#0D0D10] flex items-center justify-center p-2">
@@ -420,7 +437,7 @@ export const CaseStudyPage: React.FC = () => {
                       </span>
                     </div>
                   </div>
-                  <p className="mt-4 text-xs sm:text-sm text-[#77746F] font-mono leading-relaxed">
+                  <p className="mt-4 text-xs sm:text-sm text-[#77746F] dark:text-[#A1A1AA] font-mono leading-relaxed">
                     {item.caption}
                   </p>
                 </div>
@@ -436,9 +453,9 @@ export const CaseStudyPage: React.FC = () => {
         />
 
         {/* Related Case Studies */}
-        <section className="mt-24 pt-16 border-t border-[#DEDAD3]">
+        <section className="mt-24 pt-16 border-t border-[#DEDAD3] dark:border-white/10">
           <div className="flex items-center justify-between mb-8">
-            <h2 className="font-sans font-bold text-2xl text-[#171717]">
+            <h2 className="font-sans font-bold text-2xl text-[#171717] dark:text-[#F6F3ED]">
               Explore more selected work
             </h2>
             <Link to="/work" className="text-xs font-mono font-semibold uppercase tracking-widest text-[#C7612E] hover:underline">
@@ -450,27 +467,27 @@ export const CaseStudyPage: React.FC = () => {
             {relatedProjects.map((rel) => (
               <div 
                 key={rel.slug}
-                className="bg-[#F6F3ED] border border-[#DEDAD3] rounded-2xl p-6 hover:border-[#C7612E]/50 shadow-xs transition-all flex flex-col justify-between"
+                className="bg-[#F6F3ED] dark:bg-[#1A1A20] border border-[#DEDAD3] dark:border-white/10 rounded-2xl p-6 hover:border-[#C7612E]/50 shadow-xs transition-all flex flex-col justify-between"
               >
                 <div>
-                  <div className="flex items-center justify-between text-xs font-mono text-[#77746F] mb-3">
+                  <div className="flex items-center justify-between text-xs font-mono text-[#77746F] dark:text-[#A1A1AA] mb-3">
                     <span className="text-[#C7612E] font-semibold">{rel.category}</span>
                     <span>{rel.year}</span>
                   </div>
-                  <h3 className="font-sans font-bold text-xl text-[#171717]">
+                  <h3 className="font-sans font-bold text-xl text-[#171717] dark:text-[#F6F3ED]">
                     <Link to={`/work/${rel.slug}`} className="hover:text-[#C7612E] transition-colors">
                       {rel.title}
                     </Link>
                   </h3>
-                  <p className="mt-2 text-xs sm:text-sm text-[#77746F] line-clamp-2">
+                  <p className="mt-2 text-xs sm:text-sm text-[#77746F] dark:text-[#A1A1AA] line-clamp-2">
                     {rel.summary}
                   </p>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-[#DEDAD3] flex items-center justify-between">
+                <div className="mt-6 pt-4 border-t border-[#DEDAD3] dark:border-white/10 flex items-center justify-between">
                   <Link 
                     to={`/work/${rel.slug}`} 
-                    className="text-xs font-semibold uppercase tracking-wider text-[#171717] hover:text-[#C7612E] transition-colors inline-flex items-center gap-1"
+                    className="text-xs font-semibold uppercase tracking-wider text-[#171717] dark:text-[#F6F3ED] hover:text-[#C7612E] transition-colors inline-flex items-center gap-1"
                   >
                     Read Story <ArrowUpRight className="w-3.5 h-3.5" />
                   </Link>
@@ -481,16 +498,16 @@ export const CaseStudyPage: React.FC = () => {
         </section>
 
         {/* CTA */}
-        <div className="mt-20 p-8 sm:p-12 glass-card rounded-2xl text-[#171717] flex flex-col lg:flex-row items-center justify-between gap-6">
+        <div className="mt-20 p-6 sm:p-12 glass-card rounded-2xl text-[#171717] dark:text-[#F6F3ED] flex flex-col lg:flex-row items-center justify-between gap-6">
           <div>
-            <h3 className="font-sans font-bold text-2xl text-[#171717]">Have a project with a clear next step?</h3>
-            <p className="text-sm text-[#77746F] mt-1 font-light">Tell us what you are trying to build. We will shape the right architecture.</p>
+            <h3 className="font-sans font-bold text-2xl text-[#171717] dark:text-[#F6F3ED]">Have a project with a clear next step?</h3>
+            <p className="text-sm text-[#77746F] dark:text-[#A1A1AA] mt-1 font-light">Tell us what you are trying to build. We will shape the right architecture.</p>
           </div>
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 w-full lg:w-auto">
             <button
               type="button"
               onClick={() => openBookingModal('call')}
-              className="px-5 py-3 rounded-full bg-[#171717] hover:bg-black text-white text-xs font-bold uppercase tracking-wider transition-colors flex items-center gap-2 shadow-xs"
+              className="px-5 py-3 rounded-full bg-[#171717] dark:bg-white hover:bg-black dark:hover:bg-zinc-200 text-white dark:text-[#171717] text-xs font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-2 shadow-xs w-full sm:w-auto"
             >
               <Calendar className="w-3.5 h-3.5 text-[#C7612E]" />
               <span>Schedule Call (30m)</span>
@@ -498,12 +515,12 @@ export const CaseStudyPage: React.FC = () => {
             <button
               type="button"
               onClick={() => openBookingModal('quotation')}
-              className="px-5 py-3 rounded-full bg-[#F6F3ED] hover:bg-[#DEDAD3] text-[#171717] text-xs font-bold uppercase tracking-wider transition-colors border border-[#DEDAD3] flex items-center gap-2"
+              className="px-5 py-3 rounded-full bg-[#F6F3ED] dark:bg-[#1C1C22] hover:bg-[#DEDAD3] dark:hover:bg-[#2D2D2A] text-[#171717] dark:text-[#F6F3ED] text-xs font-bold uppercase tracking-wider transition-colors border border-[#DEDAD3] dark:border-white/10 flex items-center justify-center gap-2 w-full sm:w-auto"
             >
               <FileText className="w-3.5 h-3.5 text-[#C7612E]" />
               <span>Get Quote</span>
             </button>
-            <Button to="/contact" variant="primary" size="md" showArrow>
+            <Button to="/contact" variant="primary" size="md" showArrow className="w-full sm:w-auto justify-center">
               Start Project
             </Button>
           </div>

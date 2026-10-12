@@ -47,7 +47,7 @@ export const App: React.FC = () => {
       <FilmGrainOverlay />
       <div className="flex flex-col min-h-screen bg-[#F6F3ED] dark:bg-[#171717] text-[#171717] dark:text-[#F6F3ED] transition-colors duration-300">
         <SiteHeader />
-        <main className="flex-grow pb-16 md:pb-0">
+        <main className="flex-grow pb-28 sm:pb-32 md:pb-0">
           <Suspense fallback={<div className="min-h-screen bg-[#F6F3ED] dark:bg-[#171717]" />}>
             <AnimatePresence mode="wait">
               <Routes location={location} key={location.pathname}>

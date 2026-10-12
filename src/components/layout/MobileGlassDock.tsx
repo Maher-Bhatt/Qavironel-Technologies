@@ -1,12 +1,59 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Calendar, FileText, MessageSquare, LayoutGrid } from 'lucide-react';
 import { openBookingModal } from '../booking/BookingModal';
 import { companyConfig } from '../../data/company';
 
 export const MobileGlassDock: React.FC = () => {
+  const [isVisible, setIsVisible] = useState(true);
+  const lastScrollYRef = useRef(0);
+  const location = useLocation();
+
+  // Reset visibility on route change
+  useEffect(() => {
+    setIsVisible(true);
+    lastScrollYRef.current = 0;
+  }, [location.pathname]);
+
+  useEffect(() => {
+    let ticking = false;
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const currentScrollY = window.scrollY || document.documentElement.scrollTop;
+          
+          // Always show near the very top of the page (< 80px)
+          if (currentScrollY < 80) {
+            setIsVisible(true);
+          } else if (currentScrollY > lastScrollYRef.current + 10) {
+            // Scrolling down -> hide dock to free screen space
+            setIsVisible(false);
+          } else if (currentScrollY < lastScrollYRef.current - 10) {
+            // Scrolling up -> reveal dock for quick navigation
+            setIsVisible(true);
+          }
+
+          lastScrollYRef.current = currentScrollY;
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <div className="fixed bottom-4 left-4 right-4 z-40 md:hidden flex justify-center pointer-events-none">
+    <div 
+      className={`fixed bottom-4 left-4 right-4 z-40 md:hidden flex justify-center pointer-events-none transition-all duration-300 ease-out ${
+        isVisible ? 'translate-y-0 opacity-100' : 'translate-y-24 opacity-0'
+      }`}
+      style={{
+        bottom: 'max(1rem, env(safe-area-inset-bottom, 1rem))'
+      }}
+    >
       <nav 
         aria-label="Mobile Quick Actions"
         className="pointer-events-auto w-full max-w-sm rounded-full px-2 py-1.5 flex items-center justify-between bg-white/95 dark:bg-[#151518]/95 backdrop-blur-2xl border border-[#DEDAD3] dark:border-white/15 shadow-[0_12px_36px_rgba(0,0,0,0.14)] dark:shadow-[0_16px_40px_rgba(0,0,0,0.7)] transition-colors duration-300"

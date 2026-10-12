@@ -109,11 +109,11 @@ export const HomePage: React.FC = () => {
                   initial={{ opacity: 0, y: 24 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.7, delay: 0.3 }}
-                  className="mt-8 sm:mt-10 flex flex-wrap items-center gap-4"
+                  className="mt-8 sm:mt-10 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 sm:gap-4 w-full"
                 >
                   <MagneticButton
                     onClick={() => navigate('/contact')}
-                    className="px-8 py-4 rounded-full bg-[#C7612E] hover:bg-[#d04a14] text-white text-xs font-bold uppercase tracking-wider shadow-[0_8px_25px_rgba(199,97,46,0.3)] group"
+                    className="px-7 sm:px-8 py-3.5 sm:py-4 rounded-full bg-[#C7612E] hover:bg-[#d04a14] text-white text-xs font-bold uppercase tracking-wider shadow-[0_8px_25px_rgba(199,97,46,0.3)] group justify-center w-full sm:w-auto"
                   >
                     <span>Start a Project</span>
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -121,7 +121,7 @@ export const HomePage: React.FC = () => {
 
                   <Link 
                     to="/work" 
-                    className="px-6 py-4 rounded-full bg-white dark:bg-[#18181E] hover:bg-[#EFEBE3] dark:hover:bg-[#25252E] text-[#141414] dark:text-[#F6F3ED] text-xs font-bold uppercase tracking-wider border border-[#DEDAD3] dark:border-white/10 transition-colors flex items-center gap-2 shadow-xs"
+                    className="px-6 py-3.5 sm:py-4 rounded-full bg-white dark:bg-[#18181E] hover:bg-[#EFEBE3] dark:hover:bg-[#25252E] text-[#141414] dark:text-[#F6F3ED] text-xs font-bold uppercase tracking-wider border border-[#DEDAD3] dark:border-white/10 transition-colors flex items-center justify-center gap-2 shadow-xs w-full sm:w-auto"
                   >
                     <span>Explore Our Work</span>
                     <ArrowUpRight className="w-3.5 h-3.5" />
@@ -129,7 +129,7 @@ export const HomePage: React.FC = () => {
 
                   <MagneticButton
                     onClick={() => openBookingModal('call')}
-                    className="px-6 py-4 rounded-full bg-[#141414] dark:bg-white hover:bg-black dark:hover:bg-zinc-100 text-white dark:text-[#141414] text-xs font-bold uppercase tracking-wider shadow-xs group"
+                    className="px-6 py-3.5 sm:py-4 rounded-full bg-[#141414] dark:bg-white hover:bg-black dark:hover:bg-zinc-100 text-white dark:text-[#141414] text-xs font-bold uppercase tracking-wider shadow-xs group justify-center w-full sm:w-auto"
                   >
                     <Calendar className="w-4 h-4 text-[#C7612E] group-hover:scale-110 transition-transform" />
                     <span>Book Discovery (30m)</span>
@@ -391,9 +391,9 @@ export const HomePage: React.FC = () => {
             <div className="mt-12 space-y-10">
               {(workFilter === 'all' || workFilter === 'ai') && (
                 <div className="relative">
-                  <div className="flex items-center justify-between mb-3 text-xs font-mono text-[#6E6B65] dark:text-[#A6A29A]">
-                    <span className="text-[#C7612E] font-bold">★ FLAGSHIP SHOWCASE · STORE CERTIFIED v1.0.4</span>
-                    <span>CLICK TABS BELOW TO INSPECT SCREENS</span>
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-3 text-xs font-mono text-[#6E6B65] dark:text-[#A6A29A]">
+                    <span className="text-[#C7612E] font-bold text-[0.72rem] sm:text-xs tracking-tight">★ FLAGSHIP SHOWCASE · STORE CERTIFIED v1.0.4</span>
+                    <span className="hidden sm:inline text-[0.7rem]">CLICK TABS BELOW TO INSPECT SCREENS</span>
                   </div>
                   <ProjectCard project={curatedProjects[0]} layout="featured" />
                 </div>

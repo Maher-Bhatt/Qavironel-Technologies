@@ -142,18 +142,19 @@ export const ServicesPage: React.FC = () => {
                     {svc.image && (
                       <div className="rounded-2xl border border-[#DEDAD3] dark:border-white/10 bg-white dark:bg-[#1A1A20] overflow-hidden shadow-sm">
                         {/* Mockup Window Header */}
-                        <div className="px-4 py-2.5 bg-[#F1F3F5] dark:bg-[#1C1C22] border-b border-[#DEDAD3] dark:border-white/10 flex items-center justify-between">
-                          <div className="flex items-center gap-1.5">
+                        <div className="px-3 sm:px-4 py-2 sm:py-2.5 bg-[#F1F3F5] dark:bg-[#1C1C22] border-b border-[#DEDAD3] dark:border-white/10 flex items-center justify-between gap-2">
+                          <div className="flex items-center gap-1.5 shrink-0">
                             <span className="w-2.5 h-2.5 rounded-full bg-[#DEDAD3] dark:bg-zinc-700 border border-[#D1D5DB] dark:border-zinc-600" />
                             <span className="w-2.5 h-2.5 rounded-full bg-[#DEDAD3] dark:bg-zinc-700 border border-[#D1D5DB] dark:border-zinc-600" />
                             <span className="w-2.5 h-2.5 rounded-full bg-[#DEDAD3] dark:bg-zinc-700 border border-[#D1D5DB] dark:border-zinc-600" />
                           </div>
-                          <div className="px-3 py-0.5 rounded-md bg-white dark:bg-[#20201E] border border-[#DEDAD3] dark:border-white/10 text-[0.68rem] font-mono text-[#77746F] dark:text-[#A1A1AA]">
+                          <div className="px-2 sm:px-3 py-0.5 rounded-md bg-white dark:bg-[#20201E] border border-[#DEDAD3] dark:border-white/10 text-[0.65rem] sm:text-[0.68rem] font-mono text-[#77746F] dark:text-[#A1A1AA] truncate max-w-[140px] sm:max-w-none">
                             qavironel.internal // {svc.id}
                           </div>
-                          <div className="flex items-center gap-1.5 text-[0.65rem] font-mono text-emerald-600 dark:text-emerald-400 font-semibold">
+                          <div className="flex items-center gap-1.5 text-[0.65rem] font-mono text-emerald-600 dark:text-emerald-400 font-semibold shrink-0">
                             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                            <span>PRODUCTION READY</span>
+                            <span className="hidden sm:inline">PRODUCTION READY</span>
+                            <span className="sm:hidden">LIVE</span>
                           </div>
                         </div>
 

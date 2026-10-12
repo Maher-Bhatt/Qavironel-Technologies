@@ -23,6 +23,15 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   const [rotateX, setRotateX] = useState(0);
   const [rotateY, setRotateY] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const [isPlayingMobile, setIsPlayingMobile] = useState(false);
+
+  // Set defaultMuted and muted on DOM element for mobile Safari compatibility
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.defaultMuted = true;
+      videoRef.current.muted = true;
+    }
+  }, [project.videoSrc]);
 
   // Auto-pause video if card is scrolled off-screen or tab is hidden
   useEffect(() => {
@@ -33,6 +42,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       if (!entry.isIntersecting && videoRef.current) {
         videoRef.current.pause();
         setIsHovered(false);
+        setIsPlayingMobile(false);
       }
     }, { threshold: 0.1 });
 
@@ -41,6 +51,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
     const handleVisibilityChange = () => {
       if (document.hidden && videoRef.current) {
         videoRef.current.pause();
+        setIsPlayingMobile(false);
       }
     };
     document.addEventListener('visibilitychange', handleVisibilityChange);
@@ -69,7 +80,16 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   const handleMouseEnter = () => {
     setIsHovered(true);
     if (videoRef.current) {
-      videoRef.current.play().catch(e => console.log('Video playback error:', e));
+      videoRef.current.defaultMuted = true;
+      videoRef.current.muted = true;
+      try {
+        const playPromise = videoRef.current.play();
+        if (playPromise && typeof playPromise.catch === 'function') {
+          playPromise.catch(() => {});
+        }
+      } catch {
+        // Fallback for autoplay-restricted environments
+      }
     }
   };
 
@@ -77,8 +97,33 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
     setRotateX(0);
     setRotateY(0);
     setIsHovered(false);
-    if (videoRef.current) {
+    if (videoRef.current && !isPlayingMobile) {
       videoRef.current.pause();
+    }
+  };
+
+  const toggleMobileVideo = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!videoRef.current) return;
+    if (isPlayingMobile) {
+      videoRef.current.pause();
+      setIsPlayingMobile(false);
+    } else {
+      videoRef.current.defaultMuted = true;
+      videoRef.current.muted = true;
+      try {
+        const playPromise = videoRef.current.play();
+        if (playPromise && typeof playPromise.then === 'function') {
+          playPromise
+            .then(() => setIsPlayingMobile(true))
+            .catch(() => {});
+        } else {
+          setIsPlayingMobile(true);
+        }
+      } catch {
+        // Fallback
+      }
     }
   };
 
@@ -110,24 +155,24 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       </span>
 
       {/* Studio Chrome Window Header */}
-      <div className="col-span-12 flex items-center justify-between px-4 sm:px-5 py-2.5 border-b border-[#DEDAD3] dark:border-white/10 bg-[#FAFAFA] dark:bg-[#1C1C22] relative z-10">
-        <div className="flex items-center gap-2">
-          <div className="flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#EF4444]/80" />
-            <span className="w-2.5 h-2.5 rounded-full bg-[#F59E0B]/80" />
-            <span className="w-2.5 h-2.5 rounded-full bg-[#10B981]/80" />
+      <div className="col-span-12 flex items-center justify-between px-3 sm:px-5 py-2 sm:py-2.5 border-b border-[#DEDAD3] dark:border-white/10 bg-[#FAFAFA] dark:bg-[#1C1C22] relative z-10 gap-2">
+        <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
+          <div className="flex items-center gap-1 sm:gap-1.5 shrink-0">
+            <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-[#EF4444]/80" />
+            <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-[#F59E0B]/80" />
+            <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-[#10B981]/80" />
           </div>
-          <span className="text-[0.68rem] font-mono tracking-wider text-[#77746F] dark:text-[#A1A1AA] ml-1">
+          <span className="text-[0.62rem] sm:text-[0.68rem] font-mono tracking-wider text-[#77746F] dark:text-[#A1A1AA] ml-1 truncate max-w-[130px] sm:max-w-none">
             sys://qavironel/{project.slug}
           </span>
         </div>
 
-        <div className="flex items-center gap-2.5">
-          <span className="text-[0.65rem] font-mono font-semibold uppercase tracking-wider text-[#C7612E]">
+        <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0 text-right">
+          <span className="text-[0.6rem] sm:text-[0.65rem] font-mono font-semibold uppercase tracking-wider text-[#C7612E]">
             {project.category}
           </span>
           <span className="text-[#D1D5DB] text-xs">·</span>
-          <span className="text-[0.65rem] font-mono text-[#77746F]">
+          <span className="text-[0.6rem] sm:text-[0.65rem] font-mono text-[#77746F]">
             {project.year}
           </span>
         </div>
@@ -168,7 +213,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             />
           </AnimatePresence>
 
-          {/* Automatic Z-Axis Hover Video Playback System */}
+          {/* Automatic Hover (Desktop) & Touch-Toggle (Mobile) Video Playback */}
           {project.videoSrc && (
             <video
               ref={videoRef}
@@ -177,15 +222,28 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
               loop
               playsInline
               className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out pointer-events-none ${
-                isHovered ? 'opacity-100 z-10' : 'opacity-0 z-0'
+                isHovered || isPlayingMobile ? 'opacity-100 z-10' : 'opacity-0 z-0'
               }`}
             />
           )}
         </Link>
 
+        {/* Mobile / Touch Video Reel Trigger Pill */}
+        {project.videoSrc && (
+          <button
+            type="button"
+            onClick={toggleMobileVideo}
+            className="sm:hidden absolute top-3 right-3 z-30 px-2.5 py-1 rounded-full bg-black/75 backdrop-blur-md border border-white/20 text-white text-[0.62rem] font-mono flex items-center gap-1.5 shadow-lg active:scale-95 transition-all"
+            aria-label="Toggle preview video"
+          >
+            <span className={`w-1.5 h-1.5 rounded-full ${isPlayingMobile ? 'bg-[#10B981] animate-pulse' : 'bg-[#C7612E]'}`} />
+            <span>{isPlayingMobile ? 'Pause Reel' : 'Watch Reel'}</span>
+          </button>
+        )}
+
         {/* Interactive Gallery Switcher Chips for Featured Cards */}
         {isFeatured && project.gallery && project.gallery.length > 1 && (
-          <div className="absolute bottom-3 left-4 right-4 z-20 flex flex-wrap items-center justify-center gap-1.5 p-1 rounded-xl bg-black/60 backdrop-blur-md border border-white/10">
+          <div className="absolute bottom-3 left-2 right-2 sm:left-4 sm:right-4 z-20 flex items-center justify-center gap-1 sm:gap-1.5 p-1 rounded-xl bg-black/60 backdrop-blur-md border border-white/10 overflow-x-auto scrollbar-none">
             {project.gallery.slice(0, 4).map((img, idx) => (
               <button
                 key={idx}
@@ -196,7 +254,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                   playClickSound();
                   setActiveImageIndex(idx);
                 }}
-                className={`px-2.5 py-1 rounded-lg text-[0.65rem] font-mono transition-colors ${
+                className={`px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-lg text-[0.6rem] sm:text-[0.65rem] font-mono shrink-0 transition-colors ${
                   activeImageIndex === idx
                     ? 'bg-[#C7612E] text-white font-bold shadow-xs'
                     : 'bg-white/10 text-white/80 hover:bg-white/20'
@@ -211,21 +269,25 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
 
       {/* Content Container */}
       <div 
-        className={`p-6 sm:p-8 flex flex-col justify-between relative z-10 ${
+        className={`p-5 sm:p-8 flex flex-col justify-between relative z-10 ${
           isFeatured ? 'lg:col-span-5' : 'flex-1'
         }`}
       >
         <div>
-          <div className="flex items-center justify-between gap-4 text-xs font-mono text-[#77746F] dark:text-[#A1A1AA] mb-2">
-            <span className="uppercase tracking-wider text-[#C7612E] font-semibold">{project.eyebrow}</span>
-            <span className="text-[0.68rem] text-emerald-600 dark:text-emerald-400 font-semibold">{project.status}</span>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-4 text-xs font-mono text-[#77746F] dark:text-[#A1A1AA] mb-2">
+            <span className="uppercase tracking-wider text-[#C7612E] font-semibold text-[0.68rem] sm:text-xs">
+              {project.eyebrow}
+            </span>
+            <span className="text-[0.65rem] sm:text-[0.68rem] text-emerald-600 dark:text-emerald-400 font-semibold shrink-0">
+              {project.status}
+            </span>
           </div>
 
           {/* Microsoft Store Verified Badge for K.A.L.K.I. */}
           {project.slug === 'kalki' && (
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-400 text-[0.68rem] font-mono font-bold mb-3">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-400 text-[0.65rem] sm:text-[0.68rem] font-mono font-bold mb-3 max-w-full">
               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
-              <span>STORE VERIFIED · v1.0.4 · ID: 9P6HJPQZBGFQ</span>
+              <span className="truncate">STORE VERIFIED · v1.0.4 · ID: 9P6HJPQZBGFQ</span>
             </div>
           )}
 

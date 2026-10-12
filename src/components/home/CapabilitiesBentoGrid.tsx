@@ -33,7 +33,7 @@ export const CapabilitiesBentoGrid: React.FC = () => {
         </div>
 
         {/* 4-Tile Bento Grid */}
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 items-stretch">
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
           
           {/* TILE 1: APPLIED AI & REASONING (LARGE 2-COL / 2-ROW) */}
           <motion.div 
@@ -123,7 +123,7 @@ export const CapabilitiesBentoGrid: React.FC = () => {
           <motion.div 
             whileHover={{ y: -4 }}
             transition={{ duration: 0.2 }}
-            className="md:col-span-1 lg:col-span-2 p-5 sm:p-8 rounded-2xl bg-white dark:bg-[#151518] border border-[#DEDAD3] dark:border-white/10 flex flex-col justify-between shadow-xs hover:border-[#C7612E]/40 transition-colors"
+            className="md:col-span-2 lg:col-span-2 p-5 sm:p-8 rounded-2xl bg-white dark:bg-[#151518] border border-[#DEDAD3] dark:border-white/10 flex flex-col justify-between shadow-xs hover:border-[#C7612E]/40 transition-colors"
           >
             <div>
               <div className="flex items-center justify-between mb-4">

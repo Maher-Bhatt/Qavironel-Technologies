@@ -66,21 +66,42 @@ export const VideoShowreel: React.FC = () => {
   const userPausedRef = useRef<boolean>(false);
   const isInViewportRef = useRef<boolean>(false);
 
+  const safePlay = (video: HTMLVideoElement | null, onPlayed?: () => void) => {
+    if (!video) return;
+    try {
+      const promise = video.play();
+      if (promise && typeof promise.then === 'function') {
+        promise
+          .then(() => onPlayed?.())
+          .catch(() => {});
+      } else {
+        onPlayed?.();
+      }
+    } catch {
+      // Safe fallback for restricted playback
+    }
+  };
+
   // Viewport-aware playback: play when visible, pause when scrolled away (upside or downside)
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
 
+    if (videoRef.current) {
+      videoRef.current.defaultMuted = true;
+      videoRef.current.muted = isMuted;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
-        const isVisible = entry.isIntersecting && entry.intersectionRatio >= 0.2;
+        const isVisible = entry.isIntersecting && entry.intersectionRatio >= 0.1;
         isInViewportRef.current = isVisible;
 
         if (videoRef.current) {
           if (isVisible) {
             // Only auto-resume if user didn't explicitly pause and doesn't prefer reduced motion
             if (!userPausedRef.current && !prefersReducedMotion) {
-              videoRef.current.play().then(() => setIsPlaying(true)).catch(() => {});
+              safePlay(videoRef.current, () => setIsPlaying(true));
             }
           } else {
             // Offscreen: pause immediately to save GPU, battery, and memory bandwidth
@@ -89,14 +110,14 @@ export const VideoShowreel: React.FC = () => {
           }
         }
       },
-      { threshold: [0, 0.2, 0.5] }
+      { threshold: [0, 0.1, 0.5] }
     );
 
     observer.observe(container);
 
     // If already in viewport and allowed to play, trigger immediate start on channel change
     if (isInViewportRef.current && !userPausedRef.current && !prefersReducedMotion && videoRef.current) {
-      videoRef.current.play().then(() => setIsPlaying(true)).catch(() => {});
+      safePlay(videoRef.current, () => setIsPlaying(true));
     }
 
     // Pause when browser tab is hidden / minimized
@@ -106,7 +127,7 @@ export const VideoShowreel: React.FC = () => {
         videoRef.current.pause();
         setIsPlaying(false);
       } else if (isInViewportRef.current && !userPausedRef.current && !prefersReducedMotion) {
-        videoRef.current.play().then(() => setIsPlaying(true)).catch(() => {});
+        safePlay(videoRef.current, () => setIsPlaying(true));
       }
     };
 
@@ -116,7 +137,7 @@ export const VideoShowreel: React.FC = () => {
       observer.disconnect();
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
-  }, [prefersReducedMotion, activeChannelIdx]);
+  }, [prefersReducedMotion, activeChannelIdx, isMuted]);
 
   const togglePlay = () => {
     if (!videoRef.current) return;
@@ -126,7 +147,7 @@ export const VideoShowreel: React.FC = () => {
       setIsPlaying(false);
     } else {
       userPausedRef.current = false;
-      videoRef.current.play().then(() => setIsPlaying(true)).catch(() => {});
+      safePlay(videoRef.current, () => setIsPlaying(true));
     }
   };
 
@@ -171,7 +192,7 @@ export const VideoShowreel: React.FC = () => {
             onEnded={handleVideoEnded}
             onCanPlay={() => {
               if (isInViewportRef.current && !userPausedRef.current && !prefersReducedMotion) {
-                videoRef.current?.play().then(() => setIsPlaying(true)).catch(() => {});
+                safePlay(videoRef.current, () => setIsPlaying(true));
               }
             }}
             onPlay={() => setIsPlaying(true)}
@@ -284,7 +305,7 @@ export const VideoShowreel: React.FC = () => {
           </div>
 
           <div className="mt-2.5 px-2 py-1.5 flex items-center justify-between text-xs font-mono">
-            <span className="font-bold text-[#141414] dark:text-[#F6F3ED] truncate text-[0.75rem] max-w-[220px]">
+            <span className="font-bold text-[#141414] dark:text-[#F6F3ED] truncate text-[0.75rem] max-w-[170px] sm:max-w-[220px] min-w-0">
               {currentChannel.title}
             </span>
             <span className="text-[0.65rem] text-[#C7612E] font-semibold shrink-0">

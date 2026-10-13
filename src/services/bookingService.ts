@@ -9,6 +9,9 @@ export interface BookingFormData {
   topic: string;
   notes?: string;
   hpField?: string;
+  timezone?: string;
+  localTimeDisplay?: string;
+  studioTimeDisplay?: string;
 }
 
 export interface QuoteFormData {
@@ -46,6 +49,8 @@ export const STANDARD_SLOTS = [
   { time: '15:30', display: '03:30 PM' },
   { time: '17:00', display: '05:00 PM' },
   { time: '18:30', display: '06:30 PM' },
+  { time: '20:00', display: '08:00 PM' },
+  { time: '21:30', display: '09:30 PM' },
 ];
 
 /**
@@ -182,6 +187,10 @@ export function validateQuoteForm(data: QuoteFormData): {
 
 export function buildBookingMailto(data: BookingFormData): string {
   const subject = encodeURIComponent(`Architecture Call Request: ${data.name.trim()} (${data.topic})`);
+  const timeDetails = data.localTimeDisplay 
+    ? `• Local Time: ${data.localTimeDisplay} (${data.timezone || 'Local Timezone'})\n• Studio Time (IST): ${data.studioTimeDisplay || data.time}\n`
+    : `• Requested Time Slot: ${data.time}\n• Timezone: ${data.timezone || 'IST'}\n`;
+
   const body = encodeURIComponent(
     `Hello Maher & Qavironel Team,\n\n` +
     `I would like to schedule a 30-minute architecture review call.\n\n` +
@@ -189,7 +198,7 @@ export function buildBookingMailto(data: BookingFormData): string {
     `• Email: ${data.email.trim()}\n` +
     `• Organization: ${data.organization?.trim() || 'N/A'}\n` +
     `• Requested Date: ${data.date}\n` +
-    `• Requested Time Slot: ${data.time}\n` +
+    timeDetails +
     `• Topic: ${data.topic}\n` +
     `• Notes: ${data.notes?.trim() || 'None'}\n\n` +
     `Please send a Google Meet invite to confirm.\n\n` +
@@ -237,8 +246,9 @@ export async function submitBookingRequest(data: BookingFormData): Promise<{
 
   const endpoint = (typeof import.meta !== 'undefined' && import.meta.env?.VITE_BOOKING_ENDPOINT) || '/api/booking';
   const mailtoFallback = buildBookingMailto(data);
+  const timeNote = data.localTimeDisplay ? `${data.localTimeDisplay} (${data.timezone})` : data.time;
   const whatsappFallback = `${companyConfig.whatsappUrl}?text=${encodeURIComponent(
-    `Hi Maher, I would like to schedule an Architecture Call.\nName: ${data.name}\nDate: ${data.date} at ${data.time}\nTopic: ${data.topic}`
+    `Hi Maher, I would like to schedule an Architecture Call.\nName: ${data.name}\nDate: ${data.date} at ${timeNote}\nTopic: ${data.topic}`
   )}`;
 
   try {

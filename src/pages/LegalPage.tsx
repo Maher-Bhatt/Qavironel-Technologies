@@ -42,12 +42,18 @@ export const LegalPage: React.FC = () => {
   return (
     <>
       <SEO 
-        title={activeTab === 'terms' ? 'Terms of Service' : 'Privacy Policy'} 
+        title={activeTab === 'terms' ? 'Terms of Service & IP Governance' : 'Privacy Policy & AI Confidentiality'} 
         description={
           activeTab === 'terms' 
             ? 'Terms of Service, intellectual property handover policies, and engineering contract governance for Qavironel Technologies.' 
             : 'Privacy Policy, data governance standards, and applied AI confidentiality commitments for Qavironel Technologies.'
         }
+        structuredData={{
+          '@context': 'https://schema.org',
+          '@type': 'WebPage',
+          name: activeTab === 'terms' ? 'Terms of Service & IP Governance' : 'Privacy Policy & AI Confidentiality',
+          url: activeTab === 'terms' ? 'https://qavironel.com/terms' : 'https://qavironel.com/privacy'
+        }}
       />
       <div className="bg-[#FAFAFA] dark:bg-[#0A0A0A] text-[#0A0A0A] dark:text-[#FAFAFA] pt-28 sm:pt-36 pb-28 selection:bg-[#0A0A0A] selection:text-white dark:selection:bg-white dark:selection:text-black transition-colors duration-300 min-h-screen">
         <div className="max-w-[1400px] w-full mx-auto px-5 sm:px-8 lg:px-12">

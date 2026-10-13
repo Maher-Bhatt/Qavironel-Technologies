@@ -49,7 +49,7 @@ export const HomePage: React.FC = () => {
   const zteesProject = projects.find(p => p.slug === 'ztees') || projects[1];
   const cipProject = projects.find(p => p.slug === 'classic-infrastructure') || projects[2];
   const civicProject = projects.find(p => p.slug === 'civic-sathi') || projects[3];
-  const cyberProject = projects.find(p => p.slug === 'socialsafe') || projects[7];
+  const cyberProject = projects.find(p => p.slug === 'socialsafe') || projects[projects.length - 1] || projects[0];
 
   const disciplines = [
     {
@@ -93,8 +93,21 @@ export const HomePage: React.FC = () => {
   return (
     <>
       <SEO 
-        title="Qavironel Technologies — Ideas. Engineered." 
-        description="Independent digital product and software engineering studio. We design and build bespoke web platforms, software systems, and applied AI applications."
+        title="Digital Product & Applied AI Engineering Studio" 
+        description="Global engineering-led studio architecting bespoke web platforms, SaaS applications, and applied AI systems with sub-second execution speeds."
+        structuredData={{
+          '@context': 'https://schema.org',
+          '@graph': [
+            {
+              '@type': 'WebSite',
+              '@id': 'https://qavironel.com/#website',
+              url: 'https://qavironel.com/',
+              name: 'Qavironel Technologies',
+              description: 'Global engineering-led digital product and applied AI studio.',
+              publisher: { '@id': 'https://qavironel.com/#organization' }
+            }
+          ]
+        }}
       />
 
       <div className="bg-[#FAFAFA] dark:bg-[#0A0A0A] text-[#0A0A0A] dark:text-[#FAFAFA] transition-colors duration-300 selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black">

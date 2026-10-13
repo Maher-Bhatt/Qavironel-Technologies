@@ -159,7 +159,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         transformPerspective: 1000,
       }}
       transition={{ type: 'spring', stiffness: 320, damping: 26 }}
-      className={`group relative glass-card rounded-2xl transition-all duration-300 flex flex-col overflow-hidden text-black dark:text-white dark:text-white bg-white dark:bg-[#121212] border border-black/10 dark:border-white/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30 shadow-xs hover:shadow-xl hover:shadow-black/5 dark:hover:shadow-white/5 ${
+      className={`group relative glass-card rounded-2xl transition-all duration-300 flex flex-col overflow-hidden text-black dark:text-white bg-white dark:bg-[#121212] border border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30 shadow-xs hover:shadow-xl hover:shadow-black/5 dark:hover:shadow-white/5 ${
         isFeatured ? 'lg:grid lg:grid-cols-12 gap-0' : ''
       }`}
     >
@@ -196,8 +196,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       <div 
         className={`relative overflow-hidden z-10 flex items-center justify-center ${
           isFeatured 
-            ? 'lg:col-span-7 p-4 sm:p-6 lg:p-8 ' + (isDarkProject ? 'bg-black' : 'bg-white')
-            : 'p-4 sm:p-5 h-[260px] sm:h-[300px] ' + (isDarkProject ? 'bg-black' : 'bg-white')
+            ? 'lg:col-span-7 p-4 sm:p-6 lg:p-8 ' + (isDarkProject ? 'bg-black' : 'bg-white dark:bg-zinc-950')
+            : 'p-4 sm:p-5 h-[260px] sm:h-[300px] ' + (isDarkProject ? 'bg-black' : 'bg-white dark:bg-zinc-950')
         } border-b lg:border-b-0 border-black/10 dark:border-white/10`}
       >
         <Link 
@@ -358,10 +358,10 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         </div>
 
         {/* Action Link Footer */}
-        <div className="mt-8 pt-6 border-t border-black/10 dark:border-white/10 dark:border-white/10 flex items-center justify-between">
+        <div className="mt-8 pt-6 border-t border-black/10 dark:border-white/10 flex items-center justify-between">
           <Link 
             to={`/work/${project.slug}`} 
-            className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-black dark:text-white dark:text-white group-hover:text-black dark:group-hover:text-white transition-colors"
+            className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-black dark:text-white group-hover:text-black dark:group-hover:text-white transition-colors"
           >
             <span>Explore Case Study</span>
             <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1 text-black dark:text-white" />
@@ -372,7 +372,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
               href={project.links[0].url} 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-xs font-mono text-zinc-500 dark:text-[#A7B0A7] hover:text-black dark:hover:text-white inline-flex items-center gap-1 transition-colors font-medium"
+              className="text-xs font-mono text-zinc-500 dark:text-zinc-400 hover:text-black dark:hover:text-white inline-flex items-center gap-1 transition-colors font-medium"
               title={project.links[0].label}
             >
               <span>{project.links[0].type === 'github' ? 'GitHub' : 'Live'}</span>

@@ -28,11 +28,38 @@ export const AboutPage: React.FC = () => {
   return (
     <>
       <SEO 
-        title="About Us — Qavironel Technologies" 
-        description="Meet the founding engineering team behind Qavironel Technologies. Founder-led software engineering, digital craftsmanship, and applied AI."
+        title="About the Studio & Founding Team" 
+        description="Meet founders Maher Bhatt & Anurag Pandey. Founder-led engineering studio delivering resilient web architectures, local-first AI, and custom software."
+        structuredData={{
+          '@context': 'https://schema.org',
+          '@type': 'AboutPage',
+          mainEntity: {
+            '@type': 'Organization',
+            name: 'Qavironel Technologies',
+            url: 'https://qavironel.com',
+            founder: [
+              {
+                '@type': 'Person',
+                name: 'Maher Bhatt',
+                jobTitle: 'Founder & Lead Systems Engineer',
+                sameAs: [
+                  'https://github.com/Maher-Bhatt',
+                  'https://linkedin.com/in/maher-bhatt-206035362',
+                  'https://maherbhatt.me'
+                ]
+              },
+              {
+                '@type': 'Person',
+                name: 'Anurag Pandey',
+                jobTitle: 'Co-Founder & Backend Engineering Lead',
+                sameAs: []
+              }
+            ]
+          }
+        }}
       />
 
-      <div className="bg-[#F9F9F9] dark:bg-[#0A0A0A] text-[#0A0A0A] dark:text-[#F4F4F5] pt-32 sm:pt-40 pb-28 selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black transition-colors duration-300">
+      <div className="bg-[#FAFAFA] dark:bg-[#0A0A0A] text-[#0A0A0A] dark:text-[#F4F4F5] pt-32 sm:pt-40 pb-28 selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black transition-colors duration-300">
         <div className="max-w-[1700px] w-full mx-auto px-5 sm:px-8 lg:px-12">
           
           {/* ========================================================================= */}
@@ -339,8 +366,11 @@ export const AboutPage: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="pt-4 border-t border-black/10 dark:border-white/10 flex items-center gap-4 text-xs font-mono text-zinc-500 dark:text-zinc-400">
-                  <span>Server-Side Systems & High-Throughput APIs</span>
+                <div className="pt-4 border-t border-black/10 dark:border-white/10 flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
+                  <span className="text-zinc-500 dark:text-zinc-400">Distributed APIs & Server Architecture</span>
+                  <span className="px-2.5 py-1 rounded-full border border-black/10 dark:border-white/10 bg-white/80 dark:bg-zinc-900/80 text-[0.68rem] text-zinc-700 dark:text-zinc-300 font-medium">
+                    Backend Core
+                  </span>
                 </div>
               </div>
 
@@ -428,8 +458,11 @@ export const AboutPage: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="pt-4 border-t border-black/10 dark:border-white/10 flex items-center gap-4 text-xs font-mono text-zinc-500 dark:text-zinc-400">
-                  <span>Full-Stack Architecture & Reactive Web Systems</span>
+                <div className="pt-4 border-t border-black/10 dark:border-white/10 flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
+                  <span className="text-zinc-500 dark:text-zinc-400">Full-Stack Architecture & Reactive Systems</span>
+                  <span className="px-2.5 py-1 rounded-full border border-black/10 dark:border-white/10 bg-white/80 dark:bg-zinc-900/80 text-[0.68rem] text-zinc-700 dark:text-zinc-300 font-medium">
+                    Full-Stack Core
+                  </span>
                 </div>
               </div>
 

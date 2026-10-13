@@ -20,7 +20,7 @@ export const teamMembers: TeamMember[] = [
   {
     name: 'Maher Bhatt',
     role: 'Founder & Lead Systems Engineer',
-    bio: 'Guiding technical architecture, applied AI systems, and company direction at Qavironel Technologies. Specializing in high-performance web platforms, local-first LLM desktop runtimes, and defensive infrastructure, he partners directly with clients to turn complex technical challenges into resilient, production-ready software.',
+    bio: 'Maher guides technical architecture, applied AI systems, and company direction at Qavironel Technologies. Specializing in high-performance web platforms, local-first LLM desktop runtimes, and defensive infrastructure, he partners directly with clients to turn complex technical challenges into resilient, production-ready software.',
     credentials: [
       'Systems Architecture',
       'Applied AI & Local LLMs',
@@ -46,7 +46,7 @@ export const teamMembers: TeamMember[] = [
   {
     name: 'Anurag Pandey',
     role: 'Co-Founder & Backend Engineering Lead',
-    bio: 'Leading backend engineering and server-side architecture at Qavironel Technologies. He designs high-throughput APIs, database schemas, and robust data management layers that power our digital products, ensuring every backend service operates with strict security boundaries, maintainability, and end-to-end reliability.',
+    bio: 'Anurag leads backend engineering and server-side architecture at Qavironel Technologies. He designs high-throughput APIs, database schemas, and robust data management layers that power our digital products, ensuring every backend service operates with strict security boundaries, maintainability, and end-to-end reliability.',
     credentials: [
       'Backend Development',
       'API Integration',
@@ -56,7 +56,7 @@ export const teamMembers: TeamMember[] = [
     skills: [
       'Backend Architecture',
       'API Design & REST',
-      'Database Modelling',
+      'Database Modeling',
       'Authentication & Security',
       'Data Pipelines',
       'Service Reliability'
@@ -67,7 +67,7 @@ export const teamMembers: TeamMember[] = [
   {
     name: 'Jaydev Gohil',
     role: 'Core Member — Full-Stack & Systems Architecture',
-    bio: 'Spearheading interactive frontend systems, responsive web performance, and full-stack integration at Qavironel Technologies. He transforms complex client specifications into fluid, accessible digital products engineered with type-safe state architecture, clean component modularity, and sub-second rendering speeds.',
+    bio: 'Jaydev spearheads interactive frontend systems, responsive web performance, and full-stack integration at Qavironel Technologies. He transforms complex client specifications into fluid, accessible digital products engineered with type-safe state architecture, clean component modularity, and sub-second rendering speeds.',
     credentials: [
       'Full-Stack Architecture',
       'UI/UX Engineering',
@@ -89,7 +89,7 @@ export const teamMembers: TeamMember[] = [
   {
     name: 'Dhyani Parikh',
     role: 'Founding Team Member — Frontend & Operations',
-    bio: 'Contributing to frontend implementation and project coordination at Qavironel Technologies. She helps turn design concepts into responsive, reusable interface components while managing sprint tracking, meeting documentation, and team communications with a collaborative mindset and dedication to practical technical growth.',
+    bio: 'Dhyani contributes to frontend implementation and project coordination at Qavironel Technologies. She helps turn design concepts into responsive, reusable interface components while managing sprint tracking, meeting documentation, and team communications with a collaborative mindset and dedication to practical technical growth.',
     credentials: [
       'Frontend Development',
       'Responsive UI',
@@ -112,7 +112,7 @@ export const teamMembers: TeamMember[] = [
   {
     name: 'Aayushi Jasani',
     role: 'Founding Team Member — Frontend & Operations',
-    bio: 'Contributing to interface styling, frontend refinements, and project operations at Qavironel Technologies. She assists with UI component styling, layout testing, and cross-functional task coordination, bringing a collaborative spirit and focus on building clean, user-centered digital solutions.',
+    bio: 'Aayushi contributes to interface styling, frontend refinements, and project operations at Qavironel Technologies. She assists with UI component styling, layout testing, and cross-functional task coordination, bringing a collaborative spirit and focus on building clean, user-centered digital solutions.',
     credentials: [
       'UI Design & Styling',
       'Frontend Refinements',

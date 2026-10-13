@@ -76,28 +76,58 @@ export const CaseStudyPage: React.FC = () => {
   // Related projects
   const relatedProjects = projects.filter((p) => p.slug !== project.slug).slice(0, 2);
 
+  const truncatedSummary = project.summary.length > 155 
+    ? `${project.summary.slice(0, 152).trim()}...` 
+    : project.summary;
+
+  const resolvedHeroImage = project.slug === 'kalki' 
+    ? '/images/work/kalki-standby.webp' 
+    : project.heroImage;
+
   return (
     <article className="bg-[#FAFAFA] dark:bg-[#0A0A0A] text-black dark:text-white transition-colors duration-300 pt-28 sm:pt-36 pb-24 selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black">
       <SEO
         title={`${project.title} — Case Study`}
-        description={project.summary}
+        description={truncatedSummary}
         type="article"
-        image={project.heroImage}
+        image={resolvedHeroImage}
         url={`https://qavironel.com/work/${project.slug}`}
         keywords={project.technologies}
         structuredData={{
           '@context': 'https://schema.org',
-          '@type': 'CreativeWork',
-          name: project.title,
-          headline: project.eyebrow,
-          description: project.summary,
-          image: `https://qavironel.com${project.heroImage}`,
-          author: {
-            '@type': 'Organization',
-            name: 'Qavironel Technologies',
-            url: 'https://qavironel.com'
-          },
-          keywords: project.technologies.join(', ')
+          '@graph': [
+            {
+              '@type': ['CreativeWork', 'TechArticle'],
+              name: project.title,
+              headline: project.eyebrow,
+              description: project.summary,
+              image: `https://qavironel.com${resolvedHeroImage}`,
+              datePublished: `${project.year.split('–')[0]}-01-01`,
+              inLanguage: 'en-US',
+              author: {
+                '@type': 'Organization',
+                name: 'Qavironel Technologies',
+                url: 'https://qavironel.com'
+              },
+              publisher: {
+                '@type': 'Organization',
+                name: 'Qavironel Technologies',
+                logo: {
+                  '@type': 'ImageObject',
+                  url: 'https://qavironel.com/brand/qavironel-logo-square.png'
+                }
+              },
+              keywords: project.technologies.join(', ')
+            },
+            {
+              '@type': 'BreadcrumbList',
+              itemListElement: [
+                { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://qavironel.com/' },
+                { '@type': 'ListItem', position: 2, name: 'Work', item: 'https://qavironel.com/work' },
+                { '@type': 'ListItem', position: 3, name: project.title, item: `https://qavironel.com/work/${project.slug}` }
+              ]
+            }
+          ]
         }}
       />
       <div className="max-w-[1800px] w-full mx-auto px-5 sm:px-8 lg:px-12">
@@ -162,7 +192,7 @@ export const CaseStudyPage: React.FC = () => {
               <div className="flex items-center gap-2 min-w-0">
                 <span className="w-2 h-2 rounded-full bg-white animate-pulse shrink-0" />
                 <span className="text-white uppercase tracking-wider truncate">
-                  {activeMediaMode === 'video' ? 'System Showreel (1080p Full HD)' : 'Store Interface & Marketing Kit'}
+                  {activeMediaMode === 'video' ? 'System Showreel (1080p Full HD)' : 'Interface Architecture & System Still'}
                 </span>
               </div>
               <div className="flex items-center gap-1.5 bg-white/10 p-1 rounded-lg shrink-0 self-start sm:self-auto">
@@ -516,7 +546,7 @@ export const CaseStudyPage: React.FC = () => {
             <button
               type="button"
               onClick={() => openBookingModal('call')}
-              className="px-5 py-3 rounded-full bg-black dark:bg-white hover:bg-zinc-800 dark:hover:bg-zinc-200 text-white dark:text-black text-xs font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-2 shadow-xs w-full sm:w-auto"
+              className="btn-glass-shimmer hover:-translate-y-0.5 active:scale-[0.98] px-5 py-3 rounded-full bg-black dark:bg-white hover:bg-zinc-800 dark:hover:bg-zinc-200 text-white dark:text-black text-xs font-bold uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2 shadow-xs w-full sm:w-auto"
             >
               <Calendar className="w-3.5 h-3.5 text-white dark:text-black" />
               <span>Schedule Call (30m)</span>
@@ -524,12 +554,12 @@ export const CaseStudyPage: React.FC = () => {
             <button
               type="button"
               onClick={() => openBookingModal('quotation')}
-              className="px-5 py-3 rounded-full bg-white dark:bg-zinc-900 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-black dark:text-white text-xs font-bold uppercase tracking-wider transition-colors border border-black/10 dark:border-white/10 flex items-center justify-center gap-2 w-full sm:w-auto"
+              className="btn-glass-shimmer hover:-translate-y-0.5 active:scale-[0.98] px-5 py-3 rounded-full bg-white dark:bg-zinc-900 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-black dark:text-white text-xs font-bold uppercase tracking-wider transition-all duration-300 border border-black/10 dark:border-white/10 flex items-center justify-center gap-2 w-full sm:w-auto"
             >
               <FileText className="w-3.5 h-3.5 text-black dark:text-white" />
               <span>Get Quote</span>
             </button>
-            <Button to="/contact" variant="primary" size="md" showArrow className="w-full sm:w-auto justify-center">
+            <Button to="/contact" variant="primary" size="md" showArrow className="btn-glass-shimmer hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-300 w-full sm:w-auto justify-center">
               Let's Talk
             </Button>
           </div>

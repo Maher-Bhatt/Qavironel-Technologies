@@ -26,15 +26,15 @@ export const VideoShowreel: React.FC = () => {
 
   const channels: VideoChannel[] = [
     {
-      id: 'ztees-commerce',
+      id: 'engineering-craftsmanship',
       channelNum: 'CH 01',
-      title: 'Ztees Streetwear Commerce Platform',
-      subtitle: 'Mobile-first editorial storefront, automated WhatsApp ordering & sub-second LCP',
-      category: 'COMMERCE PLATFORM',
-      src: '/videos/project-reel.mp4',
-      poster: '/images/projects/ztees-cover.jpg',
+      title: 'Engineering Craftsmanship & Momentum',
+      subtitle: 'Design-led execution, micro-interactions & hardware synergy',
+      category: 'STUDIO CRAFT',
+      src: '/videos/tech-atmosphere.mp4',
+      poster: '/videos/tech-atmosphere-poster.webp',
       duration: '0:15',
-      tags: ['React 19', 'WhatsApp API', 'Sub-Second LCP', 'UPI Checkout'],
+      tags: ['Clean Architecture', 'Type-Safe', 'Global Studio'],
     },
     {
       id: 'platform-build',
@@ -48,26 +48,15 @@ export const VideoShowreel: React.FC = () => {
       tags: ['React 19', 'TypeScript', 'FastAPI', 'High-Performance'],
     },
     {
-      id: 'project-reel',
+      id: 'technical-hud',
       channelNum: 'CH 03',
-      title: 'Tactical HUD & Spatial Computer Vision',
+      title: 'Technical HUD & Spatial Computer Vision',
       subtitle: 'Real-time object segmentation, token streaming & UI interaction',
       category: 'COMPUTER VISION',
       src: '/videos/project-reel.mp4',
       poster: '/videos/project-reel-poster.webp',
       duration: '0:15',
       tags: ['OpenCV', 'YOLOv8', 'Spatial Tracking', 'Local Inference'],
-    },
-    {
-      id: 'studio-atmosphere',
-      channelNum: 'CH 04',
-      title: 'Engineering Craftsmanship & Momentum',
-      subtitle: 'Design-led execution, micro-interactions & hardware synergy',
-      category: 'STUDIO CRAFT',
-      src: '/videos/tech-atmosphere.mp4',
-      poster: '/videos/tech-atmosphere-poster.webp',
-      duration: '0:15',
-      tags: ['Clean Architecture', 'Type-Safe', 'Global Studio'],
     },
   ];
 
@@ -188,7 +177,7 @@ export const VideoShowreel: React.FC = () => {
   return (
     <div ref={containerRef} className="w-full relative">
       {/* Video Frame Container */}
-      <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden border border-[#E5E7EB] bg-[#0A0A0A] shadow-[0_24px_60px_rgba(0,0,0,0.08)] group">
+      <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden border border-black/10 dark:border-white/10 bg-[#0A0A0A] shadow-[0_24px_60px_rgba(0,0,0,0.08)] group">
         {/* HTML5 Video Player */}
         <div className="relative aspect-[16/9] sm:aspect-[21/9] w-full overflow-hidden bg-[#0A0A0A]">
           <video key={currentChannel.id}
@@ -300,13 +289,13 @@ export const VideoShowreel: React.FC = () => {
                   key={chan.id}
                   type="button"
                   onClick={() => switchChannel(idx)}
-                  className={`flex-1 py-2 px-1.5 rounded-lg text-center transition-all duration-200 cursor-pointer ${
+                  className={`flex-1 py-2.5 px-2 min-h-[44px] rounded-lg text-center transition-all duration-200 active:scale-95 cursor-pointer flex items-center justify-center ${
                     isSelected
                       ? 'bg-black dark:bg-white text-white dark:text-black shadow-xs font-bold'
                       : 'text-zinc-500 dark:text-zinc-400 hover:text-black dark:hover:text-white'
                   }`}
                 >
-                  <div className="flex items-center justify-center gap-1 text-[0.68rem] font-mono font-bold">
+                  <div className="flex items-center justify-center gap-1.5 text-[0.72rem] font-mono font-bold">
                     {isSelected && <span className="w-1.5 h-1.5 rounded-full bg-white dark:bg-black animate-pulse" />}
                     <span>{chan.channelNum}</span>
                   </div>
@@ -316,7 +305,7 @@ export const VideoShowreel: React.FC = () => {
           </div>
 
           <div className="mt-2.5 px-2 py-1.5 flex items-center justify-between text-xs font-mono">
-            <span className="font-bold text-black dark:text-white truncate text-[0.75rem] max-w-[170px] sm:max-w-[220px] min-w-0">
+            <span className="font-bold text-black dark:text-white truncate text-[0.75rem] flex-1 mr-2 min-w-0">
               {currentChannel.title}
             </span>
             <span className="text-[0.65rem] text-black dark:text-white font-bold shrink-0">
@@ -325,8 +314,8 @@ export const VideoShowreel: React.FC = () => {
           </div>
         </div>
 
-        {/* 2. TABLET & DESKTOP 4-COLUMN ARCHITECTURAL MATRIX (sm+) */}
-        <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-3 p-4 sm:p-5 bg-white dark:bg-[#121212] border-t border-black/10 dark:border-white/10">
+        {/* 2. TABLET & DESKTOP 3-COLUMN ARCHITECTURAL MATRIX (sm+) */}
+        <div className="hidden sm:grid sm:grid-cols-3 gap-3 p-4 sm:p-5 bg-white dark:bg-[#121212] border-t border-black/10 dark:border-white/10">
           {channels.map((chan, idx) => {
             const isSelected = activeChannelIdx === idx;
             return (

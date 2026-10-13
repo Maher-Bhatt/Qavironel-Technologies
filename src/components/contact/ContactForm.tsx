@@ -5,12 +5,11 @@ import {
   AlertCircle, 
   Mail, 
   MessageSquare, 
-  Sparkles, 
   Layers, 
-  DollarSign, 
   Clock, 
   Check,
-  ArrowRight
+  ArrowRight,
+  ShieldCheck
 } from 'lucide-react';
 import { playSuccessSound, playErrorSound } from '../../utils/soundEffects';
 import { 
@@ -32,7 +31,7 @@ const SCOPE_OPTIONS = [
     id: 'web', 
     label: 'Web Platform', 
     value: 'High-Impact Custom Web Platform',
-    badge: 'React 19 / Vite'
+    badge: 'React 19 / Fast LCP'
   },
   { 
     id: 'saas', 
@@ -47,31 +46,17 @@ const SCOPE_OPTIONS = [
     badge: 'Local LLMs & Agents'
   },
   { 
-    id: 'design', 
-    label: 'Design System', 
-    value: 'Brand Identity, UX Design & Systems',
-    badge: 'Tokens & UI'
-  },
-  { 
     id: 'audit', 
     label: 'Architecture & Audit', 
     value: 'Performance Engineering & Architecture Audit',
-    badge: 'OWASP & Core Vitals'
+    badge: 'Scalability & Security'
   },
 ];
 
-const COLLABORATION_MODELS = [
-  { label: 'Rapid MVP Sprint', value: 'Rapid MVP Sprint (1–2 Wks)', detail: 'Fast-track product prototype' },
-  { label: 'Dedicated Sprint', value: 'Dedicated Feature Sprint', detail: 'Targeted architecture & features' },
-  { label: 'Full Product Lifecycle', value: 'Full Production Build', detail: 'End-to-end design & engineering' },
-  { label: 'Architecture & Audit', value: 'Advisory & Architecture', detail: 'Code review, scalability & security' },
-];
-
 const TIMELINE_OPTIONS = [
-  { label: 'Immediate (2–4 Wks)', value: 'Immediate (Next 2-4 Weeks)' },
+  { label: 'Next 2–4 Weeks (Urgent)', value: 'Immediate (Next 2-4 Weeks)' },
   { label: '1–2 Months', value: '1-2 Months (Active Product Sprint)' },
-  { label: '3+ Months', value: '3+ Months (Strategic Roadmap)' },
-  { label: 'Milestone Driven', value: 'Flexible / Milestone-Driven' },
+  { label: 'Flexible / Strategic', value: 'Flexible / Milestone-Driven' },
 ];
 
 export const ContactForm: React.FC<ContactFormProps> = () => {
@@ -83,7 +68,7 @@ export const ContactForm: React.FC<ContactFormProps> = () => {
     organization: '',
     projectType: 'High-Impact Custom Web Platform',
     timeline: 'Immediate (Next 2-4 Weeks)',
-    engagementModel: 'Rapid MVP Sprint (1–2 Wks)',
+    engagementModel: 'Direct Founder Sprint',
     details: '',
     hpField: '',
   });
@@ -139,7 +124,7 @@ export const ContactForm: React.FC<ContactFormProps> = () => {
 
     try {
       const result = await submitContactInquiry(formData, mountTimestampRef.current);
-
+      
       if (result.success) {
         try {
           playSuccessSound();
@@ -150,19 +135,12 @@ export const ContactForm: React.FC<ContactFormProps> = () => {
           type: 'success',
           text: result.message,
         });
-
-        // Reset inputs on confirmed success
-        setFormData({
-          name: '',
-          email: '',
-          organization: '',
-          projectType: 'High-Impact Custom Web Platform',
-          timeline: 'Immediate (Next 2-4 Weeks)',
-          engagementModel: 'Full-Cycle Product Architecture & Build',
-          budget: '$2,500 – $5,000',
+        // Reset form details while keeping contact identity for convenience
+        setFormData((prev) => ({
+          ...prev,
           details: '',
-          hpField: '',
-        });
+          organization: '',
+        }));
       } else {
         try {
           playErrorSound();
@@ -194,11 +172,11 @@ export const ContactForm: React.FC<ContactFormProps> = () => {
   };
 
   const whatsappDirectUrl = `${companyConfig.whatsappUrl}?text=${encodeURIComponent(
-    `Hello Maher & Anurag, I would like to discuss a project.\nName: ${formData.name || 'Prospect'}\nDiscipline: ${formData.projectType}\nEngagement Scope: ${formData.engagementModel}`
+    `Hello Maher & Anurag, I would like to discuss a project.\nName: ${formData.name || 'Prospect'}\nDiscipline: ${formData.projectType}\nTimeline: ${formData.timeline}`
   )}`;
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="space-y-8">
+    <form onSubmit={handleSubmit} noValidate className="space-y-6">
       {/* Honeypot spam trap */}
       <div 
         aria-hidden="true" 
@@ -221,13 +199,13 @@ export const ContactForm: React.FC<ContactFormProps> = () => {
         <div
           role="alert"
           aria-live="polite"
-          className={`p-6 rounded-2xl border transition-all ${
+          className={`p-5 rounded-2xl border transition-all ${
             statusMessage.type === 'success'
               ? 'bg-zinc-100 dark:bg-zinc-900 border-black/15 dark:border-white/20 text-black dark:text-white'
               : 'bg-red-50 dark:bg-red-950/40 border-red-200 dark:border-red-900/60 text-red-900 dark:text-red-200'
           }`}
         >
-          <div className="flex items-start gap-3.5">
+          <div className="flex items-start gap-3">
             {statusMessage.type === 'success' ? (
               <CheckCircle2 className="w-5 h-5 text-black dark:text-white shrink-0 mt-0.5" />
             ) : (
@@ -244,11 +222,11 @@ export const ContactForm: React.FC<ContactFormProps> = () => {
           </div>
 
           {statusMessage.type === 'error' && (statusMessage.mailtoFallback || statusMessage.whatsappFallback) && (
-            <div className="flex flex-wrap gap-3 pt-3.5 mt-3 border-t border-red-200/60 dark:border-red-900/40">
+            <div className="flex flex-wrap gap-2.5 pt-3 mt-3 border-t border-red-200/60 dark:border-red-900/40">
               {statusMessage.mailtoFallback && (
                 <a
                   href={statusMessage.mailtoFallback}
-                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-black dark:bg-white text-white dark:text-black text-xs font-mono font-bold uppercase tracking-wider hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors shadow-xs cursor-pointer"
+                  className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-black dark:bg-white text-white dark:text-black text-xs font-mono font-bold uppercase tracking-wider hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors shadow-xs cursor-pointer"
                 >
                   <Mail className="w-3.5 h-3.5" />
                   <span>Send via Email Client</span>
@@ -259,7 +237,7 @@ export const ContactForm: React.FC<ContactFormProps> = () => {
                   href={statusMessage.whatsappFallback}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-zinc-900 dark:bg-zinc-100 text-white dark:text-black text-xs font-mono font-bold uppercase tracking-wider hover:bg-zinc-800 dark:hover:bg-white transition-colors shadow-xs cursor-pointer"
+                  className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-zinc-900 dark:bg-zinc-100 text-white dark:text-black text-xs font-mono font-bold uppercase tracking-wider hover:bg-zinc-800 dark:hover:bg-white transition-colors shadow-xs cursor-pointer"
                 >
                   <MessageSquare className="w-3.5 h-3.5" />
                   <span>Send via WhatsApp</span>
@@ -270,19 +248,14 @@ export const ContactForm: React.FC<ContactFormProps> = () => {
         </div>
       )}
 
-      {/* ========================================================================= */}
-      {/* 01. INTERACTIVE SCOPE PILLS                                               */}
-      {/* ========================================================================= */}
-      <div className="space-y-3">
-        <div className="flex items-center justify-between">
-          <label className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-400 flex items-center gap-2">
-            <Layers className="w-3.5 h-3.5 text-black dark:text-white" />
-            <span>01. Project Scope & Architecture Focus</span>
-          </label>
-          <span className="text-[0.68rem] font-mono text-zinc-400 dark:text-zinc-500">Select Primary Objective</span>
-        </div>
+      {/* 01. PROJECT DISCIPLINE SELECTOR */}
+      <div className="space-y-2.5">
+        <label className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-400 flex items-center gap-2">
+          <Layers className="w-3.5 h-3.5 text-black dark:text-white" />
+          <span>Project Objective</span>
+        </label>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
           {SCOPE_OPTIONS.map((scope) => {
             const isSelected = formData.projectType === scope.value;
             return (
@@ -290,23 +263,23 @@ export const ContactForm: React.FC<ContactFormProps> = () => {
                 key={scope.id}
                 type="button"
                 onClick={() => handleChange('projectType', scope.value)}
-                className={`p-3.5 rounded-xl border text-left transition-all duration-200 flex flex-col justify-between cursor-pointer ${
+                className={`p-3 rounded-xl border text-left transition-all duration-200 flex flex-col justify-between cursor-pointer ${
                   isSelected
-                    ? 'bg-black text-white dark:bg-white dark:text-black border-black dark:border-white shadow-md scale-[1.01]'
+                    ? 'bg-black text-white dark:bg-white dark:text-black border-black dark:border-white shadow-sm'
                     : 'bg-zinc-50 dark:bg-zinc-900/60 text-zinc-700 dark:text-zinc-300 border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30 hover:bg-zinc-100 dark:hover:bg-zinc-900'
                 }`}
               >
-                <div className="flex items-center justify-between w-full mb-1">
-                  <span className="font-display font-bold text-sm tracking-tight">
+                <div className="flex items-center justify-between w-full mb-0.5">
+                  <span className="font-display font-bold text-xs sm:text-sm tracking-tight">
                     {scope.label}
                   </span>
                   {isSelected ? (
-                    <Check className="w-4 h-4 shrink-0 text-white dark:text-black" />
+                    <Check className="w-3.5 h-3.5 shrink-0 text-white dark:text-black" />
                   ) : (
-                    <span className="w-2 h-2 rounded-full bg-zinc-300 dark:bg-zinc-700" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-zinc-300 dark:bg-zinc-700" />
                   )}
                 </div>
-                <span className={`text-[0.68rem] font-mono ${isSelected ? 'text-zinc-300 dark:text-zinc-600' : 'text-zinc-500 dark:text-zinc-400'}`}>
+                <span className={`text-[0.65rem] font-mono ${isSelected ? 'text-zinc-300 dark:text-zinc-600' : 'text-zinc-500 dark:text-zinc-400'}`}>
                   {scope.badge}
                 </span>
               </button>
@@ -315,84 +288,12 @@ export const ContactForm: React.FC<ContactFormProps> = () => {
         </div>
       </div>
 
-      {/* ========================================================================= */}
-      {/* 02. COLLABORATION MODEL & ENGAGEMENT SCOPE                                */}
-      {/* ========================================================================= */}
-      <div className="space-y-3">
-        <div className="flex items-center justify-between">
-          <label className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-400 flex items-center gap-2">
-            <Sparkles className="w-3.5 h-3.5 text-black dark:text-white" />
-            <span>02. Collaboration Model & Scope</span>
-          </label>
-          <span className="text-[0.68rem] font-mono text-zinc-400 dark:text-zinc-500">Flexible Engagement</span>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5">
-          {COLLABORATION_MODELS.map((m) => {
-            const isSelected = formData.engagementModel === m.value;
-            return (
-              <button
-                key={m.value}
-                type="button"
-                onClick={() => handleChange('engagementModel', m.value)}
-                className={`p-3.5 rounded-xl border text-center transition-all duration-200 flex flex-col items-center justify-center cursor-pointer ${
-                  isSelected
-                    ? 'bg-black text-white dark:bg-white dark:text-black border-black dark:border-white shadow-sm'
-                    : 'bg-zinc-50 dark:bg-zinc-900/60 text-zinc-700 dark:text-zinc-300 border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30 hover:bg-zinc-100 dark:hover:bg-zinc-900'
-                }`}
-              >
-                <span className="font-mono font-bold text-xs sm:text-sm tracking-tight mb-0.5">
-                  {m.label}
-                </span>
-                <span className={`text-[0.62rem] font-mono ${isSelected ? 'text-zinc-300 dark:text-zinc-600' : 'text-zinc-400 dark:text-zinc-500'}`}>
-                  {m.detail}
-                </span>
-              </button>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* ========================================================================= */}
-      {/* 03. TARGET TIMELINE                                                       */}
-      {/* ========================================================================= */}
-      <div className="space-y-3">
-        <label className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-400 flex items-center gap-2">
-          <Clock className="w-3.5 h-3.5 text-black dark:text-white" />
-          <span>03. Desired Shipping Cadence</span>
-        </label>
-
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-          {TIMELINE_OPTIONS.map((t) => {
-            const isSelected = formData.timeline === t.value;
-            return (
-              <button
-                key={t.value}
-                type="button"
-                onClick={() => handleChange('timeline', t.value)}
-                className={`py-2.5 px-3 rounded-xl border text-center transition-all duration-200 cursor-pointer ${
-                  isSelected
-                    ? 'bg-black text-white dark:bg-white dark:text-black border-black dark:border-white shadow-xs'
-                    : 'bg-zinc-50 dark:bg-zinc-900/60 text-zinc-700 dark:text-zinc-300 border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30 hover:bg-zinc-100 dark:hover:bg-zinc-900'
-                }`}
-              >
-                <span className="text-xs font-mono font-semibold">
-                  {t.label}
-                </span>
-              </button>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* ========================================================================= */}
-      {/* 04. CONTACT CREDENTIALS (NAME, EMAIL, ORGANIZATION)                       */}
-      {/* ========================================================================= */}
-      <div className="space-y-4 pt-2 border-t border-black/10 dark:border-white/10">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+      {/* 02. CONTACT CREDENTIALS (NAME, EMAIL, ENTITY) */}
+      <div className="space-y-3.5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label htmlFor="contact-name" className="block text-xs font-mono font-bold uppercase tracking-wider mb-2 text-black dark:text-white">
-              Your Name <span className="text-zinc-400 dark:text-zinc-500" aria-hidden="true">*</span>
+            <label htmlFor="contact-name" className="block text-xs font-mono font-bold uppercase tracking-wider mb-1.5 text-black dark:text-white">
+              Your Name <span className="text-zinc-400" aria-hidden="true">*</span>
             </label>
             <input
               id="contact-name"
@@ -405,20 +306,20 @@ export const ContactForm: React.FC<ContactFormProps> = () => {
               placeholder="e.g. Elena Rostova"
               aria-invalid={!!errors.name}
               aria-describedby={errors.name ? 'contact-error-name' : undefined}
-              className={`w-full px-4 py-3.5 rounded-xl text-sm transition-all bg-zinc-50 dark:bg-zinc-900/90 border text-black dark:text-white placeholder-zinc-400 focus:outline-hidden focus:border-black dark:focus:border-white focus:ring-1 focus:ring-black dark:focus:ring-white ${
+              className={`w-full px-3.5 py-3 rounded-xl text-sm transition-all bg-zinc-50 dark:bg-zinc-900/90 border text-black dark:text-white placeholder-zinc-400 focus:outline-hidden focus:border-black dark:focus:border-white focus:ring-1 focus:ring-black dark:focus:ring-white ${
                 errors.name ? 'border-red-500' : 'border-black/10 dark:border-white/10'
               }`}
             />
             {errors.name && (
-              <p id="contact-error-name" role="alert" className="mt-1.5 text-xs text-red-600 dark:text-red-400 font-sans">
+              <p id="contact-error-name" role="alert" className="mt-1 text-xs text-red-600 dark:text-red-400 font-sans">
                 {errors.name}
               </p>
             )}
           </div>
 
           <div>
-            <label htmlFor="contact-email" className="block text-xs font-mono font-bold uppercase tracking-wider mb-2 text-black dark:text-white">
-              Work Email <span className="text-zinc-400 dark:text-zinc-500" aria-hidden="true">*</span>
+            <label htmlFor="contact-email" className="block text-xs font-mono font-bold uppercase tracking-wider mb-1.5 text-black dark:text-white">
+              Work Email <span className="text-zinc-400" aria-hidden="true">*</span>
             </label>
             <input
               id="contact-email"
@@ -431,12 +332,12 @@ export const ContactForm: React.FC<ContactFormProps> = () => {
               placeholder="elena@company.com"
               aria-invalid={!!errors.email}
               aria-describedby={errors.email ? 'contact-error-email' : undefined}
-              className={`w-full px-4 py-3.5 rounded-xl text-sm transition-all bg-zinc-50 dark:bg-zinc-900/90 border text-black dark:text-white placeholder-zinc-400 focus:outline-hidden focus:border-black dark:focus:border-white focus:ring-1 focus:ring-black dark:focus:ring-white ${
+              className={`w-full px-3.5 py-3 rounded-xl text-sm transition-all bg-zinc-50 dark:bg-zinc-900/90 border text-black dark:text-white placeholder-zinc-400 focus:outline-hidden focus:border-black dark:focus:border-white focus:ring-1 focus:ring-black dark:focus:ring-white ${
                 errors.email ? 'border-red-500' : 'border-black/10 dark:border-white/10'
               }`}
             />
             {errors.email && (
-              <p id="contact-error-email" role="alert" className="mt-1.5 text-xs text-red-600 dark:text-red-400 font-sans">
+              <p id="contact-error-email" role="alert" className="mt-1 text-xs text-red-600 dark:text-red-400 font-sans">
                 {errors.email}
               </p>
             )}
@@ -444,8 +345,8 @@ export const ContactForm: React.FC<ContactFormProps> = () => {
         </div>
 
         <div>
-          <label htmlFor="contact-org" className="block text-xs font-mono font-bold uppercase tracking-wider mb-2 text-black dark:text-white">
-            Company / Startup / Entity <span className="text-[0.68rem] text-zinc-400 font-normal lowercase">(optional)</span>
+          <label htmlFor="contact-org" className="block text-xs font-mono font-bold uppercase tracking-wider mb-1.5 text-black dark:text-white">
+            Company / Startup <span className="text-[0.68rem] text-zinc-400 font-normal lowercase">(optional)</span>
           </label>
           <input
             id="contact-org"
@@ -454,72 +355,77 @@ export const ContactForm: React.FC<ContactFormProps> = () => {
             disabled={isSubmitting}
             value={formData.organization}
             onChange={(e) => handleChange('organization', e.target.value)}
-            placeholder="e.g. Acme Health / Stealth AI Lab"
-            className="w-full px-4 py-3.5 rounded-xl text-sm transition-all bg-zinc-50 dark:bg-zinc-900/90 border border-black/10 dark:border-white/10 text-black dark:text-white placeholder-zinc-400 focus:outline-hidden focus:border-black dark:focus:border-white focus:ring-1 focus:ring-black dark:focus:ring-white"
+            placeholder="e.g. Acme Health or Stealth AI Lab"
+            className="w-full px-3.5 py-3 rounded-xl text-sm transition-all bg-zinc-50 dark:bg-zinc-900/90 border border-black/10 dark:border-white/10 text-black dark:text-white placeholder-zinc-400 focus:outline-hidden focus:border-black dark:focus:border-white focus:ring-1 focus:ring-black dark:focus:ring-white"
           />
         </div>
       </div>
 
-      {/* ========================================================================= */}
-      {/* 05. DETAILED PROJECT BRIEF & OBJECTIVES                                   */}
-      {/* ========================================================================= */}
+      {/* 03. TARGET TIMELINE SELECTOR */}
+      <div className="space-y-2">
+        <label className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-400 flex items-center gap-2">
+          <Clock className="w-3.5 h-3.5 text-black dark:text-white" />
+          <span>Timeline Target</span>
+        </label>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+          {TIMELINE_OPTIONS.map((t) => {
+            const isSelected = formData.timeline === t.value;
+            return (
+              <button
+                key={t.value}
+                type="button"
+                onClick={() => handleChange('timeline', t.value)}
+                className={`py-2 px-3 rounded-xl border text-center transition-all duration-200 cursor-pointer ${
+                  isSelected
+                    ? 'bg-black text-white dark:bg-white dark:text-black border-black dark:border-white shadow-2xs'
+                    : 'bg-zinc-50 dark:bg-zinc-900/60 text-zinc-700 dark:text-zinc-300 border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30 hover:bg-zinc-100 dark:hover:bg-zinc-900'
+                }`}
+              >
+                <span className="text-xs font-mono font-semibold">
+                  {t.label}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* 04. PROJECT BRIEF & OBJECTIVES */}
       <div>
-        <div className="flex items-center justify-between mb-2">
+        <div className="flex items-center justify-between mb-1.5">
           <label htmlFor="contact-details" className="block text-xs font-mono font-bold uppercase tracking-wider text-black dark:text-white">
-            Project Brief & Architectural Goals <span className="text-zinc-400 dark:text-zinc-500" aria-hidden="true">*</span>
+            Project Overview & Goals <span className="text-zinc-400" aria-hidden="true">*</span>
           </label>
-          <span className="text-[0.68rem] font-mono text-zinc-400 dark:text-zinc-500">Min 10 characters</span>
+          <span className="text-[0.68rem] font-mono text-zinc-400">Min 10 characters</span>
         </div>
         <textarea
           id="contact-details"
-          rows={5}
+          rows={4}
           required
           disabled={isSubmitting}
           value={formData.details}
           onChange={(e) => handleChange('details', e.target.value)}
-          placeholder="Describe your vision, target deliverables, reference platforms, and any core architectural constraints (e.g. on-device LLMs, sub-second latency, security requirements)..."
+          placeholder="Tell us what you're building, target outcomes, or any technical constraints..."
           aria-invalid={!!errors.details}
           aria-describedby={errors.details ? 'contact-error-details' : undefined}
-          className={`w-full px-4 py-3.5 rounded-xl text-sm transition-all bg-zinc-50 dark:bg-zinc-900/90 border text-black dark:text-white placeholder-zinc-400 focus:outline-hidden focus:border-black dark:focus:border-white focus:ring-1 focus:ring-black dark:focus:ring-white leading-relaxed ${
+          className={`w-full px-3.5 py-3 rounded-xl text-sm transition-all bg-zinc-50 dark:bg-zinc-900/90 border text-black dark:text-white placeholder-zinc-400 focus:outline-hidden focus:border-black dark:focus:border-white focus:ring-1 focus:ring-black dark:focus:ring-white leading-relaxed ${
             errors.details ? 'border-red-500' : 'border-black/10 dark:border-white/10'
           }`}
         />
         {errors.details && (
-          <p id="contact-error-details" role="alert" className="mt-1.5 text-xs text-red-600 dark:text-red-400 font-sans">
+          <p id="contact-error-details" role="alert" className="mt-1 text-xs text-red-600 dark:text-red-400 font-sans">
             {errors.details}
           </p>
         )}
       </div>
 
-      {/* Real-Time Monospace Intake Manifest Widget */}
-      <div className="p-4 rounded-2xl bg-zinc-950 text-zinc-300 border border-black/10 dark:border-white/15 space-y-2 select-none shadow-sm">
-        <div className="flex items-center justify-between pb-2 border-b border-white/10 text-white font-mono font-bold text-xs">
-          <span className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            LIVE INTAKE SPECIFICATION MANIFEST
-          </span>
-          <span className="text-zinc-500 text-[0.65rem] tracking-wider">QAVIRONEL PROTOCOL v2.6</span>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1.5 pt-1 text-[0.72rem] font-mono">
-          <div><span className="text-zinc-500">DISCIPLINE:</span> <span className="text-white font-semibold">{formData.projectType.split('/')[0]}</span></div>
-          <div><span className="text-zinc-500">ENGAGEMENT:</span> <span className="text-white font-semibold">{formData.engagementModel.split('(')[0]}</span></div>
-          <div><span className="text-zinc-500">TIMELINE:</span> <span className="text-white font-semibold">{formData.timeline.split('(')[0]}</span></div>
-          <div><span className="text-zinc-500">CONFIDENTIALITY:</span> <span className="text-emerald-400 font-semibold">100% MUTUAL NDA</span></div>
-        </div>
-        <div className="pt-1.5 border-t border-white/5 text-[0.65rem] font-mono text-zinc-500 flex items-center justify-between">
-          <span>ROUTED TO: MAHER BHATT & ANURAG PANDEY</span>
-          <span className="text-zinc-300 font-semibold">VERIFIED SLA: &lt; 12 HOURS</span>
-        </div>
-      </div>
-
-      {/* ========================================================================= */}
-      {/* 06. SUBMIT BUTTON & DIRECT ALTERNATIVES                                   */}
-      {/* ========================================================================= */}
-      <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-5 border-t border-black/10 dark:border-white/10">
+      {/* 05. PRIVACY NOTICE & SUBMIT BUTTON */}
+      <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-black/10 dark:border-white/10">
         <button
           type="submit"
           disabled={isSubmitting}
-          className="btn-glass-shimmer w-full sm:w-auto px-8 py-4 rounded-full bg-black hover:bg-zinc-800 text-white dark:bg-white dark:hover:bg-zinc-100 dark:text-black font-mono font-bold uppercase tracking-widest text-xs transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-0.5 active:scale-[0.98] flex items-center justify-center gap-2.5 cursor-pointer disabled:opacity-50 group border border-white/10 dark:border-black/10"
+          className="btn-glass-shimmer w-full sm:w-auto px-7 py-3.5 rounded-full bg-black hover:bg-zinc-800 text-white dark:bg-white dark:hover:bg-zinc-100 dark:text-black font-mono font-bold uppercase tracking-wider text-xs transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-0.5 active:scale-[0.98] flex items-center justify-center gap-2.5 cursor-pointer disabled:opacity-50 group border border-white/10 dark:border-black/10"
         >
           {isSubmitting ? (
             <>
@@ -528,22 +434,29 @@ export const ContactForm: React.FC<ContactFormProps> = () => {
             </>
           ) : (
             <>
-              <span>Let's Talk — Submit Project Brief</span>
-              <Send className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-transform" />
+              <span>Let's Talk — Submit Project Inquiry</span>
+              <Send className="w-3.5 h-3.5 group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-transform" />
             </>
           )}
         </button>
 
-        <a
-          href={whatsappDirectUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-zinc-500 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors cursor-pointer"
-        >
-          <MessageSquare className="w-3.5 h-3.5" />
-          <span>Quick WhatsApp Connect</span>
-          <ArrowRight className="w-3 h-3" />
-        </a>
+        <div className="flex items-center gap-4 text-xs font-mono text-zinc-500 dark:text-zinc-400">
+          <span className="flex items-center gap-1.5">
+            <ShieldCheck className="w-3.5 h-3.5 text-black dark:text-white" />
+            <span>Mutual NDA Protected</span>
+          </span>
+          <span className="text-zinc-300 dark:text-zinc-700">·</span>
+          <a
+            href={whatsappDirectUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors cursor-pointer"
+          >
+            <MessageSquare className="w-3.5 h-3.5" />
+            <span>WhatsApp Connect</span>
+            <ArrowRight className="w-3 h-3" />
+          </a>
+        </div>
       </div>
     </form>
   );

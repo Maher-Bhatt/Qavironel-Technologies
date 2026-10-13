@@ -122,10 +122,10 @@ export const SiteFooter: React.FC = () => {
               <div className="flex items-start gap-2.5">
                 <Mail className="w-4 h-4 text-zinc-500 dark:text-zinc-400 shrink-0 mt-0.5" />
                 <div>
-                  <a href={`mailto:${companyConfig.email}`} className="text-black dark:text-white dark:text-white hover:text-black dark:hover:text-white transition-colors block font-mono font-semibold">
+                  <a href={`mailto:${companyConfig.email}`} className="text-black dark:text-white hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors block font-mono font-semibold">
                     {companyConfig.email}
                   </a>
-                  <a href={`mailto:${companyConfig.secondaryEmail}`} className="text-xs text-zinc-500 dark:text-zinc-400 hover:text-zinc-600 dark:text-zinc-400 dark:hover:text-white transition-colors block font-mono">
+                  <a href={`mailto:${companyConfig.secondaryEmail}`} className="text-xs text-zinc-500 dark:text-zinc-400 hover:text-zinc-600 dark:hover:text-white transition-colors block font-mono">
                     {companyConfig.secondaryEmail}
                   </a>
                 </div>

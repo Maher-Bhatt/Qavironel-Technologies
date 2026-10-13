@@ -21,8 +21,28 @@ export const ServicesPage: React.FC = () => {
   return (
     <>
       <SEO 
-        title="Services & Capabilities — Qavironel Technologies" 
-        description="Bespoke web development, full-stack software engineering, applied AI workflows, and digital product design delivered with senior technical leadership."
+        title="Engineering Services & Capabilities" 
+        description="Bespoke web platforms, SaaS MVP engineering, applied AI workflows, and developer tooling delivered in high-velocity 1-to-2 week sprints."
+        structuredData={{
+          '@context': 'https://schema.org',
+          '@type': 'Service',
+          name: 'Digital Product & Software Engineering Services',
+          provider: {
+            '@type': 'Organization',
+            name: 'Qavironel Technologies',
+            url: 'https://qavironel.com'
+          },
+          hasOfferCatalog: {
+            '@type': 'OfferCatalog',
+            name: 'Core Studio Capabilities',
+            itemListElement: [
+              { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Bespoke Web Platform Architecture & Design' } },
+              { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Full-Stack SaaS MVP & Digital Product Engineering' } },
+              { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Applied AI, LLM Integration & Agentic Automation' } },
+              { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Mobile Developer Tooling & Native Runtimes' } }
+            ]
+          }
+        }}
       />
 
       <div className="bg-[#FAFAFA] dark:bg-[#0A0A0A] text-[#0A0A0A] dark:text-[#FAFAFA] pt-32 sm:pt-40 pb-28 selection:bg-[#0A0A0A] selection:text-white dark:selection:bg-white dark:selection:text-black transition-colors duration-300">
@@ -109,8 +129,14 @@ export const ServicesPage: React.FC = () => {
                   <div className="rounded-2xl border border-black/10 dark:border-white/10 bg-white dark:bg-zinc-900 p-4 shadow-sm">
                     <div className="aspect-[16/11] rounded-xl overflow-hidden bg-black">
                       <img 
-                        src="/images/work/ztees-hero.webp" 
-                        alt="Ztees streetwear platform showcase"
+                        src="/images/projects/ztees/ztees-storefront-hero.png" 
+                        onError={(e) => {
+                          const target = e.currentTarget;
+                          if (target.src !== '/images/projects/ztees-cover.jpg') {
+                            target.src = '/images/projects/ztees-cover.jpg';
+                          }
+                        }}
+                        alt="Ztees streetwear commerce platform storefront"
                         className="w-full h-full object-cover"
                       />
                     </div>
@@ -132,8 +158,14 @@ export const ServicesPage: React.FC = () => {
                   <div className="rounded-2xl border border-black/10 dark:border-white/10 bg-white dark:bg-zinc-900 p-4 shadow-sm">
                     <div className="aspect-[16/10] rounded-xl overflow-hidden bg-black">
                       <img 
-                        src="/images/projects/civic-public-home.png" 
-                        alt="Civic Sathi Multi-Role RBAC Portal"
+                        src="/images/projects/civic-sathi/civic-sathi-map-analytics.png" 
+                        onError={(e) => {
+                          const target = e.currentTarget;
+                          if (target.src !== '/images/projects/civic-sathi/civic-sathi-delhi-hero.png') {
+                            target.src = '/images/projects/civic-sathi/civic-sathi-delhi-hero.png';
+                          }
+                        }}
+                        alt="Civic Sathi Multi-Role RBAC Portal & Map Analytics"
                         className="w-full h-full object-cover"
                       />
                     </div>
@@ -391,10 +423,10 @@ export const ServicesPage: React.FC = () => {
                 Schedule a direct 30-minute architectural consultation.
               </h3>
             </div>
-            <div className="flex flex-wrap items-center gap-4">
+            <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-4 w-full md:w-auto">
               <Link
                 to="/contact"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-black hover:bg-zinc-800 text-white dark:bg-white dark:hover:bg-zinc-200 dark:text-black text-xs font-mono uppercase font-bold tracking-wider transition-colors shadow-xs"
+                className="btn-glass-shimmer hover:-translate-y-0.5 active:scale-[0.98] inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-black hover:bg-zinc-800 text-white dark:bg-white dark:hover:bg-zinc-200 dark:text-black text-xs font-mono uppercase font-bold tracking-wider transition-all duration-300 shadow-xs w-full sm:w-auto"
               >
                 <span>Let's Talk</span>
                 <ArrowRight className="w-4 h-4" />
@@ -402,7 +434,7 @@ export const ServicesPage: React.FC = () => {
               <button
                 type="button"
                 onClick={() => openBookingModal('call')}
-                className="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-white dark:bg-zinc-900 border border-black/10 dark:border-white/15 text-black dark:text-white text-xs font-mono uppercase font-bold tracking-wider hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors"
+                className="btn-glass-shimmer hover:-translate-y-0.5 active:scale-[0.98] inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full bg-white dark:bg-zinc-900 border border-black/10 dark:border-white/15 text-black dark:text-white text-xs font-mono uppercase font-bold tracking-wider hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-all duration-300 w-full sm:w-auto"
               >
                 <Calendar className="w-4 h-4 text-black dark:text-white" />
                 <span>Book Discovery Call</span>

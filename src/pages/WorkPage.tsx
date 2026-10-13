@@ -41,8 +41,24 @@ export const WorkPage: React.FC = () => {
   return (
     <>
       <SEO 
-        title="Selected Work & Case Studies — Qavironel Technologies" 
-        description="Explore verified client platforms, independent products, applied AI systems, and open-source tools engineered by Qavironel Technologies."
+        title="Selected Work & Case Studies" 
+        description="Explore verified client platforms, applied AI desktop assistants, high-velocity e-commerce storefronts, and developer tooling engineered by Qavironel."
+        structuredData={{
+          '@context': 'https://schema.org',
+          '@type': 'CollectionPage',
+          name: 'Selected Work & Case Studies — Qavironel Technologies',
+          url: 'https://qavironel.com/work',
+          description: 'Portfolio of production platforms and applied AI systems.',
+          mainEntity: {
+            '@type': 'ItemList',
+            itemListElement: projects.map((p, index) => ({
+              '@type': 'ListItem',
+              position: index + 1,
+              name: p.title,
+              url: `https://qavironel.com/work/${p.slug}`
+            }))
+          }
+        }}
       />
 
       <div className="bg-[#FAFAFA] dark:bg-[#0A0A0A] text-black dark:text-white pt-32 sm:pt-40 pb-28 selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black transition-colors duration-300">

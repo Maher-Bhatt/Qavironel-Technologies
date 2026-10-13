@@ -13,7 +13,7 @@ export const projects: Project[] = [
     year: '2025–2026',
     summary: 'A voice-capable desktop assistant combining a tactical HUD, multi-model inference router (Groq LLaMA-3.3-70B, LLaMA-4-Scout vision, offline Ollama fallback), hardware-bound DPAPI vault, local memory, and guarded platform actions.',
     audience: 'Power users, developers, and security-conscious creators who want an intelligent desktop companion that operates close to the machine without sending sensitive credentials or unverified actions to uncontrolled third parties.',
-    challenge: 'Most desktop AI assistants either rely entirely on cloud-hosted closed models that log user prompts, or they are fragile CLI scripts with no intuitive graphical interface. K.A.L.K.I. needed to unify voice interaction, multi-model flexibility, and local hardware awareness inside an aesthetic dashboard—while enforcing strict boundary controls over local shell execution.',
+    challenge: 'Most desktop AI assistants either rely entirely on cloud-hosted closed models that log user prompts, or they are fragile CLI scripts with no intuitive graphical interface. K.A.L.K.I. needed to unify voice interaction, multi-model flexibility, and local hardware awareness inside a sleek, aesthetically refined dashboard—while enforcing strict boundary controls over local shell execution.',
     objectives: [
       'Engineer a responsive visual HUD providing real-time telemetry, model status, and memory state.',
       'Support swappable inference providers: local models (Ollama/Llama 3) and cloud APIs (Groq LLaMA-3.3-70B, LLaMA-4-Scout, OpenAI, Gemini).',
@@ -101,7 +101,7 @@ export const projects: Project[] = [
     featured: true,
     order: 2,
     year: '2026',
-    summary: 'A high-conversion streetwear commerce ecosystem built for Z Tees India, comprising a mobile-first editorial customer storefront (ztees.store), a dedicated private owner operations console (/admin), and an Expo Android mobile app. Features 61 live oversized graphic tees, instant size selection, multi-angle media studio, customer review moderation, and frictionless WhatsApp + UPI conversational checkout.',
+    summary: 'A high-conversion streetwear commerce ecosystem built for Z Tees India, comprising a mobile-first editorial customer storefront (ztees.store), a dedicated private owner operations console (/admin), and an Expo Android mobile app. It features 61 live oversized graphic tees, instant size selection, multi-angle media studio, customer review moderation, and frictionless WhatsApp + UPI conversational checkout.',
     audience: 'D2C apparel shoppers seeking heavyweight 240 GSM graphic streetwear drops, alongside brand owners who require real-time catalog management, order triage, and zero-overhead SaaS operations.',
     challenge: 'The brand was bottlenecked by manual Instagram DM ordering: customer inquiries slipped through message requests, sizing questions were repeated endlessly, and stock counts were impossible to track accurately during limited-quantity drops. Meanwhile, standard Shopify subscriptions imposed monthly overhead, payment gateway transaction cuts, and sluggish mobile page load times.',
     objectives: [
@@ -272,7 +272,7 @@ export const projects: Project[] = [
       { value: 'TanStack', label: 'Start Architecture', context: 'React 19 full-stack performance' }
     ],
     links: [
-      { label: 'Client Category: Heavy Civil EPC', url: '/contact', type: 'external' }
+      { label: 'Request EPC Contracting Consultation', url: '/contact', type: 'live' }
     ]
   },
   {
@@ -441,8 +441,8 @@ export const projects: Project[] = [
     slug: 'itm-notes',
     title: 'ITM Notes',
     eyebrow: 'Full-Stack Academic Operating System · Engineering Study Suite',
-    category: 'Digital Products',
-    categoryLabel: 'Digital Products · Academic Systems & EdTech',
+    category: 'Academic Build',
+    categoryLabel: 'Academic Build · Academic Systems & EdTech',
     status: 'Live Production Platform',
     featured: false,
     order: 6,
@@ -453,7 +453,7 @@ export const projects: Project[] = [
     objectives: [
       'Deploy an in-browser zero-setup Coding Lab featuring 154 runnable engineering practicals across Java, C, SQL, and Python.',
       'Deliver an academic Markdown reader with KaTeX LaTeX math rendering, Pomodoro focus sprints, and continuous text-to-speech audio lectures.',
-      'Build transparent mathematical calculators for 10-point relative SGPA prediction, reverse exam targets, and 75% attendance safe bunk buffer modeling.',
+      'Build transparent mathematical calculators for 10-point relative SGPA prediction, reverse exam targets, and UGC 75% attendance safety margin modeling.',
       'Index 954 university multiple-choice questions into a timed subject quiz engine with grand mock exam simulations.',
       'Engineer Campus Pulse—a real-time peer discussion forum with privacy-preserving Anonymous Mask protection to safeguard students from academic retaliation.',
       'Centralize 52+ official syllabus documents, mid-semester test (MST) question banks, and faculty lecture slides with one-click offline PDF access.'
@@ -464,7 +464,7 @@ export const projects: Project[] = [
       'Interactive Student Dashboard: Real-time 5-day study streak tracking, XP milestones (Level 9 Architect), 23-day university exam countdown clock, and instant semester switcher.',
       'Integrated Coding Lab: 154 runnable engineering practicals in Java, C, SQL, and Python with in-browser terminal execution and automated test harnesses.',
       'Academic Syllabus Reader: Comprehensive Markdown reader rendering KaTeX LaTeX equations, Mermaid diagrams, integrated text-to-speech audio lectures, and 25-minute Pomodoro sprints.',
-      'Academic Calculators: 10-point relative SGPA/CGPA forecaster, Reverse Exam Target ("What Grade Do I Need?"), and 75% UGC Attendance Guard calculating safe bunk margins.',
+      'Academic Calculators: 10-point relative SGPA/CGPA forecaster, Reverse Exam Target ("What Grade Do I Need?"), and 75% UGC Attendance Guard calculating attendance safety thresholds.',
       'Subject Quiz Engine: 954 curated multiple-choice questions with timed mock exam sessions, instant explanation scoring, and unit-wise topic mastery.',
       'Campus Pulse & Materials: Real-time peer discussion forum powered by Supabase with Anonymous Mask shield, paired with a library of 52+ official university question papers and downloadable PDFs.'
     ],
@@ -508,8 +508,8 @@ export const projects: Project[] = [
       },
       {
         src: '/images/projects/itm/itm-gpa-attendance.png',
-        alt: '10-point relative SGPA calculator and 75% attendance safe bunk margin guard',
-        caption: 'Dynamic academic modeling engine calculating 10-point relative SGPA and UGC 75% attendance compliance with safe bunk buffers.'
+        alt: '10-point relative SGPA calculator and UGC 75% attendance compliance guard',
+        caption: 'Dynamic academic modeling engine calculating 10-point relative SGPA and UGC 75% attendance compliance with safe threshold buffers.'
       },
       {
         src: '/images/projects/itm/itm-quiz-engine.png',

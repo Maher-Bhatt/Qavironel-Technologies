@@ -244,7 +244,15 @@ export const ServicesPage: React.FC = () => {
                   <div className="rounded-2xl border border-black/10 dark:border-white/10 bg-white dark:bg-zinc-900 p-4 shadow-sm">
                     <div className="aspect-[16/10] rounded-xl overflow-hidden bg-black">
                       <img 
-                        src="/images/projects/kalki-hero.png" 
+                        src="/images/projects/kalki/kalki-hero.png" 
+                        onError={(e) => {
+                          const target = e.currentTarget;
+                          if (target.src !== '/images/projects/kalki-hero.png') {
+                            target.src = '/images/projects/kalki-hero.png';
+                          } else {
+                            target.src = '/images/projects/kalki-launch.png';
+                          }
+                        }}
                         alt="K.A.L.K.I. multi-model AI assistant"
                         className="w-full h-full object-cover"
                       />

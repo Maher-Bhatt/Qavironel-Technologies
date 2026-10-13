@@ -26,15 +26,15 @@ export const VideoShowreel: React.FC = () => {
 
   const channels: VideoChannel[] = [
     {
-      id: 'kalki-tactical',
+      id: 'ztees-commerce',
       channelNum: 'CH 01',
-      title: 'K.A.L.K.I. Desktop AI Assistant',
-      subtitle: 'Local-first neural runtime, voice command pipeline & tactical HUD v1.0.4',
-      category: 'APPLIED AI SYSTEMS',
-      src: '/videos/kalki-video.mp4',
-      poster: '/images/projects/kalki-launch.png',
-      duration: '0:22',
-      tags: ['Local LLaMA', 'Groq Multi-LLM', 'VOSK Audio', 'DPAPI Vault'],
+      title: 'Ztees Streetwear Commerce Platform',
+      subtitle: 'Mobile-first editorial storefront, automated WhatsApp ordering & sub-second LCP',
+      category: 'COMMERCE PLATFORM',
+      src: '/videos/project-reel.mp4',
+      poster: '/images/projects/ztees-cover.jpg',
+      duration: '0:15',
+      tags: ['React 19', 'WhatsApp API', 'Sub-Second LCP', 'UPI Checkout'],
     },
     {
       id: 'platform-build',

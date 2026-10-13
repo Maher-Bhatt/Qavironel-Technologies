@@ -432,39 +432,6 @@ export const projects: Project[] = [
     ]
   },
   {
-    slug: 'chain-of-achievements',
-    title: 'Chain of Achievements',
-    eyebrow: 'Blockchain Credential System · Smart Contract Lab',
-    category: 'Experiments',
-    categoryLabel: 'Open Source · Web3 & Smart Contracts',
-    status: 'Open Source Prototype',
-    featured: false,
-    order: 7,
-    year: '2025',
-    summary: 'A blockchain verification prototype exploring tamper-proof academic and professional certification issuance on an Ethereum testnet.',
-    audience: 'Educational institutions, certification authorities, and students requiring immutable, verifiable proof of achievement.',
-    challenge: 'Digital certificates in PDF format are easily spoofed or altered, while centralized verification APIs depend entirely on the issuing institution remaining operational.',
-    objectives: [
-      'Write and deploy ERC-721 smart contracts representing non-transferable achievement tokens.',
-      'Build a lightweight React interface for minting and cryptographic verification.',
-      'Deliver working code in a rapid 4-hour hackathon sprint.'
-    ],
-    solution: 'Developed Solidity contracts allowing authorized issuers to mint certificate tokens containing IPFS metadata hashes, verifiable on public block explorers.',
-    whyItMatters: 'Demonstrates hands-on smart contract engineering, cryptographic verification principles, and Web3 frontend integration.',
-    workflow: [
-      'Issuer connects authorized Web3 wallet.',
-      'Mints non-transferable certificate token with metadata stored on IPFS.',
-      'Anyone can verify credential validity against the blockchain contract.'
-    ],
-    technologies: ['Solidity', 'Ethereum Testnet', 'Web3.js', 'React', 'IPFS'],
-    heroImage: '/images/projects/velocity-cover.png',
-    videoSrc: '/videos/tech-atmosphere.mp4',
-    gallery: [],
-    links: [
-      { label: 'View Source on GitHub', url: 'https://github.com/Maher-Bhatt/chain-of-achievements', type: 'github' }
-    ]
-  },
-  {
     slug: 'socialsafe',
     title: 'CyberGuard Security Lab',
     eyebrow: 'Interactive Defense & Awareness Labs · Cybersecurity Education',
@@ -472,7 +439,7 @@ export const projects: Project[] = [
     categoryLabel: 'Open Source · Cybersecurity Education & Labs',
     status: 'Educational Security Lab Series',
     featured: false,
-    order: 8,
+    order: 7,
     year: '2025–2026',
     summary: 'An educational cybersecurity training suite and interactive awareness lab demonstrating credential harvesting defense, phishing anatomy, session security, and strict client-side isolation across multiple cybersecurity workshops.',
     audience: 'Engineering cohorts, developers, and computer users attending interactive cybersecurity awareness sessions to learn threat recognition and client-side web defense boundaries.',

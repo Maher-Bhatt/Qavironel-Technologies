@@ -169,14 +169,14 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       </span>
 
       {/* Studio Chrome Window Header */}
-      <div className="col-span-12 flex items-center justify-between px-3 sm:px-5 py-2 sm:py-2.5 border-b border-black/10 dark:border-white/10 dark:border-white/10 bg-white dark:bg-[#18221D] relative z-10 gap-2">
+      <div className="col-span-12 flex items-center justify-between px-3 sm:px-5 py-2 sm:py-2.5 border-b border-black/10 dark:border-white/10 bg-white dark:bg-zinc-900 relative z-10 gap-2">
         <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
           <div className="flex items-center gap-1 sm:gap-1.5 shrink-0">
             <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-[#EF4444]/80" />
             <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-[#F59E0B]/80" />
             <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-[#10B981]/80" />
           </div>
-          <span className="text-[0.62rem] sm:text-[0.68rem] font-mono tracking-wider text-zinc-500 dark:text-[#A7B0A7] ml-1 truncate max-w-[130px] sm:max-w-none">
+          <span className="text-[0.62rem] sm:text-[0.68rem] font-mono tracking-wider text-zinc-500 dark:text-zinc-400 ml-1 truncate max-w-[130px] sm:max-w-none">
             sys://qavironel/{project.slug}
           </span>
         </div>
@@ -186,7 +186,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             {project.category}
           </span>
           <span className="text-zinc-300 dark:text-zinc-700 text-xs">·</span>
-          <span className="text-[0.6rem] sm:text-[0.65rem] font-mono text-zinc-500 dark:text-[#A7B0A7]">
+          <span className="text-[0.6rem] sm:text-[0.65rem] font-mono text-zinc-500 dark:text-zinc-400">
             {project.year}
           </span>
         </div>
@@ -196,8 +196,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       <div 
         className={`relative overflow-hidden z-10 flex items-center justify-center ${
           isFeatured 
-            ? 'lg:col-span-7 p-4 sm:p-6 lg:p-8 ' + (isDarkProject ? 'bg-[#0B100D]' : 'bg-white')
-            : 'p-4 sm:p-5 h-[260px] sm:h-[300px] ' + (isDarkProject ? 'bg-[#0B100D]' : 'bg-white')
+            ? 'lg:col-span-7 p-4 sm:p-6 lg:p-8 ' + (isDarkProject ? 'bg-black' : 'bg-white')
+            : 'p-4 sm:p-5 h-[260px] sm:h-[300px] ' + (isDarkProject ? 'bg-black' : 'bg-white')
         } border-b lg:border-b-0 border-black/10 dark:border-white/10`}
       >
         <Link 
@@ -300,40 +300,40 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         }`}
       >
         <div>
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-4 text-xs font-mono text-zinc-500 dark:text-[#A7B0A7] mb-2">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-4 text-xs font-mono text-zinc-500 dark:text-zinc-400 mb-2">
             <span className="uppercase tracking-wider text-black dark:text-white font-semibold text-[0.68rem] sm:text-xs">
               {project.eyebrow}
             </span>
-            <span className="text-[0.65rem] sm:text-[0.68rem] text-emerald-600 dark:text-emerald-400 font-semibold shrink-0">
+            <span className="text-[0.65rem] sm:text-[0.68rem] text-zinc-600 dark:text-zinc-300 font-semibold shrink-0">
               {project.status}
             </span>
           </div>
 
           {/* Microsoft Store Verified Badge for K.A.L.K.I. */}
           {project.slug === 'kalki' && (
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800 border border-[#D3E6DA] dark:border-[#1E382B] text-black dark:text-white text-[0.65rem] sm:text-[0.68rem] font-mono font-bold mb-3 max-w-full">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-white/15 text-black dark:text-white text-[0.65rem] sm:text-[0.68rem] font-mono font-bold mb-3 max-w-full">
               <CheckCircle2 className="w-3.5 h-3.5 text-black dark:text-white shrink-0" />
               <span className="truncate">STORE VERIFIED · v1.0.4 · ID: 9P6HJPQZBGFQ</span>
             </div>
           )}
 
-          <h3 className="font-display font-bold text-2xl sm:text-3xl text-black dark:text-white dark:text-white tracking-tight group-hover:text-black dark:group-hover:text-white transition-colors leading-tight">
+          <h3 className="font-display font-bold text-2xl sm:text-3xl text-black dark:text-white tracking-tight group-hover:text-black dark:group-hover:text-white transition-colors leading-tight">
             <Link to={`/work/${project.slug}`}>
               {project.title}
             </Link>
           </h3>
 
-          <p className="mt-3 text-sm text-zinc-500 dark:text-[#A7B0A7] leading-relaxed line-clamp-3 font-light">
+          <p className="mt-3 text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed line-clamp-3 font-light">
             {project.summary}
           </p>
 
           {/* Key Metrics */}
           {project.metrics && project.metrics.length > 0 && (
-            <div className="mt-6 pt-5 border-t border-black/10 dark:border-white/10 dark:border-white/10 grid grid-cols-2 gap-3">
+            <div className="mt-6 pt-5 border-t border-black/10 dark:border-white/10 grid grid-cols-2 gap-3">
               {project.metrics.slice(0, 2).map((m, idx) => (
-                <div key={idx} className="p-3 rounded-xl bg-white dark:bg-[#18221D] border border-black/10 dark:border-white/10/80 dark:border-white/10">
-                  <p className="text-lg sm:text-xl font-bold font-display text-black dark:text-white dark:text-white tabular-nums">{m.value}</p>
-                  <p className="text-[0.7rem] text-zinc-500 dark:text-[#A7B0A7] font-mono tracking-tight mt-0.5">{m.label}</p>
+                <div key={idx} className="p-3 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-black/10 dark:border-white/10">
+                  <p className="text-lg sm:text-xl font-bold font-display text-black dark:text-white tabular-nums">{m.value}</p>
+                  <p className="text-[0.7rem] text-zinc-500 dark:text-zinc-400 font-mono tracking-tight mt-0.5">{m.label}</p>
                 </div>
               ))}
             </div>
@@ -344,13 +344,13 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             {project.technologies.slice(0, 4).map((tech) => (
               <span 
                 key={tech} 
-                className="text-[0.68rem] font-mono text-zinc-500 dark:text-[#A7B0A7] bg-white dark:bg-[#18221D] px-2.5 py-1 rounded-md border border-black/10 dark:border-white/10 dark:border-white/10"
+                className="text-[0.68rem] font-mono text-zinc-700 dark:text-zinc-300 bg-zinc-100 dark:bg-zinc-800 px-2.5 py-1 rounded-md border border-black/5 dark:border-white/10"
               >
                 {tech}
               </span>
             ))}
             {project.technologies.length > 4 && (
-              <span className="text-[0.68rem] font-mono text-zinc-500 dark:text-[#A7B0A7] px-1 py-1">
+              <span className="text-[0.68rem] font-mono text-zinc-500 dark:text-zinc-400 px-1 py-1">
                 +{project.technologies.length - 4}
               </span>
             )}

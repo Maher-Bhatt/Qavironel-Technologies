@@ -491,6 +491,27 @@ export const ContactForm: React.FC<ContactFormProps> = () => {
         )}
       </div>
 
+      {/* Real-Time Monospace Intake Manifest Widget */}
+      <div className="p-4 rounded-2xl bg-zinc-950 text-zinc-300 border border-black/10 dark:border-white/15 space-y-2 select-none shadow-sm">
+        <div className="flex items-center justify-between pb-2 border-b border-white/10 text-white font-mono font-bold text-xs">
+          <span className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            LIVE INTAKE SPECIFICATION MANIFEST
+          </span>
+          <span className="text-zinc-500 text-[0.65rem] tracking-wider">QAVIRONEL PROTOCOL v2.6</span>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1.5 pt-1 text-[0.72rem] font-mono">
+          <div><span className="text-zinc-500">DISCIPLINE:</span> <span className="text-white font-semibold">{formData.projectType.split('/')[0]}</span></div>
+          <div><span className="text-zinc-500">ENGAGEMENT:</span> <span className="text-white font-semibold">{formData.engagementModel.split('(')[0]}</span></div>
+          <div><span className="text-zinc-500">TIMELINE:</span> <span className="text-white font-semibold">{formData.timeline.split('(')[0]}</span></div>
+          <div><span className="text-zinc-500">CONFIDENTIALITY:</span> <span className="text-emerald-400 font-semibold">100% MUTUAL NDA</span></div>
+        </div>
+        <div className="pt-1.5 border-t border-white/5 text-[0.65rem] font-mono text-zinc-500 flex items-center justify-between">
+          <span>ROUTED TO: MAHER BHATT & ANURAG PANDEY</span>
+          <span className="text-zinc-300 font-semibold">VERIFIED SLA: &lt; 12 HOURS</span>
+        </div>
+      </div>
+
       {/* ========================================================================= */}
       {/* 06. SUBMIT BUTTON & DIRECT ALTERNATIVES                                   */}
       {/* ========================================================================= */}

@@ -15,6 +15,7 @@ import {
   Sparkles 
 } from 'lucide-react';
 import { GithubIcon } from '../components/ui/Icons';
+import { ScrollAutoplayVideo } from '../components/media/ScrollAutoplayVideo';
 
 export const WorkPage: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<ProjectCategory>('All Work');
@@ -103,17 +104,13 @@ export const WorkPage: React.FC = () => {
                       to={`/work/${kalki.slug}`}
                       className="block group overflow-hidden rounded-2xl border border-black/10 dark:border-white/10 bg-black transition-transform duration-300 hover:scale-[1.008]"
                     >
-                      <div className="aspect-[16/10] overflow-hidden relative">
-                        <img 
-                          src="/images/projects/kalki-launch.png" 
-                          alt="K.A.L.K.I. main tactical desktop HUD" 
-                          className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500"
-                        />
-                        <div className="absolute top-3 left-3 px-2 py-0.5 rounded bg-black/80 backdrop-blur-md text-[0.65rem] font-mono text-white border border-white/20 flex items-center gap-1.5">
-                          <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
-                          <span>TACTICAL HUD v1.0.4</span>
-                        </div>
-                      </div>
+                      <ScrollAutoplayVideo 
+                        src={kalki.videoSrc || '/videos/kalki-video.mp4'}
+                        poster="/images/projects/kalki-launch.png"
+                        alt="K.A.L.K.I. main tactical desktop HUD video"
+                        badgeText="TACTICAL HUD v1.0.4"
+                        aspectRatio="aspect-[16/10]"
+                      />
                     </Link>
 
                     {/* Secondary Gallery Previews */}
@@ -219,19 +216,29 @@ export const WorkPage: React.FC = () => {
                 >
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
                     
-                    {/* Visual Media (6 or 7 cols) */}
+                    {/* Visual Media (6 or 7 cols) with active scroll playback */}
                     <div className={`lg:col-span-7 ${isEven ? 'order-1' : 'order-1 lg:order-2'}`}>
                       <Link 
                         to={`/work/${project.slug}`}
-                        className="block group overflow-hidden rounded-2xl border border-black/10 dark:border-white/10 bg-white dark:bg-zinc-900 p-3 transition-transform duration-300 hover:scale-[1.008]"
+                        className="block group overflow-hidden rounded-2xl border border-black/10 dark:border-white/10 bg-black p-2 transition-transform duration-300 hover:scale-[1.008]"
                       >
-                        <div className="aspect-[16/10] rounded-xl overflow-hidden bg-black">
-                          <img 
-                            src={project.heroImage || project.gallery[0]?.src} 
-                            alt={project.title}
-                            className="w-full h-full object-cover group-hover:scale-104 transition-transform duration-500" 
-                          />
-                        </div>
+                        <ScrollAutoplayVideo 
+                          src={project.videoSrc || '/videos/project-reel.mp4'}
+                          poster={project.heroImage || project.gallery[0]?.src}
+                          alt={`${project.title} runtime presentation`}
+                          badgeText={
+                            project.slug === 'ztees' 
+                              ? 'LIVE STOREFRONT' 
+                              : project.slug === 'classic-infrastructure' 
+                              ? 'HEAVY CIVIL EPC' 
+                              : project.slug === 'civic-sathi' 
+                              ? '4-ROLE MONOREPO' 
+                              : project.slug === 'socialsafe' 
+                              ? 'DEFENSIVE LABS' 
+                              : project.category.toUpperCase()
+                          }
+                          aspectRatio="aspect-[16/10]"
+                        />
                       </Link>
                     </div>
 

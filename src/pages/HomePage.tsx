@@ -580,111 +580,44 @@ export const HomePage: React.FC = () => {
               </Link>
             </div>
 
-            {/* Project 01: Heroic Full-Width Flagship (KALKI) */}
-            <div className="py-12 border-b border-black/10 dark:border-white/10">
-              <div className="glass-card-luxury p-8 sm:p-12 rounded-3xl transition-all duration-300">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-                  <div className="lg:col-span-7 order-2 lg:order-1 space-y-6">
-                    <div className="flex flex-wrap items-center gap-3">
-                      <span className="text-xs font-mono px-3.5 py-1 rounded-full bg-black/5 dark:bg-white/10 text-black dark:text-white font-bold border border-black/10 dark:border-white/15">
-                        #01 · FLAGSHIP PRODUCT
-                      </span>
-                      <span className="text-xs font-mono text-zinc-500">2025–2026 · AI & Systems</span>
-                    </div>
-
-                    <h3 className="font-display font-bold text-3xl sm:text-5xl text-black dark:text-white tracking-tight">
-                      {kalkiProject.title}
-                    </h3>
-                    <p className="text-sm font-mono text-zinc-600 dark:text-zinc-400">
-                      {kalkiProject.eyebrow}
-                    </p>
-                    <p className="text-base text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-xl font-light">
-                      {kalkiProject.summary}
-                    </p>
-
-                    <div className="flex flex-wrap gap-2 pt-1">
-                      {kalkiProject.technologies.slice(0, 5).map(t => (
-                        <span key={t} className="text-xs font-mono px-2.5 py-1 rounded border border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 text-zinc-800 dark:text-zinc-200">
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-
-                    <div className="pt-4 flex flex-wrap items-center gap-4">
-                      <Link
-                        to={`/work/${kalkiProject.slug}`}
-                        className="btn-glass-shimmer inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-black text-white dark:bg-white dark:text-black text-xs font-mono uppercase font-bold tracking-wider transition-all shadow-sm hover:-translate-y-0.5"
-                      >
-                        <span>Read Case Study</span>
-                        <ArrowRight className="w-3.5 h-3.5" />
-                      </Link>
-                      <a
-                        href="https://apps.microsoft.com/detail/9P6HJPQZBGFQ"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/15 text-black dark:text-white text-xs font-mono uppercase font-semibold tracking-wider hover:bg-black/10 dark:hover:bg-white/10 transition-all hover:-translate-y-0.5"
-                      >
-                        <span>Microsoft Store (9P6HJPQZBGFQ)</span>
-                        <ExternalLink className="w-3.5 h-3.5" />
-                      </a>
-                    </div>
-                  </div>
-
-                  <div className="lg:col-span-5 order-1 lg:order-2">
-                    <Link 
-                      to={`/work/${kalkiProject.slug}`}
-                      className="block group overflow-hidden rounded-2xl border border-black/10 dark:border-white/15 bg-black p-2 transition-transform duration-300 hover:scale-[1.01]"
-                    >
-                      <ScrollAutoplayVideo 
-                        src={kalkiProject.videoSrc || '/videos/kalki-video.mp4'}
-                        poster="/images/projects/kalki/kalki-hero.png"
-                        alt="K.A.L.K.I. main tactical interface runtime video"
-                        badgeText="TACTICAL HUD v1.0.4"
-                        aspectRatio="aspect-[4/3]"
-                      />
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Harmonized 2-Column Grid (Cards #02 to #05) */}
+            {/* Harmonized 4-Flagship Cinema Grid (Ztees, CIP, CyberGuard, Civic Sathi) */}
+            {/* KALKI is spotlighted exclusively in the Hero Console & Video Showreel to avoid duplicate card sprawl */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 py-16">
               
-              {/* Card #02: Ztees Streetwear Commerce */}
-              <div className="glass-card-luxury p-7 sm:p-9 rounded-3xl flex flex-col justify-between group transition-all duration-300 hover:-translate-y-1">
+              {/* Card #01: Ztees Streetwear Commerce */}
+              <div className="glass-card-luxury p-6 sm:p-8 rounded-3xl flex flex-col justify-between group transition-all duration-300 hover:-translate-y-1">
                 <div>
                   <Link 
                     to={`/work/${zteesProject.slug}`}
-                    className="block group/img overflow-hidden rounded-2xl border border-black/10 dark:border-white/15 bg-black mb-6"
+                    className="block group/img overflow-hidden rounded-2xl border border-black/10 dark:border-white/15 bg-black mb-5"
                   >
                     <ScrollAutoplayVideo 
                       src={zteesProject.videoSrc || '/videos/project-reel.mp4'}
                       poster="/images/projects/ztees-cover.jpg"
                       alt="Ztees streetwear commerce drop presentation video"
                       badgeText="LIVE STOREFRONT"
-                      aspectRatio="aspect-[16/10]"
+                      aspectRatio="aspect-[16/9]"
                     />
                   </Link>
 
-                  <div className="space-y-3">
+                  <div className="space-y-2.5">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-mono px-3 py-1 rounded-full bg-black/5 dark:bg-white/10 text-black dark:text-white font-bold border border-black/10 dark:border-white/15">
-                        #02 · CLIENT STOREFRONT
+                      <span className="text-[0.68rem] font-mono px-2.5 py-0.5 rounded-full bg-black/5 dark:bg-white/10 text-black dark:text-white font-bold border border-black/10 dark:border-white/15">
+                        #01 · CLIENT STOREFRONT
                       </span>
-                      <span className="text-xs font-mono text-zinc-500">2026 · Commerce</span>
+                      <span className="text-[0.68rem] font-mono text-zinc-500">2026 · Commerce</span>
                     </div>
-                    <h3 className="font-display font-bold text-2xl sm:text-3xl text-black dark:text-white">
+                    <h3 className="font-display font-bold text-xl sm:text-2xl text-black dark:text-white tracking-tight">
                       <Link to={`/work/${zteesProject.slug}`} className="hover:opacity-75 transition-opacity">
                         {zteesProject.title}
                       </Link>
                     </h3>
-                    <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed font-light">
+                    <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed font-light line-clamp-2">
                       {zteesProject.summary}
                     </p>
-                    <div className="flex flex-wrap gap-1.5 pt-2">
+                    <div className="flex flex-wrap gap-1.5 pt-1">
                       {zteesProject.technologies.slice(0, 4).map(t => (
-                        <span key={t} className="text-[0.68rem] font-mono px-2.5 py-1 rounded bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-zinc-800 dark:text-zinc-200">
+                        <span key={t} className="text-[0.62rem] font-mono px-2 py-0.5 rounded bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-zinc-700 dark:text-zinc-300">
                           {t}
                         </span>
                       ))}
@@ -692,52 +625,52 @@ export const HomePage: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="pt-6 mt-6 border-t border-black/10 dark:border-white/10 flex items-center justify-between">
+                <div className="pt-5 mt-5 border-t border-black/10 dark:border-white/10 flex items-center justify-between">
                   <Link 
                     to={`/work/${zteesProject.slug}`} 
-                    className="inline-flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-black dark:text-white hover:underline"
+                    className="inline-flex items-center gap-1.5 text-xs font-mono font-bold uppercase tracking-wider text-black dark:text-white hover:underline"
                   >
                     <span>Inspect Case Study</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
-                  <span className="text-xs font-mono text-zinc-500">Fast Drop Architecture</span>
+                  <span className="text-[0.68rem] font-mono text-zinc-500">2.4x Drop Throughput</span>
                 </div>
               </div>
 
-              {/* Card #03: Classic Infrastructure Projects */}
-              <div className="glass-card-luxury p-7 sm:p-9 rounded-3xl flex flex-col justify-between group transition-all duration-300 hover:-translate-y-1">
+              {/* Card #02: Classic Infrastructure Projects */}
+              <div className="glass-card-luxury p-6 sm:p-8 rounded-3xl flex flex-col justify-between group transition-all duration-300 hover:-translate-y-1">
                 <div>
                   <Link 
                     to={`/work/${cipProject.slug}`}
-                    className="block group/img overflow-hidden rounded-2xl border border-black/10 dark:border-white/15 bg-black mb-6"
+                    className="block group/img overflow-hidden rounded-2xl border border-black/10 dark:border-white/15 bg-black mb-5"
                   >
                     <ScrollAutoplayVideo 
                       src={cipProject.videoSrc || '/videos/hero-showreel.mp4'}
                       poster="/images/projects/cip/cip-new-1-hero.webp"
                       alt="Classic Infrastructure Projects Corporate Platform video"
                       badgeText="HEAVY CIVIL EPC"
-                      aspectRatio="aspect-[16/10]"
+                      aspectRatio="aspect-[16/9]"
                     />
                   </Link>
 
-                  <div className="space-y-3">
+                  <div className="space-y-2.5">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-mono px-3 py-1 rounded-full bg-black/5 dark:bg-white/10 text-black dark:text-white font-bold border border-black/10 dark:border-white/15">
-                        #03 · ENTERPRISE PLATFORM
+                      <span className="text-[0.68rem] font-mono px-2.5 py-0.5 rounded-full bg-black/5 dark:bg-white/10 text-black dark:text-white font-bold border border-black/10 dark:border-white/15">
+                        #02 · ENTERPRISE PLATFORM
                       </span>
-                      <span className="text-xs font-mono text-zinc-500">Est. 2008 · Full-Stack</span>
+                      <span className="text-[0.68rem] font-mono text-zinc-500">Est. 2008 · Full-Stack</span>
                     </div>
-                    <h3 className="font-display font-bold text-2xl sm:text-3xl text-black dark:text-white">
+                    <h3 className="font-display font-bold text-xl sm:text-2xl text-black dark:text-white tracking-tight">
                       <Link to={`/work/${cipProject.slug}`} className="hover:opacity-75 transition-opacity">
                         {cipProject.title}
                       </Link>
                     </h3>
-                    <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed font-light">
+                    <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed font-light line-clamp-2">
                       {cipProject.summary}
                     </p>
-                    <div className="flex flex-wrap gap-1.5 pt-2">
+                    <div className="flex flex-wrap gap-1.5 pt-1">
                       {cipProject.technologies.slice(0, 4).map(t => (
-                        <span key={t} className="text-[0.68rem] font-mono px-2.5 py-1 rounded bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-zinc-800 dark:text-zinc-200">
+                        <span key={t} className="text-[0.62rem] font-mono px-2 py-0.5 rounded bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-zinc-700 dark:text-zinc-300">
                           {t}
                         </span>
                       ))}
@@ -745,52 +678,52 @@ export const HomePage: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="pt-6 mt-6 border-t border-black/10 dark:border-white/10 flex items-center justify-between">
+                <div className="pt-5 mt-5 border-t border-black/10 dark:border-white/10 flex items-center justify-between">
                   <Link 
                     to={`/work/${cipProject.slug}`} 
-                    className="inline-flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-black dark:text-white hover:underline"
+                    className="inline-flex items-center gap-1.5 text-xs font-mono font-bold uppercase tracking-wider text-black dark:text-white hover:underline"
                   >
                     <span>Inspect Case Study</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
-                  <span className="text-xs font-mono text-zinc-500">High-Density Asset Pipeline</span>
+                  <span className="text-[0.68rem] font-mono text-zinc-500">100% Zero-Defect Delivery</span>
                 </div>
               </div>
 
-              {/* Card #04: CyberGuard Security Lab */}
-              <div className="glass-card-luxury p-7 sm:p-9 rounded-3xl flex flex-col justify-between group transition-all duration-300 hover:-translate-y-1">
+              {/* Card #03: CyberGuard Security Lab */}
+              <div className="glass-card-luxury p-6 sm:p-8 rounded-3xl flex flex-col justify-between group transition-all duration-300 hover:-translate-y-1">
                 <div>
                   <Link 
                     to={`/work/${cyberProject.slug}`}
-                    className="block group/img overflow-hidden rounded-2xl border border-black/10 dark:border-white/15 bg-black mb-6"
+                    className="block group/img overflow-hidden rounded-2xl border border-black/10 dark:border-white/15 bg-black mb-5"
                   >
                     <ScrollAutoplayVideo 
                       src={cyberProject.videoSrc || '/videos/hero-showreel.mp4'}
                       poster="/images/projects/kalki-security.png"
                       alt="CyberGuard Security Lab Interface video"
                       badgeText="DEFENSIVE LABS"
-                      aspectRatio="aspect-[16/10]"
+                      aspectRatio="aspect-[16/9]"
                     />
                   </Link>
 
-                  <div className="space-y-3">
+                  <div className="space-y-2.5">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-mono px-3 py-1 rounded-full bg-black/5 dark:bg-white/10 text-black dark:text-white font-bold border border-black/10 dark:border-white/15">
-                        #04 · DEFENSIVE SECURITY
+                      <span className="text-[0.68rem] font-mono px-2.5 py-0.5 rounded-full bg-black/5 dark:bg-white/10 text-black dark:text-white font-bold border border-black/10 dark:border-white/15">
+                        #03 · DEFENSIVE SECURITY
                       </span>
-                      <span className="text-xs font-mono text-zinc-500">2025–2026 · Workshops</span>
+                      <span className="text-[0.68rem] font-mono text-zinc-500">2025–2026 · Workshops</span>
                     </div>
-                    <h3 className="font-display font-bold text-2xl sm:text-3xl text-black dark:text-white">
+                    <h3 className="font-display font-bold text-xl sm:text-2xl text-black dark:text-white tracking-tight">
                       <Link to={`/work/${cyberProject.slug}`} className="hover:opacity-75 transition-opacity">
                         {cyberProject.title}
                       </Link>
                     </h3>
-                    <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed font-light">
+                    <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed font-light line-clamp-2">
                       {cyberProject.summary}
                     </p>
-                    <div className="flex flex-wrap gap-1.5 pt-2">
+                    <div className="flex flex-wrap gap-1.5 pt-1">
                       {cyberProject.technologies.slice(0, 4).map(t => (
-                        <span key={t} className="text-[0.68rem] font-mono px-2.5 py-1 rounded bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-zinc-800 dark:text-zinc-200">
+                        <span key={t} className="text-[0.62rem] font-mono px-2 py-0.5 rounded bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-zinc-700 dark:text-zinc-300">
                           {t}
                         </span>
                       ))}
@@ -798,52 +731,52 @@ export const HomePage: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="pt-6 mt-6 border-t border-black/10 dark:border-white/10 flex items-center justify-between">
+                <div className="pt-5 mt-5 border-t border-black/10 dark:border-white/10 flex items-center justify-between">
                   <Link 
                     to={`/work/${cyberProject.slug}`} 
-                    className="inline-flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-black dark:text-white hover:underline"
+                    className="inline-flex items-center gap-1.5 text-xs font-mono font-bold uppercase tracking-wider text-black dark:text-white hover:underline"
                   >
                     <span>Inspect Security Specs</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
-                  <span className="text-xs font-mono text-zinc-500">Strict CSP Isolation</span>
+                  <span className="text-[0.68rem] font-mono text-zinc-500">Strict CSP Isolation</span>
                 </div>
               </div>
 
-              {/* Card #05: Civic Sathi Monorepo Platform */}
-              <div className="glass-card-luxury p-7 sm:p-9 rounded-3xl flex flex-col justify-between group transition-all duration-300 hover:-translate-y-1">
+              {/* Card #04: Civic Sathi Monorepo Platform */}
+              <div className="glass-card-luxury p-6 sm:p-8 rounded-3xl flex flex-col justify-between group transition-all duration-300 hover:-translate-y-1">
                 <div>
                   <Link 
                     to={`/work/${civicProject.slug}`}
-                    className="block group/img overflow-hidden rounded-2xl border border-black/10 dark:border-white/15 bg-black mb-6"
+                    className="block group/img overflow-hidden rounded-2xl border border-black/10 dark:border-white/15 bg-black mb-5"
                   >
                     <ScrollAutoplayVideo 
                       src={civicProject.videoSrc || '/videos/tech-atmosphere.mp4'}
                       poster="/images/projects/civic-public-home.png"
                       alt="Civic Sathi Public Citizen Interface video"
                       badgeText="4-ROLE MONOREPO"
-                      aspectRatio="aspect-[16/10]"
+                      aspectRatio="aspect-[16/9]"
                     />
                   </Link>
 
-                  <div className="space-y-3">
+                  <div className="space-y-2.5">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-mono px-3 py-1 rounded-full bg-black/5 dark:bg-white/10 text-black dark:text-white font-bold border border-black/10 dark:border-white/15">
-                        #05 · MONOREPO GOVTECH
+                      <span className="text-[0.68rem] font-mono px-2.5 py-0.5 rounded-full bg-black/5 dark:bg-white/10 text-black dark:text-white font-bold border border-black/10 dark:border-white/15">
+                        #04 · MONOREPO GOVTECH
                       </span>
-                      <span className="text-xs font-mono text-zinc-500">SIH 2026 · Product Lab</span>
+                      <span className="text-[0.68rem] font-mono text-zinc-500">SIH 2026 · Product Lab</span>
                     </div>
-                    <h3 className="font-display font-bold text-2xl sm:text-3xl text-black dark:text-white">
+                    <h3 className="font-display font-bold text-xl sm:text-2xl text-black dark:text-white tracking-tight">
                       <Link to={`/work/${civicProject.slug}`} className="hover:opacity-75 transition-opacity">
                         {civicProject.title}
                       </Link>
                     </h3>
-                    <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed font-light">
+                    <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed font-light line-clamp-2">
                       {civicProject.summary}
                     </p>
-                    <div className="flex flex-wrap gap-1.5 pt-2">
+                    <div className="flex flex-wrap gap-1.5 pt-1">
                       {civicProject.technologies.slice(0, 4).map(t => (
-                        <span key={t} className="text-[0.68rem] font-mono px-2.5 py-1 rounded bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-zinc-800 dark:text-zinc-200">
+                        <span key={t} className="text-[0.62rem] font-mono px-2 py-0.5 rounded bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-zinc-700 dark:text-zinc-300">
                           {t}
                         </span>
                       ))}
@@ -851,7 +784,7 @@ export const HomePage: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="pt-6 mt-6 border-t border-black/10 dark:border-white/10 flex items-center justify-between">
+                <div className="pt-5 mt-5 border-t border-black/10 dark:border-white/10 flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <Link 
                       to={`/work/${civicProject.slug}`} 
@@ -870,7 +803,7 @@ export const HomePage: React.FC = () => {
                       <ExternalLink className="w-3 h-3" />
                     </a>
                   </div>
-                  <span className="text-xs font-mono text-zinc-500">HDBSCAN AI</span>
+                  <span className="text-[0.68rem] font-mono text-zinc-500">HDBSCAN ML Engine</span>
                 </div>
               </div>
 

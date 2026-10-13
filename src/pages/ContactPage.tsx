@@ -48,6 +48,26 @@ export const ContactPage: React.FC = () => {
           {/* 01. EDITORIAL PRESTIGE HEADER                                             */}
           {/* ========================================================================= */}
           <div className="pb-16 border-b border-black/10 dark:border-white/10 max-w-5xl">
+            {/* Live Studio Telemetry Strip */}
+            <div className="mb-6 inline-flex flex-wrap items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-black/5 dark:bg-white/10 border border-black/10 dark:border-white/15 text-[0.68rem] font-mono">
+              <span className="flex items-center gap-1.5 text-black dark:text-white font-bold">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                STUDIO ONLINE
+              </span>
+              <span className="text-zinc-400 dark:text-zinc-600">·</span>
+              <span className="text-zinc-600 dark:text-zinc-400">
+                SPRINT CAPACITY: 2 SLOTS OPEN FOR Q2
+              </span>
+              <span className="text-zinc-400 dark:text-zinc-600">·</span>
+              <span className="text-zinc-600 dark:text-zinc-400">
+                UTC+5:30 IST
+              </span>
+              <span className="text-zinc-400 dark:text-zinc-600">·</span>
+              <span className="text-black dark:text-white font-bold">
+                AVG RESPONSE &lt; 12H
+              </span>
+            </div>
+
             <div className="flex items-center gap-2 mb-4">
               <span className="w-2 h-2 rounded-full bg-black dark:bg-white animate-pulse" />
               <span className="text-xs font-mono font-bold uppercase tracking-[0.25em] text-zinc-500 dark:text-zinc-400">

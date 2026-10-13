@@ -12,7 +12,7 @@ interface Clay3DSculptureProps {
  * after Clay.global's iconic tactile aesthetic:
  * 
  * - Seamless matte-white porcelain ceramic form with soft ambient occlusion
- * - Dual jewel pearls: royal violet & signature radiant studio orange
+ * - Dual jewel pearls: royal emerald & signature studio titanium
  * - Soft, multi-point studio lighting with ACES Filmic tonemapping
  * - Serene floating breathing physics with subtle weighted mouse parallax
  * - 60 FPS performance budget with automatic off-screen pause

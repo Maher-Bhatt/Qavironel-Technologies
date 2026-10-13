@@ -383,10 +383,10 @@ export const HomePage: React.FC = () => {
                       <div className="p-4 rounded-xl bg-zinc-950 text-zinc-300 border border-white/10 space-y-3">
                         <div className="flex items-center justify-between text-[0.68rem] text-zinc-400 border-b border-white/10 pb-2">
                           <span className="flex items-center gap-1.5 text-white">
-                            <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
-                            ENGINE_ACTIVE
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400/80" />
+                            BENCHMARK_TARGETS
                           </span>
-                          <span>HOST: REGION_GLOBAL</span>
+                          <span className="text-zinc-400">ILLUSTRATIVE MODEL</span>
                         </div>
 
                         <div className="grid grid-cols-2 gap-3 pt-1">
@@ -410,13 +410,13 @@ export const HomePage: React.FC = () => {
 
                         <div className="pt-2 border-t border-white/10 flex items-center justify-between text-[0.65rem] text-zinc-400">
                           <span>SECURITY: DPAPI / ZERO TRUST</span>
-                          <span className="text-white font-bold">VERIFIED</span>
+                          <span className="text-zinc-300">ARCHITECTURE STANDARD</span>
                         </div>
                       </div>
 
                       <div className="pt-1 flex items-center justify-between text-xs font-mono">
                         <span className="text-black dark:text-white font-semibold text-[0.72rem]">
-                          Continuous Telemetry
+                          Performance Architecture (Illustrative)
                         </span>
                         <Link 
                           to="/services" 

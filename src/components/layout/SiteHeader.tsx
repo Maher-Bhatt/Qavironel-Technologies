@@ -34,7 +34,7 @@ export const SiteHeader: React.FC = () => {
       <header 
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled 
-            ? 'bg-[#F9F9F9]/90 dark:bg-[#0A0A0A]/90 backdrop-blur-md border-b border-black/10 dark:border-white/10 py-3.5 shadow-xs' 
+            ? 'bg-white/90 dark:bg-[#0D1511]/90 backdrop-blur-md border-b border-[#D9DED7] dark:border-white/10 py-3.5 shadow-xs' 
             : 'bg-transparent border-b border-transparent py-5 sm:py-6'
         }`}
       >
@@ -95,9 +95,12 @@ export const SiteHeader: React.FC = () => {
 
       {/* Mobile Editorial Drawer */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-40 bg-[#F9F9F9] dark:bg-[#0A0A0A] pt-24 px-6 flex flex-col justify-between pb-10 md:hidden animate-fade-in">
+        <div className="fixed inset-0 z-40 bg-[#F5F5F0] dark:bg-[#0D1511] pt-24 px-6 flex flex-col justify-between pb-10 md:hidden animate-fade-in">
           <div className="space-y-6">
-            <p className="text-xs font-mono uppercase tracking-[0.2em] text-zinc-500">Navigation</p>
+            <div className="pb-4 border-b border-[#D9DED7] dark:border-white/10 flex items-center justify-between">
+              <Logo size="sm" />
+              <span className="text-[0.68rem] font-mono uppercase tracking-[0.2em] text-[#737A73]">Navigation</span>
+            </div>
             <div className="flex flex-col space-y-4">
               {navLinks.map((link) => (
                 <NavLink

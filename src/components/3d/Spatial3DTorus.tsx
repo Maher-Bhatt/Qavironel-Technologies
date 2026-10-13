@@ -8,7 +8,7 @@ interface Spatial3DTorusProps {
 
 /**
  * Spatial3DTorus
- * An architectural 3D Torus Knot in frosted optical glass and studio copper.
+ * An architectural 3D Torus Knot in frosted optical glass and studio chrome.
  * Elegant continuous motion matching Qavironel's digital craftsmanship theme.
  */
 export const Spatial3DTorus: React.FC<Spatial3DTorusProps> = ({

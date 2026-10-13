@@ -36,7 +36,7 @@ export const SiteFooter: React.FC = () => {
         {/* Middle Grid: Navigation, Services, Direct Line */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 py-16 border-b border-black/[0.08] dark:border-white/10">
           <div className="lg:col-span-5 space-y-6">
-            <Logo variant="full" size="md" />
+            <Logo variant="full" size="md" showTagline={true} />
             <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 max-w-sm leading-relaxed">
               No account-manager layers. No bloated templates. Direct founder engineering, defensive security standards, and production speed.
             </p>

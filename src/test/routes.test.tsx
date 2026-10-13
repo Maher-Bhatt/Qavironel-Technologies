@@ -100,6 +100,30 @@ describe('Route Smoke Tests', () => {
     expect(screen.getByRole('heading', { level: 1 })).toBeDefined();
   });
 
+  it('renders CaseStudyPage for Ztees e-commerce platform', () => {
+    render(
+      <MemoryRouter initialEntries={['/work/ztees']}>
+        <Routes>
+          <Route path="/work/:slug" element={<CaseStudyPage />} />
+        </Routes>
+      </MemoryRouter>
+    );
+    expect(screen.getByRole('heading', { level: 1 })).toBeDefined();
+    expect(screen.getByText('Ztees')).toBeDefined();
+  });
+
+  it('renders LegalPage for /terms route', () => {
+    render(
+      <MemoryRouter initialEntries={['/terms']}>
+        <Routes>
+          <Route path="/terms" element={<LegalPage />} />
+        </Routes>
+      </MemoryRouter>
+    );
+    expect(screen.getByRole('heading', { level: 1 })).toBeDefined();
+    expect(screen.getAllByText(/Terms of Service/i).length).toBeGreaterThan(0);
+  });
+
   it('renders NotFoundPage route without error', () => {
     render(
       <MemoryRouter initialEntries={['/non-existent-404-url']}>

@@ -7,59 +7,59 @@
   --font-display: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
-  /* Remapped Monochrome Palette (Pure Black, White, Charcoal, Zinc, Titanium) */
-  --color-forest: #0A0A0A;
-  --color-forest-deep: #000000;
-  --color-forest-accent: #171717;
-  --color-ivory: #FFFFFF;
+  /* Official Brand Palette v2.0 */
+  --color-forest: #174C3A;
+  --color-forest-deep: #103629;
+  --color-forest-accent: #174C3A;
+  --color-ivory: #F5F5F0;
   --color-white: #FFFFFF;
-  --color-graphite: #0A0A0A;
-  --color-graphite-secondary: #262626;
-  --color-sage: #525252;
-  --color-sage-pale: #F4F4F4;
-  --color-warm-grey: #737373;
-  --color-border-soft: #E5E5E5;
+  --color-graphite: #191D1A;
+  --color-graphite-secondary: #343A35;
+  --color-sage: #879B89;
+  --color-sage-pale: #E6ECE5;
+  --color-warm-grey: #737A73;
+  --color-border-soft: #D9DED7;
 
-  /* Legacy aliases mapped to pure monochrome */
-  --color-primary-dark: #0A0A0A;
-  --color-deep-charcoal: #0A0A0A;
-  --color-warm-off-white: #FAFAFA;
-  --color-subtle-border: #E5E5E5;
-  --color-border-dark: rgba(255, 255, 255, 0.12);
+  /* Legacy aliases mapped to approved brand tokens */
+  --color-primary-dark: #191D1A;
+  --color-deep-charcoal: #103629;
+  --color-warm-off-white: #F5F5F0;
+  --color-subtle-border: #D9DED7;
+  --color-border-dark: rgba(217, 222, 215, 0.15);
 }
 
 :root {
   --bg-primary: #FFFFFF;
   --bg-surface: #FFFFFF;
-  --bg-surface-secondary: #F4F4F4;
-  --text-primary: #0A0A0A;
-  --text-secondary: #404040;
-  --text-muted: #737373;
-  --color-accent: #0A0A0A;
-  --color-accent-deep: #000000;
-  --color-accent-vibrant: #171717;
-  --color-accent-soft: #525252;
-  --color-accent-pale: #F4F4F4;
-  --color-charcoal: #0A0A0A;
-  --color-warm-grey: #737373;
-  --color-border: #E5E5E5;
+  --bg-surface-secondary: #F5F5F0;
+  --text-primary: #191D1A;
+  --text-secondary: #343A35;
+  --text-muted: #737A73;
+  --color-accent: #174C3A;
+  --color-accent-deep: #103629;
+  --color-accent-vibrant: #174C3A;
+  --color-accent-soft: #879B89;
+  --color-accent-pale: #E6ECE5;
+  --color-charcoal: #191D1A;
+  --color-warm-grey: #737A73;
+  --color-border: #D9DED7;
 }
 
 .dark {
-  --bg-primary: #0A0A0A;
-  --bg-surface: #121212;
-  --bg-surface-secondary: #1A1A1A;
-  --text-primary: #FFFFFF;
-  --text-secondary: #A3A3A3;
-  --text-muted: #737373;
-  --color-accent: #FFFFFF;
-  --color-accent-deep: #000000;
-  --color-accent-vibrant: #E5E5E5;
-  --color-accent-soft: #A3A3A3;
-  --color-accent-pale: #1A1A1A;
-  --color-charcoal: #FFFFFF;
-  --color-warm-grey: #737373;
-  --color-border: rgba(255, 255, 255, 0.12);
+  --bg-primary: #0D1511;
+  --bg-surface: #103629;
+  --bg-surface-secondary: #191D1A;
+  --text-primary: #F5F5F0;
+  --text-secondary: #E6ECE5;
+  --text-muted: #879B89;
+  --color-accent: #879B89;
+  --color-accent-deep: #103629;
+  --color-accent-vibrant: #E6ECE5;
+  --color-accent-soft: #879B89;
+  --color-accent-pale: #191D1A;
+  --color-charcoal: #F5F5F0;
+  --color-warm-grey: #879B89;
+  --color-border: rgba(217, 222, 215, 0.15);
 }
 
 body {
@@ -73,12 +73,12 @@ body {
 
 /* Accessibility: Visible custom focus states */
 *:focus-visible {
-  outline: 2px solid #0A0A0A;
+  outline: 2px solid #174C3A;
   outline-offset: 3px;
 }
 
 .dark *:focus-visible {
-  outline: 2px solid #FFFFFF;
+  outline: 2px solid #879B89;
 }
 
 /* Smooth motion & transitions */

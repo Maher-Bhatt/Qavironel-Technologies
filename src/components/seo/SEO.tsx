@@ -21,7 +21,7 @@ export const SEO: React.FC<SEOProps> = ({
   title, 
   description, 
   type = 'website',
-  image = '/images/brand/og-image.jpg',
+  image = '/images/brand/og-image.png',
   imageWidth = 1200,
   imageHeight = 630,
   imageAlt,

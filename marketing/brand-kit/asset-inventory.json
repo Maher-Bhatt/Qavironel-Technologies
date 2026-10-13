@@ -1,0 +1,592 @@
+[
+  {
+    "path": "README.md",
+    "bytes": 2924,
+    "ext": ".md"
+  },
+  {
+    "path": "06-Web-Integration/Antigravity_Integration_Prompt.md",
+    "bytes": 2162,
+    "ext": ".md"
+  },
+  {
+    "path": "08-Textures-and-Elements/avatar-geometry-dark.png",
+    "bytes": 68522,
+    "ext": ".png"
+  },
+  {
+    "path": "08-Textures-and-Elements/pathway-texture-light.svg",
+    "bytes": 4796,
+    "ext": ".svg"
+  },
+  {
+    "path": "08-Textures-and-Elements/pathway-texture-dark.png",
+    "bytes": 102030,
+    "ext": ".png"
+  },
+  {
+    "path": "08-Textures-and-Elements/avatar-geometry-dark.svg",
+    "bytes": 4782,
+    "ext": ".svg"
+  },
+  {
+    "path": "08-Textures-and-Elements/pathway-texture-dark.svg",
+    "bytes": 4794,
+    "ext": ".svg"
+  },
+  {
+    "path": "08-Textures-and-Elements/pathway-texture-light.png",
+    "bytes": 59149,
+    "ext": ".png"
+  },
+  {
+    "path": "05-Brand-Guidelines/Brand_Guidelines.md",
+    "bytes": 4774,
+    "ext": ".md"
+  },
+  {
+    "path": "07-Content-Plan/30-Day_Content_Plan.md",
+    "bytes": 2357,
+    "ext": ".md"
+  },
+  {
+    "path": "03-Social-Creatives/PNG/carousel-01-cover.png",
+    "bytes": 79631,
+    "ext": ".png"
+  },
+  {
+    "path": "03-Social-Creatives/PNG/instagram-services.png",
+    "bytes": 67900,
+    "ext": ".png"
+  },
+  {
+    "path": "03-Social-Creatives/PNG/x-post-launch.png",
+    "bytes": 86819,
+    "ext": ".png"
+  },
+  {
+    "path": "03-Social-Creatives/PNG/whatsapp-status.png",
+    "bytes": 72459,
+    "ext": ".png"
+  },
+  {
+    "path": "03-Social-Creatives/PNG/case-study-template.png",
+    "bytes": 140880,
+    "ext": ".png"
+  },
+  {
+    "path": "03-Social-Creatives/PNG/carousel-02-services.png",
+    "bytes": 75901,
+    "ext": ".png"
+  },
+  {
+    "path": "03-Social-Creatives/PNG/instagram-cta.png",
+    "bytes": 77796,
+    "ext": ".png"
+  },
+  {
+    "path": "03-Social-Creatives/PNG/linkedin-engineering-note.png",
+    "bytes": 64362,
+    "ext": ".png"
+  },
+  {
+    "path": "03-Social-Creatives/PNG/instagram-brand-launch.png",
+    "bytes": 71947,
+    "ext": ".png"
+  },
+  {
+    "path": "03-Social-Creatives/PNG/instagram-process.png",
+    "bytes": 72609,
+    "ext": ".png"
+  },
+  {
+    "path": "03-Social-Creatives/PNG/linkedin-brand-launch.png",
+    "bytes": 75132,
+    "ext": ".png"
+  },
+  {
+    "path": "03-Social-Creatives/PNG/carousel-05-cta.png",
+    "bytes": 73265,
+    "ext": ".png"
+  },
+  {
+    "path": "03-Social-Creatives/PNG/instagram-story-reel-cover.png",
+    "bytes": 67830,
+    "ext": ".png"
+  },
+  {
+    "path": "03-Social-Creatives/PNG/youtube-thumbnail-template.png",
+    "bytes": 127909,
+    "ext": ".png"
+  },
+  {
+    "path": "03-Social-Creatives/PNG/instagram-portfolio-cover.png",
+    "bytes": 504787,
+    "ext": ".png"
+  },
+  {
+    "path": "03-Social-Creatives/PNG/carousel-04-proof.png",
+    "bytes": 77258,
+    "ext": ".png"
+  },
+  {
+    "path": "03-Social-Creatives/PNG/carousel-03-process.png",
+    "bytes": 74620,
+    "ext": ".png"
+  },
+  {
+    "path": "03-Social-Creatives/SVG/case-study-template.svg",
+    "bytes": 115307,
+    "ext": ".svg"
+  },
+  {
+    "path": "03-Social-Creatives/SVG/instagram-portfolio-cover.svg",
+    "bytes": 350331,
+    "ext": ".svg"
+  },
+  {
+    "path": "03-Social-Creatives/SVG/instagram-process.svg",
+    "bytes": 6063,
+    "ext": ".svg"
+  },
+  {
+    "path": "03-Social-Creatives/SVG/linkedin-engineering-note.svg",
+    "bytes": 6039,
+    "ext": ".svg"
+  },
+  {
+    "path": "03-Social-Creatives/SVG/instagram-cta.svg",
+    "bytes": 6257,
+    "ext": ".svg"
+  },
+  {
+    "path": "03-Social-Creatives/SVG/youtube-thumbnail-template.svg",
+    "bytes": 151323,
+    "ext": ".svg"
+  },
+  {
+    "path": "03-Social-Creatives/SVG/instagram-story-reel-cover.svg",
+    "bytes": 6064,
+    "ext": ".svg"
+  },
+  {
+    "path": "03-Social-Creatives/SVG/carousel-03-process.svg",
+    "bytes": 6242,
+    "ext": ".svg"
+  },
+  {
+    "path": "03-Social-Creatives/SVG/carousel-05-cta.svg",
+    "bytes": 6056,
+    "ext": ".svg"
+  },
+  {
+    "path": "03-Social-Creatives/SVG/linkedin-brand-launch.svg",
+    "bytes": 6053,
+    "ext": ".svg"
+  },
+  {
+    "path": "03-Social-Creatives/SVG/instagram-services.svg",
+    "bytes": 6042,
+    "ext": ".svg"
+  },
+  {
+    "path": "03-Social-Creatives/SVG/carousel-01-cover.svg",
+    "bytes": 6227,
+    "ext": ".svg"
+  },
+  {
+    "path": "03-Social-Creatives/SVG/instagram-brand-launch.svg",
+    "bytes": 6051,
+    "ext": ".svg"
+  },
+  {
+    "path": "03-Social-Creatives/SVG/whatsapp-status.svg",
+    "bytes": 6289,
+    "ext": ".svg"
+  },
+  {
+    "path": "03-Social-Creatives/SVG/x-post-launch.svg",
+    "bytes": 6025,
+    "ext": ".svg"
+  },
+  {
+    "path": "03-Social-Creatives/SVG/carousel-02-services.svg",
+    "bytes": 6247,
+    "ext": ".svg"
+  },
+  {
+    "path": "03-Social-Creatives/SVG/carousel-04-proof.svg",
+    "bytes": 6050,
+    "ext": ".svg"
+  },
+  {
+    "path": "04-Project-Showcases/Source/project-itm-notes.svg",
+    "bytes": 195262,
+    "ext": ".svg"
+  },
+  {
+    "path": "04-Project-Showcases/Source/itm-dashboard.webp",
+    "bytes": 71990,
+    "ext": ".webp"
+  },
+  {
+    "path": "04-Project-Showcases/Source/project-kalki-workspace.svg",
+    "bytes": 141811,
+    "ext": ".svg"
+  },
+  {
+    "path": "04-Project-Showcases/Source/codedroid-cover.webp",
+    "bytes": 28840,
+    "ext": ".webp"
+  },
+  {
+    "path": "04-Project-Showcases/Source/kalki-ask.webp",
+    "bytes": 36754,
+    "ext": ".webp"
+  },
+  {
+    "path": "04-Project-Showcases/Source/kalki-workbench.webp",
+    "bytes": 47428,
+    "ext": ".webp"
+  },
+  {
+    "path": "04-Project-Showcases/Source/ztees-storefront-hero.webp",
+    "bytes": 109336,
+    "ext": ".webp"
+  },
+  {
+    "path": "04-Project-Showcases/Source/civic-sathi-hero.webp",
+    "bytes": 168598,
+    "ext": ".webp"
+  },
+  {
+    "path": "04-Project-Showcases/Source/project-codedroid.svg",
+    "bytes": 79861,
+    "ext": ".svg"
+  },
+  {
+    "path": "04-Project-Showcases/Source/project-civic-sathi.svg",
+    "bytes": 395043,
+    "ext": ".svg"
+  },
+  {
+    "path": "04-Project-Showcases/PNG/project-kalki-workspace.png",
+    "bytes": 136982,
+    "ext": ".png"
+  },
+  {
+    "path": "04-Project-Showcases/PNG/project-civic-sathi.png",
+    "bytes": 552088,
+    "ext": ".png"
+  },
+  {
+    "path": "04-Project-Showcases/PNG/project-codedroid.png",
+    "bytes": 182922,
+    "ext": ".png"
+  },
+  {
+    "path": "04-Project-Showcases/PNG/project-itm-notes.png",
+    "bytes": 186997,
+    "ext": ".png"
+  },
+  {
+    "path": "02-Platform-Banners/PNG/linkedin-company-cover.png",
+    "bytes": 43852,
+    "ext": ".png"
+  },
+  {
+    "path": "02-Platform-Banners/PNG/linkedin-founder-cover.png",
+    "bytes": 106525,
+    "ext": ".png"
+  },
+  {
+    "path": "02-Platform-Banners/PNG/facebook-page-cover.png",
+    "bytes": 123799,
+    "ext": ".png"
+  },
+  {
+    "path": "02-Platform-Banners/PNG/website-open-graph.png",
+    "bytes": 90505,
+    "ext": ".png"
+  },
+  {
+    "path": "02-Platform-Banners/PNG/github-social-preview.png",
+    "bytes": 107493,
+    "ext": ".png"
+  },
+  {
+    "path": "02-Platform-Banners/PNG/youtube-channel-banner.png",
+    "bytes": 239312,
+    "ext": ".png"
+  },
+  {
+    "path": "02-Platform-Banners/PNG/x-header.png",
+    "bytes": 129173,
+    "ext": ".png"
+  },
+  {
+    "path": "02-Platform-Banners/SVG/youtube-channel-banner.svg",
+    "bytes": 6048,
+    "ext": ".svg"
+  },
+  {
+    "path": "02-Platform-Banners/SVG/github-social-preview.svg",
+    "bytes": 6353,
+    "ext": ".svg"
+  },
+  {
+    "path": "02-Platform-Banners/SVG/facebook-page-cover.svg",
+    "bytes": 6430,
+    "ext": ".svg"
+  },
+  {
+    "path": "02-Platform-Banners/SVG/linkedin-company-cover.svg",
+    "bytes": 5463,
+    "ext": ".svg"
+  },
+  {
+    "path": "02-Platform-Banners/SVG/website-open-graph.svg",
+    "bytes": 6338,
+    "ext": ".svg"
+  },
+  {
+    "path": "02-Platform-Banners/SVG/linkedin-founder-cover.svg",
+    "bytes": 6473,
+    "ext": ".svg"
+  },
+  {
+    "path": "02-Platform-Banners/SVG/x-header.svg",
+    "bytes": 6276,
+    "ext": ".svg"
+  },
+  {
+    "path": "01-Logo/PNG/qavironel-logo-stacked-light-bg.png",
+    "bytes": 24309,
+    "ext": ".png"
+  },
+  {
+    "path": "01-Logo/PNG/qavironel-logo-stacked-dark-bg.png",
+    "bytes": 24958,
+    "ext": ".png"
+  },
+  {
+    "path": "01-Logo/PNG/avatar-ivory.png",
+    "bytes": 51770,
+    "ext": ".png"
+  },
+  {
+    "path": "01-Logo/PNG/qavironel-logo-stacked-light-transparent.png",
+    "bytes": 27210,
+    "ext": ".png"
+  },
+  {
+    "path": "01-Logo/PNG/qavironel-mark-monochrome.png",
+    "bytes": 11598,
+    "ext": ".png"
+  },
+  {
+    "path": "01-Logo/PNG/qavironel-wordmark-dark-transparent.png",
+    "bytes": 28912,
+    "ext": ".png"
+  },
+  {
+    "path": "01-Logo/PNG/qavironel-logo-horizontal-mono.png",
+    "bytes": 29933,
+    "ext": ".png"
+  },
+  {
+    "path": "01-Logo/PNG/qavironel-logo-horizontal-dark-transparent.png",
+    "bytes": 30006,
+    "ext": ".png"
+  },
+  {
+    "path": "01-Logo/PNG/qavironel-mark-forest.png",
+    "bytes": 12028,
+    "ext": ".png"
+  },
+  {
+    "path": "01-Logo/PNG/qavironel-logo-horizontal-light-bg.png",
+    "bytes": 29161,
+    "ext": ".png"
+  },
+  {
+    "path": "01-Logo/PNG/qavironel-wordmark-light-bg.png",
+    "bytes": 28094,
+    "ext": ".png"
+  },
+  {
+    "path": "01-Logo/PNG/qavironel-logo-stacked-dark-transparent.png",
+    "bytes": 27069,
+    "ext": ".png"
+  },
+  {
+    "path": "01-Logo/PNG/favicon-48.png",
+    "bytes": 1095,
+    "ext": ".png"
+  },
+  {
+    "path": "01-Logo/PNG/avatar-ink.png",
+    "bytes": 67720,
+    "ext": ".png"
+  },
+  {
+    "path": "01-Logo/PNG/favicon-180.png",
+    "bytes": 3147,
+    "ext": ".png"
+  },
+  {
+    "path": "01-Logo/PNG/qavironel-wordmark-dark-bg.png",
+    "bytes": 28118,
+    "ext": ".png"
+  },
+  {
+    "path": "01-Logo/PNG/favicon-32.png",
+    "bytes": 742,
+    "ext": ".png"
+  },
+  {
+    "path": "01-Logo/PNG/qavironel-mark-dark.png",
+    "bytes": 11645,
+    "ext": ".png"
+  },
+  {
+    "path": "01-Logo/PNG/qavironel-logo-horizontal-light-transparent.png",
+    "bytes": 30186,
+    "ext": ".png"
+  },
+  {
+    "path": "01-Logo/PNG/favicon-512.png",
+    "bytes": 9119,
+    "ext": ".png"
+  },
+  {
+    "path": "01-Logo/PNG/qavironel-wordmark-light-transparent.png",
+    "bytes": 29066,
+    "ext": ".png"
+  },
+  {
+    "path": "01-Logo/PNG/qavironel-logo-horizontal-dark-bg.png",
+    "bytes": 29208,
+    "ext": ".png"
+  },
+  {
+    "path": "01-Logo/PNG/favicon-192.png",
+    "bytes": 3317,
+    "ext": ".png"
+  },
+  {
+    "path": "01-Logo/PNG/avatar-forest.png",
+    "bytes": 67903,
+    "ext": ".png"
+  },
+  {
+    "path": "01-Logo/PNG/favicon-64.png",
+    "bytes": 1397,
+    "ext": ".png"
+  },
+  {
+    "path": "01-Logo/PNG/favicon-16.png",
+    "bytes": 448,
+    "ext": ".png"
+  },
+  {
+    "path": "01-Logo/SVG/qavironel-logo-horizontal-dark-bg.svg",
+    "bytes": 1154,
+    "ext": ".svg"
+  },
+  {
+    "path": "01-Logo/SVG/avatar-forest.svg",
+    "bytes": 1490,
+    "ext": ".svg"
+  },
+  {
+    "path": "01-Logo/SVG/qavironel-wordmark-light-bg.svg",
+    "bytes": 783,
+    "ext": ".svg"
+  },
+  {
+    "path": "01-Logo/SVG/qavironel-logo-horizontal-dark-transparent.svg",
+    "bytes": 1106,
+    "ext": ".svg"
+  },
+  {
+    "path": "01-Logo/SVG/qavironel-wordmark-dark-bg.svg",
+    "bytes": 783,
+    "ext": ".svg"
+  },
+  {
+    "path": "01-Logo/SVG/qavironel-wordmark-light-transparent.svg",
+    "bytes": 735,
+    "ext": ".svg"
+  },
+  {
+    "path": "01-Logo/SVG/favicon.svg",
+    "bytes": 518,
+    "ext": ".svg"
+  },
+  {
+    "path": "01-Logo/SVG/qavironel-logo-stacked-light-bg.svg",
+    "bytes": 1139,
+    "ext": ".svg"
+  },
+  {
+    "path": "01-Logo/SVG/qavironel-logo-horizontal-light-transparent.svg",
+    "bytes": 1106,
+    "ext": ".svg"
+  },
+  {
+    "path": "01-Logo/SVG/qavironel-mark-monochrome.svg",
+    "bytes": 502,
+    "ext": ".svg"
+  },
+  {
+    "path": "01-Logo/SVG/qavironel-mark-dark.svg",
+    "bytes": 502,
+    "ext": ".svg"
+  },
+  {
+    "path": "01-Logo/SVG/avatar-ivory.svg",
+    "bytes": 1490,
+    "ext": ".svg"
+  },
+  {
+    "path": "01-Logo/SVG/qavironel-logo-horizontal-mono.svg",
+    "bytes": 1106,
+    "ext": ".svg"
+  },
+  {
+    "path": "01-Logo/SVG/qavironel-wordmark-dark-transparent.svg",
+    "bytes": 735,
+    "ext": ".svg"
+  },
+  {
+    "path": "01-Logo/SVG/avatar-ink.svg",
+    "bytes": 1490,
+    "ext": ".svg"
+  },
+  {
+    "path": "01-Logo/SVG/qavironel-logo-stacked-dark-bg.svg",
+    "bytes": 1139,
+    "ext": ".svg"
+  },
+  {
+    "path": "01-Logo/SVG/qavironel-logo-stacked-light-transparent.svg",
+    "bytes": 1090,
+    "ext": ".svg"
+  },
+  {
+    "path": "01-Logo/SVG/qavironel-logo-stacked-dark-transparent.svg",
+    "bytes": 1090,
+    "ext": ".svg"
+  },
+  {
+    "path": "01-Logo/SVG/qavironel-logo-horizontal-light-bg.svg",
+    "bytes": 1154,
+    "ext": ".svg"
+  },
+  {
+    "path": "01-Logo/SVG/qavironel-mark-forest.svg",
+    "bytes": 502,
+    "ext": ".svg"
+  }
+]

@@ -8,7 +8,7 @@ interface Spatial3DPrismProps {
 
 /**
  * Spatial3DPrism
- * An optical crystalline prism in frosted physical glass and studio copper.
+ * An optical crystalline prism in frosted physical glass and studio titanium.
  * Designed to seamlessly sit within the Capabilities Bento Grid or technical modules.
  */
 export const Spatial3DPrism: React.FC<Spatial3DPrismProps> = ({

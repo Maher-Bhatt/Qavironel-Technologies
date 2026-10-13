@@ -377,54 +377,107 @@ export const projects: Project[] = [
   {
     slug: 'itm-notes',
     title: 'ITM Notes',
-    eyebrow: 'Student Resource Platform · Digital Product',
+    eyebrow: 'Full-Stack Academic Operating System · Engineering Study Suite',
     category: 'Digital Products',
-    categoryLabel: 'Digital Products · Education',
-    status: 'Live Platform',
+    categoryLabel: 'Digital Products · Academic Systems & EdTech',
+    status: 'Live Production Platform',
     featured: false,
     order: 6,
     year: '2025–2026',
-    summary: 'A focused study platform that organizes Semester 2 engineering subjects, materials, practice quizzes, and search for 300+ B.Tech students.',
-    audience: 'Undergraduate engineering students who need unified, instant access to syllabus-aligned study materials without digging through unorganized messaging groups and cloud folders.',
-    challenge: 'Course materials, previous year exam papers, and laboratory assignments were scattered across disparate cloud drives, messaging groups, and outdated portals. Students routinely struggled to locate accurate study guides during exam preparation cycles.',
+    summary: 'A comprehensive academic operating system engineered for engineering undergraduates at ITM (SLS) Baroda University. Unifies an in-browser coding sandbox with 154 runnable practicals, a 954-question timed quiz engine, KaTeX LaTeX syllabus reader with TTS audio lectures, 75% attendance compliance guard, 10-point relative SGPA predictor, and real-time Campus Pulse community.',
+    audience: 'Undergraduate computer science and engineering students, faculty, and lab assistants seeking a centralized, high-velocity digital companion for semester coursework, coding practicals, and university examination prep.',
+    challenge: 'Engineering coursework suffered from severe platform fragmentation: coding lab assignments required heavy local IDE setups prone to compiler version mismatches, course syllabi and MST/CET question papers were buried in unstructured messaging groups, and students lacked clear mathematical visibility into relative SGPA distributions and UGC-mandated 75% minimum attendance thresholds.',
     objectives: [
-      'Organize curricula into clean, searchable digital subject modules.',
-      'Provide instant client-side search across chapters, topics, and important exam questions.',
-      'Ensure 100% mobile usability for studying on transit and between classes.',
-      'Keep hosting and maintenance zero-cost through an optimized static JAMstack architecture.'
+      'Deploy an in-browser zero-setup Coding Lab featuring 154 runnable engineering practicals across Java, C, SQL, and Python.',
+      'Deliver an academic Markdown reader with KaTeX LaTeX math rendering, Pomodoro focus sprints, and continuous text-to-speech audio lectures.',
+      'Build transparent mathematical calculators for 10-point relative SGPA prediction, reverse exam targets, and 75% attendance safe bunk buffer modeling.',
+      'Index 954 university multiple-choice questions into a timed subject quiz engine with grand mock exam simulations.',
+      'Engineer Campus Pulse—a real-time peer discussion forum with privacy-preserving Anonymous Mask protection to safeguard students from academic retaliation.',
+      'Centralize 52+ official syllabus documents, mid-semester test (MST) question banks, and faculty lecture slides with one-click offline PDF access.'
     ],
-    solution: 'Designed and deployed a responsive educational hub indexing five core engineering subjects: Python Programming, C Language, Digital Electronics, Probability & Statistics, and Financial Accounting. Includes downloadable lecture PDFs, curated important question banks, and progress tracking.',
-    whyItMatters: 'Demonstrates how thoughtful information architecture and clean design can turn chaotic academic documents into an empowering daily tool that directly serves hundreds of fellow university peers.',
+    solution: 'Engineered ITM Notes 2.0 as an offline-first Progressive Web App built with React 18, TypeScript, Tailwind CSS, Radix UI, and Supabase. The platform provides a full in-browser coding sandbox with syntax highlighting and simulated execution, KaTeX mathematical typesetting, continuous audio lecture synthesis, dynamic academic analytics, and real-time peer community feeds.',
+    whyItMatters: 'Demonstrates end-to-end full-stack software craftsmanship applied directly to real-world campus workflows—transforming fragmented university PDFs into an empowering daily operating system with gamified streaks, coding practicals, and high-trust peer collaboration.',
     workflow: [
-      'Landing dashboard displays active semester syllabus and recent syllabus notices.',
-      'Students select a subject to access structured units, lecture slides, and formula sheets.',
-      'Global search bar filters topics and question banks in real time.',
-      'One-click PDF preview or direct download for offline study.'
+      'Interactive Student Dashboard: Real-time 5-day study streak tracking, XP milestones (Level 9 Architect), 23-day university exam countdown clock, and instant semester switcher.',
+      'Integrated Coding Lab: 154 runnable engineering practicals in Java, C, SQL, and Python with in-browser terminal execution and automated test harnesses.',
+      'Academic Syllabus Reader: Comprehensive Markdown reader rendering KaTeX LaTeX equations, Mermaid diagrams, integrated text-to-speech audio lectures, and 25-minute Pomodoro sprints.',
+      'Academic Calculators: 10-point relative SGPA/CGPA forecaster, Reverse Exam Target ("What Grade Do I Need?"), and 75% UGC Attendance Guard calculating safe bunk margins.',
+      'Subject Quiz Engine: 954 curated multiple-choice questions with timed mock exam sessions, instant explanation scoring, and unit-wise topic mastery.',
+      'Campus Pulse & Materials: Real-time peer discussion forum powered by Supabase with Anonymous Mask shield, paired with a library of 52+ official university question papers and downloadable PDFs.'
     ],
     buildNotes: [
-      'Built using React and TypeScript deployed to Vercel edge networks.',
-      'Curated content verified in collaboration with university course representatives.',
-      'Optimized with client-side indexing for zero-latency instant search.'
+      'Architected with React 18, TypeScript, Tailwind CSS, and Radix UI (shadcn/ui) for a high-density, accessible interface.',
+      'Integrated KaTeX and remark-math for sub-millisecond client-side LaTeX equation rendering across engineering subjects.',
+      'Engineered custom terminal sandbox simulation supporting code execution across 154 structured university practicals.',
+      'Powered real-time campus feeds and peer interactions with Supabase PostgreSQL, Row-Level Security (RLS), and WebSockets.',
+      'Configured Vite PWA with service-worker caching for instant offline document retrieval on mobile and desktop.'
     ],
-    technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Client-side Search Index', 'Vercel Edge Platform'],
-    heroImage: '/images/work/itm-notes-home.webp',
+    technologies: [
+      'React 18',
+      'TypeScript',
+      'Tailwind CSS',
+      'shadcn/ui (Radix)',
+      'Supabase (PostgreSQL & RLS)',
+      'TanStack React Query',
+      'KaTeX Math Engine',
+      'Mermaid.js',
+      'Recharts',
+      'Vite PWA',
+      'Vercel Edge Platform'
+    ],
+    heroImage: '/images/projects/itm/itm-dashboard-hero.png',
     videoSrc: '/videos/project-reel.mp4',
     gallery: [
       {
-        src: '/images/projects/itmnotes-cover.png',
-        alt: 'ITM Notes study dashboard showcasing Semester 2 subject cards',
-        caption: 'The main dashboard organizing five foundational semester subjects with progress indicators.'
+        src: '/images/projects/itm/itm-dashboard-hero.png',
+        alt: 'ITM Notes student dashboard with gamified streak, level milestones, and countdown',
+        caption: 'Main student dashboard featuring active study streak tracking, Level 9 Architect XP progress, and live university exam countdown.'
       },
       {
-        src: '/images/projects/itmnotes-subjects.png',
-        alt: 'ITM Notes subject syllabus breakdown and PDF resource listings',
-        caption: 'Subject detail view with structured unit modules, downloadable guides, and exam question banks.'
+        src: '/images/projects/itm/itm-coding-lab.png',
+        alt: 'Interactive in-browser Coding Lab IDE with 154 runnable practicals',
+        caption: 'Integrated university coding laboratory with syntax-highlighted IDE, terminal output console, and 154 multi-language practicals.'
+      },
+      {
+        src: '/images/projects/itm/itm-notes-reader.png',
+        alt: 'Academic syllabus reader with KaTeX LaTeX math formulas and continuous audio lecture TTS',
+        caption: 'Comprehensive markdown reader featuring KaTeX LaTeX formula rendering, integrated audio lecture narration, and Pomodoro focus sprints.'
+      },
+      {
+        src: '/images/projects/itm/itm-gpa-attendance.png',
+        alt: '10-point relative SGPA calculator and 75% attendance safe bunk margin guard',
+        caption: 'Dynamic academic modeling engine calculating 10-point relative SGPA and UGC 75% attendance compliance with safe bunk buffers.'
+      },
+      {
+        src: '/images/projects/itm/itm-quiz-engine.png',
+        alt: 'University quiz engine with 954 MCQs and timed grand mock exam mode',
+        caption: 'Interactive subject quiz engine indexing 954 multiple-choice questions with timed mock exam conditions and instant performance scoring.'
+      },
+      {
+        src: '/images/projects/itm/itm-campus-social.png',
+        alt: 'Campus Pulse social discussion feed with Anonymous Mask anti-retaliation shield',
+        caption: 'Real-time student community feed built on Supabase, featuring reactions and privacy-preserving Anonymous Mask protection.'
+      },
+      {
+        src: '/images/projects/itm/itm-materials-library.png',
+        alt: 'Centralized academic materials library with 52+ university documents and PDFs',
+        caption: 'Centralized repository indexing 52+ official syllabi, lecture presentations, MST/CET question banks, and offline PDFs.'
+      },
+      {
+        src: '/images/projects/itm/itm-exam-countdown.png',
+        alt: 'University term examination timetable and live countdown clock',
+        caption: 'Live examination command center displaying official university timetables, course codes, and 23-day countdown timers.'
+      },
+      {
+        src: '/images/projects/itm/itm-exam-imp-questions.png',
+        alt: 'Unit-wise high-yield exam question banks with 3M, 5M, and 7M model answers',
+        caption: 'Curated university question bank organized by unit weights (3M, 5M, 7M) with model answers and quick revision cheat sheets.'
       }
     ],
     metrics: [
-      { value: '300+', label: 'Active University Students', context: 'Adopted across engineering student cohort' },
-      { value: '5 Core', label: 'B.Tech Subjects', context: 'Python, C, Digital Electronics, Stats & Accounting' },
-      { value: 'Mobile-First', label: 'Responsive Architecture', context: 'Engineered for quick revision on phones' }
+      { value: '154', label: 'Runnable Coding Practicals', context: 'Java, C, SQL & Python in-browser IDE sandbox' },
+      { value: '954+', label: 'University MCQ Bank', context: 'Timed practice exams & instant scoring' },
+      { value: '251 Topics', label: 'Curriculum Mastered', context: 'KaTeX LaTeX math, audio TTS & 75% attendance guard' }
     ],
     links: [
       { label: 'Visit Live Study Platform', url: 'https://itm-notes-new.vercel.app/', type: 'live' },

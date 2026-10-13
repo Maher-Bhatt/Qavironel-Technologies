@@ -94,77 +94,112 @@ export const projects: Project[] = [
   {
     slug: 'ztees',
     title: 'Ztees',
-    eyebrow: 'E-Commerce Storefront · Production Commerce',
+    eyebrow: 'Direct-to-Consumer Streetwear Engine · Storefront & Operations Console',
     category: 'Client Work',
-    categoryLabel: 'Client Work · E-Commerce',
-    status: 'Live Storefront',
+    categoryLabel: 'Client Work · E-Commerce & Retail Operations',
+    status: 'Production Storefront & Owner Console',
     featured: true,
     order: 2,
     year: '2026',
-    summary: 'A mobile-first editorial storefront for an Indian streetwear brand, designed around quick product discovery and a direct WhatsApp order journey.',
-    audience: 'Shoppers looking for graphic and heavyweight oversized streetwear drops, especially users browsing on phones who prefer conversational ordering over high-friction checkout funnels.',
-    challenge: 'The brand was managing product drops and orders manually through Instagram direct messages, creating lost inquiries, repetitive product questions, and checkout drop-off. The client needed a fast, credible digital storefront without the overhead or ongoing monthly fees of a heavyweight Shopify or Magento subscription.',
+    summary: 'A high-conversion streetwear commerce ecosystem built for Z Tees India, comprising a mobile-first editorial customer storefront (ztees.store), a dedicated private owner operations console (/admin), and an Expo Android mobile app. Features 61 live oversized graphic tees, instant size selection, multi-angle media studio, customer review moderation, and frictionless WhatsApp + UPI conversational checkout.',
+    audience: 'D2C apparel shoppers seeking heavyweight 240 GSM graphic streetwear drops, alongside brand owners who require real-time catalog management, order triage, and zero-overhead SaaS operations.',
+    challenge: 'The brand was bottlenecked by manual Instagram DM ordering: customer inquiries slipped through message requests, sizing questions were repeated endlessly, and stock counts were impossible to track accurately during limited-quantity drops. Meanwhile, standard Shopify subscriptions imposed monthly overhead, payment gateway transaction cuts, and sluggish mobile page load times.',
     objectives: [
-      'Enable rapid collection browsing and size verification on mobile devices.',
-      'Transition shoppers into an automated WhatsApp order pre-fill without losing cart intent.',
-      'Ship from initial creative brief to production launch within 48 hours.',
-      'Maintain lightweight, instant-load performance across 4G and mobile networks.'
+      'Engineer an editorial, drop-driven customer storefront displaying 60+ active streetwear designs.',
+      'Build a high-converting frictionless checkout routing orders directly into pre-filled WhatsApp UPI payment messages.',
+      'Develop a protected owner workspace (/admin) with Supabase Auth for real-time catalog updates and order triage.',
+      'Implement a multi-angle Media Studio allowing the merchant to upload front, back, detail, and lifestyle photos.',
+      'Package an Expo React Native Android mobile client for on-the-go customer shopping and store management.',
+      'Eliminate recurring SaaS subscription fees while achieving sub-second edge load speeds on mobile networks.'
     ],
-    solution: 'Designed and engineered a custom editorial storefront combining streetwear visual appeal with immediate conversion mechanics. Features include dynamic collection campaigns, structured size guides, high-density product photography grids, WhatsApp pre-populated checkout messaging, and UPI payment guidance.',
-    whyItMatters: 'Demonstrates that small consumer brands do not always need an expensive multi-page checkout architecture to build trust. Crafting a high-speed, editorial presentation paired with natural regional payment habits (WhatsApp + UPI) produces higher completion rates than generic templates.',
+    solution: 'Architected a dual-surface e-commerce engine using Vite, React 18, Tailwind CSS, and Supabase PostgreSQL. For consumers, the platform offers an editorial catalog with instant size matrices, interactive drop campaigns (Janmashtami Radha Krishna, Heavyweight, Anime, Motorsport), and automated WhatsApp order generation. For the brand owner, a private console provides live order queues, CSV exports, catalog pricing/GSM toggles, customer review moderation, and cloud media uploads.',
+    whyItMatters: 'Demonstrates how high-velocity software engineering eliminates SaaS lock-in: replacing costly commerce subscriptions with a custom, ultra-fast storefront and dedicated owner operations suite that respects Indian consumer checkout habits (WhatsApp + UPI).',
     workflow: [
-      'Editorial drop showcase featuring new arrivals and campaign artwork.',
-      'Category and size filtering with clear price and inventory visibility.',
-      'Product detail inspection with material details and fit specifications.',
-      'One-tap "Order via WhatsApp" trigger generating an exact SKU, size, and pricing message for the seller.'
+      'Customer Discovery: Shoppers browse seasonal drops with interactive category chips, color swatches, and instant search across 61 designs.',
+      'Product & Fit Inspection: Detailed product view featuring 240 GSM cotton specifications, oversized fit guides, and multi-angle photography.',
+      'Frictionless Checkout: Instant bag addition with automated "Buy Now on WhatsApp" pre-formatting SKU, size, price, and customer address.',
+      'Owner Order Triage: Brand managers monitor live incoming orders in /admin, update fulfillment status, and add courier tracking notes.',
+      'Catalog & Review Operations: Instant product creation with fabric specs, live stock toggles, and customer review moderation ("Read. Check. Publish.").'
     ],
     buildNotes: [
-      'Engineered with React, Vite, and Tailwind CSS for minimal bundle footprint.',
-      'Optimized asset pipeline with modern responsive image sizing and webp conversion.',
-      'Integrated OpenGraph cards tailored for social media drop shares.'
+      'Built with React 18, Vite, Tailwind CSS, and Supabase Realtime for instant catalog synchronization.',
+      'Integrated Supabase PostgreSQL with Row-Level Security (RLS) separating public catalog reads from protected admin operations.',
+      'Engineered automated WhatsApp order payload generator that serializes cart items into formatted WhatsApp Business messages.',
+      'Developed native Expo React Native Android mobile app with EAS Build release pipelines.'
     ],
-    technologies: ['React', 'Vite', 'Tailwind CSS', 'WhatsApp Business Flow', 'UPI Integration', 'Performance SEO'],
-    heroImage: '/images/work/ztees-hero.webp',
+    technologies: [
+      'React 18',
+      'Vite',
+      'TypeScript',
+      'Tailwind CSS',
+      'Supabase (PostgreSQL & Auth)',
+      'Supabase Realtime',
+      'React Native (Expo EAS)',
+      'WhatsApp Business API',
+      'UPI Payment Protocol'
+    ],
+    heroImage: '/images/projects/ztees/ztees-storefront-hero.png',
     videoSrc: '/videos/project-reel.mp4',
     gallery: [
       {
-        src: '/images/projects/ztees-cover.jpg',
-        alt: 'Ztees streetwear storefront hero drop presentation',
-        caption: 'The editorial Mirzapur campaign hero banner highlighting the latest oversized graphic drop.'
+        src: '/images/projects/ztees/ztees-storefront-hero.png',
+        alt: 'Z Tees India streetwear storefront hero drop presentation',
+        caption: 'The Janmashtami Radha Krishna limited edition drop hero banner showcasing 240 GSM oversized apparel.'
       },
       {
-        src: '/images/projects/ztees-products.png',
-        alt: 'Ztees product collection grid with size and pricing tags',
-        caption: 'Mobile-first product grid with instant size selectors and direct WhatsApp ordering buttons.'
+        src: '/images/projects/ztees/ztees-drop-catalog.png',
+        alt: 'Z Tees editorial product drop catalog with pricing and discount badges',
+        caption: 'The New Drop product grid featuring Thunder, Silent Crest, Awakened, and discount badges.'
       },
       {
-        src: '/images/projects/ztees/porsche-911-studio.jpg',
-        alt: 'Ztees Porsche 911 studio editorial drop mockup',
-        caption: 'Studio editorial mockup showcasing heavy-cotton oversized apparel styling and typography.'
+        src: '/images/projects/ztees/ztees-collection-filter.png',
+        alt: 'Z Tees 61-piece collection browser with category chips and search',
+        caption: 'Complete 61-design collection browser with category filtering across Heavyweight, Anime, and Motorsport.'
       },
       {
-        src: '/images/projects/ztees/awakened-royal-blue-studio.jpg',
-        alt: 'Ztees Awakened Royal Blue graphic tee mockup',
-        caption: 'High-contrast studio garment render displaying front graphic placement and fabric texture.'
+        src: '/images/projects/ztees/ztees-product-detail.png',
+        alt: 'Z Tees Silent Crest product detail view with WhatsApp checkout',
+        caption: 'Detailed product page with size selector, fabric specs, and direct "Buy Now on WhatsApp" checkout.'
       },
       {
-        src: '/images/projects/ztees/batman-batmobile-blueprint.jpg',
-        alt: 'Ztees Batmobile blueprint conceptual graphic piece',
-        caption: 'Technical blueprint graphic edition developed for targeted pop-culture drop campaigns.'
+        src: '/images/projects/ztees/ztees-cart-checkout.png',
+        alt: 'Z Tees cart drawer and order summary with UPI notice',
+        caption: 'Interactive shopping cart with item quantity modifiers, Gujarat free delivery badge, and UPI instructions.'
       },
       {
-        src: '/images/projects/ztees/silent-crest-lavender-studio.jpg',
-        alt: 'Ztees Silent Crest lavender studio render',
-        caption: 'Pastel studio colorway photography prepared for summer drop lookbooks.'
+        src: '/images/projects/ztees/ztees-owner-auth.png',
+        alt: 'Z Tees private owner workspace login console',
+        caption: 'Protected owner console login ("Run The Drop") authenticated via Supabase Auth for brand operators.'
+      },
+      {
+        src: '/images/projects/ztees/ztees-owner-orders.png',
+        alt: 'Z Tees owner operations order queue and customer address triage',
+        caption: 'Real-time order management dashboard displaying customer names, delivery addresses, fulfillment notes, and CSV export.'
+      },
+      {
+        src: '/images/projects/ztees/ztees-catalogue-manager.png',
+        alt: 'Z Tees catalog editor with GSM fabric specs and live toggles',
+        caption: 'Live catalog creator supporting SKU slugs, 240 GSM fabric specs, oversized fit metadata, and instant storefront sync.'
+      },
+      {
+        src: '/images/projects/ztees/ztees-review-moderation.png',
+        alt: 'Z Tees customer review moderation console',
+        caption: 'Customer voice moderation dashboard ("Read. Check. Publish.") for approving verified 5-star shopper feedback.'
+      },
+      {
+        src: '/images/projects/ztees/ztees-media-studio.png',
+        alt: 'Z Tees Media Studio multi-angle photography uploader',
+        caption: 'Brand media studio allowing owners to upload and queue front, back, detail, and lifestyle photoshoot angles.'
       }
     ],
     metrics: [
-      { value: '~2 Days', label: 'Brief to Production', context: 'Rapid turnkey delivery for a scheduled drop' },
-      { value: '100%', label: 'Mobile-First', context: 'Optimized touch targets and vertical scrolling' },
-      { value: 'Zero', label: 'Monthly SaaS Fees', context: 'Custom build eliminates recurring platform costs' }
+      { value: '61 Active', label: 'Streetwear Designs', context: 'Curated 240 GSM catalog synced via Supabase' },
+      { value: 'Dual-Surface', label: 'Storefront + Admin', context: 'Public D2C store & private owner operations console' },
+      { value: 'Zero Fees', label: 'Direct WhatsApp + UPI', context: 'Eliminates recurring Shopify & gateway subscription costs' }
     ],
     links: [
-      { label: 'Visit Live Storefront', url: 'https://ztees.store/', type: 'live' }
+      { label: 'Visit Live Storefront', url: 'https://ztees.store/', type: 'live' },
+      { label: 'Protected Admin Console', url: 'https://ztees.store/admin/login', type: 'demo' }
     ]
   },
   {
@@ -243,77 +278,105 @@ export const projects: Project[] = [
   {
     slug: 'civic-sathi',
     title: 'Civic Sathi',
-    eyebrow: 'Civic Intelligence & Grievance Platform · Multi-Role System',
+    eyebrow: 'Civic Intelligence & Grievance Platform · 4-Portal Municipal Ecosystem',
     category: 'Product Lab',
-    categoryLabel: 'Civic Technology · Product Lab Monorepo',
-    status: 'SIH 2026 Build / Product Lab Monorepo',
+    categoryLabel: 'Civic Technology & Smart Governance · SIH 2026',
+    status: 'SIH 2026 National Finalist Platform',
     featured: true,
     order: 4,
     year: '2026',
-    summary: 'A 4-role civic operations platform connecting citizen grievance reporting, location-tagged photographic evidence, municipal intelligence triage, and contractor dispatch.',
-    audience: 'Citizens reporting neighborhood infrastructure problems, municipal officials tracking remediation progress, and authorized contractors assigned to verified civic work orders.',
-    challenge: 'Civic complaint channels are notoriously broken: citizen reports lack actionable location data or photographic proof, while municipal work orders disappear into opaque internal spreadsheets without public accountability.',
+    summary: 'A production-grade civic operations ecosystem developed by Team Vertex for Smart India Hackathon 2026. Unifies four role-separated portals (Public Citizen, Municipal Ward Officer, Contractor Dispatch, and Super Admin) featuring AI problem categorization, HDBSCAN duplicate clustering, live locality GIS heatmaps across 4 metros (Delhi, Mumbai, Bengaluru, Vadodara), Participatory Budgeting, and Tri-Partite contractor transparency scoring.',
+    audience: 'Urban citizens seeking rapid municipal grievance redressal, municipal ward officers triaging neighborhood complaints, infrastructure contractors fulfilling work orders, and city administrators monitoring cross-ward governance metrics.',
+    challenge: 'Municipal complaint channels suffer from deep structural friction: citizens submit ambiguous reports without precise geospatial coordinates or photographic proof, identical complaints overwhelm ward desks without duplicate grouping, and contractor allocation remains opaque without public accountability or performance metrics.',
     objectives: [
-      'Build a public-facing citizen reporting portal with geolocation capture and image evidence uploads.',
-      'Architect role-separated portals for Municipal Officers, Contractors, and Administrators.',
-      'Integrate AI issue clustering (HDBSCAN) to detect duplicate reports and prioritize systemic hazards.'
+      'Architect 4 dedicated role-based portals (Public Citizen, Municipality, Contractor, Super Admin) in a unified monorepo.',
+      'Deploy a multi-metro GIS map with live severity zones (Low, Moderate, High, Critical) and locality drilldowns across Delhi, Mumbai, Bengaluru, and Vadodara.',
+      'Deliver a frictionless 4-step grievance wizard with natural voice description ("Describe by Voice"), AI suggestions, and GPS evidence uploads.',
+      'Implement HDBSCAN machine learning clustering to detect duplicate reports and prioritize systemic civic infrastructure hazards.',
+      'Pioneer a Tri-Partite Contractor Rating system combining citizen votes, AI SLA quality verification, and government inspection scores.',
+      'Integrate a Daily Community Hub with real-time Open-Meteo AQI telemetry and Participatory Budgeting voting on municipal projects.'
     ],
-    solution: 'Designed and implemented an integrated civic monorepo featuring 4 distinct role applications: Citizen Public Portal, Municipal Operations Dashboard, Contractor Dispatch App, and Admin Command Center. Public citizens submit geotagged complaints with photographic proof and track resolution progress via unique ticket numbers.',
-    whyItMatters: 'Demonstrates full-stack system architecture, monorepo discipline, and role-based access control (RBAC) applied to real-world municipal problems. Developed for Smart India Hackathon 2026 by Team Vertex.',
+    solution: 'Engineered Civic Sathi as a high-velocity full-stack monorepo with React 19, TypeScript, Tailwind CSS, Leaflet GIS, FastAPI, and Neon Postgres. Features an interactive citizen map tracking 1,200+ mapped reports across major Indian cities, voice-assisted complaint submission, locality-level issue analytics, live AQI and emergency service cards, and an open democratic participatory budgeting module.',
+    whyItMatters: 'Demonstrates full-scale enterprise software architecture applied to civic governance—turning opaque municipal bureaucracy into an accountable, transparent, and participatory digital system for millions of urban residents.',
     workflow: [
-      'Citizen submits road hazard or sanitation issue with photo proof and GPS coordinates.',
-      'Public ticket generated for real-time tracking without requiring private user registration.',
-      'Municipal officer verifies report severity, sets priority, and assigns registered contractor.',
-      'Contractor uploads completion proof to close ticket, updating the public status audit trail.'
+      'Citizen Geotagged Reporting: Citizens describe civic issues via voice or text; AI automatically suggests categories, extracts coordinates, and logs photographic evidence.',
+      'Interactive Locality Mapping: Live Leaflet GIS map visualizes complaint density, severity hotspots (Low to Critical), and locality drilldowns across 4 metros.',
+      'Tri-Partite Contractor Accountability: Public citizens, AI verification models, and municipal inspectors jointly score contractor performance on completed work orders.',
+      'Participatory Budgeting: Citizens directly cast democratic votes on local infrastructure initiatives (solar streetlights, lake rejuvenation, health clinics).',
+      'Municipal & Admin Dispatch: Ward officers triage clustered complaints, assign vetted contractors, and track resolution proofs to ticket closure.'
     ],
     buildNotes: [
-      'Engineered as a monorepo containing 4 distinct role applications (admin, municipality, contractor, public).',
-      'Frontend built with React 19, TypeScript, and Tailwind CSS.',
-      'Integrated map coordinate mapping, HDBSCAN clustering heuristics, and photo verification checks.'
+      'Engineered as a high-cohesion monorepo containing 4 distinct role applications (public, municipality, contractor, admin).',
+      'Integrated Leaflet and OpenStreetMap GIS engine for interactive locality polygons and real-time severity heatmaps.',
+      'Implemented HDBSCAN unsupervised spatial clustering algorithms to group redundant neighborhood complaints into unified work orders.',
+      'Connected Open-Meteo API for real-time Air Quality Index (AQI) and meteorological telemetry in the Community Hub.',
+      'Built offline-capable PWA client with multi-lingual localization support (English, Hindi, Gujarati).'
     ],
     scopeNote: 'Presented as an independent product-lab prototype developed for Smart India Hackathon 2026, with public demo portals accessible online.',
-    technologies: ['React 19', 'FastAPI', 'Neon Postgres', 'HDBSCAN Clustering', 'Leaflet / GIS Mapping', 'Role-Based Access Control'],
-    heroImage: '/images/projects/civic-sathi/vadodara-civic-atmosphere.webp',
+    technologies: [
+      'React 19',
+      'TypeScript',
+      'Tailwind CSS',
+      'Leaflet / OpenStreetMap GIS',
+      'FastAPI & Python',
+      'Neon PostgreSQL',
+      'HDBSCAN Spatial Clustering',
+      'Open-Meteo Weather API',
+      'Role-Based Access Control (RBAC)',
+      'Vite PWA'
+    ],
+    heroImage: '/images/projects/civic-sathi/civic-sathi-delhi-hero.png',
     videoSrc: '/videos/tech-atmosphere.mp4',
     gallery: [
       {
-        src: '/images/projects/civic-sathi/civic-sathi-logo.png',
-        alt: 'Civic Sathi brand identity and official project emblem',
-        caption: 'The official Civic Sathi project identity engineered for Smart India Hackathon 2026.'
+        src: '/images/projects/civic-sathi/civic-sathi-delhi-hero.png',
+        alt: 'Civic Sathi Delhi MCD Citizen Portal with live severity map',
+        caption: 'The multi-city citizen portal featuring live severity zones, Leaflet mapping, and 1,200+ mapped reports across Delhi MCD.'
       },
       {
-        src: '/images/projects/civic-sathi/vadodara-civic-atmosphere.webp',
-        alt: 'Civic Sathi municipal pilot context photography',
-        caption: 'Pilot municipal deployment context tailored for municipal flood and sanitation challenges.'
+        src: '/images/projects/civic-sathi/civic-sathi-map-analytics.png',
+        alt: 'Civic Sathi locality activity map with severity donut distribution',
+        caption: 'Interactive GIS mapping interface displaying severity distribution charts (Low, Moderate, High, Critical) and active area rankings.'
       },
       {
-        src: '/images/projects/civic-public-home.png',
-        alt: 'Civic Sathi citizen landing page and issue report launcher',
-        caption: 'The public citizen portal welcoming reports with step-by-step guidance and status lookup.'
+        src: '/images/projects/civic-sathi/civic-sathi-locality-drilldown.png',
+        alt: 'Civic Sathi India Gate and Central Vista locality drilldown modal',
+        caption: 'Granular locality drilldown modal tracking resolved reports, issue mix histograms (road damage, drainage), and recent activity.'
       },
       {
-        src: '/images/projects/civic-public-how-it-works.png',
-        alt: 'Civic Sathi four-step civic resolution lifecycle walkthrough',
-        caption: 'The public resolution workflow showing the progression from report to contractor verification.'
+        src: '/images/projects/civic-sathi/civic-sathi-report-wizard.png',
+        alt: 'Civic Sathi step-by-step grievance reporting wizard with voice input',
+        caption: 'Four-step issue reporting wizard with voice description input ("Describe by Voice"), AI category suggestion, and evidence upload.'
       },
       {
-        src: '/images/projects/civic-municipality-login.png',
-        alt: 'Civic Sathi municipal department officer authentication portal',
-        caption: 'Dedicated municipal portal login with department-specific authentication.'
+        src: '/images/projects/civic-sathi/civic-sathi-contractor-ratings.png',
+        alt: 'Civic Sathi Tri-Partite contractor transparency and ratings leaderboard',
+        caption: 'Public contractor accountability board displaying tri-partite scores combining citizen votes, AI SLA checks, and government inspections.'
       },
       {
-        src: '/images/projects/civic-contractor-login.png',
-        alt: 'Civic Sathi contractor dispatch and job verification interface',
-        caption: 'Contractor dashboard entrance for assigned field work and resolution proof uploads.'
+        src: '/images/projects/civic-sathi/civic-sathi-community-hub.png',
+        alt: 'Civic Sathi City Hub community center with real-time AQI and emergency cards',
+        caption: 'Daily-use community center showing live Open-Meteo AQI telemetry, emergency service contacts (112, 101, 108), and participatory projects.'
+      },
+      {
+        src: '/images/projects/civic-sathi/civic-sathi-participatory-budgeting.png',
+        alt: 'Civic Sathi community projects participatory budgeting voting portal',
+        caption: 'Participatory budgeting module empowering citizens to vote on municipal fund allocations for solar lighting, parks, and clinics.'
+      },
+      {
+        src: '/images/projects/civic-sathi/civic-sathi-heritage-panel.png',
+        alt: 'Civic Sathi cultural and civic heritage conservation panel',
+        caption: 'Municipal heritage foundation panel indexing historical monuments (Red Fort UNESCO, India Gate, Qutub Minar) for conservation.'
       }
     ],
     metrics: [
-      { value: '4 Separate', label: 'Role Surfaces', context: 'Citizen, Municipality, Contractor, and Admin' },
-      { value: 'HDBSCAN', label: 'AI Clustering', context: 'Duplicate detection & hotspot ranking' },
-      { value: 'SIH 2026', label: 'Hackathon Concept', context: 'Developed by Team Vertex for national competition' }
+      { value: '4 Portals', label: 'Role Surfaces', context: 'Citizen, Municipality, Contractor, and Admin command' },
+      { value: '1,200+', label: 'Mapped Civic Reports', context: 'Live severity GIS hotspots across 4 major metros' },
+      { value: 'Tri-Partite', label: 'Accountability Model', context: 'Public citizen + AI SLA + government inspection ratings' }
     ],
     links: [
       { label: 'View Public Portal Demo', url: 'https://janmind-public.vercel.app/', type: 'live' },
+      { label: 'Explore Civic Map', url: 'https://janmind-public.vercel.app/map', type: 'demo' },
       { label: 'View Repository on GitHub', url: 'https://github.com/Maher-Bhatt/Civic-Sathi', type: 'github' }
     ]
   },
@@ -472,6 +535,11 @@ export const projects: Project[] = [
         src: '/images/projects/itm/itm-exam-imp-questions.png',
         alt: 'Unit-wise high-yield exam question banks with 3M, 5M, and 7M model answers',
         caption: 'Curated university question bank organized by unit weights (3M, 5M, 7M) with model answers and quick revision cheat sheets.'
+      },
+      {
+        src: '/images/projects/itm/itm-curriculum-browser.png',
+        alt: 'University curriculum browser with 12-week GitHub-style study heatmap',
+        caption: 'Engineering curriculum navigation panel featuring semester course codes, 12-week study heatmaps, and revision cheat sheets.'
       }
     ],
     metrics: [

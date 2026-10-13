@@ -201,7 +201,7 @@ export const ContactPage: React.FC = () => {
                       <img 
                         src={maher.image} 
                         alt={maher.name} 
-                        className="w-full h-full object-cover object-[50%_15%] rounded-full"
+                        className="w-full h-full object-cover object-center rounded-full"
                       />
                     </div>
                     <div className="space-y-0.5">

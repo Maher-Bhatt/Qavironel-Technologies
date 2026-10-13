@@ -21,8 +21,9 @@ export const AboutPage: React.FC = () => {
 
   const maher = teamMembers.find(m => m.name.toLowerCase().includes('maher')) || teamMembers[0];
   const anurag = teamMembers.find(m => m.name.toLowerCase().includes('anurag')) || teamMembers[1];
-  const dhyani = teamMembers.find(m => m.name.toLowerCase().includes('dhyani')) || teamMembers[2];
-  const aayushi = teamMembers.find(m => m.name.toLowerCase().includes('aayushi')) || teamMembers[3];
+  const jaydev = teamMembers.find(m => m.name.toLowerCase().includes('jaydev')) || teamMembers[2];
+  const dhyani = teamMembers.find(m => m.name.toLowerCase().includes('dhyani')) || teamMembers[3];
+  const aayushi = teamMembers.find(m => m.name.toLowerCase().includes('aayushi')) || teamMembers[4];
 
   return (
     <>
@@ -123,14 +124,14 @@ export const AboutPage: React.FC = () => {
           <section id="team" className="py-20 border-b border-black/10 dark:border-white/10 scroll-mt-28">
             <div className="mb-12">
               <span className="text-xs font-mono uppercase tracking-[0.22em] text-zinc-500 dark:text-zinc-400 font-bold block mb-2">
-                Technical Leadership & Co-Founders
+                Technical Leadership & Core Engineering
               </span>
               <h2 className="font-display font-bold text-3xl sm:text-4xl text-black dark:text-white tracking-tight">
                 Direct collaboration with senior engineers.
               </h2>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
               
               {/* Founder & Lead Systems Engineer: Maher Bhatt */}
               <div className="glass-card-luxury rounded-3xl p-7 sm:p-9 flex flex-col justify-between space-y-6">
@@ -162,7 +163,7 @@ export const AboutPage: React.FC = () => {
                         <img 
                           src={maher.image} 
                           alt={`${maher.name}, Founder & Technical Lead`} 
-                          className="w-full h-full object-cover object-[50%_15%] group-hover:scale-110 transition-transform duration-500 ease-out"
+                          className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500 ease-out"
                           loading="eager"
                         />
                         <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
@@ -216,23 +217,38 @@ export const AboutPage: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Social Links */}
-                <div className="pt-4 border-t border-black/10 dark:border-white/10 flex items-center gap-5 text-xs font-mono">
+                {/* Social Action Buttons */}
+                <div className="pt-4 border-t border-black/10 dark:border-white/10 flex flex-wrap items-center gap-2.5 text-xs font-mono">
                   {maher.links?.github && (
-                    <a href={maher.links.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-zinc-700 dark:text-zinc-300 hover:text-black dark:hover:text-white transition-colors">
-                      <GithubIcon className="w-3.5 h-3.5" />
+                    <a 
+                      href={maher.links.github} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-black/15 dark:border-white/20 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md text-zinc-900 dark:text-zinc-100 hover:text-black dark:hover:text-white hover:border-black/40 dark:hover:border-white/40 hover:bg-black/5 dark:hover:bg-white/10 transition-all font-medium shadow-2xs hover:scale-105 active:scale-95"
+                    >
+                      <GithubIcon className="w-3.5 h-3.5 shrink-0" />
                       <span>GitHub</span>
                     </a>
                   )}
                   {maher.links?.linkedin && (
-                    <a href={maher.links.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-zinc-700 dark:text-zinc-300 hover:text-black dark:hover:text-white transition-colors">
-                      <LinkedinIcon className="w-3.5 h-3.5" />
+                    <a 
+                      href={maher.links.linkedin} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-black/15 dark:border-white/20 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md text-zinc-900 dark:text-zinc-100 hover:text-black dark:hover:text-white hover:border-black/40 dark:hover:border-white/40 hover:bg-black/5 dark:hover:bg-white/10 transition-all font-medium shadow-2xs hover:scale-105 active:scale-95"
+                    >
+                      <LinkedinIcon className="w-3.5 h-3.5 shrink-0" />
                       <span>LinkedIn</span>
                     </a>
                   )}
                   {maher.links?.website && (
-                    <a href={maher.links.website} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-zinc-700 dark:text-zinc-300 hover:text-black dark:hover:text-white transition-colors">
-                      <ExternalLink className="w-3.5 h-3.5" />
+                    <a 
+                      href={maher.links.website} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-black/15 dark:border-white/20 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md text-zinc-900 dark:text-zinc-100 hover:text-black dark:hover:text-white hover:border-black/40 dark:hover:border-white/40 hover:bg-black/5 dark:hover:bg-white/10 transition-all font-medium shadow-2xs hover:scale-105 active:scale-95"
+                    >
+                      <ExternalLink className="w-3.5 h-3.5 shrink-0" />
                       <span>maherbhatt.me</span>
                     </a>
                   )}
@@ -325,6 +341,95 @@ export const AboutPage: React.FC = () => {
 
                 <div className="pt-4 border-t border-black/10 dark:border-white/10 flex items-center gap-4 text-xs font-mono text-zinc-500 dark:text-zinc-400">
                   <span>Server-Side Systems & High-Throughput APIs</span>
+                </div>
+              </div>
+
+              {/* Core Member: Jaydev Gohil */}
+              <div className="glass-card-luxury rounded-3xl p-7 sm:p-9 flex flex-col justify-between space-y-6 md:col-span-2 lg:col-span-1">
+                <div className="space-y-6">
+                  {/* Circular Avatar + Title Lockup */}
+                  <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-5 sm:gap-6">
+                    {/* Concentric Frosted Halo Circular Avatar */}
+                    <div className="relative shrink-0 p-1.5 rounded-full bg-white/70 dark:bg-white/[0.08] backdrop-blur-md border border-black/10 dark:border-white/20 shadow-sm">
+                      <div 
+                        onClick={() => setLightboxItem({ 
+                          src: jaydev.image, 
+                          alt: `${jaydev.name} — ${jaydev.role}`,
+                          caption: `${jaydev.name} · Core Member · Full-Stack & Systems Architecture · Qavironel Technologies` 
+                        })}
+                        className="group w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden cursor-pointer relative"
+                        role="button"
+                        tabIndex={0}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter' || e.key === ' ') {
+                            setLightboxItem({ 
+                              src: jaydev.image, 
+                              alt: `${jaydev.name} — ${jaydev.role}`,
+                              caption: `${jaydev.name} · Core Member · Full-Stack & Systems Architecture · Qavironel Technologies` 
+                            });
+                          }
+                        }}
+                        aria-label={`View high-resolution portrait of ${jaydev.name}`}
+                      >
+                        <img 
+                          src={jaydev.image} 
+                          alt={`${jaydev.name}, Core Member`} 
+                          className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500 ease-out"
+                          loading="eager"
+                        />
+                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                          <Maximize2 className="w-4 h-4 text-white" />
+                        </div>
+                      </div>
+                      {/* Active Status Beacon */}
+                      <span className="absolute bottom-1 right-1 flex h-4 w-4 items-center justify-center rounded-full bg-white dark:bg-zinc-950 ring-2 ring-white dark:ring-zinc-900 shadow-xs" title="Core Member">
+                        <span className="h-2 w-2 rounded-full bg-black dark:bg-white animate-pulse" />
+                      </span>
+                    </div>
+
+                    <div className="space-y-1.5 flex-1 min-w-0">
+                      <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
+                        <span className="text-[0.68rem] font-mono font-bold uppercase tracking-widest text-zinc-500 dark:text-zinc-400">
+                          Core Member
+                        </span>
+                        <span className="text-[0.62rem] font-mono px-2 py-0.5 rounded-full bg-black/5 dark:bg-white/10 text-zinc-700 dark:text-zinc-300 border border-black/5 dark:border-white/10">
+                          Systems
+                        </span>
+                      </div>
+                      <h3 className="font-display font-extrabold text-2xl sm:text-3xl text-black dark:text-white tracking-tight">
+                        {jaydev.name}
+                      </h3>
+                      <p className="text-xs font-mono text-zinc-600 dark:text-zinc-400">
+                        Full-Stack Architecture · Interactive Systems · UI/UX
+                      </p>
+                      <div className="pt-1 flex items-center justify-center sm:justify-start gap-2 text-[0.7rem] font-mono text-zinc-500 dark:text-zinc-400">
+                        <ShieldCheck className="w-3.5 h-3.5 text-black dark:text-white" />
+                        <span>Direct Technical Delivery</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-300 leading-relaxed font-light">
+                    {jaydev.bio}
+                  </p>
+
+                  {/* Credentials / Focus */}
+                  <div className="space-y-2 pt-2 border-t border-black/10 dark:border-white/10">
+                    <p className="text-xs font-mono font-bold uppercase tracking-wider text-black dark:text-white">
+                      Core Architectural Focus:
+                    </p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {jaydev.skills.map(skill => (
+                        <span key={skill} className="text-xs font-mono px-2.5 py-1 rounded-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-zinc-800 dark:text-zinc-200">
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pt-4 border-t border-black/10 dark:border-white/10 flex items-center gap-4 text-xs font-mono text-zinc-500 dark:text-zinc-400">
+                  <span>Full-Stack Architecture & Reactive Web Systems</span>
                 </div>
               </div>
 
@@ -476,8 +581,13 @@ export const AboutPage: React.FC = () => {
                     ))}
                   </div>
                   {dhyani.links?.linkedin && (
-                    <a href={dhyani.links.linkedin} target="_blank" rel="noopener noreferrer" className="text-xs font-mono text-zinc-700 dark:text-zinc-300 hover:text-black dark:hover:text-white hover:underline flex items-center gap-1">
-                      <LinkedinIcon className="w-3 h-3" />
+                    <a 
+                      href={dhyani.links.linkedin} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-black/15 dark:border-white/20 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md text-zinc-900 dark:text-zinc-100 hover:text-black dark:hover:text-white hover:border-black/40 dark:hover:border-white/40 hover:bg-black/5 dark:hover:bg-white/10 transition-all text-xs font-mono font-medium shadow-2xs hover:scale-105 active:scale-95"
+                    >
+                      <LinkedinIcon className="w-3.5 h-3.5 shrink-0" />
                       <span>LinkedIn</span>
                     </a>
                   )}

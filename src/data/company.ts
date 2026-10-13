@@ -65,6 +65,28 @@ export const teamMembers: TeamMember[] = [
     links: {}
   },
   {
+    name: 'Jaydev Gohil',
+    role: 'Core Member — Full-Stack & Systems Architecture',
+    bio: 'Spearheading interactive frontend systems, responsive web performance, and full-stack integration at Qavironel Technologies. He transforms complex client specifications into fluid, accessible digital products engineered with type-safe state architecture, clean component modularity, and sub-second rendering speeds.',
+    credentials: [
+      'Full-Stack Architecture',
+      'UI/UX Engineering',
+      'Interactive Web Systems',
+      'Performance Optimization'
+    ],
+    skills: [
+      'React 19 & Next.js',
+      'TypeScript',
+      'Tailwind CSS & Motion',
+      'REST & GraphQL APIs',
+      'Component Architecture',
+      'Core Web Vitals Tuning',
+      'Modern Frontend Tooling'
+    ],
+    image: '/images/team/jaydev-gohil.webp',
+    links: {}
+  },
+  {
     name: 'Dhyani Parikh',
     role: 'Founding Team Member — Frontend & Operations',
     bio: 'Contributing to frontend implementation and project coordination at Qavironel Technologies. She helps turn design concepts into responsive, reusable interface components while managing sprint tracking, meeting documentation, and team communications with a collaborative mindset and dedication to practical technical growth.',

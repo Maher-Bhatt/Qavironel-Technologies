@@ -11,22 +11,22 @@ async function createOgImage() {
     fs.mkdirSync(brandDir, { recursive: true });
   }
 
-  // Create an SVG card template using approved charcoal (#171717), copper (#C7612E), and warm off-white (#F6F3ED)
+  // Create an SVG card template using approved Forest Green (#174C3A), Deep Evergreen (#103629), Sage (#879B89), and Warm Ivory (#F5F5F0)
   const svgOverlay = `
   <svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#171717" />
-        <stop offset="100%" stop-color="#20201E" />
+        <stop offset="0%" stop-color="#103629" />
+        <stop offset="100%" stop-color="#191D1A" />
       </linearGradient>
-      <linearGradient id="copperLine" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" stop-color="#C7612E" />
-        <stop offset="50%" stop-color="#E0561B" />
-        <stop offset="100%" stop-color="#98431F" />
+      <linearGradient id="accentLine" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#174C3A" />
+        <stop offset="50%" stop-color="#879B89" />
+        <stop offset="100%" stop-color="#174C3A" />
       </linearGradient>
     </defs>
 
-    <!-- Deep Charcoal Base -->
+    <!-- Deep Evergreen Base -->
     <rect width="${width}" height="${height}" fill="url(#bgGrad)" />
 
     <!-- Subtle Hairline Grid Pattern -->
@@ -42,46 +42,46 @@ async function createOgImage() {
     </g>
 
     <!-- Inner Border Framing -->
-    <rect x="40" y="40" width="${width - 80}" height="${height - 80}" rx="20" fill="none" stroke="#FFFFFF" stroke-width="1" opacity="0.1" />
+    <rect x="40" y="40" width="${width - 80}" height="${height - 80}" rx="20" fill="none" stroke="#D9DED7" stroke-width="1" opacity="0.15" />
 
-    <!-- Top Copper Accent Bar -->
-    <rect x="90" y="85" width="60" height="4" fill="url(#copperLine)" rx="2" />
+    <!-- Top Accent Bar -->
+    <rect x="90" y="85" width="60" height="4" fill="url(#accentLine)" rx="2" />
 
     <!-- Eyebrow Tag -->
-    <text x="90" y="130" font-family="'JetBrains Mono', monospace" font-size="14" font-weight="700" fill="#C7612E" letter-spacing="3">DIGITAL PRODUCT &amp; SOFTWARE ENGINEERING STUDIO</text>
+    <text x="90" y="130" font-family="'JetBrains Mono', monospace" font-size="14" font-weight="700" fill="#879B89" letter-spacing="3">DIGITAL PRODUCT &amp; SOFTWARE ENGINEERING STUDIO</text>
 
     <!-- Brand Header -->
-    <text x="90" y="230" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="64" font-weight="800" fill="#F6F3ED" letter-spacing="-1.5">Qavironel Technologies</text>
+    <text x="90" y="230" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="64" font-weight="800" fill="#F5F5F0" letter-spacing="-1.5">Qavironel Technologies</text>
 
     <!-- Tagline -->
-    <text x="90" y="300" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="34" font-weight="400" fill="#77746F">Ideas. <tspan fill="#C7612E" font-weight="700">Engineered.</tspan></text>
+    <text x="90" y="300" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="34" font-weight="400" fill="#E6ECE5">Ideas. <tspan fill="#879B89" font-weight="700">Engineered.</tspan></text>
 
     <!-- Divider -->
-    <line x1="90" y1="360" x2="1110" y2="360" stroke="#FFFFFF" stroke-width="1" opacity="0.08" />
+    <line x1="90" y1="360" x2="1110" y2="360" stroke="#D9DED7" stroke-width="1" opacity="0.1" />
 
     <!-- Pillar Capabilities -->
-    <g font-family="'JetBrains Mono', monospace" font-size="14" font-weight="600" fill="#DEDAD3" letter-spacing="1">
-      <circle cx="100" cy="420" r="4" fill="#C7612E" />
+    <g font-family="'JetBrains Mono', monospace" font-size="14" font-weight="600" fill="#E6ECE5" letter-spacing="1">
+      <circle cx="100" cy="420" r="4" fill="#879B89" />
       <text x="116" y="425">HIGH-VELOCITY WEB PLATFORMS</text>
 
-      <circle cx="500" cy="420" r="4" fill="#C7612E" />
+      <circle cx="500" cy="420" r="4" fill="#879B89" />
       <text x="516" y="425">APPLIED AI &amp; LOCAL LLMS</text>
 
-      <circle cx="870" cy="420" r="4" fill="#C7612E" />
+      <circle cx="870" cy="420" r="4" fill="#879B89" />
       <text x="886" y="425">DEFENSIVE SYSTEMS</text>
     </g>
 
     <!-- Subtitle Description -->
-    <text x="90" y="480" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="18" font-weight="300" fill="#77746F">
+    <text x="90" y="480" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="18" font-weight="300" fill="#879B89">
       Bespoke digital architecture, full-stack product development, and applied AI systems.
     </text>
 
     <!-- Domain Footer Badge -->
-    <rect x="90" y="525" width="180" height="34" rx="17" fill="#20201E" stroke="#FFFFFF" stroke-width="1" stroke-opacity="0.1" />
-    <text x="120" y="547" font-family="'JetBrains Mono', monospace" font-size="13" font-weight="700" fill="#F6F3ED" letter-spacing="1">qavironel.com</text>
+    <rect x="90" y="525" width="180" height="34" rx="17" fill="#174C3A" stroke="#879B89" stroke-width="1" stroke-opacity="0.3" />
+    <text x="120" y="547" font-family="'JetBrains Mono', monospace" font-size="13" font-weight="700" fill="#F5F5F0" letter-spacing="1">qavironel.com</text>
 
     <!-- Location -->
-    <text x="1110" y="547" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="500" fill="#77746F">GLOBAL · REMOTE-FIRST STUDIO</text>
+    <text x="1110" y="547" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="500" fill="#879B89">GLOBAL · REMOTE-FIRST STUDIO</text>
   </svg>
   `;
 

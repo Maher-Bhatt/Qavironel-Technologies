@@ -122,8 +122,8 @@ export const AmbientHeroCanvas: React.FC = () => {
         height * 0.35,
         width * 0.55
       );
-      grad.addColorStop(0, 'rgba(199, 97, 46, 0.045)');
-      grad.addColorStop(0.5, 'rgba(199, 97, 46, 0.015)');
+      grad.addColorStop(0, 'rgba(23, 76, 58, 0.045)');
+      grad.addColorStop(0.5, 'rgba(23, 76, 58, 0.015)');
       grad.addColorStop(1, 'transparent');
       ctx.fillStyle = grad;
       ctx.fillRect(0, 0, width, height);
@@ -136,7 +136,7 @@ export const AmbientHeroCanvas: React.FC = () => {
         const isAccent = i === 1;
 
         ctx.strokeStyle = isAccent 
-          ? 'rgba(199, 97, 46, 0.12)' 
+          ? 'rgba(23, 76, 58, 0.12)' 
           : 'rgba(10, 10, 10, 0.04)';
         ctx.lineWidth = isAccent ? 1.6 : 1.0;
 

@@ -27,14 +27,23 @@ export default defineConfig({
       output: {
         manualChunks(id) {
           if (id.includes('node_modules')) {
-            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router')) {
+            const normalized = id.replace(/\\/g, '/');
+            if (
+              normalized.includes('/node_modules/react/') ||
+              normalized.includes('/node_modules/react-dom/') ||
+              normalized.includes('/node_modules/react-router/') ||
+              normalized.includes('/node_modules/react-router-dom/')
+            ) {
               return 'vendor-react';
             }
-            if (id.includes('three')) {
+            if (normalized.includes('/node_modules/three/')) {
               return 'vendor-three';
             }
-            if (id.includes('framer-motion')) {
+            if (normalized.includes('/node_modules/framer-motion/')) {
               return 'vendor-motion';
+            }
+            if (normalized.includes('/node_modules/lucide-react/')) {
+              return 'vendor-icons';
             }
             return 'vendor'; // all other node_modules
           }

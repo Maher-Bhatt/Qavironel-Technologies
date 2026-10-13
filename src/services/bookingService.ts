@@ -187,6 +187,7 @@ export function validateQuoteForm(data: QuoteFormData): {
 
 export function buildBookingMailto(data: BookingFormData): string {
   const subject = encodeURIComponent(`Architecture Call Request: ${data.name.trim()} (${data.topic})`);
+  const safeNotes = data.notes?.trim() ? (data.notes.trim().length > 1500 ? data.notes.trim().slice(0, 1500) + '...' : data.notes.trim()) : 'None';
   const timeDetails = data.localTimeDisplay 
     ? `• Local Time: ${data.localTimeDisplay} (${data.timezone || 'Local Timezone'})\n• Studio Time (IST): ${data.studioTimeDisplay || data.time}\n`
     : `• Requested Time Slot: ${data.time}\n• Timezone: ${data.timezone || 'IST'}\n`;
@@ -200,7 +201,7 @@ export function buildBookingMailto(data: BookingFormData): string {
     `• Requested Date: ${data.date}\n` +
     timeDetails +
     `• Topic: ${data.topic}\n` +
-    `• Notes: ${data.notes?.trim() || 'None'}\n\n` +
+    `• Notes: ${safeNotes}\n\n` +
     `Please send a Google Meet invite to confirm.\n\n` +
     `Best regards,\n${data.name.trim()}`
   );
@@ -209,6 +210,9 @@ export function buildBookingMailto(data: BookingFormData): string {
 
 export function buildQuoteMailto(data: QuoteFormData): string {
   const subject = encodeURIComponent(`Quotation & Architecture Brief: ${data.name.trim()} - ${data.projectType}`);
+  const safeScope = data.scopeDetails.trim().length > 1500 
+    ? data.scopeDetails.trim().slice(0, 1500) + '...' 
+    : data.scopeDetails.trim();
   const body = encodeURIComponent(
     `Hello Qavironel Team,\n\n` +
     `I would like to request a formal quotation and scope estimate.\n\n` +
@@ -219,11 +223,15 @@ export function buildQuoteMailto(data: QuoteFormData): string {
     `• Budget Range: ${data.budgetRange}\n` +
     `• Target Timeline: ${data.timeline}\n` +
     (data.features && data.features.length > 0 ? `• Deliverables: ${data.features.join(', ')}\n` : '') +
-    `\nScope & Objectives:\n${data.scopeDetails.trim()}\n\n` +
+    `\nScope & Objectives:\n${safeScope}\n\n` +
     `Best regards,\n${data.name.trim()}`
   );
   return `mailto:${companyConfig.email}?subject=${subject}&body=${body}`;
 }
+
+let lastBookingTime = 0;
+let lastQuoteTime = 0;
+const SUBMISSION_COOLDOWN_MS = 8000;
 
 export async function submitBookingRequest(data: BookingFormData): Promise<{
   success: boolean;
@@ -242,6 +250,15 @@ export async function submitBookingRequest(data: BookingFormData): Promise<{
   // Honeypot check
   if (data.hpField && data.hpField.trim().length > 0) {
     return { success: false, message: 'Request could not be verified.' };
+  }
+
+  const now = Date.now();
+  if (now - lastBookingTime < SUBMISSION_COOLDOWN_MS) {
+    const waitSeconds = Math.ceil((SUBMISSION_COOLDOWN_MS - (now - lastBookingTime)) / 1000);
+    return {
+      success: false,
+      message: `Please wait ${waitSeconds}s before submitting another booking request.`,
+    };
   }
 
   const endpoint = (typeof import.meta !== 'undefined' && import.meta.env?.VITE_BOOKING_ENDPOINT) || '/api/booking';
@@ -267,6 +284,7 @@ export async function submitBookingRequest(data: BookingFormData): Promise<{
     clearTimeout(timeout);
 
     if (res.ok) {
+      lastBookingTime = Date.now();
       return {
         success: true,
         message: 'Your meeting request has been submitted. Maher Bhatt will review availability and confirm your calendar invite with a Google Meet link within 12 hours.',
@@ -315,6 +333,15 @@ export async function submitQuoteRequest(data: QuoteFormData): Promise<{
     return { success: false, message: 'Request could not be verified.' };
   }
 
+  const now = Date.now();
+  if (now - lastQuoteTime < SUBMISSION_COOLDOWN_MS) {
+    const waitSeconds = Math.ceil((SUBMISSION_COOLDOWN_MS - (now - lastQuoteTime)) / 1000);
+    return {
+      success: false,
+      message: `Please wait ${waitSeconds}s before submitting another quote request.`,
+    };
+  }
+
   const endpoint = (typeof import.meta !== 'undefined' && import.meta.env?.VITE_QUOTE_ENDPOINT) || '/api/quote';
   const mailtoFallback = buildQuoteMailto(data);
   const whatsappFallback = `${companyConfig.whatsappUrl}?text=${encodeURIComponent(
@@ -337,6 +364,7 @@ export async function submitQuoteRequest(data: QuoteFormData): Promise<{
     clearTimeout(timeout);
 
     if (res.ok) {
+      lastQuoteTime = Date.now();
       return {
         success: true,
         message: 'Your quotation request has been received. Our engineering lead will analyze your deliverables and deliver a structured scope breakdown within 24 hours.',

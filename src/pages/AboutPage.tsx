@@ -12,7 +12,7 @@ import {
   Maximize2
 } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from '../components/ui/Icons';
-import { openBookingModal } from '../components/booking/BookingModal';
+import { openBookingModal } from '../utils/modalEvents';
 import { Spatial3DPrism } from '../components/3d/Spatial3DPrism';
 import { ImageLightbox } from '../components/work/ImageLightbox';
 

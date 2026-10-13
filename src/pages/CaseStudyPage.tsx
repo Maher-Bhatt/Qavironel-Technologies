@@ -20,7 +20,7 @@ import {
   Play
 } from 'lucide-react';
 import { GithubIcon } from '../components/ui/Icons';
-import { openBookingModal } from '../components/booking/BookingModal';
+import { openBookingModal } from '../utils/modalEvents';
 import { enforceScrollTop } from '../utils/scroll';
 
 export const CaseStudyPage: React.FC = () => {
@@ -460,7 +460,16 @@ export const CaseStudyPage: React.FC = () => {
               {project.gallery.map((item, idx) => (
                 <div 
                   key={idx}
-                  className="bg-white dark:bg-zinc-900 border border-black/10 dark:border-white/10 rounded-2xl p-4 group cursor-pointer hover:border-black/30 dark:hover:border-white/30 transition-all shadow-xs"
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`Enlarge image: ${item.caption || item.alt}`}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      setSelectedImage(item);
+                    }
+                  }}
+                  className="bg-white dark:bg-zinc-900 border border-black/10 dark:border-white/10 rounded-2xl p-4 group cursor-pointer hover:border-black/30 dark:hover:border-white/30 transition-all shadow-xs focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white"
                   onClick={() => setSelectedImage(item)}
                 >
                   <div className="relative aspect-[16/10] overflow-hidden rounded-xl bg-black flex items-center justify-center p-2">

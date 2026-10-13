@@ -8,17 +8,35 @@ interface ImageLightboxProps {
 }
 
 export const ImageLightbox: React.FC<ImageLightboxProps> = ({ item, onClose }) => {
+  const closeButtonRef = React.useRef<HTMLButtonElement>(null);
+
   useEffect(() => {
+    if (!item) return;
+
+    const previousActiveElement = document.activeElement as HTMLElement | null;
+    document.body.style.overflow = 'hidden';
+
+    // Focus close button on open
+    setTimeout(() => {
+      closeButtonRef.current?.focus();
+    }, 50);
+
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
+      if (e.key === 'Escape') {
+        onClose();
+      } else if (e.key === 'Tab') {
+        // Keep focus inside close button since it is the only interactive control
+        e.preventDefault();
+        closeButtonRef.current?.focus();
+      }
     };
-    if (item) {
-      document.body.style.overflow = 'hidden';
-      window.addEventListener('keydown', handleKeyDown);
-    }
+
+    window.addEventListener('keydown', handleKeyDown);
+
     return () => {
       document.body.style.overflow = 'auto';
       window.removeEventListener('keydown', handleKeyDown);
+      previousActiveElement?.focus?.();
     };
   }, [item, onClose]);
 
@@ -40,9 +58,10 @@ export const ImageLightbox: React.FC<ImageLightboxProps> = ({ item, onClose }) =
         onWheel={(e) => e.stopPropagation()}
       >
         <button
+          ref={closeButtonRef}
           type="button"
           onClick={onClose}
-          className="absolute -top-4 -right-4 sm:top-4 sm:right-4 z-10 p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/20 backdrop-blur-md transition-colors shadow-lg cursor-pointer"
+          className="absolute -top-4 -right-4 sm:top-4 sm:right-4 z-10 p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/20 backdrop-blur-md transition-colors shadow-lg cursor-pointer focus:outline-none focus:ring-2 focus:ring-white"
           aria-label="Close preview"
         >
           <X className="w-5 h-5" />

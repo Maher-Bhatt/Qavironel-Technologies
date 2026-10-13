@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { BookingModalTab } from '../components/booking/BookingModal';
+import type { BookingModalTab } from '../utils/modalEvents';
 
 /**
  * Custom hook to listen for the 'open-booking-modal' custom event.

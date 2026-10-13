@@ -86,6 +86,8 @@ export const SiteHeader: React.FC = () => {
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="p-2.5 rounded-xl border border-black/10 dark:border-white/10 text-black dark:text-white bg-white dark:bg-zinc-900"
               aria-label={mobileMenuOpen ? 'Close Menu' : 'Open Menu'}
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-navigation-drawer"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -95,7 +97,7 @@ export const SiteHeader: React.FC = () => {
 
       {/* Mobile Editorial Drawer */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-40 bg-[#F5F5F0] dark:bg-[#0D1511] pt-24 px-6 flex flex-col justify-between pb-10 md:hidden animate-fade-in">
+        <div id="mobile-navigation-drawer" className="fixed inset-0 z-40 bg-[#F5F5F0] dark:bg-[#0D1511] pt-24 px-6 flex flex-col justify-between pb-10 md:hidden animate-fade-in">
           <div className="space-y-6">
             <div className="pb-4 border-b border-[#D9DED7] dark:border-white/10 flex items-center justify-between">
               <Logo size="sm" />

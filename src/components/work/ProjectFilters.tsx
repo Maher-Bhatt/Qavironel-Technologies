@@ -29,6 +29,7 @@ export const ProjectFilters: React.FC<ProjectFiltersProps> = ({
               playTabSound();
               onSelectCategory(cat.id);
             }}
+            aria-pressed={isActive}
             className={`px-4 py-2 text-xs font-semibold uppercase tracking-widest transition-all duration-200 shrink-0 flex items-center gap-2 border rounded-full ${
               isActive
                 ? 'bg-[#0A0A0A] dark:bg-white text-white dark:text-[#0A0A0A] border-[#0A0A0A] dark:border-white shadow-xs'

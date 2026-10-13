@@ -212,10 +212,10 @@ export function buildIcsDataUri(params: {
     `DTSTAMP:${nowStr}`,
     `DTSTART:${startStr}`,
     `DTEND:${endStr}`,
-    `SUMMARY:${title.replace(/,/g, '\\,')}`,
+    `SUMMARY:${title.replace(/,/g, '\\,')} (Provisional)`,
     `DESCRIPTION:${description.replace(/\n/g, '\\n').replace(/,/g, '\\,')}`,
     `LOCATION:${location.replace(/,/g, '\\,')}`,
-    'STATUS:CONFIRMED',
+    'STATUS:TENTATIVE',
     'END:VEVENT',
     'END:VCALENDAR',
   ];

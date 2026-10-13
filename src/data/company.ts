@@ -5,6 +5,7 @@ export const companyConfig = {
   shortName: 'Qavironel',
   tagline: 'Ideas. Engineered.',
   eyebrow: 'Global Technology & Digital Product Studio',
+  siteUrl: 'https://qavironel.com',
   description: 'Qavironel Technologies is a remote-first software engineering and digital product studio. We partner with ambitious founders, startups, and companies worldwide to engineer high-performance web systems, custom digital products, and applied AI applications.',
   foundedLocation: 'Global · Remote-First Studio',
   email: 'qavironeltechnologies@gmail.com',
@@ -142,9 +143,9 @@ export const testimonials: Testimonial[] = [
   },
   {
     quote: 'Qavironel transformed our civil engineering credential portfolio into an authoritative digital platform. Government procurement officers and municipal engineers can now review our verified pipeline and drainage projects instantly from their phones.',
-    author: 'Project Engineering Lead',
-    role: 'Director of Operations',
-    organization: 'Classic Infrastructure Projects',
+    author: 'Executive Management',
+    role: 'Operations & Procurement Oversight',
+    organization: 'Classic Infrastructure Projects (Est. 2008)',
     projectSlug: 'classic-infrastructure'
   }
 ];

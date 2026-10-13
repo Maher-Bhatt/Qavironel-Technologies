@@ -23,14 +23,14 @@ interface RequestQuoteFormProps {
 }
 
 const AVAILABLE_DELIVERABLES = [
-  'Custom UI/UX & Responsive Frontend',
+  'Custom Web Platform & Responsive UI',
   'Full-Stack Architecture & API Routes',
-  'Authentication & Role-Based Access',
-  'Applied AI / LLM Workflow Integration',
-  'Stripe / Razorpay Payment Integration',
+  'User Login & Role-Based Access (RBAC)',
+  'Applied AI & Local LLM Workflows',
+  'Payment Integration (Stripe / Razorpay / UPI)',
   'Database Modeling (PostgreSQL / SQLite)',
-  'Defensive Security & Input Validation',
-  'Lighthouse & Core Web Vitals Tuning',
+  'Defensive Security & Input Hardening',
+  'Speed, SEO & Core Web Vitals Tuning',
 ];
 
 export const RequestQuoteForm: React.FC<RequestQuoteFormProps> = ({ onSuccess, onCancel }) => {
@@ -39,10 +39,10 @@ export const RequestQuoteForm: React.FC<RequestQuoteFormProps> = ({ onSuccess, o
     email: '',
     organization: '',
     projectType: 'High-Impact Custom Web Platform',
-    budgetRange: '$5k – $10k (Core Sprint)',
-    timeline: '1-2 Months (Product Sprint)',
+    budgetRange: '$2k – $5k / ₹1.5L – ₹4L (Sprint MVP)',
+    timeline: '2-4 Weeks (Product Sprint)',
     scopeDetails: '',
-    features: ['Custom UI/UX & Responsive Frontend', 'Full-Stack Architecture & API Routes'],
+    features: ['Custom Web Platform & Responsive UI', 'Full-Stack Architecture & API Routes'],
     hpField: '',
   });
 
@@ -68,6 +68,7 @@ export const RequestQuoteForm: React.FC<RequestQuoteFormProps> = ({ onSuccess, o
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isSubmitting) return;
     setSubmissionResult(null);
 
     const validation = validateQuoteForm(formData);
@@ -106,7 +107,7 @@ export const RequestQuoteForm: React.FC<RequestQuoteFormProps> = ({ onSuccess, o
 
   if (submissionResult?.success) {
     return (
-      <div className="py-8 text-center space-y-5 animate-in fade-in duration-300">
+      <div role="status" aria-live="polite" className="py-8 text-center space-y-5 animate-in fade-in duration-300">
         <div className="w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400 mx-auto flex items-center justify-center border border-emerald-300 dark:border-emerald-700/50 shadow-sm">
           <CheckCircle2 className="w-8 h-8" />
         </div>
@@ -114,19 +115,19 @@ export const RequestQuoteForm: React.FC<RequestQuoteFormProps> = ({ onSuccess, o
           <span className="text-xs font-mono font-bold uppercase tracking-widest text-black dark:text-white">
             Request Transmitted
           </span>
-          <h3 className="font-sans font-bold text-2xl text-black dark:text-white dark:text-[#F5F5F0]">
+          <h3 className="font-sans font-bold text-2xl text-black dark:text-white">
             Quotation Request Received
           </h3>
-          <p className="text-sm text-zinc-500 dark:text-[#A7B0A7] leading-relaxed font-light">
+          <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed font-light">
             {submissionResult.message}
           </p>
         </div>
 
-        <div className="p-4 rounded-xl bg-[#F5F5F0] dark:bg-[#0A0A0A] border border-black/10 dark:border-white/10 dark:border-white/10 max-w-sm mx-auto text-left text-xs space-y-1 font-mono text-black dark:text-white dark:text-[#F5F5F0]">
-          <p><span className="text-zinc-500 dark:text-[#A7B0A7]">Project:</span> {formData.projectType}</p>
-          <p><span className="text-zinc-500 dark:text-[#A7B0A7]">Budget Tier:</span> {formData.budgetRange}</p>
-          <p><span className="text-zinc-500 dark:text-[#A7B0A7]">Timeline:</span> {formData.timeline}</p>
-          <p><span className="text-zinc-500 dark:text-[#A7B0A7]">Contact:</span> {formData.email}</p>
+        <div className="p-4 rounded-xl bg-[#F5F5F0] dark:bg-[#0A0A0A] border border-black/10 dark:border-white/10 max-w-sm mx-auto text-left text-xs space-y-1 font-mono text-black dark:text-white">
+          <p><span className="text-zinc-500">Project:</span> {formData.projectType}</p>
+          <p><span className="text-zinc-500">Budget Tier:</span> {formData.budgetRange}</p>
+          <p><span className="text-zinc-500">Timeline:</span> {formData.timeline}</p>
+          <p><span className="text-zinc-500">Contact:</span> {formData.email}</p>
         </div>
 
         <div className="pt-2">
@@ -146,14 +147,16 @@ export const RequestQuoteForm: React.FC<RequestQuoteFormProps> = ({ onSuccess, o
     );
   }
 
-  const labelClass = `block text-xs font-mono font-bold uppercase tracking-wider mb-2 text-black dark:text-white dark:text-[#F5F5F0]`;
-  const inputClass = `w-full px-4 py-3 rounded-xl text-sm transition-all bg-white dark:bg-[#0B100D] border border-black/10 dark:border-white/10 dark:border-white/10 text-black dark:text-white dark:text-[#F5F5F0] placeholder-[#52635A] dark:placeholder-[#83988D] focus:outline-hidden focus:border-black dark:focus:border-white focus:ring-1 focus:ring-black dark:focus:ring-white`;
+  const labelClass = `block text-xs font-mono font-bold uppercase tracking-wider mb-2 text-black dark:text-white`;
+  const inputClass = `w-full px-4 py-3 rounded-xl text-sm transition-all bg-white dark:bg-[#103629]/20 border border-black/10 dark:border-white/10 text-black dark:text-white placeholder-zinc-400 dark:placeholder-zinc-500 focus:outline-hidden focus:border-[#174C3A] dark:focus:border-[#879B89] focus:ring-1 focus:ring-[#174C3A] dark:focus:ring-[#879B89] disabled:opacity-60 disabled:cursor-not-allowed`;
 
   return (
     <form onSubmit={handleSubmit} noValidate className="space-y-6">
       {/* Honeypot field */}
       <div aria-hidden="true" style={{ position: 'absolute', left: '-9999px', top: '-9999px', height: 0, overflow: 'hidden' }}>
+        <label htmlFor="quote_bot_hp" className="sr-only">Leave this field blank</label>
         <input
+          id="quote_bot_hp"
           type="text"
           name="quote_bot_hp"
           tabIndex={-1}
@@ -174,7 +177,7 @@ export const RequestQuoteForm: React.FC<RequestQuoteFormProps> = ({ onSuccess, o
               {submissionResult.fallbackMailto && (
                 <a
                   href={submissionResult.fallbackMailto}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#0F1713] dark:bg-white text-white dark:text-black dark:text-white text-xs font-mono font-bold uppercase"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#103629] dark:bg-white text-white dark:text-black text-xs font-mono font-bold uppercase"
                 >
                   <Mail className="w-3.5 h-3.5" />
                   <span>Send via Email</span>
@@ -196,14 +199,15 @@ export const RequestQuoteForm: React.FC<RequestQuoteFormProps> = ({ onSuccess, o
         </div>
       )}
 
-      {/* Row 1: Project Type & Budget Tier */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      {/* Row 1: Project Type, Budget Tier & Timeline */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div>
           <label htmlFor="quote-type" className={labelClass}>
             Discipline & Scope
           </label>
           <select
             id="quote-type"
+            disabled={isSubmitting}
             value={formData.projectType}
             onChange={(e) => setFormData({ ...formData, projectType: e.target.value })}
             className={inputClass}
@@ -222,22 +226,42 @@ export const RequestQuoteForm: React.FC<RequestQuoteFormProps> = ({ onSuccess, o
           </label>
           <select
             id="quote-budget"
+            disabled={isSubmitting}
             value={formData.budgetRange}
             onChange={(e) => setFormData({ ...formData, budgetRange: e.target.value })}
             className={inputClass}
           >
-            <option value="$2k – $5k (Sprint MVP)">$2,000 – $5,000 (Sprint MVP)</option>
-            <option value="$5k – $10k (Core Sprint)">$5,000 – $10,000 (Core Sprint)</option>
-            <option value="$10k – $25k (Full Production)">$10,000 – $25,000 (Full Production)</option>
-            <option value="$25k+ (Enterprise Architecture)">$25,000+ (Enterprise Architecture)</option>
+            <option value="< $2,000 / < ₹1.5L (Starter Sprint)">Under $2,000 / ₹1.5L (Starter Sprint)</option>
+            <option value="$2k – $5k / ₹1.5L – ₹4L (Sprint MVP)">$2,000 – $5,000 / ₹1.5L – ₹4L (Sprint MVP)</option>
+            <option value="$5k – $10k / ₹4L – ₹8L (Core Sprint)">$5,000 – $10,000 / ₹4L – ₹8L (Core Sprint)</option>
+            <option value="$10k – $25k / ₹8L – ₹20L (Full Production)">$10,000 – $25,000 / ₹8L – ₹20L (Full Production)</option>
+            <option value="$25k+ / ₹20L+ (Enterprise Architecture)">$25,000+ / ₹20L+ (Enterprise Architecture)</option>
             <option value="Flexible / Retainer Milestone">Flexible / Retainer Milestone</option>
+          </select>
+        </div>
+
+        <div>
+          <label htmlFor="quote-timeline" className={labelClass}>
+            Target Timeline
+          </label>
+          <select
+            id="quote-timeline"
+            disabled={isSubmitting}
+            value={formData.timeline}
+            onChange={(e) => setFormData({ ...formData, timeline: e.target.value })}
+            className={inputClass}
+          >
+            <option value="1-2 Weeks (Urgent Sprint)">1–2 Weeks (Urgent Sprint)</option>
+            <option value="2-4 Weeks (Product Sprint)">2–4 Weeks (Product Sprint)</option>
+            <option value="1-2 Months (Multi-Milestone Build)">1–2 Months (Multi-Milestone Build)</option>
+            <option value="Flexible / Ongoing Retainer">Flexible / Ongoing Retainer</option>
           </select>
         </div>
       </div>
 
       {/* Deliverable Checkboxes */}
-      <div>
-        <label className={labelClass}>Key Required Deliverables</label>
+      <fieldset className="border-0 p-0 m-0">
+        <legend className={labelClass}>Key Required Deliverables</legend>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           {AVAILABLE_DELIVERABLES.map((deliverable) => {
             const isChecked = formData.features?.includes(deliverable);
@@ -245,8 +269,11 @@ export const RequestQuoteForm: React.FC<RequestQuoteFormProps> = ({ onSuccess, o
               <button
                 key={deliverable}
                 type="button"
+                role="checkbox"
+                aria-checked={isChecked}
+                disabled={isSubmitting}
                 onClick={() => toggleFeature(deliverable)}
-                className={`p-3 rounded-xl border text-left text-xs font-sans transition-all flex items-center justify-between cursor-pointer ${
+                className={`p-3 rounded-xl border text-left text-xs font-sans transition-all flex items-center justify-between cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed ${
                   isChecked
                     ? 'bg-zinc-100 dark:bg-zinc-800/60 border-black dark:border-white text-[#0A0A0A] dark:text-white font-medium'
                     : 'bg-white dark:bg-zinc-900 border-black/10 dark:border-white/10 text-zinc-600 dark:text-zinc-400 hover:border-black/30 dark:hover:border-white/30'
@@ -262,7 +289,7 @@ export const RequestQuoteForm: React.FC<RequestQuoteFormProps> = ({ onSuccess, o
             );
           })}
         </div>
-      </div>
+      </fieldset>
 
       {/* Scope Details */}
       <div>
@@ -273,6 +300,7 @@ export const RequestQuoteForm: React.FC<RequestQuoteFormProps> = ({ onSuccess, o
           id="quote-scope"
           rows={4}
           required
+          disabled={isSubmitting}
           value={formData.scopeDetails}
           onChange={(e) => setFormData({ ...formData, scopeDetails: e.target.value })}
           placeholder="Describe your current system or proposed product, core user journeys, target deadline, and specific technical requirements."
@@ -291,6 +319,7 @@ export const RequestQuoteForm: React.FC<RequestQuoteFormProps> = ({ onSuccess, o
             id="quote-name"
             type="text"
             required
+            disabled={isSubmitting}
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             placeholder="Jane Doe"
@@ -307,6 +336,7 @@ export const RequestQuoteForm: React.FC<RequestQuoteFormProps> = ({ onSuccess, o
             id="quote-email"
             type="email"
             required
+            disabled={isSubmitting}
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
             placeholder="jane@company.com"
@@ -322,6 +352,7 @@ export const RequestQuoteForm: React.FC<RequestQuoteFormProps> = ({ onSuccess, o
           <input
             id="quote-org"
             type="text"
+            disabled={isSubmitting}
             value={formData.organization}
             onChange={(e) => setFormData({ ...formData, organization: e.target.value })}
             placeholder="Company / Project"
@@ -354,7 +385,7 @@ export const RequestQuoteForm: React.FC<RequestQuoteFormProps> = ({ onSuccess, o
           <button
             type="button"
             onClick={onCancel}
-            className="text-xs font-mono uppercase text-zinc-500 hover:text-black dark:text-white dark:hover:text-[#F4F7F5]"
+            className="text-xs font-mono uppercase text-zinc-500 hover:text-black dark:text-white dark:hover:text-[#F5F5F0]"
           >
             Cancel
           </button>

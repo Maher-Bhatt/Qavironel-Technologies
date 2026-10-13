@@ -131,5 +131,38 @@ describe('bookingService', () => {
       expect(res.message).toContain('unavailable');
       expect(res.fallbackMailto).toBeDefined();
     });
+
+    it('builds mailto for quote containing scope and deliverables', () => {
+      const mailto = buildQuoteMailto({
+        name: 'Ada Lovelace',
+        email: 'ada@analyticalengine.org',
+        projectType: 'Analytical Platform',
+        budgetRange: '$5,000 - $10,000',
+        timeline: '1-2 Months',
+        scopeDetails: 'Engineering the first algorithmic pipeline for computation.',
+        features: ['Algorithmic Engine', 'Bernoulli Table Generation'],
+      });
+      expect(mailto).toContain(`mailto:${companyConfig.email}`);
+      const decoded = decodeURIComponent(mailto);
+      expect(decoded).toContain('Ada Lovelace');
+      expect(decoded).toContain('Algorithmic Engine');
+      expect(decoded).toContain('Bernoulli Table Generation');
+    });
+
+    it('submitQuoteRequest returns honest fallback on network failure', async () => {
+      global.fetch = vi.fn().mockRejectedValue(new Error('Network offline'));
+      const res = await submitQuoteRequest({
+        name: 'Ada Lovelace',
+        email: 'ada@analyticalengine.org',
+        projectType: 'Analytical Platform',
+        budgetRange: '$5,000 - $10,000',
+        timeline: '1-2 Months',
+        scopeDetails: 'Engineering the first algorithmic pipeline for computation.',
+      });
+      expect(res.success).toBe(false);
+      expect(res.message).toContain('unavailable');
+      expect(res.fallbackMailto).toBeDefined();
+      expect(res.fallbackWhatsApp).toBeDefined();
+    });
   });
 });

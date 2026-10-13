@@ -99,9 +99,15 @@ export const Spatial3DPrism: React.FC<Spatial3DPrismProps> = ({
     let isVisible = false;
     let frameId: number | null = null;
     let clock = new THREE.Clock();
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     const animate = () => {
       if (!isVisible) return;
+      if (prefersReducedMotion) {
+        // Render a single static frame for reduced motion preference
+        renderer.render(scene, camera);
+        return;
+      }
       frameId = requestAnimationFrame(animate);
 
       const delta = clock.getDelta();
@@ -120,7 +126,11 @@ export const Spatial3DPrism: React.FC<Spatial3DPrismProps> = ({
         if (visible && !isVisible) {
           isVisible = true;
           if (frameId) cancelAnimationFrame(frameId);
-          frameId = requestAnimationFrame(animate);
+          if (prefersReducedMotion) {
+            renderer.render(scene, camera);
+          } else {
+            frameId = requestAnimationFrame(animate);
+          }
         } else if (!visible && isVisible) {
           isVisible = false;
           if (frameId) cancelAnimationFrame(frameId);

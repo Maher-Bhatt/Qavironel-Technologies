@@ -40,7 +40,7 @@ export const Hero3DCanvas: React.FC<Hero3DCanvasProps> = ({ className = '' }) =>
     const knotGeometry = new THREE.TorusKnotGeometry(1.4, 0.42, 128, 32, 2, 3);
     const knotMaterial = new THREE.MeshPhysicalMaterial({
       color: new THREE.Color('#FFFFFF'),
-      emissive: new THREE.Color('#1A0802'),
+      emissive: new THREE.Color('#103629'),
       roughness: 0.15,
       metalness: 0.1,
       clearcoat: 1.0,

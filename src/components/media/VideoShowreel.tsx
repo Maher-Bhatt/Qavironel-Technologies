@@ -289,6 +289,8 @@ export const VideoShowreel: React.FC = () => {
                   key={chan.id}
                   type="button"
                   onClick={() => switchChannel(idx)}
+                  aria-label={`Channel ${chan.channelNum}: ${chan.title}`}
+                  aria-pressed={isSelected}
                   className={`flex-1 py-2.5 px-2 min-h-[44px] rounded-lg text-center transition-all duration-200 active:scale-95 cursor-pointer flex items-center justify-center ${
                     isSelected
                       ? 'bg-black dark:bg-white text-white dark:text-black shadow-xs font-bold'
@@ -323,6 +325,8 @@ export const VideoShowreel: React.FC = () => {
                 key={chan.id}
                 type="button"
                 onClick={() => switchChannel(idx)}
+                aria-label={`Select Channel ${chan.channelNum}: ${chan.title}`}
+                aria-pressed={isSelected}
                 className={`p-3.5 rounded-xl text-left border transition-all duration-200 flex flex-col justify-between cursor-pointer ${
                   isSelected
                     ? 'bg-black dark:bg-white border-black dark:border-white text-white dark:text-black shadow-md'

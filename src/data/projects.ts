@@ -272,7 +272,7 @@ export const projects: Project[] = [
       { value: 'TanStack', label: 'Start Architecture', context: 'React 19 full-stack performance' }
     ],
     links: [
-      { label: 'Request EPC Contracting Consultation', url: '/contact', type: 'live' }
+      { label: 'View EPC Credential Dossier (Enterprise Intranet Portal)', url: '/contact', type: 'live' }
     ]
   },
   {
@@ -371,7 +371,7 @@ export const projects: Project[] = [
     ],
     metrics: [
       { value: '4 Portals', label: 'Role Surfaces', context: 'Citizen, Municipality, Contractor, and Admin command' },
-      { value: '1,200+', label: 'Mapped Civic Reports', context: 'Live severity GIS hotspots across 4 major metros' },
+      { value: '1,200+', label: 'Seeded GIS Incident Reports', context: 'Geospatial hotspot test dataset across Delhi MCD (SIH 2026 Prototype)' },
       { value: 'Tri-Partite', label: 'Accountability Model', context: 'Public citizen + AI SLA + government inspection ratings' }
     ],
     links: [

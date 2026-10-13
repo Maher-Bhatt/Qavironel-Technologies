@@ -19,6 +19,13 @@ const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
 
 function checkRateLimit(ip: string): boolean {
   const now = Date.now();
+  if (ipRateLimitMap.size > 1000) {
+    for (const [key, value] of ipRateLimitMap.entries()) {
+      if (now > value.resetAt) {
+        ipRateLimitMap.delete(key);
+      }
+    }
+  }
   const record = ipRateLimitMap.get(ip);
   if (!record || now > record.resetAt) {
     ipRateLimitMap.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
@@ -40,6 +47,16 @@ function escapeHtml(str: string): string {
     .replace(/'/g, '&#39;');
 }
 
+function sanitizeText(val: unknown, maxLen: number): string {
+  if (typeof val !== 'string') return '';
+  return val.trim().slice(0, maxLen);
+}
+
+function sanitizeSubject(val: unknown, maxLen = 120): string {
+  if (typeof val !== 'string') return '';
+  return val.replace(/[\r\n\t]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, maxLen);
+}
+
 const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
 
 export default async function handler(req: any, res: any) {
@@ -48,7 +65,9 @@ export default async function handler(req: any, res: any) {
     return res.status(405).json({ success: false, message: 'Method Not Allowed' });
   }
 
-  const clientIp = (req.headers['x-forwarded-for'] as string)?.split(',')[0]?.trim() || 
+  const clientIp = (req.headers['x-vercel-ip'] as string)?.trim() ||
+                   (req.headers['x-real-ip'] as string)?.trim() ||
+                   (req.headers['x-forwarded-for'] as string)?.split(',')[0]?.trim() || 
                    req.socket?.remoteAddress || '127.0.0.1';
 
   // 1. Rate Limit Check
@@ -60,37 +79,38 @@ export default async function handler(req: any, res: any) {
   }
 
   // 2. Body parsing and validation
-  let body: BookingRequestBody;
+  let body: any;
   try {
     body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
+    if (!body || typeof body !== 'object' || Array.isArray(body)) {
+      return res.status(400).json({ success: false, message: 'Invalid JSON payload.' });
+    }
   } catch {
     return res.status(400).json({ success: false, message: 'Invalid JSON payload.' });
   }
 
   // Honeypot check
-  if (body.hpField && body.hpField.trim().length > 0) {
+  const hpField = sanitizeText(body.hpField, 100);
+  if (hpField.length > 0) {
     return res.status(200).json({ success: true, message: 'Request received.' });
   }
 
-  const name = body.name?.trim();
-  const email = body.email?.trim();
-  const date = body.date?.trim();
-  const time = body.time?.trim();
-  const organization = body.organization?.trim() || 'N/A';
-  const topic = body.topic?.trim() || 'General Architecture Consultation';
-  const notes = body.notes?.trim() || '';
+  const name = sanitizeText(body.name, 100);
+  const email = sanitizeText(body.email, 120);
+  const date = sanitizeText(body.date, 30);
+  const time = sanitizeText(body.time, 30);
+  const organization = sanitizeText(body.organization, 150) || 'N/A';
+  const topic = sanitizeText(body.topic, 150) || 'General Architecture Consultation';
+  const notes = sanitizeText(body.notes, 3000);
 
-  if (!name || name.length < 2 || name.length > 100) {
+  if (!name || name.length < 2) {
     return res.status(400).json({ success: false, message: 'Invalid or missing name.' });
   }
-  if (!email || !EMAIL_REGEX.test(email) || email.length > 120) {
+  if (!email || !EMAIL_REGEX.test(email)) {
     return res.status(400).json({ success: false, message: 'Invalid or missing email address.' });
   }
   if (!date || !time) {
     return res.status(400).json({ success: false, message: 'Missing date or time selection.' });
-  }
-  if (notes.length > 3000) {
-    return res.status(400).json({ success: false, message: 'Notes must be 3000 characters or fewer.' });
   }
 
   const resendApiKey = process.env.RESEND_API_KEY;
@@ -108,7 +128,7 @@ export default async function handler(req: any, res: any) {
           from: process.env.RESEND_FROM_EMAIL || 'inquiries@qavironel.com',
           to: [targetEmail],
           reply_to: email,
-          subject: `[Call Request] ${escapeHtml(date)} at ${escapeHtml(time)} - ${escapeHtml(name)} (${escapeHtml(topic)})`,
+          subject: `[Call Request] ${sanitizeSubject(date)} at ${sanitizeSubject(time)} - ${sanitizeSubject(name)} (${sanitizeSubject(topic)})`,
           html: `
             <h2>New Call Request from Qavironel.com</h2>
             <p><strong>Name:</strong> ${escapeHtml(name)}</p>

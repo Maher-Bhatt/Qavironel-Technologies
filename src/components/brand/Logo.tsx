@@ -105,6 +105,7 @@ export const Logo: React.FC<LogoProps> = ({
   if (!asLink) {
     return (
       <div 
+        role="img"
         className={`inline-flex items-center gap-3 select-none ${className}`}
         aria-label="Qavironel Technologies"
       >

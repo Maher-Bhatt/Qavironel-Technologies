@@ -17,7 +17,7 @@ export const Badge: React.FC<BadgeProps> = ({
     ? 'px-2.5 py-1 text-[0.68rem] font-semibold tracking-wider uppercase' 
     : 'px-3.5 py-1.5 text-xs font-semibold tracking-wider uppercase';
 
-  const forestStyle = 'bg-emerald-50 text-black dark:text-white dark:bg-emerald-950/40 dark:text-white border border-emerald-200 dark:border-emerald-800/40 rounded-full';
+  const forestStyle = 'bg-[#E6ECE5] text-[#174C3A] dark:bg-[#103629] dark:text-[#E6ECE5] border border-[#D9DED7] dark:border-[#879B89]/30 rounded-full';
 
   const variantStyles = {
     forest: forestStyle,

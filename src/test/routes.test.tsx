@@ -112,6 +112,54 @@ describe('Route Smoke Tests', () => {
     expect(screen.getByText('Ztees')).toBeDefined();
   });
 
+  it('renders CaseStudyPage for Classic Infrastructure Projects', () => {
+    render(
+      <MemoryRouter initialEntries={['/work/classic-infrastructure']}>
+        <Routes>
+          <Route path="/work/:slug" element={<CaseStudyPage />} />
+        </Routes>
+      </MemoryRouter>
+    );
+    expect(screen.getByRole('heading', { level: 1 })).toBeDefined();
+    expect(screen.getAllByText(/Classic Infrastructure Projects/i).length).toBeGreaterThan(0);
+  });
+
+  it('renders CaseStudyPage for Civic Sathi', () => {
+    render(
+      <MemoryRouter initialEntries={['/work/civic-sathi']}>
+        <Routes>
+          <Route path="/work/:slug" element={<CaseStudyPage />} />
+        </Routes>
+      </MemoryRouter>
+    );
+    expect(screen.getByRole('heading', { level: 1 })).toBeDefined();
+    expect(screen.getAllByText(/Civic Sathi/i).length).toBeGreaterThan(0);
+  });
+
+  it('renders CaseStudyPage for CyberGuard Security Lab', () => {
+    render(
+      <MemoryRouter initialEntries={['/work/socialsafe']}>
+        <Routes>
+          <Route path="/work/:slug" element={<CaseStudyPage />} />
+        </Routes>
+      </MemoryRouter>
+    );
+    expect(screen.getByRole('heading', { level: 1 })).toBeDefined();
+    expect(screen.getAllByText(/CyberGuard Security Lab/i).length).toBeGreaterThan(0);
+  });
+
+  it('renders CaseStudyPage for ITM Notes Portal', () => {
+    render(
+      <MemoryRouter initialEntries={['/work/itm-notes']}>
+        <Routes>
+          <Route path="/work/:slug" element={<CaseStudyPage />} />
+        </Routes>
+      </MemoryRouter>
+    );
+    expect(screen.getByRole('heading', { level: 1 })).toBeDefined();
+    expect(screen.getAllByText(/ITM Notes/i).length).toBeGreaterThan(0);
+  });
+
   it('renders LegalPage for /terms route', () => {
     render(
       <MemoryRouter initialEntries={['/terms']}>

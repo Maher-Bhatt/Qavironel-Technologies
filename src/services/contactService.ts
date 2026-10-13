@@ -71,6 +71,9 @@ export function validateContactForm(data: ContactFormData): {
 
 export function buildContactMailto(data: ContactFormData): string {
   const subject = encodeURIComponent(`Project Inquiry: ${data.projectType} — ${data.name.trim() || 'Prospect'}`);
+  const safeDetails = data.details.trim().length > 1500 
+    ? data.details.trim().slice(0, 1500) + '...' 
+    : data.details.trim();
   const body = encodeURIComponent(
     `Hello Qavironel Team,\n\n` +
     `I would like to discuss a project with your engineering studio.\n\n` +
@@ -81,7 +84,7 @@ export function buildContactMailto(data: ContactFormData): string {
     (data.budget ? `Investment Range: ${data.budget}\n` : '') +
     `Timeline: ${data.timeline}\n` +
     `Engagement Model: ${data.engagementModel}\n\n` +
-    `Project Details:\n${data.details.trim()}\n\n` +
+    `Project Details:\n${safeDetails}\n\n` +
     `Best regards,\n${data.name.trim()}`
   );
   return `mailto:${companyConfig.email}?subject=${subject}&body=${body}`;

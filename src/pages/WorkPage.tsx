@@ -122,7 +122,7 @@ export const WorkPage: React.FC = () => {
                     >
                       <ScrollAutoplayVideo 
                         src={kalki.videoSrc || '/videos/kalki-video.mp4'}
-                        poster="/images/projects/kalki-launch.png"
+                        poster="/videos/kalki-video-poster.webp"
                         alt="K.A.L.K.I. main tactical desktop HUD video"
                         badgeText="TACTICAL HUD v1.0.4"
                         aspectRatio="aspect-[16/10]"

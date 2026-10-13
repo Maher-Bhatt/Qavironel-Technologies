@@ -10,14 +10,10 @@ import {
 import { ScheduleCallForm } from './ScheduleCallForm';
 import { RequestQuoteForm } from './RequestQuoteForm';
 import { playModalOpenSound, playModalCloseSound, playTabSound } from '../../utils/soundEffects';
+import { BookingModalTab, openBookingModal } from '../../utils/modalEvents';
 
-export type BookingModalTab = 'call' | 'quotation';
-
-export const openBookingModal = (tab: BookingModalTab = 'call') => {
-  if (typeof window !== 'undefined') {
-    window.dispatchEvent(new CustomEvent('open-booking-modal', { detail: { tab } }));
-  }
-};
+export type { BookingModalTab };
+export { openBookingModal };
 
 interface BookingModalProps {
   isOpen: boolean;
@@ -164,9 +160,13 @@ export const BookingModal: React.FC<BookingModalProps> = ({
             </div>
 
             {/* Tab Switcher */}
-            <div className="px-5 sm:px-6 pt-4 pb-2 border-b border-black/[0.08] dark:border-white/10 bg-[#F9FAFB] dark:bg-[#0A0A0A] flex gap-2 shrink-0">
+            <div role="tablist" aria-label="Booking options" className="px-5 sm:px-6 pt-4 pb-2 border-b border-black/[0.08] dark:border-white/10 bg-[#F9FAFB] dark:bg-[#0A0A0A] flex gap-2 shrink-0">
               <button
                 type="button"
+                role="tab"
+                id="booking-tab-call"
+                aria-selected={activeTab === 'call'}
+                aria-controls="booking-tabpanel"
                 onClick={() => {
                   playTabSound();
                   setActiveTab('call');
@@ -183,6 +183,10 @@ export const BookingModal: React.FC<BookingModalProps> = ({
 
               <button
                 type="button"
+                role="tab"
+                id="booking-tab-quotation"
+                aria-selected={activeTab === 'quotation'}
+                aria-controls="booking-tabpanel"
                 onClick={() => {
                   playTabSound();
                   setActiveTab('quotation');
@@ -200,6 +204,9 @@ export const BookingModal: React.FC<BookingModalProps> = ({
 
             {/* Modal Body with internal smooth scrolling */}
             <div 
+              id="booking-tabpanel"
+              role="tabpanel"
+              aria-labelledby={activeTab === 'call' ? 'booking-tab-call' : 'booking-tab-quotation'}
               className="p-5 sm:p-6 overflow-y-auto flex-1 overscroll-contain bg-white dark:bg-zinc-950"
               style={{ WebkitOverflowScrolling: 'touch' }}
             >

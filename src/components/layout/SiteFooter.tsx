@@ -19,7 +19,7 @@ export const SiteFooter: React.FC = () => {
               Independent Digital Product & Software Studio
             </span>
             <h2 className="font-display font-extrabold text-4xl sm:text-6xl lg:text-7xl tracking-tight text-[#0A0A0A] dark:text-white leading-[1.05]">
-              Ideas. <span className="text-zinc-400 dark:text-zinc-500 font-light">Engineered.</span>
+              Ideas. <span className="text-zinc-600 dark:text-zinc-400 font-light">Engineered.</span>
             </h2>
           </div>
           <div className="max-w-md space-y-4">

@@ -107,7 +107,7 @@ export const services: ServicePillar[] = [
     imageCaption: 'CodeDroid Multi-Device Engineering Companion & Mathematical Design System',
     metrics: [
       { value: '4pt / 8pt', label: 'Mathematical Spacing Scale' },
-      { value: 'WCAG AAA', label: 'Contrast & Accessibility' },
+      { value: 'WCAG 2.1 AA', label: 'Contrast & Accessibility' },
       { value: 'Zero-Drift', label: 'Figma-to-Code Tokens' }
     ],
     architectureHighlights: [
@@ -144,7 +144,7 @@ export const services: ServicePillar[] = [
     architectureHighlights: [
       'Automated next-gen image conversion (WebP/AVIF) with lazy-load thresholds',
       'Semantic HTML5 structure with dynamic sitemap.xml and robots.txt',
-      'Comprehensive Schema.org microdata (Organization, LocalBusiness, Breadcrumbs)',
+      'Comprehensive Schema.org structured data (Organization, WebSite, CaseStudy, Breadcrumbs)',
       'Edge cache stale-while-revalidate headers for sub-second global responses'
     ],
     deliverables: [

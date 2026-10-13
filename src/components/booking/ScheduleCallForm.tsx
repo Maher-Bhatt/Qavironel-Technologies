@@ -131,6 +131,7 @@ export const ScheduleCallForm: React.FC<ScheduleCallFormProps> = ({ onSuccess, o
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isSubmitting) return;
     setSubmissionResult(null);
 
     if (!selectedSlotData) {
@@ -207,7 +208,7 @@ export const ScheduleCallForm: React.FC<ScheduleCallFormProps> = ({ onSuccess, o
     });
 
     return (
-      <div className="py-6 text-center space-y-6 animate-in fade-in duration-300">
+      <div role="status" aria-live="polite" className="py-6 text-center space-y-6 animate-in fade-in duration-300">
         <div className="w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400 mx-auto flex items-center justify-center border border-emerald-300 dark:border-emerald-700/50 shadow-sm">
           <CheckCircle2 className="w-8 h-8" />
         </div>
@@ -215,13 +216,13 @@ export const ScheduleCallForm: React.FC<ScheduleCallFormProps> = ({ onSuccess, o
         <div className="space-y-2 max-w-lg mx-auto">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/5 dark:bg-white/10 text-xs font-mono font-bold uppercase tracking-wider text-black dark:text-white">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>Meeting Scheduled & Transmitted</span>
+            <span>Meeting Request Dispatched</span>
           </div>
           <h3 className="font-display font-bold text-2xl sm:text-3xl text-black dark:text-white">
-            Architecture Call Confirmed
+            Architecture Call Requested
           </h3>
           <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed font-light">
-            {submissionResult.message}
+            Your meeting request has been received. Maher Bhatt will review availability and confirm your calendar invite with the official Google Meet link within 12 hours.
           </p>
         </div>
 
@@ -263,10 +264,10 @@ export const ScheduleCallForm: React.FC<ScheduleCallFormProps> = ({ onSuccess, o
           </div>
         </div>
 
-        {/* 1-Click Instant Calendar Integrations */}
+        {/* 1-Click Calendar Hold Options */}
         <div className="space-y-3 max-w-md mx-auto pt-1">
           <div className="text-[0.68rem] font-mono uppercase tracking-wider text-zinc-500">
-            Instant 1-Click Calendar Sync (UTC Grounded)
+            Provisional Calendar Hold (UTC Grounded)
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -277,17 +278,17 @@ export const ScheduleCallForm: React.FC<ScheduleCallFormProps> = ({ onSuccess, o
               className="btn-glass-shimmer inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-black dark:bg-white text-white dark:text-black font-mono font-bold text-xs uppercase tracking-wider hover:opacity-90 transition-all shadow-sm"
             >
               <CalendarIcon className="w-3.5 h-3.5" />
-              <span>Add to Google Calendar</span>
+              <span>Hold in Google Calendar</span>
               <ExternalLink className="w-3 h-3 opacity-60" />
             </a>
 
             <a
               href={icsUri}
-              download="Qavironel-Architecture-Call.ics"
+              download="Qavironel-Architecture-Call-Provisional.ics"
               className="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-black/10 dark:border-white/10 text-black dark:text-white font-mono font-bold text-xs uppercase tracking-wider hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-all shadow-xs"
             >
               <Download className="w-3.5 h-3.5" />
-              <span>Download .ICS Invite</span>
+              <span>Download .ICS Hold</span>
             </a>
           </div>
 
@@ -566,7 +567,7 @@ export const ScheduleCallForm: React.FC<ScheduleCallFormProps> = ({ onSuccess, o
                 {/* Date shift notification if slot crosses midnight in user's timezone */}
                 {converted.isDifferentDate && (
                   <div className={`text-[0.58rem] font-mono mt-0.5 font-bold ${
-                    isSelected ? 'text-amber-300 dark:text-amber-600' : 'text-amber-600 dark:text-amber-400'
+                    isSelected ? 'text-[#E6ECE5] dark:text-[#E6ECE5]' : 'text-[#174C3A] dark:text-[#879B89]'
                   }`}>
                     {converted.dateShiftNote}
                   </div>

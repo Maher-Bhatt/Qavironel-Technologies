@@ -19,6 +19,13 @@ const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
 
 function checkRateLimit(ip: string): boolean {
   const now = Date.now();
+  if (ipRateLimitMap.size > 1000) {
+    for (const [key, value] of ipRateLimitMap.entries()) {
+      if (now > value.resetAt) {
+        ipRateLimitMap.delete(key);
+      }
+    }
+  }
   const record = ipRateLimitMap.get(ip);
   if (!record || now > record.resetAt) {
     ipRateLimitMap.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
@@ -40,6 +47,16 @@ function escapeHtml(str: string): string {
     .replace(/'/g, '&#39;');
 }
 
+function sanitizeText(val: unknown, maxLen: number): string {
+  if (typeof val !== 'string') return '';
+  return val.trim().slice(0, maxLen);
+}
+
+function sanitizeSubject(val: unknown, maxLen = 120): string {
+  if (typeof val !== 'string') return '';
+  return val.replace(/[\r\n\t]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, maxLen);
+}
+
 const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
 
 export default async function handler(req: any, res: any) {
@@ -49,7 +66,9 @@ export default async function handler(req: any, res: any) {
     return res.status(405).json({ success: false, message: 'Method Not Allowed' });
   }
 
-  const clientIp = (req.headers['x-forwarded-for'] as string)?.split(',')[0]?.trim() || 
+  const clientIp = (req.headers['x-vercel-ip'] as string)?.trim() ||
+                   (req.headers['x-real-ip'] as string)?.trim() ||
+                   (req.headers['x-forwarded-for'] as string)?.split(',')[0]?.trim() || 
                    req.socket?.remoteAddress || '127.0.0.1';
 
   // 1. Rate Limit Check
@@ -61,15 +80,19 @@ export default async function handler(req: any, res: any) {
   }
 
   // 2. Parse and Validate Body
-  let body: ContactRequestBody;
+  let body: any;
   try {
     body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
+    if (!body || typeof body !== 'object' || Array.isArray(body)) {
+      return res.status(400).json({ success: false, message: 'Invalid JSON payload.' });
+    }
   } catch {
     return res.status(400).json({ success: false, message: 'Invalid JSON payload.' });
   }
 
   // 3. Honeypot check (spam protection)
-  if (body.hpField && body.hpField.trim().length > 0) {
+  const hpField = sanitizeText(body.hpField, 100);
+  if (hpField.length > 0) {
     // Silently accept without action to thwart spambots
     return res.status(200).json({
       success: true,
@@ -77,21 +100,21 @@ export default async function handler(req: any, res: any) {
     });
   }
 
-  const name = body.name?.trim();
-  const email = body.email?.trim();
-  const details = body.details?.trim();
-  const organization = body.organization?.trim() || 'N/A';
-  const projectType = body.projectType?.trim() || 'Custom Engineering';
-  const timeline = body.timeline?.trim() || 'Not specified';
-  const engagementModel = body.engagementModel?.trim() || 'Not specified';
+  const name = sanitizeText(body.name, 100);
+  const email = sanitizeText(body.email, 120);
+  const details = sanitizeText(body.details, 5000);
+  const organization = sanitizeText(body.organization, 150) || 'N/A';
+  const projectType = sanitizeText(body.projectType, 100) || 'Custom Engineering';
+  const timeline = sanitizeText(body.timeline, 100) || 'Not specified';
+  const engagementModel = sanitizeText(body.engagementModel, 100) || 'Not specified';
 
-  if (!name || name.length < 2 || name.length > 100) {
+  if (!name || name.length < 2) {
     return res.status(400).json({ success: false, message: 'Invalid or missing name.' });
   }
-  if (!email || !EMAIL_REGEX.test(email) || email.length > 120) {
+  if (!email || !EMAIL_REGEX.test(email)) {
     return res.status(400).json({ success: false, message: 'Invalid or missing email address.' });
   }
-  if (!details || details.length < 10 || details.length > 5000) {
+  if (!details || details.length < 10) {
     return res.status(400).json({ success: false, message: 'Project details must be between 10 and 5000 characters.' });
   }
 
@@ -111,7 +134,7 @@ export default async function handler(req: any, res: any) {
           from: process.env.RESEND_FROM_EMAIL || 'inquiries@qavironel.com',
           to: [targetEmail],
           reply_to: email,
-          subject: `[New Inquiry] ${escapeHtml(projectType)} - ${escapeHtml(name)}`,
+          subject: `[New Inquiry] ${sanitizeSubject(projectType)} - ${sanitizeSubject(name)}`,
           html: `
             <h2>New Project Inquiry from Qavironel.com</h2>
             <p><strong>Name:</strong> ${escapeHtml(name)}</p>

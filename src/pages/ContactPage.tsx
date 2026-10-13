@@ -16,7 +16,7 @@ import {
 } from 'lucide-react';
 import { ContactForm } from '../components/contact/ContactForm';
 import { companyConfig, faqs, teamMembers } from '../data/company';
-import { openBookingModal } from '../components/booking/BookingModal';
+import { openBookingModal } from '../utils/modalEvents';
 
 export const ContactPage: React.FC = () => {
   const [copied, setCopied] = useState(false);

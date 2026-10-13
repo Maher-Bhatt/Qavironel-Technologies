@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Calendar, FileText, MessageSquare, LayoutGrid } from 'lucide-react';
-import { openBookingModal } from '../booking/BookingModal';
+import { openBookingModal } from '../../utils/modalEvents';
 import { companyConfig } from '../../data/company';
 
 export const MobileGlassDock: React.FC = () => {
@@ -69,7 +69,7 @@ export const MobileGlassDock: React.FC = () => {
         </button>
 
         {/* Separator */}
-        <div className="w-[1px] h-6 bg-black/10 dark:border-white/10" />
+        <div className="w-[1px] h-6 bg-black/10 dark:bg-white/10" />
 
         {/* Request Quotation */}
         <button
@@ -82,7 +82,7 @@ export const MobileGlassDock: React.FC = () => {
         </button>
 
         {/* Separator */}
-        <div className="w-[1px] h-6 bg-black/10 dark:border-white/10" />
+        <div className="w-[1px] h-6 bg-black/10 dark:bg-white/10" />
 
         {/* WhatsApp Chat */}
         <a
@@ -96,7 +96,7 @@ export const MobileGlassDock: React.FC = () => {
         </a>
 
         {/* Separator */}
-        <div className="w-[1px] h-6 bg-black/10 dark:border-white/10" />
+        <div className="w-[1px] h-6 bg-black/10 dark:bg-white/10" />
 
         {/* Selected Work */}
         <Link

@@ -15,7 +15,7 @@ import {
   Cpu, 
   ExternalLink 
 } from 'lucide-react';
-import { openBookingModal } from '../components/booking/BookingModal';
+import { openBookingModal } from '../utils/modalEvents';
 
 export const ServicesPage: React.FC = () => {
   return (

@@ -42,53 +42,56 @@ export const Spatial3DPrism: React.FC<Spatial3DPrismProps> = ({
     const group = new THREE.Group();
     scene.add(group);
 
-    // Inner Glowing Copper Pyramidal Core
+    // Inner Titanium Core (#1A1A1A)
     const innerGeo = new THREE.OctahedronGeometry(0.7, 0);
     const innerMat = new THREE.MeshStandardMaterial({
-      color: new THREE.Color('#C7612E'),
-      emissive: new THREE.Color('#C7612E'),
-      emissiveIntensity: 1.2,
-      metalness: 0.85,
-      roughness: 0.2
+      color: new THREE.Color('#1A1A1A'),
+      emissive: new THREE.Color('#111111'),
+      emissiveIntensity: 0.2,
+      metalness: 0.95,
+      roughness: 0.15
     });
     const innerMesh = new THREE.Mesh(innerGeo, innerMat);
     group.add(innerMesh);
 
-    // Outer Frosted Glass Octahedron
+    // Outer Frosted Glass Octahedron (#FFFFFF)
     const glassGeo = new THREE.OctahedronGeometry(1.3, 0);
     const glassMat = new THREE.MeshPhysicalMaterial({
       color: new THREE.Color('#FFFFFF'),
-      transmission: 0.94,
+      transmission: 0.95,
       roughness: 0.1,
-      metalness: 0.05,
+      metalness: 0.1,
       ior: 1.52,
       thickness: 1.5,
       clearcoat: 1.0,
+      clearcoatRoughness: 0.05,
+      specularIntensity: 1.0,
+      specularColor: new THREE.Color('#FFFFFF'),
       transparent: true,
-      opacity: 0.9
+      opacity: 0.92
     });
     const glassMesh = new THREE.Mesh(glassGeo, glassMat);
     group.add(glassMesh);
 
-    // Delicate Copper Edge Bevels
+    // Delicate Chrome / Silver Edge Bevels (#E5E5E5)
     const wireGeo = new THREE.EdgesGeometry(glassGeo);
     const wireMat = new THREE.LineBasicMaterial({
-      color: new THREE.Color('#C7612E'),
+      color: new THREE.Color('#E5E5E5'),
       transparent: true,
-      opacity: 0.7
+      opacity: 0.75
     });
     const wireMesh = new THREE.LineSegments(wireGeo, wireMat);
     group.add(wireMesh);
 
-    // Lighting
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1.3);
+    // Lighting (Pure White & Chrome Rig)
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.4);
     scene.add(ambientLight);
 
-    const pointLight = new THREE.PointLight('#C7612E', 16, 12);
+    const pointLight = new THREE.PointLight('#FFFFFF', 14, 12);
     pointLight.position.set(3, 3, 3);
     scene.add(pointLight);
 
-    const rimLight = new THREE.DirectionalLight('#FFFFFF', 1.5);
+    const rimLight = new THREE.DirectionalLight('#E5E5E5', 1.8);
     rimLight.position.set(-3, 3, 2);
     scene.add(rimLight);
 

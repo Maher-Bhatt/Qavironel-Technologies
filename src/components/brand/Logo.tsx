@@ -4,7 +4,7 @@ import { useTheme } from '../../context/ThemeContext';
 
 interface LogoProps {
   variant?: 'full' | 'mark' | 'horizontal';
-  theme?: 'dark' | 'light'; // dark = for dark backgrounds, light = for light backgrounds
+  theme?: 'dark' | 'light';
   className?: string;
   size?: 'sm' | 'md' | 'lg';
 }
@@ -25,71 +25,72 @@ export const Logo: React.FC<LogoProps> = ({
 
   const isDarkBg = (explicitTheme || contextTheme) === 'dark';
 
-  const markSrc = isDarkBg 
-    ? '/brand/qavironel-monogram-light.png' 
-    : '/brand/qavironel-monogram.png';
+  const markSize = size === 'sm' ? 'w-7 h-7' : size === 'lg' ? 'w-11 h-11' : 'w-8 h-8';
 
-  const wordmarkSrc = isDarkBg 
-    ? '/brand/qavironel-wordmark-light.png' 
-    : '/brand/qavironel-wordmark.png';
-
-  const markHeight = size === 'sm' ? 'h-7' : size === 'lg' ? 'h-12' : 'h-9';
-  const wordmarkHeight = size === 'sm' ? 'h-5' : size === 'lg' ? 'h-8' : 'h-6';
+  const MarkSvg = () => (
+    <svg 
+      className={`${markSize} shrink-0 transition-transform duration-300 group-hover:scale-105`} 
+      viewBox="0 0 120 120" 
+      fill="none" 
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      {/* Precision octagonal badge */}
+      <rect width="120" height="120" rx="26" fill={isDarkBg ? '#FFFFFF' : '#0A0A0A'} />
+      {/* Architectural geometric Q loop */}
+      <path 
+        d="M 42 24 L 78 24 L 96 42 L 96 76 L 78 94 L 42 94 L 24 76 L 24 42 Z" 
+        stroke={isDarkBg ? '#0A0A0A' : '#FFFFFF'} 
+        strokeWidth="9" 
+        strokeLinejoin="round" 
+        fill="none" 
+      />
+      {/* Inner architectural core */}
+      <path 
+        d="M 48 40 L 72 40 L 82 50 L 82 68 L 72 78 L 48 78 L 38 68 L 38 50 Z" 
+        fill={isDarkBg ? '#E5E5E5' : '#171717'} 
+      />
+      {/* Angled engineering dynamic crossbar */}
+      <path 
+        d="M 46 62 L 66 62 L 98 94 L 82 98 L 52 68 Z" 
+        fill={isDarkBg ? '#0A0A0A' : '#FFFFFF'} 
+      />
+      {/* Pure monochrome optic precision dot */}
+      <circle cx="60" cy="59" r="6" fill={isDarkBg ? '#0A0A0A' : '#FFFFFF'} />
+    </svg>
+  );
 
   if (variant === 'mark') {
     return (
-      <Link to="/" className={`inline-flex items-center gap-2 group transition-opacity hover:opacity-90 ${className}`} aria-label="Qavironel Technologies Home">
-        <img 
-          src={markSrc} 
-          alt="Qavironel Q Monogram" 
-          className={`${markHeight} w-auto object-contain p-[1px] transition-transform duration-300 group-hover:scale-105`}
-        />
+      <Link 
+        to="/" 
+        className={`inline-flex items-center gap-2 group transition-opacity hover:opacity-90 ${className}`} 
+        aria-label="Qavironel Technologies Home"
+      >
+        <MarkSvg />
       </Link>
     );
   }
 
-  if (variant === 'horizontal') {
-    return (
-      <Link to="/" className={`inline-flex items-center gap-2 sm:gap-3 group transition-opacity hover:opacity-90 ${className}`} aria-label="Qavironel Technologies Home">
-        <img 
-          src={markSrc} 
-          alt="Qavironel" 
-          className="h-7 sm:h-8 md:h-9 w-auto object-contain p-[1px] transition-transform duration-300 group-hover:scale-105 shrink-0"
-        />
-        <img 
-          src={wordmarkSrc} 
-          alt="Qavironel Technologies" 
-          className="h-5 sm:h-5 md:h-6 w-auto object-contain p-[1px] shrink-0"
-        />
-      </Link>
-    );
-  }
-
-  // Full default variant with mark + typographic wordmark lockup
   return (
     <Link 
       to="/" 
-      className={`inline-flex items-center gap-3.5 group transition-opacity hover:opacity-95 ${className}`} 
+      className={`inline-flex items-center gap-3 group transition-opacity hover:opacity-95 ${className}`} 
       aria-label="Qavironel Technologies Home"
     >
-      <div className="relative shrink-0">
-        <img 
-          src={markSrc} 
-          alt="Qavironel Mark" 
-          className={`${markHeight} w-auto object-contain p-[1px] transition-transform duration-300 group-hover:scale-105`}
-        />
-      </div>
+      <MarkSvg />
       <div className="flex flex-col justify-center">
-        <div className="flex items-center tracking-[-0.03em] font-extrabold text-[1.05rem] leading-none uppercase">
-          <span className={isDarkBg ? 'text-white' : 'text-[#171717]'}>QAVIR</span>
-          <span className="text-[#C7612E]">O</span>
-          <span className={isDarkBg ? 'text-white' : 'text-[#171717]'}>NEL</span>
+        <div className="flex items-center tracking-[-0.03em] font-display font-extrabold text-[1.12rem] leading-none">
+          <span className={isDarkBg ? 'text-white' : 'text-[#0A0A0A]'}>QAVIR</span>
+          <span className={isDarkBg ? 'text-white' : 'text-[#0A0A0A]'}>O</span>
+          <span className={isDarkBg ? 'text-white' : 'text-[#0A0A0A]'}>NEL</span>
         </div>
-        <div className="flex items-center justify-between mt-1 tracking-[0.24em] font-semibold text-[0.55rem] uppercase leading-none">
-          <span className="text-[#77746F]">TECHNOLOGIES</span>
+        <div className="flex items-center tracking-[0.24em] font-mono font-medium text-[0.58rem] uppercase leading-none mt-1">
+          <span className={isDarkBg ? 'text-zinc-400' : 'text-[#737373]'}>TECHNOLOGIES</span>
         </div>
       </div>
     </Link>
   );
 };
 
+export default Logo;

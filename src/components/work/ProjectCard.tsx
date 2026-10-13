@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Project } from '../../types';
-import { ArrowUpRight, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { ArrowUpRight, ArrowRight, CheckCircle2, Volume2, VolumeX } from 'lucide-react';
 import { playClickSound } from '../../utils/soundEffects';
 
 interface ProjectCardProps {
@@ -19,32 +19,44 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   const videoRef = useRef<HTMLVideoElement>(null);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
-  // Subtle interactive 3D spring tilt & video hover state
+  // Subtle interactive 3D spring tilt & video hover/scroll state
   const [rotateX, setRotateX] = useState(0);
   const [rotateY, setRotateY] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const [isInView, setIsInView] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
   const [isPlayingMobile, setIsPlayingMobile] = useState(false);
 
   // Set defaultMuted and muted on DOM element for mobile Safari compatibility
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.defaultMuted = true;
-      videoRef.current.muted = true;
+      videoRef.current.muted = isMuted;
     }
-  }, [project.videoSrc]);
+  }, [project.videoSrc, isMuted]);
 
-  // Auto-pause video if card is scrolled off-screen or tab is hidden
+  // Automatic scroll-triggered video playback when the project card enters the screen
   useEffect(() => {
     const card = cardRef.current;
     if (!card) return;
 
     const observer = new IntersectionObserver(([entry]) => {
-      if (!entry.isIntersecting && videoRef.current) {
-        videoRef.current.pause();
-        setIsHovered(false);
-        setIsPlayingMobile(false);
+      if (entry.isIntersecting && entry.intersectionRatio >= 0.15) {
+        setIsInView(true);
+        if (videoRef.current) {
+          videoRef.current.defaultMuted = true;
+          videoRef.current.muted = isMuted;
+          videoRef.current.play().catch(() => {});
+        }
+      } else if (!entry.isIntersecting || entry.intersectionRatio < 0.1) {
+        setIsInView(false);
+        if (videoRef.current) {
+          videoRef.current.pause();
+          setIsHovered(false);
+          setIsPlayingMobile(false);
+        }
       }
-    }, { threshold: 0.1 });
+    }, { threshold: [0, 0.15, 0.35] });
 
     observer.observe(card);
 
@@ -52,6 +64,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       if (document.hidden && videoRef.current) {
         videoRef.current.pause();
         setIsPlayingMobile(false);
+      } else if (!document.hidden && isInView && videoRef.current) {
+        videoRef.current.play().catch(() => {});
       }
     };
     document.addEventListener('visibilitychange', handleVisibilityChange);
@@ -60,7 +74,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       observer.disconnect();
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
-  }, []);
+  }, [isInView, isMuted]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return;
@@ -145,7 +159,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         transformPerspective: 1000,
       }}
       transition={{ type: 'spring', stiffness: 320, damping: 26 }}
-      className={`group relative glass-card rounded-2xl transition-all duration-300 flex flex-col overflow-hidden text-[#171717] dark:text-[#F6F3ED] bg-white dark:bg-[#20201E] border border-[#DEDAD3] dark:border-white/10 hover:border-[#C7612E]/40 shadow-xs hover:shadow-xl hover:shadow-[#C7612E]/5 ${
+      className={`group relative glass-card rounded-2xl transition-all duration-300 flex flex-col overflow-hidden text-black dark:text-white dark:text-white bg-white dark:bg-[#121212] border border-black/10 dark:border-white/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30 shadow-xs hover:shadow-xl hover:shadow-black/5 dark:hover:shadow-white/5 ${
         isFeatured ? 'lg:grid lg:grid-cols-12 gap-0' : ''
       }`}
     >
@@ -155,24 +169,24 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       </span>
 
       {/* Studio Chrome Window Header */}
-      <div className="col-span-12 flex items-center justify-between px-3 sm:px-5 py-2 sm:py-2.5 border-b border-[#DEDAD3] dark:border-white/10 bg-[#FAFAFA] dark:bg-[#1C1C22] relative z-10 gap-2">
+      <div className="col-span-12 flex items-center justify-between px-3 sm:px-5 py-2 sm:py-2.5 border-b border-black/10 dark:border-white/10 dark:border-white/10 bg-white dark:bg-[#18221D] relative z-10 gap-2">
         <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
           <div className="flex items-center gap-1 sm:gap-1.5 shrink-0">
             <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-[#EF4444]/80" />
             <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-[#F59E0B]/80" />
             <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-[#10B981]/80" />
           </div>
-          <span className="text-[0.62rem] sm:text-[0.68rem] font-mono tracking-wider text-[#77746F] dark:text-[#A1A1AA] ml-1 truncate max-w-[130px] sm:max-w-none">
+          <span className="text-[0.62rem] sm:text-[0.68rem] font-mono tracking-wider text-zinc-500 dark:text-[#A7B0A7] ml-1 truncate max-w-[130px] sm:max-w-none">
             sys://qavironel/{project.slug}
           </span>
         </div>
 
         <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0 text-right">
-          <span className="text-[0.6rem] sm:text-[0.65rem] font-mono font-semibold uppercase tracking-wider text-[#C7612E]">
+          <span className="text-[0.6rem] sm:text-[0.65rem] font-mono font-semibold uppercase tracking-wider text-black dark:text-white">
             {project.category}
           </span>
-          <span className="text-[#D1D5DB] text-xs">·</span>
-          <span className="text-[0.6rem] sm:text-[0.65rem] font-mono text-[#77746F]">
+          <span className="text-zinc-300 dark:text-zinc-700 text-xs">·</span>
+          <span className="text-[0.6rem] sm:text-[0.65rem] font-mono text-zinc-500 dark:text-[#A7B0A7]">
             {project.year}
           </span>
         </div>
@@ -182,9 +196,9 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       <div 
         className={`relative overflow-hidden z-10 flex items-center justify-center ${
           isFeatured 
-            ? 'lg:col-span-7 p-4 sm:p-6 lg:p-8 ' + (isDarkProject ? 'bg-[#171717]' : 'bg-[#F4F4F6]')
-            : 'p-4 sm:p-5 h-[260px] sm:h-[300px] ' + (isDarkProject ? 'bg-[#171717]' : 'bg-[#F6F3ED]')
-        } border-b lg:border-b-0 border-[#DEDAD3]`}
+            ? 'lg:col-span-7 p-4 sm:p-6 lg:p-8 ' + (isDarkProject ? 'bg-[#0B100D]' : 'bg-white')
+            : 'p-4 sm:p-5 h-[260px] sm:h-[300px] ' + (isDarkProject ? 'bg-[#0B100D]' : 'bg-white')
+        } border-b lg:border-b-0 border-black/10 dark:border-white/10`}
       >
         <Link 
           to={`/work/${project.slug}`} 
@@ -213,32 +227,44 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             />
           </AnimatePresence>
 
-          {/* Automatic Hover (Desktop) & Touch-Toggle (Mobile) Video Playback */}
+          {/* Automatic Scroll & Hover Video Playback */}
           {project.videoSrc && (
             <video
               ref={videoRef}
               src={project.videoSrc}
-              muted
+              muted={isMuted}
               loop
               playsInline
-              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out pointer-events-none ${
-                isHovered || isPlayingMobile ? 'opacity-100 z-10' : 'opacity-0 z-0'
+              webkit-playsinline="true"
+              preload="metadata"
+              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out pointer-events-none ${
+                isInView || isHovered || isPlayingMobile ? 'opacity-100 z-10' : 'opacity-0 z-0'
               }`}
             />
           )}
         </Link>
 
-        {/* Mobile / Touch Video Reel Trigger Pill */}
+        {/* Video Controls & Live HUD Indicator */}
         {project.videoSrc && (
-          <button
-            type="button"
-            onClick={toggleMobileVideo}
-            className="sm:hidden absolute top-3 right-3 z-30 px-2.5 py-1 rounded-full bg-black/75 backdrop-blur-md border border-white/20 text-white text-[0.62rem] font-mono flex items-center gap-1.5 shadow-lg active:scale-95 transition-all"
-            aria-label="Toggle preview video"
-          >
-            <span className={`w-1.5 h-1.5 rounded-full ${isPlayingMobile ? 'bg-[#10B981] animate-pulse' : 'bg-[#C7612E]'}`} />
-            <span>{isPlayingMobile ? 'Pause Reel' : 'Watch Reel'}</span>
-          </button>
+          <div className="absolute top-3 right-3 z-30 flex items-center gap-1.5">
+            <button
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setIsMuted(!isMuted);
+              }}
+              className="p-1.5 rounded-full bg-black/80 hover:bg-black text-white backdrop-blur-md border border-white/20 transition-all cursor-pointer shadow-sm hover:scale-105 active:scale-95"
+              aria-label={isMuted ? 'Unmute video audio' : 'Mute video audio'}
+              title={isMuted ? 'Unmute' : 'Mute'}
+            >
+              {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
+            </button>
+            <div className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-black/80 backdrop-blur-md border border-white/20 text-white text-[0.62rem] font-mono pointer-events-none">
+              <span className={`w-1.5 h-1.5 rounded-full ${isInView || isHovered || isPlayingMobile ? 'bg-white animate-pulse' : 'bg-white/40'}`} />
+              <span>{isInView || isHovered || isPlayingMobile ? 'PLAYING' : 'IDLE'}</span>
+            </div>
+          </div>
         )}
 
         {/* Interactive Gallery Switcher Chips for Featured Cards */}
@@ -256,7 +282,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                 }}
                 className={`px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-lg text-[0.6rem] sm:text-[0.65rem] font-mono shrink-0 transition-colors ${
                   activeImageIndex === idx
-                    ? 'bg-[#C7612E] text-white font-bold shadow-xs'
+                    ? 'bg-white text-black font-bold shadow-xs'
                     : 'bg-white/10 text-white/80 hover:bg-white/20'
                 }`}
               >
@@ -274,8 +300,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         }`}
       >
         <div>
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-4 text-xs font-mono text-[#77746F] dark:text-[#A1A1AA] mb-2">
-            <span className="uppercase tracking-wider text-[#C7612E] font-semibold text-[0.68rem] sm:text-xs">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-4 text-xs font-mono text-zinc-500 dark:text-[#A7B0A7] mb-2">
+            <span className="uppercase tracking-wider text-black dark:text-white font-semibold text-[0.68rem] sm:text-xs">
               {project.eyebrow}
             </span>
             <span className="text-[0.65rem] sm:text-[0.68rem] text-emerald-600 dark:text-emerald-400 font-semibold shrink-0">
@@ -285,29 +311,29 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
 
           {/* Microsoft Store Verified Badge for K.A.L.K.I. */}
           {project.slug === 'kalki' && (
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-400 text-[0.65rem] sm:text-[0.68rem] font-mono font-bold mb-3 max-w-full">
-              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800 border border-[#D3E6DA] dark:border-[#1E382B] text-black dark:text-white text-[0.65rem] sm:text-[0.68rem] font-mono font-bold mb-3 max-w-full">
+              <CheckCircle2 className="w-3.5 h-3.5 text-black dark:text-white shrink-0" />
               <span className="truncate">STORE VERIFIED · v1.0.4 · ID: 9P6HJPQZBGFQ</span>
             </div>
           )}
 
-          <h3 className="font-display font-bold text-2xl sm:text-3xl text-[#141414] dark:text-[#F6F3ED] tracking-tight group-hover:text-[#C7612E] transition-colors leading-tight">
+          <h3 className="font-display font-bold text-2xl sm:text-3xl text-black dark:text-white dark:text-white tracking-tight group-hover:text-black dark:group-hover:text-white transition-colors leading-tight">
             <Link to={`/work/${project.slug}`}>
               {project.title}
             </Link>
           </h3>
 
-          <p className="mt-3 text-sm text-[#57544E] dark:text-[#A6A29A] leading-relaxed line-clamp-3 font-light">
+          <p className="mt-3 text-sm text-zinc-500 dark:text-[#A7B0A7] leading-relaxed line-clamp-3 font-light">
             {project.summary}
           </p>
 
           {/* Key Metrics */}
           {project.metrics && project.metrics.length > 0 && (
-            <div className="mt-6 pt-5 border-t border-[#DEDAD3] dark:border-white/10 grid grid-cols-2 gap-3">
+            <div className="mt-6 pt-5 border-t border-black/10 dark:border-white/10 dark:border-white/10 grid grid-cols-2 gap-3">
               {project.metrics.slice(0, 2).map((m, idx) => (
-                <div key={idx} className="p-3 rounded-xl bg-[#F6F3ED] dark:bg-[#1A1A20] border border-[#DEDAD3]/80 dark:border-white/10">
-                  <p className="text-lg sm:text-xl font-bold font-display text-[#141414] dark:text-[#F6F3ED] tabular-nums">{m.value}</p>
-                  <p className="text-[0.7rem] text-[#6E6B65] dark:text-[#A6A29A] font-mono tracking-tight mt-0.5">{m.label}</p>
+                <div key={idx} className="p-3 rounded-xl bg-white dark:bg-[#18221D] border border-black/10 dark:border-white/10/80 dark:border-white/10">
+                  <p className="text-lg sm:text-xl font-bold font-display text-black dark:text-white dark:text-white tabular-nums">{m.value}</p>
+                  <p className="text-[0.7rem] text-zinc-500 dark:text-[#A7B0A7] font-mono tracking-tight mt-0.5">{m.label}</p>
                 </div>
               ))}
             </div>
@@ -318,13 +344,13 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             {project.technologies.slice(0, 4).map((tech) => (
               <span 
                 key={tech} 
-                className="text-[0.68rem] font-mono text-[#77746F] dark:text-[#A1A1AA] bg-[#F6F3ED] dark:bg-[#1A1A20] px-2.5 py-1 rounded-md border border-[#DEDAD3] dark:border-white/10"
+                className="text-[0.68rem] font-mono text-zinc-500 dark:text-[#A7B0A7] bg-white dark:bg-[#18221D] px-2.5 py-1 rounded-md border border-black/10 dark:border-white/10 dark:border-white/10"
               >
                 {tech}
               </span>
             ))}
             {project.technologies.length > 4 && (
-              <span className="text-[0.68rem] font-mono text-[#77746F] dark:text-[#A1A1AA] px-1 py-1">
+              <span className="text-[0.68rem] font-mono text-zinc-500 dark:text-[#A7B0A7] px-1 py-1">
                 +{project.technologies.length - 4}
               </span>
             )}
@@ -332,13 +358,13 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         </div>
 
         {/* Action Link Footer */}
-        <div className="mt-8 pt-6 border-t border-[#DEDAD3] dark:border-white/10 flex items-center justify-between">
+        <div className="mt-8 pt-6 border-t border-black/10 dark:border-white/10 dark:border-white/10 flex items-center justify-between">
           <Link 
             to={`/work/${project.slug}`} 
-            className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#171717] dark:text-[#F6F3ED] group-hover:text-[#C7612E] transition-colors"
+            className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-black dark:text-white dark:text-white group-hover:text-black dark:group-hover:text-white transition-colors"
           >
             <span>Explore Case Study</span>
-            <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1 text-[#C7612E]" />
+            <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1 text-black dark:text-white" />
           </Link>
 
           {project.links.length > 0 && (
@@ -346,7 +372,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
               href={project.links[0].url} 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-xs font-mono text-[#77746F] dark:text-[#A1A1AA] hover:text-[#C7612E] inline-flex items-center gap-1 transition-colors font-medium"
+              className="text-xs font-mono text-zinc-500 dark:text-[#A7B0A7] hover:text-black dark:hover:text-white inline-flex items-center gap-1 transition-colors font-medium"
               title={project.links[0].label}
             >
               <span>{project.links[0].type === 'github' ? 'GitHub' : 'Live'}</span>

@@ -132,20 +132,20 @@ export const BookingModal: React.FC<BookingModalProps> = ({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 12 }}
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            className="relative w-full max-w-2xl bg-white dark:bg-[#121216] rounded-2xl md:rounded-3xl shadow-2xl border border-[#DEDAD3] dark:border-white/10 z-10 flex flex-col max-h-[92vh] overflow-hidden"
+            className="relative w-full max-w-2xl bg-white dark:bg-zinc-950 rounded-2xl md:rounded-3xl shadow-2xl border border-black/10 dark:border-white/10 z-10 flex flex-col max-h-[92vh] overflow-hidden"
           >
             {/* Modal Header */}
-            <div className="p-5 sm:p-6 pb-4 border-b border-[#DEDAD3] dark:border-white/10 flex items-center justify-between shrink-0">
+            <div className="p-5 sm:p-6 pb-4 border-b border-black/[0.08] dark:border-white/10 flex items-center justify-between shrink-0 bg-white dark:bg-zinc-950">
               <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-[#C7612E]/10 flex items-center justify-center text-[#C7612E]">
-                  <Sparkles className="w-4 h-4" />
+                <div className="w-9 h-9 rounded-xl bg-[#0A0A0A] text-white dark:bg-white dark:text-[#0A0A0A] flex items-center justify-center">
+                  <Sparkles className="w-4 h-4 text-white dark:text-black" />
                 </div>
                 <div>
-                  <h2 id="booking-modal-title" className="font-sans font-bold text-lg sm:text-xl text-[#171717] dark:text-white">
+                  <h2 id="booking-modal-title" className="font-sans font-bold text-lg sm:text-xl text-[#0A0A0A] dark:text-white">
                     Direct Engineering Access
                   </h2>
-                  <p className="text-xs text-[#77746F] dark:text-zinc-400">
-                    Partner directly with Maher Bhatt · Zero middleman agency fog
+                  <p className="text-xs text-zinc-500 dark:text-zinc-400">
+                    Partner directly with our technical founders · Zero agency middlemen
                   </p>
                 </div>
               </div>
@@ -157,14 +157,14 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                   onClose();
                 }}
                 aria-label="Close dialog"
-                className="p-2 rounded-xl text-[#77746F] hover:text-[#171717] dark:text-zinc-400 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-white/10 transition-colors cursor-pointer"
+                className="p-2 rounded-xl text-zinc-500 hover:text-black dark:text-zinc-400 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-white/10 transition-colors cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             {/* Tab Switcher */}
-            <div className="px-5 sm:px-6 pt-4 pb-2 border-b border-[#DEDAD3]/60 dark:border-white/5 bg-zinc-50/60 dark:bg-[#15151A]/60 flex gap-2 shrink-0">
+            <div className="px-5 sm:px-6 pt-4 pb-2 border-b border-black/[0.08] dark:border-white/10 bg-[#F9FAFB] dark:bg-[#0A0A0A] flex gap-2 shrink-0">
               <button
                 type="button"
                 onClick={() => {
@@ -173,8 +173,8 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                 }}
                 className={`flex-1 py-2.5 px-3 rounded-xl text-xs font-mono font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer ${
                   activeTab === 'call'
-                    ? 'bg-white dark:bg-[#1E1E24] text-[#C7612E] shadow-xs border border-[#DEDAD3] dark:border-white/10'
-                    : 'text-[#77746F] dark:text-zinc-400 hover:text-[#171717] dark:hover:text-white'
+                    ? 'bg-[#0A0A0A] text-white dark:bg-white dark:text-[#0A0A0A] shadow-xs'
+                    : 'text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white'
                 }`}
               >
                 <CalendarIcon className="w-3.5 h-3.5" />
@@ -189,8 +189,8 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                 }}
                 className={`flex-1 py-2.5 px-3 rounded-xl text-xs font-mono font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer ${
                   activeTab === 'quotation'
-                    ? 'bg-white dark:bg-[#1E1E24] text-[#C7612E] shadow-xs border border-[#DEDAD3] dark:border-white/10'
-                    : 'text-[#77746F] dark:text-zinc-400 hover:text-[#171717] dark:hover:text-white'
+                    ? 'bg-[#0A0A0A] text-white dark:bg-white dark:text-[#0A0A0A] shadow-xs'
+                    : 'text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white'
                 }`}
               >
                 <FileText className="w-3.5 h-3.5" />
@@ -200,7 +200,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
 
             {/* Modal Body with internal smooth scrolling */}
             <div 
-              className="p-5 sm:p-6 overflow-y-auto flex-1 overscroll-contain"
+              className="p-5 sm:p-6 overflow-y-auto flex-1 overscroll-contain bg-white dark:bg-zinc-950"
               style={{ WebkitOverflowScrolling: 'touch' }}
             >
               {activeTab === 'call' ? (
@@ -211,9 +211,9 @@ export const BookingModal: React.FC<BookingModalProps> = ({
             </div>
 
             {/* Modal Footer Security Badge */}
-            <div className="py-2.5 px-6 border-t border-[#DEDAD3]/60 dark:border-white/5 bg-zinc-50 dark:bg-[#171717] flex items-center justify-between text-[11px] font-mono text-[#77746F] dark:text-zinc-500 shrink-0">
+            <div className="py-2.5 px-6 border-t border-black/[0.08] dark:border-white/10 bg-[#F9FAFB] dark:bg-[#0A0A0A] flex items-center justify-between text-[11px] font-mono text-zinc-500 dark:text-zinc-400 shrink-0">
               <span className="flex items-center gap-1.5">
-                <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+                <ShieldCheck className="w-3.5 h-3.5 text-black dark:text-white" />
                 Mutual NDA Protected & Direct Engineering Oversight
               </span>
               <span>12h Response Guarantee</span>

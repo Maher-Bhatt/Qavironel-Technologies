@@ -1,554 +1,1085 @@
-import { SEO } from '../components/seo/SEO';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { Button } from '../components/ui/Button';
-import { RevealHeadline } from '../components/ui/RevealHeadline';
-import { MagneticButton } from '../components/ui/MagneticButton';
-import { CapabilitiesBentoGrid } from '../components/home/CapabilitiesBentoGrid';
+import { motion, AnimatePresence } from 'framer-motion';
+import { SEO } from '../components/seo/SEO';
 import { projects } from '../data/projects';
 import { companyConfig } from '../data/company';
+import { openBookingModal } from '../components/booking/BookingModal';
 import { VideoShowreel } from '../components/media/VideoShowreel';
-import { Hero3DArchitectureStack } from '../components/3d/Hero3DArchitectureStack';
-
-import { ProjectCard } from '../components/work/ProjectCard';
+import { ScrollAutoplayVideo } from '../components/media/ScrollAutoplayVideo';
+import { Spatial3DPrism } from '../components/3d/Spatial3DPrism';
 import { 
   ArrowRight, 
   ArrowUpRight, 
-  ShieldCheck, 
-  Cpu, 
-  Globe, 
-  Code2, 
-  Film, 
   Calendar, 
-  FileText 
+  CheckCircle2, 
+  Layers, 
+  ShieldCheck, 
+  Terminal, 
+  Zap, 
+  ExternalLink,
+  Cpu,
+  Radio,
+  Sparkles,
+  Activity,
+  Volume2,
+  VolumeX,
+  Play,
+  Pause
 } from 'lucide-react';
-import { openBookingModal } from '../components/booking/BookingModal';
-import { StudioStandardsMatrix } from '../components/home/StudioStandardsMatrix';
-import { playClickSound } from '../utils/soundEffects';
 
 export const HomePage: React.FC = () => {
   const navigate = useNavigate();
-  const [workFilter, setWorkFilter] = useState<'all' | 'ai' | 'client' | 'security'>('all');
-  const curatedProjects = projects.filter((p) => p.featured).slice(0, 6);
+  const [heroTab, setHeroTab] = useState<'kalki' | 'ztees' | 'telemetry'>('kalki');
+  const [isHeroVideoMuted, setIsHeroVideoMuted] = useState<boolean>(true);
+  const [tokensPerSec, setTokensPerSec] = useState<number>(142);
+  const [latency, setLatency] = useState<number>(8.4);
 
-  const marqueeItems = [
-    'IDEAS. ENGINEERED.',
-    'APPLIED AI ARCHITECTURE',
-    'BESPOKE WEB SYSTEMS',
-    'DIGITAL CRAFTSMANSHIP',
-    'GLOBAL REMOTE DELIVERY',
-    'DEFENSIVE SECURITY BY DEFAULT',
-    'ZERO TEMPLATES',
-    'SUB-SECOND PERFORMANCE'
+  // Subtle live pulse for engine telemetry
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTokensPerSec(Math.floor(138 + Math.random() * 12));
+      setLatency(Number((7.8 + Math.random() * 1.4).toFixed(1)));
+    }, 2500);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Flagship projects
+  const kalkiProject = projects.find(p => p.slug === 'kalki') || projects[0];
+  const zteesProject = projects.find(p => p.slug === 'ztees') || projects[1];
+  const cipProject = projects.find(p => p.slug === 'classic-infrastructure') || projects[2];
+  const civicProject = projects.find(p => p.slug === 'civic-sathi') || projects[3];
+  const cyberProject = projects.find(p => p.slug === 'socialsafe') || projects[7];
+
+  const disciplines = [
+    {
+      num: '01',
+      title: 'Web Systems & Digital Platforms',
+      summary: 'Marketing sites, commerce storefronts, and bespoke business web applications engineered from scratch. Fast, responsive, and completely free of template bloat.',
+      deliverables: ['Custom React & Next.js architectures', 'High-conversion WhatsApp & Stripe commerce', 'Core Web Vitals & technical SEO', 'Zero-drift Figma to code'],
+      stack: ['React 19', 'TanStack', 'Tailwind CSS', 'Vite', 'TypeScript'],
+      caseStudySlug: 'ztees',
+      caseStudyName: 'Ztees Streetwear Platform'
+    },
+    {
+      num: '02',
+      title: 'Software & Application Engineering',
+      summary: 'Full-stack software products, role-based dashboards, and internal operational tools. Built with clean data schemas, resilient APIs, and strict security boundaries.',
+      deliverables: ['SaaS MVPs shipped in 2–4 weeks', 'Role-based access control (RBAC) portals', 'PostgreSQL data modeling & REST APIs', 'Desktop applications & native runtimes'],
+      stack: ['Python', 'FastAPI', 'PostgreSQL', 'TypeScript', 'Node.js'],
+      caseStudySlug: 'civic-sathi',
+      caseStudyName: 'Civic Sathi Monorepo'
+    },
+    {
+      num: '03',
+      title: 'Applied AI & Intelligent Workflows',
+      summary: 'Practical AI implementations built for real utility, not hype. From local-first desktop runtimes and air-gapped models to multi-LLM routing and guarded automation.',
+      deliverables: ['Local-first inference with Ollama & LLaMA', 'Multi-model routing (Groq, Gemini, OpenAI)', 'Hardware-encrypted credentials (DPAPI)', 'Voice interfaces & neural speech (VOSK)'],
+      stack: ['Python', 'Local LLMs', 'Groq LLaMA 3.3', 'VOSK', 'DPAPI Vault'],
+      caseStudySlug: 'kalki',
+      caseStudyName: 'K.A.L.K.I. Desktop Assistant'
+    },
+    {
+      num: '04',
+      title: 'UI/UX & Design Systems',
+      summary: 'Editorial design systems, interface typography, and interactive components that turn complex technical workflows into natural, accessible user journeys.',
+      deliverables: ['Cohesive design systems & tokens', 'Fluid micro-interactions & spring physics', 'Multi-device mobile & tablet ergonomics', 'Accessibility compliance (WCAG 2.1 AA)'],
+      stack: ['Figma', 'Design Tokens', 'Framer Motion', 'Tailwind CSS'],
+      caseStudySlug: 'codedroid',
+      caseStudyName: 'CodeDroid Mobile IDE'
+    }
   ];
 
   return (
     <>
-      <SEO title="Home" />
-      <div className="bg-[#F6F3ED] dark:bg-[#0C0C0E] text-[#141414] dark:text-[#F6F3ED] overflow-hidden selection:bg-[#C7612E] selection:text-white transition-colors duration-300 pb-20 md:pb-0">
+      <SEO 
+        title="Qavironel Technologies — Ideas. Engineered." 
+        description="Independent digital product and software engineering studio. We design and build bespoke web platforms, software systems, and applied AI applications."
+      />
+
+      <div className="bg-[#FAFAFA] dark:bg-[#0A0A0A] text-[#0A0A0A] dark:text-[#FAFAFA] transition-colors duration-300 selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black">
         
-        {/* 01. BRAND-FIRST EDITORIAL HERO SECTION */}
-        <section className="relative pt-28 sm:pt-32 pb-10 sm:pb-20 border-b border-[#DEDAD3] dark:border-white/10 bg-[#F6F3ED] dark:bg-[#0C0C0E] transition-colors duration-300">
-          {/* Subtle Ambient Radial Highlight */}
-          <div 
-            className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-[#C7612E]/5 rounded-full blur-[140px] pointer-events-none" 
-            aria-hidden="true" 
-          />
-
-          <div className="max-w-[1800px] w-full mx-auto px-5 sm:px-8 lg:px-12 relative z-10">
-            {/* Top Status Pill & Kinetic Tags */}
-            <motion.div 
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="flex flex-wrap items-center gap-2.5 mb-8"
-            >
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white dark:bg-[#18181E] border border-[#DEDAD3] dark:border-white/10 text-xs font-mono text-[#57544E] dark:text-[#A6A29A] shadow-xs">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                <span className="font-semibold text-[#141414] dark:text-[#F6F3ED]">INDEPENDENT DIGITAL STUDIO</span>
-                <span className="text-[#C7612E]">·</span>
-                <span className="text-[#C7612E] font-medium">AVAILABLE FOR NEW BUILDS</span>
-              </div>
-
-              <div className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white dark:bg-[#18181E] border border-[#DEDAD3] dark:border-white/10 text-xs font-mono text-[#57544E] dark:text-[#A6A29A]">
-                <span className="text-[#C7612E]">✦</span>
-                <span>Web Systems · Software · Applied AI</span>
-              </div>
-
-              <div className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white dark:bg-[#18181E] border border-[#DEDAD3] dark:border-white/10 text-xs font-mono text-[#57544E] dark:text-[#A6A29A]">
-                <span className="text-emerald-500">⚡</span>
+        {/* ========================================================================= */}
+        {/* 01. EDITORIAL ASYMMETRIC HERO SECTION                                     */}
+        {/* ========================================================================= */}
+        <section className="relative pt-32 sm:pt-40 pb-20 sm:pb-28 border-b border-black/10 dark:border-white/10 overflow-hidden">
+          <div className="max-w-[1700px] mx-auto px-5 sm:px-8 lg:px-12 relative z-10">
+            
+            {/* Studio Identity Tags */}
+            <div className="flex flex-wrap items-center gap-2.5 mb-8 sm:mb-12">
+              <span className="inline-flex items-center gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-white dark:bg-zinc-900 border border-black/10 dark:border-white/10 text-[0.68rem] sm:text-[0.7rem] font-mono tracking-widest uppercase text-black dark:text-white shadow-2xs max-w-full">
+                <span className="w-2 h-2 rounded-full bg-black dark:bg-white animate-pulse shrink-0" />
+                <span className="truncate">INDEPENDENT DIGITAL STUDIO <span className="hidden sm:inline">· AVAILABLE FOR NEW BUILDS</span></span>
+              </span>
+              <span className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/80 dark:bg-zinc-900/80 border border-black/10 dark:border-white/10 text-[0.7rem] font-mono uppercase text-zinc-500 dark:text-zinc-400">
+                <span>✦ Web Systems · Software · Applied AI</span>
+              </span>
+              <span className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/80 dark:bg-zinc-900/80 border border-black/10 dark:border-white/10 text-[0.7rem] font-mono uppercase text-zinc-500 dark:text-zinc-400">
                 <span>Zero Templates · Handcrafted Code</span>
-              </div>
-            </motion.div>
+              </span>
+            </div>
 
-            {/* Hero Two-Column Grid: Bold Editorial Typography + Interactive 3D WebGL Sculpture */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-              {/* Left Column: Editorial Typography & Actions (7 Cols) */}
-              <div className="lg:col-span-7">
-                <RevealHeadline
-                  className="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl xl:text-7xl tracking-tight text-[#141414] dark:text-[#F6F3ED] leading-[1.08] mb-6"
-                  delay={0.1}
-                  highlightWord="engineered"
-                >
-                  {"Thoughtfully designed.\nPrecisely engineered."}
-                </RevealHeadline>
+            {/* Asymmetrical 2-Column Hero */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+              
+              {/* Left Column (7 cols): Editorial Typography + Direct Value CTAs */}
+              <div className="lg:col-span-7 space-y-8 sm:space-y-10">
+                <h1 className="font-display font-extrabold text-4xl sm:text-7xl lg:text-8xl tracking-[-0.04em] leading-[1.04] sm:leading-[0.98] text-[#0A0A0A] dark:text-[#FAFAFA]">
+                  Software, <br className="sm:hidden" />
+                  designed with <br className="hidden sm:inline" />
+                  <span className="underline decoration-black/20 dark:decoration-white/25 underline-offset-8">intent.</span>
+                </h1>
 
-                <motion.div
-                  initial={{ opacity: 0, y: 24 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.7, delay: 0.2 }}
-                >
-                  <p className="text-base sm:text-lg lg:text-xl text-[#57544E] dark:text-[#A6A29A] font-light leading-relaxed max-w-2xl">
-                    Qavironel Technologies is an independent engineering and design studio. We architect and build bespoke web platforms, custom SaaS applications, and applied AI systems that turn ambitious ideas into working digital products.
-                  </p>
-                </motion.div>
+                <p className="text-lg sm:text-xl lg:text-2xl text-zinc-600 dark:text-zinc-400 font-light leading-relaxed max-w-2xl">
+                  We design and engineer bespoke web platforms, software systems, and applied AI applications for ambitious founders and enterprises. Built with craftsmanship, zero template bloat, and direct founder accountability.
+                </p>
 
-                {/* Action CTAs (Magnetic Physics + Micro-Acoustics) */}
-                <motion.div
-                  initial={{ opacity: 0, y: 24 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.7, delay: 0.3 }}
-                  className="mt-8 sm:mt-10 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 sm:gap-4 w-full"
-                >
-                  <MagneticButton
-                    onClick={() => navigate('/contact')}
-                    className="px-7 sm:px-8 py-3.5 sm:py-4 rounded-full bg-[#C7612E] hover:bg-[#d04a14] text-white text-xs font-bold uppercase tracking-wider shadow-[0_8px_25px_rgba(199,97,46,0.3)] group justify-center w-full sm:w-auto"
+                {/* Primary & Secondary CTAs */}
+                <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+                  <Link
+                    to="/contact"
+                    className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-black hover:bg-zinc-800 text-white dark:bg-white dark:hover:bg-zinc-200 dark:text-black text-xs font-mono font-bold uppercase tracking-wider transition-all duration-200 shadow-md group cursor-pointer"
                   >
                     <span>Start a Project</span>
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </MagneticButton>
+                  </Link>
 
-                  <Link 
-                    to="/work" 
-                    className="px-6 py-3.5 sm:py-4 rounded-full bg-white dark:bg-[#18181E] hover:bg-[#EFEBE3] dark:hover:bg-[#25252E] text-[#141414] dark:text-[#F6F3ED] text-xs font-bold uppercase tracking-wider border border-[#DEDAD3] dark:border-white/10 transition-colors flex items-center justify-center gap-2 shadow-xs w-full sm:w-auto"
+                  <Link
+                    to="/work"
+                    className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full bg-white dark:bg-zinc-900 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-black dark:text-white text-xs font-mono font-semibold uppercase tracking-wider border border-black/10 dark:border-white/15 transition-all duration-200 shadow-2xs cursor-pointer"
                   >
                     <span>Explore Our Work</span>
                     <ArrowUpRight className="w-3.5 h-3.5" />
                   </Link>
 
-                  <MagneticButton
+                  <button
+                    type="button"
                     onClick={() => openBookingModal('call')}
-                    className="px-6 py-3.5 sm:py-4 rounded-full bg-[#141414] dark:bg-white hover:bg-black dark:hover:bg-zinc-100 text-white dark:text-[#141414] text-xs font-bold uppercase tracking-wider shadow-xs group justify-center w-full sm:w-auto"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full bg-transparent hover:bg-black/5 dark:hover:bg-white/5 text-zinc-600 hover:text-black dark:text-zinc-400 dark:hover:text-white text-xs font-mono font-semibold uppercase tracking-wider transition-colors cursor-pointer"
                   >
-                    <Calendar className="w-4 h-4 text-[#C7612E] group-hover:scale-110 transition-transform" />
-                    <span>Book Discovery (30m)</span>
-                  </MagneticButton>
-                </motion.div>
-              </div>
-
-              {/* Right Column: Hero 3D Spatial Architecture Core (5 Cols) */}
-              <div className="hidden lg:flex lg:col-span-5 relative items-center justify-center">
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.8, delay: 0.2 }}
-                  className="relative w-full max-w-[500px] flex items-center justify-center"
-                >
-                  {/* Ambient Subtle Radial Glow */}
-                  <div className="absolute inset-0 bg-[#C7612E]/5 rounded-full blur-[90px] pointer-events-none" />
-                  <Hero3DArchitectureStack className="w-full relative z-10" />
-                </motion.div>
-              </div>
-            </div>
-
-            {/* Telemetry Metrics Band - Tailored Mobile & Tablet Architecture */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.4 }}
-              className="mt-10 sm:mt-20 pt-8 border-t border-[#DEDAD3] dark:border-white/10 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6"
-            >
-              <div className="p-4 sm:p-5 rounded-2xl bg-white/70 dark:bg-[#151518]/70 border border-[#DEDAD3] dark:border-white/10 backdrop-blur-sm flex flex-col justify-between space-y-1 shadow-xs">
-                <div>
-                  <p className="text-xl sm:text-2xl lg:text-3xl font-bold font-display text-[#141414] dark:text-[#F6F3ED] tracking-tight">Handcrafted</p>
-                  <p className="text-[0.68rem] sm:text-xs font-mono uppercase tracking-wider text-[#C7612E] font-semibold mt-0.5">Custom Architecture</p>
+                    <Calendar className="w-4 h-4 text-black dark:text-white" />
+                    <span>Book 30m Call</span>
+                  </button>
                 </div>
-                <p className="text-[0.72rem] text-[#6E6B65] dark:text-[#A6A29A] leading-relaxed pt-2">Zero generic builders or bloated themes</p>
-              </div>
 
-              <div className="p-4 sm:p-5 rounded-2xl bg-white/70 dark:bg-[#151518]/70 border border-[#DEDAD3] dark:border-white/10 backdrop-blur-sm flex flex-col justify-between space-y-1 shadow-xs">
-                <div>
-                  <p className="text-xl sm:text-2xl lg:text-3xl font-bold font-display text-[#141414] dark:text-[#F6F3ED] tracking-tight">Type-Safe</p>
-                  <p className="text-[0.68rem] sm:text-xs font-mono uppercase tracking-wider text-[#C7612E] font-semibold mt-0.5">Engineering Rigor</p>
-                </div>
-                <p className="text-[0.72rem] text-[#6E6B65] dark:text-[#A6A29A] leading-relaxed pt-2">Modern React, TypeScript & modular systems</p>
-              </div>
-
-              <div className="p-4 sm:p-5 rounded-2xl bg-white/70 dark:bg-[#151518]/70 border border-[#DEDAD3] dark:border-white/10 backdrop-blur-sm flex flex-col justify-between space-y-1 shadow-xs">
-                <div>
-                  <p className="text-xl sm:text-2xl lg:text-3xl font-bold font-display text-[#141414] dark:text-[#F6F3ED] tracking-tight">Direct</p>
-                  <p className="text-[0.68rem] sm:text-xs font-mono uppercase tracking-wider text-[#C7612E] font-semibold mt-0.5">Senior Engineering</p>
-                </div>
-                <p className="text-[0.72rem] text-[#6E6B65] dark:text-[#A6A29A] leading-relaxed pt-2">Collaborate with builders, zero middle layers</p>
-              </div>
-
-              <div className="p-4 sm:p-5 rounded-2xl bg-white/70 dark:bg-[#151518]/70 border border-[#DEDAD3] dark:border-white/10 backdrop-blur-sm flex flex-col justify-between space-y-1 shadow-xs">
-                <div>
-                  <p className="text-xl sm:text-2xl lg:text-3xl font-bold font-display text-[#141414] dark:text-[#F6F3ED] tracking-tight">Global</p>
-                  <p className="text-[0.68rem] sm:text-xs font-mono uppercase tracking-wider text-[#C7612E] font-semibold mt-0.5">Remote Reach</p>
-                </div>
-                <p className="text-[0.72rem] text-[#6E6B65] dark:text-[#A6A29A] leading-relaxed pt-2">Serving ambitious companies worldwide</p>
-              </div>
-            </motion.div>
-
-            {/* HERO ANIMATED SHOWREEL / VIDEO REEL PLAYER */}
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.55 }}
-              className="mt-12 sm:mt-20">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 mb-4">
-                <div className="flex items-center gap-2">
-                  <Film className="w-4 h-4 text-[#C7612E] shrink-0" />
-                  <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#141414] dark:text-[#F6F3ED]">
-                    Studio Showreel In Motion
-                  </span>
-                </div>
-                <span className="text-[0.68rem] font-mono text-[#6E6B65] dark:text-[#A6A29A] tracking-wider">
-                  RECORDED SCREEN RUNTIMES · VERIFIED BUILDS
-                </span>
-              </div>
-              <VideoShowreel />
-            </motion.div>
-          </div>
-        </section>
-
-        {/* 02. ANIMATED MARQUEE TICKER */}
-        <div className="py-4 bg-[#EFEBE3] dark:bg-[#121215] border-b border-[#DEDAD3] dark:border-white/10 overflow-hidden whitespace-nowrap transition-colors duration-300">
-          <div className="animate-marquee-smooth flex items-center gap-8">
-            {[...marqueeItems, ...marqueeItems, ...marqueeItems, ...marqueeItems].map((item, idx) => (
-              <div key={idx} className="flex items-center gap-8 text-xs font-mono tracking-[0.2em] text-[#6E6B65] dark:text-[#A6A29A]">
-                <span className="text-[#141414] dark:text-[#F6F3ED] hover:text-[#C7612E] dark:hover:text-[#C7612E] transition-colors font-semibold">{item}</span>
-                <span className="text-[#C7612E]">✦</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* 03. INTERACTIVE CAPABILITIES BENTO ARCHITECTURE */}
-        <CapabilitiesBentoGrid />
-
-        {/* 04. STUDIO MANIFESTO & PHILOSOPHY */}
-        <section className="py-24 sm:py-32 border-b border-[#DEDAD3] dark:border-white/10 bg-white dark:bg-[#121215] transition-colors duration-300 relative">
-          <div className="max-w-[1800px] w-full mx-auto px-5 sm:px-8 lg:px-12">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-              <div className="lg:col-span-5 space-y-6">
-                <div>
-                  <span className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-[#C7612E] block mb-2">
-                    The Qavironel Standard
-                  </span>
-                  <h2 className="font-display font-bold text-3xl sm:text-5xl lg:text-6xl text-[#141414] dark:text-[#F6F3ED] tracking-tight leading-tight">
-                    Built for founders who refuse ordinary templates.
-                  </h2>
-                </div>
-              </div>
-
-              <div className="lg:col-span-7 space-y-6 text-[#57544E] dark:text-[#A6A29A] text-base sm:text-lg leading-relaxed font-light">
-                <p>
-                  The digital web is saturated with sluggish WordPress themes, off-the-shelf page builders, and agency middlemen who charge large markups while farming out the code to unvetted contractors.
-                </p>
-                <p>
-                  <span className="text-[#141414] dark:text-[#F6F3ED] font-semibold">Qavironel Technologies</span> exists as an honest, high-craft alternative. We are an independent, remote-first studio that treats every web application, product MVP, and applied AI integration as a piece of disciplined digital craftsmanship.
-                </p>
-                <p>
-                  When you partner with us, you collaborate directly with the lead engineer writing your code. We ship with relentless momentum, defend your systems with ethical security standards, and deliver experiences that turn visitors into active customers.
-                </p>
-              </div>
-            </div>
-
-            {/* 4 Core Studio Pillars Grid */}
-            <div className="mt-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              <motion.div 
-                whileHover={{ y: -6, borderColor: 'rgba(199, 97, 46, 0.6)' }}
-                transition={{ duration: 0.2 }}
-                className="bg-[#F6F3ED] dark:bg-[#18181E] rounded-2xl border border-[#DEDAD3] dark:border-white/10 p-6 sm:p-8 flex flex-col justify-between shadow-xs hover:border-[#C7612E]/40 transition-colors"
-              >
-                <div>
-                  <div className="w-10 h-10 rounded-lg bg-[#C7612E]/10 border border-[#C7612E]/20 text-[#C7612E] flex items-center justify-center mb-6">
-                    <Code2 className="w-5 h-5" />
+                {/* Direct Studio Trust Factors */}
+                <div className="pt-6 border-t border-black/10 dark:border-white/10 grid grid-cols-2 sm:grid-cols-3 gap-6 text-xs font-mono text-zinc-500 dark:text-zinc-400">
+                  <div>
+                    <span className="block text-black dark:text-white font-bold text-sm mb-0.5">Direct Access</span>
+                    <span>Lead engineers Maher & Anurag</span>
                   </div>
-                  <h3 className="font-display font-bold text-xl text-[#141414] dark:text-[#F6F3ED] mb-2">Architectural Rigor</h3>
-                  <p className="text-xs sm:text-sm text-[#57544E] dark:text-[#A6A29A] leading-relaxed">
-                    Zero bloated plugins or slow builders. Handcrafted, type-safe full-stack code built for lightning performance and clean scalability.
-                  </p>
-                </div>
-                <div className="mt-6 pt-4 border-t border-[#DEDAD3] dark:border-white/10 text-[0.7rem] font-mono text-[#C7612E] font-semibold">
-                  REACT 19 · TYPESCRIPT · VITE
-                </div>
-              </motion.div>
-
-              <motion.div 
-                whileHover={{ y: -6, borderColor: 'rgba(199, 97, 46, 0.6)' }}
-                transition={{ duration: 0.2 }}
-                className="bg-[#F6F3ED] dark:bg-[#18181E] rounded-2xl border border-[#DEDAD3] dark:border-white/10 p-6 sm:p-8 flex flex-col justify-between shadow-xs hover:border-[#C7612E]/40 transition-colors"
-              >
-                <div>
-                  <div className="w-10 h-10 rounded-lg bg-[#C7612E]/10 border border-[#C7612E]/20 text-[#C7612E] flex items-center justify-center mb-6">
-                    <Cpu className="w-5 h-5" />
+                  <div>
+                    <span className="block text-black dark:text-white font-bold text-sm mb-0.5">1–2 Wk Sprints</span>
+                    <span>Continuous live staging</span>
                   </div>
-                  <h3 className="font-display font-bold text-xl text-[#141414] dark:text-[#F6F3ED] mb-2">Applied AI Systems</h3>
-                  <p className="text-xs sm:text-sm text-[#57544E] dark:text-[#A6A29A] leading-relaxed">
-                    Practical intelligence: local-first LLM inference, vision OCR extraction, contextual advisory chat, and guarded system automations.
-                  </p>
-                </div>
-                <div className="mt-6 pt-4 border-t border-[#DEDAD3] dark:border-white/10 text-[0.7rem] font-mono text-[#C7612E] font-semibold">
-                  GROQ · LLAMA 3.3 · OLLAMA
-                </div>
-              </motion.div>
-
-              <motion.div 
-                whileHover={{ y: -6, borderColor: 'rgba(199, 97, 46, 0.6)' }}
-                transition={{ duration: 0.2 }}
-                className="bg-[#F6F3ED] dark:bg-[#18181E] rounded-2xl border border-[#DEDAD3] dark:border-white/10 p-6 sm:p-8 flex flex-col justify-between shadow-xs hover:border-[#C7612E]/40 transition-colors"
-              >
-                <div>
-                  <div className="w-10 h-10 rounded-lg bg-[#C7612E]/10 border border-[#C7612E]/20 text-[#C7612E] flex items-center justify-center mb-6">
-                    <ShieldCheck className="w-5 h-5" />
+                  <div>
+                    <span className="block text-black dark:text-white font-bold text-sm mb-0.5">100% IP Transfer</span>
+                    <span>Zero proprietary lock-in</span>
                   </div>
-                  <h3 className="font-display font-bold text-xl text-[#141414] dark:text-[#F6F3ED] mb-2">Defensive Security</h3>
-                  <p className="text-xs sm:text-sm text-[#57544E] dark:text-[#A6A29A] leading-relaxed">
-                    Backed by Bug Bounty and CTF victories: strict CSP boundaries, token-authenticated localhost layers, and defensible data access controls.
-                  </p>
                 </div>
-                <div className="mt-6 pt-4 border-t border-[#DEDAD3] dark:border-white/10 text-[0.7rem] font-mono text-[#C7612E] font-semibold">
-                  BSIDES VADODARA AWARDS · OWASP
-                </div>
-              </motion.div>
-
-              <motion.div 
-                whileHover={{ y: -6, borderColor: 'rgba(199, 97, 46, 0.6)' }}
-                transition={{ duration: 0.2 }}
-                className="bg-[#F6F3ED] dark:bg-[#18181E] rounded-2xl border border-[#DEDAD3] dark:border-white/10 p-6 sm:p-8 flex flex-col justify-between shadow-xs hover:border-[#C7612E]/40 transition-colors"
-              >
-                <div>
-                  <div className="w-10 h-10 rounded-lg bg-[#C7612E]/10 border border-[#C7612E]/20 text-[#C7612E] flex items-center justify-center mb-6">
-                    <Globe className="w-5 h-5" />
-                  </div>
-                  <h3 className="font-display font-bold text-xl text-[#141414] dark:text-[#F6F3ED] mb-2">Global Velocity</h3>
-                  <p className="text-xs sm:text-sm text-[#57544E] dark:text-[#A6A29A] leading-relaxed">
-                    Remote-first workflows catering to clients worldwide. Rapid 1–3 week sprint deliverables, asynchronous video reviews, and zero bureaucracy.
-                  </p>
-                </div>
-                <div className="mt-6 pt-4 border-t border-[#DEDAD3] dark:border-white/10 text-[0.7rem] font-mono text-[#C7612E] font-semibold">
-                  GLOBAL REACH · 24H CADENCE
-                </div>
-              </motion.div>
-            </div>
-          </div>
-        </section>
-
-        {/* 05. CURATED WORK */}
-        <section className="py-24 sm:py-32 border-b border-[#DEDAD3] dark:border-white/10 bg-[#F6F3ED] dark:bg-[#0C0C0E] transition-colors duration-300 relative">
-          <div className="max-w-[1800px] w-full mx-auto px-5 sm:px-8 lg:px-12">
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-10 border-b border-[#DEDAD3] dark:border-white/10">
-              <div>
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="w-2 h-2 rounded-full bg-[#C7612E] animate-pulse" />
-                  <span className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-[#C7612E]">
-                    Curated Studio Archive
-                  </span>
-                </div>
-                <h2 className="font-display font-bold text-3xl sm:text-5xl lg:text-6xl text-[#141414] dark:text-[#F6F3ED] tracking-tight">
-                  Featured software & digital platforms.
-                </h2>
-                <p className="mt-2 text-sm sm:text-base text-[#57544E] dark:text-[#A6A29A] max-w-xl font-light">
-                  Verifiable case studies of client production software, applied AI desktop assistants, and full-stack systems. Zero placeholder mockups.
-                </p>
               </div>
 
-              {/* Filter Pills */}
-              <div className="flex flex-wrap items-center gap-1.5 p-1.5 rounded-2xl bg-white dark:bg-[#18181E] border border-[#DEDAD3] dark:border-white/10 shadow-xs">
-                {[
-                  { id: 'all', label: 'All Featured (6)' },
-                  { id: 'ai', label: 'Applied AI & Runtimes' },
-                  { id: 'client', label: 'Client Commerce' },
-                  { id: 'security', label: 'Security & Labs' }
-                ].map((tab) => {
-                  const isActive = workFilter === tab.id;
-                  return (
+              {/* Right Column (5 cols): Interactive Systems Telemetry & Production Showcase */}
+              <div className="lg:col-span-5">
+                <div className="rounded-2xl border border-black/10 dark:border-white/10 bg-white/95 dark:bg-[#121212]/95 p-6 sm:p-7 shadow-xl backdrop-blur-sm relative overflow-hidden">
+                  
+                  {/* Console Header Bar */}
+                  <div className="flex items-center justify-between pb-4 border-b border-black/10 dark:border-white/10">
+                    <div className="flex items-center gap-2.5">
+                      <span className="w-2 h-2 rounded-full bg-black dark:bg-white animate-pulse" />
+                      <span className="text-[0.72rem] font-mono uppercase font-bold tracking-wider text-black dark:text-white">
+                        SYS://LIVE-TELEMETRY
+                      </span>
+                    </div>
+                    <span className="text-[0.68rem] font-mono font-semibold px-2.5 py-0.5 rounded-full bg-black/5 dark:bg-white/10 text-black dark:text-white border border-black/10 dark:border-white/15">
+                      ACTIVE FEED · CERTIFIED
+                    </span>
+                  </div>
+
+                  {/* Interactive Tab Switcher */}
+                  <div className="flex items-center gap-1 my-4 p-1 rounded-xl bg-zinc-100 dark:bg-zinc-900 border border-black/5 dark:border-white/10 text-[0.7rem] font-mono">
                     <button
-                      key={tab.id}
                       type="button"
-                      onClick={() => {
-                        playClickSound();
-                        setWorkFilter(tab.id as any);
-                      }}
-                      className={`px-3.5 py-1.5 rounded-xl text-xs font-mono font-semibold transition-all ${
-                        isActive
-                          ? 'bg-[#141414] dark:bg-[#F6F3ED] text-white dark:text-[#141414] shadow-xs'
-                          : 'text-[#6E6B65] dark:text-[#A6A29A] hover:text-[#141414] dark:hover:text-white hover:bg-[#F6F3ED] dark:hover:bg-[#25252E]'
+                      onClick={() => setHeroTab('kalki')}
+                      className={`flex-1 py-1.5 px-2 rounded-lg font-semibold transition-all cursor-pointer ${
+                        heroTab === 'kalki' 
+                          ? 'bg-white dark:bg-zinc-800 text-black dark:text-white shadow-xs' 
+                          : 'text-zinc-500 hover:text-black dark:hover:text-white'
                       }`}
                     >
-                      {tab.label}
+                      01. Tactical AI (Live)
                     </button>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Project Display: Flagship Spotlight + Grid */}
-            <div className="mt-12 space-y-10">
-              {(workFilter === 'all' || workFilter === 'ai') && (
-                <div className="relative">
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-3 text-xs font-mono text-[#6E6B65] dark:text-[#A6A29A]">
-                    <span className="text-[#C7612E] font-bold text-[0.72rem] sm:text-xs tracking-tight">★ FLAGSHIP SHOWCASE · STORE CERTIFIED v1.0.4</span>
-                    <span className="hidden sm:inline text-[0.7rem]">CLICK TABS BELOW TO INSPECT SCREENS</span>
+                    <button
+                      type="button"
+                      onClick={() => setHeroTab('ztees')}
+                      className={`flex-1 py-1.5 px-2 rounded-lg font-semibold transition-all cursor-pointer ${
+                        heroTab === 'ztees' 
+                          ? 'bg-white dark:bg-zinc-800 text-black dark:text-white shadow-xs' 
+                          : 'text-zinc-500 hover:text-black dark:hover:text-white'
+                      }`}
+                    >
+                      02. Platform Reel
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setHeroTab('telemetry')}
+                      className={`flex-1 py-1.5 px-2 rounded-lg font-semibold transition-all cursor-pointer ${
+                        heroTab === 'telemetry' 
+                          ? 'bg-white dark:bg-zinc-800 text-black dark:text-white shadow-xs' 
+                          : 'text-zinc-500 hover:text-black dark:hover:text-white'
+                      }`}
+                    >
+                      03. Vitals
+                    </button>
                   </div>
-                  <ProjectCard project={curatedProjects[0]} layout="featured" />
+
+                  {/* Tab 1: K.A.L.K.I. Tactical AI Runtime with LIVE VIDEO PLAYBACK */}
+                  {heroTab === 'kalki' && (
+                    <div className="space-y-4 animate-fade-in">
+                      <div className="relative group/vid overflow-hidden rounded-xl border border-black/10 dark:border-white/15 bg-black aspect-[16/10]">
+                        <video 
+                          src="/videos/kalki-video.mp4" 
+                          autoPlay 
+                          loop 
+                          muted={isHeroVideoMuted}
+                          playsInline
+                          className="w-full h-full object-cover"
+                        />
+                        <div className="absolute top-2.5 left-2.5 px-2 py-0.5 rounded bg-black/80 backdrop-blur-md text-[0.65rem] font-mono text-white border border-white/20 flex items-center gap-1.5 z-10 pointer-events-none">
+                          <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                          <span>LIVE HUD v1.0.4 · PLAYING</span>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => setIsHeroVideoMuted(!isHeroVideoMuted)}
+                          className="absolute bottom-2.5 right-2.5 p-1.5 rounded-full bg-black/80 hover:bg-black text-white backdrop-blur-md border border-white/20 transition-all z-20 cursor-pointer"
+                          aria-label={isHeroVideoMuted ? 'Unmute video audio' : 'Mute video audio'}
+                          title={isHeroVideoMuted ? 'Unmute audio' : 'Mute audio'}
+                        >
+                          {isHeroVideoMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
+                        </button>
+                      </div>
+
+                      <div className="space-y-2">
+                        <div className="flex items-baseline justify-between">
+                          <Link 
+                            to={`/work/${kalkiProject.slug}`}
+                            className="font-display font-bold text-lg sm:text-xl text-black dark:text-white hover:opacity-75 transition-opacity"
+                          >
+                            {kalkiProject.title}
+                          </Link>
+                          <span className="text-xs font-mono text-zinc-500">2025–2026</span>
+                        </div>
+
+                        <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed line-clamp-2">
+                          {kalkiProject.summary}
+                        </p>
+
+                        <div className="flex flex-wrap gap-1.5 pt-1">
+                          <span className="text-[0.65rem] font-mono px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 border border-black/5 dark:border-white/10">
+                            Local LLaMA 3.3
+                          </span>
+                          <span className="text-[0.65rem] font-mono px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 border border-black/5 dark:border-white/10">
+                            Groq Multi-LLM
+                          </span>
+                          <span className="text-[0.65rem] font-mono px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 border border-black/5 dark:border-white/10">
+                            DPAPI Vault
+                          </span>
+                        </div>
+
+                        <div className="pt-3 border-t border-black/10 dark:border-white/10 flex items-center justify-between text-xs font-mono">
+                          <span className="text-black dark:text-white font-semibold text-[0.72rem]">
+                            MS Store: 9P6HJPQZBGFQ
+                          </span>
+                          <Link 
+                            to={`/work/${kalkiProject.slug}`} 
+                            className="inline-flex items-center gap-1 text-black dark:text-white font-semibold hover:underline"
+                          >
+                            <span>Inspect Specs</span>
+                            <ArrowUpRight className="w-3.5 h-3.5" />
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Tab 2: Live Platform Reel */}
+                  {heroTab === 'ztees' && (
+                    <div className="space-y-4 animate-fade-in">
+                      <div className="relative group/vid overflow-hidden rounded-xl border border-black/10 dark:border-white/15 bg-black aspect-[16/10]">
+                        <video 
+                          src="/videos/project-reel.mp4" 
+                          autoPlay 
+                          loop 
+                          muted 
+                          playsInline
+                          className="w-full h-full object-cover"
+                        />
+                        <div className="absolute top-2.5 left-2.5 px-2 py-0.5 rounded bg-black/80 backdrop-blur-md text-[0.65rem] font-mono text-white border border-white/20 flex items-center gap-1.5 z-10 pointer-events-none">
+                          <span className="w-1.5 h-1.5 rounded-full bg-white" />
+                          <span>PRODUCTION REEL · TTFB &lt; 0.8s</span>
+                        </div>
+                      </div>
+
+                      <div className="space-y-2">
+                        <div className="flex items-baseline justify-between">
+                          <Link 
+                            to={`/work/${zteesProject.slug}`}
+                            className="font-display font-bold text-lg sm:text-xl text-black dark:text-white hover:opacity-75 transition-opacity"
+                          >
+                            {zteesProject.title}
+                          </Link>
+                          <span className="text-xs font-mono text-zinc-500">Client Platform</span>
+                        </div>
+
+                        <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed line-clamp-2">
+                          {zteesProject.summary}
+                        </p>
+
+                        <div className="flex flex-wrap gap-1.5 pt-1">
+                          <span className="text-[0.65rem] font-mono px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 border border-black/5 dark:border-white/10">
+                            React 19
+                          </span>
+                          <span className="text-[0.65rem] font-mono px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 border border-black/5 dark:border-white/10">
+                            WhatsApp Flow
+                          </span>
+                          <span className="text-[0.65rem] font-mono px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 border border-black/5 dark:border-white/10">
+                            Zero Hydration Lag
+                          </span>
+                        </div>
+
+                        <div className="pt-3 border-t border-black/10 dark:border-white/10 flex items-center justify-between text-xs font-mono">
+                          <span className="text-black dark:text-white font-semibold text-[0.72rem]">
+                            Ergonomic Score 100/100
+                          </span>
+                          <Link 
+                            to={`/work/${zteesProject.slug}`} 
+                            className="inline-flex items-center gap-1 text-black dark:text-white font-semibold hover:underline"
+                          >
+                            <span>Inspect Specs</span>
+                            <ArrowUpRight className="w-3.5 h-3.5" />
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Tab 3: Studio Core Vitals & Production Telemetry */}
+                  {heroTab === 'telemetry' && (
+                    <div className="space-y-4 py-2 animate-fade-in font-mono text-xs">
+                      <div className="p-4 rounded-xl bg-zinc-950 text-zinc-300 border border-white/10 space-y-3">
+                        <div className="flex items-center justify-between text-[0.68rem] text-zinc-400 border-b border-white/10 pb-2">
+                          <span className="flex items-center gap-1.5 text-white">
+                            <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                            ENGINE_ACTIVE
+                          </span>
+                          <span>HOST: REGION_GLOBAL</span>
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-3 pt-1">
+                          <div>
+                            <span className="block text-[0.65rem] text-zinc-500 uppercase">Throughput</span>
+                            <span className="text-sm font-bold text-white">{tokensPerSec} tok/s</span>
+                          </div>
+                          <div>
+                            <span className="block text-[0.65rem] text-zinc-500 uppercase">Latency</span>
+                            <span className="text-sm font-bold text-white">{latency} ms</span>
+                          </div>
+                          <div>
+                            <span className="block text-[0.65rem] text-zinc-500 uppercase">Type Safety</span>
+                            <span className="text-sm font-bold text-white">100% Strict</span>
+                          </div>
+                          <div>
+                            <span className="block text-[0.65rem] text-zinc-500 uppercase">Hydration</span>
+                            <span className="text-sm font-bold text-white">0.0 ms</span>
+                          </div>
+                        </div>
+
+                        <div className="pt-2 border-t border-white/10 flex items-center justify-between text-[0.65rem] text-zinc-400">
+                          <span>SECURITY: DPAPI / ZERO TRUST</span>
+                          <span className="text-white font-bold">VERIFIED</span>
+                        </div>
+                      </div>
+
+                      <div className="pt-1 flex items-center justify-between text-xs font-mono">
+                        <span className="text-black dark:text-white font-semibold text-[0.72rem]">
+                          Continuous Telemetry
+                        </span>
+                        <Link 
+                          to="/services" 
+                          className="inline-flex items-center gap-1 text-black dark:text-white font-semibold hover:underline"
+                        >
+                          <span>Explore Services</span>
+                          <ArrowUpRight className="w-3.5 h-3.5" />
+                        </Link>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Console Footer Status */}
+                  <div className="mt-5 pt-3 border-t border-black/10 dark:border-white/10 flex items-center justify-between text-[0.65rem] font-mono text-zinc-500">
+                    <span>STACK: REACT 19 · TS · TAILWIND · PYTHON</span>
+                    <span className="font-semibold text-black dark:text-white">100% HANDCRAFTED</span>
+                  </div>
+
                 </div>
-              )}
+              </div>
 
-              {/* Grid for Other Projects */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
-                {curatedProjects
-                  .filter((p) => {
-                    if (workFilter === 'all') return p.slug !== 'kalki';
-                    if (workFilter === 'ai') return (p.category === 'AI & Software' || p.category === 'Digital Products') && p.slug !== 'kalki';
-                    if (workFilter === 'client') return p.category === 'Client Work';
-                    if (workFilter === 'security') return p.category === 'Product Lab' || p.category === 'Academic Build' || p.category === 'Experiments';
-                    return true;
-                  })
-                  .map((project) => (
-                    <ProjectCard key={project.slug} project={project} layout="standard" />
-                  ))}
+            </div>
+
+            {/* Studio Standards 4-Pillar Grid */}
+            <div className="mt-14 sm:mt-20 pt-10 border-t border-black/10 dark:border-white/10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-black/10 dark:border-white/10 shadow-xs space-y-2.5">
+                <div className="flex items-center justify-between text-xs font-mono text-zinc-500">
+                  <span>01 / ARCHITECTURE</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-black dark:bg-white" />
+                </div>
+                <h3 className="font-display font-bold text-lg text-black dark:text-white">Handcrafted</h3>
+                <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                  Zero generic builders or bloated WordPress themes. Every line of code is purpose-built for speed and durability.
+                </p>
+              </div>
+
+              <div className="p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-black/10 dark:border-white/10 shadow-xs space-y-2.5">
+                <div className="flex items-center justify-between text-xs font-mono text-zinc-500">
+                  <span>02 / DISCIPLINE</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-black dark:bg-white" />
+                </div>
+                <h3 className="font-display font-bold text-lg text-black dark:text-white">Type-Safe</h3>
+                <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                  Strict TypeScript, defensive schema validation, and clean REST contracts ensure bulletproof production stability.
+                </p>
+              </div>
+
+              <div className="p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-black/10 dark:border-white/10 shadow-xs space-y-2.5">
+                <div className="flex items-center justify-between text-xs font-mono text-zinc-500">
+                  <span>03 / COLLABORATION</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-black dark:bg-white" />
+                </div>
+                <h3 className="font-display font-bold text-lg text-black dark:text-white">Direct Access</h3>
+                <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                  Work directly with founding engineers Maher Bhatt & Anurag Pandey. Zero project managers or communication fog.
+                </p>
+              </div>
+
+              <div className="p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-black/10 dark:border-white/10 shadow-xs space-y-2.5">
+                <div className="flex items-center justify-between text-xs font-mono text-zinc-500">
+                  <span>04 / PRESENCE</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-black dark:bg-white" />
+                </div>
+                <h3 className="font-display font-bold text-lg text-black dark:text-white">Global Reach</h3>
+                <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                  Remote-first studio partnering with ambitious founders, startups, and companies across time zones.
+                </p>
               </div>
             </div>
 
-            {/* Scope Estimator Quick-Launch Card */}
-            <div className="mt-16 p-8 rounded-2xl bg-white dark:bg-[#151518] border border-[#DEDAD3] dark:border-white/10 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xs">
-              <div className="space-y-1 text-center md:text-left">
-                <span className="text-xs font-mono text-[#C7612E] font-bold uppercase tracking-wider">
-                  Instant Architecture Brief
+          </div>
+        </section>
+
+        {/* ========================================================================= */}
+        {/* 02. STUDIO INTRO & POSITIONING                                            */}
+        {/* ========================================================================= */}
+        <section className="py-20 sm:py-28 border-b border-black/10 dark:border-white/10 bg-zinc-50 dark:bg-zinc-950 transition-colors">
+          <div className="max-w-[1700px] mx-auto px-5 sm:px-8 lg:px-12">
+            
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+              <div className="lg:col-span-4 space-y-4">
+                <span className="text-xs font-mono uppercase tracking-[0.22em] text-zinc-500 dark:text-zinc-400 font-bold block">
+                  01 / The Studio Philosophy
                 </span>
-                <h3 className="font-display font-bold text-xl sm:text-2xl text-[#141414] dark:text-[#F6F3ED]">
-                  Have a specific project or platform in mind?
-                </h3>
-                <p className="text-xs sm:text-sm text-[#57544E] dark:text-[#A6A29A]">
-                  Configure deliverables, tech modules, and receive an instant scope breakdown in under 60 seconds.
-                </p>
+                <h2 className="font-display font-bold text-3xl sm:text-4xl text-black dark:text-white tracking-tight leading-tight">
+                  Crafting software with direct accountability.
+                </h2>
               </div>
 
-              <div className="flex flex-wrap items-center gap-3">
-                <button
-                  type="button"
-                  onClick={() => {
-                    playClickSound();
-                    openBookingModal('quotation');
-                  }}
-                  className="px-5 py-3 rounded-full bg-[#C7612E] hover:bg-[#d04a14] text-white text-xs font-bold uppercase tracking-wider transition-colors shadow-xs flex items-center gap-2"
-                >
-                  <FileText className="w-3.5 h-3.5" />
-                  <span>Configure Scope Brief</span>
-                </button>
+              <div className="lg:col-span-8 space-y-8">
+                <p className="font-display text-xl sm:text-2xl text-black dark:text-white leading-snug font-normal">
+                  The modern web is filled with bloated page builders, slow WordPress themes, and agency middlemen who charge large retainers while outsourcing the actual programming to junior contractors.
+                </p>
+                <p className="text-base sm:text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed font-light">
+                  We founded Qavironel Technologies to offer an uncompromising alternative: a direct, founder-led studio that treats every web application, SaaS MVP, and AI workflow as a piece of digital craftsmanship. You collaborate directly with senior engineers who understand distributed systems, Core Web Vitals, and responsive interface design.
+                </p>
 
-                <Button to="/work" variant="secondary" size="md" showArrow>
-                  {`View Complete Archive (${projects.length})`}
-                </Button>
+                {/* 3 Value Pillars */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 pt-6 border-t border-black/10 dark:border-white/10">
+                  <div className="space-y-2">
+                    <span className="text-xs font-mono font-bold text-zinc-900 dark:text-zinc-100">01 / DIRECT ACCESS</span>
+                    <h3 className="font-display font-bold text-base text-black dark:text-white">Zero Intermediaries</h3>
+                    <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                      Communicate directly with lead architects Maher Bhatt and Anurag Pandey on daily Slack channels and video reviews.
+                    </p>
+                  </div>
+
+                  <div className="space-y-2">
+                    <span className="text-xs font-mono font-bold text-zinc-900 dark:text-zinc-100">02 / BESPOKE RIGOR</span>
+                    <h3 className="font-display font-bold text-base text-black dark:text-white">Handcrafted Architecture</h3>
+                    <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                      Clean modular React 19, Vite, TanStack, and Python. Every component is engineered for sub-second load times and reliability.
+                    </p>
+                  </div>
+
+                  <div className="space-y-2">
+                    <span className="text-xs font-mono font-bold text-zinc-900 dark:text-zinc-100">03 / DEFENSIVE BY DEFAULT</span>
+                    <h3 className="font-display font-bold text-base text-black dark:text-white">Guarded Security</h3>
+                    <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                      Rooted in ethical hacking and cybersecurity workshops. Strict CSP, DPAPI vault encryption, and input sanitization by default.
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
+
           </div>
         </section>
 
-        {/* 06. STUDIO ENGINEERING BENCHMARKS & COMPARISON MATRIX */}
-        <StudioStandardsMatrix onOpenBooking={openBookingModal} />
+        {/* ========================================================================= */}
+        {/* 03. LIVE PRODUCTION SHOWREELS & ACTIVE PLAYBACK                           */}
+        {/* ========================================================================= */}
+        <section className="py-20 sm:py-28 border-b border-black/10 dark:border-white/10 bg-white dark:bg-[#0A0A0A]">
+          <div className="max-w-[1700px] mx-auto px-5 sm:px-8 lg:px-12 space-y-10">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 pb-8 border-b border-black/10 dark:border-white/10">
+              <div className="space-y-3">
+                <span className="text-xs font-mono uppercase tracking-[0.22em] text-zinc-500 dark:text-zinc-400 font-bold block">
+                  02 / Live Media Showcase
+                </span>
+                <h2 className="font-display font-bold text-3xl sm:text-5xl lg:text-6xl text-black dark:text-white tracking-tight">
+                  Active video playback.
+                </h2>
+              </div>
+              <p className="text-xs sm:text-sm font-mono text-zinc-500 max-w-md">
+                Direct captures from tactical HUD runtimes, desktop clients, responsive web storefronts, and studio engineering craft.
+              </p>
+            </div>
+            <VideoShowreel />
+          </div>
+        </section>
 
-        {/* 07. HOW WE BUILD — THE 4-STAGE GLOBAL DELIVERY MODEL */}
-        <section className="py-24 sm:py-32 border-b border-[#DEDAD3] dark:border-white/10 bg-[#F6F3ED] dark:bg-[#0C0C0E] transition-colors duration-300">
-          <div className="max-w-[1800px] w-full mx-auto px-5 sm:px-8 lg:px-12">
-            <div className="max-w-3xl mb-16">
-              <span className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-[#C7612E] block mb-2">
-                Our Process
+        {/* ========================================================================= */}
+        {/* 04. ASYMMETRIC EDITORIAL PORTFOLIO (GENUINE PROJECTS)                     */}
+        {/* ========================================================================= */}
+        <section className="py-24 sm:py-32 border-b border-black/10 dark:border-white/10">
+          <div className="max-w-[1700px] mx-auto px-5 sm:px-8 lg:px-12">
+            
+            {/* Section Header */}
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 pb-14 border-b border-black/10 dark:border-white/10">
+              <div className="space-y-3">
+                <span className="text-xs font-mono uppercase tracking-[0.22em] text-zinc-500 dark:text-zinc-400 font-bold block">
+                  03 / Selected Works
+                </span>
+                <h2 className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl text-black dark:text-white tracking-tight">
+                  Proven builds. Real systems.
+                </h2>
+              </div>
+              <Link 
+                to="/work" 
+                className="inline-flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-black dark:text-white hover:underline"
+              >
+                <span>View Full Portfolio ({projects.length} Projects)</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+
+            {/* Project 01: Heroic Full-Width Flagship (KALKI) */}
+            <div className="py-12 border-b border-black/10 dark:border-white/10">
+              <div className="glass-card-luxury p-8 sm:p-12 rounded-3xl transition-all duration-300">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+                  <div className="lg:col-span-7 order-2 lg:order-1 space-y-6">
+                    <div className="flex flex-wrap items-center gap-3">
+                      <span className="text-xs font-mono px-3.5 py-1 rounded-full bg-black/5 dark:bg-white/10 text-black dark:text-white font-bold border border-black/10 dark:border-white/15">
+                        #01 · FLAGSHIP PRODUCT
+                      </span>
+                      <span className="text-xs font-mono text-zinc-500">2025–2026 · AI & Systems</span>
+                    </div>
+
+                    <h3 className="font-display font-bold text-3xl sm:text-5xl text-black dark:text-white tracking-tight">
+                      {kalkiProject.title}
+                    </h3>
+                    <p className="text-sm font-mono text-zinc-600 dark:text-zinc-400">
+                      {kalkiProject.eyebrow}
+                    </p>
+                    <p className="text-base text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-xl font-light">
+                      {kalkiProject.summary}
+                    </p>
+
+                    <div className="flex flex-wrap gap-2 pt-1">
+                      {kalkiProject.technologies.slice(0, 5).map(t => (
+                        <span key={t} className="text-xs font-mono px-2.5 py-1 rounded border border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 text-zinc-800 dark:text-zinc-200">
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+
+                    <div className="pt-4 flex flex-wrap items-center gap-4">
+                      <Link
+                        to={`/work/${kalkiProject.slug}`}
+                        className="btn-glass-shimmer inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-black text-white dark:bg-white dark:text-black text-xs font-mono uppercase font-bold tracking-wider transition-all shadow-sm hover:-translate-y-0.5"
+                      >
+                        <span>Read Case Study</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </Link>
+                      <a
+                        href="https://apps.microsoft.com/detail/9P6HJPQZBGFQ"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/15 text-black dark:text-white text-xs font-mono uppercase font-semibold tracking-wider hover:bg-black/10 dark:hover:bg-white/10 transition-all hover:-translate-y-0.5"
+                      >
+                        <span>Microsoft Store (9P6HJPQZBGFQ)</span>
+                        <ExternalLink className="w-3.5 h-3.5" />
+                      </a>
+                    </div>
+                  </div>
+
+                  <div className="lg:col-span-5 order-1 lg:order-2">
+                    <Link 
+                      to={`/work/${kalkiProject.slug}`}
+                      className="block group overflow-hidden rounded-2xl border border-black/10 dark:border-white/15 bg-black p-2 transition-transform duration-300 hover:scale-[1.01]"
+                    >
+                      <ScrollAutoplayVideo 
+                        src={kalkiProject.videoSrc || '/videos/kalki-video.mp4'}
+                        poster="/images/projects/kalki/kalki-hero.png"
+                        alt="K.A.L.K.I. main tactical interface runtime video"
+                        badgeText="TACTICAL HUD v1.0.4"
+                        aspectRatio="aspect-[4/3]"
+                      />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Harmonized 2-Column Grid (Cards #02 to #05) */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 py-16">
+              
+              {/* Card #02: Ztees Streetwear Commerce */}
+              <div className="glass-card-luxury p-7 sm:p-9 rounded-3xl flex flex-col justify-between group transition-all duration-300 hover:-translate-y-1">
+                <div>
+                  <Link 
+                    to={`/work/${zteesProject.slug}`}
+                    className="block group/img overflow-hidden rounded-2xl border border-black/10 dark:border-white/15 bg-black mb-6"
+                  >
+                    <ScrollAutoplayVideo 
+                      src={zteesProject.videoSrc || '/videos/project-reel.mp4'}
+                      poster="/images/projects/ztees-cover.jpg"
+                      alt="Ztees streetwear commerce drop presentation video"
+                      badgeText="LIVE STOREFRONT"
+                      aspectRatio="aspect-[16/10]"
+                    />
+                  </Link>
+
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-mono px-3 py-1 rounded-full bg-black/5 dark:bg-white/10 text-black dark:text-white font-bold border border-black/10 dark:border-white/15">
+                        #02 · CLIENT STOREFRONT
+                      </span>
+                      <span className="text-xs font-mono text-zinc-500">2026 · Commerce</span>
+                    </div>
+                    <h3 className="font-display font-bold text-2xl sm:text-3xl text-black dark:text-white">
+                      <Link to={`/work/${zteesProject.slug}`} className="hover:opacity-75 transition-opacity">
+                        {zteesProject.title}
+                      </Link>
+                    </h3>
+                    <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed font-light">
+                      {zteesProject.summary}
+                    </p>
+                    <div className="flex flex-wrap gap-1.5 pt-2">
+                      {zteesProject.technologies.slice(0, 4).map(t => (
+                        <span key={t} className="text-[0.68rem] font-mono px-2.5 py-1 rounded bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-zinc-800 dark:text-zinc-200">
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pt-6 mt-6 border-t border-black/10 dark:border-white/10 flex items-center justify-between">
+                  <Link 
+                    to={`/work/${zteesProject.slug}`} 
+                    className="inline-flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-black dark:text-white hover:underline"
+                  >
+                    <span>Inspect Case Study</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                  <span className="text-xs font-mono text-zinc-500">Fast Drop Architecture</span>
+                </div>
+              </div>
+
+              {/* Card #03: Classic Infrastructure Projects */}
+              <div className="glass-card-luxury p-7 sm:p-9 rounded-3xl flex flex-col justify-between group transition-all duration-300 hover:-translate-y-1">
+                <div>
+                  <Link 
+                    to={`/work/${cipProject.slug}`}
+                    className="block group/img overflow-hidden rounded-2xl border border-black/10 dark:border-white/15 bg-black mb-6"
+                  >
+                    <ScrollAutoplayVideo 
+                      src={cipProject.videoSrc || '/videos/hero-showreel.mp4'}
+                      poster="/images/projects/cip/cip-new-1-hero.webp"
+                      alt="Classic Infrastructure Projects Corporate Platform video"
+                      badgeText="HEAVY CIVIL EPC"
+                      aspectRatio="aspect-[16/10]"
+                    />
+                  </Link>
+
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-mono px-3 py-1 rounded-full bg-black/5 dark:bg-white/10 text-black dark:text-white font-bold border border-black/10 dark:border-white/15">
+                        #03 · ENTERPRISE PLATFORM
+                      </span>
+                      <span className="text-xs font-mono text-zinc-500">Est. 2008 · Full-Stack</span>
+                    </div>
+                    <h3 className="font-display font-bold text-2xl sm:text-3xl text-black dark:text-white">
+                      <Link to={`/work/${cipProject.slug}`} className="hover:opacity-75 transition-opacity">
+                        {cipProject.title}
+                      </Link>
+                    </h3>
+                    <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed font-light">
+                      {cipProject.summary}
+                    </p>
+                    <div className="flex flex-wrap gap-1.5 pt-2">
+                      {cipProject.technologies.slice(0, 4).map(t => (
+                        <span key={t} className="text-[0.68rem] font-mono px-2.5 py-1 rounded bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-zinc-800 dark:text-zinc-200">
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pt-6 mt-6 border-t border-black/10 dark:border-white/10 flex items-center justify-between">
+                  <Link 
+                    to={`/work/${cipProject.slug}`} 
+                    className="inline-flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-black dark:text-white hover:underline"
+                  >
+                    <span>Inspect Case Study</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                  <span className="text-xs font-mono text-zinc-500">High-Density Asset Pipeline</span>
+                </div>
+              </div>
+
+              {/* Card #04: CyberGuard Security Lab */}
+              <div className="glass-card-luxury p-7 sm:p-9 rounded-3xl flex flex-col justify-between group transition-all duration-300 hover:-translate-y-1">
+                <div>
+                  <Link 
+                    to={`/work/${cyberProject.slug}`}
+                    className="block group/img overflow-hidden rounded-2xl border border-black/10 dark:border-white/15 bg-black mb-6"
+                  >
+                    <ScrollAutoplayVideo 
+                      src={cyberProject.videoSrc || '/videos/hero-showreel.mp4'}
+                      poster="/images/projects/kalki-security.png"
+                      alt="CyberGuard Security Lab Interface video"
+                      badgeText="DEFENSIVE LABS"
+                      aspectRatio="aspect-[16/10]"
+                    />
+                  </Link>
+
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-mono px-3 py-1 rounded-full bg-black/5 dark:bg-white/10 text-black dark:text-white font-bold border border-black/10 dark:border-white/15">
+                        #04 · DEFENSIVE SECURITY
+                      </span>
+                      <span className="text-xs font-mono text-zinc-500">2025–2026 · Workshops</span>
+                    </div>
+                    <h3 className="font-display font-bold text-2xl sm:text-3xl text-black dark:text-white">
+                      <Link to={`/work/${cyberProject.slug}`} className="hover:opacity-75 transition-opacity">
+                        {cyberProject.title}
+                      </Link>
+                    </h3>
+                    <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed font-light">
+                      {cyberProject.summary}
+                    </p>
+                    <div className="flex flex-wrap gap-1.5 pt-2">
+                      {cyberProject.technologies.slice(0, 4).map(t => (
+                        <span key={t} className="text-[0.68rem] font-mono px-2.5 py-1 rounded bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-zinc-800 dark:text-zinc-200">
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pt-6 mt-6 border-t border-black/10 dark:border-white/10 flex items-center justify-between">
+                  <Link 
+                    to={`/work/${cyberProject.slug}`} 
+                    className="inline-flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-black dark:text-white hover:underline"
+                  >
+                    <span>Inspect Security Specs</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                  <span className="text-xs font-mono text-zinc-500">Strict CSP Isolation</span>
+                </div>
+              </div>
+
+              {/* Card #05: Civic Sathi Monorepo Platform */}
+              <div className="glass-card-luxury p-7 sm:p-9 rounded-3xl flex flex-col justify-between group transition-all duration-300 hover:-translate-y-1">
+                <div>
+                  <Link 
+                    to={`/work/${civicProject.slug}`}
+                    className="block group/img overflow-hidden rounded-2xl border border-black/10 dark:border-white/15 bg-black mb-6"
+                  >
+                    <ScrollAutoplayVideo 
+                      src={civicProject.videoSrc || '/videos/tech-atmosphere.mp4'}
+                      poster="/images/projects/civic-public-home.png"
+                      alt="Civic Sathi Public Citizen Interface video"
+                      badgeText="4-ROLE MONOREPO"
+                      aspectRatio="aspect-[16/10]"
+                    />
+                  </Link>
+
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-mono px-3 py-1 rounded-full bg-black/5 dark:bg-white/10 text-black dark:text-white font-bold border border-black/10 dark:border-white/15">
+                        #05 · MONOREPO GOVTECH
+                      </span>
+                      <span className="text-xs font-mono text-zinc-500">SIH 2026 · Product Lab</span>
+                    </div>
+                    <h3 className="font-display font-bold text-2xl sm:text-3xl text-black dark:text-white">
+                      <Link to={`/work/${civicProject.slug}`} className="hover:opacity-75 transition-opacity">
+                        {civicProject.title}
+                      </Link>
+                    </h3>
+                    <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed font-light">
+                      {civicProject.summary}
+                    </p>
+                    <div className="flex flex-wrap gap-1.5 pt-2">
+                      {civicProject.technologies.slice(0, 4).map(t => (
+                        <span key={t} className="text-[0.68rem] font-mono px-2.5 py-1 rounded bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-zinc-800 dark:text-zinc-200">
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pt-6 mt-6 border-t border-black/10 dark:border-white/10 flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <Link 
+                      to={`/work/${civicProject.slug}`} 
+                      className="inline-flex items-center gap-1.5 text-xs font-mono font-bold uppercase tracking-wider text-black dark:text-white hover:underline"
+                    >
+                      <span>Inspect Specs</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
+                    <a
+                      href="https://janmind-public.vercel.app/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs font-mono text-zinc-500 hover:text-black dark:hover:text-white flex items-center gap-1"
+                    >
+                      <span>Live Demo</span>
+                      <ExternalLink className="w-3 h-3" />
+                    </a>
+                  </div>
+                  <span className="text-xs font-mono text-zinc-500">HDBSCAN AI</span>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </section>
+
+        {/* ========================================================================= */}
+        {/* 05. EDITORIAL CAPABILITIES & DISCIPLINES + 3D SPATIAL ARCHITECTURE         */}
+        {/* ========================================================================= */}
+        <section className="py-24 sm:py-32 border-b border-black/10 dark:border-white/10 bg-zinc-50 dark:bg-zinc-950 transition-colors">
+          <div className="max-w-[1700px] mx-auto px-5 sm:px-8 lg:px-12">
+            
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pb-16 border-b border-black/10 dark:border-white/10">
+              <div className="lg:col-span-8 space-y-3">
+                <span className="text-xs font-mono uppercase tracking-[0.22em] text-zinc-500 dark:text-zinc-400 font-bold block">
+                  04 / Core Capabilities
+                </span>
+                <h2 className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl text-black dark:text-white tracking-tight">
+                  What we engineer.
+                </h2>
+                <p className="text-sm font-mono text-zinc-600 dark:text-zinc-400 max-w-xl pt-2">
+                  No outsourcing. Every line authored and vetted by technical leadership Maher Bhatt & Anurag Pandey.
+                </p>
+              </div>
+
+              {/* 3D Spatial Architecture Showcase */}
+              <div className="lg:col-span-4 flex flex-col items-center justify-center p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-black/10 dark:border-white/10 shadow-sm relative overflow-hidden group">
+                <div className="absolute top-3 left-3 text-[0.65rem] font-mono text-zinc-500 uppercase tracking-wider flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-black dark:bg-white animate-pulse" />
+                  <span>SPATIAL / 3D ARCHITECTURE</span>
+                </div>
+                <div className="my-2">
+                  <Spatial3DPrism size={240} />
+                </div>
+                <span className="text-[0.65rem] font-mono text-zinc-500">Frosted Optical Glass · Titanium Specular</span>
+              </div>
+            </div>
+
+            {/* Disciplines Editorial List */}
+            <div className="divide-y divide-black/10 dark:divide-white/10">
+              {disciplines.map((d) => (
+                <div key={d.num} className="py-12 sm:py-16 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                  
+                  <div className="lg:col-span-1">
+                    <span className="font-mono text-sm font-bold text-black dark:text-white">
+                      {d.num}
+                    </span>
+                  </div>
+
+                  <div className="lg:col-span-5 space-y-4">
+                    <h3 className="font-display font-bold text-2xl sm:text-3xl text-black dark:text-white">
+                      {d.title}
+                    </h3>
+                    <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                      {d.summary}
+                    </p>
+                    <div className="pt-2">
+                      <Link 
+                        to={`/work/${d.caseStudySlug}`}
+                        className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-black dark:text-white hover:underline"
+                      >
+                        <span>Related Case: {d.caseStudyName}</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </Link>
+                    </div>
+                  </div>
+
+                  <div className="lg:col-span-4 space-y-2">
+                    <p className="text-xs font-mono uppercase tracking-wider text-zinc-500 mb-3">Deliverables</p>
+                    <ul className="space-y-2 text-xs sm:text-sm text-black dark:text-white">
+                      {d.deliverables.map(deliv => (
+                        <li key={deliv} className="flex items-start gap-2">
+                          <CheckCircle2 className="w-4 h-4 text-black dark:text-white shrink-0 mt-0.5" />
+                          <span>{deliv}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="lg:col-span-2 space-y-2">
+                    <p className="text-xs font-mono uppercase tracking-wider text-zinc-500 mb-3">Technologies</p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {d.stack.map(st => (
+                        <span key={st} className="text-[0.7rem] font-mono px-2 py-0.5 rounded bg-white dark:bg-zinc-900 border border-black/10 dark:border-white/10 text-zinc-800 dark:text-zinc-200">
+                          {st}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                </div>
+              ))}
+            </div>
+
+          </div>
+        </section>
+
+        {/* ========================================================================= */}
+        {/* 06. THE WAY WE BUILD: 4-STAGE SPRINT CADENCE                              */}
+        {/* ========================================================================= */}
+        <section className="py-24 sm:py-32 border-b border-black/10 dark:border-white/10">
+          <div className="max-w-[1700px] mx-auto px-5 sm:px-8 lg:px-12">
+            
+            <div className="max-w-2xl space-y-4 mb-16">
+              <span className="text-xs font-mono uppercase tracking-[0.22em] text-zinc-500 dark:text-zinc-400 font-bold block">
+                05 / Engineering Process
               </span>
-              <h2 className="font-display font-bold text-3xl sm:text-5xl lg:text-6xl text-[#141414] dark:text-[#F6F3ED] tracking-tight">
-                Disciplined execution from day zero to launch.
+              <h2 className="font-display font-bold text-4xl sm:text-5xl text-black dark:text-white tracking-tight">
+                From napkin concept to production release.
               </h2>
+              <p className="text-base text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                We eliminate multi-month agency stalls. Working in tight 1-to-2-week milestone sprints, we deliver staging environments you can click and test in real time.
+              </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              <div className="p-7 bg-white dark:bg-[#151518] rounded-2xl border border-[#DEDAD3] dark:border-white/10 space-y-4 shadow-xs hover:border-[#C7612E]/40 transition-colors">
-                <span className="text-xs font-mono text-[#C7612E] font-bold">01 / BLUEPRINT</span>
-                <h3 className="font-display font-bold text-lg text-[#141414] dark:text-[#F6F3ED]">Discovery & Architecture</h3>
-                <p className="text-xs sm:text-sm text-[#57544E] dark:text-[#A6A29A] leading-relaxed">
-                  We define core user flows, technical constraints, data schemas, and performance targets before writing a single line of production code.
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              
+              <div className="p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-black/10 dark:border-white/10 space-y-4 shadow-xs">
+                <span className="text-xs font-mono text-black dark:text-white font-bold">01 / DISCOVERY</span>
+                <h3 className="font-display font-bold text-xl text-black dark:text-white">Understand & Scope</h3>
+                <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                  Direct call with Maher and Anurag. We clarify business objectives, user flows, reference benchmarks, and fixed deliverables.
                 </p>
               </div>
 
-              <div className="p-7 bg-white dark:bg-[#151518] rounded-2xl border border-[#DEDAD3] dark:border-white/10 space-y-4 shadow-xs hover:border-[#C7612E]/40 transition-colors">
-                <span className="text-xs font-mono text-[#C7612E] font-bold">02 / INTERACTION</span>
-                <h3 className="font-display font-bold text-lg text-[#141414] dark:text-[#F6F3ED]">Design & Motion Systems</h3>
-                <p className="text-xs sm:text-sm text-[#57544E] dark:text-[#A6A29A] leading-relaxed">
-                  High-fidelity interface design crafted with editorial typography, custom micro-interactions, responsive touch targets, and design tokens.
+              <div className="p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-black/10 dark:border-white/10 space-y-4 shadow-xs">
+                <span className="text-xs font-mono text-black dark:text-white font-bold">02 / ARCHITECTURE</span>
+                <h3 className="font-display font-bold text-xl text-black dark:text-white">Design & Schemas</h3>
+                <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                  Database models, REST contracts, and Figma interface tokens mapped out before coding to eliminate expensive scope churn.
                 </p>
               </div>
 
-              <div className="p-7 bg-white dark:bg-[#151518] rounded-2xl border border-[#DEDAD3] dark:border-white/10 space-y-4 shadow-xs hover:border-[#C7612E]/40 transition-colors">
-                <span className="text-xs font-mono text-[#C7612E] font-bold">03 / CODE</span>
-                <h3 className="font-display font-bold text-lg text-[#141414] dark:text-[#F6F3ED]">Full-Stack Engineering</h3>
-                <p className="text-xs sm:text-sm text-[#57544E] dark:text-[#A6A29A] leading-relaxed">
-                  Handcrafted type-safe React, TanStack Start, Python, and applied AI models. Clean modular architecture. Production-tuned performance by default.
+              <div className="p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-black/10 dark:border-white/10 space-y-4 shadow-xs">
+                <span className="text-xs font-mono text-black dark:text-white font-bold">03 / CODE SPRINT</span>
+                <h3 className="font-display font-bold text-xl text-black dark:text-white">Precision Builds</h3>
+                <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                  Type-safe React, TanStack, and Python. Async daily Loom reviews and live staging links on every Git commit.
                 </p>
               </div>
 
-              <div className="p-7 bg-white dark:bg-[#151518] rounded-2xl border border-[#DEDAD3] dark:border-white/10 space-y-4 shadow-xs hover:border-[#C7612E]/40 transition-colors">
-                <span className="text-xs font-mono text-[#C7612E] font-bold">04 / MOMENTUM</span>
-                <h3 className="font-display font-bold text-lg text-[#141414] dark:text-[#F6F3ED]">Hardening & Global Launch</h3>
-                <p className="text-xs sm:text-sm text-[#57544E] dark:text-[#A6A29A] leading-relaxed">
-                  Core Web Vitals tuning, defensive security verification, semantic search indexing, and 30-day dedicated post-launch support.
+              <div className="p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-black/10 dark:border-white/10 space-y-4 shadow-xs">
+                <span className="text-xs font-mono text-black dark:text-white font-bold">04 / LAUNCH</span>
+                <h3 className="font-display font-bold text-xl text-black dark:text-white">Hardening & Handover</h3>
+                <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                  Core Web Vitals tuning, defensive security audit, DNS setup, and 30-day post-launch warranty with full IP handover.
                 </p>
               </div>
+
             </div>
+
           </div>
         </section>
 
-        {/* 08. HIGH-IMPACT CLOSING CTA */}
-        <section className="py-24 sm:py-32 bg-white dark:bg-[#121215] border-b border-[#DEDAD3] dark:border-white/10 transition-colors duration-300 relative">
-          <div className="max-w-5xl mx-auto px-5 sm:px-8 text-center space-y-8">
-            <span className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-[#C7612E] block">
+        {/* ========================================================================= */}
+        {/* 07. HIGH-IMPACT CLOSING CALL TO ACTION                                    */}
+        {/* ========================================================================= */}
+        <section className="py-28 sm:py-36 bg-zinc-950 text-white transition-colors relative overflow-hidden border-t border-white/10">
+          <div className="max-w-5xl mx-auto px-5 sm:px-8 text-center space-y-8 relative z-10">
+            <span className="text-xs font-mono font-bold uppercase tracking-[0.25em] text-zinc-400 block">
               Start Your Next Build
             </span>
-            <h2 className="font-display font-bold text-4xl sm:text-6xl lg:text-7xl text-[#141414] dark:text-[#F6F3ED] tracking-tight leading-[1.08]">
+            <h2 className="font-display font-bold text-4xl sm:text-6xl lg:text-7xl text-white tracking-tight leading-[1.06]">
               Have an ambitious idea? <br className="hidden sm:inline" />
-              <span className="text-[#C7612E]">Let's engineer it.</span>
+              <span className="underline decoration-white/30 underline-offset-8">Let's engineer it.</span>
             </h2>
-            <p className="text-base sm:text-lg text-[#57544E] dark:text-[#A6A29A] max-w-2xl mx-auto font-light leading-relaxed">
+            <p className="text-base sm:text-xl text-zinc-400 max-w-2xl mx-auto font-light leading-relaxed">
               We partner with founders and businesses globally to build custom web systems, SaaS MVPs, and applied AI applications. Direct collaboration. Relentless speed.
             </p>
 
             <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
-              <MagneticButton
-                onClick={() => navigate('/contact')}
-                className="px-8 py-4 rounded-full bg-[#C7612E] hover:bg-[#d04a14] text-white text-xs font-bold uppercase tracking-wider shadow-[0_8px_25px_rgba(199,97,46,0.3)] group"
+              <Link
+                to="/contact"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white hover:bg-zinc-200 text-black text-xs font-mono font-bold uppercase tracking-wider shadow-lg group transition-all cursor-pointer"
               >
                 <span>Start a Project</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </MagneticButton>
+              </Link>
 
-              <MagneticButton
+              <button
+                type="button"
                 onClick={() => openBookingModal('call')}
-                className="px-6 py-4 rounded-full bg-[#141414] dark:bg-white hover:bg-black dark:hover:bg-zinc-100 text-white dark:text-[#141414] text-xs font-bold uppercase tracking-wider shadow-xs group"
+                className="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-white/10 hover:bg-white/15 text-white border border-white/20 text-xs font-mono font-bold uppercase tracking-wider transition-colors cursor-pointer"
               >
-                <Calendar className="w-4 h-4 text-[#C7612E] group-hover:scale-110 transition-transform" />
+                <Calendar className="w-4 h-4 text-white" />
                 <span>Book Discovery (30m)</span>
-              </MagneticButton>
+              </button>
 
               <a
                 href={companyConfig.whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-6 py-4 rounded-full bg-[#F6F3ED] dark:bg-[#1E1E24] hover:bg-[#EFEBE3] dark:hover:bg-[#25252E] text-[#141414] dark:text-[#F6F3ED] border border-[#DEDAD3] dark:border-white/10 text-xs font-bold uppercase tracking-wider transition-colors shadow-xs"
+                className="inline-flex items-center gap-2 px-6 py-4 rounded-full bg-white/5 hover:bg-white/10 text-zinc-300 border border-white/15 text-xs font-mono font-bold uppercase tracking-wider transition-colors"
               >
-                Direct WhatsApp Line
+                <span>Direct WhatsApp Line</span>
               </a>
             </div>
 
-            <p className="text-xs font-mono text-[#6E6B65] dark:text-[#A6A29A] pt-4">
-              Inquiries: <a href={`mailto:${companyConfig.email}`} className="text-[#C7612E] hover:underline font-semibold">{companyConfig.email}</a> · Average response in &lt; 12 hours
+            <p className="text-xs font-mono text-zinc-500 pt-4">
+              Inquiries: <a href={`mailto:${companyConfig.email}`} className="text-white hover:underline font-semibold">{companyConfig.email}</a> · Direct responses in &lt; 12 hours
             </p>
           </div>
         </section>
+
       </div>
     </>
   );
 };
+
 export default HomePage;

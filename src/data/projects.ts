@@ -125,6 +125,7 @@ export const projects: Project[] = [
     ],
     technologies: ['React', 'Vite', 'Tailwind CSS', 'WhatsApp Business Flow', 'UPI Integration', 'Performance SEO'],
     heroImage: '/images/work/ztees-hero.webp',
+    videoSrc: '/videos/project-reel.mp4',
     gallery: [
       {
         src: '/images/projects/ztees-cover.jpg',
@@ -174,14 +175,14 @@ export const projects: Project[] = [
     categoryLabel: 'Client Work · Industrial & Corporate Infrastructure',
     status: 'Corporate Client Platform',
     featured: true,
-    order: 5,
+    order: 3,
     year: '2026',
     summary: 'A full-scale corporate web application and qualification credential showcase for Classic Infrastructure Projects (CIP), an established engineering contracting firm (Est. 2008) executing pipeline networks, municipal drainage, heavy civil works, and mechanical installations.',
     audience: 'Government procurement officers, municipal corporations, public sector utilities, and industrial plant heads evaluating prequalification credentials and technical execution capacity for tenders.',
-    challenge: 'Classic Infrastructure Projects has over 15 years of proven field execution—including multi-kilometer pipeline networks and municipal storm water RCC box culverts—yet lacked an institutional digital presence. In high-stakes tenders, decision-makers demand immediate, verifiable evidence of past execution, machinery fleets, safety standards, and structured bid inquiry channels.',
+    challenge: 'Classic Infrastructure Projects has over 15 years of proven field execution—including multi-kilometer pipeline networks and municipal stormwater RCC box culverts—yet lacked an institutional digital presence. In high-stakes tenders, decision-makers demand immediate, verifiable evidence of past execution, machinery fleets, safety standards, and structured bid inquiry channels.',
     objectives: [
       'Design an authoritative corporate presence reflecting 15+ years of infrastructure contracting experience.',
-      'Showcase real high-resolution field photography categorized by discipline: Pipeline, Storm Water Drainage, Protection Works, Roads, and Mechanical Engineering.',
+      'Showcase real high-resolution field photography categorized by discipline: Pipeline, Stormwater Drainage, Protection Works, Roads, and Mechanical Engineering.',
       'Implement an interactive RFP/quotation request system with automated email notifications for corporate bid inquiries.',
       'Guarantee fast loading speeds for field inspectors and municipal officials reviewing profiles on mobile devices in the field.'
     ],
@@ -202,6 +203,7 @@ export const projects: Project[] = [
     scopeNote: 'Engineered for Classic Infrastructure Projects (CIP), established 2008.',
     technologies: ['React 19', 'TanStack Start', 'Tailwind CSS v4', 'Nodemailer', 'High-Density WebP Pipeline', 'Lucide Icons', 'Zod Validation'],
     heroImage: '/images/projects/cip/cip-new-1-hero.webp',
+    videoSrc: '/videos/hero-showreel.mp4',
     gallery: [
       {
         src: '/images/projects/cip/cip-pipeline-110-hero.webp',
@@ -210,8 +212,8 @@ export const projects: Project[] = [
       },
       {
         src: '/images/projects/cip/cip-drainage-040-hero.webp',
-        alt: 'Municipal storm water RCC box drain construction',
-        caption: 'Heavy reinforced cement concrete (RCC) storm water drainage channel constructed for municipal flood management.'
+        alt: 'Municipal stormwater RCC box drain construction',
+        caption: 'Heavy reinforced cement concrete (RCC) stormwater drainage channel constructed for municipal flood management.'
       },
       {
         src: '/images/projects/cip/cip-roads-117.webp',
@@ -246,17 +248,17 @@ export const projects: Project[] = [
     categoryLabel: 'Civic Technology · Product Lab Monorepo',
     status: 'SIH 2026 Build / Product Lab Monorepo',
     featured: true,
-    order: 5,
+    order: 4,
     year: '2026',
     summary: 'A 4-role civic operations platform connecting citizen grievance reporting, location-tagged photographic evidence, municipal intelligence triage, and contractor dispatch.',
     audience: 'Citizens reporting neighborhood infrastructure problems, municipal officials tracking remediation progress, and authorized contractors assigned to verified civic work orders.',
     challenge: 'Civic complaint channels are notoriously broken: citizen reports lack actionable location data or photographic proof, while municipal work orders disappear into opaque internal spreadsheets without public accountability.',
     objectives: [
-      'Build a public-facing citizen reporting portal with geo-location capture and image evidence uploads.',
+      'Build a public-facing citizen reporting portal with geolocation capture and image evidence uploads.',
       'Architect role-separated portals for Municipal Officers, Contractors, and Administrators.',
       'Integrate AI issue clustering (HDBSCAN) to detect duplicate reports and prioritize systemic hazards.'
     ],
-    solution: 'Designed and implemented an integrated civic monorepo featuring 4 distinct role applications: Citizen Public Portal, Municipal Operations Dashboard, Contractor Dispatch App, and Admin Command Center. Public citizens submit geo-tagged complaints with photographic proof and track resolution progress via unique ticket numbers.',
+    solution: 'Designed and implemented an integrated civic monorepo featuring 4 distinct role applications: Citizen Public Portal, Municipal Operations Dashboard, Contractor Dispatch App, and Admin Command Center. Public citizens submit geotagged complaints with photographic proof and track resolution progress via unique ticket numbers.',
     whyItMatters: 'Demonstrates full-stack system architecture, monorepo discipline, and role-based access control (RBAC) applied to real-world municipal problems. Developed for Smart India Hackathon 2026 by Team Vertex.',
     workflow: [
       'Citizen submits road hazard or sanitation issue with photo proof and GPS coordinates.',
@@ -272,6 +274,7 @@ export const projects: Project[] = [
     scopeNote: 'Presented as an independent product-lab prototype developed for Smart India Hackathon 2026, with public demo portals accessible online.',
     technologies: ['React 19', 'FastAPI', 'Neon Postgres', 'HDBSCAN Clustering', 'Leaflet / GIS Mapping', 'Role-Based Access Control'],
     heroImage: '/images/projects/civic-sathi/vadodara-civic-atmosphere.webp',
+    videoSrc: '/videos/tech-atmosphere.mp4',
     gallery: [
       {
         src: '/images/projects/civic-sathi/civic-sathi-logo.png',
@@ -322,10 +325,10 @@ export const projects: Project[] = [
     categoryLabel: 'Developer Tooling · Mobile Engineering',
     status: 'Active Open Source Build',
     featured: true,
-    order: 6,
+    order: 5,
     year: '2025–2026',
     summary: 'A pocket development environment for Android with an offline CodeMirror editor, integrated terminal, and on-device execution for Python and JavaScript.',
-    audience: 'Computer science students, mobile learners, and traveling engineers who need to write, test, and debug scripts from an Android smartphone or tablet without needing a laptop.',
+    audience: 'Computer science students, mobile learners, and traveling engineers who need to write, test, and debug scripts from an Android smartphone or tablet without requiring a laptop.',
     challenge: 'Existing mobile text editors either stop at simple syntax coloring with no execution capability, or they require heavy cloud subscriptions that fail completely when offline. CodeDroid aimed to transform an ordinary mobile phone into a self-contained runtime environment.',
     objectives: [
       'Deliver fluid, multi-tab code editing with syntax highlighting across 18 programming languages.',
@@ -348,6 +351,7 @@ export const projects: Project[] = [
     ],
     technologies: ['Android SDK', 'Java / Kotlin', 'Chaquopy (Python Runtime)', 'Rhino JS Engine', 'CodeMirror', 'Piston API'],
     heroImage: '/images/work/codedroid-multidevice.webp',
+    videoSrc: '/videos/tech-atmosphere.mp4',
     gallery: [
       {
         src: '/images/projects/codedroid-cover.png',
@@ -404,6 +408,7 @@ export const projects: Project[] = [
     ],
     technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Client-side Search Index', 'Vercel Edge Platform'],
     heroImage: '/images/work/itm-notes-home.webp',
+    videoSrc: '/videos/project-reel.mp4',
     gallery: [
       {
         src: '/images/projects/itmnotes-cover.png',
@@ -453,6 +458,7 @@ export const projects: Project[] = [
     ],
     technologies: ['Solidity', 'Ethereum Testnet', 'Web3.js', 'React', 'IPFS'],
     heroImage: '/images/projects/velocity-cover.png',
+    videoSrc: '/videos/tech-atmosphere.mp4',
     gallery: [],
     links: [
       { label: 'View Source on GitHub', url: 'https://github.com/Maher-Bhatt/chain-of-achievements', type: 'github' }
@@ -460,66 +466,47 @@ export const projects: Project[] = [
   },
   {
     slug: 'socialsafe',
-    title: 'SocialSafe',
-    eyebrow: 'Login Awareness Lab · Cybersecurity Education',
+    title: 'CyberGuard Security Lab',
+    eyebrow: 'Interactive Defense & Awareness Labs · Cybersecurity Education',
     category: 'Experiments',
-    categoryLabel: 'Open Source · Cybersecurity Education',
-    status: 'Open Source Lab',
+    categoryLabel: 'Open Source · Cybersecurity Education & Labs',
+    status: 'Educational Security Lab Series',
     featured: false,
     order: 8,
-    year: '2026',
-    summary: 'An educational login awareness and phishing defense demonstration built with zero network storage, strict CSP boundaries, and security awareness guidance.',
-    audience: 'Students and computer users learning to recognize credential harvesting risks and understand web defense boundaries.',
-    challenge: 'Security awareness lectures often feel abstract without hands-on demonstrations showing how credential submission actually works—and how strict web boundaries protect users.',
+    year: '2025–2026',
+    summary: 'An educational cybersecurity training suite and interactive awareness lab demonstrating credential harvesting defense, phishing anatomy, session security, and strict client-side isolation across multiple cybersecurity workshops.',
+    audience: 'Engineering cohorts, developers, and computer users attending interactive cybersecurity awareness sessions to learn threat recognition and client-side web defense boundaries.',
+    challenge: 'Security awareness lectures often feel abstract without hands-on lab demonstrations showing how credential harvesting mechanisms operate, how phishing vectors deceive users, and how strict browser isolation controls neutralize threats.',
     objectives: [
-      'Build a completely isolated demonstration login page with zero network transmission.',
-      'Enforce Content Security Policy: form-action none and connect-src none.',
-      'Teach URL inspection, HTTPS limitations, and password manager safety.'
+      'Deliver interactive phishing anatomy and credential hygiene modules across multiple educational security sessions.',
+      'Demonstrate strict client-side boundary enforcement via Content Security Policy (connect-src none, form-action none).',
+      'Execute simulated authentication challenges entirely in ephemeral memory with instant credential erasure.',
+      'Equip attendees with practical heuristics for URL validation, HTTPS inspection, and password safety.'
     ],
-    solution: 'Engineered a dependency-free educational lab that performs strictly synchronous in-memory comparison against dummy values, clearing credentials immediately with zero network logging.',
-    whyItMatters: 'Reflects deep cybersecurity discipline, defensive engineering practices, and privacy-first architectural choices.',
+    solution: 'Engineered a lightweight, dependency-free educational laboratory used across multiple cybersecurity sessions. The lab executes synchronous zero-persistence simulations with immediate credential sanitization, accompanied by structured threat modeling walkthroughs and browser security briefings.',
+    whyItMatters: 'Demonstrates defensive engineering principles, safe educational simulation methodology, and the importance of privacy-first architectural boundaries in cybersecurity training.',
     workflow: [
-      'Interactive login lab with dummy credentials.',
-      'Synchronous credential erasure on every interaction.',
-      'Accompanying security briefing explaining phishing indicators.'
+      'Session participants interact with a simulated login workflow to analyze security indicators.',
+      'System executes zero-persistence comparison in isolated memory and purges data immediately.',
+      'Telemetry briefing explains phishing indicators, form action restrictions, and CSP defenses.',
+      'Participants review live browser network inspection showing zero egress or token leakage.'
     ],
-    technologies: ['HTML5', 'CSS3', 'Modern JavaScript', 'Content Security Policy (CSP)', 'Threat Modeling'],
+    buildNotes: [
+      'Conducted and refined across multiple university cybersecurity awareness sessions and peer workshops.',
+      'Dependency-free implementation with strict CSP preventing network transmission or storage.',
+      'Includes structured educator briefing notes on phishing heuristics and defense in depth.'
+    ],
+    technologies: ['HTML5', 'CSS3', 'Modern JavaScript', 'Content Security Policy (CSP)', 'Threat Modeling', 'Phishing Analysis', 'Security Awareness'],
     heroImage: '/images/projects/kalki-security.png',
+    videoSrc: '/videos/hero-showreel.mp4',
     gallery: [],
+    metrics: [
+      { value: 'Multi-Session', label: 'Security Lab Series', context: 'Conducted for student cohorts & peer workshops' },
+      { value: 'Zero Egress', label: 'Network Transmission', context: 'Strict CSP connect-src and form-action' },
+      { value: '100% In-Memory', label: 'Ephemeral Isolation', context: 'Immediate credential destruction on interaction' }
+    ],
     links: [
       { label: 'View Source on GitHub', url: 'https://github.com/Maher-Bhatt/SocialSafe', type: 'github' }
-    ]
-  },
-  {
-    slug: 'password-generator',
-    title: 'Cryptographic Password Generator',
-    eyebrow: 'Security Utility · Python CLI',
-    category: 'Experiments',
-    categoryLabel: 'Open Source · Security Utility',
-    status: 'Open Source Utility',
-    featured: false,
-    order: 9,
-    year: '2025',
-    summary: 'A Python cryptographic command-line utility for generating cryptographically secure, high-entropy passwords with custom character constraints.',
-    audience: 'System administrators and security-conscious developers needing random keys without reliance on online generators.',
-    challenge: 'Many simple password generators rely on pseudorandom number generators that lack cryptographic unpredictability.',
-    objectives: [
-      'Utilize system entropy via Python secrets module.',
-      'Provide customizable symbol, digit, and length parameters.',
-      'Calculate Shannon entropy to grade generated secret strength.'
-    ],
-    solution: 'Built a lightweight Python script leveraging OS-level cryptographically secure random number sources to guarantee unpredictability.',
-    whyItMatters: 'Shows solid fundamentals in cryptographic libraries, CLI tool design, and security best practices.',
-    workflow: [
-      'Specify desired password length and character flags.',
-      'Generate secure string using OS entropy sources.',
-      'Display estimated entropy bits and crack-time safety margin.'
-    ],
-    technologies: ['Python', 'Secrets Module', 'Cryptographic Entropy', 'CLI Ergonomics'],
-    heroImage: '/images/projects/codedroid-cover.png',
-    gallery: [],
-    links: [
-      { label: 'View Source on GitHub', url: 'https://github.com/Maher-Bhatt/Password-Generator', type: 'github' }
     ]
   }
 ];

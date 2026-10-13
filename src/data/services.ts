@@ -17,7 +17,7 @@ export const services: ServicePillar[] = [
       { value: 'Custom Code', label: 'Zero Builder Bloat' }
     ],
     architectureHighlights: [
-      'Static Edge Render with React 19 selective hydration',
+      'Static Edge Rendering with React 19 selective hydration',
       'Fluid micro-haptic interactions and spring physics motion',
       'High-conversion direct commerce pipeline (WhatsApp & Stripe)',
       'Low-latency Interaction to Next Paint (INP) tuning'
@@ -71,7 +71,7 @@ export const services: ServicePillar[] = [
     title: 'Applied AI & Automation',
     tagline: 'Practical LLM integrations, intelligent workflows, and local-first AI tools.',
     description: 'We cut through the hype to engineer genuinely useful AI capabilities. From local-first desktop assistants and intelligent document extractors to natural language search and automated workflows, we build AI that solves real operational bottlenecks.',
-    whoItsFor: 'Businesses wanting to automate repetitive tasks, founders building AI-native features, and teams exploring secure on-premise or edge inference.',
+    whoItsFor: 'Businesses wanting to automate repetitive tasks, founders building AI-native features, and teams exploring secure on-premises or edge inference.',
     image: '/images/projects/kalki/kalki-hero.png',
     imageCaption: 'K.A.L.K.I. v1.0.4 Microsoft Store Multi-Model AI Assistant with Hardware DPAPI Vault',
     metrics: [
@@ -132,7 +132,7 @@ export const services: ServicePillar[] = [
     badge: 'EDGE RUNTIME & DISCOVERABILITY',
     title: 'Technical Optimization & SEO Foundation',
     tagline: 'Performance speedups, semantic architecture, and search discoverability.',
-    description: 'A great website is useless if nobody can find it or if it takes five seconds to open. We audit, refactor, and engineer websites to achieve top Core Web Vitals and solid organic search visibility.',
+    description: 'A digital platform cannot succeed if it suffers from poor discoverability or sluggish loading speeds. We audit, refactor, and engineer websites to achieve top Core Web Vitals and solid organic search visibility.',
     whoItsFor: 'Companies with existing websites suffering from sluggish load times, poor mobile performance, or invisible search rankings.',
     image: '/images/projects/velocity-cover.png',
     imageCaption: 'Performance Engineering, Core Web Vitals Audit & Semantic Schema Engine',
@@ -182,6 +182,6 @@ export const processSteps = [
     step: '04',
     title: 'Launch & Support',
     summary: 'We deploy to global edge infrastructure, verify production analytics and SEO, and provide post-launch support.',
-    details: 'We handle domain configuration, SSL setup, structured data verification, and handover all assets and code cleanly. Every engagement includes dedicated post-launch support to guarantee stability.'
+    details: 'We handle domain configuration, SSL setup, structured data verification, and hand over all assets and code cleanly. Every engagement includes dedicated post-launch support to guarantee stability.'
   }
 ];

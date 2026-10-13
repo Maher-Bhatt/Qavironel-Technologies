@@ -29,27 +29,27 @@ describe('VideoShowreel Continuous Playlist Carousel', () => {
 
   it('renders initial channel 01 as playing now in continuous playlist', () => {
     const { container } = render(<VideoShowreel />);
-    expect(screen.getByText('CONTINUOUS PLAYLIST · 1/3')).toBeDefined();
-    expect(screen.getAllByText('Engineering Craftsmanship & Momentum').length).toBeGreaterThanOrEqual(1);
+    expect(screen.getByText('CONTINUOUS PLAYLIST · 1/4')).toBeDefined();
+    expect(screen.getAllByText('K.A.L.K.I. Desktop AI Assistant').length).toBeGreaterThanOrEqual(1);
     
     const video = container.querySelector('video') as HTMLVideoElement;
     expect(video).toBeDefined();
-    expect(video.getAttribute('src')).toBe('/videos/tech-atmosphere.mp4');
+    expect(video.getAttribute('src')).toBe('/videos/kalki-video.mp4');
   });
 
-  it('automatically advances from video 1 -> 2 -> 3 -> 1 on video ended event', () => {
+  it('automatically advances from video 1 -> 2 -> 3 -> 4 -> 1 on video ended event', () => {
     const { container } = render(<VideoShowreel />);
 
     // Video 1 -> Video 2
     let video = container.querySelector('video') as HTMLVideoElement;
-    expect(video.getAttribute('src')).toBe('/videos/tech-atmosphere.mp4');
-    expect(screen.getByText('CONTINUOUS PLAYLIST · 1/3')).toBeDefined();
+    expect(video.getAttribute('src')).toBe('/videos/kalki-video.mp4');
+    expect(screen.getByText('CONTINUOUS PLAYLIST · 1/4')).toBeDefined();
 
     act(() => {
       fireEvent.ended(video);
     });
 
-    expect(screen.getByText('CONTINUOUS PLAYLIST · 2/3')).toBeDefined();
+    expect(screen.getByText('CONTINUOUS PLAYLIST · 2/4')).toBeDefined();
     expect(screen.getAllByText('Full-Stack Platform & SaaS Architecture').length).toBeGreaterThanOrEqual(1);
     video = container.querySelector('video') as HTMLVideoElement;
     expect(video.getAttribute('src')).toBe('/videos/hero-showreel.mp4');
@@ -59,20 +59,30 @@ describe('VideoShowreel Continuous Playlist Carousel', () => {
       fireEvent.ended(video);
     });
 
-    expect(screen.getByText('CONTINUOUS PLAYLIST · 3/3')).toBeDefined();
+    expect(screen.getByText('CONTINUOUS PLAYLIST · 3/4')).toBeDefined();
     expect(screen.getAllByText('Tactical HUD & Spatial Computer Vision').length).toBeGreaterThanOrEqual(1);
     video = container.querySelector('video') as HTMLVideoElement;
     expect(video.getAttribute('src')).toBe('/videos/project-reel.mp4');
 
-    // Video 3 -> loops back to Video 1
+    // Video 3 -> Video 4
     act(() => {
       fireEvent.ended(video);
     });
 
-    expect(screen.getByText('CONTINUOUS PLAYLIST · 1/3')).toBeDefined();
+    expect(screen.getByText('CONTINUOUS PLAYLIST · 4/4')).toBeDefined();
     expect(screen.getAllByText('Engineering Craftsmanship & Momentum').length).toBeGreaterThanOrEqual(1);
     video = container.querySelector('video') as HTMLVideoElement;
     expect(video.getAttribute('src')).toBe('/videos/tech-atmosphere.mp4');
+
+    // Video 4 -> loops back to Video 1
+    act(() => {
+      fireEvent.ended(video);
+    });
+
+    expect(screen.getByText('CONTINUOUS PLAYLIST · 1/4')).toBeDefined();
+    expect(screen.getAllByText('K.A.L.K.I. Desktop AI Assistant').length).toBeGreaterThanOrEqual(1);
+    video = container.querySelector('video') as HTMLVideoElement;
+    expect(video.getAttribute('src')).toBe('/videos/kalki-video.mp4');
   });
 
   it('allows manual channel switching by clicking playlist buttons', () => {
@@ -87,7 +97,7 @@ describe('VideoShowreel Continuous Playlist Carousel', () => {
       fireEvent.click(ch2Button!);
     });
 
-    expect(screen.getByText('CONTINUOUS PLAYLIST · 2/3')).toBeDefined();
+    expect(screen.getByText('CONTINUOUS PLAYLIST · 2/4')).toBeDefined();
     const video = container.querySelector('video') as HTMLVideoElement;
     expect(video.getAttribute('src')).toBe('/videos/hero-showreel.mp4');
   });

@@ -58,23 +58,23 @@ export const Spatial3DTorus: React.FC<Spatial3DTorusProps> = ({
     const knotMesh = new THREE.Mesh(knotGeo, glassMat);
     group.add(knotMesh);
 
-    // Inner Glowing Copper Spline Core
+    // Inner Titanium Core Spline
     const coreGeo = new THREE.TorusKnotGeometry(1.2, 0.08, 100, 16, 2, 3);
-    const copperMat = new THREE.MeshStandardMaterial({
-      color: new THREE.Color('#C7612E'),
-      emissive: new THREE.Color('#C7612E'),
-      emissiveIntensity: 1.3,
-      metalness: 0.9,
-      roughness: 0.15
+    const splineMat = new THREE.MeshStandardMaterial({
+      color: new THREE.Color('#1A1A1A'),
+      emissive: new THREE.Color('#111111'),
+      emissiveIntensity: 0.15,
+      metalness: 0.95,
+      roughness: 0.2
     });
-    const coreMesh = new THREE.Mesh(coreGeo, copperMat);
+    const coreMesh = new THREE.Mesh(coreGeo, splineMat);
     group.add(coreMesh);
 
     // Lighting Rig
     const ambientLight = new THREE.AmbientLight(0xffffff, 1.4);
     scene.add(ambientLight);
 
-    const pointLight = new THREE.PointLight('#C7612E', 18, 12);
+    const pointLight = new THREE.PointLight('#FFFFFF', 14, 12);
     pointLight.position.set(3, 4, 3);
     scene.add(pointLight);
 
@@ -150,7 +150,7 @@ export const Spatial3DTorus: React.FC<Spatial3DTorusProps> = ({
       knotGeo.dispose();
       coreGeo.dispose();
       glassMat.dispose();
-      copperMat.dispose();
+      splineMat.dispose();
     };
   }, [size]);
 

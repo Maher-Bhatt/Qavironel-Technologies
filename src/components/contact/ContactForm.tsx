@@ -1,6 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { MessageSquare, Send, AlertCircle, CheckCircle2, Mail } from 'lucide-react';
-import { Button } from '../ui/Button';
+import { 
+  Send, 
+  CheckCircle2, 
+  AlertCircle, 
+  Mail, 
+  MessageSquare, 
+  Sparkles, 
+  Layers, 
+  DollarSign, 
+  Clock, 
+  Check,
+  ArrowRight
+} from 'lucide-react';
 import { playSuccessSound, playErrorSound } from '../../utils/soundEffects';
 import { 
   ContactFormData, 
@@ -16,7 +27,54 @@ interface ContactFormProps {
   theme?: 'light' | 'dark';
 }
 
-export const ContactForm: React.FC<ContactFormProps> = ({ theme = 'light' }) => {
+const SCOPE_OPTIONS = [
+  { 
+    id: 'web', 
+    label: 'Web Platform', 
+    value: 'High-Impact Custom Web Platform',
+    badge: 'React 19 / Vite'
+  },
+  { 
+    id: 'saas', 
+    label: 'Software & SaaS', 
+    value: 'Full-Stack SaaS MVP / Web Application',
+    badge: 'APIs & Data Layers'
+  },
+  { 
+    id: 'ai', 
+    label: 'Applied AI', 
+    value: 'Applied AI / LLM & Agentic Workflows',
+    badge: 'Local LLMs & Agents'
+  },
+  { 
+    id: 'design', 
+    label: 'Design System', 
+    value: 'Brand Identity, UX Design & Systems',
+    badge: 'Tokens & UI'
+  },
+  { 
+    id: 'audit', 
+    label: 'Architecture & Audit', 
+    value: 'Performance Engineering & Architecture Audit',
+    badge: 'OWASP & Core Vitals'
+  },
+];
+
+const COLLABORATION_MODELS = [
+  { label: 'Rapid MVP Sprint', value: 'Rapid MVP Sprint (1–2 Wks)', detail: 'Fast-track product prototype' },
+  { label: 'Dedicated Sprint', value: 'Dedicated Feature Sprint', detail: 'Targeted architecture & features' },
+  { label: 'Full Product Lifecycle', value: 'Full Production Build', detail: 'End-to-end design & engineering' },
+  { label: 'Architecture & Audit', value: 'Advisory & Architecture', detail: 'Code review, scalability & security' },
+];
+
+const TIMELINE_OPTIONS = [
+  { label: 'Immediate (2–4 Wks)', value: 'Immediate (Next 2-4 Weeks)' },
+  { label: '1–2 Months', value: '1-2 Months (Active Product Sprint)' },
+  { label: '3+ Months', value: '3+ Months (Strategic Roadmap)' },
+  { label: 'Milestone Driven', value: 'Flexible / Milestone-Driven' },
+];
+
+export const ContactForm: React.FC<ContactFormProps> = () => {
   const mountTimestampRef = useRef<number>(Date.now());
   
   const [formData, setFormData] = useState<ContactFormData>({
@@ -25,7 +83,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ theme = 'light' }) => 
     organization: '',
     projectType: 'High-Impact Custom Web Platform',
     timeline: 'Immediate (Next 2-4 Weeks)',
-    engagementModel: 'Full-Cycle Product Architecture & Build',
+    engagementModel: 'Rapid MVP Sprint (1–2 Wks)',
     details: '',
     hpField: '',
   });
@@ -48,7 +106,6 @@ export const ContactForm: React.FC<ContactFormProps> = ({ theme = 'light' }) => 
     value: string
   ) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
-    // Clear error for field on change
     if (errors[field as keyof ContactValidationErrors]) {
       setErrors((prev) => {
         const next = { ...prev };
@@ -69,9 +126,8 @@ export const ContactForm: React.FC<ContactFormProps> = ({ theme = 'light' }) => 
       try {
         playErrorSound();
       } catch {
-        // ignore audio errors
+        // audio fail-safe
       }
-      // Focus first erroneous input for accessibility
       const firstErrorField = Object.keys(validationErrors)[0];
       const element = document.getElementById(`contact-${firstErrorField}`);
       element?.focus();
@@ -88,14 +144,14 @@ export const ContactForm: React.FC<ContactFormProps> = ({ theme = 'light' }) => 
         try {
           playSuccessSound();
         } catch {
-          // ignore audio
+          // audio fail-safe
         }
         setStatusMessage({
           type: 'success',
           text: result.message,
         });
 
-        // Reset form data on confirmed success
+        // Reset inputs on confirmed success
         setFormData({
           name: '',
           email: '',
@@ -103,6 +159,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ theme = 'light' }) => 
           projectType: 'High-Impact Custom Web Platform',
           timeline: 'Immediate (Next 2-4 Weeks)',
           engagementModel: 'Full-Cycle Product Architecture & Build',
+          budget: '$2,500 – $5,000',
           details: '',
           hpField: '',
         });
@@ -110,7 +167,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ theme = 'light' }) => 
         try {
           playErrorSound();
         } catch {
-          // ignore audio
+          // audio fail-safe
         }
         setStatusMessage({
           type: 'error',
@@ -123,11 +180,11 @@ export const ContactForm: React.FC<ContactFormProps> = ({ theme = 'light' }) => 
       try {
         playErrorSound();
       } catch {
-        // ignore
+        // audio fail-safe
       }
       setStatusMessage({
         type: 'error',
-        text: 'A network error prevented submission. Please reach us directly via email or WhatsApp below.',
+        text: 'A network interruption prevented direct dispatch. You can connect with our founders directly via email or WhatsApp below.',
         mailtoFallback: buildContactMailto(formData),
         whatsappFallback: buildContactWhatsApp(formData),
       });
@@ -136,16 +193,13 @@ export const ContactForm: React.FC<ContactFormProps> = ({ theme = 'light' }) => 
     }
   };
 
-  const whatsappQuickMessage = encodeURIComponent(
-    `Hi Qavironel Team, I would like to discuss a project.\nName: ${formData.name || 'Prospect'}\nDiscipline: ${formData.projectType}`
-  );
-
-  const labelClass = `block text-xs font-mono font-bold uppercase tracking-widest mb-2 text-[#171717] dark:text-zinc-300`;
-  const inputClass = `w-full px-5 py-4 rounded-xl text-sm transition-all shadow-xs focus:outline-hidden bg-white dark:bg-[#18181D] border border-[#DEDAD3] dark:border-[#27272A] text-[#171717] dark:text-white placeholder-[#77746F] dark:placeholder-zinc-500 focus:border-[#C7612E] dark:focus:border-[#C7612E] focus:ring-1 focus:ring-[#C7612E]`;
+  const whatsappDirectUrl = `${companyConfig.whatsappUrl}?text=${encodeURIComponent(
+    `Hello Maher & Anurag, I would like to discuss a project.\nName: ${formData.name || 'Prospect'}\nDiscipline: ${formData.projectType}\nEngagement Scope: ${formData.engagementModel}`
+  )}`;
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="space-y-6">
-      {/* Honeypot anti-spam trap */}
+    <form onSubmit={handleSubmit} noValidate className="space-y-8">
+      {/* Honeypot spam trap */}
       <div 
         aria-hidden="true" 
         style={{ position: 'absolute', left: '-9999px', top: '-9999px', height: 0, overflow: 'hidden' }}
@@ -162,39 +216,39 @@ export const ContactForm: React.FC<ContactFormProps> = ({ theme = 'light' }) => 
         />
       </div>
 
-      {/* Status feedback banner */}
+      {/* Status Feedback Notification */}
       {statusMessage && (
         <div
           role="alert"
           aria-live="polite"
-          className={`p-5 rounded-xl border flex flex-col gap-3 ${
+          className={`p-6 rounded-2xl border transition-all ${
             statusMessage.type === 'success'
-              ? 'bg-emerald-50 dark:bg-emerald-950/30 border-emerald-300 dark:border-emerald-700/50 text-emerald-900 dark:text-emerald-200'
-              : 'bg-amber-50 dark:bg-amber-950/30 border-amber-300 dark:border-amber-700/50 text-amber-950 dark:text-amber-200'
+              ? 'bg-zinc-100 dark:bg-zinc-900 border-black/15 dark:border-white/20 text-black dark:text-white'
+              : 'bg-red-50 dark:bg-red-950/40 border-red-200 dark:border-red-900/60 text-red-900 dark:text-red-200'
           }`}
         >
-          <div className="flex items-start gap-3">
+          <div className="flex items-start gap-3.5">
             {statusMessage.type === 'success' ? (
-              <CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
+              <CheckCircle2 className="w-5 h-5 text-black dark:text-white shrink-0 mt-0.5" />
             ) : (
-              <AlertCircle className="w-5 h-5 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
+              <AlertCircle className="w-5 h-5 text-red-600 dark:text-red-400 shrink-0 mt-0.5" />
             )}
             <div className="text-sm font-sans leading-relaxed">
               <p className="font-semibold">{statusMessage.text}</p>
               {statusMessage.type === 'error' && (
-                <p className="text-xs mt-1 text-[#77746F] dark:text-zinc-400">
-                  Your entered details have been preserved. You can send them directly with one click:
+                <p className="text-xs mt-1 text-zinc-600 dark:text-zinc-400">
+                  Your project scope and entered details are preserved below. Dispatch directly via:
                 </p>
               )}
             </div>
           </div>
 
           {statusMessage.type === 'error' && (statusMessage.mailtoFallback || statusMessage.whatsappFallback) && (
-            <div className="flex flex-wrap gap-3 pt-2 border-t border-amber-200/60 dark:border-amber-800/40">
+            <div className="flex flex-wrap gap-3 pt-3.5 mt-3 border-t border-red-200/60 dark:border-red-900/40">
               {statusMessage.mailtoFallback && (
                 <a
                   href={statusMessage.mailtoFallback}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#171717] dark:bg-white text-white dark:text-[#171717] text-xs font-mono font-bold uppercase tracking-wider hover:bg-[#C7612E] dark:hover:bg-[#C7612E] dark:hover:text-white transition-colors"
+                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-black dark:bg-white text-white dark:text-black text-xs font-mono font-bold uppercase tracking-wider hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors shadow-xs cursor-pointer"
                 >
                   <Mail className="w-3.5 h-3.5" />
                   <span>Send via Email Client</span>
@@ -205,7 +259,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ theme = 'light' }) => 
                   href={statusMessage.whatsappFallback}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#25D366] text-white text-xs font-mono font-bold uppercase tracking-wider hover:bg-[#1EBE5D] transition-colors"
+                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-zinc-900 dark:bg-zinc-100 text-white dark:text-black text-xs font-mono font-bold uppercase tracking-wider hover:bg-zinc-800 dark:hover:bg-white transition-colors shadow-xs cursor-pointer"
                 >
                   <MessageSquare className="w-3.5 h-3.5" />
                   <span>Send via WhatsApp</span>
@@ -216,62 +270,182 @@ export const ContactForm: React.FC<ContactFormProps> = ({ theme = 'light' }) => 
         </div>
       )}
 
-      {/* Row 1: Name and Email */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        <div>
-          <label htmlFor="contact-name" className={labelClass}>
-            Your Name <span className="text-[#C7612E]" aria-hidden="true">*</span>
+      {/* ========================================================================= */}
+      {/* 01. INTERACTIVE SCOPE PILLS                                               */}
+      {/* ========================================================================= */}
+      <div className="space-y-3">
+        <div className="flex items-center justify-between">
+          <label className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-400 flex items-center gap-2">
+            <Layers className="w-3.5 h-3.5 text-black dark:text-white" />
+            <span>01. Project Scope & Architecture Focus</span>
           </label>
-          <input
-            id="contact-name"
-            type="text"
-            required
-            autoComplete="name"
-            disabled={isSubmitting}
-            value={formData.name}
-            onChange={(e) => handleChange('name', e.target.value)}
-            placeholder="Jane Doe"
-            aria-invalid={!!errors.name}
-            aria-describedby={errors.name ? 'contact-error-name' : undefined}
-            className={`${inputClass} ${errors.name ? 'border-red-500 dark:border-red-500' : ''}`}
-          />
-          {errors.name && (
-            <p id="contact-error-name" role="alert" className="mt-1.5 text-xs text-red-600 dark:text-red-400 font-sans">
-              {errors.name}
-            </p>
-          )}
+          <span className="text-[0.68rem] font-mono text-zinc-400 dark:text-zinc-500">Select Primary Objective</span>
         </div>
 
-        <div>
-          <label htmlFor="contact-email" className={labelClass}>
-            Email Address <span className="text-[#C7612E]" aria-hidden="true">*</span>
-          </label>
-          <input
-            id="contact-email"
-            type="email"
-            required
-            autoComplete="email"
-            disabled={isSubmitting}
-            value={formData.email}
-            onChange={(e) => handleChange('email', e.target.value)}
-            placeholder="jane@company.com"
-            aria-invalid={!!errors.email}
-            aria-describedby={errors.email ? 'contact-error-email' : undefined}
-            className={`${inputClass} ${errors.email ? 'border-red-500 dark:border-red-500' : ''}`}
-          />
-          {errors.email && (
-            <p id="contact-error-email" role="alert" className="mt-1.5 text-xs text-red-600 dark:text-red-400 font-sans">
-              {errors.email}
-            </p>
-          )}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
+          {SCOPE_OPTIONS.map((scope) => {
+            const isSelected = formData.projectType === scope.value;
+            return (
+              <button
+                key={scope.id}
+                type="button"
+                onClick={() => handleChange('projectType', scope.value)}
+                className={`p-3.5 rounded-xl border text-left transition-all duration-200 flex flex-col justify-between cursor-pointer ${
+                  isSelected
+                    ? 'bg-black text-white dark:bg-white dark:text-black border-black dark:border-white shadow-md scale-[1.01]'
+                    : 'bg-zinc-50 dark:bg-zinc-900/60 text-zinc-700 dark:text-zinc-300 border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30 hover:bg-zinc-100 dark:hover:bg-zinc-900'
+                }`}
+              >
+                <div className="flex items-center justify-between w-full mb-1">
+                  <span className="font-display font-bold text-sm tracking-tight">
+                    {scope.label}
+                  </span>
+                  {isSelected ? (
+                    <Check className="w-4 h-4 shrink-0 text-white dark:text-black" />
+                  ) : (
+                    <span className="w-2 h-2 rounded-full bg-zinc-300 dark:bg-zinc-700" />
+                  )}
+                </div>
+                <span className={`text-[0.68rem] font-mono ${isSelected ? 'text-zinc-300 dark:text-zinc-600' : 'text-zinc-500 dark:text-zinc-400'}`}>
+                  {scope.badge}
+                </span>
+              </button>
+            );
+          })}
         </div>
       </div>
 
-      {/* Row 2: Organization & Project Type */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      {/* ========================================================================= */}
+      {/* 02. COLLABORATION MODEL & ENGAGEMENT SCOPE                                */}
+      {/* ========================================================================= */}
+      <div className="space-y-3">
+        <div className="flex items-center justify-between">
+          <label className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-400 flex items-center gap-2">
+            <Sparkles className="w-3.5 h-3.5 text-black dark:text-white" />
+            <span>02. Collaboration Model & Scope</span>
+          </label>
+          <span className="text-[0.68rem] font-mono text-zinc-400 dark:text-zinc-500">Flexible Engagement</span>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5">
+          {COLLABORATION_MODELS.map((m) => {
+            const isSelected = formData.engagementModel === m.value;
+            return (
+              <button
+                key={m.value}
+                type="button"
+                onClick={() => handleChange('engagementModel', m.value)}
+                className={`p-3.5 rounded-xl border text-center transition-all duration-200 flex flex-col items-center justify-center cursor-pointer ${
+                  isSelected
+                    ? 'bg-black text-white dark:bg-white dark:text-black border-black dark:border-white shadow-sm'
+                    : 'bg-zinc-50 dark:bg-zinc-900/60 text-zinc-700 dark:text-zinc-300 border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30 hover:bg-zinc-100 dark:hover:bg-zinc-900'
+                }`}
+              >
+                <span className="font-mono font-bold text-xs sm:text-sm tracking-tight mb-0.5">
+                  {m.label}
+                </span>
+                <span className={`text-[0.62rem] font-mono ${isSelected ? 'text-zinc-300 dark:text-zinc-600' : 'text-zinc-400 dark:text-zinc-500'}`}>
+                  {m.detail}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* ========================================================================= */}
+      {/* 03. TARGET TIMELINE                                                       */}
+      {/* ========================================================================= */}
+      <div className="space-y-3">
+        <label className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-400 flex items-center gap-2">
+          <Clock className="w-3.5 h-3.5 text-black dark:text-white" />
+          <span>03. Desired Shipping Cadence</span>
+        </label>
+
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+          {TIMELINE_OPTIONS.map((t) => {
+            const isSelected = formData.timeline === t.value;
+            return (
+              <button
+                key={t.value}
+                type="button"
+                onClick={() => handleChange('timeline', t.value)}
+                className={`py-2.5 px-3 rounded-xl border text-center transition-all duration-200 cursor-pointer ${
+                  isSelected
+                    ? 'bg-black text-white dark:bg-white dark:text-black border-black dark:border-white shadow-xs'
+                    : 'bg-zinc-50 dark:bg-zinc-900/60 text-zinc-700 dark:text-zinc-300 border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30 hover:bg-zinc-100 dark:hover:bg-zinc-900'
+                }`}
+              >
+                <span className="text-xs font-mono font-semibold">
+                  {t.label}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* ========================================================================= */}
+      {/* 04. CONTACT CREDENTIALS (NAME, EMAIL, ORGANIZATION)                       */}
+      {/* ========================================================================= */}
+      <div className="space-y-4 pt-2 border-t border-black/10 dark:border-white/10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <div>
+            <label htmlFor="contact-name" className="block text-xs font-mono font-bold uppercase tracking-wider mb-2 text-black dark:text-white">
+              Your Name <span className="text-zinc-400 dark:text-zinc-500" aria-hidden="true">*</span>
+            </label>
+            <input
+              id="contact-name"
+              type="text"
+              required
+              autoComplete="name"
+              disabled={isSubmitting}
+              value={formData.name}
+              onChange={(e) => handleChange('name', e.target.value)}
+              placeholder="e.g. Elena Rostova"
+              aria-invalid={!!errors.name}
+              aria-describedby={errors.name ? 'contact-error-name' : undefined}
+              className={`w-full px-4 py-3.5 rounded-xl text-sm transition-all bg-zinc-50 dark:bg-zinc-900/90 border text-black dark:text-white placeholder-zinc-400 focus:outline-hidden focus:border-black dark:focus:border-white focus:ring-1 focus:ring-black dark:focus:ring-white ${
+                errors.name ? 'border-red-500' : 'border-black/10 dark:border-white/10'
+              }`}
+            />
+            {errors.name && (
+              <p id="contact-error-name" role="alert" className="mt-1.5 text-xs text-red-600 dark:text-red-400 font-sans">
+                {errors.name}
+              </p>
+            )}
+          </div>
+
+          <div>
+            <label htmlFor="contact-email" className="block text-xs font-mono font-bold uppercase tracking-wider mb-2 text-black dark:text-white">
+              Work Email <span className="text-zinc-400 dark:text-zinc-500" aria-hidden="true">*</span>
+            </label>
+            <input
+              id="contact-email"
+              type="email"
+              required
+              autoComplete="email"
+              disabled={isSubmitting}
+              value={formData.email}
+              onChange={(e) => handleChange('email', e.target.value)}
+              placeholder="elena@company.com"
+              aria-invalid={!!errors.email}
+              aria-describedby={errors.email ? 'contact-error-email' : undefined}
+              className={`w-full px-4 py-3.5 rounded-xl text-sm transition-all bg-zinc-50 dark:bg-zinc-900/90 border text-black dark:text-white placeholder-zinc-400 focus:outline-hidden focus:border-black dark:focus:border-white focus:ring-1 focus:ring-black dark:focus:ring-white ${
+                errors.email ? 'border-red-500' : 'border-black/10 dark:border-white/10'
+              }`}
+            />
+            {errors.email && (
+              <p id="contact-error-email" role="alert" className="mt-1.5 text-xs text-red-600 dark:text-red-400 font-sans">
+                {errors.email}
+              </p>
+            )}
+          </div>
+        </div>
+
         <div>
-          <label htmlFor="contact-org" className={labelClass}>
-            Company / Organization
+          <label htmlFor="contact-org" className="block text-xs font-mono font-bold uppercase tracking-wider mb-2 text-black dark:text-white">
+            Company / Startup / Entity <span className="text-[0.68rem] text-zinc-400 font-normal lowercase">(optional)</span>
           </label>
           <input
             id="contact-org"
@@ -280,76 +454,22 @@ export const ContactForm: React.FC<ContactFormProps> = ({ theme = 'light' }) => 
             disabled={isSubmitting}
             value={formData.organization}
             onChange={(e) => handleChange('organization', e.target.value)}
-            placeholder="Acme Inc. / Stealth Startup"
-            className={inputClass}
+            placeholder="e.g. Acme Health / Stealth AI Lab"
+            className="w-full px-4 py-3.5 rounded-xl text-sm transition-all bg-zinc-50 dark:bg-zinc-900/90 border border-black/10 dark:border-white/10 text-black dark:text-white placeholder-zinc-400 focus:outline-hidden focus:border-black dark:focus:border-white focus:ring-1 focus:ring-black dark:focus:ring-white"
           />
         </div>
-
-        <div>
-          <label htmlFor="contact-type" className={labelClass}>
-            Discipline & Focus Area
-          </label>
-          <select
-            id="contact-type"
-            disabled={isSubmitting}
-            value={formData.projectType}
-            onChange={(e) => handleChange('projectType', e.target.value)}
-            className={inputClass}
-          >
-            <option value="High-Impact Custom Web Platform" className="bg-white dark:bg-[#18181D] text-[#171717] dark:text-white">High-Impact Custom Web Platform</option>
-            <option value="Full-Stack SaaS MVP / Web Application" className="bg-white dark:bg-[#18181D] text-[#171717] dark:text-white">Full-Stack SaaS MVP / Web App</option>
-            <option value="Applied AI / LLM & Agentic Workflows" className="bg-white dark:bg-[#18181D] text-[#171717] dark:text-white">Applied AI / LLM & Agentic Workflows</option>
-            <option value="Bespoke E-Commerce Architecture" className="bg-white dark:bg-[#18181D] text-[#171717] dark:text-white">Bespoke E-Commerce Architecture</option>
-            <option value="Brand Identity, UX Design & Systems" className="bg-white dark:bg-[#18181D] text-[#171717] dark:text-white">Brand Identity, UX Design & Systems</option>
-            <option value="Performance Engineering & Architecture Audit" className="bg-white dark:bg-[#18181D] text-[#171717] dark:text-white">Performance Engineering & Audit</option>
-          </select>
-        </div>
       </div>
 
-      {/* Row 3: Timeline & Engagement Model */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-          <label htmlFor="contact-timeline" className={labelClass}>
-            Target Timeline
-          </label>
-          <select
-            id="contact-timeline"
-            disabled={isSubmitting}
-            value={formData.timeline}
-            onChange={(e) => handleChange('timeline', e.target.value)}
-            className={inputClass}
-          >
-            <option value="Immediate (Next 2-4 Weeks)" className="bg-white dark:bg-[#18181D] text-[#171717] dark:text-white">Immediate (Next 2-4 Weeks)</option>
-            <option value="1-2 Months (Active Product Sprint)" className="bg-white dark:bg-[#18181D] text-[#171717] dark:text-white">1-2 Months (Active Product Sprint)</option>
-            <option value="3+ Months (Strategic Roadmap)" className="bg-white dark:bg-[#18181D] text-[#171717] dark:text-white">3+ Months (Strategic Roadmap)</option>
-            <option value="Flexible / Milestone-Driven" className="bg-white dark:bg-[#18181D] text-[#171717] dark:text-white">Flexible / Milestone-Driven</option>
-          </select>
-        </div>
-
-        <div>
-          <label htmlFor="contact-engagement" className={labelClass}>
-            Engagement Model
-          </label>
-          <select
-            id="contact-engagement"
-            disabled={isSubmitting}
-            value={formData.engagementModel}
-            onChange={(e) => handleChange('engagementModel', e.target.value)}
-            className={inputClass}
-          >
-            <option value="Full-Cycle Product Architecture & Build" className="bg-white dark:bg-[#18181D] text-[#171717] dark:text-white">Full-Cycle Product Architecture & Build</option>
-            <option value="Design & Frontend Engineering Sprint" className="bg-white dark:bg-[#18181D] text-[#171717] dark:text-white">Design & Frontend Engineering Sprint</option>
-            <option value="AI Integration & Custom Workflows" className="bg-white dark:bg-[#18181D] text-[#171717] dark:text-white">AI Integration & Custom Workflows</option>
-            <option value="Dedicated Technical Studio Retainer" className="bg-white dark:bg-[#18181D] text-[#171717] dark:text-white">Dedicated Technical Studio Retainer</option>
-          </select>
-        </div>
-      </div>
-
-      {/* Row 4: Details */}
+      {/* ========================================================================= */}
+      {/* 05. DETAILED PROJECT BRIEF & OBJECTIVES                                   */}
+      {/* ========================================================================= */}
       <div>
-        <label htmlFor="contact-details" className={labelClass}>
-          Project Details & Goals <span className="text-[#C7612E]" aria-hidden="true">*</span>
-        </label>
+        <div className="flex items-center justify-between mb-2">
+          <label htmlFor="contact-details" className="block text-xs font-mono font-bold uppercase tracking-wider text-black dark:text-white">
+            Project Brief & Architectural Goals <span className="text-zinc-400 dark:text-zinc-500" aria-hidden="true">*</span>
+          </label>
+          <span className="text-[0.68rem] font-mono text-zinc-400 dark:text-zinc-500">Min 10 characters</span>
+        </div>
         <textarea
           id="contact-details"
           rows={5}
@@ -357,10 +477,12 @@ export const ContactForm: React.FC<ContactFormProps> = ({ theme = 'light' }) => 
           disabled={isSubmitting}
           value={formData.details}
           onChange={(e) => handleChange('details', e.target.value)}
-          placeholder="Tell us what you are building, your primary technical objectives, target deadline, and any references to existing platforms or repositories."
+          placeholder="Describe your vision, target deliverables, reference platforms, and any core architectural constraints (e.g. on-device LLMs, sub-second latency, security requirements)..."
           aria-invalid={!!errors.details}
           aria-describedby={errors.details ? 'contact-error-details' : undefined}
-          className={`${inputClass} ${errors.details ? 'border-red-500 dark:border-red-500' : ''}`}
+          className={`w-full px-4 py-3.5 rounded-xl text-sm transition-all bg-zinc-50 dark:bg-zinc-900/90 border text-black dark:text-white placeholder-zinc-400 focus:outline-hidden focus:border-black dark:focus:border-white focus:ring-1 focus:ring-black dark:focus:ring-white leading-relaxed ${
+            errors.details ? 'border-red-500' : 'border-black/10 dark:border-white/10'
+          }`}
         />
         {errors.details && (
           <p id="contact-error-details" role="alert" className="mt-1.5 text-xs text-red-600 dark:text-red-400 font-sans">
@@ -369,38 +491,41 @@ export const ContactForm: React.FC<ContactFormProps> = ({ theme = 'light' }) => 
         )}
       </div>
 
-      {/* Submission Actions */}
-      <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-6">
-        <Button
+      {/* ========================================================================= */}
+      {/* 06. SUBMIT BUTTON & DIRECT ALTERNATIVES                                   */}
+      {/* ========================================================================= */}
+      <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-5 border-t border-black/10 dark:border-white/10">
+        <button
           type="submit"
-          variant="primary"
-          size="lg"
           disabled={isSubmitting}
-          className="w-full sm:w-auto shadow-lg shadow-[#C7612E]/20"
+          className="btn-glass-shimmer w-full sm:w-auto px-8 py-4 rounded-full bg-black hover:bg-zinc-800 text-white dark:bg-white dark:hover:bg-zinc-100 dark:text-black font-mono font-bold uppercase tracking-widest text-xs transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-0.5 active:scale-[0.98] flex items-center justify-center gap-2.5 cursor-pointer disabled:opacity-50 group border border-white/10 dark:border-black/10"
         >
           {isSubmitting ? (
-            <span className="inline-flex items-center gap-2">
-              <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-              <span>Transmitting Inquiry...</span>
-            </span>
+            <>
+              <span className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
+              <span>Transmitting Brief...</span>
+            </>
           ) : (
-            <span className="inline-flex items-center gap-2">
-              <Send className="w-4 h-4" />
-              <span>Send Project Inquiry</span>
-            </span>
+            <>
+              <span>Let's Talk — Submit Project Brief</span>
+              <Send className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-transform" />
+            </>
           )}
-        </Button>
+        </button>
 
         <a
-          href={`${companyConfig.whatsappUrl}?text=${whatsappQuickMessage}`}
+          href={whatsappDirectUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider transition-colors font-bold text-[#77746F] dark:text-zinc-400 hover:text-[#C7612E] dark:hover:text-[#C7612E]"
+          className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-zinc-500 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors cursor-pointer"
         >
-          <MessageSquare className="w-4 h-4 text-[#C7612E]" />
-          <span>Or chat directly on WhatsApp</span>
+          <MessageSquare className="w-3.5 h-3.5" />
+          <span>Quick WhatsApp Connect</span>
+          <ArrowRight className="w-3 h-3" />
         </a>
       </div>
     </form>
   );
 };
+
+export default ContactForm;

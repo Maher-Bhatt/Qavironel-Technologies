@@ -1,23 +1,21 @@
-import React, { useState, useEffect, Suspense } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { SiteHeader } from './components/layout/SiteHeader';
 import { SiteFooter } from './components/layout/SiteFooter';
 
-// Code Splitting for performance
-const HomePage = React.lazy(() => import('./pages/HomePage').then(module => ({ default: module.HomePage })));
-const WorkPage = React.lazy(() => import('./pages/WorkPage').then(module => ({ default: module.WorkPage })));
-const CaseStudyPage = React.lazy(() => import('./pages/CaseStudyPage').then(module => ({ default: module.CaseStudyPage })));
-const ServicesPage = React.lazy(() => import('./pages/ServicesPage').then(module => ({ default: module.ServicesPage })));
-const AboutPage = React.lazy(() => import('./pages/AboutPage').then(module => ({ default: module.AboutPage })));
-const ContactPage = React.lazy(() => import('./pages/ContactPage').then(module => ({ default: module.ContactPage })));
-const LegalPage = React.lazy(() => import('./pages/LegalPage').then(module => ({ default: module.LegalPage })));
-const NotFoundPage = React.lazy(() => import('./pages/NotFoundPage').then(module => ({ default: module.NotFoundPage })));
+import { HomePage } from './pages/HomePage';
+import { WorkPage } from './pages/WorkPage';
+import { CaseStudyPage } from './pages/CaseStudyPage';
+import { ServicesPage } from './pages/ServicesPage';
+import { AboutPage } from './pages/AboutPage';
+import { ContactPage } from './pages/ContactPage';
+import { LegalPage } from './pages/LegalPage';
+import { NotFoundPage } from './pages/NotFoundPage';
 
 import { BookingModal, BookingModalTab } from './components/booking/BookingModal';
 import { MobileGlassDock } from './components/layout/MobileGlassDock';
 import { SmoothScrollProvider } from './components/layout/SmoothScrollProvider';
-import { Preloader } from './components/ui/Preloader';
 import { FilmGrainOverlay } from './components/ui/FilmGrainOverlay';
 import { PageTransition } from './components/layout/PageTransition';
 
@@ -43,26 +41,23 @@ export const App: React.FC = () => {
 
   return (
     <SmoothScrollProvider>
-      <Preloader />
       <FilmGrainOverlay />
-      <div className="flex flex-col min-h-screen bg-[#F6F3ED] dark:bg-[#171717] text-[#171717] dark:text-[#F6F3ED] transition-colors duration-300">
+      <div className="flex flex-col min-h-screen bg-[#FAFAFA] dark:bg-[#0A0A0A] text-[#0A0A0A] dark:text-[#FAFAFA] transition-colors duration-300">
         <SiteHeader />
         <main className="flex-grow pb-28 sm:pb-32 md:pb-0">
-          <Suspense fallback={<div className="min-h-screen bg-[#F6F3ED] dark:bg-[#171717]" />}>
-            <AnimatePresence mode="wait">
-              <Routes location={location} key={location.pathname}>
-                <Route path="/" element={<PageTransition><HomePage /></PageTransition>} />
-                <Route path="/work" element={<PageTransition><WorkPage /></PageTransition>} />
-                <Route path="/work/:slug" element={<PageTransition><CaseStudyPage /></PageTransition>} />
-                <Route path="/services" element={<PageTransition><ServicesPage /></PageTransition>} />
-                <Route path="/about" element={<PageTransition><AboutPage /></PageTransition>} />
-                <Route path="/contact" element={<PageTransition><ContactPage /></PageTransition>} />
-                <Route path="/privacy" element={<PageTransition><LegalPage /></PageTransition>} />
-                <Route path="/terms" element={<PageTransition><LegalPage /></PageTransition>} />
-                <Route path="*" element={<PageTransition><NotFoundPage /></PageTransition>} />
-              </Routes>
-            </AnimatePresence>
-          </Suspense>
+          <AnimatePresence mode="wait">
+            <Routes location={location} key={location.pathname}>
+              <Route path="/" element={<PageTransition><HomePage /></PageTransition>} />
+              <Route path="/work" element={<PageTransition><WorkPage /></PageTransition>} />
+              <Route path="/work/:slug" element={<PageTransition><CaseStudyPage /></PageTransition>} />
+              <Route path="/services" element={<PageTransition><ServicesPage /></PageTransition>} />
+              <Route path="/about" element={<PageTransition><AboutPage /></PageTransition>} />
+              <Route path="/contact" element={<PageTransition><ContactPage /></PageTransition>} />
+              <Route path="/privacy" element={<PageTransition><LegalPage /></PageTransition>} />
+              <Route path="/terms" element={<PageTransition><LegalPage /></PageTransition>} />
+              <Route path="*" element={<PageTransition><NotFoundPage /></PageTransition>} />
+            </Routes>
+          </AnimatePresence>
         </main>
         <SiteFooter />
         <MobileGlassDock />
@@ -77,5 +72,3 @@ export const App: React.FC = () => {
 };
 
 export default App;
-
-

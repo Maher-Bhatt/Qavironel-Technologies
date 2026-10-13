@@ -134,7 +134,7 @@ export const faqs = [
   },
   {
     question: 'Will I collaborate directly with senior engineers or be passed to account managers?',
-    answer: 'You partner directly with our founder and lead systems engineer, Maher Bhatt. Qavironel was founded specifically to eliminate agency fog, junior delegation, and communication middlemen. Every schema decision, API route, and UI micro-interaction is engineered by senior hands with complete accountability.'
+    answer: 'You partner directly with our co-founders and engineering leads, Maher Bhatt and Anurag Pandey. Qavironel was founded specifically to eliminate agency fog, junior delegation, and communication middlemen. Every schema decision, API route, and UI micro-interaction is engineered by senior hands with complete accountability.'
   },
   {
     question: 'How does Qavironel ship production platforms in 1 to 2 weeks when traditional agencies take months?',
@@ -146,7 +146,7 @@ export const faqs = [
   },
   {
     question: 'How do your Applied AI systems protect proprietary business data and prompt privacy?',
-    answer: 'We engineer strict privacy boundaries tailored to your sensitivity tier. For classified or enterprise data, we deploy completely air-gapped local models (via Ollama and quantized LLaMA) where zero bytes ever leave physical hardware. For high-velocity generative tasks, we implement guarded cloud routing (Groq LLaMA 3.3, Claude, OpenAI) with automated PII redaction and local vector memory (ChromaDB / SQLite-vec).'
+    answer: 'We engineer strict privacy boundaries tailored to your sensitivity tier. For classified or enterprise data, we deploy completely air-gapped local models (via Ollama and quantized LLaMA) where no proprietary data ever leaves your on-premises hardware. For high-velocity generative tasks, we implement guarded cloud routing (Groq LLaMA 3.3, Claude, OpenAI) with automated PII redaction and local vector memory (ChromaDB / SQLite-vec).'
   },
   {
     question: 'How do you manage communication and delivery for international clients across time zones?',
@@ -158,6 +158,6 @@ export const faqs = [
   },
   {
     question: 'What support and warranty do you provide after the platform goes live?',
-    answer: 'Every build includes a dedicated 30-day post-launch warranty where we actively monitor Core Web Vitals, resolve any emergent edge-case bugs, configure DNS/CDN routing, and conduct video training sessions for your team. We also offer monthly architectural retainers for continuous feature shipping and security updates.'
+    answer: 'Every build includes a dedicated 30-day post-launch warranty where we actively monitor Core Web Vitals, resolve any edge-case bugs, configure DNS/CDN routing, and conduct video training sessions for your team. We also offer monthly architectural retainers for continuous feature shipping and security updates.'
   }
 ];

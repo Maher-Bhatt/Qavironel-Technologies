@@ -47,7 +47,7 @@ export const RevealHeadline: React.FC<RevealHeadlineProps> = ({
                 );
                 return (
                   <span key={wordIdx}>
-                    <span className={isHighlight ? 'text-[#C7612E]' : ''}>
+                    <span className={isHighlight ? 'text-black dark:text-white' : ''}>
                       {word}
                     </span>
                     {wordIdx < words.length - 1 && ' '}

@@ -76,23 +76,25 @@ export const Hero3DArchitectureStack: React.FC<Hero3DArchitectureStackProps> = (
     
     const curve = new InfinityCurve();
     
-    // TubeGeometry: path, tubularSegments, radius, radialSegments (4 = sharp prism edges), closed
+    // TubeGeometry: outer frosted glass ribbon
     const geometry = new THREE.TubeGeometry(curve, 350, 0.22, 4, true);
 
     // ─────────────────────────────────────────────────────────────
-    // ADAPTIVE FROSTED GLASS MATERIAL
+    // ADAPTIVE FROSTED GLASS MATERIAL (Monochrome Luxury Optical Glass)
     // ─────────────────────────────────────────────────────────────
     const material = new THREE.MeshPhysicalMaterial({
-      color: new THREE.Color('#ffffff'), // Pure white base
-      transmission: 1.0,     // Full glass transparency
-      ior: 1.5,              // Glass index of refraction
-      roughness: 0.12,       // Frosted/Satin finish (not perfectly clear)
-      metalness: 0.05,
-      clearcoat: 1.0,        // Crisp specular highlight over the frosted surface
-      clearcoatRoughness: 0.05,
+      color: new THREE.Color('#FFFFFF'), // Pure optical white base
+      transmission: 0.98,     // Full glass transparency
+      ior: 1.52,              // Optical glass index of refraction
+      roughness: 0.10,       // Satin frosted finish
+      metalness: 0.08,
+      clearcoat: 1.0,        // Crisp specular chrome highlight
+      clearcoatRoughness: 0.04,
+      specularIntensity: 1.0,
+      specularColor: new THREE.Color('#FFFFFF'),
       thickness: 1.5,        // Volume for light refraction
-      attenuationColor: new THREE.Color('#C7612E'), // Brand orange internal glow!
-      attenuationDistance: 4.0, // How far light travels before becoming fully orange
+      attenuationColor: new THREE.Color('#FFFFFF'), // Pure white specular transmission
+      attenuationDistance: 4.0,
       side: THREE.DoubleSide
     });
 
@@ -100,15 +102,34 @@ export const Hero3DArchitectureStack: React.FC<Hero3DArchitectureStackProps> = (
     mainGroup.add(mesh);
 
     // ─────────────────────────────────────────────────────────────
-    // INTERNAL & SCENE LIGHTING
+    // INNER TITANIUM CORE SPINE (#1A1A1A)
     // ─────────────────────────────────────────────────────────────
-    // A soft core point light inside the knot to illuminate the frosted glass with the brand color
-    const coreLight = new THREE.PointLight('#C7612E', 150, 8);
+    const coreGeometry = new THREE.TubeGeometry(curve, 350, 0.07, 12, true);
+    const coreMaterial = new THREE.MeshStandardMaterial({
+      color: new THREE.Color('#1A1A1A'),
+      metalness: 0.95,
+      roughness: 0.2,
+      emissive: new THREE.Color('#111111'),
+      emissiveIntensity: 0.1
+    });
+    const coreMesh = new THREE.Mesh(coreGeometry, coreMaterial);
+    mainGroup.add(coreMesh);
+
+    // ─────────────────────────────────────────────────────────────
+    // INTERNAL & SCENE LIGHTING (Pure White / Chrome Rig)
+    // ─────────────────────────────────────────────────────────────
+    // Core white light inside the knot
+    const coreLight = new THREE.PointLight('#FFFFFF', 90, 8);
     coreLight.position.set(0, 0, 0);
     scene.add(coreLight);
 
+    // Silver / chrome rim key
+    const rimLight = new THREE.DirectionalLight('#E5E5E5', 1.6);
+    rimLight.position.set(3, 4, 3);
+    scene.add(rimLight);
+
     // Subdued ambient for the overall scene
-    const ambientLight = new THREE.AmbientLight('#ffffff', 0.5);
+    const ambientLight = new THREE.AmbientLight('#FFFFFF', 0.6);
     scene.add(ambientLight);
 
     // ─────────────────────────────────────────────────────────────
@@ -184,6 +205,8 @@ export const Hero3DArchitectureStack: React.FC<Hero3DArchitectureStackProps> = (
       renderer.dispose();
       geometry.dispose();
       material.dispose();
+      coreGeometry.dispose();
+      coreMaterial.dispose();
       pmremGenerator.dispose();
     };
   }, []);

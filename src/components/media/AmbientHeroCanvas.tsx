@@ -42,7 +42,7 @@ export const AmbientHeroCanvas: React.FC = () => {
       for (let i = 0; i < count; i++) {
         const x = Math.random() * width;
         const y = Math.random() * height;
-        const isCopper = Math.random() < 0.28;
+        const isForest = Math.random() < 0.28;
         particles.push({
           x,
           y,
@@ -50,9 +50,9 @@ export const AmbientHeroCanvas: React.FC = () => {
           originY: y,
           vx: (Math.random() - 0.5) * 0.4,
           vy: (Math.random() - 0.5) * 0.4,
-          size: isCopper ? Math.random() * 2.2 + 1.2 : Math.random() * 1.8 + 0.8,
-          alpha: isCopper ? Math.random() * 0.35 + 0.15 : Math.random() * 0.15 + 0.05,
-          color: isCopper ? '#C7612E' : '#71717A'
+          size: isForest ? Math.random() * 2.2 + 1.2 : Math.random() * 1.8 + 0.8,
+          alpha: isForest ? Math.random() * 0.35 + 0.15 : Math.random() * 0.15 + 0.05,
+          color: isForest ? '#0A0A0A' : '#737373'
         });
       }
     };
@@ -199,7 +199,7 @@ export const AmbientHeroCanvas: React.FC = () => {
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = '#C7612E';
+            ctx.strokeStyle = '#0A0A0A';
             ctx.globalAlpha = (1 - distNodes / 110) * 0.08;
             ctx.lineWidth = 0.8;
             ctx.stroke();

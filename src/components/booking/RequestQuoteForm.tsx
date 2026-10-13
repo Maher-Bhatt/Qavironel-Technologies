@@ -96,7 +96,7 @@ export const RequestQuoteForm: React.FC<RequestQuoteFormProps> = ({ onSuccess, o
         message: 'Network service unavailable. Please dispatch your quotation requirements via direct email or WhatsApp below.',
         fallbackMailto: buildQuoteMailto(formData),
         fallbackWhatsApp: `${companyConfig.whatsappUrl}?text=${encodeURIComponent(
-          `Hi Maher, I would like to request an architecture quotation.\nName: ${formData.name}\nProject: ${formData.projectType}`
+          `Hi Qavironel Team, I would like to request an architecture quotation.\nName: ${formData.name}\nProject: ${formData.projectType}`
         )}`,
       });
     } finally {
@@ -111,22 +111,22 @@ export const RequestQuoteForm: React.FC<RequestQuoteFormProps> = ({ onSuccess, o
           <CheckCircle2 className="w-8 h-8" />
         </div>
         <div className="space-y-2 max-w-md mx-auto">
-          <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#C7612E]">
+          <span className="text-xs font-mono font-bold uppercase tracking-widest text-black dark:text-white">
             Request Transmitted
           </span>
-          <h3 className="font-sans font-bold text-2xl text-[#171717] dark:text-white">
+          <h3 className="font-sans font-bold text-2xl text-black dark:text-white dark:text-[#F5F5F0]">
             Quotation Request Received
           </h3>
-          <p className="text-sm text-[#77746F] dark:text-zinc-300 leading-relaxed font-light">
+          <p className="text-sm text-zinc-500 dark:text-[#A7B0A7] leading-relaxed font-light">
             {submissionResult.message}
           </p>
         </div>
 
-        <div className="p-4 rounded-xl bg-zinc-50 dark:bg-[#18181D] border border-[#DEDAD3] dark:border-white/10 max-w-sm mx-auto text-left text-xs space-y-1 font-mono text-[#171717] dark:text-zinc-300">
-          <p><span className="text-[#77746F] dark:text-zinc-500">Project:</span> {formData.projectType}</p>
-          <p><span className="text-[#77746F] dark:text-zinc-500">Budget Tier:</span> {formData.budgetRange}</p>
-          <p><span className="text-[#77746F] dark:text-zinc-500">Timeline:</span> {formData.timeline}</p>
-          <p><span className="text-[#77746F] dark:text-zinc-500">Contact:</span> {formData.email}</p>
+        <div className="p-4 rounded-xl bg-[#F5F5F0] dark:bg-[#0A0A0A] border border-black/10 dark:border-white/10 dark:border-white/10 max-w-sm mx-auto text-left text-xs space-y-1 font-mono text-black dark:text-white dark:text-[#F5F5F0]">
+          <p><span className="text-zinc-500 dark:text-[#A7B0A7]">Project:</span> {formData.projectType}</p>
+          <p><span className="text-zinc-500 dark:text-[#A7B0A7]">Budget Tier:</span> {formData.budgetRange}</p>
+          <p><span className="text-zinc-500 dark:text-[#A7B0A7]">Timeline:</span> {formData.timeline}</p>
+          <p><span className="text-zinc-500 dark:text-[#A7B0A7]">Contact:</span> {formData.email}</p>
         </div>
 
         <div className="pt-2">
@@ -136,7 +136,7 @@ export const RequestQuoteForm: React.FC<RequestQuoteFormProps> = ({ onSuccess, o
             )}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-xs font-mono uppercase font-bold text-[#C7612E] hover:underline"
+            className="inline-flex items-center gap-2 text-xs font-mono uppercase font-bold text-black dark:text-white hover:underline"
           >
             <MessageSquare className="w-4 h-4" />
             <span>Notify directly via WhatsApp</span>
@@ -146,8 +146,8 @@ export const RequestQuoteForm: React.FC<RequestQuoteFormProps> = ({ onSuccess, o
     );
   }
 
-  const labelClass = `block text-xs font-mono font-bold uppercase tracking-wider mb-2 text-[#171717] dark:text-zinc-300`;
-  const inputClass = `w-full px-4 py-3 rounded-xl text-sm transition-all bg-white dark:bg-[#18181D] border border-[#DEDAD3] dark:border-[#27272A] text-[#171717] dark:text-white placeholder-[#77746F] dark:placeholder-zinc-500 focus:outline-hidden focus:border-[#C7612E] dark:focus:border-[#C7612E]`;
+  const labelClass = `block text-xs font-mono font-bold uppercase tracking-wider mb-2 text-black dark:text-white dark:text-[#F5F5F0]`;
+  const inputClass = `w-full px-4 py-3 rounded-xl text-sm transition-all bg-white dark:bg-[#0B100D] border border-black/10 dark:border-white/10 dark:border-white/10 text-black dark:text-white dark:text-[#F5F5F0] placeholder-[#52635A] dark:placeholder-[#83988D] focus:outline-hidden focus:border-black dark:focus:border-white focus:ring-1 focus:ring-black dark:focus:ring-white`;
 
   return (
     <form onSubmit={handleSubmit} noValidate className="space-y-6">
@@ -164,17 +164,17 @@ export const RequestQuoteForm: React.FC<RequestQuoteFormProps> = ({ onSuccess, o
       </div>
 
       {submissionResult && !submissionResult.success && (
-        <div role="alert" className="p-4 rounded-xl border bg-amber-50 dark:bg-amber-950/30 border-amber-300 dark:border-amber-700/50 text-amber-950 dark:text-amber-200 text-xs space-y-2">
+        <div role="alert" className="p-4 rounded-xl border bg-red-50 dark:bg-red-950/30 border-red-200 dark:border-red-900/50 text-red-900 dark:text-red-200 text-xs space-y-2">
           <div className="flex items-start gap-2">
-            <AlertCircle className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
+            <AlertCircle className="w-4 h-4 text-red-600 dark:text-red-400 shrink-0 mt-0.5" />
             <p className="font-semibold">{submissionResult.message}</p>
           </div>
           {(submissionResult.fallbackMailto || submissionResult.fallbackWhatsApp) && (
-            <div className="flex flex-wrap gap-2 pt-2 border-t border-amber-200/60 dark:border-amber-800/40">
+            <div className="flex flex-wrap gap-2 pt-2 border-t border-red-200/60 dark:border-red-900/40">
               {submissionResult.fallbackMailto && (
                 <a
                   href={submissionResult.fallbackMailto}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#171717] dark:bg-white text-white dark:text-[#171717] text-xs font-mono font-bold uppercase"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#0F1713] dark:bg-white text-white dark:text-black dark:text-white text-xs font-mono font-bold uppercase"
                 >
                   <Mail className="w-3.5 h-3.5" />
                   <span>Send via Email</span>
@@ -248,13 +248,13 @@ export const RequestQuoteForm: React.FC<RequestQuoteFormProps> = ({ onSuccess, o
                 onClick={() => toggleFeature(deliverable)}
                 className={`p-3 rounded-xl border text-left text-xs font-sans transition-all flex items-center justify-between cursor-pointer ${
                   isChecked
-                    ? 'bg-[#C7612E]/10 border-[#C7612E] text-[#171717] dark:text-white font-medium'
-                    : 'bg-white dark:bg-[#18181D] border-[#DEDAD3] dark:border-white/10 text-[#77746F] dark:text-zinc-400 hover:border-[#C7612E]'
+                    ? 'bg-zinc-100 dark:bg-zinc-800/60 border-black dark:border-white text-[#0A0A0A] dark:text-white font-medium'
+                    : 'bg-white dark:bg-zinc-900 border-black/10 dark:border-white/10 text-zinc-600 dark:text-zinc-400 hover:border-black/30 dark:hover:border-white/30'
                 }`}
               >
                 <span>{deliverable}</span>
                 <span className={`w-4 h-4 rounded-md flex items-center justify-center border transition-all ${
-                  isChecked ? 'bg-[#C7612E] border-[#C7612E] text-white' : 'border-[#DEDAD3] dark:border-zinc-700'
+                  isChecked ? 'bg-[#0A0A0A] border-[#0A0A0A] dark:bg-white dark:border-white text-white dark:text-[#0A0A0A]' : 'border-zinc-300 dark:border-zinc-700'
                 }`}>
                   {isChecked && <Check className="w-3 h-3 stroke-[3]" />}
                 </span>
@@ -267,7 +267,7 @@ export const RequestQuoteForm: React.FC<RequestQuoteFormProps> = ({ onSuccess, o
       {/* Scope Details */}
       <div>
         <label htmlFor="quote-scope" className={labelClass}>
-          Scope Breakdown & Objectives <span className="text-[#C7612E]">*</span>
+          Scope Breakdown & Objectives <span className="text-black dark:text-white">*</span>
         </label>
         <textarea
           id="quote-scope"
@@ -285,7 +285,7 @@ export const RequestQuoteForm: React.FC<RequestQuoteFormProps> = ({ onSuccess, o
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div>
           <label htmlFor="quote-name" className={labelClass}>
-            Name <span className="text-[#C7612E]">*</span>
+            Name <span className="text-black dark:text-white">*</span>
           </label>
           <input
             id="quote-name"
@@ -301,7 +301,7 @@ export const RequestQuoteForm: React.FC<RequestQuoteFormProps> = ({ onSuccess, o
 
         <div>
           <label htmlFor="quote-email" className={labelClass}>
-            Email <span className="text-[#C7612E]">*</span>
+            Email <span className="text-black dark:text-white">*</span>
           </label>
           <input
             id="quote-email"
@@ -335,7 +335,7 @@ export const RequestQuoteForm: React.FC<RequestQuoteFormProps> = ({ onSuccess, o
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-[#C7612E] hover:bg-[#98431F] text-white text-xs font-mono font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-2 shadow-sm cursor-pointer disabled:opacity-70"
+          className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-[#0A0A0A] hover:bg-[#262626] text-white dark:bg-white dark:hover:bg-zinc-200 dark:text-[#0A0A0A] text-xs font-mono font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-2 shadow-xs cursor-pointer disabled:opacity-70"
         >
           {isSubmitting ? (
             <>
@@ -354,7 +354,7 @@ export const RequestQuoteForm: React.FC<RequestQuoteFormProps> = ({ onSuccess, o
           <button
             type="button"
             onClick={onCancel}
-            className="text-xs font-mono uppercase text-[#77746F] hover:text-[#171717] dark:hover:text-white"
+            className="text-xs font-mono uppercase text-zinc-500 hover:text-black dark:text-white dark:hover:text-[#F4F7F5]"
           >
             Cancel
           </button>

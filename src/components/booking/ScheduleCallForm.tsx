@@ -89,7 +89,7 @@ export const ScheduleCallForm: React.FC<ScheduleCallFormProps> = ({ onSuccess, o
         message: 'Network service unavailable. Please dispatch your meeting request via direct email or WhatsApp below.',
         fallbackMailto: buildBookingMailto(fullPayload),
         fallbackWhatsApp: `${companyConfig.whatsappUrl}?text=${encodeURIComponent(
-          `Hi Maher, I would like to schedule an Architecture Call.\nName: ${fullPayload.name}\nDate: ${fullPayload.date} at ${fullPayload.time}`
+          `Hi Qavironel Team, I would like to schedule an Architecture Call.\nName: ${fullPayload.name}\nDate: ${fullPayload.date} at ${fullPayload.time}`
         )}`,
       });
     } finally {
@@ -104,22 +104,22 @@ export const ScheduleCallForm: React.FC<ScheduleCallFormProps> = ({ onSuccess, o
           <CheckCircle2 className="w-8 h-8" />
         </div>
         <div className="space-y-2 max-w-md mx-auto">
-          <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#C7612E]">
+          <span className="text-xs font-mono font-bold uppercase tracking-widest text-black dark:text-white">
             Request Transmitted
           </span>
-          <h3 className="font-sans font-bold text-2xl text-[#171717] dark:text-white">
+          <h3 className="font-sans font-bold text-2xl text-black dark:text-white dark:text-[#F5F5F0]">
             Meeting Request Received
           </h3>
-          <p className="text-sm text-[#77746F] dark:text-zinc-300 leading-relaxed font-light">
+          <p className="text-sm text-zinc-500 dark:text-[#A7B0A7] leading-relaxed font-light">
             {submissionResult.message}
           </p>
         </div>
 
-        <div className="p-4 rounded-xl bg-zinc-50 dark:bg-[#18181D] border border-[#DEDAD3] dark:border-white/10 max-w-sm mx-auto text-left text-xs space-y-1 font-mono text-[#171717] dark:text-zinc-300">
-          <p><span className="text-[#77746F] dark:text-zinc-500">Date:</span> {selectedDate}</p>
-          <p><span className="text-[#77746F] dark:text-zinc-500">Slot:</span> {selectedTime}</p>
-          <p><span className="text-[#77746F] dark:text-zinc-500">Recipient:</span> {formData.email}</p>
-          <p><span className="text-[#77746F] dark:text-zinc-500">Host:</span> Maher Bhatt (Lead Systems Engineer)</p>
+        <div className="p-4 rounded-xl bg-[#F5F5F0] dark:bg-[#0A0A0A] border border-black/10 dark:border-white/10 dark:border-white/10 max-w-sm mx-auto text-left text-xs space-y-1 font-mono text-black dark:text-white dark:text-[#F5F5F0]">
+          <p><span className="text-zinc-500 dark:text-[#A7B0A7]">Date:</span> {selectedDate}</p>
+          <p><span className="text-zinc-500 dark:text-[#A7B0A7]">Slot:</span> {selectedTime}</p>
+          <p><span className="text-zinc-500 dark:text-[#A7B0A7]">Recipient:</span> {formData.email}</p>
+          <p><span className="text-zinc-500 dark:text-[#A7B0A7]">Host:</span> Maher Bhatt (Lead Systems Engineer)</p>
         </div>
 
         <div className="pt-2">
@@ -129,7 +129,7 @@ export const ScheduleCallForm: React.FC<ScheduleCallFormProps> = ({ onSuccess, o
             )}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-xs font-mono uppercase font-bold text-[#C7612E] hover:underline"
+            className="inline-flex items-center gap-2 text-xs font-mono uppercase font-bold text-black dark:text-white hover:underline"
           >
             <MessageSquare className="w-4 h-4" />
             <span>Notify directly via WhatsApp</span>
@@ -139,8 +139,8 @@ export const ScheduleCallForm: React.FC<ScheduleCallFormProps> = ({ onSuccess, o
     );
   }
 
-  const labelClass = `block text-xs font-mono font-bold uppercase tracking-wider mb-2 text-[#171717] dark:text-zinc-300`;
-  const inputClass = `w-full px-4 py-3 rounded-xl text-sm transition-all bg-white dark:bg-[#18181D] border border-[#DEDAD3] dark:border-[#27272A] text-[#171717] dark:text-white placeholder-[#77746F] dark:placeholder-zinc-500 focus:outline-hidden focus:border-[#C7612E] dark:focus:border-[#C7612E]`;
+  const labelClass = `block text-xs font-mono font-bold uppercase tracking-wider mb-2 text-black dark:text-white dark:text-[#F5F5F0]`;
+  const inputClass = `w-full px-4 py-3 rounded-xl text-sm transition-all bg-white dark:bg-[#0B100D] border border-black/10 dark:border-white/10 dark:border-white/10 text-black dark:text-white dark:text-[#F5F5F0] placeholder-[#52635A] dark:placeholder-[#83988D] focus:outline-hidden focus:border-black dark:focus:border-white focus:ring-1 focus:ring-black dark:focus:ring-white`;
 
   return (
     <form onSubmit={handleSubmit} noValidate className="space-y-6">
@@ -157,17 +157,17 @@ export const ScheduleCallForm: React.FC<ScheduleCallFormProps> = ({ onSuccess, o
       </div>
 
       {submissionResult && !submissionResult.success && (
-        <div role="alert" className="p-4 rounded-xl border bg-amber-50 dark:bg-amber-950/30 border-amber-300 dark:border-amber-700/50 text-amber-950 dark:text-amber-200 text-xs space-y-2">
+        <div role="alert" className="p-4 rounded-xl border bg-red-50 dark:bg-red-950/30 border-red-200 dark:border-red-900/50 text-red-900 dark:text-red-200 text-xs space-y-2">
           <div className="flex items-start gap-2">
-            <AlertCircle className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
+            <AlertCircle className="w-4 h-4 text-red-600 dark:text-red-400 shrink-0 mt-0.5" />
             <p className="font-semibold">{submissionResult.message}</p>
           </div>
           {(submissionResult.fallbackMailto || submissionResult.fallbackWhatsApp) && (
-            <div className="flex flex-wrap gap-2 pt-2 border-t border-amber-200/60 dark:border-amber-800/40">
+            <div className="flex flex-wrap gap-2 pt-2 border-t border-red-200/60 dark:border-red-900/40">
               {submissionResult.fallbackMailto && (
                 <a
                   href={submissionResult.fallbackMailto}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#171717] dark:bg-white text-white dark:text-[#171717] text-xs font-mono font-bold uppercase"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#0F1713] dark:bg-white text-white dark:text-black dark:text-white text-xs font-mono font-bold uppercase"
                 >
                   <Mail className="w-3.5 h-3.5" />
                   <span>Send via Email</span>
@@ -190,16 +190,16 @@ export const ScheduleCallForm: React.FC<ScheduleCallFormProps> = ({ onSuccess, o
       )}
 
       {/* Overview Meta */}
-      <div className="flex flex-wrap items-center gap-4 py-3 px-4 rounded-xl bg-zinc-50 dark:bg-[#18181D] border border-[#DEDAD3] dark:border-white/10 text-xs font-mono text-[#77746F] dark:text-zinc-400">
-        <span className="flex items-center gap-1.5"><Clock className="w-3.5 h-3.5 text-[#C7612E]" /> 30 Minutes</span>
-        <span className="flex items-center gap-1.5"><Video className="w-3.5 h-3.5 text-[#C7612E]" /> Google Meet</span>
-        <span className="flex items-center gap-1.5"><Globe className="w-3.5 h-3.5 text-[#C7612E]" /> IST / Global Timezones</span>
+      <div className="flex flex-wrap items-center gap-4 py-3 px-4 rounded-xl bg-[#F5F5F0] dark:bg-[#0A0A0A] border border-black/10 dark:border-white/10 dark:border-white/10 text-xs font-mono text-zinc-500 dark:text-[#A7B0A7]">
+        <span className="flex items-center gap-1.5"><Clock className="w-3.5 h-3.5 text-black dark:text-white" /> 30 Minutes</span>
+        <span className="flex items-center gap-1.5"><Video className="w-3.5 h-3.5 text-black dark:text-white" /> Google Meet</span>
+        <span className="flex items-center gap-1.5"><Globe className="w-3.5 h-3.5 text-black dark:text-white" /> IST / Global Timezones</span>
       </div>
 
       {/* Step 1: Select Date */}
       <div>
         <label className={labelClass}>
-          Select Date <span className="text-[#C7612E]">*</span>
+          Select Date <span className="text-black dark:text-white">*</span>
         </label>
         <div className="grid grid-cols-4 sm:grid-cols-7 gap-2">
           {dates.map((d) => (
@@ -213,8 +213,8 @@ export const ScheduleCallForm: React.FC<ScheduleCallFormProps> = ({ onSuccess, o
               }}
               className={`p-2.5 rounded-xl border text-center transition-all cursor-pointer ${
                 selectedDate === d.dateString
-                  ? 'bg-[#171717] dark:bg-white text-white dark:text-[#171717] border-[#171717] dark:border-white shadow-sm'
-                  : 'bg-white dark:bg-[#18181D] border-[#DEDAD3] dark:border-white/10 text-[#171717] dark:text-white hover:border-[#C7612E]'
+                  ? 'bg-[#0A0A0A] text-white border-[#0A0A0A] dark:bg-white dark:text-[#0A0A0A] dark:border-white shadow-sm'
+                  : 'bg-white dark:bg-zinc-900 border-black/10 dark:border-white/10 text-[#0A0A0A] dark:text-white hover:border-black dark:hover:border-white'
               }`}
             >
               <div className="text-[10px] font-mono uppercase tracking-wider opacity-70">{d.dayName}</div>
@@ -230,9 +230,9 @@ export const ScheduleCallForm: React.FC<ScheduleCallFormProps> = ({ onSuccess, o
       <div>
         <div className="flex items-center justify-between mb-2">
           <label className={labelClass}>
-            Select Time Slot <span className="text-[#C7612E]">*</span>
+            Select Time Slot <span className="text-black dark:text-white">*</span>
           </label>
-          <span className="text-[11px] font-mono text-[#77746F] dark:text-zinc-400">
+          <span className="text-[11px] font-mono text-zinc-500 dark:text-zinc-400">
             Min. 1 hour advance notice
           </span>
         </div>
@@ -250,8 +250,8 @@ export const ScheduleCallForm: React.FC<ScheduleCallFormProps> = ({ onSuccess, o
                 !s.isAvailable
                   ? 'bg-zinc-100 dark:bg-zinc-900/40 text-zinc-400 dark:text-zinc-600 border-zinc-200 dark:border-zinc-800 cursor-not-allowed line-through'
                   : selectedTime === s.display
-                  ? 'bg-[#C7612E] text-white border-[#C7612E] shadow-sm'
-                  : 'bg-white dark:bg-[#18181D] border-[#DEDAD3] dark:border-white/10 text-[#171717] dark:text-white hover:border-[#C7612E] cursor-pointer'
+                  ? 'bg-[#0A0A0A] text-white border-[#0A0A0A] dark:bg-white dark:text-[#0A0A0A] dark:border-white shadow-sm'
+                  : 'bg-white dark:bg-zinc-900 border-black/10 dark:border-white/10 text-[#0A0A0A] dark:text-white hover:border-black dark:hover:border-white cursor-pointer'
               }`}
             >
               {s.display}
@@ -265,7 +265,7 @@ export const ScheduleCallForm: React.FC<ScheduleCallFormProps> = ({ onSuccess, o
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label htmlFor="call-name" className={labelClass}>
-            Your Name <span className="text-[#C7612E]">*</span>
+            Your Name <span className="text-black dark:text-white">*</span>
           </label>
           <input
             id="call-name"
@@ -281,7 +281,7 @@ export const ScheduleCallForm: React.FC<ScheduleCallFormProps> = ({ onSuccess, o
 
         <div>
           <label htmlFor="call-email" className={labelClass}>
-            Business Email <span className="text-[#C7612E]">*</span>
+            Business Email <span className="text-black dark:text-white">*</span>
           </label>
           <input
             id="call-email"
@@ -333,7 +333,7 @@ export const ScheduleCallForm: React.FC<ScheduleCallFormProps> = ({ onSuccess, o
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-[#C7612E] hover:bg-[#98431F] text-white text-xs font-mono font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-2 shadow-sm cursor-pointer disabled:opacity-70"
+          className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-[#0A0A0A] hover:bg-[#262626] text-white dark:bg-white dark:hover:bg-zinc-200 dark:text-[#0A0A0A] text-xs font-mono font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-2 shadow-xs cursor-pointer disabled:opacity-70"
         >
           {isSubmitting ? (
             <>
@@ -352,7 +352,7 @@ export const ScheduleCallForm: React.FC<ScheduleCallFormProps> = ({ onSuccess, o
           <button
             type="button"
             onClick={onCancel}
-            className="text-xs font-mono uppercase text-[#77746F] hover:text-[#171717] dark:hover:text-white"
+            className="text-xs font-mono uppercase text-zinc-500 hover:text-black dark:text-white dark:hover:text-[#F4F7F5]"
           >
             Cancel
           </button>

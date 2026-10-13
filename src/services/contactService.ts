@@ -8,6 +8,7 @@ export interface ContactFormData {
   timeline: string;
   engagementModel: string;
   details: string;
+  budget?: string;
   /** Honeypot spam trap: hidden from humans, filled by spam bots */
   hpField?: string;
 }
@@ -77,6 +78,7 @@ export function buildContactMailto(data: ContactFormData): string {
     `Email: ${data.email.trim()}\n` +
     `Organization: ${data.organization?.trim() || 'N/A'}\n` +
     `Discipline: ${data.projectType}\n` +
+    (data.budget ? `Investment Range: ${data.budget}\n` : '') +
     `Timeline: ${data.timeline}\n` +
     `Engagement Model: ${data.engagementModel}\n\n` +
     `Project Details:\n${data.details.trim()}\n\n` +
@@ -92,6 +94,7 @@ export function buildContactWhatsApp(data: ContactFormData): string {
     `• Email: ${data.email.trim()}\n` +
     `• Organization: ${data.organization?.trim() || 'N/A'}\n` +
     `• Type: ${data.projectType}\n` +
+    (data.budget ? `• Budget: ${data.budget}\n` : '') +
     `• Timeline: ${data.timeline}\n\n` +
     `Details: ${data.details.trim()}`
   );
@@ -156,6 +159,7 @@ export async function submitContactInquiry(
       email: data.email.trim(),
       organization: data.organization?.trim() || '',
       projectType: data.projectType,
+      budget: data.budget || '',
       timeline: data.timeline,
       engagementModel: data.engagementModel,
       details: data.details.trim(),

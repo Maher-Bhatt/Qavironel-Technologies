@@ -25,7 +25,7 @@ export interface ProjectMetric {
 export interface ProjectGalleryItem {
   src: string;
   alt: string;
-  caption: string;
+  caption?: string;
 }
 
 /**

@@ -1,11 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
-  <rect width="120" height="120" rx="24" fill="#171717"/>
-  <!-- Octagonal loop in off-white -->
-  <path d="M 42 22 L 78 22 L 98 42 L 98 78 L 78 98 L 42 98 L 22 78 L 22 42 Z" fill="#2A2A28"/>
-  <path d="M 44 24 L 76 24 L 94 42 L 94 76 L 76 94 L 44 94 L 26 76 L 26 42 Z" fill="#F6F3ED"/>
-  <!-- Inner cutout -->
-  <path d="M 46 38 L 68 38 L 78 48 L 78 68 L 68 78 L 46 78 L 38 70 L 38 46 Z" fill="#171717"/>
-  <!-- Copper orange angled crossbar -->
-  <path d="M 40 58 L 56 58 L 94 96 L 78 102 L 48 72 L 40 72 Z" fill="#C7612E"/>
-  <polygon points="56,58 74,58 100,84 86,96" fill="#E0733E"/>
+  <rect width="120" height="120" rx="26" fill="#0A0A0A"/>
+  <path d="M 42 24 L 78 24 L 96 42 L 96 76 L 78 94 L 42 94 L 24 76 L 24 42 Z" stroke="#FFFFFF" stroke-width="9" stroke-linejoin="round" fill="none"/>
+  <path d="M 48 40 L 72 40 L 82 50 L 82 68 L 72 78 L 48 78 L 38 68 L 38 50 Z" fill="#171717"/>
+  <path d="M 46 62 L 66 62 L 98 94 L 82 98 L 52 68 Z" fill="#FFFFFF"/>
+  <circle cx="60" cy="59" r="6" fill="#0E7A57"/>
 </svg>

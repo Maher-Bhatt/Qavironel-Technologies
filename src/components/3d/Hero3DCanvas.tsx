@@ -59,11 +59,11 @@ export const Hero3DCanvas: React.FC<Hero3DCanvasProps> = ({ className = '' }) =>
     // 2. Wireframe Accent Ring (Inner Gyroscopic Orbit)
     const ringGeometry = new THREE.TorusGeometry(2.2, 0.02, 16, 100);
     const ringMaterial = new THREE.MeshStandardMaterial({
-      color: new THREE.Color('#C7612E'),
-      metalness: 0.8,
-      roughness: 0.2,
-      emissive: new THREE.Color('#C7612E'),
-      emissiveIntensity: 0.2
+      color: new THREE.Color('#E5E5E5'),
+      metalness: 0.95,
+      roughness: 0.1,
+      emissive: new THREE.Color('#1A1A1A'),
+      emissiveIntensity: 0.1
     });
     const ringMesh1 = new THREE.Mesh(ringGeometry, ringMaterial);
     ringMesh1.rotation.x = Math.PI / 3;
@@ -79,8 +79,8 @@ export const Hero3DCanvas: React.FC<Hero3DCanvasProps> = ({ className = '' }) =>
     const satellites: { mesh: THREE.Mesh; speed: number; orbitRadius: number; angle: number; yOffset: number }[] = [];
     const satGeo = new THREE.IcosahedronGeometry(0.12, 0);
     const satMat = new THREE.MeshStandardMaterial({
-      color: new THREE.Color('#C7612E'),
-      metalness: 0.9,
+      color: new THREE.Color('#1A1A1A'),
+      metalness: 0.95,
       roughness: 0.1,
       wireframe: false
     });
@@ -111,13 +111,13 @@ export const Hero3DCanvas: React.FC<Hero3DCanvasProps> = ({ className = '' }) =>
     const ambientLight = new THREE.AmbientLight(0xffffff, 1.4);
     scene.add(ambientLight);
 
-    // Key Signature Copper/Orange Light
-    const copperLight = new THREE.PointLight('#C7612E', 18, 20);
-    copperLight.position.set(4, 3, 4);
-    scene.add(copperLight);
+    // Pure White Key Light
+    const whiteKeyLight = new THREE.PointLight('#FFFFFF', 18, 20);
+    whiteKeyLight.position.set(4, 3, 4);
+    scene.add(whiteKeyLight);
 
-    // Cool Rim Light
-    const rimLight = new THREE.PointLight('#60A5FA', 10, 20);
+    // Subtle Chrome Rim Light
+    const rimLight = new THREE.PointLight('#E5E5E5', 10, 20);
     rimLight.position.set(-4, -3, 3);
     scene.add(rimLight);
 
@@ -167,9 +167,9 @@ export const Hero3DCanvas: React.FC<Hero3DCanvasProps> = ({ className = '' }) =>
       ringMesh2.rotation.y = Math.PI / 4 + elapsedTime * 0.18;
       ringMesh2.rotation.z = elapsedTime * 0.12;
 
-      // Move copper light dynamically with cursor for specular shimmer
-      copperLight.position.x = 4 + mouseX * 2;
-      copperLight.position.y = 3 - mouseY * 2;
+      // Move white key light dynamically with cursor for specular shimmer
+      whiteKeyLight.position.x = 4 + mouseX * 2;
+      whiteKeyLight.position.y = 3 - mouseY * 2;
 
       // Animate floating satellites
       satellites.forEach((sat) => {

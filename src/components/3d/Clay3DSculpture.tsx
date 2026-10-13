@@ -126,11 +126,11 @@ export const Clay3DSculpture: React.FC<Clay3DSculptureProps> = ({
     charcoalPearl.position.set(0.68, 1.28, 0.98);
     sculptureGroup.add(charcoalPearl);
 
-    // Signature Radiant Copper Pearl (Bottom interior wall)
-    const copperGeo = new THREE.SphereGeometry(0.18, 48, 48);
-    const copperMat = new THREE.MeshPhysicalMaterial({
-      color: new THREE.Color('#C7612E'),
-      emissive: new THREE.Color('#98431F'),
+    // Signature Radiant Forest Green Pearl (Bottom interior wall)
+    const forestGeo = new THREE.SphereGeometry(0.18, 48, 48);
+    const forestMat = new THREE.MeshPhysicalMaterial({
+      color: new THREE.Color('#0E7A57'),
+      emissive: new THREE.Color('#0A3828'),
       emissiveIntensity: 0.35,
       roughness: 0.12,
       metalness: 0.1,
@@ -139,10 +139,10 @@ export const Clay3DSculpture: React.FC<Clay3DSculptureProps> = ({
       transmission: 0.12,
       ior: 1.6
     });
-    const copperPearl = new THREE.Mesh(copperGeo, copperMat);
+    const forestPearl = new THREE.Mesh(forestGeo, forestMat);
     // Nestled inside the lower concave wall
-    copperPearl.position.set(-0.72, -0.65, 1.15);
-    sculptureGroup.add(copperPearl);
+    forestPearl.position.set(-0.72, -0.65, 1.15);
+    sculptureGroup.add(forestPearl);
 
     // ─────────────────────────────────────────────────────────────
     // 5. THREE-POINT STUDIO LIGHTING RIG
@@ -166,13 +166,13 @@ export const Clay3DSculpture: React.FC<Clay3DSculptureProps> = ({
     scene.add(rimLight);
 
     // Subtle accent point lights for jewel specular gleam
-    const charcoalGleam = new THREE.PointLight('#77746F', 1.8, 4.0);
+    const charcoalGleam = new THREE.PointLight('#737373', 1.8, 4.0);
     charcoalGleam.position.set(0.9, 1.5, 1.3);
     scene.add(charcoalGleam);
 
-    const copperGleam = new THREE.PointLight('#D96F3B', 3.0, 4.0);
-    copperGleam.position.set(-0.9, -0.4, 1.4);
-    scene.add(copperGleam);
+    const silverGleam = new THREE.PointLight('#E5E5E5', 2.5, 4.0);
+    silverGleam.position.set(-0.9, -0.4, 1.4);
+    scene.add(silverGleam);
 
     // ─────────────────────────────────────────────────────────────
     // 6. WEIGHTED MOUSE INTERACTION (SMOOTH PARALLAX)
@@ -221,7 +221,7 @@ export const Clay3DSculpture: React.FC<Clay3DSculptureProps> = ({
 
       // Subtle pulse on accent spheres
       charcoalMat.emissiveIntensity = 0.2 + Math.sin(t * 1.5) * 0.05;
-      copperMat.emissiveIntensity = 0.35 + Math.cos(t * 1.5) * 0.1;
+      forestMat.emissiveIntensity = 0.35 + Math.cos(t * 1.5) * 0.1;
 
       renderer.render(scene, camera);
     };
@@ -277,17 +277,17 @@ export const Clay3DSculpture: React.FC<Clay3DSculptureProps> = ({
       porcelainMat.dispose();
       charcoalGeo.dispose();
       charcoalMat.dispose();
-      copperGeo.dispose();
-      copperMat.dispose();
+      forestGeo.dispose();
+      forestMat.dispose();
       renderer.dispose();
     };
   }, [size]);
 
   return (
     <div className={`relative flex items-center justify-center ${className}`}>
-      {/* Soft Ambient Copper Diffuse Glow */}
+      {/* Soft Ambient Forest Diffuse Glow */}
       <div 
-        className="absolute w-[80%] h-[80%] rounded-full bg-radial from-[#C7612E]/5 to-transparent blur-[80px] pointer-events-none"
+        className="absolute w-[80%] h-[80%] rounded-full bg-radial from-[#0E7A57]/5 dark:from-[#0E7A57]/10 to-transparent blur-[80px] pointer-events-none"
         aria-hidden="true"
       />
       {/* 3D Canvas Mount Point */}
@@ -296,7 +296,7 @@ export const Clay3DSculpture: React.FC<Clay3DSculptureProps> = ({
         className="w-full aspect-square max-w-[520px] max-h-[520px] relative z-10 cursor-grab active:cursor-grabbing"
         title="Interactive 3D Porcelain Sculpture"
         role="img"
-        aria-label="Tactile porcelain architectural 3D sculpture with copper and charcoal accent spheres"
+        aria-label="Tactile porcelain architectural 3D sculpture with forest green and charcoal accent spheres"
       />
     </div>
   );

@@ -41,8 +41,7 @@ Every project in this repository represents verified work with honest classifica
 5. **CodeDroid** (`/work/codedroid`): Digital Products — Mobile Developer Tooling. Pocket Android IDE with offline CodeMirror editor, integrated terminal, and embedded on-device Python (Chaquopy) & JS runtimes.
 6. **ITM Notes** (`/work/itm-notes`): Digital Products — Education Platform. Curated study portal organizing five core B.Tech Semester 2 engineering subjects for 300+ university peers.
 7. **Chain of Achievements** (`/work/chain-of-achievements`): Engineering Archive — Web3 Prototype. Non-transferable credential issuance prototype on Ethereum testnet.
-8. **SocialSafe** (`/work/socialsafe`): Engineering Archive — Cybersecurity Education. Dependency-free login awareness lab with strict CSP boundaries and instant credential erasure.
-9. **Cryptographic Password Generator** (`/work/password-generator`): Engineering Archive — Security Utility. Python CLI utility for generating cryptographically secure, high-entropy secrets via OS entropy.
+8. **CyberGuard Security Lab** (`/work/socialsafe`): Engineering Archive — Cybersecurity Education & Labs. Modular cybersecurity training suite demonstrating phishing defense, session security, and strict client-side isolation across multiple educational workshops.
 
 ---
 

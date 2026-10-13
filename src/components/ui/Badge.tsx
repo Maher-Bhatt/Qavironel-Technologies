@@ -2,7 +2,7 @@ import React from 'react';
 
 interface BadgeProps {
   children: React.ReactNode;
-  variant?: 'copper' | 'charcoal' | 'outline' | 'subtle';
+  variant?: 'forest' | 'charcoal' | 'outline' | 'subtle';
   size?: 'sm' | 'md';
   className?: string;
 }
@@ -17,11 +17,13 @@ export const Badge: React.FC<BadgeProps> = ({
     ? 'px-2.5 py-1 text-[0.68rem] font-semibold tracking-wider uppercase' 
     : 'px-3.5 py-1.5 text-xs font-semibold tracking-wider uppercase';
 
+  const forestStyle = 'bg-emerald-50 text-black dark:text-white dark:bg-emerald-950/40 dark:text-white border border-emerald-200 dark:border-emerald-800/40 rounded-full';
+
   const variantStyles = {
-    copper: 'bg-[#C7612E]/10 text-[#C7612E] border border-[#C7612E]/30 rounded',
-    charcoal: 'bg-[#171717] text-white border border-[#20201E] rounded',
-    outline: 'bg-transparent text-[#171717] dark:text-[#F6F3ED] border border-[#DEDAD3] dark:border-white/10 rounded',
-    subtle: 'bg-[#F6F3ED] dark:bg-[#20201E] text-[#77746F] dark:text-[#A1A1AA] border border-[#DEDAD3] dark:border-white/10 rounded',
+    forest: forestStyle,
+    charcoal: 'bg-[#0A0A0A] text-white dark:bg-white dark:text-[#0A0A0A] border border-black/10 dark:border-white/10 rounded-full',
+    outline: 'bg-transparent text-[#0A0A0A] dark:text-white border border-black/10 dark:border-white/10 rounded-full',
+    subtle: 'bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 border border-black/5 dark:border-white/10 rounded-full',
   }[variant];
 
   return (

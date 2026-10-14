@@ -236,7 +236,9 @@ export const CaseStudyPage: React.FC = () => {
                       ? '/videos/ztees-video-poster.webp'
                       : project.slug === 'itm-notes'
                         ? '/videos/itm-notes-video-poster.webp'
-                        : '/videos/project-reel-poster.webp'
+                        : project.slug === 'civic-sathi'
+                          ? '/videos/civic-sathi-video-poster.webp'
+                          : '/videos/project-reel-poster.webp'
                 }
                 controls
                 autoPlay

@@ -759,8 +759,8 @@ export const HomePage: React.FC = () => {
                     className="block group/img overflow-hidden rounded-2xl border border-black/10 dark:border-white/15 bg-black mb-5"
                   >
                     <ScrollAutoplayVideo 
-                      src={civicProject.videoSrc || '/videos/tech-atmosphere.mp4'}
-                      poster="/images/projects/civic-public-home.png"
+                      src={civicProject.videoSrc || '/videos/civic-sathi-video.mp4'}
+                      poster="/videos/civic-sathi-video-poster.webp"
                       alt="Civic Sathi Public Citizen Interface video"
                       badgeText="4-ROLE MONOREPO"
                       aspectRatio="aspect-[16/9]"

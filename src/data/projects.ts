@@ -326,7 +326,7 @@ export const projects: Project[] = [
       'Vite PWA'
     ],
     heroImage: '/images/projects/civic-sathi/civic-sathi-delhi-hero.png',
-    videoSrc: '/videos/tech-atmosphere.mp4',
+    videoSrc: '/videos/civic-sathi-video.mp4',
     gallery: [
       {
         src: '/images/projects/civic-sathi/civic-sathi-delhi-hero.png',

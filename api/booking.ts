@@ -1,6 +1,6 @@
 // Serverless handler for booking requests (Google Meet / Call appointments)
 // Validates fields on server, sends via Resend if configured, returns honest 503 if unconfigured.
-import { renderBookingTeamEmail, renderBookingClientEmail } from './templates';
+import { renderBookingTeamEmail, renderBookingClientEmail, sendWithResend } from './templates';
 
 interface BookingRequestBody {
   name?: string;
@@ -115,8 +115,11 @@ export default async function handler(req: any, res: any) {
   }
 
   const resendApiKey = process.env.RESEND_API_KEY;
-  const targetEmail = process.env.CONTACT_RECEIVER_EMAIL || 'qavironeltechnologies@gmail.com';
-  const fromEmail = process.env.RESEND_FROM_EMAIL || 'inquiries@qavironel.com';
+  const targetEmail = process.env.CONTACT_RECEIVER_EMAIL || 'maherbhatt01@gmail.com';
+  const rawFrom = process.env.RESEND_FROM_EMAIL?.trim();
+  const fromEmail = (rawFrom && !rawFrom.toLowerCase().includes('@qavironel.com'))
+    ? rawFrom
+    : 'Qavironel Technologies <onboarding@resend.dev>';
 
   if (resendApiKey) {
     try {
@@ -131,23 +134,22 @@ export default async function handler(req: any, res: any) {
       });
 
       // 1. Dispatch Notification to Qavironel Team
-      const emailResp = await fetch('https://api.resend.com/emails', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${resendApiKey}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          from: fromEmail,
-          to: [targetEmail],
-          reply_to: email,
-          subject: `[Call Request] ${sanitizeSubject(date)} at ${sanitizeSubject(time)} - ${sanitizeSubject(name)} (${sanitizeSubject(topic)})`,
-          html: teamHtml,
-        }),
+      const dispatchResult = await sendWithResend({
+        apiKey: resendApiKey,
+        from: fromEmail,
+        to: targetEmail,
+        replyTo: email,
+        subject: `[Call Request] ${sanitizeSubject(date)} at ${sanitizeSubject(time)} - ${sanitizeSubject(name)} (${sanitizeSubject(topic)})`,
+        html: teamHtml,
       });
 
-      if (!emailResp.ok) {
-        return res.status(502).json({ success: false, message: 'Failed to dispatch meeting notification.' });
+      if (!dispatchResult.ok) {
+        return res.status(502).json({
+          success: false,
+          code: 'DISPATCH_ERROR',
+          message: 'Failed to dispatch meeting notification.',
+          detail: process.env.NODE_ENV !== 'production' ? dispatchResult.error : undefined,
+        });
       }
 
       // 2. Dispatch Confirmation Auto-Responder to Client
@@ -159,29 +161,24 @@ export default async function handler(req: any, res: any) {
           topic,
         });
 
-        await fetch('https://api.resend.com/emails', {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${resendApiKey}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            from: fromEmail,
-            to: [email],
-            reply_to: targetEmail,
-            subject: `Architecture Call Request Received: ${sanitizeSubject(date)} — Qavironel Technologies`,
-            html: clientHtml,
-          }),
-        });
-      } catch {
-        // In sandbox testing mode (onboarding@resend.dev), Resend restricts external sending.
+        await sendWithResend({
+          apiKey: resendApiKey,
+          from: dispatchResult.usedFrom || fromEmail,
+          to: email,
+          replyTo: targetEmail,
+          subject: `Architecture Call Request Received: ${sanitizeSubject(date)} — Qavironel Technologies`,
+          html: clientHtml,
+        }).catch((err) => console.warn('Client auto-responder skipped/restricted in sandbox:', err));
+      } catch (autoErr) {
+        console.warn('Client auto-responder exception caught:', autoErr);
       }
 
       return res.status(200).json({
         success: true,
         message: 'Your meeting request has been received. Maher Bhatt will review availability and confirm your calendar invite within 12 hours.',
       });
-    } catch {
+    } catch (err: any) {
+      console.error('Internal error during booking dispatch:', err);
       return res.status(500).json({ success: false, message: 'Internal server error processing meeting dispatch.' });
     }
   }

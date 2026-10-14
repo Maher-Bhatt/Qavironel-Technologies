@@ -1,6 +1,6 @@
 // Serverless API route for contact form submission
 // Compatible with Vercel Serverless Functions (Node.js runtime)
-import { renderContactTeamEmail, renderContactClientEmail } from './templates';
+import { renderContactTeamEmail, renderContactClientEmail, sendWithResend } from './templates';
 
 interface ContactRequestBody {
   name?: string;
@@ -121,8 +121,11 @@ export default async function handler(req: any, res: any) {
 
   // 4. Delivery via configured email provider
   const resendApiKey = process.env.RESEND_API_KEY;
-  const targetEmail = process.env.CONTACT_RECEIVER_EMAIL || 'qavironeltechnologies@gmail.com';
-  const fromEmail = process.env.RESEND_FROM_EMAIL || 'inquiries@qavironel.com';
+  const targetEmail = process.env.CONTACT_RECEIVER_EMAIL || 'maherbhatt01@gmail.com';
+  const rawFrom = process.env.RESEND_FROM_EMAIL?.trim();
+  const fromEmail = (rawFrom && !rawFrom.toLowerCase().includes('@qavironel.com'))
+    ? rawFrom
+    : 'Qavironel Technologies <onboarding@resend.dev>';
 
   if (resendApiKey) {
     try {
@@ -137,26 +140,21 @@ export default async function handler(req: any, res: any) {
       });
 
       // 1. Dispatch Notification to Qavironel Team
-      const emailResp = await fetch('https://api.resend.com/emails', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${resendApiKey}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          from: fromEmail,
-          to: [targetEmail],
-          reply_to: email,
-          subject: `[New Inquiry] ${sanitizeSubject(projectType)} - ${sanitizeSubject(name)}`,
-          html: teamHtml,
-        }),
+      const dispatchResult = await sendWithResend({
+        apiKey: resendApiKey,
+        from: fromEmail,
+        to: targetEmail,
+        replyTo: email,
+        subject: `[New Inquiry] ${sanitizeSubject(projectType)} - ${sanitizeSubject(name)}`,
+        html: teamHtml,
       });
 
-      if (!emailResp.ok) {
+      if (!dispatchResult.ok) {
         return res.status(502).json({
           success: false,
           code: 'DISPATCH_ERROR',
           message: 'Error communicating with mail provider.',
+          detail: process.env.NODE_ENV !== 'production' ? dispatchResult.error : undefined,
         });
       }
 
@@ -169,30 +167,24 @@ export default async function handler(req: any, res: any) {
           details,
         });
 
-        await fetch('https://api.resend.com/emails', {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${resendApiKey}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            from: fromEmail,
-            to: [email],
-            reply_to: targetEmail,
-            subject: `Inquiry Received: ${sanitizeSubject(projectType)} — Qavironel Technologies`,
-            html: clientHtml,
-          }),
-        });
-      } catch {
-        // In sandbox testing mode (onboarding@resend.dev), Resend restricts external sending.
-        // We log nothing and continue so client submission remains successful.
+        await sendWithResend({
+          apiKey: resendApiKey,
+          from: dispatchResult.usedFrom || fromEmail,
+          to: email,
+          replyTo: targetEmail,
+          subject: `Inquiry Received: ${sanitizeSubject(projectType)} — Qavironel Technologies`,
+          html: clientHtml,
+        }).catch((err) => console.warn('Client auto-responder skipped/restricted in sandbox:', err));
+      } catch (autoErr) {
+        console.warn('Client auto-responder exception caught:', autoErr);
       }
 
       return res.status(200).json({
         success: true,
         message: 'Your project inquiry has been received. Maher Bhatt will review and reply within 12 hours.',
       });
-    } catch {
+    } catch (err: any) {
+      console.error('Internal error during dispatch:', err);
       return res.status(500).json({
         success: false,
         code: 'INTERNAL_ERROR',

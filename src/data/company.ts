@@ -12,6 +12,8 @@ export const companyConfig = {
   secondaryEmail: 'maherbhatt01@gmail.com',
   phone: '+91 98795 29957',
   whatsappUrl: 'https://wa.me/919879529957',
+  calComUrl: 'https://cal.com/qavironel/30min',
+  calCom15mUrl: 'https://cal.com/qavironel/15min',
   githubOrg: 'https://github.com/Maher-Bhatt',
   linkedinUrl: 'https://linkedin.com/in/maher-bhatt-206035362',
   portfolioOrigin: 'An independent digital product and software engineering practice dedicated to high-performance craftsmanship, defensive security architecture, and applied AI systems.'

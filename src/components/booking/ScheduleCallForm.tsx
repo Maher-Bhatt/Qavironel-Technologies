@@ -360,6 +360,41 @@ export const ScheduleCallForm: React.FC<ScheduleCallFormProps> = ({ onSuccess, o
         </div>
       )}
 
+      {/* Live Cal.com Direct Booking Card */}
+      <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-zinc-50 to-zinc-100 dark:from-zinc-900 dark:to-zinc-950 border border-black/10 dark:border-white/10 shadow-xs">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div className="space-y-1">
+            <div className="inline-flex items-center gap-2 text-[10px] font-mono font-bold uppercase tracking-widest text-emerald-600 dark:text-emerald-400">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span>Instant Google Meet Booking</span>
+            </div>
+            <h3 className="font-sans font-bold text-sm sm:text-base text-black dark:text-white">
+              Live Calendar &amp; Instant Google Meet Link
+            </h3>
+            <p className="text-xs text-zinc-500 dark:text-zinc-400">
+              Pick your exact time slot directly on Cal.com to auto-sync with Maher's calendar and get an instant meeting invite.
+            </p>
+          </div>
+          <a
+            href={companyConfig.calComUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-glass-shimmer inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-black dark:bg-white text-white dark:text-black font-mono font-bold text-xs uppercase tracking-wider hover:scale-[1.02] transition-all shrink-0 shadow-md"
+          >
+            <CalendarIcon className="w-3.5 h-3.5" />
+            <span>Book on Cal.com &rarr;</span>
+          </a>
+        </div>
+      </div>
+
+      <div className="relative flex py-1 items-center">
+        <div className="flex-grow border-t border-black/10 dark:border-white/10"></div>
+        <span className="flex-shrink mx-4 text-[10px] font-mono uppercase tracking-widest text-zinc-400">
+          Or submit preferred slot below
+        </span>
+        <div className="flex-grow border-t border-black/10 dark:border-white/10"></div>
+      </div>
+
       {/* ========================================================================= */}
       {/* 01. GLOBAL TIMEZONE SELECTOR & CALL PARAMETERS                            */}
       {/* ========================================================================= */}

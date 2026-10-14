@@ -149,16 +149,29 @@ export const ContactPage: React.FC = () => {
                 </div>
 
                 <div className="lg:col-span-4 flex flex-col gap-3">
-                  <button
-                    type="button"
-                    onClick={() => openBookingModal('call')}
+                  <a
+                    href={companyConfig.calComUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="btn-glass-shimmer group relative flex items-center justify-between px-6 py-4 rounded-2xl bg-black dark:bg-white text-white dark:text-black font-mono font-bold text-xs uppercase tracking-wider shadow-lg hover:shadow-xl hover:scale-[1.01] transition-all cursor-pointer border border-white/20 dark:border-black/20"
                   >
                     <span className="flex items-center gap-2.5">
                       <Calendar className="w-4 h-4" />
-                      <span>Select Calendar Slot (30m)</span>
+                      <span>Book on Cal.com (Instant Meet)</span>
                     </span>
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
+                  </a>
+
+                  <button
+                    type="button"
+                    onClick={() => openBookingModal('call')}
+                    className="flex items-center justify-between px-6 py-3.5 rounded-2xl bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-900 dark:hover:bg-zinc-800 text-black dark:text-white font-mono font-semibold text-xs tracking-wider transition-colors border border-black/5 dark:border-white/10 cursor-pointer"
+                  >
+                    <span className="flex items-center gap-2.5">
+                      <Clock className="w-4 h-4" />
+                      <span>Custom Intake Brief</span>
+                    </span>
+                    <ArrowUpRight className="w-3.5 h-3.5" />
                   </button>
 
                   <a

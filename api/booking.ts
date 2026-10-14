@@ -1,5 +1,6 @@
 // Serverless handler for booking requests (Google Meet / Call appointments)
 // Validates fields on server, sends via Resend if configured, returns honest 503 if unconfigured.
+import { renderBookingTeamEmail, renderBookingClientEmail } from './templates';
 
 interface BookingRequestBody {
   name?: string;
@@ -115,9 +116,21 @@ export default async function handler(req: any, res: any) {
 
   const resendApiKey = process.env.RESEND_API_KEY;
   const targetEmail = process.env.CONTACT_RECEIVER_EMAIL || 'qavironeltechnologies@gmail.com';
+  const fromEmail = process.env.RESEND_FROM_EMAIL || 'inquiries@qavironel.com';
 
   if (resendApiKey) {
     try {
+      const teamHtml = renderBookingTeamEmail({
+        name,
+        email,
+        organization,
+        date,
+        time,
+        topic,
+        notes,
+      });
+
+      // 1. Dispatch Notification to Qavironel Team
       const emailResp = await fetch('https://api.resend.com/emails', {
         method: 'POST',
         headers: {
@@ -125,25 +138,43 @@ export default async function handler(req: any, res: any) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          from: process.env.RESEND_FROM_EMAIL || 'inquiries@qavironel.com',
+          from: fromEmail,
           to: [targetEmail],
           reply_to: email,
           subject: `[Call Request] ${sanitizeSubject(date)} at ${sanitizeSubject(time)} - ${sanitizeSubject(name)} (${sanitizeSubject(topic)})`,
-          html: `
-            <h2>New Call Request from Qavironel.com</h2>
-            <p><strong>Name:</strong> ${escapeHtml(name)}</p>
-            <p><strong>Email:</strong> ${escapeHtml(email)}</p>
-            <p><strong>Organization:</strong> ${escapeHtml(organization)}</p>
-            <p><strong>Requested Date:</strong> ${escapeHtml(date)}</p>
-            <p><strong>Requested Time Slot:</strong> ${escapeHtml(time)}</p>
-            <p><strong>Topic:</strong> ${escapeHtml(topic)}</p>
-            <p><strong>Notes:</strong> ${escapeHtml(notes || 'None')}</p>
-          `,
+          html: teamHtml,
         }),
       });
 
       if (!emailResp.ok) {
         return res.status(502).json({ success: false, message: 'Failed to dispatch meeting notification.' });
+      }
+
+      // 2. Dispatch Confirmation Auto-Responder to Client
+      try {
+        const clientHtml = renderBookingClientEmail({
+          name,
+          date,
+          time,
+          topic,
+        });
+
+        await fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${resendApiKey}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            from: fromEmail,
+            to: [email],
+            reply_to: targetEmail,
+            subject: `Architecture Call Request Received: ${sanitizeSubject(date)} — Qavironel Technologies`,
+            html: clientHtml,
+          }),
+        });
+      } catch {
+        // In sandbox testing mode (onboarding@resend.dev), Resend restricts external sending.
       }
 
       return res.status(200).json({

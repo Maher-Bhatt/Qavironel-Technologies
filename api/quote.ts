@@ -1,5 +1,6 @@
 // Serverless handler for quotation requests
 // Validates scope fields on server, dispatches via email provider, returns honest status.
+import { renderQuoteTeamEmail, renderQuoteClientEmail } from './templates';
 
 interface QuoteRequestBody {
   name?: string;
@@ -124,9 +125,22 @@ export default async function handler(req: any, res: any) {
 
   const resendApiKey = process.env.RESEND_API_KEY;
   const targetEmail = process.env.CONTACT_RECEIVER_EMAIL || 'qavironeltechnologies@gmail.com';
+  const fromEmail = process.env.RESEND_FROM_EMAIL || 'inquiries@qavironel.com';
 
   if (resendApiKey) {
     try {
+      const teamHtml = renderQuoteTeamEmail({
+        name,
+        email,
+        organization,
+        projectType,
+        budgetRange,
+        timeline,
+        features,
+        scopeDetails,
+      });
+
+      // 1. Dispatch Notification to Qavironel Team
       const emailResp = await fetch('https://api.resend.com/emails', {
         method: 'POST',
         headers: {
@@ -134,23 +148,11 @@ export default async function handler(req: any, res: any) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          from: process.env.RESEND_FROM_EMAIL || 'inquiries@qavironel.com',
+          from: fromEmail,
           to: [targetEmail],
           reply_to: email,
           subject: `[Quotation Request] ${sanitizeSubject(projectType)} - ${sanitizeSubject(name)} (${sanitizeSubject(budgetRange)})`,
-          html: `
-            <h2>New Quotation Request from Qavironel.com</h2>
-            <p><strong>Name:</strong> ${escapeHtml(name)}</p>
-            <p><strong>Email:</strong> ${escapeHtml(email)}</p>
-            <p><strong>Organization:</strong> ${escapeHtml(organization)}</p>
-            <p><strong>Project Type:</strong> ${escapeHtml(projectType)}</p>
-            <p><strong>Budget Tier:</strong> ${escapeHtml(budgetRange)}</p>
-            <p><strong>Timeline:</strong> ${escapeHtml(timeline)}</p>
-            <p><strong>Selected Deliverables:</strong> ${escapeHtml(features)}</p>
-            <hr />
-            <h3>Scope & Requirements:</h3>
-            <p style="white-space: pre-wrap;">${escapeHtml(scopeDetails)}</p>
-          `,
+          html: teamHtml,
         }),
       });
 
@@ -160,6 +162,35 @@ export default async function handler(req: any, res: any) {
           code: 'DISPATCH_ERROR',
           message: 'Failed to dispatch quotation request.',
         });
+      }
+
+      // 2. Dispatch Confirmation Auto-Responder to Client
+      try {
+        const clientHtml = renderQuoteClientEmail({
+          name,
+          projectType,
+          budgetRange,
+          timeline,
+          features,
+          scopeDetails,
+        });
+
+        await fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${resendApiKey}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            from: fromEmail,
+            to: [email],
+            reply_to: targetEmail,
+            subject: `Quotation Request Received: ${sanitizeSubject(projectType)} — Qavironel Technologies`,
+            html: clientHtml,
+          }),
+        });
+      } catch {
+        // In sandbox testing mode (onboarding@resend.dev), Resend restricts external sending.
       }
 
       return res.status(200).json({

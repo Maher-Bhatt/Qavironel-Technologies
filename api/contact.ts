@@ -1,5 +1,6 @@
 // Serverless API route for contact form submission
 // Compatible with Vercel Serverless Functions (Node.js runtime)
+import nodemailer from 'nodemailer';
 
 interface ContactRequestBody {
   name?: string;
@@ -363,6 +364,84 @@ async function sendWithResend(options: {
   }
 }
 
+async function dispatchEmail(options: {
+  to: string | string[];
+  replyTo?: string;
+  subject: string;
+  html: string;
+  isAutoResponder?: boolean;
+}): Promise<{ ok: boolean; status: number; error?: string; usedFrom?: string }> {
+  const smtpUser = process.env.SMTP_USER || process.env.GMAIL_USER;
+  const smtpPass = process.env.SMTP_PASS || process.env.GMAIL_APP_PASSWORD;
+  const resendApiKey = process.env.RESEND_API_KEY;
+
+  // 1. If SMTP / Gmail credentials are provided, send via Nodemailer (allows sending to ANY user worldwide)
+  if (smtpUser && smtpPass) {
+    try {
+      const host = process.env.SMTP_HOST;
+      const port = process.env.SMTP_PORT ? parseInt(process.env.SMTP_PORT, 10) : undefined;
+      const secure = process.env.SMTP_SECURE === 'true' || port === 465;
+
+      const transportConfig: any = host
+        ? {
+            host,
+            port: port || 587,
+            secure,
+            auth: {
+              user: smtpUser.trim(),
+              pass: smtpPass.trim().replace(/\s+/g, ''),
+            },
+          }
+        : {
+            service: 'gmail',
+            auth: {
+              user: smtpUser.trim(),
+              pass: smtpPass.trim().replace(/\s+/g, ''),
+            },
+          };
+
+      const transporter = nodemailer.createTransport(transportConfig);
+      const senderName = process.env.EMAIL_SENDER_NAME || 'Qavironel Technologies';
+      const fromHeader = `"${senderName}" <${smtpUser.trim()}>`;
+
+      await transporter.sendMail({
+        from: fromHeader,
+        to: options.to,
+        replyTo: options.replyTo,
+        subject: options.subject,
+        html: options.html,
+      });
+
+      return { ok: true, status: 200, usedFrom: fromHeader };
+    } catch (smtpErr: any) {
+      console.error('SMTP dispatch attempt error:', smtpErr);
+      if (!resendApiKey) {
+        return { ok: false, status: 502, error: smtpErr?.message || 'SMTP delivery failed' };
+      }
+    }
+  }
+
+  // 2. Fallback to Resend API
+  if (resendApiKey) {
+    const rawFrom = process.env.RESEND_FROM_EMAIL?.trim();
+    const fromEmail = (rawFrom && !rawFrom.toLowerCase().includes('@qavironel.com'))
+      ? rawFrom
+      : 'Qavironel Technologies <onboarding@resend.dev>';
+
+    return sendWithResend({
+      apiKey: resendApiKey,
+      from: fromEmail,
+      to: options.to,
+      replyTo: options.replyTo,
+      subject: options.subject,
+      html: options.html,
+      isAutoResponder: options.isAutoResponder,
+    });
+  }
+
+  return { ok: false, status: 503, error: 'No email delivery provider (SMTP or Resend) is configured.' };
+}
+
 export default async function handler(req: any, res: any) {
   // Only allow POST
   if (req.method !== 'POST') {
@@ -421,15 +500,15 @@ export default async function handler(req: any, res: any) {
     return sendJson(res, 400, { success: false, message: 'Project details must be between 10 and 5000 characters.' });
   }
 
-  // 4. Delivery via configured email provider
-  const resendApiKey = process.env.RESEND_API_KEY;
-  const targetEmail = process.env.CONTACT_RECEIVER_EMAIL || 'maherbhatt01@gmail.com';
-  const rawFrom = process.env.RESEND_FROM_EMAIL?.trim();
-  const fromEmail = (rawFrom && !rawFrom.toLowerCase().includes('@qavironel.com'))
-    ? rawFrom
-    : 'Qavironel Technologies <onboarding@resend.dev>';
+  // 4. Delivery via configured email provider (SMTP or Resend)
+  const targetEmail = process.env.CONTACT_RECEIVER_EMAIL || process.env.SMTP_USER || process.env.GMAIL_USER || 'maherbhatt01@gmail.com';
+  const hasProvider = Boolean(
+    (process.env.SMTP_USER && process.env.SMTP_PASS) ||
+    (process.env.GMAIL_USER && process.env.GMAIL_APP_PASSWORD) ||
+    process.env.RESEND_API_KEY
+  );
 
-  if (resendApiKey) {
+  if (hasProvider) {
     try {
       const teamHtml = renderContactTeamEmail({
         name,
@@ -442,13 +521,12 @@ export default async function handler(req: any, res: any) {
       });
 
       // 1. Dispatch Notification to Qavironel Team
-      const dispatchResult = await sendWithResend({
-        apiKey: resendApiKey,
-        from: fromEmail,
+      const dispatchResult = await dispatchEmail({
         to: targetEmail,
         replyTo: email,
         subject: `[New Inquiry] ${sanitizeSubject(projectType)} - ${sanitizeSubject(name)}`,
         html: teamHtml,
+        isAutoResponder: false,
       });
 
       if (!dispatchResult.ok) {
@@ -460,7 +538,7 @@ export default async function handler(req: any, res: any) {
         });
       }
 
-      // 2. Dispatch Confirmation Auto-Responder to Client
+      // 2. Dispatch Confirmation Auto-Responder to Client (XYZ user)
       try {
         const clientHtml = renderContactClientEmail({
           name,
@@ -469,9 +547,7 @@ export default async function handler(req: any, res: any) {
           details,
         });
 
-        await sendWithResend({
-          apiKey: resendApiKey,
-          from: dispatchResult.usedFrom || fromEmail,
+        await dispatchEmail({
           to: email,
           replyTo: targetEmail,
           subject: `Inquiry Received: ${sanitizeSubject(projectType)} — Qavironel Technologies`,

@@ -44,7 +44,7 @@ export const VideoShowreel: React.FC = () => {
       category: 'PRODUCTION RUNTIME',
       src: '/videos/hero-showreel.mp4',
       poster: '/videos/hero-showreel-poster.webp',
-      duration: '0:30',
+      duration: '0:10',
       tags: ['React 19', 'TypeScript', 'FastAPI', 'High-Performance'],
     },
     {

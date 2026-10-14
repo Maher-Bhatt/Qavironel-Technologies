@@ -313,19 +313,23 @@ async function sendWithResend(options: {
     } catch {}
     const errMsg = (errJson?.message || errText).toLowerCase();
 
-    // If from address needs to fallback to sandbox
-    if (errMsg.includes('domain') || errMsg.includes('from') || errMsg.includes('not verified')) {
-      if (!currentFrom.includes('onboarding@resend.dev')) {
-        currentFrom = 'Qavironel Technologies <onboarding@resend.dev>';
-        resp = await doDispatch(currentFrom, currentTo);
-        if (resp.ok) {
-          const data = await resp.json().catch(() => ({}));
-          return { ok: true, status: resp.status, data, usedFrom: currentFrom };
-        }
+    // If Resend sandbox restricts to verified account owner
+    if (errMsg.includes('testing emails to your own email address') || errMsg.includes('own email address')) {
+      const match = errText.match(/testing emails to your own email address \(([^)]+)\)/i) ||
+                    errText.match(/\b([A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,})\b/);
+      const verifiedOwner = match?.[1]?.trim() || 'qavironeltechnologies@gmail.com';
+      console.log(`Resend sandbox detected: auto-routing dispatch to verified account ${verifiedOwner}`);
+      currentTo = [verifiedOwner];
+      currentFrom = 'onboarding@resend.dev';
+      resp = await doDispatch(currentFrom, currentTo);
+      if (resp.ok) {
+        const data = await resp.json().catch(() => ({}));
+        return { ok: true, status: resp.status, data, usedFrom: currentFrom };
       }
     }
 
-    if (currentFrom !== 'onboarding@resend.dev') {
+    // If from address needs to fallback to sandbox
+    if (errMsg.includes('domain') || errMsg.includes('from') || errMsg.includes('not verified')) {
       currentFrom = 'onboarding@resend.dev';
       resp = await doDispatch(currentFrom, currentTo);
       if (resp.ok) {
@@ -487,19 +491,22 @@ export default async function handler(req: any, res: any) {
 
   if (hasProvider) {
     try {
-      const clientHtml = renderContactClientEmail({
+      const inquiryHtml = renderContactTeamEmail({
         name,
+        email,
+        organization,
         projectType,
         timeline,
+        engagementModel,
         details,
       });
 
       // ONLY ONE EMAIL is dispatched: directly to the user who filled the form!
       const dispatchResult = await dispatchEmail({
         to: email,
-        replyTo: targetEmail,
-        subject: `Inquiry Received: ${sanitizeSubject(projectType)} — Qavironel Technologies`,
-        html: clientHtml,
+        replyTo: email,
+        subject: `[Project Inquiry] ${sanitizeSubject(projectType)} — ${sanitizeSubject(name)}`,
+        html: inquiryHtml,
         isAutoResponder: false,
       });
 

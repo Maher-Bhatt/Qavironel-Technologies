@@ -41,8 +41,8 @@ export const HomePage: React.FC = () => {
   const kalkiProject = projects.find(p => p.slug === 'kalki') || projects[0];
   const zteesProject = projects.find(p => p.slug === 'ztees') || projects[1];
   const cipProject = projects.find(p => p.slug === 'classic-infrastructure') || projects[2];
+  const itmProject = projects.find(p => p.slug === 'itm-notes') || projects[5] || projects[0];
   const civicProject = projects.find(p => p.slug === 'civic-sathi') || projects[3];
-  const cyberProject = projects.find(p => p.slug === 'socialsafe') || projects[projects.length - 1] || projects[0];
 
   const disciplines = [
     {
@@ -588,7 +588,7 @@ export const HomePage: React.FC = () => {
               </Link>
             </div>
 
-            {/* Harmonized 4-Flagship Cinema Grid (Ztees, CIP, CyberGuard, Civic Sathi) */}
+            {/* Harmonized 4-Flagship Cinema Grid (Ztees, CIP, ITM Notes, Civic Sathi) */}
             {/* KALKI is spotlighted exclusively in the Hero Console & Video Showreel to avoid duplicate card sprawl */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 py-16">
               
@@ -698,18 +698,18 @@ export const HomePage: React.FC = () => {
                 </div>
               </div>
 
-              {/* Card #03: CyberGuard Security Lab */}
+              {/* Card #03: ITM Notes Academic Operating System */}
               <div className="glass-card-luxury p-6 sm:p-8 rounded-3xl flex flex-col justify-between group transition-all duration-300 hover:-translate-y-1">
                 <div>
                   <Link 
-                    to={`/work/${cyberProject.slug}`}
+                    to={`/work/${itmProject.slug}`}
                     className="block group/img overflow-hidden rounded-2xl border border-black/10 dark:border-white/15 bg-black mb-5"
                   >
                     <ScrollAutoplayVideo 
-                      src={cyberProject.videoSrc || '/videos/hero-showreel.mp4'}
-                      poster="/images/projects/kalki-security.png"
-                      alt="CyberGuard Security Lab Interface video"
-                      badgeText="DEFENSIVE LABS"
+                      src={itmProject.videoSrc || '/videos/itm-notes-video.mp4'}
+                      poster="/videos/itm-notes-video-poster.webp"
+                      alt="ITM Notes Academic Platform video"
+                      badgeText="ACADEMIC OS"
                       aspectRatio="aspect-[16/9]"
                     />
                   </Link>
@@ -717,20 +717,20 @@ export const HomePage: React.FC = () => {
                   <div className="space-y-2.5">
                     <div className="flex items-center justify-between">
                       <span className="text-[0.68rem] font-mono px-2.5 py-0.5 rounded-full bg-black/5 dark:bg-white/10 text-black dark:text-white font-bold border border-black/10 dark:border-white/15">
-                        #03 · DEFENSIVE SECURITY
+                        #03 · ACADEMIC PLATFORM
                       </span>
-                      <span className="text-[0.68rem] font-mono text-zinc-500">2025–2026 · Workshops</span>
+                      <span className="text-[0.68rem] font-mono text-zinc-500">2025–2026 · EdTech & PWA</span>
                     </div>
                     <h3 className="font-display font-bold text-xl sm:text-2xl text-black dark:text-white tracking-tight">
-                      <Link to={`/work/${cyberProject.slug}`} className="hover:opacity-75 transition-opacity">
-                        {cyberProject.title}
+                      <Link to={`/work/${itmProject.slug}`} className="hover:opacity-75 transition-opacity">
+                        {itmProject.title}
                       </Link>
                     </h3>
                     <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed font-light line-clamp-2">
-                      {cyberProject.summary}
+                      {itmProject.summary}
                     </p>
                     <div className="flex flex-wrap gap-1.5 pt-1">
-                      {cyberProject.technologies.slice(0, 4).map(t => (
+                      {itmProject.technologies.slice(0, 4).map(t => (
                         <span key={t} className="text-[0.62rem] font-mono px-2 py-0.5 rounded bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-zinc-700 dark:text-zinc-300">
                           {t}
                         </span>
@@ -741,13 +741,13 @@ export const HomePage: React.FC = () => {
 
                 <div className="pt-5 mt-5 border-t border-black/10 dark:border-white/10 flex items-center justify-between">
                   <Link 
-                    to={`/work/${cyberProject.slug}`} 
+                    to={`/work/${itmProject.slug}`} 
                     className="inline-flex items-center gap-1.5 text-xs font-mono font-bold uppercase tracking-wider text-black dark:text-white hover:underline"
                   >
-                    <span>Inspect Security Specs</span>
+                    <span>Inspect Case Study</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
-                  <span className="text-[0.68rem] font-mono text-zinc-500">Strict CSP Isolation</span>
+                  <span className="text-[0.68rem] font-mono text-zinc-500">154 Coding Practicals · KaTeX LaTeX</span>
                 </div>
               </div>
 

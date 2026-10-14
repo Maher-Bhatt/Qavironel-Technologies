@@ -444,7 +444,7 @@ export const projects: Project[] = [
     category: 'Academic Build',
     categoryLabel: 'Academic Build · Academic Systems & EdTech',
     status: 'Live Production Platform',
-    featured: false,
+    featured: true,
     order: 6,
     year: '2025–2026',
     summary: 'A comprehensive academic operating system engineered for engineering undergraduates at ITM (SLS) Baroda University. Unifies an in-browser coding sandbox with 154 runnable practicals, a 954-question timed quiz engine, KaTeX LaTeX syllabus reader with TTS audio lectures, 75% attendance compliance guard, 10-point relative SGPA predictor, and real-time Campus Pulse community.',

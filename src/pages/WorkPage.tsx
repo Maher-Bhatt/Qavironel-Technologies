@@ -345,7 +345,7 @@ export const WorkPage: React.FC = () => {
                 Ready to build something tangible?
               </span>
               <h3 className="font-display font-bold text-2xl sm:text-3xl text-black dark:text-white">
-                Every project begins with a 30-minute architectural conversation.
+                Every project begins with a 60-minute architectural conversation.
               </h3>
             </div>
             <Link

@@ -195,7 +195,7 @@ export const ScheduleCallForm: React.FC<ScheduleCallFormProps> = ({ onSuccess, o
       title: `Technical Architecture Review — Qavironel Technologies`,
       description: `Direct Founder Architecture Review with Maher Bhatt & Anurag Pandey.\n\nTopic: ${bookingRecord.topic}\nClient: ${bookingRecord.name} (${bookingRecord.email})\nOrganization: ${bookingRecord.organization || 'N/A'}\n\nGoogle Meet link will be activated for the call.`,
       startDate: convertedRecord.dateObj,
-      durationMinutes: 30,
+      durationMinutes: 60,
       location: 'Google Meet',
     });
 
@@ -203,7 +203,7 @@ export const ScheduleCallForm: React.FC<ScheduleCallFormProps> = ({ onSuccess, o
       title: `Technical Architecture Review — Qavironel Technologies`,
       description: `Direct Founder Architecture Review with Maher Bhatt & Anurag Pandey.\nTopic: ${bookingRecord.topic}`,
       startDate: convertedRecord.dateObj,
-      durationMinutes: 30,
+      durationMinutes: 60,
       location: 'Google Meet',
     });
 
@@ -230,7 +230,7 @@ export const ScheduleCallForm: React.FC<ScheduleCallFormProps> = ({ onSuccess, o
         <div className="p-5 rounded-2xl bg-zinc-50 dark:bg-zinc-900 border border-black/10 dark:border-white/15 max-w-md mx-auto text-left text-xs space-y-2.5 font-mono shadow-sm">
           <div className="flex items-center justify-between pb-2 border-b border-black/10 dark:border-white/10 font-bold text-black dark:text-white">
             <span>MEETING SPECIFICATION</span>
-            <span className="text-[0.68rem] text-emerald-600 dark:text-emerald-400">30 MIN GOOGLE MEET</span>
+            <span className="text-[0.68rem] text-emerald-600 dark:text-emerald-400">60 MIN GOOGLE MEET (1 HOUR)</span>
           </div>
 
           <div className="space-y-1.5 pt-1">
@@ -360,41 +360,6 @@ export const ScheduleCallForm: React.FC<ScheduleCallFormProps> = ({ onSuccess, o
         </div>
       )}
 
-      {/* Live Cal.com Direct Booking Card */}
-      <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-zinc-50 to-zinc-100 dark:from-zinc-900 dark:to-zinc-950 border border-black/10 dark:border-white/10 shadow-xs">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <div className="space-y-1">
-            <div className="inline-flex items-center gap-2 text-[10px] font-mono font-bold uppercase tracking-widest text-emerald-600 dark:text-emerald-400">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>Instant Google Meet Booking</span>
-            </div>
-            <h3 className="font-sans font-bold text-sm sm:text-base text-black dark:text-white">
-              Live Calendar &amp; Instant Google Meet Link
-            </h3>
-            <p className="text-xs text-zinc-500 dark:text-zinc-400">
-              Pick your exact time slot directly on Cal.com to auto-sync with Maher's calendar and get an instant meeting invite.
-            </p>
-          </div>
-          <a
-            href={companyConfig.calComUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-glass-shimmer inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-black dark:bg-white text-white dark:text-black font-mono font-bold text-xs uppercase tracking-wider hover:scale-[1.02] transition-all shrink-0 shadow-md"
-          >
-            <CalendarIcon className="w-3.5 h-3.5" />
-            <span>Book on Cal.com &rarr;</span>
-          </a>
-        </div>
-      </div>
-
-      <div className="relative flex py-1 items-center">
-        <div className="flex-grow border-t border-black/10 dark:border-white/10"></div>
-        <span className="flex-shrink mx-4 text-[10px] font-mono uppercase tracking-widest text-zinc-400">
-          Or submit preferred slot below
-        </span>
-        <div className="flex-grow border-t border-black/10 dark:border-white/10"></div>
-      </div>
-
       {/* ========================================================================= */}
       {/* 01. GLOBAL TIMEZONE SELECTOR & CALL PARAMETERS                            */}
       {/* ========================================================================= */}
@@ -403,7 +368,7 @@ export const ScheduleCallForm: React.FC<ScheduleCallFormProps> = ({ onSuccess, o
           <div className="flex items-center gap-4 text-zinc-600 dark:text-zinc-300">
             <span className="flex items-center gap-1.5">
               <Clock className="w-3.5 h-3.5 text-black dark:text-white" />
-              <span>30 Min</span>
+              <span>60 Min (1 Hour)</span>
             </span>
             <span className="text-zinc-300 dark:text-zinc-700">·</span>
             <span className="flex items-center gap-1.5">

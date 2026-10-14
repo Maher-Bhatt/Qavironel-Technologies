@@ -420,7 +420,7 @@ export const ServicesPage: React.FC = () => {
                 Ready to discuss your project?
               </span>
               <h3 className="font-display font-bold text-2xl sm:text-3xl text-black dark:text-white">
-                Schedule a direct 30-minute architectural consultation.
+                Schedule a direct 60-minute architectural consultation.
               </h3>
             </div>
             <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-4 w-full md:w-auto">

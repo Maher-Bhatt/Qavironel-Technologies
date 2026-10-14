@@ -157,7 +157,7 @@ function renderBookingTeamEmail(data: {
                 Call Requested by ${escapeHtml(data.name)}
               </h1>
               <p style="margin: 0 0 24px 0; font-size: 14px; color: #596159; line-height: 1.5;">
-                A 30-minute technical discovery call was requested on <a href="https://qavironel.com" style="color: #174C3A;">qavironel.com</a>.
+                A 60-minute technical discovery session (1 Hour) was requested on <a href="https://qavironel.com" style="color: #174C3A;">qavironel.com</a>.
               </p>
 
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #F9FAF9; border-radius: 12px; border: 1px solid #E6ECE5; margin-bottom: 24px;">
@@ -167,7 +167,7 @@ function renderBookingTeamEmail(data: {
                 </tr>
                 <tr>
                   <td style="padding: 14px 18px; border-bottom: 1px solid #E6ECE5; font-size: 13px; color: #596159;">Time Slot (IST)</td>
-                  <td style="padding: 14px 18px; border-bottom: 1px solid #E6ECE5; font-size: 14px; font-weight: 800; color: #103629;">${escapeHtml(data.time)}</td>
+                  <td style="padding: 14px 18px; border-bottom: 1px solid #E6ECE5; font-size: 14px; font-weight: 800; color: #103629;">${escapeHtml(data.time)} (60 Minutes)</td>
                 </tr>
                 <tr>
                   <td style="padding: 14px 18px; border-bottom: 1px solid #E6ECE5; font-size: 13px; color: #596159;">Client Name</td>
@@ -217,13 +217,13 @@ function renderBookingClientEmail(data: {
           <tr>
             <td style="padding: 32px 32px 24px 32px;">
               <div style="display: inline-block; padding: 4px 12px; background-color: #E6ECE5; border-radius: 20px; font-size: 11px; font-weight: 700; color: #174C3A; font-family: 'Courier New', monospace; letter-spacing: 0.05em; margin-bottom: 16px;">
-                CALL REQUEST RECEIVED · PENDING CONFIRMATION
+                60-MIN CALL REQUEST RECEIVED · PENDING CONFIRMATION
               </div>
               <h1 style="margin: 0 0 12px 0; font-size: 22px; font-weight: 800; color: #191D1A; line-height: 1.3;">
                 Hello ${escapeHtml(data.name)}, your call request is received.
               </h1>
               <p style="margin: 0 0 18px 0; font-size: 14px; color: #343A35; line-height: 1.6;">
-                Thank you for requesting an architecture review session with <strong>Qavironel Technologies</strong>.
+                Thank you for requesting a 60-minute architecture discovery session with <strong>Qavironel Technologies</strong>.
               </p>
               <p style="margin: 0 0 24px 0; font-size: 14px; color: #596159; line-height: 1.6;">
                 Founding engineer <strong>Maher Bhatt</strong> is reviewing availability for your chosen slot. You will receive an official Google Calendar invite containing the Google Meet room link within <strong>12 hours</strong>.
@@ -231,7 +231,7 @@ function renderBookingClientEmail(data: {
 
               <div style="background-color: #F9FAF9; border-radius: 12px; border: 1px solid #E6ECE5; padding: 20px; margin-bottom: 24px;">
                 <div style="font-size: 11px; font-family: 'Courier New', monospace; font-weight: 700; color: #596159; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px; border-bottom: 1px solid #E6ECE5; padding-bottom: 8px;">
-                  REQUESTED SESSION SPECIFICATION
+                  REQUESTED SESSION SPECIFICATION (60 MINUTES)
                 </div>
                 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="font-size: 13px; line-height: 1.8;">
                   <tr>
@@ -240,7 +240,7 @@ function renderBookingClientEmail(data: {
                   </tr>
                   <tr>
                     <td style="color: #596159;">Time (Studio IST):</td>
-                    <td style="font-weight: 800; color: #103629;">${escapeHtml(data.time)}</td>
+                    <td style="font-weight: 800; color: #103629;">${escapeHtml(data.time)} (60 Minutes)</td>
                   </tr>
                   <tr>
                     <td style="color: #596159;">Topic:</td>
@@ -270,6 +270,7 @@ async function sendWithResend(options: {
   replyTo?: string;
   subject: string;
   html: string;
+  isAutoResponder?: boolean;
 }): Promise<{ ok: boolean; status: number; data?: any; error?: string; usedFrom?: string }> {
   const { apiKey, replyTo, subject, html } = options;
 
@@ -323,6 +324,10 @@ async function sendWithResend(options: {
     }
 
     if (errMsg.includes('testing emails to your own email address') || errMsg.includes('own email address')) {
+      if (options.isAutoResponder) {
+        console.warn('Sandbox mode: Resend restricts sending auto-responders to unverified external emails without a custom domain. Suppressing reroute to owner so founder does not receive duplicate client email.');
+        return { ok: false, status: 403, error: 'Sandbox mode: auto-responder skipped to prevent sending client email to owner.' };
+      }
       const match = errText.match(/testing emails to your own email address \(([^)]+)\)/i) ||
                     errText.match(/\b([A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,})\b/);
       if (match && match[1]) {
@@ -438,8 +443,9 @@ export default async function handler(req: any, res: any) {
         from: fromEmail,
         to: targetEmail,
         replyTo: email,
-        subject: `[Call Request] ${sanitizeSubject(date)} at ${sanitizeSubject(time)} - ${sanitizeSubject(name)} (${sanitizeSubject(topic)})`,
+        subject: `[Call Request (60m)] ${sanitizeSubject(date)} at ${sanitizeSubject(time)} - ${sanitizeSubject(name)} (${sanitizeSubject(topic)})`,
         html: teamHtml,
+        isAutoResponder: false,
       });
 
       if (!dispatchResult.ok) {
@@ -464,8 +470,9 @@ export default async function handler(req: any, res: any) {
           from: dispatchResult.usedFrom || fromEmail,
           to: email,
           replyTo: targetEmail,
-          subject: `Architecture Call Request Received: ${sanitizeSubject(date)} — Qavironel Technologies`,
+          subject: `Meeting Requested: 60-Min Architecture Discovery Session — Qavironel Technologies`,
           html: clientHtml,
+          isAutoResponder: true,
         }).catch((err) => console.warn('Client auto-responder skipped/restricted in sandbox:', err));
       } catch (autoErr) {
         console.warn('Client auto-responder exception caught:', autoErr);

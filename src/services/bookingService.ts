@@ -194,7 +194,7 @@ export function buildBookingMailto(data: BookingFormData): string {
 
   const body = encodeURIComponent(
     `Hello Maher & Qavironel Team,\n\n` +
-    `I would like to schedule a 30-minute architecture review call.\n\n` +
+    `I would like to schedule a 60-minute architecture review session.\n\n` +
     `• Name: ${data.name.trim()}\n` +
     `• Email: ${data.email.trim()}\n` +
     `• Organization: ${data.organization?.trim() || 'N/A'}\n` +

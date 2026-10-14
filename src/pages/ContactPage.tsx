@@ -125,14 +125,18 @@ export const ContactPage: React.FC = () => {
                   </div>
                   
                   <h2 className="font-display font-bold text-2xl sm:text-3xl lg:text-4xl text-black dark:text-white tracking-tight">
-                    Book a 30-Min Technical Discovery Session
+                    Book a 60-Min Technical Discovery Session
                   </h2>
                   
                   <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-300 leading-relaxed font-light">
-                    Speak directly with founding engineers Maher Bhatt & Anurag Pandey on Google Meet. We review your architecture, code feasibility, and timeline. Zero fluff, 100% technical clarity.
+                    Speak directly with founding engineers Maher Bhatt & Anurag Pandey on Google Meet for an in-depth 1-hour session. We review your architecture, code feasibility, and timeline. Zero fluff, 100% technical clarity.
                   </p>
 
                   <div className="flex flex-wrap items-center gap-4 pt-1 text-xs font-mono text-zinc-600 dark:text-zinc-400">
+                    <span className="flex items-center gap-1.5">
+                      <Clock className="w-3.5 h-3.5 text-black dark:text-white" />
+                      60 Min Deep Dive
+                    </span>
                     <span className="flex items-center gap-1.5">
                       <CheckCircle2 className="w-3.5 h-3.5 text-black dark:text-white" />
                       Instant Google Meet Link
@@ -142,34 +146,33 @@ export const ContactPage: React.FC = () => {
                       Mutual NDA Protected
                     </span>
                     <span className="flex items-center gap-1.5">
-                      <Clock className="w-3.5 h-3.5 text-black dark:text-white" />
+                      <Sparkles className="w-3.5 h-3.5 text-black dark:text-white" />
                       100% Free · No Obligation
                     </span>
                   </div>
                 </div>
 
                 <div className="lg:col-span-4 flex flex-col gap-3">
-                  <a
-                    href={companyConfig.calComUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <button
+                    type="button"
+                    onClick={() => openBookingModal('call')}
                     className="btn-glass-shimmer group relative flex items-center justify-between px-6 py-4 rounded-2xl bg-black dark:bg-white text-white dark:text-black font-mono font-bold text-xs uppercase tracking-wider shadow-lg hover:shadow-xl hover:scale-[1.01] transition-all cursor-pointer border border-white/20 dark:border-black/20"
                   >
                     <span className="flex items-center gap-2.5">
                       <Calendar className="w-4 h-4" />
-                      <span>Book on Cal.com (Instant Meet)</span>
+                      <span>Select Calendar Slot (60m)</span>
                     </span>
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
-                  </a>
+                  </button>
 
                   <button
                     type="button"
-                    onClick={() => openBookingModal('call')}
+                    onClick={() => openBookingModal('quotation')}
                     className="flex items-center justify-between px-6 py-3.5 rounded-2xl bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-900 dark:hover:bg-zinc-800 text-black dark:text-white font-mono font-semibold text-xs tracking-wider transition-colors border border-black/5 dark:border-white/10 cursor-pointer"
                   >
                     <span className="flex items-center gap-2.5">
                       <Clock className="w-4 h-4" />
-                      <span>Custom Intake Brief</span>
+                      <span>Request Scope &amp; Quotation</span>
                     </span>
                     <ArrowUpRight className="w-3.5 h-3.5" />
                   </button>

@@ -268,6 +268,7 @@ async function sendWithResend(options: {
   replyTo?: string;
   subject: string;
   html: string;
+  isAutoResponder?: boolean;
 }): Promise<{ ok: boolean; status: number; data?: any; error?: string; usedFrom?: string }> {
   const { apiKey, replyTo, subject, html } = options;
 
@@ -321,6 +322,10 @@ async function sendWithResend(options: {
     }
 
     if (errMsg.includes('testing emails to your own email address') || errMsg.includes('own email address')) {
+      if (options.isAutoResponder) {
+        console.warn('Sandbox mode: Resend restricts sending auto-responders to unverified external emails without a custom domain. Suppressing reroute to owner so founder does not receive duplicate client inquiry email.');
+        return { ok: false, status: 403, error: 'Sandbox mode: auto-responder skipped to prevent sending client inquiry email to owner.' };
+      }
       const match = errText.match(/testing emails to your own email address \(([^)]+)\)/i) ||
                     errText.match(/\b([A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,})\b/);
       if (match && match[1]) {
@@ -471,6 +476,7 @@ export default async function handler(req: any, res: any) {
           replyTo: targetEmail,
           subject: `Inquiry Received: ${sanitizeSubject(projectType)} — Qavironel Technologies`,
           html: clientHtml,
+          isAutoResponder: true,
         }).catch((err) => console.warn('Client auto-responder skipped/restricted in sandbox:', err));
       } catch (autoErr) {
         console.warn('Client auto-responder exception caught:', autoErr);

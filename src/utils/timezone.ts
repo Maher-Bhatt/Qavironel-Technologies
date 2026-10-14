@@ -160,7 +160,7 @@ export function buildGoogleCalendarUrl(params: {
   durationMinutes?: number;
   location?: string;
 }): string {
-  const { title, description, startDate, durationMinutes = 30, location = 'Google Meet (Link will be emailed upon confirmation)' } = params;
+  const { title, description, startDate, durationMinutes = 60, location = 'Google Meet (Link will be emailed upon confirmation)' } = params;
   const endDate = new Date(startDate.getTime() + durationMinutes * 60 * 1000);
 
   const formatUtcForGCal = (d: Date) => {
@@ -190,7 +190,7 @@ export function buildIcsDataUri(params: {
   durationMinutes?: number;
   location?: string;
 }): string {
-  const { title, description, startDate, durationMinutes = 30, location = 'Google Meet' } = params;
+  const { title, description, startDate, durationMinutes = 60, location = 'Google Meet' } = params;
   const endDate = new Date(startDate.getTime() + durationMinutes * 60 * 1000);
 
   const formatUtc = (d: Date) => {

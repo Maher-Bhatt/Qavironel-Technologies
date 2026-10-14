@@ -66,4 +66,24 @@ describe('timezone utilities', () => {
     expect(decodeURIComponent(ics)).toContain('DTSTART:20261014T130000Z');
     expect(decodeURIComponent(ics)).toContain('DTEND:20261014T133000Z');
   });
+
+  it('defaults to 60-minute duration when durationMinutes is omitted', () => {
+    const testDate = new Date('2026-10-14T13:00:00.000Z');
+    const url = buildGoogleCalendarUrl({
+      title: '60-Min Architecture Discovery',
+      description: 'Technical deep dive',
+      startDate: testDate,
+    });
+    // 13:00 to 14:00 (60 minutes)
+    expect(url).toContain('20261014T130000Z');
+    expect(url).toContain('20261014T140000Z');
+
+    const ics = buildIcsDataUri({
+      title: '60-Min Architecture Discovery',
+      description: 'Technical deep dive',
+      startDate: testDate,
+    });
+    expect(decodeURIComponent(ics)).toContain('DTSTART:20261014T130000Z');
+    expect(decodeURIComponent(ics)).toContain('DTEND:20261014T140000Z');
+  });
 });

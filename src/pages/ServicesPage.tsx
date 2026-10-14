@@ -58,7 +58,7 @@ export const ServicesPage: React.FC = () => {
             <h1 className="font-display font-extrabold text-5xl sm:text-7xl lg:text-8xl text-[#0A0A0A] dark:text-white tracking-[-0.04em] leading-[0.98]">
               Disciplines engineered for real momentum.
             </h1>
-            <p className="mt-6 text-lg sm:text-xl text-zinc-600 dark:text-zinc-400 font-light leading-relaxed max-w-3xl">
+            <p className="mt-6 text-lg sm:text-xl text-zinc-700 dark:text-zinc-300 font-normal leading-relaxed max-w-3xl">
               We combine digital craftsmanship with full-stack software engineering and applied AI. Every service is delivered with direct technical leadership—no junior account managers, no outsourced contractors, and zero template bloat.
             </p>
           </div>

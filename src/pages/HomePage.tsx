@@ -136,7 +136,7 @@ export const HomePage: React.FC = () => {
                   <span className="underline decoration-black/20 dark:decoration-white/25 underline-offset-8">intent.</span>
                 </h1>
 
-                <p className="text-lg sm:text-xl lg:text-2xl text-zinc-600 dark:text-zinc-400 font-light leading-relaxed max-w-2xl">
+                <p className="text-lg sm:text-xl lg:text-2xl text-zinc-700 dark:text-zinc-300 font-normal leading-relaxed max-w-2xl">
                   We design and engineer bespoke web platforms, software systems, and applied AI applications for ambitious founders and enterprises. Built with craftsmanship, zero template bloat, and direct founder accountability.
                 </p>
 
@@ -443,7 +443,7 @@ export const HomePage: React.FC = () => {
                   <span className="w-1.5 h-1.5 rounded-full bg-black dark:bg-white" />
                 </div>
                 <h3 className="font-display font-bold text-lg text-black dark:text-white">Handcrafted</h3>
-                <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                <p className="text-xs sm:text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed font-normal">
                   Zero generic builders or bloated WordPress themes. Every line of code is purpose-built for speed and durability.
                 </p>
               </div>
@@ -454,7 +454,7 @@ export const HomePage: React.FC = () => {
                   <span className="w-1.5 h-1.5 rounded-full bg-black dark:bg-white" />
                 </div>
                 <h3 className="font-display font-bold text-lg text-black dark:text-white">Type-Safe</h3>
-                <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                <p className="text-xs sm:text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed font-normal">
                   Strict TypeScript, defensive schema validation, and clean REST contracts ensure bulletproof production stability.
                 </p>
               </div>
@@ -465,7 +465,7 @@ export const HomePage: React.FC = () => {
                   <span className="w-1.5 h-1.5 rounded-full bg-black dark:bg-white" />
                 </div>
                 <h3 className="font-display font-bold text-lg text-black dark:text-white">Direct Access</h3>
-                <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                <p className="text-xs sm:text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed font-normal">
                   Work directly with founding engineers Maher Bhatt & Anurag Pandey. Zero project managers or communication fog.
                 </p>
               </div>
@@ -476,7 +476,7 @@ export const HomePage: React.FC = () => {
                   <span className="w-1.5 h-1.5 rounded-full bg-black dark:bg-white" />
                 </div>
                 <h3 className="font-display font-bold text-lg text-black dark:text-white">Global Reach</h3>
-                <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                <p className="text-xs sm:text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed font-normal">
                   Remote-first studio partnering with ambitious founders, startups, and companies across time zones.
                 </p>
               </div>
@@ -505,7 +505,7 @@ export const HomePage: React.FC = () => {
                 <p className="font-display text-xl sm:text-2xl text-black dark:text-white leading-snug font-normal">
                   The modern web is filled with bloated page builders, slow WordPress themes, and agency middlemen who charge large retainers while outsourcing the actual programming to junior contractors.
                 </p>
-                <p className="text-base sm:text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed font-light">
+                <p className="text-base sm:text-lg text-zinc-700 dark:text-zinc-300 leading-relaxed font-normal">
                   We founded Qavironel Technologies to offer an uncompromising alternative: a direct, founder-led studio that treats every web application, SaaS MVP, and AI workflow as a piece of digital craftsmanship. You collaborate directly with senior engineers who understand distributed systems, Core Web Vitals, and responsive interface design.
                 </p>
 
@@ -514,7 +514,7 @@ export const HomePage: React.FC = () => {
                   <div className="space-y-2">
                     <span className="text-xs font-mono font-bold text-zinc-900 dark:text-zinc-100">01 / DIRECT ACCESS</span>
                     <h3 className="font-display font-bold text-base text-black dark:text-white">Zero Intermediaries</h3>
-                    <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                    <p className="text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed font-normal">
                       Communicate directly with lead architects Maher Bhatt and Anurag Pandey on daily Slack channels and video reviews.
                     </p>
                   </div>
@@ -522,7 +522,7 @@ export const HomePage: React.FC = () => {
                   <div className="space-y-2">
                     <span className="text-xs font-mono font-bold text-zinc-900 dark:text-zinc-100">02 / BESPOKE RIGOR</span>
                     <h3 className="font-display font-bold text-base text-black dark:text-white">Handcrafted Architecture</h3>
-                    <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                    <p className="text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed font-normal">
                       Clean modular React 19, Vite, TanStack, and Python. Every component is engineered for sub-second load times and reliability.
                     </p>
                   </div>
@@ -530,7 +530,7 @@ export const HomePage: React.FC = () => {
                   <div className="space-y-2">
                     <span className="text-xs font-mono font-bold text-zinc-900 dark:text-zinc-100">03 / DEFENSIVE BY DEFAULT</span>
                     <h3 className="font-display font-bold text-base text-black dark:text-white">Guarded Security</h3>
-                    <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                    <p className="text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed font-normal">
                       Rooted in ethical hacking and cybersecurity workshops. Strict CSP, DPAPI vault encryption, and input sanitization by default.
                     </p>
                   </div>
@@ -620,7 +620,7 @@ export const HomePage: React.FC = () => {
                         {zteesProject.title}
                       </Link>
                     </h3>
-                    <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed font-light line-clamp-2">
+                    <p className="text-xs sm:text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed font-normal line-clamp-2">
                       {zteesProject.summary}
                     </p>
                     <div className="flex flex-wrap gap-1.5 pt-1">
@@ -673,7 +673,7 @@ export const HomePage: React.FC = () => {
                         {cipProject.title}
                       </Link>
                     </h3>
-                    <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed font-light line-clamp-2">
+                    <p className="text-xs sm:text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed font-normal line-clamp-2">
                       {cipProject.summary}
                     </p>
                     <div className="flex flex-wrap gap-1.5 pt-1">
@@ -726,7 +726,7 @@ export const HomePage: React.FC = () => {
                         {itmProject.title}
                       </Link>
                     </h3>
-                    <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed font-light line-clamp-2">
+                    <p className="text-xs sm:text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed font-normal line-clamp-2">
                       {itmProject.summary}
                     </p>
                     <div className="flex flex-wrap gap-1.5 pt-1">
@@ -779,7 +779,7 @@ export const HomePage: React.FC = () => {
                         {civicProject.title}
                       </Link>
                     </h3>
-                    <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed font-light line-clamp-2">
+                    <p className="text-xs sm:text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed font-normal line-clamp-2">
                       {civicProject.summary}
                     </p>
                     <div className="flex flex-wrap gap-1.5 pt-1">

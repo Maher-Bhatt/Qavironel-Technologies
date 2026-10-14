@@ -158,7 +158,7 @@ export const CaseStudyPage: React.FC = () => {
             {project.title}
           </h1>
 
-          <p className="mt-6 text-lg sm:text-2xl text-zinc-800 dark:text-zinc-200 font-light max-w-4xl leading-relaxed">
+          <p className="mt-6 text-lg sm:text-2xl text-zinc-800 dark:text-zinc-200 font-normal max-w-4xl leading-relaxed">
             {project.summary}
           </p>
 

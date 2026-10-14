@@ -87,7 +87,7 @@ export const ContactPage: React.FC = () => {
               <span className="text-zinc-500 dark:text-zinc-400">your next breakthrough.</span>
             </h1>
             
-            <p className="mt-6 text-lg sm:text-xl text-zinc-600 dark:text-zinc-300 font-light leading-relaxed max-w-3xl">
+            <p className="mt-6 text-lg sm:text-xl text-zinc-700 dark:text-zinc-300 font-normal leading-relaxed max-w-3xl">
               Every project starts with a direct, confidential technical conversation with our founders. We evaluate architecture, recommend high-leverage execution paths, and ship in focused 1–2 week sprints.
             </p>
 

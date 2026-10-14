@@ -130,7 +130,7 @@ export const AboutPage: React.FC = () => {
                 </div>
               </div>
 
-              <div className="lg:col-span-7 space-y-6 text-base sm:text-lg text-zinc-600 dark:text-zinc-300 leading-relaxed font-light">
+              <div className="lg:col-span-7 space-y-6 text-base sm:text-lg text-zinc-700 dark:text-zinc-300 leading-relaxed font-normal">
                 <p>
                   The modern digital landscape is saturated with bloated themes, slow drag-and-drop page builders, and agency middlemen who charge large retainers while outsourcing the actual programming.
                 </p>
@@ -225,7 +225,7 @@ export const AboutPage: React.FC = () => {
                     </div>
                   </div>
 
-                  <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-300 leading-relaxed font-light">
+                  <p className="text-sm sm:text-base text-zinc-700 dark:text-zinc-300 leading-relaxed font-normal">
                     {maher.bio}
                   </p>
 
@@ -347,7 +347,7 @@ export const AboutPage: React.FC = () => {
                     </div>
                   </div>
 
-                  <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-300 leading-relaxed font-light">
+                  <p className="text-sm sm:text-base text-zinc-700 dark:text-zinc-300 leading-relaxed font-normal">
                     {anurag.bio}
                   </p>
 

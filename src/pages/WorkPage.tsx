@@ -74,7 +74,7 @@ export const WorkPage: React.FC = () => {
             <h1 className="font-display font-extrabold text-5xl sm:text-7xl lg:text-8xl text-black dark:text-white tracking-[-0.04em] leading-[0.98]">
               Selected work.
             </h1>
-            <p className="mt-6 text-lg sm:text-xl text-zinc-600 dark:text-zinc-400 font-light leading-relaxed max-w-2xl">
+            <p className="mt-6 text-lg sm:text-xl text-zinc-700 dark:text-zinc-300 font-normal leading-relaxed max-w-2xl">
               A curated record of client platforms, independent digital products, applied AI systems, and academic tools. Every project is labeled honestly with its true scope, live links, and verified technical outcomes.
             </p>
           </div>

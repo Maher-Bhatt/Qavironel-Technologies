@@ -229,7 +229,15 @@ export const CaseStudyPage: React.FC = () => {
               <video
                 ref={videoRef}
                 src={project.videoSrc}
-                poster={project.slug === 'kalki' ? '/videos/kalki-video-poster.webp' : '/videos/project-reel-poster.webp'}
+                poster={
+                  project.slug === 'kalki' 
+                    ? '/videos/kalki-video-poster.webp' 
+                    : project.slug === 'ztees'
+                      ? '/videos/ztees-video-poster.webp'
+                      : project.slug === 'itm-notes'
+                        ? '/videos/itm-notes-video-poster.webp'
+                        : '/videos/project-reel-poster.webp'
+                }
                 controls
                 autoPlay
                 muted

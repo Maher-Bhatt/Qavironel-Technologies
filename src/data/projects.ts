@@ -139,7 +139,7 @@ export const projects: Project[] = [
       'UPI Payment Protocol'
     ],
     heroImage: '/images/projects/ztees/ztees-storefront-hero.png',
-    videoSrc: '/videos/project-reel.mp4',
+    videoSrc: '/videos/ztees-video.mp4',
     gallery: [
       {
         src: '/images/projects/ztees/ztees-storefront-hero.png',
@@ -489,7 +489,7 @@ export const projects: Project[] = [
       'Vercel Edge Platform'
     ],
     heroImage: '/images/projects/itm/itm-dashboard-hero.png',
-    videoSrc: '/videos/project-reel.mp4',
+    videoSrc: '/videos/itm-notes-video.mp4',
     gallery: [
       {
         src: '/images/projects/itm/itm-dashboard-hero.png',

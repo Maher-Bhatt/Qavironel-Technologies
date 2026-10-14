@@ -600,8 +600,8 @@ export const HomePage: React.FC = () => {
                     className="block group/img overflow-hidden rounded-2xl border border-black/10 dark:border-white/15 bg-black mb-5"
                   >
                     <ScrollAutoplayVideo 
-                      src={zteesProject.videoSrc || '/videos/project-reel.mp4'}
-                      poster="/images/projects/ztees-cover.jpg"
+                      src={zteesProject.videoSrc || '/videos/ztees-video.mp4'}
+                      poster="/videos/ztees-video-poster.webp"
                       alt="Ztees streetwear commerce drop presentation video"
                       badgeText="LIVE STOREFRONT"
                       aspectRatio="aspect-[16/9]"

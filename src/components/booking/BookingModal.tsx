@@ -128,7 +128,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 12 }}
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            className="relative w-full max-w-2xl bg-white dark:bg-zinc-950 rounded-2xl md:rounded-3xl shadow-2xl border border-black/10 dark:border-white/10 z-10 flex flex-col max-h-[92vh] overflow-hidden"
+            className={`relative w-full ${activeTab === 'call' ? 'max-w-4xl' : 'max-w-2xl'} bg-white dark:bg-zinc-950 rounded-2xl md:rounded-3xl shadow-2xl border border-black/10 dark:border-white/10 z-10 flex flex-col max-h-[92vh] overflow-hidden transition-all duration-300`}
           >
             {/* Modal Header */}
             <div className="p-5 sm:p-6 pb-4 border-b border-black/[0.08] dark:border-white/10 flex items-center justify-between shrink-0 bg-white dark:bg-zinc-950">

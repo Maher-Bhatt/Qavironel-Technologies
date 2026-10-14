@@ -317,36 +317,15 @@ async function sendWithResend(options: {
 
     let modified = false;
 
+    // If from address needs to fallback to sandbox
     if (errMsg.includes('domain') || errMsg.includes('from') || errMsg.includes('not verified')) {
       if (!currentFrom.includes('onboarding@resend.dev')) {
         currentFrom = 'Qavironel Technologies <onboarding@resend.dev>';
-        modified = true;
-      }
-    }
-
-    if (errMsg.includes('testing emails to your own email address') || errMsg.includes('own email address')) {
-      if (options.isAutoResponder) {
-        console.warn('Sandbox mode: Resend restricts sending auto-responders to unverified external emails without a custom domain. Suppressing reroute to owner so founder does not receive duplicate client email.');
-        return { ok: false, status: 403, error: 'Sandbox mode: auto-responder skipped to prevent sending client email to owner.' };
-      }
-      const match = errText.match(/testing emails to your own email address \(([^)]+)\)/i) ||
-                    errText.match(/\b([A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,})\b/);
-      if (match && match[1]) {
-        const ownerEmail = match[1].trim();
-        console.log(`Auto-routing to verified account email: ${ownerEmail}`);
-        currentTo = [ownerEmail];
-      } else {
-        currentTo = ['maherbhatt01@gmail.com'];
-      }
-      currentFrom = 'Qavironel Technologies <onboarding@resend.dev>';
-      modified = true;
-    }
-
-    if (modified) {
-      resp = await doDispatch(currentFrom, currentTo);
-      if (resp.ok) {
-        const data = await resp.json().catch(() => ({}));
-        return { ok: true, status: resp.status, data, usedFrom: currentFrom };
+        resp = await doDispatch(currentFrom, currentTo);
+        if (resp.ok) {
+          const data = await resp.json().catch(() => ({}));
+          return { ok: true, status: resp.status, data, usedFrom: currentFrom };
+        }
       }
     }
 
@@ -507,21 +486,19 @@ export default async function handler(req: any, res: any) {
 
   if (hasProvider) {
     try {
-      const teamHtml = renderBookingTeamEmail({
+      const clientHtml = renderBookingClientEmail({
         name,
-        email,
-        organization,
         date,
         time,
         topic,
-        notes,
       });
 
+      // ONLY ONE EMAIL is dispatched: directly to the user who filled the form!
       const dispatchResult = await dispatchEmail({
-        to: targetEmail,
-        replyTo: email,
-        subject: `[Call Request (60m)] ${sanitizeSubject(date)} at ${sanitizeSubject(time)} - ${sanitizeSubject(name)} (${sanitizeSubject(topic)})`,
-        html: teamHtml,
+        to: email,
+        replyTo: targetEmail,
+        subject: `Meeting Requested: 60-Min Architecture Discovery Session — Qavironel Technologies`,
+        html: clientHtml,
         isAutoResponder: false,
       });
 
@@ -529,33 +506,14 @@ export default async function handler(req: any, res: any) {
         return sendJson(res, 502, {
           success: false,
           code: 'DISPATCH_ERROR',
-          message: 'Failed to dispatch meeting notification.',
+          message: 'Failed to dispatch meeting confirmation email.',
           detail: process.env.NODE_ENV !== 'production' ? dispatchResult.error : undefined,
         });
       }
 
-      try {
-        const clientHtml = renderBookingClientEmail({
-          name,
-          date,
-          time,
-          topic,
-        });
-
-        await dispatchEmail({
-          to: email,
-          replyTo: targetEmail,
-          subject: `Meeting Requested: 60-Min Architecture Discovery Session — Qavironel Technologies`,
-          html: clientHtml,
-          isAutoResponder: true,
-        }).catch((err) => console.warn('Client auto-responder skipped/restricted in sandbox:', err));
-      } catch (autoErr) {
-        console.warn('Client auto-responder exception caught:', autoErr);
-      }
-
       return sendJson(res, 200, {
         success: true,
-        message: 'Your meeting request has been received. Maher Bhatt will review availability and confirm your calendar invite within 12 hours.',
+        message: 'Your meeting request has been received. A confirmation has been delivered to your email.',
       });
     } catch (err: any) {
       console.error('Internal error during booking dispatch:', err);

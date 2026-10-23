@@ -253,15 +253,15 @@ export const LegalPage: React.FC = () => {
                     </p>
                     <ul className="space-y-2 text-xs sm:text-sm text-[#404040] dark:text-[#A3A3A3]">
                       <li className="flex items-start gap-2.5">
-                        <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                        <CheckCircle2 className="w-4 h-4 text-zinc-500 shrink-0 mt-0.5" />
                         <span><strong>Zero Advertising Trackers:</strong> We do not load Meta Pixels, Google Ads conversion tags, TikTok beacons, or third-party behavioral trackers.</span>
                       </li>
                       <li className="flex items-start gap-2.5">
-                        <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                        <CheckCircle2 className="w-4 h-4 text-zinc-500 shrink-0 mt-0.5" />
                         <span><strong>Zero Data Monetization:</strong> We will never sell, rent, monetize, or trade client email lists or project details to data brokers or advertising exchanges.</span>
                       </li>
                       <li className="flex items-start gap-2.5">
-                        <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                        <CheckCircle2 className="w-4 h-4 text-zinc-500 shrink-0 mt-0.5" />
                         <span><strong>Local Preference Storage:</strong> We only store functional preferences in your browser's local storage (e.g. your chosen light/dark theme and audio micro-haptic state).</span>
                       </li>
                     </ul>
@@ -281,7 +281,7 @@ export const LegalPage: React.FC = () => {
                     <div className="p-5 rounded-2xl bg-black/5 dark:bg-black/40 border border-[#E5E5E5] dark:border-white/10 space-y-3 font-mono text-xs">
                       <div className="flex items-center justify-between text-[#0A0A0A] dark:text-[#737373] pb-2 border-b border-[#E5E5E5] dark:border-white/10">
                         <span>AI ARCHITECTURAL PROTOCOL</span>
-                        <span className="text-emerald-500 font-bold">ZERO-TRAINING CLAUSE</span>
+                        <span className="text-zinc-500 font-bold">ZERO-TRAINING CLAUSE</span>
                       </div>
                       <p className="text-[#404040] dark:text-zinc-300 leading-relaxed font-sans">
                         1. <strong>No Model Training on Client IP:</strong> Client source code, proprietary documents, and prompts are never fed into public LLM training datasets. We strictly utilize enterprise API endpoints with verified Zero-Data-Retention policies (Groq, Anthropic Claude, OpenAI Enterprise, and Google Gemini API).
@@ -399,7 +399,7 @@ export const LegalPage: React.FC = () => {
                           {companyConfig.email}
                         </a>
                       </div>
-                      <span className="text-emerald-500 font-bold hidden sm:block">RESPONSE WITHIN 24H</span>
+                      <span className="text-zinc-500 font-bold hidden sm:block">RESPONSE WITHIN 24H</span>
                     </div>
                   </section>
                 </>

@@ -2,8 +2,8 @@ import { describe, it, expect } from 'vitest';
 import { projects, categories } from './projects';
 
 describe('Project Inventory & Data Integrity', () => {
-  it('contains exactly 7 verified projects', () => {
-    expect(projects).toHaveLength(7);
+  it('contains exactly 6 verified projects', () => {
+    expect(projects).toHaveLength(6);
   });
 
   it('all projects have required fields and non-empty values', () => {
@@ -51,7 +51,6 @@ describe('Project Inventory & Data Integrity', () => {
       'civic-sathi',
       'codedroid',
       'itm-notes',
-      'socialsafe',
     ];
 
     expectedSlugs.forEach((slug) => {
@@ -67,6 +66,5 @@ describe('Project Inventory & Data Integrity', () => {
     expect(categoryIds).toContain('AI & Software');
     expect(categoryIds).toContain('Product Lab');
     expect(categoryIds).toContain('Academic Build');
-    expect(categoryIds).toContain('Experiments');
   });
 });

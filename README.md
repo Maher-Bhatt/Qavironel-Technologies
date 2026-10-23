@@ -39,9 +39,7 @@ Every project in this repository represents verified work with honest classifica
 3. **Classic Infrastructure Projects** (`/work/classic-infrastructure`): Client Work — Civil & Industrial Engineering. Prequalification credential showcase and corporate platform for an infrastructure contractor established in 2008.
 4. **Civic Sathi** (`/work/civic-sathi`): Product Lab — Civic Technology. Smart India Hackathon (SIH 2026) competitive prototype featuring 4 role surfaces (Citizen, Municipality, Contractor, Admin) with geo-tagging and photo verification.
 5. **CodeDroid** (`/work/codedroid`): Digital Products — Mobile Developer Tooling. Pocket Android IDE with offline CodeMirror editor, integrated terminal, and embedded on-device Python (Chaquopy) & JS runtimes.
-6. **ITM Notes** (`/work/itm-notes`): Digital Products — Education Platform. Curated study portal organizing five core B.Tech Semester 2 engineering subjects for 300+ university peers.
-7. **Chain of Achievements** (`/work/chain-of-achievements`): Engineering Archive — Web3 Prototype. Non-transferable credential issuance prototype on Ethereum testnet.
-8. **CyberGuard Security Lab** (`/work/socialsafe`): Engineering Archive — Cybersecurity Education & Labs. Modular cybersecurity training suite demonstrating phishing defense, session security, and strict client-side isolation across multiple educational workshops.
+6. **ITM Notes** (`/work/itm-notes`): Digital Products — Education Platform. A curated study portal for core B.Tech Semester 2 subjects.
 
 ---
 

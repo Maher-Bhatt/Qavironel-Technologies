@@ -5,10 +5,15 @@ let lastClickTime = 0;
 let lastHoverTime = 0;
 let lastKeyTime = 0;
 
-// Read initial preference from localStorage (defaults to true)
-let soundEnabled = typeof window !== 'undefined'
-  ? localStorage.getItem('qavironel_sfx_enabled') !== 'false'
-  : true;
+// Sound is opt-in. No interface audio plays until the visitor enables it.
+let soundEnabled = false;
+if (typeof window !== 'undefined') {
+  try {
+    soundEnabled = localStorage.getItem('qavironel_sfx_enabled') === 'true';
+  } catch {
+    soundEnabled = false;
+  }
+}
 
 let isScrolling = false;
 let scrollTimeout: any = null;
@@ -61,7 +66,7 @@ export const setAudioEnabled = (enabled: boolean): void => {
 };
 
 /**
- * Toggle audio on/off, persist to localStorage, dispatch change event, and play confirmation sound.
+ * Toggle audio on/off, persist to localStorage, dispatch change event, and confirm opt-in.
  */
 export const toggleAudio = (): boolean => {
   initAudio();
@@ -78,9 +83,6 @@ export const toggleAudio = (): boolean => {
   // Play immediate feedback sound
   if (soundEnabled) {
     playToggleSound(true);
-  } else {
-    // Briefly force sound for the "off" sound before muting
-    playMuteSound();
   }
   
   return soundEnabled;
@@ -190,13 +192,6 @@ export const playToggleSound = (enabled: boolean) => {
 };
 
 /**
- * Muted settling tone when toggling SFX OFF.
- */
-const playMuteSound = () => {
-  playOscillator('sine', 480, 220, 0.08, 0.14, 0.001, true);
-};
-
-/**
  * Subtle pneumatic opening sound for modals and drawers.
  */
 export const playModalOpenSound = () => {
@@ -248,8 +243,7 @@ export const playTransitionSound = () => {
 };
 
 /**
- * Global micro-acoustics listener: automatically binds click, hover & type sounds to ALL
- * interactive controls across the entire application (buttons, links, selects, tabs, inputs).
+ * Global, opt-in click feedback for interactive controls.
  */
 export const setupGlobalSoundListeners = (): (() => void) => {
   if (typeof window === 'undefined') return () => {};
@@ -284,23 +278,10 @@ export const setupGlobalSoundListeners = (): (() => void) => {
     }
   };
 
-  // Delegated typing feedback for text inputs and textareas
-  const handleDocumentInput = (e: Event) => {
-    if (!soundEnabled) return;
-    const target = e.target as HTMLElement | null;
-    if (!target) return;
-
-    if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA') {
-      playKeySound();
-    }
-  };
-
   document.addEventListener('click', handleDocumentClick, { capture: true, passive: true });
-  document.addEventListener('input', handleDocumentInput, { capture: true, passive: true });
 
   return () => {
     document.removeEventListener('click', handleDocumentClick, { capture: true });
-    document.removeEventListener('input', handleDocumentInput, { capture: true });
     window.removeEventListener('pointerdown', unlockAudio);
     window.removeEventListener('keydown', unlockAudio);
     window.removeEventListener('touchstart', unlockAudio);

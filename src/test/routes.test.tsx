@@ -136,7 +136,7 @@ describe('Route Smoke Tests', () => {
     expect(screen.getAllByText(/Civic Sathi/i).length).toBeGreaterThan(0);
   });
 
-  it('renders CaseStudyPage for CyberGuard Security Lab', () => {
+  it('retires the former CyberGuard project route from the portfolio', () => {
     render(
       <MemoryRouter initialEntries={['/work/socialsafe']}>
         <Routes>
@@ -145,7 +145,7 @@ describe('Route Smoke Tests', () => {
       </MemoryRouter>
     );
     expect(screen.getByRole('heading', { level: 1 })).toBeDefined();
-    expect(screen.getAllByText(/CyberGuard Security Lab/i).length).toBeGreaterThan(0);
+    expect(screen.getByRole('heading', { name: /Case Study Not Found/i })).toBeDefined();
   });
 
   it('renders CaseStudyPage for ITM Notes Portal', () => {

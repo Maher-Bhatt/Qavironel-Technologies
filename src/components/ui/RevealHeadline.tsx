@@ -26,20 +26,20 @@ export const RevealHeadline: React.FC<RevealHeadlineProps> = ({
     : [];
 
   return (
-    <Component className={`overflow-hidden ${className}`}>
+    <Component className={className}>
       {lines.map((line, lineIdx) => {
         const words = line.split(' ');
         return (
-          <span key={lineIdx} className="block overflow-hidden py-0.5 sm:py-1">
+          <span key={lineIdx} className="block">
             <motion.span
-              initial={{ y: '120%', rotate: 1.5 }}
-              animate={{ y: '0%', rotate: 0 }}
+              initial={{ opacity: 0, y: '0.28em' }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{
-                duration: 0.85,
+                duration: 0.7,
                 delay: delay + lineIdx * 0.1,
                 ease: [0.16, 1, 0.3, 1],
               }}
-              className="block origin-bottom-left"
+              className="block will-change-transform"
             >
               {words.map((word, wordIdx) => {
                 const isHighlight = highlights.some((hw) =>
@@ -47,7 +47,7 @@ export const RevealHeadline: React.FC<RevealHeadlineProps> = ({
                 );
                 return (
                   <span key={wordIdx}>
-                    <span className={isHighlight ? 'text-black dark:text-white' : ''}>
+                    <span className={isHighlight ? 'reveal-headline__highlight' : ''}>
                       {word}
                     </span>
                     {wordIdx < words.length - 1 && ' '}

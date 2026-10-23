@@ -19,12 +19,12 @@ import {
 describe('Sound Effects Micro-Acoustics Engine', () => {
   beforeEach(() => {
     localStorage.clear();
-    setAudioEnabled(true);
+    setAudioEnabled(false);
     vi.restoreAllMocks();
   });
 
-  it('initializes with sound enabled by default', () => {
-    expect(isAudioEnabled()).toBe(true);
+  it('keeps sound effects off until the visitor opts in', () => {
+    expect(isAudioEnabled()).toBe(false);
   });
 
   it('toggles sound on and off and persists to localStorage', () => {
@@ -32,15 +32,15 @@ describe('Sound Effects Micro-Acoustics Engine', () => {
     window.addEventListener('qavironel_sfx_change', sfxChanged);
 
     const newState1 = toggleAudio();
-    expect(newState1).toBe(false);
-    expect(isAudioEnabled()).toBe(false);
-    expect(localStorage.getItem('qavironel_sfx_enabled')).toBe('false');
+    expect(newState1).toBe(true);
+    expect(isAudioEnabled()).toBe(true);
+    expect(localStorage.getItem('qavironel_sfx_enabled')).toBe('true');
     expect(sfxChanged).toHaveBeenCalled();
 
     const newState2 = toggleAudio();
-    expect(newState2).toBe(true);
-    expect(isAudioEnabled()).toBe(true);
-    expect(localStorage.getItem('qavironel_sfx_enabled')).toBe('true');
+    expect(newState2).toBe(false);
+    expect(isAudioEnabled()).toBe(false);
+    expect(localStorage.getItem('qavironel_sfx_enabled')).toBe('false');
 
     window.removeEventListener('qavironel_sfx_change', sfxChanged);
   });
@@ -75,11 +75,9 @@ describe('Sound Effects Micro-Acoustics Engine', () => {
 
     const cleanup = setupGlobalSoundListeners();
     expect(addEventListenerSpy).toHaveBeenCalledWith('click', expect.any(Function), expect.any(Object));
-    expect(addEventListenerSpy).toHaveBeenCalledWith('input', expect.any(Function), expect.any(Object));
 
     cleanup();
     expect(removeEventListenerSpy).toHaveBeenCalledWith('click', expect.any(Function), expect.any(Object));
-    expect(removeEventListenerSpy).toHaveBeenCalledWith('input', expect.any(Function), expect.any(Object));
   });
 
   it('triggers click sound when clicking an interactive button', () => {

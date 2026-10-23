@@ -287,7 +287,7 @@ export async function submitBookingRequest(data: BookingFormData): Promise<{
       lastBookingTime = Date.now();
       return {
         success: true,
-        message: 'Your meeting request has been submitted. Maher Bhatt will review availability and confirm your calendar invite with a Google Meet link within 12 hours.',
+        message: 'Your meeting request has been submitted. The Qavironel team will review availability and confirm the next step soon.',
       };
     }
 

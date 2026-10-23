@@ -4,24 +4,24 @@ export const projects: Project[] = [
   {
     slug: 'kalki',
     title: 'K.A.L.K.I.',
-    eyebrow: 'Local-First AI Desktop Assistant · Microsoft Store & Open Source',
+    eyebrow: 'Desktop assistant · Local and cloud AI',
     category: 'AI & Software',
-    categoryLabel: 'Applied AI · Software Engineering',
+    categoryLabel: 'Software · Applied AI',
     status: 'Active Open Source · Live on Microsoft Store',
     featured: true,
     order: 1,
     year: '2025–2026',
-    summary: 'A voice-capable desktop assistant combining a tactical HUD, multi-model inference router (Groq LLaMA-3.3-70B, LLaMA-4-Scout vision, offline Ollama fallback), hardware-bound DPAPI vault, local memory, and guarded platform actions.',
-    audience: 'Power users, developers, and security-conscious creators who want an intelligent desktop companion that operates close to the machine without sending sensitive credentials or unverified actions to uncontrolled third parties.',
-    challenge: 'Most desktop AI assistants either rely entirely on cloud-hosted closed models that log user prompts, or they are fragile CLI scripts with no intuitive graphical interface. K.A.L.K.I. needed to unify voice interaction, multi-model flexibility, and local hardware awareness inside a sleek, aesthetically refined dashboard—while enforcing strict boundary controls over local shell execution.',
+    summary: 'A desktop assistant that brings voice input, model selection, local memory, and guarded system tools into one workspace. K.A.L.K.I. is available on the Microsoft Store and GitHub.',
+    audience: 'People who want a desktop assistant with voice controls, local tools, and a choice of AI providers.',
+    challenge: 'Desktop assistants can be easy to use but limited in control, or flexible but difficult to set up. K.A.L.K.I. brings voice, model choice, and system tools into a single interface while keeping sensitive actions behind explicit controls.',
     objectives: [
       'Engineer a responsive visual HUD providing real-time telemetry, model status, and memory state.',
       'Support swappable inference providers: local models (Ollama/Llama 3) and cloud APIs (Groq LLaMA-3.3-70B, LLaMA-4-Scout, OpenAI, Gemini).',
       'Implement an authenticated localhost communication layer with DPAPI hardware-bound vault protection.',
       'Protect system resources by keeping host command execution explicitly sandboxed and gated behind confirmation flags.'
     ],
-    solution: 'Built an architecture centered on an authenticated local daemon paired with a rich tactical PWA HUD. Features voice input with wake-word detection, local SQLite conversational memory, vision-assisted screen analysis, network/security diagnostic utilities (Shodan OSINT, CVE intelligence, Webscan), Telegram remote control, and guarded execution adapters.',
-    whyItMatters: 'AI assistants must not become uninspected backdoors into personal operating systems. By engineering transparent trust boundaries, DPAPI hardware-bound token protection, and local model support, K.A.L.K.I. proves how applied AI and security engineering belong together.',
+    solution: 'The app pairs a local runtime with a visual desktop workspace. It supports voice input, local conversation history, several model providers, and system tools that require explicit confirmation.',
+    whyItMatters: 'The project explores how an assistant can feel capable while making its access and actions easier to understand.',
     workflow: [
       'Daemon startup initializes hardware-bound DPAPI vault and verifies provider availability.',
       'User triggers interaction via hotkey or voice command.',
@@ -38,6 +38,7 @@ export const projects: Project[] = [
     technologies: ['Python', 'Local LLMs (Ollama)', 'Groq (LLaMA-3.3-70B)', 'DPAPI Vault', 'VOSK Voice Recognition', 'Custom HUD Architecture', 'Security Boundaries'],
     heroImage: '/images/projects/kalki/kalki-store-marketing.png',
     videoSrc: '/videos/kalki-video.mp4',
+    videoPoster: '/videos/kalki-video-poster.webp',
     gallery: [
       {
         src: '/images/projects/kalki/kalki-hero.png',
@@ -94,30 +95,30 @@ export const projects: Project[] = [
   {
     slug: 'ztees',
     title: 'Ztees',
-    eyebrow: 'Direct-to-Consumer Streetwear Engine · Storefront & Operations Console',
+    eyebrow: 'Commerce · Streetwear storefront and shop tools',
     category: 'Client Work',
-    categoryLabel: 'Client Work · E-Commerce & Retail Operations',
+    categoryLabel: 'Client work · Online retail',
     status: 'Production Storefront & Owner Console',
     featured: true,
     order: 2,
     year: '2026',
-    summary: 'A high-conversion streetwear commerce ecosystem built for Z Tees India, comprising a mobile-first editorial customer storefront (ztees.store), a dedicated private owner operations console (/admin), and an Expo Android mobile app. It features 61 live oversized graphic tees, instant size selection, multi-angle media studio, customer review moderation, and frictionless WhatsApp + UPI conversational checkout.',
-    audience: 'D2C apparel shoppers seeking heavyweight 240 GSM graphic streetwear drops, alongside brand owners who require real-time catalog management, order triage, and zero-overhead SaaS operations.',
-    challenge: 'The brand was bottlenecked by manual Instagram DM ordering: customer inquiries slipped through message requests, sizing questions were repeated endlessly, and stock counts were impossible to track accurately during limited-quantity drops. Meanwhile, standard Shopify subscriptions imposed monthly overhead, payment gateway transaction cuts, and sluggish mobile page load times.',
+    summary: 'A mobile storefront and owner console for Z Tees India, designed around streetwear drops, product details, and direct customer ordering.',
+    audience: 'Streetwear shoppers browsing on mobile and the team managing products and orders.',
+    challenge: 'Orders and product questions were handled through social messages, making it harder to keep product information and order details in one place. The store needed a clear shopping flow and a simpler way for the team to manage its catalogue.',
     objectives: [
       'Engineer an editorial, drop-driven customer storefront displaying 60+ active streetwear designs.',
-      'Build a high-converting frictionless checkout routing orders directly into pre-filled WhatsApp UPI payment messages.',
+      'Create a short checkout flow that prepares order details for WhatsApp and UPI payment.',
       'Develop a protected owner workspace (/admin) with Supabase Auth for real-time catalog updates and order triage.',
       'Implement a multi-angle Media Studio allowing the merchant to upload front, back, detail, and lifestyle photos.',
       'Package an Expo React Native Android mobile client for on-the-go customer shopping and store management.',
-      'Eliminate recurring SaaS subscription fees while achieving sub-second edge load speeds on mobile networks.'
+      'Reduce recurring platform fees and keep the storefront responsive on mobile networks.'
     ],
-    solution: 'Architected a dual-surface e-commerce engine using Vite, React 18, Tailwind CSS, and Supabase PostgreSQL. For consumers, the platform offers an editorial catalog with instant size matrices, interactive drop campaigns (Janmashtami Radha Krishna, Heavyweight, Anime, Motorsport), and automated WhatsApp order generation. For the brand owner, a private console provides live order queues, CSV exports, catalog pricing/GSM toggles, customer review moderation, and cloud media uploads.',
-    whyItMatters: 'Demonstrates how high-velocity software engineering eliminates SaaS lock-in: replacing costly commerce subscriptions with a custom, ultra-fast storefront and dedicated owner operations suite that respects Indian consumer checkout habits (WhatsApp + UPI).',
+    solution: 'The customer storefront organizes collections, product imagery, and size selection, then prepares an order for WhatsApp. A private owner console supports catalogue updates and order review.',
+    whyItMatters: 'The storefront and the day-to-day tools are designed together, so customers and the shop team can use one connected experience.',
     workflow: [
       'Customer Discovery: Shoppers browse seasonal drops with interactive category chips, color swatches, and instant search across 61 designs.',
       'Product & Fit Inspection: Detailed product view featuring 240 GSM cotton specifications, oversized fit guides, and multi-angle photography.',
-      'Frictionless Checkout: Instant bag addition with automated "Buy Now on WhatsApp" pre-formatting SKU, size, price, and customer address.',
+      'WhatsApp checkout: Customers send their selected products, sizes, and delivery details to the shop to complete an order.',
       'Owner Order Triage: Brand managers monitor live incoming orders in /admin, update fulfillment status, and add courier tracking notes.',
       'Catalog & Review Operations: Instant product creation with fabric specs, live stock toggles, and customer review moderation ("Read. Check. Publish.").'
     ],
@@ -140,6 +141,7 @@ export const projects: Project[] = [
     ],
     heroImage: '/images/projects/ztees/ztees-storefront-hero.png',
     videoSrc: '/videos/ztees-video.mp4',
+    videoPoster: '/videos/ztees-video-poster.webp',
     gallery: [
       {
         src: '/images/projects/ztees/ztees-storefront-hero.png',
@@ -205,24 +207,24 @@ export const projects: Project[] = [
   {
     slug: 'classic-infrastructure',
     title: 'Classic Infrastructure Projects',
-    eyebrow: 'Enterprise Contracting Platform · Full-Stack Platform',
+    eyebrow: 'Civil engineering · Corporate website',
     category: 'Client Work',
-    categoryLabel: 'Client Work · Industrial & Corporate Infrastructure',
+    categoryLabel: 'Client work · Infrastructure',
     status: 'Corporate Client Platform',
     featured: true,
     order: 3,
     year: '2026',
-    summary: 'A full-scale corporate web application and qualification credential showcase for Classic Infrastructure Projects (CIP), an established engineering contracting firm (Est. 2008) executing pipeline networks, municipal drainage, heavy civil works, and mechanical installations.',
-    audience: 'Government procurement officers, municipal corporations, public sector utilities, and industrial plant heads evaluating prequalification credentials and technical execution capacity for tenders.',
-    challenge: 'Classic Infrastructure Projects has over 15 years of proven field execution—including multi-kilometer pipeline networks and municipal stormwater RCC box culverts—yet lacked an institutional digital presence. In high-stakes tenders, decision-makers demand immediate, verifiable evidence of past execution, machinery fleets, safety standards, and structured bid inquiry channels.',
+    summary: 'A corporate website for Classic Infrastructure Projects, presenting the civil engineering firm’s services, project experience, and company information.',
+    audience: 'Clients and procurement teams looking for information about the company and its infrastructure work.',
+    challenge: 'The company needed a clear online presence to explain its capabilities and make project information easier to find.',
     objectives: [
       'Design an authoritative corporate presence reflecting 15+ years of infrastructure contracting experience.',
       'Showcase real high-resolution field photography categorized by discipline: Pipeline, Stormwater Drainage, Protection Works, Roads, and Mechanical Engineering.',
       'Implement an interactive RFP/quotation request system with automated email notifications for corporate bid inquiries.',
       'Guarantee fast loading speeds for field inspectors and municipal officials reviewing profiles on mobile devices in the field.'
     ],
-    solution: 'Engineered a full-stack corporate platform using TanStack Start, React 19, and Tailwind CSS v4. Features comprehensive project portfolios, verified technical specifications, downloadable company profiles, and structured quotation request workflows.',
-    whyItMatters: 'Proves Qavironel’s capability to serve established heavy-industry contractors and commercial enterprises. We translate complex engineering credentials, machinery assets, and compliance documentation into an authoritative, modern digital experience.',
+    solution: 'The site brings company information, project examples, and service details into one structured experience, with a direct path for new inquiries.',
+    whyItMatters: 'A considered digital presence can help a specialist engineering firm explain its work clearly to prospective clients.',
     workflow: [
       'Procurement officers review corporate profile, client track record, and verified contracting strengths.',
       'Filter dynamic project gallery by sector (Pipeline, Drainage, Civil/Structural, Mechanical, Industrial Roads).',
@@ -238,7 +240,8 @@ export const projects: Project[] = [
     scopeNote: 'Engineered for Classic Infrastructure Projects (CIP), established 2008.',
     technologies: ['React 19', 'TanStack Start', 'Tailwind CSS v4', 'Nodemailer', 'High-Density WebP Pipeline', 'Lucide Icons', 'Zod Validation'],
     heroImage: '/images/projects/cip/cip-new-1-hero.webp',
-    videoSrc: '/videos/hero-showreel.mp4',
+    videoSrc: '/videos/cip-project-video.mp4',
+    videoPoster: '/images/projects/cip/cip-pipeline-110-hero.webp',
     gallery: [
       {
         src: '/images/projects/cip/cip-pipeline-110-hero.webp',
@@ -272,45 +275,45 @@ export const projects: Project[] = [
       { value: 'TanStack', label: 'Start Architecture', context: 'React 19 full-stack performance' }
     ],
     links: [
-      { label: 'View EPC Credential Dossier (Enterprise Intranet Portal)', url: '/contact', type: 'live' }
+      { label: 'Discuss a similar infrastructure project', url: '/contact', type: 'demo' }
     ]
   },
   {
     slug: 'civic-sathi',
     title: 'Civic Sathi',
-    eyebrow: 'Civic Intelligence & Grievance Platform · 4-Portal Municipal Ecosystem',
+    eyebrow: 'Civic services · Product prototype',
     category: 'Product Lab',
-    categoryLabel: 'Civic Technology & Smart Governance · SIH 2026',
+    categoryLabel: 'Prototype · Civic technology',
     status: 'SIH 2026 National Finalist Platform',
     featured: true,
     order: 4,
     year: '2026',
-    summary: 'A production-grade civic operations ecosystem developed by Team Vertex for Smart India Hackathon 2026. Unifies four role-separated portals (Public Citizen, Municipal Ward Officer, Contractor Dispatch, and Super Admin) featuring AI problem categorization, HDBSCAN duplicate clustering, live locality GIS heatmaps across 4 metros (Delhi, Mumbai, Bengaluru, Vadodara), Participatory Budgeting, and Tri-Partite contractor transparency scoring.',
-    audience: 'Urban citizens seeking rapid municipal grievance redressal, municipal ward officers triaging neighborhood complaints, infrastructure contractors fulfilling work orders, and city administrators monitoring cross-ward governance metrics.',
-    challenge: 'Municipal complaint channels suffer from deep structural friction: citizens submit ambiguous reports without precise geospatial coordinates or photographic proof, identical complaints overwhelm ward desks without duplicate grouping, and contractor allocation remains opaque without public accountability or performance metrics.',
+    summary: 'A civic-service prototype developed by Team Vertex for Smart India Hackathon 2026. It brings public reporting, issue mapping, and municipal workflows into a connected platform.',
+    audience: 'Residents exploring local services and the teams responsible for reviewing and responding to civic reports.',
+    challenge: 'Civic issues can be difficult to report and follow when information is spread across separate channels. The prototype explores a more connected path from a resident’s report to municipal review.',
     objectives: [
-      'Architect 4 dedicated role-based portals (Public Citizen, Municipality, Contractor, Super Admin) in a unified monorepo.',
-      'Deploy a multi-metro GIS map with live severity zones (Low, Moderate, High, Critical) and locality drilldowns across Delhi, Mumbai, Bengaluru, and Vadodara.',
-      'Deliver a frictionless 4-step grievance wizard with natural voice description ("Describe by Voice"), AI suggestions, and GPS evidence uploads.',
-      'Implement HDBSCAN machine learning clustering to detect duplicate reports and prioritize systemic civic infrastructure hazards.',
-      'Pioneer a Tri-Partite Contractor Rating system combining citizen votes, AI SLA quality verification, and government inspection scores.',
-      'Integrate a Daily Community Hub with real-time Open-Meteo AQI telemetry and Participatory Budgeting voting on municipal projects.'
+      'Build four role-based portals for residents, municipal teams, contractors, and administrators.',
+      'Create a GIS map with severity levels and locality views for Delhi, Mumbai, Bengaluru, and Vadodara.',
+      'Create a four-step reporting flow with voice input, AI category suggestions, and location-tagged evidence.',
+      'Use HDBSCAN clustering to identify duplicate reports and group related infrastructure issues.',
+      'Develop a contractor rating model that combines resident feedback, service checks, and municipal inspections.',
+      'Add a community hub with weather and air-quality information, plus voting on local projects.'
     ],
-    solution: 'Engineered Civic Sathi as a high-velocity full-stack monorepo with React 19, TypeScript, Tailwind CSS, Leaflet GIS, FastAPI, and Neon Postgres. Features an interactive citizen map tracking 1,200+ mapped reports across major Indian cities, voice-assisted complaint submission, locality-level issue analytics, live AQI and emergency service cards, and an open democratic participatory budgeting module.',
-    whyItMatters: 'Demonstrates full-scale enterprise software architecture applied to civic governance—turning opaque municipal bureaucracy into an accountable, transparent, and participatory digital system for millions of urban residents.',
+    solution: 'The prototype combines a public reporting portal, a map for exploring issues, and separate views for municipal staff and contractors. It also includes community information and participatory budgeting concepts.',
+    whyItMatters: 'The work tests how mapping and clear status information could make civic services easier to understand and follow.',
     workflow: [
-      'Citizen Geotagged Reporting: Citizens describe civic issues via voice or text; AI automatically suggests categories, extracts coordinates, and logs photographic evidence.',
-      'Interactive Locality Mapping: Live Leaflet GIS map visualizes complaint density, severity hotspots (Low to Critical), and locality drilldowns across 4 metros.',
-      'Tri-Partite Contractor Accountability: Public citizens, AI verification models, and municipal inspectors jointly score contractor performance on completed work orders.',
-      'Participatory Budgeting: Citizens directly cast democratic votes on local infrastructure initiatives (solar streetlights, lake rejuvenation, health clinics).',
-      'Municipal & Admin Dispatch: Ward officers triage clustered complaints, assign vetted contractors, and track resolution proofs to ticket closure.'
+      'Issue reporting: Residents describe a problem by voice or text, add a location and photo, and receive a suggested category.',
+      'Locality map: A Leaflet map shows reports by area and severity across four cities.',
+      'Contractor ratings: Resident feedback, service checks, and municipal inspections contribute to contractor ratings.',
+      'Community voting: Residents can vote on proposed local projects, such as street lighting, parks, and clinics.',
+      'Municipal review: Ward officers group related reports, assign contractors, and track progress through resolution.'
     ],
     buildNotes: [
-      'Engineered as a high-cohesion monorepo containing 4 distinct role applications (public, municipality, contractor, admin).',
+      'Organized as a monorepo with separate applications for residents, municipal teams, contractors, and administrators.',
       'Integrated Leaflet and OpenStreetMap GIS engine for interactive locality polygons and real-time severity heatmaps.',
-      'Implemented HDBSCAN unsupervised spatial clustering algorithms to group redundant neighborhood complaints into unified work orders.',
+      'Used HDBSCAN clustering to group related reports into shared work items.',
       'Connected Open-Meteo API for real-time Air Quality Index (AQI) and meteorological telemetry in the Community Hub.',
-      'Built offline-capable PWA client with multi-lingual localization support (English, Hindi, Gujarati).'
+      'Built an offline-capable progressive web app with English, Hindi, and Gujarati language support.'
     ],
     scopeNote: 'Presented as an independent product-lab prototype developed for Smart India Hackathon 2026, with public demo portals accessible online.',
     technologies: [
@@ -327,6 +330,7 @@ export const projects: Project[] = [
     ],
     heroImage: '/images/projects/civic-sathi/civic-sathi-delhi-hero.png',
     videoSrc: '/videos/civic-sathi-video.mp4',
+    videoPoster: '/videos/civic-sathi-video-poster.webp',
     gallery: [
       {
         src: '/images/projects/civic-sathi/civic-sathi-delhi-hero.png',
@@ -383,24 +387,24 @@ export const projects: Project[] = [
   {
     slug: 'codedroid',
     title: 'CodeDroid',
-    eyebrow: 'Android Mobile IDE · Open Source Developer Tooling',
+    eyebrow: 'Mobile development · Android coding app',
     category: 'Digital Products',
-    categoryLabel: 'Developer Tooling · Mobile Engineering',
+    categoryLabel: 'Open source · Mobile software',
     status: 'Active Open Source Build',
     featured: true,
     order: 5,
     year: '2025–2026',
-    summary: 'A pocket development environment for Android with an offline CodeMirror editor, integrated terminal, and on-device execution for Python and JavaScript.',
-    audience: 'Computer science students, mobile learners, and traveling engineers who need to write, test, and debug scripts from an Android smartphone or tablet without requiring a laptop.',
-    challenge: 'Existing mobile text editors either stop at simple syntax coloring with no execution capability, or they require heavy cloud subscriptions that fail completely when offline. CodeDroid aimed to transform an ordinary mobile phone into a self-contained runtime environment.',
+    summary: 'An Android coding environment with a multi-language editor, integrated terminal, and on-device Python and JavaScript tools.',
+    audience: 'Students and developers who want to write and try code from an Android device.',
+    challenge: 'Most mobile editors are designed for reading or making quick changes. CodeDroid brings editing and selected development tools into a workspace that fits on a phone or tablet.',
     objectives: [
       'Deliver fluid, multi-tab code editing with syntax highlighting across 18 programming languages.',
       'Embed on-device interpreters (Chaquopy for Python, Rhino for JS) requiring no internet access.',
       'Integrate cloud execution runners (Piston API) for compiling C, C++, Java, and Go.',
       'Include programmer-friendly keyboard extensions, Vim mode, auto-indentation, and a terminal.'
     ],
-    solution: 'Engineered a native Android application packaging a customized CodeMirror webview editor alongside embedded native runtimes. Chaquopy provides a complete Python 3 standard library directly inside the APK, while an integrated terminal emulator captures standard in/out streams for true interactive script testing.',
-    whyItMatters: 'Drastically lowers the barrier to entry for computer science students in developing regions who own a smartphone but lack reliable access to a personal laptop or home broadband. Makes learning to code accessible anywhere.',
+    solution: 'The Android app pairs a CodeMirror-based editor with on-device Python and JavaScript runtimes, plus an integrated terminal for working through small programs.',
+    whyItMatters: 'A portable coding environment makes it easier to practise and experiment away from a desktop setup.',
     workflow: [
       'Create or open workspace files via the built-in Android file picker.',
       'Edit scripts with syntax highlighting, line numbers, autocomplete, and code folding.',
@@ -414,7 +418,8 @@ export const projects: Project[] = [
     ],
     technologies: ['Android SDK', 'Java / Kotlin', 'Chaquopy (Python Runtime)', 'Rhino JS Engine', 'CodeMirror', 'Piston API'],
     heroImage: '/images/work/codedroid-multidevice.webp',
-    videoSrc: '/videos/tech-atmosphere.mp4',
+    videoSrc: '/videos/codedroid-project-video.mp4',
+    videoPoster: '/images/projects/codedroid-cover.png',
     gallery: [
       {
         src: '/images/projects/codedroid-cover.png',
@@ -440,16 +445,16 @@ export const projects: Project[] = [
   {
     slug: 'itm-notes',
     title: 'ITM Notes',
-    eyebrow: 'Full-Stack Academic Operating System · Engineering Study Suite',
+    eyebrow: 'Education · Engineering study platform',
     category: 'Academic Build',
-    categoryLabel: 'Academic Build · Academic Systems & EdTech',
+    categoryLabel: 'Education · Student platform',
     status: 'Live Production Platform',
     featured: true,
     order: 6,
     year: '2025–2026',
-    summary: 'A comprehensive academic operating system engineered for engineering undergraduates at ITM (SLS) Baroda University. Unifies an in-browser coding sandbox with 154 runnable practicals, a 954-question timed quiz engine, KaTeX LaTeX syllabus reader with TTS audio lectures, 75% attendance compliance guard, 10-point relative SGPA predictor, and real-time Campus Pulse community.',
-    audience: 'Undergraduate computer science and engineering students, faculty, and lab assistants seeking a centralized, high-velocity digital companion for semester coursework, coding practicals, and university examination prep.',
-    challenge: 'Engineering coursework suffered from severe platform fragmentation: coding lab assignments required heavy local IDE setups prone to compiler version mismatches, course syllabi and MST/CET question papers were buried in unstructured messaging groups, and students lacked clear mathematical visibility into relative SGPA distributions and UGC-mandated 75% minimum attendance thresholds.',
+    summary: 'A study portal for engineering students at ITM (SLS) Baroda University, bringing course materials, coding practice, quizzes, and study tools together.',
+    audience: 'Engineering students organizing coursework and preparing for practicals and exams.',
+    challenge: 'Course notes, practicals, question banks, and planning tools were spread across different places. The portal brings these resources into a single space students can return to throughout the semester.',
     objectives: [
       'Deploy an in-browser zero-setup Coding Lab featuring 154 runnable engineering practicals across Java, C, SQL, and Python.',
       'Deliver an academic Markdown reader with KaTeX LaTeX math rendering, Pomodoro focus sprints, and continuous text-to-speech audio lectures.',
@@ -458,8 +463,8 @@ export const projects: Project[] = [
       'Engineer Campus Pulse—a real-time peer discussion forum with privacy-preserving Anonymous Mask protection to safeguard students from academic retaliation.',
       'Centralize 52+ official syllabus documents, mid-semester test (MST) question banks, and faculty lecture slides with one-click offline PDF access.'
     ],
-    solution: 'Engineered ITM Notes 2.0 as an offline-first Progressive Web App built with React 18, TypeScript, Tailwind CSS, Radix UI, and Supabase. The platform provides a full in-browser coding sandbox with syntax highlighting and simulated execution, KaTeX mathematical typesetting, continuous audio lecture synthesis, dynamic academic analytics, and real-time peer community feeds.',
-    whyItMatters: 'Demonstrates end-to-end full-stack software craftsmanship applied directly to real-world campus workflows—transforming fragmented university PDFs into an empowering daily operating system with gamified streaks, coding practicals, and high-trust peer collaboration.',
+    solution: 'The platform combines a practicals library, timed quizzes, a syllabus reader, academic calculators, and a student community area. It is built as a Progressive Web App for use across desktop and mobile devices.',
+    whyItMatters: 'The project brings routine study tasks and course resources closer together in one student-focused product.',
     workflow: [
       'Interactive Student Dashboard: Real-time 5-day study streak tracking, XP milestones (Level 9 Architect), 23-day university exam countdown clock, and instant semester switcher.',
       'Integrated Coding Lab: 154 runnable engineering practicals in Java, C, SQL, and Python with in-browser terminal execution and automated test harnesses.',
@@ -490,6 +495,7 @@ export const projects: Project[] = [
     ],
     heroImage: '/images/projects/itm/itm-dashboard-hero.png',
     videoSrc: '/videos/itm-notes-video.mp4',
+    videoPoster: '/videos/itm-notes-video-poster.webp',
     gallery: [
       {
         src: '/images/projects/itm/itm-dashboard-hero.png',
@@ -551,51 +557,6 @@ export const projects: Project[] = [
       { label: 'Visit Live Study Platform', url: 'https://itm-notes-new.vercel.app/', type: 'live' },
       { label: 'View Source on GitHub', url: 'https://github.com/Maher-Bhatt/itm-notes', type: 'github' }
     ]
-  },
-  {
-    slug: 'socialsafe',
-    title: 'CyberGuard Security Lab',
-    eyebrow: 'Interactive Defense & Awareness Labs · Cybersecurity Education',
-    category: 'Experiments',
-    categoryLabel: 'Open Source · Cybersecurity Education & Labs',
-    status: 'Educational Security Lab Series',
-    featured: false,
-    order: 7,
-    year: '2025–2026',
-    summary: 'An educational cybersecurity training suite and interactive awareness lab demonstrating credential harvesting defense, phishing anatomy, session security, and strict client-side isolation across multiple cybersecurity workshops.',
-    audience: 'Engineering cohorts, developers, and computer users attending interactive cybersecurity awareness sessions to learn threat recognition and client-side web defense boundaries.',
-    challenge: 'Security awareness lectures often feel abstract without hands-on lab demonstrations showing how credential harvesting mechanisms operate, how phishing vectors deceive users, and how strict browser isolation controls neutralize threats.',
-    objectives: [
-      'Deliver interactive phishing anatomy and credential hygiene modules across multiple educational security sessions.',
-      'Demonstrate strict client-side boundary enforcement via Content Security Policy (connect-src none, form-action none).',
-      'Execute simulated authentication challenges entirely in ephemeral memory with instant credential erasure.',
-      'Equip attendees with practical heuristics for URL validation, HTTPS inspection, and password safety.'
-    ],
-    solution: 'Engineered a lightweight, dependency-free educational laboratory used across multiple cybersecurity sessions. The lab executes synchronous zero-persistence simulations with immediate credential sanitization, accompanied by structured threat modeling walkthroughs and browser security briefings.',
-    whyItMatters: 'Demonstrates defensive engineering principles, safe educational simulation methodology, and the importance of privacy-first architectural boundaries in cybersecurity training.',
-    workflow: [
-      'Session participants interact with a simulated login workflow to analyze security indicators.',
-      'System executes zero-persistence comparison in isolated memory and purges data immediately.',
-      'Telemetry briefing explains phishing indicators, form action restrictions, and CSP defenses.',
-      'Participants review live browser network inspection showing zero egress or token leakage.'
-    ],
-    buildNotes: [
-      'Conducted and refined across multiple university cybersecurity awareness sessions and peer workshops.',
-      'Dependency-free implementation with strict CSP preventing network transmission or storage.',
-      'Includes structured educator briefing notes on phishing heuristics and defense in depth.'
-    ],
-    technologies: ['HTML5', 'CSS3', 'Modern JavaScript', 'Content Security Policy (CSP)', 'Threat Modeling', 'Phishing Analysis', 'Security Awareness'],
-    heroImage: '/images/projects/kalki-security.png',
-    videoSrc: '/videos/hero-showreel.mp4',
-    gallery: [],
-    metrics: [
-      { value: 'Multi-Session', label: 'Security Lab Series', context: 'Conducted for student cohorts & peer workshops' },
-      { value: 'Zero Egress', label: 'Network Transmission', context: 'Strict CSP connect-src and form-action' },
-      { value: '100% In-Memory', label: 'Ephemeral Isolation', context: 'Immediate credential destruction on interaction' }
-    ],
-    links: [
-      { label: 'View Source on GitHub', url: 'https://github.com/Maher-Bhatt/SocialSafe', type: 'github' }
-    ]
   }
 ];
 
@@ -605,6 +566,5 @@ export const categories: { id: Project['category']; label: string }[] = [
   { id: 'Digital Products', label: 'Digital Products' },
   { id: 'AI & Software', label: 'AI & Software' },
   { id: 'Product Lab', label: 'Product Lab' },
-  { id: 'Academic Build', label: 'Academic Builds' },
-  { id: 'Experiments', label: 'Experiments & Labs' }
+  { id: 'Academic Build', label: 'Academic Builds' }
 ];

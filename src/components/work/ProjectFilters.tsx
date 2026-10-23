@@ -16,7 +16,7 @@ export const ProjectFilters: React.FC<ProjectFiltersProps> = ({
   counts,
 }) => {
   return (
-    <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+    <div role="group" aria-label="Filter projects by category" className="flex flex-wrap items-center gap-2 pb-2">
       {categories.map((cat) => {
         const isActive = activeCategory === cat.id;
         const count = counts[cat.id] ?? 0;
@@ -30,14 +30,14 @@ export const ProjectFilters: React.FC<ProjectFiltersProps> = ({
               onSelectCategory(cat.id);
             }}
             aria-pressed={isActive}
-            className={`px-4 py-2 text-xs font-semibold uppercase tracking-widest transition-all duration-200 shrink-0 flex items-center gap-2 border rounded-full ${
+            className={`px-4 py-2.5 text-[0.68rem] font-semibold uppercase tracking-[0.11em] transition-all duration-200 shrink-0 flex items-center gap-2 border rounded-full ${
               isActive
-                ? 'bg-[#0A0A0A] dark:bg-white text-white dark:text-[#0A0A0A] border-[#0A0A0A] dark:border-white shadow-xs'
-                : 'bg-white dark:bg-[#121212] text-zinc-600 dark:text-zinc-400 border-black/10 dark:border-white/10 hover:border-black dark:hover:border-white hover:text-black dark:hover:text-white'
+                ? 'bg-[#161616] dark:bg-[#D4D4D4] text-white dark:text-[#111111] border-[#161616] dark:border-[#D4D4D4] shadow-xs'
+                : 'bg-transparent dark:bg-white/[0.03] text-zinc-600 dark:text-zinc-400 border-[#D8D8D8] dark:border-white/15 hover:border-[#161616] dark:hover:border-[#D4D4D4] hover:text-[#161616] dark:hover:text-white'
             }`}
           >
             <span>{cat.label}</span>
-            <span className={`text-[0.68rem] font-mono px-2 py-0.5 rounded-full ${
+            <span className={`text-[0.65rem] font-mono px-1.5 py-0.5 rounded-full ${
               isActive 
                 ? 'bg-white/20 text-white dark:bg-black/10 dark:text-black' 
                 : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300'

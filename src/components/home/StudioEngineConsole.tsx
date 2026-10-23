@@ -45,8 +45,8 @@ export const StudioEngineConsole: React.FC = () => {
         </div>
 
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-1.5 text-[0.65rem] text-emerald-400 bg-emerald-950/60 border border-emerald-500/30 px-2 py-0.5 rounded-full">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+          <div className="flex items-center gap-1.5 text-[0.65rem] text-zinc-300 bg-zinc-950/60 border border-zinc-500/30 px-2 py-0.5 rounded-full">
+            <span className="w-1.5 h-1.5 rounded-full bg-zinc-300 animate-pulse" />
             <span>NODE_LIVE</span>
           </div>
         </div>
@@ -116,7 +116,7 @@ export const StudioEngineConsole: React.FC = () => {
                 <div className="p-3 bg-white/5 border border-white/10 rounded-xl space-y-1">
                   <p className="text-zinc-400">INPUT STREAM</p>
                   <p className="font-bold text-white">Multimodal Voice/Text</p>
-                  <span className="text-[0.6rem] text-emerald-400">● 16-bit PCM In</span>
+                  <span className="text-[0.6rem] text-zinc-300">● 16-bit PCM In</span>
                 </div>
 
                 <div className="p-3 bg-white/5 border border-white/10 rounded-xl space-y-1">
@@ -128,7 +128,7 @@ export const StudioEngineConsole: React.FC = () => {
                 <div className="p-3 bg-white/5 border border-white/10 rounded-xl space-y-1">
                   <p className="text-zinc-400">VECTOR MEMORY</p>
                   <p className="font-bold text-white">Hardware DPAPI Vault</p>
-                  <span className="text-[0.6rem] text-emerald-400">● Zero Cloud Leak</span>
+                  <span className="text-[0.6rem] text-zinc-300">● Zero Cloud Leak</span>
                 </div>
 
                 <div className="p-3 bg-[#0A0A0A]/20 border border-[#0A0A0A]/40 rounded-xl space-y-1">
@@ -143,7 +143,7 @@ export const StudioEngineConsole: React.FC = () => {
                 <div className="text-zinc-400">
                   <span className="text-[#737373]">$</span> qavironel-ai orchestrate --provider=hybrid --target=production-agent
                 </div>
-                <div className="text-emerald-400">
+                <div className="text-zinc-300">
                   ✓ Vector memory loaded (14,280 chunks indexed)
                 </div>
                 <div className="text-zinc-300">
@@ -164,20 +164,20 @@ export const StudioEngineConsole: React.FC = () => {
             >
               <div className="flex items-center justify-between text-[0.7rem] text-zinc-400 pb-2 border-b border-white/5">
                 <span>CORE WEB VITALS BENCHMARK // AUDITED ON REACT 19 & VITE</span>
-                <span className="text-emerald-400 font-bold">100 / 100 LIGHTHOUSE</span>
+                <span className="text-zinc-300 font-bold">100 / 100 LIGHTHOUSE</span>
               </div>
 
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
                 <div className="p-3 bg-white/5 border border-white/10 rounded-xl">
-                  <span className="text-2xl font-bold font-sans text-emerald-400">0.58s</span>
+                  <span className="text-2xl font-bold font-sans text-zinc-300">0.58s</span>
                   <p className="text-[0.65rem] text-zinc-400 uppercase mt-1">LCP (Fastest Render)</p>
                 </div>
                 <div className="p-3 bg-white/5 border border-white/10 rounded-xl">
-                  <span className="text-2xl font-bold font-sans text-emerald-400">0 ms</span>
+                  <span className="text-2xl font-bold font-sans text-zinc-300">0 ms</span>
                   <p className="text-[0.65rem] text-zinc-400 uppercase mt-1">INP (Zero Input Lag)</p>
                 </div>
                 <div className="p-3 bg-white/5 border border-white/10 rounded-xl">
-                  <span className="text-2xl font-bold font-sans text-emerald-400">0.00</span>
+                  <span className="text-2xl font-bold font-sans text-zinc-300">0.00</span>
                   <p className="text-[0.65rem] text-zinc-400 uppercase mt-1">CLS (Zero Layout Shift)</p>
                 </div>
                 <div className="p-3 bg-[#0A0A0A]/20 border border-[#0A0A0A]/40 rounded-xl">
@@ -188,7 +188,7 @@ export const StudioEngineConsole: React.FC = () => {
 
               <div className="p-3 bg-white/5 border border-white/10 rounded-xl flex items-center justify-between text-[0.7rem]">
                 <span className="text-zinc-400">Bundle Architecture: Tree-shaken ESM & Modern CSS variables</span>
-                <span className="text-emerald-400 font-bold">GZIP: &lt; 46 kB</span>
+                <span className="text-zinc-300 font-bold">GZIP: &lt; 46 kB</span>
               </div>
             </motion.div>
           )}
@@ -210,7 +210,7 @@ export const StudioEngineConsole: React.FC = () => {
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-[0.7rem]">
                 <div className="p-3 bg-white/5 border border-white/10 rounded-xl space-y-1">
                   <p className="text-white font-bold flex items-center gap-1.5">
-                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                    <ShieldCheck className="w-3.5 h-3.5 text-zinc-300" />
                     <span>DPAPI Hardware Vault</span>
                   </p>
                   <p className="text-zinc-400 text-[0.65rem]">Keys encrypted with TPM/DPAPI machine boundaries.</p>
@@ -218,7 +218,7 @@ export const StudioEngineConsole: React.FC = () => {
 
                 <div className="p-3 bg-white/5 border border-white/10 rounded-xl space-y-1">
                   <p className="text-white font-bold flex items-center gap-1.5">
-                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                    <ShieldCheck className="w-3.5 h-3.5 text-zinc-300" />
                     <span>Strict CSP & Sanitization</span>
                   </p>
                   <p className="text-zinc-400 text-[0.65rem]">XSS and injection attack surface reduced to absolute zero.</p>
@@ -226,7 +226,7 @@ export const StudioEngineConsole: React.FC = () => {
 
                 <div className="p-3 bg-white/5 border border-white/10 rounded-xl space-y-1">
                   <p className="text-white font-bold flex items-center gap-1.5">
-                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                    <ShieldCheck className="w-3.5 h-3.5 text-zinc-300" />
                     <span>Zero Data Harvesting</span>
                   </p>
                   <p className="text-zinc-400 text-[0.65rem]">No third-party trackers, invasive cookies, or analytics leaks.</p>
@@ -234,7 +234,7 @@ export const StudioEngineConsole: React.FC = () => {
               </div>
 
               <div className="p-3 bg-black/60 border border-white/10 rounded-xl font-mono text-[0.68rem] text-zinc-300">
-                <span className="text-emerald-400">● AUDIT STATUS:</span> All communication channels, form payloads, and API endpoints authenticated with strict TLS 1.3 & token rotation.
+                <span className="text-zinc-300">● AUDIT STATUS:</span> All communication channels, form payloads, and API endpoints authenticated with strict TLS 1.3 & token rotation.
               </div>
             </motion.div>
           )}

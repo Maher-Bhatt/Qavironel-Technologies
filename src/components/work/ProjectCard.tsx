@@ -141,7 +141,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
     }
   };
 
-  const isDarkProject = project.slug === 'kalki' || project.slug === 'codedroid' || project.slug === 'socialsafe';
+  const isDarkProject = project.slug === 'kalki' || project.slug === 'codedroid';
 
   const displayImage = (isFeatured && project.gallery && project.gallery[activeImageIndex])
     ? project.gallery[activeImageIndex].src

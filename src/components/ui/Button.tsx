@@ -33,13 +33,13 @@ export const Button: React.FC<ButtonProps> = ({
   }[size];
 
   const variantStyles = {
-    primary: 'btn-glass-shimmer bg-[#0A0A0A] hover:bg-[#1C1C1E] text-white dark:bg-white dark:hover:bg-zinc-100 dark:text-[#0A0A0A] border border-black/10 dark:border-white/20 shadow-[inset_0_1px_0_rgba(255,255,255,0.25),0_4px_14px_rgba(0,0,0,0.08)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.6),0_4px_14px_rgba(255,255,255,0.08)] hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.97] transition-all duration-300',
+    primary: 'btn-glass-shimmer bg-[#161616] hover:bg-[#0A0A0A] text-white dark:bg-[#D4D4D4] dark:hover:bg-[#E5E5E5] dark:text-[#111111] border border-[#161616]/20 dark:border-white/20 shadow-[0_4px_14px_rgba(0,0,0,0.16)] hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.97] transition-all duration-300',
     secondary: 'btn-glass-shimmer bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md hover:bg-white dark:hover:bg-zinc-850 text-[#0A0A0A] dark:text-white border border-black/10 dark:border-white/15 shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_2px_8px_rgba(0,0,0,0.04)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.15)] hover:-translate-y-0.5 hover:shadow-md active:scale-[0.97] transition-all duration-300',
-    dark: 'btn-glass-shimmer bg-[#0A0A0A] dark:bg-white hover:bg-black dark:hover:bg-zinc-100 text-white dark:text-[#0A0A0A] border border-black/20 dark:border-white/20 shadow-md hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.97] transition-all duration-300',
+    dark: 'btn-glass-shimmer bg-[#0A0A0A] dark:bg-[#D4D4D4] hover:bg-[#161616] dark:hover:bg-[#E5E5E5] text-white dark:text-[#111111] border border-[#161616]/20 dark:border-white/20 shadow-md hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.97] transition-all duration-300',
     ghost: 'bg-transparent text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white p-0 font-medium tracking-normal normal-case transition-colors duration-200',
   }[variant];
 
-  const baseStyles = 'inline-flex items-center justify-center font-sans rounded-full transition-all group focus-visible:outline-2 focus-visible:outline-[#0A0A0A] dark:focus-visible:outline-white focus-visible:outline-offset-2 cursor-pointer';
+  const baseStyles = 'inline-flex items-center justify-center font-sans rounded-full transition-all group focus-visible:outline-2 focus-visible:outline-[#161616] dark:focus-visible:outline-[#D4D4D4] focus-visible:outline-offset-2 cursor-pointer';
 
   const content = (
     <>

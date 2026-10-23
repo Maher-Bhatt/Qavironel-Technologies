@@ -138,10 +138,10 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                 </div>
                 <div>
                   <h2 id="booking-modal-title" className="font-sans font-bold text-lg sm:text-xl text-[#0A0A0A] dark:text-white">
-                    Direct Engineering Access
+                    Talk through your project
                   </h2>
                   <p className="text-xs text-zinc-500 dark:text-zinc-400">
-                    Partner directly with our technical founders · Zero agency middlemen
+                    Connect with the people who will shape and build it
                   </p>
                 </div>
               </div>
@@ -221,9 +221,9 @@ export const BookingModal: React.FC<BookingModalProps> = ({
             <div className="py-2.5 px-6 border-t border-black/[0.08] dark:border-white/10 bg-[#F9FAFB] dark:bg-[#0A0A0A] flex items-center justify-between text-[11px] font-mono text-zinc-500 dark:text-zinc-400 shrink-0">
               <span className="flex items-center gap-1.5">
                 <ShieldCheck className="w-3.5 h-3.5 text-black dark:text-white" />
-                Mutual NDA Protected & Direct Engineering Oversight
+                Project details handled with care
               </span>
-              <span>12h Response Guarantee</span>
+              <span>Qavironel Technologies</span>
             </div>
           </motion.div>
         </div>

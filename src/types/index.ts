@@ -7,8 +7,7 @@ export type ProjectCategory =
   | 'Digital Products' 
   | 'AI & Software' 
   | 'Product Lab' 
-  | 'Academic Build' 
-  | 'Experiments';
+  | 'Academic Build';
 
 /**
  * Quantifiable success metric associated with a project.
@@ -62,6 +61,7 @@ export interface Project {
   technologies: string[];
   heroImage: string;
   videoSrc?: string;
+  videoPoster?: string;
   gallery: ProjectGalleryItem[];
   metrics?: ProjectMetric[];
   links: ProjectLink[];
@@ -110,15 +110,4 @@ export interface TeamMember {
     linkedin?: string;
     website?: string;
   };
-}
-
-/**
- * Client or user testimonial data.
- */
-export interface Testimonial {
-  quote: string;
-  author: string;
-  role: string;
-  organization: string;
-  projectSlug?: string;
 }

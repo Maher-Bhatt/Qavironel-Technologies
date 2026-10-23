@@ -1,13 +1,13 @@
-import { TeamMember, Testimonial } from '../types';
+import { TeamMember } from '../types';
 
 export const companyConfig = {
   name: 'Qavironel Technologies',
   shortName: 'Qavironel',
   tagline: 'Ideas. Engineered.',
-  eyebrow: 'Global Technology & Digital Product Studio',
+  eyebrow: 'Independent Product & Engineering Studio',
   siteUrl: 'https://qavironel.com',
-  description: 'Qavironel Technologies is a remote-first software engineering and digital product studio. We partner with ambitious founders, startups, and companies worldwide to engineer high-performance web systems, custom digital products, and applied AI applications.',
-  foundedLocation: 'Global · Remote-First Studio',
+  description: 'Qavironel Technologies is an independent design and engineering studio based in Vadodara, India. We work directly with founders and teams to shape ideas into useful websites, digital products, and practical AI tools.',
+  foundedLocation: 'Vadodara, Gujarat, India · Working worldwide',
   email: 'qavironeltechnologies@gmail.com',
   secondaryEmail: 'maherbhatt01@gmail.com',
   phone: '+91 98795 29957',
@@ -16,14 +16,14 @@ export const companyConfig = {
   calCom15mUrl: 'https://cal.com/qavironel/15min',
   githubOrg: 'https://github.com/Maher-Bhatt',
   linkedinUrl: 'https://linkedin.com/in/maher-bhatt-206035362',
-  portfolioOrigin: 'An independent digital product and software engineering practice dedicated to high-performance craftsmanship, defensive security architecture, and applied AI systems.'
+  portfolioOrigin: 'An independent design and engineering practice focused on considered digital products, clear collaboration, and dependable software.'
 };
 
 export const teamMembers: TeamMember[] = [
   {
     name: 'Maher Bhatt',
-    role: 'Founder & Lead Systems Engineer',
-    bio: 'Maher guides technical architecture, applied AI systems, and company direction at Qavironel Technologies. Specializing in high-performance web platforms, local-first LLM desktop runtimes, and defensive infrastructure, he partners directly with clients to turn complex technical challenges into resilient, production-ready software.',
+    role: 'Founder & Systems Engineer',
+    bio: 'Maher leads technical direction and works on software architecture and applied AI. He works directly with clients to turn complex technical needs into reliable software.',
     credentials: [
       'Systems Architecture',
       'Applied AI & Local LLMs',
@@ -48,8 +48,8 @@ export const teamMembers: TeamMember[] = [
   },
   {
     name: 'Anurag Pandey',
-    role: 'Co-Founder & Backend Engineering Lead',
-    bio: 'Anurag leads backend engineering and server-side architecture at Qavironel Technologies. He designs high-throughput APIs, database schemas, and robust data management layers that power our digital products, ensuring every backend service operates with strict security boundaries, maintainability, and end-to-end reliability.',
+    role: 'Co-founder & Backend Engineer',
+    bio: 'Anurag leads backend development, shaping the APIs, data models, and server-side systems behind Qavironel’s products. He focuses on security, maintainability, and reliability.',
     credentials: [
       'Backend Development',
       'API Integration',
@@ -69,8 +69,8 @@ export const teamMembers: TeamMember[] = [
   },
   {
     name: 'Jaydev Gohil',
-    role: 'Core Member — Full-Stack & Systems Architecture',
-    bio: 'Jaydev spearheads interactive frontend systems, responsive web performance, and full-stack integration at Qavironel Technologies. He transforms complex client specifications into fluid, accessible digital products engineered with type-safe state architecture, clean component modularity, and sub-second rendering speeds.',
+    role: 'Full-Stack Engineer',
+    bio: 'Jaydev builds interactive web interfaces and connects them to the systems behind them. He focuses on responsive layouts, accessibility, and performance.',
     credentials: [
       'Full-Stack Architecture',
       'UI/UX Engineering',
@@ -91,8 +91,8 @@ export const teamMembers: TeamMember[] = [
   },
   {
     name: 'Dhyani Parikh',
-    role: 'Founding Team Member — Frontend & Operations',
-    bio: 'Dhyani contributes to frontend implementation and project coordination at Qavironel Technologies. She helps turn design concepts into responsive, reusable interface components while managing sprint tracking, meeting documentation, and team communications with a collaborative mindset and dedication to practical technical growth.',
+    role: 'Frontend Developer & Project Coordinator',
+    bio: 'Dhyani works on frontend development and project coordination. She helps turn design concepts into responsive interfaces and keeps project communication organized.',
     credentials: [
       'Frontend Development',
       'Responsive UI',
@@ -114,8 +114,8 @@ export const teamMembers: TeamMember[] = [
   },
   {
     name: 'Aayushi Jasani',
-    role: 'Founding Team Member — Frontend & Operations',
-    bio: 'Aayushi contributes to interface styling, frontend refinements, and project operations at Qavironel Technologies. She assists with UI component styling, layout testing, and cross-functional task coordination, bringing a collaborative spirit and focus on building clean, user-centered digital solutions.',
+    role: 'Frontend Developer & Project Coordinator',
+    bio: 'Aayushi works on interface styling, frontend refinement, and project coordination. She helps keep layouts consistent and interfaces clear and easy to use.',
     credentials: [
       'UI Design & Styling',
       'Frontend Refinements',
@@ -132,23 +132,6 @@ export const teamMembers: TeamMember[] = [
     ],
     image: '/images/team/aayushi-jasani.webp',
     links: {}
-  }
-];
-
-export const testimonials: Testimonial[] = [
-  {
-    quote: 'Qavironel understood exactly what our streetwear drop needed. They delivered a fast, mobile-first storefront in about two days, and the direct WhatsApp order flow made it seamless for our community to buy immediately.',
-    author: 'Rudra Pandya',
-    role: 'Founder',
-    organization: 'Ztees Streetwear',
-    projectSlug: 'ztees'
-  },
-  {
-    quote: 'Qavironel transformed our civil engineering credential portfolio into an authoritative digital platform. Government procurement officers and municipal engineers can now review our verified pipeline and drainage projects instantly from their phones.',
-    author: 'Executive Management',
-    role: 'Operations & Procurement Oversight',
-    organization: 'Classic Infrastructure Projects (Est. 2008)',
-    projectSlug: 'classic-infrastructure'
   }
 ];
 

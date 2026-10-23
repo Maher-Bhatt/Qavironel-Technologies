@@ -1,14 +1,14 @@
-import React, { useState, useEffect, Suspense, lazy } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import React, { useEffect, useState, Suspense, lazy } from 'react';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { AnimatePresence, MotionConfig } from 'framer-motion';
 import { SiteHeader } from './components/layout/SiteHeader';
 import { SiteFooter } from './components/layout/SiteFooter';
 
 import type { BookingModalTab } from './utils/modalEvents';
-import { MobileGlassDock } from './components/layout/MobileGlassDock';
 import { SmoothScrollProvider } from './components/layout/SmoothScrollProvider';
-import { FilmGrainOverlay } from './components/ui/FilmGrainOverlay';
 import { PageTransition } from './components/layout/PageTransition';
+import { SectionRevealObserver } from './components/layout/SectionRevealObserver';
+import { setupGlobalSoundListeners } from './utils/soundEffects';
 
 // Route Code Splitting
 const HomePage = lazy(() => import('./pages/HomePage').then(m => ({ default: m.HomePage })));
@@ -23,9 +23,7 @@ const BookingModal = lazy(() => import('./components/booking/BookingModal').then
 
 // Custom Hooks Abstraction
 import { useScrollToTop } from './hooks/useScrollToTop';
-import { useAmbientCursor } from './hooks/useAmbientCursor';
 import { useBookingModalEvent } from './hooks/useBookingModalEvent';
-import { setupGlobalSoundListeners } from './utils/soundEffects';
 
 const PageFallback: React.FC = () => (
   <div className="min-h-[60vh] flex items-center justify-center">
@@ -40,25 +38,20 @@ export const App: React.FC = () => {
 
   useScrollToTop();
   useBookingModalEvent(setIsBookingOpen, setBookingTab);
-  useAmbientCursor();
-
-  useEffect(() => {
-    const cleanup = setupGlobalSoundListeners();
-    return cleanup;
-  }, []);
-
+  useEffect(() => setupGlobalSoundListeners(), []);
   return (
     <MotionConfig reducedMotion="user">
       <SmoothScrollProvider>
-        <FilmGrainOverlay />
-        <div className="flex flex-col min-h-screen bg-[#FAFAFA] dark:bg-[#0A0A0A] text-[#0A0A0A] dark:text-[#FAFAFA] transition-colors duration-300">
+        <div className="app-shell">
           <SiteHeader />
-          <main className="flex-grow pb-28 sm:pb-32 md:pb-0">
+          <SectionRevealObserver />
+          <main className="app-shell__main">
             <Suspense fallback={<PageFallback />}>
               <AnimatePresence mode="wait">
                 <Routes location={location} key={location.pathname}>
                   <Route path="/" element={<PageTransition><HomePage /></PageTransition>} />
                   <Route path="/work" element={<PageTransition><WorkPage /></PageTransition>} />
+                  <Route path="/work/socialsafe" element={<Navigate to="/work" replace />} />
                   <Route path="/work/:slug" element={<PageTransition><CaseStudyPage /></PageTransition>} />
                   <Route path="/services" element={<PageTransition><ServicesPage /></PageTransition>} />
                   <Route path="/about" element={<PageTransition><AboutPage /></PageTransition>} />
@@ -71,7 +64,6 @@ export const App: React.FC = () => {
             </Suspense>
           </main>
           <SiteFooter />
-          <MobileGlassDock />
           {isBookingOpen && (
             <Suspense fallback={null}>
               <BookingModal 

@@ -5,97 +5,42 @@ const sharp = require('sharp');
 async function createOgImage() {
   const width = 1200;
   const height = 630;
-
   const brandDir = path.resolve(__dirname, '../public/images/brand');
-  if (!fs.existsSync(brandDir)) {
-    fs.mkdirSync(brandDir, { recursive: true });
-  }
+  fs.mkdirSync(brandDir, { recursive: true });
 
-  // Create an SVG card template using approved Forest Green (#174C3A), Deep Evergreen (#103629), Sage (#879B89), and Warm Ivory (#F5F5F0)
-  const svgOverlay = `
+  const svg = `
   <svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">
     <defs>
-      <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#103629" />
-        <stop offset="100%" stop-color="#191D1A" />
+      <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#F7F7F7" />
+        <stop offset="1" stop-color="#E8E8E8" />
       </linearGradient>
-      <linearGradient id="accentLine" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" stop-color="#174C3A" />
-        <stop offset="50%" stop-color="#879B89" />
-        <stop offset="100%" stop-color="#174C3A" />
+      <linearGradient id="deep" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#161616" />
+        <stop offset="1" stop-color="#0A0A0A" />
       </linearGradient>
     </defs>
+    <rect width="${width}" height="${height}" fill="url(#deep)" />
+    <circle cx="1090" cy="75" r="250" fill="none" stroke="#D4D4D4" stroke-width="1" opacity=".18" />
+    <circle cx="1090" cy="75" r="190" fill="none" stroke="#D4D4D4" stroke-width="1" opacity=".12" />
+    <rect x="54" y="54" width="${width - 108}" height="${height - 108}" rx="4" fill="none" stroke="#F7F7F7" stroke-opacity=".22" />
+    <text x="90" y="122" font-family="Arial, sans-serif" font-size="17" font-weight="700" fill="#D4D4D4" letter-spacing="4">QAVIRONEL TECHNOLOGIES</text>
+    <text x="90" y="273" font-family="Georgia, serif" font-size="108" fill="#F7F7F7" letter-spacing="-3">Software with</text>
+    <text x="90" y="386" font-family="Georgia, serif" font-size="108" fill="#E5E5E5" font-style="italic" letter-spacing="-3">purpose.</text>
+    <line x1="90" y1="440" x2="1110" y2="440" stroke="#F7F7F7" stroke-opacity=".22" />
+    <text x="90" y="494" font-family="Arial, sans-serif" font-size="16" font-weight="600" fill="#F7F7F7" letter-spacing="1.2">PRODUCT DESIGN  ·  WEB  ·  SOFTWARE  ·  APPLIED AI</text>
+    <text x="90" y="548" font-family="Arial, sans-serif" font-size="14" fill="#D4D4D4" letter-spacing="1.2">VADODARA, INDIA  /  WORKING WORLDWIDE</text>
+    <text x="1110" y="548" text-anchor="end" font-family="Arial, sans-serif" font-size="14" fill="#F7F7F7" letter-spacing="1.2">QAVIRONEL.COM</text>
+  </svg>`;
 
-    <!-- Deep Evergreen Base -->
-    <rect width="${width}" height="${height}" fill="url(#bgGrad)" />
-
-    <!-- Subtle Hairline Grid Pattern -->
-    <g opacity="0.04" stroke="#FFFFFF" stroke-width="1">
-      <line x1="80" y1="0" x2="80" y2="${height}" />
-      <line x1="320" y1="0" x2="320" y2="${height}" />
-      <line x1="600" y1="0" x2="600" y2="${height}" />
-      <line x1="880" y1="0" x2="880" y2="${height}" />
-      <line x1="1120" y1="0" x2="1120" y2="${height}" />
-      <line x1="0" y1="120" x2="${width}" y2="120" />
-      <line x1="0" y1="315" x2="${width}" y2="315" />
-      <line x1="0" y1="510" x2="${width}" y2="510" />
-    </g>
-
-    <!-- Inner Border Framing -->
-    <rect x="40" y="40" width="${width - 80}" height="${height - 80}" rx="20" fill="none" stroke="#D9DED7" stroke-width="1" opacity="0.15" />
-
-    <!-- Top Accent Bar -->
-    <rect x="90" y="85" width="60" height="4" fill="url(#accentLine)" rx="2" />
-
-    <!-- Eyebrow Tag -->
-    <text x="90" y="130" font-family="'JetBrains Mono', monospace" font-size="14" font-weight="700" fill="#879B89" letter-spacing="3">DIGITAL PRODUCT &amp; SOFTWARE ENGINEERING STUDIO</text>
-
-    <!-- Brand Header -->
-    <text x="90" y="230" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="64" font-weight="800" fill="#F5F5F0" letter-spacing="-1.5">Qavironel Technologies</text>
-
-    <!-- Tagline -->
-    <text x="90" y="300" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="34" font-weight="400" fill="#E6ECE5">Ideas. <tspan fill="#879B89" font-weight="700">Engineered.</tspan></text>
-
-    <!-- Divider -->
-    <line x1="90" y1="360" x2="1110" y2="360" stroke="#D9DED7" stroke-width="1" opacity="0.1" />
-
-    <!-- Pillar Capabilities -->
-    <g font-family="'JetBrains Mono', monospace" font-size="14" font-weight="600" fill="#E6ECE5" letter-spacing="1">
-      <circle cx="100" cy="420" r="4" fill="#879B89" />
-      <text x="116" y="425">HIGH-VELOCITY WEB PLATFORMS</text>
-
-      <circle cx="500" cy="420" r="4" fill="#879B89" />
-      <text x="516" y="425">APPLIED AI &amp; LOCAL LLMS</text>
-
-      <circle cx="870" cy="420" r="4" fill="#879B89" />
-      <text x="886" y="425">DEFENSIVE SYSTEMS</text>
-    </g>
-
-    <!-- Subtitle Description -->
-    <text x="90" y="480" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="18" font-weight="300" fill="#879B89">
-      Bespoke digital architecture, full-stack product development, and applied AI systems.
-    </text>
-
-    <!-- Domain Footer Badge -->
-    <rect x="90" y="525" width="180" height="34" rx="17" fill="#174C3A" stroke="#879B89" stroke-width="1" stroke-opacity="0.3" />
-    <text x="120" y="547" font-family="'JetBrains Mono', monospace" font-size="13" font-weight="700" fill="#F5F5F0" letter-spacing="1">qavironel.com</text>
-
-    <!-- Location -->
-    <text x="1110" y="547" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="500" fill="#879B89">GLOBAL · REMOTE-FIRST STUDIO</text>
-  </svg>
-  `;
-
-  const svgBuffer = Buffer.from(svgOverlay);
-
-  // Generate PNG
-  const pngPath = path.resolve(brandDir, 'og-image.png');
-  await sharp(svgBuffer).png({ quality: 95 }).toFile(pngPath);
-  console.log('Generated:', pngPath);
-
-  // Generate JPG
-  const jpgPath = path.resolve(brandDir, 'og-image.jpg');
-  await sharp(svgBuffer).jpeg({ quality: 92 }).toFile(jpgPath);
-  console.log('Generated:', jpgPath);
+  const svgBuffer = Buffer.from(svg);
+  fs.writeFileSync(path.join(brandDir, 'og-image.svg'), svg, 'utf8');
+  await sharp(svgBuffer).png({ quality: 95 }).toFile(path.join(brandDir, 'og-image.png'));
+  await sharp(svgBuffer).jpeg({ quality: 92 }).toFile(path.join(brandDir, 'og-image.jpg'));
+  console.log('Generated Qavironel wordmark-only social preview assets.');
 }
 
-createOgImage().catch(console.error);
+createOgImage().catch((error) => {
+  console.error(error);
+  process.exitCode = 1;
+});

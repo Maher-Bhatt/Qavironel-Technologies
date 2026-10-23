@@ -5,6 +5,7 @@ interface Hero3DCanvasProps {
   className?: string;
 }
 
+/** A hand-built field of interwoven metal ribbons, unique to the Qavironel home page. */
 export const Hero3DCanvas: React.FC<Hero3DCanvasProps> = ({ className = '' }) => {
   const mountRef = useRef<HTMLDivElement>(null);
 
@@ -12,243 +13,204 @@ export const Hero3DCanvas: React.FC<Hero3DCanvasProps> = ({ className = '' }) =>
     const container = mountRef.current;
     if (!container) return;
 
-    // Dimensions
-    let width = container.clientWidth;
-    let height = container.clientHeight;
-
-    // Scene, Camera, Renderer
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
-    camera.position.z = 7;
-
-    const renderer = new THREE.WebGLRenderer({
-      alpha: true,
-      antialias: true,
-      powerPreference: 'high-performance'
-    });
-    renderer.setSize(width, height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.2;
-    container.appendChild(renderer.domElement);
-
-    // Root Group
-    const mainGroup = new THREE.Group();
-    scene.add(mainGroup);
-
-    // 1. Primary Luxury Sculpture: Torus Knot with Physical Frosted Acrylic/Glass Material
-    const knotGeometry = new THREE.TorusKnotGeometry(1.4, 0.42, 128, 32, 2, 3);
-    const knotMaterial = new THREE.MeshPhysicalMaterial({
-      color: new THREE.Color('#FFFFFF'),
-      emissive: new THREE.Color('#103629'),
-      roughness: 0.15,
-      metalness: 0.1,
-      clearcoat: 1.0,
-      clearcoatRoughness: 0.1,
-      transmission: 0.82, // Frosted glass acrylic refraction
-      ior: 1.45,
-      thickness: 1.8,
-      specularIntensity: 1.0,
-      specularColor: new THREE.Color('#FFFFFF'),
-      transparent: true,
-      opacity: 0.95
-    });
-    const knotMesh = new THREE.Mesh(knotGeometry, knotMaterial);
-    mainGroup.add(knotMesh);
-
-    // 2. Wireframe Accent Ring (Inner Gyroscopic Orbit)
-    const ringGeometry = new THREE.TorusGeometry(2.2, 0.02, 16, 100);
-    const ringMaterial = new THREE.MeshStandardMaterial({
-      color: new THREE.Color('#E5E5E5'),
-      metalness: 0.95,
-      roughness: 0.1,
-      emissive: new THREE.Color('#1A1A1A'),
-      emissiveIntensity: 0.1
-    });
-    const ringMesh1 = new THREE.Mesh(ringGeometry, ringMaterial);
-    ringMesh1.rotation.x = Math.PI / 3;
-    mainGroup.add(ringMesh1);
-
-    const ringMesh2 = new THREE.Mesh(ringGeometry, ringMaterial);
-    ringMesh2.rotation.y = Math.PI / 4;
-    ringMesh2.scale.set(1.15, 1.15, 1.15);
-    mainGroup.add(ringMesh2);
-
-    // 3. Floating Geometric Satellites (Icosahedrons & Gems)
-    const satelliteCount = 12;
-    const satellites: { mesh: THREE.Mesh; speed: number; orbitRadius: number; angle: number; yOffset: number }[] = [];
-    const satGeo = new THREE.IcosahedronGeometry(0.12, 0);
-    const satMat = new THREE.MeshStandardMaterial({
-      color: new THREE.Color('#1A1A1A'),
-      metalness: 0.95,
-      roughness: 0.1,
-      wireframe: false
-    });
-
-    for (let i = 0; i < satelliteCount; i++) {
-      const satMesh = new THREE.Mesh(satGeo, satMat);
-      const orbitRadius = 2.4 + Math.random() * 1.2;
-      const angle = (i / satelliteCount) * Math.PI * 2;
-      const yOffset = (Math.random() - 0.5) * 1.5;
-
-      satMesh.position.set(
-        Math.cos(angle) * orbitRadius,
-        yOffset,
-        Math.sin(angle) * orbitRadius
-      );
-      mainGroup.add(satMesh);
-      satellites.push({
-        mesh: satMesh,
-        speed: 0.005 + Math.random() * 0.008,
-        orbitRadius,
-        angle,
-        yOffset
-      });
+    let renderer: THREE.WebGLRenderer;
+    try {
+      renderer = new THREE.WebGLRenderer({ alpha: true, antialias: window.innerWidth > 760, powerPreference: 'low-power' });
+    } catch {
+      container.classList.add('studio-3d-canvas--unavailable');
+      return;
     }
 
-    // 4. Studio Lighting Rig
-    // Ambient soft fill
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1.4);
-    scene.add(ambientLight);
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 40);
+    camera.position.set(0, 0, 7.1);
+    renderer.setClearColor(0x000000, 0);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.45));
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.22;
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    container.appendChild(renderer.domElement);
 
-    // Pure White Key Light
-    const whiteKeyLight = new THREE.PointLight('#FFFFFF', 18, 20);
-    whiteKeyLight.position.set(4, 3, 4);
-    scene.add(whiteKeyLight);
+    const sculpture = new THREE.Group();
+    scene.add(sculpture);
 
-    // Subtle Chrome Rim Light
-    const rimLight = new THREE.PointLight('#E5E5E5', 10, 20);
-    rimLight.position.set(-4, -3, 3);
-    scene.add(rimLight);
+    const geometries: THREE.BufferGeometry[] = [];
+    const materials: THREE.Material[] = [];
+    const finishes = [
+      new THREE.MeshPhysicalMaterial({ color: '#F1F1F1', metalness: 0.7, roughness: 0.2, clearcoat: 1, clearcoatRoughness: 0.11, side: THREE.DoubleSide }),
+      new THREE.MeshPhysicalMaterial({ color: '#858585', metalness: 0.82, roughness: 0.24, clearcoat: 0.9, clearcoatRoughness: 0.14, side: THREE.DoubleSide }),
+      new THREE.MeshPhysicalMaterial({ color: '#353535', metalness: 0.76, roughness: 0.18, clearcoat: 1, clearcoatRoughness: 0.08, side: THREE.DoubleSide })
+    ];
+    materials.push(...finishes);
 
-    // Overhead White Key
-    const overheadLight = new THREE.DirectionalLight(0xffffff, 2.0);
-    overheadLight.position.set(0, 8, 5);
-    scene.add(overheadLight);
+    const makeRibbon = (phase: number, width: number, squash: number) => {
+      const along = 256;
+      const across = 16;
+      const vertices: number[] = [];
+      const indices: number[] = [];
+      const centerAt = (u: number) => {
+        const radius = 1.22 + 0.14 * Math.sin(3 * u + phase);
+        return new THREE.Vector3(
+          radius * Math.cos(u) + 0.12 * Math.sin(2 * u + phase),
+          squash * (0.42 * Math.sin(2 * u + phase) + 0.12 * Math.sin(3 * u)),
+          0.94 * radius * Math.sin(u)
+        );
+      };
 
-    // Mouse Tracking & Inertia
-    let mouseX = 0;
-    let mouseY = 0;
-    let targetRotationX = 0;
-    let targetRotationY = 0;
+      for (let i = 0; i <= along; i += 1) {
+        const u = (i / along) * Math.PI * 2;
+        const center = centerAt(u);
+        const tangent = centerAt(u + 0.001).sub(centerAt(u - 0.001)).normalize();
+        const reference = Math.abs(tangent.dot(new THREE.Vector3(0, 1, 0))) > 0.94
+          ? new THREE.Vector3(0, 0, 1)
+          : new THREE.Vector3(0, 1, 0);
+        const side = new THREE.Vector3().crossVectors(tangent, reference).normalize();
+        const normal = new THREE.Vector3().crossVectors(tangent, side).normalize();
+        const twist = u * 1.28 + phase + 0.2 * Math.sin(3 * u);
 
-    const handleMouseMove = (event: MouseEvent) => {
-      const rect = container.getBoundingClientRect();
-      const x = (event.clientX - rect.left) / rect.width - 0.5;
-      const y = (event.clientY - rect.top) / rect.height - 0.5;
-      mouseX = x * 2;
-      mouseY = y * 2;
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-
-    // Animation Loop with Viewport Throttling
-    let isVisible = false;
-    let animationFrameId: number | null = null;
-    const startTime = performance.now() * 0.001;
-
-    const animate = () => {
-      if (!isVisible) return;
-      animationFrameId = requestAnimationFrame(animate);
-      const elapsedTime = performance.now() * 0.001 - startTime;
-
-      // Smooth Lerp for interactive orientation
-      targetRotationY += (mouseX * 0.8 - targetRotationY) * 0.05;
-      targetRotationX += (mouseY * 0.8 - targetRotationX) * 0.05;
-
-      // Rotate sculpture
-      knotMesh.rotation.x = elapsedTime * 0.25 + targetRotationX;
-      knotMesh.rotation.y = elapsedTime * 0.35 + targetRotationY;
-
-      // Orbit gyroscopic rings
-      ringMesh1.rotation.x = Math.PI / 3 + elapsedTime * 0.15;
-      ringMesh1.rotation.y = elapsedTime * 0.2;
-
-      ringMesh2.rotation.y = Math.PI / 4 + elapsedTime * 0.18;
-      ringMesh2.rotation.z = elapsedTime * 0.12;
-
-      // Move white key light dynamically with cursor for specular shimmer
-      whiteKeyLight.position.x = 4 + mouseX * 2;
-      whiteKeyLight.position.y = 3 - mouseY * 2;
-
-      // Animate floating satellites
-      satellites.forEach((sat) => {
-        sat.angle += sat.speed;
-        sat.mesh.position.x = Math.cos(sat.angle) * sat.orbitRadius;
-        sat.mesh.position.z = Math.sin(sat.angle) * sat.orbitRadius;
-        sat.mesh.position.y = sat.yOffset + Math.sin(elapsedTime * 2 + sat.angle) * 0.2;
-        sat.mesh.rotation.x += 0.02;
-        sat.mesh.rotation.y += 0.03;
-      });
-
-      renderer.render(scene, camera);
-    };
-
-    const observer = new IntersectionObserver(([entry]) => {
-      const visible = entry.isIntersecting && entry.intersectionRatio > 0;
-      if (visible && !isVisible) {
-        isVisible = true;
-        if (animationFrameId) cancelAnimationFrame(animationFrameId);
-        animationFrameId = requestAnimationFrame(animate);
-      } else if (!visible && isVisible) {
-        isVisible = false;
-        if (animationFrameId) cancelAnimationFrame(animationFrameId);
+        for (let j = 0; j <= across; j += 1) {
+          const v = j / across * 2 - 1;
+          const turnedSide = side.clone().multiplyScalar(Math.cos(twist)).addScaledVector(normal, Math.sin(twist));
+          const point = center.clone().addScaledVector(turnedSide, v * width);
+          vertices.push(point.x, point.y, point.z);
+          if (i < along && j < across) {
+            const a = i * (across + 1) + j;
+            const b = a + across + 1;
+            indices.push(a, b, a + 1, b, b + 1, a + 1);
+          }
+        }
       }
-    }, { threshold: [0, 0.05] });
 
-    observer.observe(container);
-
-    const handleVisibilityChange = () => {
-      if (document.hidden) {
-        if (animationFrameId) cancelAnimationFrame(animationFrameId);
-      } else if (isVisible) {
-        if (animationFrameId) cancelAnimationFrame(animationFrameId);
-        animationFrameId = requestAnimationFrame(animate);
-      }
+      const geometry = new THREE.BufferGeometry();
+      geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+      geometry.setIndex(indices);
+      geometry.computeVertexNormals();
+      geometries.push(geometry);
+      return geometry;
     };
-    document.addEventListener('visibilitychange', handleVisibilityChange);
 
-    // Resize Handler
-    const handleResize = () => {
-      if (!container) return;
-      width = container.clientWidth;
-      height = container.clientHeight;
+    const ribbons: THREE.Group[] = [];
+    [
+      { phase: 0, width: 0.2, squash: 1 },
+      { phase: 2.05, width: 0.16, squash: 0.78 },
+      { phase: 4.15, width: 0.12, squash: 1.18 }
+    ].forEach((shape, index) => {
+      const loop = new THREE.Group();
+      const band = new THREE.Mesh(makeRibbon(shape.phase, shape.width, shape.squash), finishes[index]);
+      band.castShadow = false;
+      loop.add(band);
+      loop.rotation.set(index * 0.11 - 0.12, index * 0.16, index * -0.1);
+      sculpture.add(loop);
+      ribbons.push(loop);
+    });
+
+    const coreGeometry = new THREE.IcosahedronGeometry(0.19, 2);
+    const coreMaterial = new THREE.MeshPhysicalMaterial({ color: '#FFFFFF', metalness: 0.3, roughness: 0.12, clearcoat: 1, emissive: '#9E9E9E', emissiveIntensity: 0.1 });
+    const core = new THREE.Mesh(coreGeometry, coreMaterial);
+    geometries.push(coreGeometry);
+    materials.push(coreMaterial);
+    sculpture.add(core);
+
+    const satelliteGeometry = new THREE.SphereGeometry(0.035, 14, 12);
+    const satelliteMaterial = new THREE.MeshStandardMaterial({ color: '#F5F5F5', metalness: 0.5, roughness: 0.18 });
+    geometries.push(satelliteGeometry);
+    materials.push(satelliteMaterial);
+    const satellites = [0, 1, 2].map(() => {
+      const satellite = new THREE.Mesh(satelliteGeometry, satelliteMaterial);
+      sculpture.add(satellite);
+      return satellite;
+    });
+
+    scene.add(new THREE.AmbientLight('#FFFFFF', 0.72));
+    const key = new THREE.DirectionalLight('#FFFFFF', 4.7);
+    key.position.set(-3.5, 4.5, 5);
+    scene.add(key);
+    const rim = new THREE.PointLight('#D7D7D7', 26, 12);
+    rim.position.set(3.5, 0.8, -1.8);
+    scene.add(rim);
+    const front = new THREE.PointLight('#FFFFFF', 17, 10);
+    front.position.set(0, -2.5, 5);
+    scene.add(front);
+
+    let visible = false;
+    let frameId = 0;
+    let pointerX = 0;
+    let pointerY = 0;
+    let reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const render = () => renderer.render(scene, camera);
+
+    const resize = () => {
+      const width = Math.max(1, container.clientWidth);
+      const height = Math.max(1, container.clientHeight);
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
-      renderer.setSize(width, height);
+      renderer.setSize(width, height, false);
+      if (reducedMotion) render();
     };
 
-    window.addEventListener('resize', handleResize);
+    const animate = (time: number) => {
+      if (!visible || document.hidden || reducedMotion) return;
+      const t = time * 0.001;
+      sculpture.rotation.y += (pointerX * 0.17 - sculpture.rotation.y) * 0.025;
+      sculpture.rotation.x += (pointerY * -0.11 - sculpture.rotation.x) * 0.025;
+      ribbons.forEach((ribbon, index) => {
+        ribbon.rotation.y = Math.sin(t * (0.14 + index * 0.025) + index * 1.7) * 0.16;
+        ribbon.rotation.z = Math.cos(t * 0.17 + index) * 0.09;
+      });
+      core.rotation.set(t * 0.13, t * 0.2, t * -0.09);
+      satellites.forEach((satellite, index) => {
+        const angle = t * (0.2 + index * 0.035) + index * Math.PI * 2 / satellites.length;
+        satellite.position.set(Math.cos(angle) * 1.72, Math.sin(angle * 1.3) * 0.65, Math.sin(angle) * 1.28);
+      });
+      render();
+      frameId = requestAnimationFrame(animate);
+    };
 
-    // Cleanup
+    const start = () => {
+      if (!visible || document.hidden) return;
+      cancelAnimationFrame(frameId);
+      if (reducedMotion) render();
+      else frameId = requestAnimationFrame(animate);
+    };
+    const stop = () => {
+      cancelAnimationFrame(frameId);
+      frameId = 0;
+    };
+    const onPointerMove = (event: PointerEvent) => {
+      const rect = container.getBoundingClientRect();
+      pointerX = ((event.clientX - rect.left) / Math.max(1, rect.width) - 0.5) * 0.8;
+      pointerY = ((event.clientY - rect.top) / Math.max(1, rect.height) - 0.5) * 0.8;
+    };
+    const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const onMotionChange = () => { reducedMotion = motionPreference.matches; start(); };
+    const intersection = new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      visible ? start() : stop();
+    }, { threshold: 0.02 });
+    const resizeObserver = new ResizeObserver(resize);
+    intersection.observe(container);
+    resizeObserver.observe(container);
+    container.addEventListener('pointermove', onPointerMove, { passive: true });
+    document.addEventListener('visibilitychange', start);
+    motionPreference.addEventListener?.('change', onMotionChange);
+    resize();
+
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('resize', handleResize);
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
-      observer.disconnect();
-      if (animationFrameId) cancelAnimationFrame(animationFrameId);
-
-      knotGeometry.dispose();
-      knotMaterial.dispose();
-      ringGeometry.dispose();
-      ringMaterial.dispose();
-      satGeo.dispose();
-      satMat.dispose();
+      stop();
+      intersection.disconnect();
+      resizeObserver.disconnect();
+      container.removeEventListener('pointermove', onPointerMove);
+      document.removeEventListener('visibilitychange', start);
+      motionPreference.removeEventListener?.('change', onMotionChange);
+      geometries.forEach((geometry) => geometry.dispose());
+      materials.forEach((material) => material.dispose());
       renderer.dispose();
-
-      if (container.contains(renderer.domElement)) {
-        container.removeChild(renderer.domElement);
-      }
+      if (container.contains(renderer.domElement)) container.removeChild(renderer.domElement);
+      container.classList.remove('studio-3d-canvas--unavailable');
     };
   }, []);
 
-  return (
-    <div
-      ref={mountRef}
-      className={`relative w-full h-full min-h-[420px] pointer-events-none select-none ${className}`}
-      aria-hidden="true"
-    />
-  );
+  return <div ref={mountRef} className={`studio-3d-canvas ${className}`} aria-hidden="true" />;
 };
-export default Hero3DCanvas;
 
+export default Hero3DCanvas;

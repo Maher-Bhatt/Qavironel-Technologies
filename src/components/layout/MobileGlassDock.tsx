@@ -56,55 +56,46 @@ export const MobileGlassDock: React.FC = () => {
     >
       <nav 
         aria-label="Mobile Quick Actions"
-        className="pointer-events-auto w-full max-w-sm rounded-full px-2 py-1.5 flex items-center justify-between bg-white/95 dark:bg-[#121212]/95 backdrop-blur-2xl border border-black/10 dark:border-white/15 shadow-[0_12px_36px_rgba(0,0,0,0.12)] dark:shadow-[0_16px_40px_rgba(0,0,0,0.7)] transition-colors duration-300"
+        className="pointer-events-auto grid w-full max-w-md grid-cols-4 rounded-full px-1.5 py-1.5 bg-[#FAFAFA]/95 dark:bg-[#191919]/95 backdrop-blur-2xl border border-[#D8D8D8] dark:border-white/15 shadow-[0_12px_36px_rgba(0,0,0,0.12)] dark:shadow-[0_16px_40px_rgba(0,0,0,0.55)] transition-colors duration-300"
       >
         {/* Book Call Button */}
         <button
           type="button"
           onClick={() => openBookingModal('call')}
-          className="flex-1 flex flex-col items-center justify-center py-1.5 px-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 text-black dark:text-white active:scale-95 transition-all"
+          className="min-w-0 flex flex-col items-center justify-center py-1.5 px-1 rounded-full hover:bg-[#161616]/8 dark:hover:bg-white/10 text-[#161616] dark:text-white active:scale-95 transition-all"
         >
           <Calendar className="w-4 h-4 text-black dark:text-white mb-0.5" />
-          <span className="text-[0.65rem] font-mono font-bold tracking-tight">Book Call</span>
+          <span className="max-w-full truncate text-[0.62rem] font-sans font-semibold tracking-tight">Book Call</span>
         </button>
-
-        {/* Separator */}
-        <div className="w-[1px] h-6 bg-black/10 dark:bg-white/10" />
 
         {/* Request Quotation */}
         <button
           type="button"
           onClick={() => openBookingModal('quotation')}
-          className="flex-1 flex flex-col items-center justify-center py-1.5 px-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 text-black dark:text-white active:scale-95 transition-all"
+          className="min-w-0 flex flex-col items-center justify-center py-1.5 px-1 rounded-full hover:bg-[#161616]/8 dark:hover:bg-white/10 text-[#161616] dark:text-white active:scale-95 transition-all"
         >
           <FileText className="w-4 h-4 text-black dark:text-white mb-0.5" />
-          <span className="text-[0.65rem] font-mono font-bold tracking-tight">Get Quote</span>
+          <span className="max-w-full truncate text-[0.62rem] font-sans font-semibold tracking-tight">Get Quote</span>
         </button>
-
-        {/* Separator */}
-        <div className="w-[1px] h-6 bg-black/10 dark:bg-white/10" />
 
         {/* WhatsApp Chat */}
         <a
           href={companyConfig.whatsappUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex-1 flex flex-col items-center justify-center py-1.5 px-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 text-black dark:text-white active:scale-95 transition-all"
+          className="min-w-0 flex flex-col items-center justify-center py-1.5 px-1 rounded-full hover:bg-[#161616]/8 dark:hover:bg-white/10 text-[#161616] dark:text-white active:scale-95 transition-all"
         >
           <MessageSquare className="w-4 h-4 text-black dark:text-white mb-0.5" />
-          <span className="text-[0.65rem] font-mono font-bold tracking-tight">WhatsApp</span>
+          <span className="max-w-full truncate text-[0.62rem] font-sans font-semibold tracking-tight">WhatsApp</span>
         </a>
-
-        {/* Separator */}
-        <div className="w-[1px] h-6 bg-black/10 dark:bg-white/10" />
 
         {/* Selected Work */}
         <Link
           to="/work"
-          className="flex-1 flex flex-col items-center justify-center py-1.5 px-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 text-black dark:text-white active:scale-95 transition-all"
+          className="min-w-0 flex flex-col items-center justify-center py-1.5 px-1 rounded-full hover:bg-[#161616]/8 dark:hover:bg-white/10 text-[#161616] dark:text-white active:scale-95 transition-all"
         >
-          <LayoutGrid className="w-4 h-4 text-zinc-500 dark:text-zinc-400 mb-0.5" />
-          <span className="text-[0.65rem] font-mono font-bold tracking-tight">Work</span>
+          <LayoutGrid className="w-4 h-4 mb-0.5" />
+          <span className="max-w-full truncate text-[0.62rem] font-sans font-semibold tracking-tight">Work</span>
         </Link>
       </nav>
     </div>

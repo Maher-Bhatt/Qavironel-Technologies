@@ -15,7 +15,7 @@ export const CapabilitiesBentoGrid: React.FC = () => {
   const [activeModel, setActiveModel] = useState<'groq' | 'ollama' | 'memory'>('groq');
 
   return (
-    <section className="py-24 sm:py-32 border-b border-[#E5E5E5] dark:border-white/10 bg-[#F5F5F0] dark:bg-[#0A0A0A] transition-colors duration-300">
+    <section className="py-24 sm:py-32 border-b border-[#E5E5E5] dark:border-white/10 bg-[#F7F7F7] dark:bg-[#0A0A0A] transition-colors duration-300">
       <div className="max-w-[1800px] w-full mx-auto px-5 sm:px-8 lg:px-12">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 border-b border-[#E5E5E5] dark:border-white/10">
@@ -23,7 +23,7 @@ export const CapabilitiesBentoGrid: React.FC = () => {
             <span className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-[#0A0A0A] dark:text-[#737373] block mb-2">
               Capabilities Architecture
             </span>
-            <h2 className="font-display font-bold text-3xl sm:text-5xl lg:text-6xl text-[#0A0A0A] dark:text-[#F5F5F0] tracking-tight leading-[1.08]">
+            <h2 className="font-display font-bold text-3xl sm:text-5xl lg:text-6xl text-[#0A0A0A] dark:text-[#F7F7F7] tracking-tight leading-[1.08]">
               Modular engineering. High-craft depth.
             </h2>
           </div>
@@ -82,24 +82,24 @@ export const CapabilitiesBentoGrid: React.FC = () => {
               <div className="p-4 rounded-xl bg-black/60 border border-white/10 font-mono text-xs space-y-2">
                 <div className="flex items-center justify-between text-[0.68rem] text-zinc-400 border-b border-white/5 pb-2">
                   <span>TELEMETRY STREAM // ACTIVE</span>
-                  <span className="text-emerald-400 font-bold">240 TOKENS/SEC</span>
+                  <span className="text-zinc-300 font-bold">240 TOKENS/SEC</span>
                 </div>
                 {activeModel === 'groq' && (
                   <p className="text-zinc-200 leading-relaxed">
                     <span className="text-[#737373]">&gt; Model:</span> Groq LLaMA-3.3-70B-Versatile<br />
-                    <span className="text-emerald-400">&gt; Status:</span> Streaming context vector tokens with sub-180ms TTFT latency.
+                    <span className="text-zinc-300">&gt; Status:</span> Streaming context vector tokens with sub-180ms TTFT latency.
                   </p>
                 )}
                 {activeModel === 'ollama' && (
                   <p className="text-zinc-200 leading-relaxed">
                     <span className="text-[#737373]">&gt; Model:</span> Localhost Llama 3 8B Q4<br />
-                    <span className="text-emerald-400">&gt; Status:</span> Air-gapped offline daemon. Zero cloud packets sent.
+                    <span className="text-zinc-300">&gt; Status:</span> Air-gapped offline daemon. Zero cloud packets sent.
                   </p>
                 )}
                 {activeModel === 'memory' && (
                   <p className="text-zinc-200 leading-relaxed">
                     <span className="text-[#737373]">&gt; Memory:</span> SQLite Vector Embeddings (Cosine Sim &gt; 0.88)<br />
-                    <span className="text-emerald-400">&gt; Status:</span> Indexed 14,200 conversational nodes in DPAPI hardware vault.
+                    <span className="text-zinc-300">&gt; Status:</span> Indexed 14,200 conversational nodes in DPAPI hardware vault.
                   </p>
                 )}
               </div>
@@ -131,14 +131,14 @@ export const CapabilitiesBentoGrid: React.FC = () => {
                   <div className="w-8 h-8 rounded-lg bg-[#0A0A0A]/10 text-[#0A0A0A] dark:text-[#737373] flex items-center justify-center border border-[#0A0A0A]/20 shrink-0">
                     <Zap className="w-4 h-4" />
                   </div>
-                  <span className="text-xs font-mono font-bold tracking-wider text-[#0A0A0A] dark:text-[#F5F5F0]">02 // PERFORMANCE DISCIPLINE</span>
+                  <span className="text-xs font-mono font-bold tracking-wider text-[#0A0A0A] dark:text-[#F7F7F7]">02 // PERFORMANCE DISCIPLINE</span>
                 </div>
                 <span className="px-2.5 py-0.5 rounded-full bg-[#F4F4F4] dark:bg-[#0A0A0A]/30 text-[#0A0A0A] dark:text-[#737373] border border-[#737373]/20 text-[0.65rem] font-mono font-bold">
                   OPTIMIZED VITALS
                 </span>
               </div>
 
-              <h3 className="font-display font-bold text-2xl text-[#0A0A0A] dark:text-[#F5F5F0] tracking-tight mb-2">
+              <h3 className="font-display font-bold text-2xl text-[#0A0A0A] dark:text-[#F7F7F7] tracking-tight mb-2">
                 Engineering for Speed & Stability
               </h3>
               <p className="text-xs sm:text-sm text-[#737373] dark:text-[#737373] font-light leading-relaxed mb-6">
@@ -147,15 +147,15 @@ export const CapabilitiesBentoGrid: React.FC = () => {
 
               {/* Benchmark Grid */}
               <div className="grid grid-cols-3 gap-2 sm:gap-3">
-                <div className="p-2.5 sm:p-3 rounded-xl bg-[#F5F5F0] dark:bg-[#222923] border border-[#E5E5E5] dark:border-white/10 text-center">
+                <div className="p-2.5 sm:p-3 rounded-xl bg-[#F7F7F7] dark:bg-[#222923] border border-[#E5E5E5] dark:border-white/10 text-center">
                   <p className="text-xs sm:text-sm font-bold font-sans text-[#0A0A0A] dark:text-[#737373]">Zero Bloat</p>
                   <p className="text-[0.6rem] sm:text-[0.65rem] text-[#737373] dark:text-[#737373] font-mono mt-0.5">Lean Bundle</p>
                 </div>
-                <div className="p-2.5 sm:p-3 rounded-xl bg-[#F5F5F0] dark:bg-[#222923] border border-[#E5E5E5] dark:border-white/10 text-center">
+                <div className="p-2.5 sm:p-3 rounded-xl bg-[#F7F7F7] dark:bg-[#222923] border border-[#E5E5E5] dark:border-white/10 text-center">
                   <p className="text-xs sm:text-sm font-bold font-sans text-[#0A0A0A] dark:text-[#737373]">Type-Safe</p>
                   <p className="text-[0.6rem] sm:text-[0.65rem] text-[#737373] dark:text-[#737373] font-mono mt-0.5">Architecture</p>
                 </div>
-                <div className="p-2.5 sm:p-3 rounded-xl bg-[#F5F5F0] dark:bg-[#222923] border border-[#E5E5E5] dark:border-white/10 text-center">
+                <div className="p-2.5 sm:p-3 rounded-xl bg-[#F7F7F7] dark:bg-[#222923] border border-[#E5E5E5] dark:border-white/10 text-center">
                   <p className="text-xs sm:text-sm font-bold font-sans text-[#0A0A0A] dark:text-[#737373]">0 Layout Shifts</p>
                   <p className="text-[0.6rem] sm:text-[0.65rem] text-[#737373] dark:text-[#737373] font-mono mt-0.5">CLS Bound</p>
                 </div>
@@ -179,10 +179,10 @@ export const CapabilitiesBentoGrid: React.FC = () => {
                 <div className="w-8 h-8 rounded-lg bg-[#0A0A0A]/10 text-[#0A0A0A] dark:text-[#737373] flex items-center justify-center border border-[#0A0A0A]/20 shrink-0">
                   <ShieldCheck className="w-4 h-4" />
                 </div>
-                <span className="text-xs font-mono font-bold tracking-wider text-[#0A0A0A] dark:text-[#F5F5F0]">03 // DEFENSIVE SECURITY</span>
+                <span className="text-xs font-mono font-bold tracking-wider text-[#0A0A0A] dark:text-[#F7F7F7]">03 // DEFENSIVE SECURITY</span>
               </div>
 
-              <h3 className="font-display font-bold text-xl text-[#0A0A0A] dark:text-[#F5F5F0] tracking-tight mb-2">
+              <h3 className="font-display font-bold text-xl text-[#0A0A0A] dark:text-[#F7F7F7] tracking-tight mb-2">
                 Ethical Privacy & Boundary Control
               </h3>
               <p className="text-xs text-[#737373] dark:text-[#737373] font-light leading-relaxed mb-4">
@@ -221,10 +221,10 @@ export const CapabilitiesBentoGrid: React.FC = () => {
                 <div className="w-8 h-8 rounded-lg bg-[#0A0A0A]/10 text-[#0A0A0A] dark:text-[#737373] flex items-center justify-center border border-[#0A0A0A]/20">
                   <Layers className="w-4 h-4" />
                 </div>
-                <span className="text-xs font-mono font-bold tracking-wider text-[#0A0A0A] dark:text-[#F5F5F0]">04 // FULL-STACK DISCIPLINE</span>
+                <span className="text-xs font-mono font-bold tracking-wider text-[#0A0A0A] dark:text-[#F7F7F7]">04 // FULL-STACK DISCIPLINE</span>
               </div>
 
-              <h3 className="font-display font-bold text-xl text-[#0A0A0A] dark:text-[#F5F5F0] tracking-tight mb-2">
+              <h3 className="font-display font-bold text-xl text-[#0A0A0A] dark:text-[#F7F7F7] tracking-tight mb-2">
                 100% Type-Safe Architecture
               </h3>
               <p className="text-xs text-[#737373] dark:text-[#737373] font-light leading-relaxed mb-4">
@@ -233,7 +233,7 @@ export const CapabilitiesBentoGrid: React.FC = () => {
 
               <div className="flex flex-wrap gap-1.5">
                 {['TypeScript', 'React 19', 'FastAPI', 'TanStack Start', 'Tailwind v4', 'PostgreSQL'].map((t) => (
-                  <span key={t} className="px-2.5 py-1 rounded-md bg-[#F5F5F0] dark:bg-[#222923] border border-[#E5E5E5] dark:border-white/10 text-[0.68rem] font-mono text-[#0A0A0A] dark:text-[#F5F5F0] font-semibold">
+                  <span key={t} className="px-2.5 py-1 rounded-md bg-[#F7F7F7] dark:bg-[#222923] border border-[#E5E5E5] dark:border-white/10 text-[0.68rem] font-mono text-[#0A0A0A] dark:text-[#F7F7F7] font-semibold">
                     {t}
                   </span>
                 ))}

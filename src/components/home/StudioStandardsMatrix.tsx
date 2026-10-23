@@ -29,7 +29,7 @@ export const StudioStandardsMatrix: React.FC<StudioStandardsMatrixProps> = ({ on
           <span className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-[#0A0A0A] dark:text-[#737373] block mb-3">
             Engineering Benchmarks & Governance
           </span>
-          <h2 className="font-display font-bold text-3xl sm:text-5xl lg:text-6xl text-[#0A0A0A] dark:text-[#F5F5F0] tracking-tight leading-[1.08]">
+          <h2 className="font-display font-bold text-3xl sm:text-5xl lg:text-6xl text-[#0A0A0A] dark:text-[#F7F7F7] tracking-tight leading-[1.08]">
             Built for companies who refuse ordinary templates.
           </h2>
           <p className="mt-4 text-base sm:text-lg text-[#737373] dark:text-[#737373] font-light leading-relaxed">
@@ -40,14 +40,14 @@ export const StudioStandardsMatrix: React.FC<StudioStandardsMatrixProps> = ({ on
         {/* Head-to-Head Comparison Architecture */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch mb-16">
           {/* Legacy Agency / Freelancer Column */}
-          <div className="lg:col-span-5 bg-[#F5F5F0] dark:bg-[#0A0A0A] border border-[#E5E5E5] dark:border-white/10 rounded-2xl p-5 sm:p-8 md:p-10 flex flex-col justify-between shadow-xs">
+          <div className="lg:col-span-5 bg-[#F7F7F7] dark:bg-[#0A0A0A] border border-[#E5E5E5] dark:border-white/10 rounded-2xl p-5 sm:p-8 md:p-10 flex flex-col justify-between shadow-xs">
             <div>
               <div className="flex items-center justify-between pb-4 border-b border-[#E5E5E5] dark:border-white/10">
                 <span className="text-xs font-mono text-[#737373] dark:text-[#737373] uppercase tracking-wider font-semibold">The Industry Standard</span>
                 <span className="text-xs font-mono text-red-500 font-bold">FRAGILE</span>
               </div>
 
-              <h3 className="font-display font-bold text-2xl text-[#0A0A0A] dark:text-[#F5F5F0] mt-6 mb-2">
+              <h3 className="font-display font-bold text-2xl text-[#0A0A0A] dark:text-[#F7F7F7] mt-6 mb-2">
                 Legacy Agencies & Templates
               </h3>
               <p className="text-xs sm:text-sm text-[#737373] dark:text-[#737373] leading-relaxed mb-6 font-light">
@@ -93,7 +93,7 @@ export const StudioStandardsMatrix: React.FC<StudioStandardsMatrixProps> = ({ on
             <div>
               <div className="flex items-center justify-between pb-4 border-b border-white/10">
                 <span className="text-xs font-mono text-[#737373] uppercase tracking-wider font-semibold">Qavironel Engineering Studio</span>
-                <span className="text-xs font-mono text-emerald-400 font-bold">100% PRODUCTION-GRADE</span>
+                <span className="text-xs font-mono text-zinc-300 font-bold">100% PRODUCTION-GRADE</span>
               </div>
 
               <h3 className="font-display font-bold text-2xl text-white mt-6 mb-2">
@@ -140,7 +140,7 @@ export const StudioStandardsMatrix: React.FC<StudioStandardsMatrixProps> = ({ on
                     <span className="font-bold text-sm text-white">1–2 Week Turnaround</span>
                   </div>
                   <p className="text-xs text-zinc-300 leading-relaxed font-light">
-                    Eliminate bureaucratic lag. Transparent milestone pricing with direct founder communication.
+                    Keep the process direct with clear communication and transparent milestone pricing.
                   </p>
                 </div>
               </div>
@@ -149,7 +149,7 @@ export const StudioStandardsMatrix: React.FC<StudioStandardsMatrixProps> = ({ on
             {/* Bottom Actions Row inside card */}
             <div className="mt-8 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="flex items-center gap-2 text-xs font-mono text-zinc-300">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="w-2 h-2 rounded-full bg-zinc-300 animate-pulse" />
                 <span>Available for international client sprints</span>
               </div>
 
@@ -157,7 +157,7 @@ export const StudioStandardsMatrix: React.FC<StudioStandardsMatrixProps> = ({ on
                 <button
                   type="button"
                   onClick={onOpenBooking}
-                  className="flex-1 sm:flex-none px-5 py-2.5 rounded-full bg-[#0A0A0A] hover:bg-[#103629] text-white text-xs font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-2"
+                  className="flex-1 sm:flex-none px-5 py-2.5 rounded-full bg-[#0A0A0A] hover:bg-[#0A0A0A] text-white text-xs font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-2"
                 >
                   <Calendar className="w-3.5 h-3.5" />
                   <span>Book 30-Min Call</span>
@@ -168,13 +168,13 @@ export const StudioStandardsMatrix: React.FC<StudioStandardsMatrixProps> = ({ on
         </div>
 
         {/* Global Dispatch Strip */}
-        <div className="bg-[#F5F5F0] dark:bg-[#0A0A0A] border border-[#E5E5E5] dark:border-white/10 rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xs">
+        <div className="bg-[#F7F7F7] dark:bg-[#0A0A0A] border border-[#E5E5E5] dark:border-white/10 rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xs">
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 rounded-xl bg-[#0A0A0A]/10 border border-[#0A0A0A]/20 text-[#0A0A0A] dark:text-[#737373] flex items-center justify-center shrink-0">
               <Calendar className="w-6 h-6" />
             </div>
             <div>
-              <h4 className="font-display font-bold text-lg text-[#0A0A0A] dark:text-[#F5F5F0]">
+              <h4 className="font-display font-bold text-lg text-[#0A0A0A] dark:text-[#F7F7F7]">
                 Have an active roadmap or upcoming project?
               </h4>
               <p className="text-xs sm:text-sm text-[#737373] dark:text-[#737373] font-light">
@@ -196,7 +196,7 @@ export const StudioStandardsMatrix: React.FC<StudioStandardsMatrixProps> = ({ on
               href={companyConfig.whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-5 py-3 rounded-full bg-[#0A0A0A] hover:bg-[#103629] text-white text-xs font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-2"
+              className="px-5 py-3 rounded-full bg-[#0A0A0A] hover:bg-[#0A0A0A] text-white text-xs font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-2"
             >
               <MessageSquare className="w-3.5 h-3.5" />
               <span>WhatsApp</span>

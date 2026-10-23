@@ -38,29 +38,29 @@ export function validateContactForm(data: ContactFormData): {
 
   const trimmedName = data.name.trim();
   if (!trimmedName) {
-    errors.name = 'Please provide your name or title.';
+    errors.name = 'Please enter your name.';
   } else if (trimmedName.length < 2) {
-    errors.name = 'Name must be at least 2 characters.';
+    errors.name = 'Your name must be at least 2 characters.';
   } else if (trimmedName.length > 100) {
-    errors.name = 'Name must be 100 characters or fewer.';
+    errors.name = 'Your name must be 100 characters or fewer.';
   }
 
   const trimmedEmail = data.email.trim();
   if (!trimmedEmail) {
-    errors.email = 'Please provide a valid business email address.';
+    errors.email = 'Please enter a valid email address.';
   } else if (!EMAIL_REGEX.test(trimmedEmail)) {
-    errors.email = 'Please provide a valid email format (e.g. name@domain.com).';
+    errors.email = 'Enter an email address in the format name@example.com.';
   } else if (trimmedEmail.length > 120) {
     errors.email = 'Email address is too long.';
   }
 
   const trimmedDetails = data.details.trim();
   if (!trimmedDetails) {
-    errors.details = 'Please describe your project scope or objectives.';
+    errors.details = 'Please add a little context so we know how to help.';
   } else if (trimmedDetails.length < 10) {
-    errors.details = 'Please provide a bit more context (at least 10 characters).';
+    errors.details = 'Please add at least 10 characters of detail.';
   } else if (trimmedDetails.length > 5000) {
-    errors.details = 'Project details must be 5000 characters or fewer.';
+    errors.details = 'Please keep your details to 5,000 characters or fewer.';
   }
 
   return {
@@ -70,29 +70,29 @@ export function validateContactForm(data: ContactFormData): {
 }
 
 export function buildContactMailto(data: ContactFormData): string {
-  const subject = encodeURIComponent(`Project Inquiry: ${data.projectType} — ${data.name.trim() || 'Prospect'}`);
+  const subject = encodeURIComponent(`Project inquiry — ${data.name.trim() || 'New contact'}`);
   const safeDetails = data.details.trim().length > 1500 
     ? data.details.trim().slice(0, 1500) + '...' 
     : data.details.trim();
   const body = encodeURIComponent(
-    `Hello Qavironel Team,\n\n` +
-    `I would like to discuss a project with your engineering studio.\n\n` +
+    `Hello Qavironel team,\n\n` +
+    `I would like to discuss a project with your studio.\n\n` +
     `Name: ${data.name.trim()}\n` +
     `Email: ${data.email.trim()}\n` +
     `Organization: ${data.organization?.trim() || 'N/A'}\n` +
-    `Discipline: ${data.projectType}\n` +
+    `Enquiry type: ${data.projectType}\n` +
     (data.budget ? `Investment Range: ${data.budget}\n` : '') +
     `Timeline: ${data.timeline}\n` +
     `Engagement Model: ${data.engagementModel}\n\n` +
-    `Project Details:\n${safeDetails}\n\n` +
-    `Best regards,\n${data.name.trim()}`
+    `Project details:\n${safeDetails}\n\n` +
+    `Regards,\n${data.name.trim()}`
   );
   return `mailto:${companyConfig.email}?subject=${subject}&body=${body}`;
 }
 
 export function buildContactWhatsApp(data: ContactFormData): string {
   const message = encodeURIComponent(
-    `Hi Qavironel Team, I'm interested in discussing a project.\n\n` +
+    `Hello Qavironel team, I’m interested in discussing a project.\n\n` +
     `• Name: ${data.name.trim()}\n` +
     `• Email: ${data.email.trim()}\n` +
     `• Organization: ${data.organization?.trim() || 'N/A'}\n` +
@@ -144,7 +144,7 @@ export async function submitContactInquiry(
     const waitSeconds = Math.ceil((SUBMISSION_COOLDOWN_MS - (now - lastSubmissionTime)) / 1000);
     return {
       success: false,
-      message: `Please wait ${waitSeconds}s before submitting another request.`,
+      message: `Please wait ${waitSeconds} seconds before sending another request.`,
     };
   }
 
@@ -187,7 +187,7 @@ export async function submitContactInquiry(
       const resJson = await response.json().catch(() => ({}));
       return {
         success: true,
-        message: resJson.message || 'Your project inquiry has been received. Maher Bhatt will review and reply within 12 hours.',
+        message: resJson.message || 'Your project inquiry has been received. The Qavironel team will be in touch soon.',
       };
     }
 
@@ -210,7 +210,7 @@ export async function submitContactInquiry(
     // Network failure, endpoint not deployed, or timeout
     return {
       success: false,
-      message: 'Direct API dispatch is currently unavailable or experiencing network interruption. Please send your inquiry via our direct channels below.',
+      message: 'We couldn’t connect to the inquiry form. Please send your message using one of the direct contact options below.',
       fallbackMailto: mailtoFallback,
       fallbackWhatsApp: whatsappFallback,
     };

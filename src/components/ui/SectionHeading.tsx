@@ -28,7 +28,7 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
         </div>
       )}
       <h2 className={`font-sans font-extrabold tracking-tight text-3xl sm:text-4xl md:text-5xl leading-tight ${
-        isLight ? 'text-black dark:text-white dark:text-[#F5F5F0]' : 'text-white'
+        isLight ? 'text-black dark:text-white dark:text-[#F7F7F7]' : 'text-white'
       }`}>
         {title}
       </h2>

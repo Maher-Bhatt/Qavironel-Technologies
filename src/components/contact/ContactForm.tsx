@@ -29,49 +29,49 @@ interface ContactFormProps {
 const SCOPE_OPTIONS = [
   { 
     id: 'web', 
-    label: 'Web Platform', 
-    value: 'High-Impact Custom Web Platform',
-    badge: 'React 19 / Fast LCP'
+    label: 'Website or online store',
+    value: 'Website or online store',
+    badge: 'Web & storefronts'
   },
   { 
     id: 'saas', 
-    label: 'Software & SaaS', 
-    value: 'Full-Stack SaaS MVP / Web Application',
-    badge: 'APIs & Data Layers'
+    label: 'Digital product',
+    value: 'Digital product or SaaS',
+    badge: 'Apps & platforms'
   },
   { 
     id: 'ai', 
     label: 'Applied AI', 
-    value: 'Applied AI / LLM & Agentic Workflows',
-    badge: 'Local LLMs & Agents'
+    value: 'Applied AI or automation',
+    badge: 'AI & integrations'
   },
   { 
     id: 'audit', 
-    label: 'Architecture & Audit', 
-    value: 'Performance Engineering & Architecture Audit',
-    badge: 'Scalability & Security'
+    label: 'Improve an existing product',
+    value: 'Existing product improvement',
+    badge: 'Design & engineering'
   },
 ];
 
 const TIMELINE_OPTIONS = [
-  { label: 'Next 2–4 Weeks (Urgent)', value: 'Immediate (Next 2-4 Weeks)' },
-  { label: '1–2 Months', value: '1-2 Months (Active Product Sprint)' },
-  { label: 'Flexible / Strategic', value: 'Flexible / Milestone-Driven' },
+  { label: 'Within a month', value: 'Within a month' },
+  { label: '1–2 months', value: '1–2 months' },
+  { label: 'Flexible', value: 'Flexible' },
 ];
 
 export const ContactForm: React.FC<ContactFormProps> = () => {
   const mountTimestampRef = useRef<number>(Date.now());
   
-  const [formData, setFormData] = useState<ContactFormData>({
+  const [formData, setFormData] = useState<ContactFormData>(() => ({
     name: '',
     email: '',
     organization: '',
-    projectType: 'High-Impact Custom Web Platform',
-    timeline: 'Immediate (Next 2-4 Weeks)',
-    engagementModel: 'Direct Founder Sprint',
+    projectType: 'Website or online store',
+    timeline: 'Within a month',
+    engagementModel: 'Project inquiry',
     details: '',
     hpField: '',
-  });
+  }));
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<ContactValidationErrors>({});
@@ -162,7 +162,7 @@ export const ContactForm: React.FC<ContactFormProps> = () => {
       }
       setStatusMessage({
         type: 'error',
-        text: 'A network interruption prevented direct dispatch. You can connect with our founders directly via email or WhatsApp below.',
+        text: 'We couldn’t send this just now. Your details are still here; you can reach us by email or WhatsApp below.',
         mailtoFallback: buildContactMailto(formData),
         whatsappFallback: buildContactWhatsApp(formData),
       });
@@ -172,11 +172,11 @@ export const ContactForm: React.FC<ContactFormProps> = () => {
   };
 
   const whatsappDirectUrl = `${companyConfig.whatsappUrl}?text=${encodeURIComponent(
-    `Hello Maher & Anurag, I would like to discuss a project.\nName: ${formData.name || 'Prospect'}\nDiscipline: ${formData.projectType}\nTimeline: ${formData.timeline}`
+    `Hello Qavironel team, I would like to discuss a project.\nName: ${formData.name || 'Prospective client'}\nProject: ${formData.projectType}\nTimeline: ${formData.timeline}`
   )}`;
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="space-y-6">
+    <form onSubmit={handleSubmit} noValidate className="contact-form space-y-6">
       {/* Honeypot spam trap */}
       <div 
         aria-hidden="true" 
@@ -215,7 +215,7 @@ export const ContactForm: React.FC<ContactFormProps> = () => {
               <p className="font-semibold">{statusMessage.text}</p>
               {statusMessage.type === 'error' && (
                 <p className="text-xs mt-1 text-zinc-600 dark:text-zinc-400">
-                  Your project scope and entered details are preserved below. Dispatch directly via:
+                  Your details are still here. You can send them directly using:
                 </p>
               )}
             </div>
@@ -229,7 +229,7 @@ export const ContactForm: React.FC<ContactFormProps> = () => {
                   className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-black dark:bg-white text-white dark:text-black text-xs font-mono font-bold uppercase tracking-wider hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors shadow-xs cursor-pointer"
                 >
                   <Mail className="w-3.5 h-3.5" />
-                  <span>Send via Email Client</span>
+                  <span>Send by email</span>
                 </a>
               )}
               {statusMessage.whatsappFallback && (
@@ -240,7 +240,7 @@ export const ContactForm: React.FC<ContactFormProps> = () => {
                   className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-zinc-900 dark:bg-zinc-100 text-white dark:text-black text-xs font-mono font-bold uppercase tracking-wider hover:bg-zinc-800 dark:hover:bg-white transition-colors shadow-xs cursor-pointer"
                 >
                   <MessageSquare className="w-3.5 h-3.5" />
-                  <span>Send via WhatsApp</span>
+                  <span>Send by WhatsApp</span>
                 </a>
               )}
             </div>
@@ -252,7 +252,7 @@ export const ContactForm: React.FC<ContactFormProps> = () => {
       <div className="space-y-2.5">
         <label className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-400 flex items-center gap-2">
           <Layers className="w-3.5 h-3.5 text-black dark:text-white" />
-          <span>Project Objective</span>
+          <span>What would you like to make?</span>
         </label>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -263,6 +263,7 @@ export const ContactForm: React.FC<ContactFormProps> = () => {
                 key={scope.id}
                 type="button"
                 onClick={() => handleChange('projectType', scope.value)}
+                aria-pressed={isSelected}
                 className={`p-3 rounded-xl border text-left transition-all duration-200 flex flex-col justify-between cursor-pointer ${
                   isSelected
                     ? 'bg-black text-white dark:bg-white dark:text-black border-black dark:border-white shadow-sm'
@@ -293,7 +294,7 @@ export const ContactForm: React.FC<ContactFormProps> = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label htmlFor="contact-name" className="block text-xs font-mono font-bold uppercase tracking-wider mb-1.5 text-black dark:text-white">
-              Your Name <span className="text-zinc-400" aria-hidden="true">*</span>
+              Your name <span className="text-zinc-400" aria-hidden="true">*</span>
             </label>
             <input
               id="contact-name"
@@ -303,7 +304,7 @@ export const ContactForm: React.FC<ContactFormProps> = () => {
               disabled={isSubmitting}
               value={formData.name}
               onChange={(e) => handleChange('name', e.target.value)}
-              placeholder="e.g. Elena Rostova"
+              placeholder="Your name"
               aria-invalid={!!errors.name}
               aria-describedby={errors.name ? 'contact-error-name' : undefined}
               className={`w-full px-3.5 py-3 rounded-xl text-sm transition-all bg-zinc-50 dark:bg-zinc-900/90 border text-black dark:text-white placeholder-zinc-400 focus:outline-hidden focus:border-black dark:focus:border-white focus:ring-1 focus:ring-black dark:focus:ring-white ${
@@ -319,7 +320,7 @@ export const ContactForm: React.FC<ContactFormProps> = () => {
 
           <div>
             <label htmlFor="contact-email" className="block text-xs font-mono font-bold uppercase tracking-wider mb-1.5 text-black dark:text-white">
-              Work Email <span className="text-zinc-400" aria-hidden="true">*</span>
+              Email address <span className="text-zinc-400" aria-hidden="true">*</span>
             </label>
             <input
               id="contact-email"
@@ -329,7 +330,7 @@ export const ContactForm: React.FC<ContactFormProps> = () => {
               disabled={isSubmitting}
               value={formData.email}
               onChange={(e) => handleChange('email', e.target.value)}
-              placeholder="elena@company.com"
+              placeholder="you@example.com"
               aria-invalid={!!errors.email}
               aria-describedby={errors.email ? 'contact-error-email' : undefined}
               className={`w-full px-3.5 py-3 rounded-xl text-sm transition-all bg-zinc-50 dark:bg-zinc-900/90 border text-black dark:text-white placeholder-zinc-400 focus:outline-hidden focus:border-black dark:focus:border-white focus:ring-1 focus:ring-black dark:focus:ring-white ${
@@ -346,7 +347,7 @@ export const ContactForm: React.FC<ContactFormProps> = () => {
 
         <div>
           <label htmlFor="contact-org" className="block text-xs font-mono font-bold uppercase tracking-wider mb-1.5 text-black dark:text-white">
-            Company / Startup <span className="text-[0.68rem] text-zinc-400 font-normal lowercase">(optional)</span>
+            Company / organization <span className="text-[0.68rem] text-zinc-400 font-normal lowercase">(optional)</span>
           </label>
           <input
             id="contact-org"
@@ -355,7 +356,7 @@ export const ContactForm: React.FC<ContactFormProps> = () => {
             disabled={isSubmitting}
             value={formData.organization}
             onChange={(e) => handleChange('organization', e.target.value)}
-            placeholder="e.g. Acme Health or Stealth AI Lab"
+            placeholder="Company or team (optional)"
             className="w-full px-3.5 py-3 rounded-xl text-sm transition-all bg-zinc-50 dark:bg-zinc-900/90 border border-black/10 dark:border-white/10 text-black dark:text-white placeholder-zinc-400 focus:outline-hidden focus:border-black dark:focus:border-white focus:ring-1 focus:ring-black dark:focus:ring-white"
           />
         </div>
@@ -365,7 +366,7 @@ export const ContactForm: React.FC<ContactFormProps> = () => {
       <div className="space-y-2">
         <label className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-400 flex items-center gap-2">
           <Clock className="w-3.5 h-3.5 text-black dark:text-white" />
-          <span>Timeline Target</span>
+          <span>When would you like to start?</span>
         </label>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
@@ -376,6 +377,7 @@ export const ContactForm: React.FC<ContactFormProps> = () => {
                 key={t.value}
                 type="button"
                 onClick={() => handleChange('timeline', t.value)}
+                aria-pressed={isSelected}
                 className={`py-2 px-3 rounded-xl border text-center transition-all duration-200 cursor-pointer ${
                   isSelected
                     ? 'bg-black text-white dark:bg-white dark:text-black border-black dark:border-white shadow-2xs'
@@ -395,7 +397,7 @@ export const ContactForm: React.FC<ContactFormProps> = () => {
       <div>
         <div className="flex items-center justify-between mb-1.5">
           <label htmlFor="contact-details" className="block text-xs font-mono font-bold uppercase tracking-wider text-black dark:text-white">
-            Project Overview & Goals <span className="text-zinc-400" aria-hidden="true">*</span>
+            A little about the project <span className="text-zinc-400" aria-hidden="true">*</span>
           </label>
           <span className="text-[0.68rem] font-mono text-zinc-400">Min 10 characters</span>
         </div>
@@ -406,7 +408,7 @@ export const ContactForm: React.FC<ContactFormProps> = () => {
           disabled={isSubmitting}
           value={formData.details}
           onChange={(e) => handleChange('details', e.target.value)}
-          placeholder="Tell us what you're building, target outcomes, or any technical constraints..."
+          placeholder="What are you trying to achieve? Share any useful context, goals, or constraints."
           aria-invalid={!!errors.details}
           aria-describedby={errors.details ? 'contact-error-details' : undefined}
           className={`w-full px-3.5 py-3 rounded-xl text-sm transition-all bg-zinc-50 dark:bg-zinc-900/90 border text-black dark:text-white placeholder-zinc-400 focus:outline-hidden focus:border-black dark:focus:border-white focus:ring-1 focus:ring-black dark:focus:ring-white leading-relaxed ${
@@ -425,16 +427,16 @@ export const ContactForm: React.FC<ContactFormProps> = () => {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="btn-glass-shimmer w-full sm:w-auto px-7 py-3.5 rounded-full bg-black hover:bg-zinc-800 text-white dark:bg-white dark:hover:bg-zinc-100 dark:text-black font-mono font-bold uppercase tracking-wider text-xs transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-0.5 active:scale-[0.98] flex items-center justify-center gap-2.5 cursor-pointer disabled:opacity-50 group border border-white/10 dark:border-black/10"
+          className="btn-glass-shimmer w-full sm:w-auto px-7 py-3.5 rounded-full bg-[#161616] hover:bg-[#0A0A0A] text-white dark:bg-[#D4D4D4] dark:hover:bg-[#E5E5E5] dark:text-[#111111] font-sans font-semibold uppercase tracking-[0.1em] text-xs transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-0.5 active:scale-[0.98] flex items-center justify-center gap-2.5 cursor-pointer disabled:opacity-50 group border border-[#161616]/10 dark:border-white/10"
         >
           {isSubmitting ? (
             <>
               <span className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
-              <span>Transmitting Brief...</span>
+                <span>Sending inquiry…</span>
             </>
           ) : (
             <>
-              <span>Let's Talk — Submit Project Inquiry</span>
+              <span>Send project inquiry</span>
               <Send className="w-3.5 h-3.5 group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-transform" />
             </>
           )}
@@ -443,7 +445,7 @@ export const ContactForm: React.FC<ContactFormProps> = () => {
         <div className="flex items-center gap-4 text-xs font-mono text-zinc-500 dark:text-zinc-400">
           <span className="flex items-center gap-1.5">
             <ShieldCheck className="w-3.5 h-3.5 text-black dark:text-white" />
-            <span>Mutual NDA Protected</span>
+            <span>Project details stay private</span>
           </span>
           <span className="text-zinc-300 dark:text-zinc-700">·</span>
           <a

@@ -111,7 +111,7 @@ export const Clay3DSculpture: React.FC<Clay3DSculptureProps> = ({
     // Deep Charcoal Sphere (Top interior rim)
     const charcoalGeo = new THREE.SphereGeometry(0.19, 48, 48);
     const charcoalMat = new THREE.MeshPhysicalMaterial({
-      color: new THREE.Color('#191D1A'),
+      color: new THREE.Color('#191919'),
       emissive: new THREE.Color('#171717'),
       emissiveIntensity: 0.2,
       roughness: 0.2,
@@ -129,8 +129,8 @@ export const Clay3DSculpture: React.FC<Clay3DSculptureProps> = ({
     // Signature Radiant Forest Green Pearl (Bottom interior wall)
     const forestGeo = new THREE.SphereGeometry(0.18, 48, 48);
     const forestMat = new THREE.MeshPhysicalMaterial({
-      color: new THREE.Color('#174C3A'),
-      emissive: new THREE.Color('#103629'),
+      color: new THREE.Color('#161616'),
+      emissive: new THREE.Color('#0A0A0A'),
       emissiveIntensity: 0.35,
       roughness: 0.12,
       metalness: 0.1,
@@ -287,7 +287,7 @@ export const Clay3DSculpture: React.FC<Clay3DSculptureProps> = ({
     <div className={`relative flex items-center justify-center ${className}`}>
       {/* Soft Ambient Forest Diffuse Glow */}
       <div 
-        className="absolute w-[80%] h-[80%] rounded-full bg-radial from-[#174C3A]/5 dark:from-[#174C3A]/10 to-transparent blur-[80px] pointer-events-none"
+        className="absolute w-[80%] h-[80%] rounded-full bg-radial from-[#161616]/5 dark:from-[#161616]/10 to-transparent blur-[80px] pointer-events-none"
         aria-hidden="true"
       />
       {/* 3D Canvas Mount Point */}

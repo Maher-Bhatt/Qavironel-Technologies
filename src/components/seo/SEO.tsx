@@ -66,7 +66,7 @@ export const SEO: React.FC<SEOProps> = ({
     alternateName: companyConfig.shortName,
     slogan: companyConfig.tagline,
     url: siteOrigin,
-    logo: `${siteOrigin}/brand/qavironel-logo-square.png`,
+    logo: `${siteOrigin}/brand/identity-v2/qavironel-mark-forest.svg`,
     email: companyConfig.email,
     description: companyConfig.description,
     sameAs: [

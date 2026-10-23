@@ -1,448 +1,83 @@
-import { SEO } from '../components/seo/SEO';
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { AnimatePresence, motion } from 'framer-motion';
+import { ArrowRight, ArrowUpRight } from 'lucide-react';
+import { SEO } from '../components/seo/SEO';
 import { services, processSteps } from '../data/services';
 import { projects } from '../data/projects';
-import { faqs, companyConfig } from '../data/company';
-import { 
-  CheckCircle2, 
-  ArrowRight, 
-  ArrowUpRight, 
-  Calendar, 
-  Layers, 
-  ShieldCheck, 
-  Code2, 
-  Cpu, 
-  ExternalLink 
-} from 'lucide-react';
-import { openBookingModal } from '../utils/modalEvents';
 
 export const ServicesPage: React.FC = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const activeService = services[activeIndex] ?? services[0];
+  const example = projects.find((project) => project.slug === activeService.exampleProjectSlug);
+
   return (
     <>
-      <SEO 
-        title="Engineering Services & Capabilities" 
-        description="Bespoke web platforms, SaaS MVP engineering, applied AI workflows, and developer tooling delivered in high-velocity 1-to-2 week sprints."
-        structuredData={{
-          '@context': 'https://schema.org',
-          '@type': 'Service',
-          name: 'Digital Product & Software Engineering Services',
-          provider: {
-            '@type': 'Organization',
-            name: 'Qavironel Technologies',
-            url: 'https://qavironel.com'
-          },
-          hasOfferCatalog: {
-            '@type': 'OfferCatalog',
-            name: 'Core Studio Capabilities',
-            itemListElement: [
-              { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Bespoke Web Platform Architecture & Design' } },
-              { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Full-Stack SaaS MVP & Digital Product Engineering' } },
-              { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Applied AI, LLM Integration & Agentic Automation' } },
-              { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Mobile Developer Tooling & Native Runtimes' } }
-            ]
-          }
-        }}
-      />
-
-      <div className="bg-[#FAFAFA] dark:bg-[#0A0A0A] text-[#0A0A0A] dark:text-[#FAFAFA] pt-32 sm:pt-40 pb-28 selection:bg-[#0A0A0A] selection:text-white dark:selection:bg-white dark:selection:text-black transition-colors duration-300">
-        <div className="max-w-[1700px] w-full mx-auto px-5 sm:px-8 lg:px-12">
-          
-          {/* ========================================================================= */}
-          {/* 01. EDITORIAL HEADER (NO 3D OBJECTS)                                      */}
-          {/* ========================================================================= */}
-          <div className="pb-16 border-b border-black/[0.08] dark:border-white/10 max-w-4xl">
-            <span className="text-xs font-mono font-semibold uppercase tracking-[0.25em] text-zinc-500 dark:text-zinc-400 block mb-3">
-              Capabilities & Disciplines
-            </span>
-            <h1 className="font-display font-extrabold text-5xl sm:text-7xl lg:text-8xl text-[#0A0A0A] dark:text-white tracking-[-0.04em] leading-[0.98]">
-              Disciplines engineered for real momentum.
-            </h1>
-            <p className="mt-6 text-lg sm:text-xl text-zinc-700 dark:text-zinc-300 font-normal leading-relaxed max-w-3xl">
-              We combine digital craftsmanship with full-stack software engineering and applied AI. Every service is delivered with direct technical leadership—no junior account managers, no outsourced contractors, and zero template bloat.
-            </p>
+      <SEO title="Services" description="Product design, custom websites, software engineering, and applied AI from Qavironel, an independent studio in Vadodara, India." />
+      <div className="site-page services-page">
+        <section className="services-intro">
+          <div className="site-container">
+            <div className="services-intro__top"><p className="site-eyebrow">Design / Product / Engineering</p><span>Our practice · 01—05</span></div>
+            <div className="services-intro__body"><h1>Make the right<br /><em>thing, well.</em></h1><div><p>Bring us a website, product, or workflow that needs attention. We’ll help find the useful shape, then design and build it with you.</p><Link to="/contact" className="text-link">Discuss a project <ArrowUpRight aria-hidden="true" /></Link></div></div>
+            <div className="services-intro__index"><span>What we work across</span><p>Web & commerce <i>·</i> Digital products <i>·</i> Applied AI <i>·</i> Product design <i>·</i> Software</p></div>
           </div>
+        </section>
 
-          {/* ========================================================================= */}
-          {/* 02. EDITORIAL SERVICES MATRIX WITH DIVERSE COMPOSITIONS                   */}
-          {/* ========================================================================= */}
-          <div className="divide-y divide-black/10 dark:divide-white/10">
-            
-            {/* 01. Web Design & Development (Asymmetrical 2-Column Split with Real Image) */}
-            <section id="web-design-development" className="py-20 scroll-mt-28">
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-                
-                <div className="lg:col-span-6 space-y-6">
-                  <div className="flex items-center gap-3">
-                    <span className="font-mono text-2xl font-bold text-black dark:text-white">01</span>
-                    <span className="text-xs font-mono px-3 py-1 rounded-full bg-black/5 dark:bg-white/10 text-black dark:text-white font-bold border border-black/10 dark:border-white/15">
-                      FRONTEND CRAFTSMANSHIP
-                    </span>
-                  </div>
-
-                  <h2 className="font-display font-bold text-3xl sm:text-4xl text-black dark:text-white tracking-tight">
-                    Web Design & Development
-                  </h2>
-                  <p className="text-base sm:text-lg text-black dark:text-white font-medium leading-snug">
-                    Marketing sites, commerce storefronts, and business platforms built from scratch.
-                  </p>
-                  <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                    We design and engineer bespoke web experiences that load instantly, command attention, and turn visitors into qualified business leads. No generic templates, bloated page-builders, or fragile plugins.
-                  </p>
-
-                  <div className="space-y-3 pt-2">
-                    <p className="text-xs font-mono uppercase tracking-wider text-black dark:text-white font-semibold">
-                      Key Deliverables:
-                    </p>
-                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs sm:text-sm text-zinc-800 dark:text-zinc-200">
-                      <li className="flex items-center gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-black dark:text-white shrink-0" />
-                        <span>Bespoke responsive frontend</span>
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-black dark:text-white shrink-0" />
-                        <span>High-conversion commerce</span>
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-black dark:text-white shrink-0" />
-                        <span>Core Web Vitals tuning</span>
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-black dark:text-white shrink-0" />
-                        <span>Zero builder bloat</span>
-                      </li>
-                    </ul>
-                  </div>
-
-                  <div className="pt-4 flex items-center gap-4">
-                    <Link
-                      to="/work/ztees"
-                      className="inline-flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-black dark:text-white hover:underline"
-                    >
-                      <span>Featured Case Study: Ztees Storefront</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </Link>
-                  </div>
-                </div>
-
-                <div className="lg:col-span-6">
-                  <div className="rounded-2xl border border-black/10 dark:border-white/10 bg-white dark:bg-zinc-900 p-4 shadow-sm">
-                    <div className="aspect-[16/11] rounded-xl overflow-hidden bg-black">
-                      <img 
-                        src="/images/projects/ztees/ztees-storefront-hero.png" 
-                        onError={(e) => {
-                          const target = e.currentTarget;
-                          if (target.src !== '/images/projects/ztees-cover.jpg') {
-                            target.src = '/images/projects/ztees-cover.jpg';
-                          }
-                        }}
-                        alt="Ztees streetwear commerce platform storefront"
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div className="pt-3 px-1 flex items-center justify-between text-xs font-mono text-zinc-600 dark:text-zinc-400">
-                      <span>Ztees Streetwear Platform</span>
-                      <span className="text-black dark:text-white font-semibold">&lt; 0.8s LCP Speed</span>
-                    </div>
-                  </div>
-                </div>
-
+        <section className="service-explorer" aria-label="Our services">
+          <div className="site-container service-explorer__grid">
+            <div className="service-explorer__choices">
+              <p className="site-eyebrow">Choose a starting point</p>
+              <div className="service-selector">
+                {services.map((service, index) => (
+                  <button
+                    type="button"
+                    id={service.id}
+                    key={service.id}
+                    aria-expanded={activeIndex === index}
+                    aria-controls="active-service-detail"
+                    onClick={() => setActiveIndex(index)}
+                    className={`service-choice${activeIndex === index ? ' is-active' : ''}`}
+                  >
+                    <span>{service.number}</span><span>{service.title}{activeIndex === index && <small>{service.tagline}</small>}</span><ArrowUpRight aria-hidden="true" />
+                  </button>
+                ))}
               </div>
-            </section>
+              <p className="service-explorer__aside">Each engagement is shaped around its people, constraints, and goals. We’ll work with you to find the right mix.</p>
+            </div>
 
-            {/* 02. Product & Software Engineering (Deep Technical Architecture Spread) */}
-            <section id="product-software-engineering" className="py-20 scroll-mt-28">
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-                
-                <div className="lg:col-span-6 order-2 lg:order-1">
-                  <div className="rounded-2xl border border-black/10 dark:border-white/10 bg-white dark:bg-zinc-900 p-4 shadow-sm">
-                    <div className="aspect-[16/10] rounded-xl overflow-hidden bg-black">
-                      <img 
-                        src="/images/projects/civic-sathi/civic-sathi-map-analytics.png" 
-                        onError={(e) => {
-                          const target = e.currentTarget;
-                          if (target.src !== '/images/projects/civic-sathi/civic-sathi-delhi-hero.png') {
-                            target.src = '/images/projects/civic-sathi/civic-sathi-delhi-hero.png';
-                          }
-                        }}
-                        alt="Civic Sathi Multi-Role RBAC Portal & Map Analytics"
-                        className="w-full h-full object-cover"
-                      />
+            <article className="service-detail" id="active-service-detail" aria-live="polite">
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.div key={activeService.id} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.28, ease: [0.2, 0.7, 0.2, 1] }}>
+                  <figure className="service-detail__image">
+                    {activeService.image && <img src={activeService.image} alt={activeService.imageCaption ?? activeService.title} loading="lazy" />}
+                    <figcaption><span>{activeService.imageCaption ?? activeService.title}</span><span>{activeService.number} / 0{services.length}</span></figcaption>
+                  </figure>
+                  <div className="service-detail__copy">
+                    <p className="site-eyebrow">{activeService.badge ?? 'Our practice'}</p>
+                    <h2>{activeService.description}</h2>
+                    <p className="service-detail__fit"><strong>A good fit for</strong> {activeService.whoItsFor}</p>
+                    <div className="service-detail__deliverables">
+                      {activeService.deliverables.slice(0, 4).map((deliverable) => <p key={deliverable}><i aria-hidden="true" />{deliverable}</p>)}
                     </div>
-                    <div className="pt-3 px-1 flex items-center justify-between text-xs font-mono text-zinc-600 dark:text-zinc-400">
-                      <span>Civic Sathi Monorepo (SIH 2026)</span>
-                      <span className="text-black dark:text-white font-semibold">4 Role Portals · RBAC</span>
+                    <div className="service-detail__bottom">
+                      <div className="service-detail__tags">{activeService.technologies.slice(0, 3).map((technology) => <span key={technology}>{technology}</span>)}</div>
+                      {example && <Link to={`/work/${example.slug}`} className="text-link">See {example.title} <ArrowRight aria-hidden="true" /></Link>}
                     </div>
                   </div>
-                </div>
-
-                <div className="lg:col-span-6 order-1 lg:order-2 space-y-6">
-                  <div className="flex items-center gap-3">
-                    <span className="font-mono text-2xl font-bold text-black dark:text-white">02</span>
-                    <span className="text-xs font-mono px-3 py-1 rounded-full bg-black/5 dark:bg-white/10 text-black dark:text-white font-bold border border-black/10 dark:border-white/15">
-                      SYSTEMS ARCHITECTURE
-                    </span>
-                  </div>
-
-                  <h2 className="font-display font-bold text-3xl sm:text-4xl text-black dark:text-white tracking-tight">
-                    Product & Software Engineering
-                  </h2>
-                  <p className="text-base sm:text-lg text-black dark:text-white font-medium leading-snug">
-                    Custom web applications, dashboards, SaaS MVPs, and internal operational tooling.
-                  </p>
-                  <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                    We engineer full-stack digital products from initial architectural schema to production release. We focus on clean data models, resilient APIs, and intuitive user experiences built to scale without rewriting.
-                  </p>
-
-                  <div className="p-5 rounded-2xl bg-white dark:bg-zinc-900 border border-black/10 dark:border-white/10 space-y-2">
-                    <p className="text-xs font-mono font-bold uppercase tracking-wider text-black dark:text-white">
-                      Architectural Highlights:
-                    </p>
-                    <ul className="space-y-1.5 text-xs text-zinc-600 dark:text-zinc-400">
-                      <li className="flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-black dark:bg-white" />
-                        <span>Strict role-based access control (RBAC) across multiple operational surfaces</span>
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-black dark:bg-white" />
-                        <span>Type-safe API contracts with automated schema validation</span>
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-black dark:bg-white" />
-                        <span>Rapid MVP release cycles shipped to staging in 2 to 4 weeks</span>
-                      </li>
-                    </ul>
-                  </div>
-
-                  <div className="pt-2 flex items-center gap-4">
-                    <Link
-                      to="/work/civic-sathi"
-                      className="inline-flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-black dark:text-white hover:underline"
-                    >
-                      <span>Explore Civic Sathi Case Study</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </Link>
-                  </div>
-                </div>
-
-              </div>
-            </section>
-
-            {/* 03. Applied AI & Automation (Featured Prominently) */}
-            <section id="applied-ai-automation" className="py-20 scroll-mt-28">
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-                
-                <div className="lg:col-span-6 space-y-6">
-                  <div className="flex items-center gap-3">
-                    <span className="font-mono text-2xl font-bold text-black dark:text-white">03</span>
-                    <span className="text-xs font-mono px-3 py-1 rounded-full bg-black/5 dark:bg-white/10 text-black dark:text-white font-bold border border-black/10 dark:border-white/15">
-                      APPLIED AI & NEURAL RUNTIMES
-                    </span>
-                  </div>
-
-                  <h2 className="font-display font-bold text-3xl sm:text-4xl text-black dark:text-white tracking-tight">
-                    Applied AI & Intelligent Workflows
-                  </h2>
-                  <p className="text-base sm:text-lg text-black dark:text-white font-medium leading-snug">
-                    Practical LLM integrations, intelligent workflows, and local-first desktop AI tools.
-                  </p>
-                  <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                    We cut through the industry hype to engineer genuinely useful AI capabilities. From privacy-safe local inference on physical hardware to dynamic multi-model routing and guarded execution adapters, we build AI that solves operational bottlenecks.
-                  </p>
-
-                  <div className="grid grid-cols-2 gap-4 py-3">
-                    <div className="p-4 rounded-xl bg-white dark:bg-zinc-900 border border-black/10 dark:border-white/10">
-                      <span className="block font-display font-bold text-base text-black dark:text-white">Air-Gapped Models</span>
-                      <span className="text-xs font-mono text-zinc-500">Ollama & LLaMA 3.3 offline</span>
-                    </div>
-                    <div className="p-4 rounded-xl bg-white dark:bg-zinc-900 border border-black/10 dark:border-white/10">
-                      <span className="block font-display font-bold text-base text-black dark:text-white">DPAPI Encryption</span>
-                      <span className="text-xs font-mono text-zinc-500">Hardware-bound credentials</span>
-                    </div>
-                  </div>
-
-                  <div className="pt-2 flex items-center gap-4">
-                    <Link
-                      to="/work/kalki"
-                      className="inline-flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-black dark:text-white hover:underline"
-                    >
-                      <span>Explore K.A.L.K.I. Case Study</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </Link>
-                  </div>
-                </div>
-
-                <div className="lg:col-span-6">
-                  <div className="rounded-2xl border border-black/10 dark:border-white/10 bg-white dark:bg-zinc-900 p-4 shadow-sm">
-                    <div className="aspect-[16/10] rounded-xl overflow-hidden bg-black">
-                      <img 
-                        src="/images/projects/kalki/kalki-hero.png" 
-                        onError={(e) => {
-                          const target = e.currentTarget;
-                          if (target.src !== '/images/projects/kalki-hero.png') {
-                            target.src = '/images/projects/kalki-hero.png';
-                          } else {
-                            target.src = '/images/projects/kalki-launch.png';
-                          }
-                        }}
-                        alt="K.A.L.K.I. multi-model AI assistant"
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div className="pt-3 px-1 flex items-center justify-between text-xs font-mono text-zinc-600 dark:text-zinc-400">
-                      <span>K.A.L.K.I. Desktop Assistant</span>
-                      <span className="text-black dark:text-white font-semibold">Live on Microsoft Store</span>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </section>
-
-            {/* 04 & 05. UI/UX Systems & Technical Optimization (Editorial 2-Column Grid) */}
-            <section className="py-20">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                
-                {/* 04. UI/UX */}
-                <div id="digital-product-design" className="space-y-6 scroll-mt-28">
-                  <div className="flex items-center gap-3">
-                    <span className="font-mono text-xl font-bold text-black dark:text-white">04</span>
-                    <span className="text-xs font-mono px-3 py-1 rounded-full bg-black/5 dark:bg-white/10 text-black dark:text-white font-bold border border-black/10 dark:border-white/15">
-                      PRODUCT CRAFT
-                    </span>
-                  </div>
-                  <h2 className="font-display font-bold text-2xl sm:text-3xl text-black dark:text-white">
-                    Digital Product Design & Systems
-                  </h2>
-                  <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                    Great software starts with clear thinking. We craft cohesive design tokens, intuitive user journeys, and responsive typography that make complex workflows feel effortless for end users.
-                  </p>
-                  <ul className="space-y-2 text-xs sm:text-sm text-zinc-800 dark:text-zinc-200">
-                    <li className="flex items-center gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-black dark:text-white" />
-                      <span>Mathematical 4pt/8pt spacing scale</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-black dark:text-white" />
-                      <span>WCAG 2.1 AA accessibility & contrast validation</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-black dark:text-white" />
-                      <span>Zero-drift Figma to Tailwind CSS handoff</span>
-                    </li>
-                  </ul>
-                  <div className="pt-2">
-                    <Link to="/work/codedroid" className="text-xs font-mono font-bold uppercase text-black dark:text-white hover:underline flex items-center gap-1.5">
-                      <span>Related: CodeDroid Design System</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </Link>
-                  </div>
-                </div>
-
-                {/* 05. Technical Optimization */}
-                <div id="technical-optimization-seo" className="space-y-6 scroll-mt-28">
-                  <div className="flex items-center gap-3">
-                    <span className="font-mono text-xl font-bold text-black dark:text-white">05</span>
-                    <span className="text-xs font-mono px-3 py-1 rounded-full bg-black/5 dark:bg-white/10 text-black dark:text-white font-bold border border-black/10 dark:border-white/15">
-                      EDGE PERFORMANCE
-                    </span>
-                  </div>
-                  <h2 className="font-display font-bold text-2xl sm:text-3xl text-black dark:text-white">
-                    Performance Hardening & Technical SEO
-                  </h2>
-                  <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                    A digital platform cannot succeed if it suffers from poor discoverability or sluggish loading. We audit, refactor, and tune websites to achieve top Core Web Vitals and solid organic visibility.
-                  </p>
-                  <ul className="space-y-2 text-xs sm:text-sm text-zinc-800 dark:text-zinc-200">
-                    <li className="flex items-center gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-black dark:text-white" />
-                      <span>Sub-second Largest Contentful Paint (LCP) engineering</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-black dark:text-white" />
-                      <span>Semantic Schema.org JSON-LD microdata integration</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-black dark:text-white" />
-                      <span>Next-gen WebP/AVIF asset pipelines & edge caching</span>
-                    </li>
-                  </ul>
-                  <div className="pt-2">
-                    <Link to="/contact" className="text-xs font-mono font-bold uppercase text-black dark:text-white hover:underline flex items-center gap-1.5">
-                      <span>Request a Performance Audit</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </Link>
-                  </div>
-                </div>
-
-              </div>
-            </section>
-
+                </motion.div>
+              </AnimatePresence>
+            </article>
           </div>
+        </section>
 
-          {/* ========================================================================= */}
-          {/* 03. FREQUENTLY ASKED QUESTIONS (PRACTICAL CLIENT TERMS)                   */}
-          {/* ========================================================================= */}
-          <section className="py-24 border-t border-black/10 dark:border-white/10">
-            <div className="max-w-3xl mb-12">
-              <span className="text-xs font-mono uppercase tracking-[0.22em] text-zinc-500 dark:text-zinc-400 font-bold block mb-2">
-                Questions & Transparency
-              </span>
-              <h2 className="font-display font-bold text-3xl sm:text-4xl text-black dark:text-white tracking-tight">
-                Clear answers before we write a line of code.
-              </h2>
-            </div>
-
-            <div className="divide-y divide-black/10 dark:divide-white/10">
-              {faqs.slice(0, 5).map((faq, idx) => (
-                <div key={idx} className="py-8 grid grid-cols-1 lg:grid-cols-12 gap-6">
-                  <div className="lg:col-span-5">
-                    <h3 className="font-display font-bold text-lg sm:text-xl text-black dark:text-white">
-                      {faq.question}
-                    </h3>
-                  </div>
-                  <div className="lg:col-span-7">
-                    <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed font-light">
-                      {faq.answer}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* ========================================================================= */}
-          {/* 04. CALL TO ACTION                                                        */}
-          {/* ========================================================================= */}
-          <div className="p-8 sm:p-12 rounded-3xl bg-white dark:bg-zinc-900 border border-black/10 dark:border-white/10 flex flex-col md:flex-row md:items-center justify-between gap-8">
-            <div className="space-y-2 max-w-xl">
-              <span className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
-                Ready to discuss your project?
-              </span>
-              <h3 className="font-display font-bold text-2xl sm:text-3xl text-black dark:text-white">
-                Schedule a direct 60-minute architectural consultation.
-              </h3>
-            </div>
-            <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-4 w-full md:w-auto">
-              <Link
-                to="/contact"
-                className="btn-glass-shimmer hover:-translate-y-0.5 active:scale-[0.98] inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-black hover:bg-zinc-800 text-white dark:bg-white dark:hover:bg-zinc-200 dark:text-black text-xs font-mono uppercase font-bold tracking-wider transition-all duration-300 shadow-xs w-full sm:w-auto"
-              >
-                <span>Let's Talk</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-              <button
-                type="button"
-                onClick={() => openBookingModal('call')}
-                className="btn-glass-shimmer hover:-translate-y-0.5 active:scale-[0.98] inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full bg-white dark:bg-zinc-900 border border-black/10 dark:border-white/15 text-black dark:text-white text-xs font-mono uppercase font-bold tracking-wider hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-all duration-300 w-full sm:w-auto"
-              >
-                <Calendar className="w-4 h-4 text-black dark:text-white" />
-                <span>Book Discovery Call</span>
-              </button>
-            </div>
+        <section className="services-process section-pad">
+          <div className="site-container">
+            <div className="section-heading section-heading--spread"><div><p className="site-eyebrow">Working together</p><h2>Keep the work<br /><em>moving clearly.</em></h2></div><p>We’ll agree what matters before we start, share progress as we go, and leave you with a clean handover.</p></div>
+            <div className="method-list">{processSteps.map((step) => <article key={step.step}><span>{step.step}</span><h3>{step.title}</h3><p>{step.summary}</p></article>)}</div>
           </div>
+        </section>
 
-        </div>
+        <section className="services-outro"><div className="site-container"><p className="site-eyebrow site-eyebrow--light">Every project begins somewhere</p><div><h2>Let’s work out<br /><em>the first step.</em></h2><Link to="/contact" className="button button--paper">Start a conversation <ArrowUpRight aria-hidden="true" /></Link></div></div></section>
       </div>
     </>
   );

@@ -20,7 +20,7 @@ export const NotFoundPage: React.FC = () => {
             Page Not Found
           </h2>
           <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-md mx-auto font-light">
-            The route you navigated to does not exist or has been relocated within our studio directory.
+            We couldn’t find that page. It may have moved, or the address may be incorrect.
           </p>
 
           <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
@@ -29,13 +29,13 @@ export const NotFoundPage: React.FC = () => {
               className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-black hover:bg-zinc-800 text-white dark:bg-white dark:hover:bg-zinc-200 dark:text-black text-xs font-mono uppercase font-bold tracking-wider transition-colors shadow-xs"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
-              <span>Back to Home</span>
+              <span>Back to home</span>
             </Link>
             <Link
               to="/work"
               className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white dark:bg-zinc-900 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-black dark:text-white border border-black/10 dark:border-white/10 text-xs font-mono uppercase font-semibold tracking-wider transition-colors"
             >
-              <span>Explore Work</span>
+              <span>Explore our work</span>
               <ArrowUpRight className="w-3.5 h-3.5" />
             </Link>
           </div>

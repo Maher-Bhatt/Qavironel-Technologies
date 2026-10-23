@@ -60,9 +60,9 @@ describe('VideoShowreel Continuous Playlist Carousel', () => {
     });
 
     expect(screen.getByText('CONTINUOUS PLAYLIST · 3/3')).toBeDefined();
-    expect(screen.getAllByText('Technical HUD & Spatial Computer Vision').length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText('Civic Sathi · Civic Platform').length).toBeGreaterThanOrEqual(1);
     video = container.querySelector('video') as HTMLVideoElement;
-    expect(video.getAttribute('src')).toBe('/videos/project-reel.mp4');
+    expect(video.getAttribute('src')).toBe('/videos/civic-sathi-video.mp4');
 
     // Video 3 -> loops back to Video 1
     act(() => {

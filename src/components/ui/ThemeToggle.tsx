@@ -24,10 +24,10 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({
       <button
         type="button"
         onClick={handleToggle}
-        className={`p-2 rounded-full border transition-all duration-300 focus-visible:outline-2 focus-visible:outline-[#0A0A0A] dark:focus-visible:outline-white ${
+        className={`p-2.5 rounded-full border transition-all duration-300 focus-visible:outline-2 focus-visible:outline-[#161616] dark:focus-visible:outline-[#D4D4D4] ${
           isDark
-            ? 'bg-[#141414] hover:bg-zinc-800 border-white/10 text-white'
-            : 'bg-white hover:bg-zinc-50 border-black/10 text-zinc-600 hover:text-black'
+            ? 'bg-white/[0.04] hover:bg-white/10 border-white/15 text-[#F7F7F7]'
+            : 'bg-[#F7F7F7] hover:bg-[#EEEEEE] border-[#D8D8D8] text-[#161616] hover:text-[#0A0A0A]'
         } ${className}`}
         title={isDark ? 'Switch to Light Theme' : 'Switch to Dark Theme'}
         aria-label={isDark ? 'Switch to Light Theme' : 'Switch to Dark Theme'}
@@ -45,10 +45,10 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({
     <button
       type="button"
       onClick={handleToggle}
-      className={`group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[0.68rem] font-mono transition-all duration-300 border focus-visible:outline-2 focus-visible:outline-[#0A0A0A] dark:focus-visible:outline-white ${
+      className={`group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[0.68rem] font-sans font-semibold tracking-[0.08em] transition-all duration-300 border focus-visible:outline-2 focus-visible:outline-[#161616] dark:focus-visible:outline-[#D4D4D4] ${
         isDark
-          ? 'bg-[#141414] hover:bg-zinc-800 border-white/10 text-white'
-          : 'bg-white hover:bg-zinc-50 border-black/10 text-zinc-600 hover:text-black'
+          ? 'bg-white/[0.04] hover:bg-white/10 border-white/15 text-[#F7F7F7]'
+          : 'bg-[#F7F7F7] hover:bg-[#EEEEEE] border-[#D8D8D8] text-[#161616] hover:text-[#0A0A0A]'
       } ${className}`}
       title={isDark ? 'Switch to Light Theme' : 'Switch to Dark Theme'}
       aria-label={isDark ? 'Switch to Light Theme' : 'Switch to Dark Theme'}

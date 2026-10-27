@@ -24,7 +24,7 @@ export const AboutPage: React.FC = () => {
           '@context': 'https://schema.org',
           '@type': 'AboutPage',
           name: 'About Qavironel Technologies',
-          url: 'https://qavironel.com/about',
+          url: `${companyConfig.siteUrl}/about`,
           mainEntity: {
             '@type': 'Organization',
             name: companyConfig.name,

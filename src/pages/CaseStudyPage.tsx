@@ -26,10 +26,10 @@ export const CaseStudyPage: React.FC = () => {
     '@type': 'CreativeWork',
     name: project.title,
     description: project.summary,
-    url: `https://qavironel.com/work/${project.slug}`,
-    image: `https://qavironel.com${project.heroImage}`,
+    url: `${companyConfig.siteUrl}/work/${project.slug}`,
+    image: `${companyConfig.siteUrl}${project.heroImage}`,
     dateCreated: project.year,
-    author: { '@type': 'Organization', name: 'Qavironel Technologies', url: 'https://qavironel.com' },
+    author: { '@type': 'Organization', name: 'Qavironel Technologies', url: companyConfig.siteUrl },
     keywords: project.technologies.join(', ')
   };
 
@@ -67,7 +67,7 @@ export const CaseStudyPage: React.FC = () => {
         {project.objectives && project.objectives.length > 0 && (
           <section className="case-objectives">
             <div className="site-container"><div className="case-section-heading"><p className="site-eyebrow">The brief, in practice</p><h2>What the work<br /><em>needed to do.</em></h2></div>
-              <ol>{project.objectives.map((objective, index) => <li key={objective}><span>0{index + 1}</span><p>{objective}</p><ArrowUpRight aria-hidden="true" /></li>)}</ol>
+              <ol>{project.objectives.map((objective, index) => <li key={objective}><span>{String(index + 1).padStart(2, '0')}</span><p>{objective}</p><ArrowUpRight aria-hidden="true" /></li>)}</ol>
             </div>
           </section>
         )}
@@ -76,14 +76,14 @@ export const CaseStudyPage: React.FC = () => {
           <section className="case-gallery site-container">
             <div className="case-section-heading"><p className="site-eyebrow">Screens & details</p><h2>See how it<br /><em>comes together.</em></h2><p>Select an image to view it larger.</p></div>
             <div className="case-gallery__grid">
-              {project.gallery.map((item, index) => <button key={item.src} type="button" className="case-gallery__item" onClick={() => setSelectedImage(item)} aria-label={`View image ${index + 1}: ${item.caption ?? item.alt}`}><img src={item.src} alt={item.alt} loading="lazy" /><span><i>0{index + 1}</i>{item.caption ?? item.alt}<ArrowUpRight aria-hidden="true" /></span></button>)}
+              {project.gallery.map((item, index) => <button key={item.src} type="button" className="case-gallery__item" onClick={() => setSelectedImage(item)} aria-label={`View image ${index + 1}: ${item.caption ?? item.alt}`}><img src={item.src} alt={item.alt} loading="lazy" /><span><i>{String(index + 1).padStart(2, '0')}</i>{item.caption ?? item.alt}<ArrowUpRight aria-hidden="true" /></span></button>)}
             </div>
           </section>
         )}
 
         {project.workflow.length > 0 && (
           <section className="case-workflow">
-            <div className="site-container"><div className="case-section-heading"><p className="site-eyebrow">A closer look</p><h2>From the user’s<br /><em>point of view.</em></h2></div><ol>{project.workflow.map((step, index) => <li key={step}><span>0{index + 1}</span><p>{step}</p></li>)}</ol></div>
+            <div className="site-container"><div className="case-section-heading"><p className="site-eyebrow">A closer look</p><h2>From the user’s<br /><em>point of view.</em></h2></div><ol>{project.workflow.map((step, index) => <li key={step}><span>{String(index + 1).padStart(2, '0')}</span><p>{step}</p></li>)}</ol></div>
           </section>
         )}
 

@@ -150,14 +150,14 @@ export const ScrollAutoplayVideo: React.FC<ScrollAutoplayVideoProps> = ({
       ref={containerRef}
       className={`relative w-full overflow-hidden bg-black rounded-2xl select-none group/player ${aspectRatio} ${className}`}
     >
-      {/* Poster Image fallback */}
+      {/* Poster Image: Always covers initial black video frames until playback is active */}
       {poster && (
         <img
           src={poster}
           alt={alt}
-          loading="lazy"
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-out ${
-            isVideoLoaded && isPlaying ? 'opacity-0 scale-102' : 'opacity-100 scale-100'
+          loading="eager"
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-out z-10 pointer-events-none ${
+            isPlaying ? 'opacity-0 scale-102' : 'opacity-100 scale-100'
           }`}
         />
       )}
@@ -175,13 +175,13 @@ export const ScrollAutoplayVideo: React.FC<ScrollAutoplayVideoProps> = ({
         onLoadedData={() => setIsVideoLoaded(true)}
         onTimeUpdate={handleTimeUpdate}
         className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out ${
-          isVideoLoaded ? 'opacity-100' : 'opacity-0'
+          isPlaying ? 'opacity-100' : 'opacity-0'
         }`}
       />
 
       {/* Subtle vignette/sheen */}
       {overlayGradient && (
-        <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/50 via-transparent to-black/20" />
+        <div className="absolute inset-0 pointer-events-none z-10 bg-gradient-to-t from-black/50 via-transparent to-black/20" />
       )}
 
       {/* Top Left Live Status Pill */}
@@ -231,3 +231,5 @@ export const ScrollAutoplayVideo: React.FC<ScrollAutoplayVideoProps> = ({
     </div>
   );
 };
+
+export default ScrollAutoplayVideo;

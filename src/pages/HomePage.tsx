@@ -229,16 +229,15 @@ export const HomePage: React.FC = () => {
                   </div>
                   <h3>{tier.name}</h3>
                   <div className="home-pricing-card__price">
-                    {tier.startingPriceInr.startsWith('TODO') ? (
-                      <div className="home-pricing-card__placeholder">
-                        <span className="home-pricing-card__placeholder-tag">Starting Rate: Custom quote</span>
-                        <small>{tier.startingPriceInr}</small>
-                      </div>
-                    ) : (
+                    {tier.startingPriceInr && tier.startingPriceInr !== 'Custom quote' && !tier.startingPriceInr.startsWith('TODO') ? (
                       <>
                         <strong>{tier.startingPriceInr}</strong>
-                        <span>starts at / ~{tier.startingPriceUsd}</span>
+                        {tier.startingPriceUsd && <span>starts at / ~{tier.startingPriceUsd}</span>}
                       </>
+                    ) : (
+                      <div className="home-pricing-card__placeholder">
+                        <span className="home-pricing-card__placeholder-tag">Starting Rate: Custom quote</span>
+                      </div>
                     )}
                   </div>
                   <p className="home-pricing-card__tagline">{tier.tagline}</p>

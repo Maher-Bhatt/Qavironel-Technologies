@@ -5,6 +5,7 @@ import { SEO } from '../components/seo/SEO';
 import { ProjectVideoPreview } from '../components/work/ProjectVideoPreview';
 import { ProjectFilters } from '../components/work/ProjectFilters';
 import { projects, categories } from '../data/projects';
+import { companyConfig } from '../data/company';
 import { ProjectCategory } from '../types';
 
 const projectNotes: Record<string, string> = {
@@ -37,8 +38,8 @@ export const WorkPage: React.FC = () => {
           '@context': 'https://schema.org',
           '@type': 'CollectionPage',
           name: 'Selected Work — Qavironel Technologies',
-          url: 'https://qavironel.com/work',
-          mainEntity: { '@type': 'ItemList', itemListElement: projects.map((project, index) => ({ '@type': 'ListItem', position: index + 1, name: project.title, url: `https://qavironel.com/work/${project.slug}` })) }
+          url: `${companyConfig.siteUrl}/work`,
+          mainEntity: { '@type': 'ItemList', itemListElement: projects.map((project, index) => ({ '@type': 'ListItem', position: index + 1, name: project.title, url: `${companyConfig.siteUrl}/work/${project.slug}` })) }
         }}
       />
 

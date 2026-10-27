@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Suspense, lazy } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { AnimatePresence, MotionConfig } from 'framer-motion';
 import { SiteHeader } from './components/layout/SiteHeader';
@@ -20,8 +20,8 @@ import { ContactPage } from './pages/ContactPage';
 import { LegalPage } from './pages/LegalPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 
-// Lazy dialog modals that load on-demand without blocking page paint
-const BookingModal = lazy(() => import('./components/booking/BookingModal').then(m => ({ default: m.BookingModal })));
+// Direct Modal Import: Ensures instant response when clicking "Request a quote" or "Book a conversation"
+import { BookingModal } from './components/booking/BookingModal';
 
 // Custom Hooks Abstraction
 import { useScrollToTop } from './hooks/useScrollToTop';
@@ -60,13 +60,11 @@ export const App: React.FC = () => {
           </main>
           <SiteFooter />
           {isBookingOpen && (
-            <Suspense fallback={null}>
-              <BookingModal 
-                isOpen={isBookingOpen} 
-                initialTab={bookingTab} 
-                onClose={() => setIsBookingOpen(false)} 
-              />
-            </Suspense>
+            <BookingModal 
+              isOpen={isBookingOpen} 
+              initialTab={bookingTab} 
+              onClose={() => setIsBookingOpen(false)} 
+            />
           )}
         </div>
       </SmoothScrollProvider>

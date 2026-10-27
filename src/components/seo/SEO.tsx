@@ -31,7 +31,7 @@ export const SEO: React.FC<SEOProps> = ({
   structuredData
 }) => {
   const location = useLocation();
-  const siteOrigin = (typeof import.meta !== 'undefined' && import.meta.env?.VITE_SITE_URL) || 'https://qavironel.com';
+  const siteOrigin = (typeof import.meta !== 'undefined' && import.meta.env?.VITE_SITE_URL) || companyConfig.siteUrl || 'https://qavironel-technologies.vercel.app';
 
   const defaultTitle = `${companyConfig.name} — ${companyConfig.tagline} | Digital Product & Software Studio`;
   const defaultDesc = companyConfig.description || 'Global technology and digital product studio architecting high-performance web platforms, SaaS applications, and applied AI systems.';

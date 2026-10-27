@@ -1,7 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const baseUrl = 'https://qavironel.com';
+// Live deployment domain (NOTE FOR OWNER: flip back to https://qavironel.com when custom domain is purchased)
+const baseUrl = 'https://qavironel-technologies.vercel.app';
 const today = new Date().toISOString().split('T')[0];
 
 // Extract project slugs from src/data/projects.ts

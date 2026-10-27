@@ -29,6 +29,10 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
   ctaLink = '/contact',
   className = '',
 }) => {
+  const activeTestimonials = testimonials.filter(
+    (t) => !t.isPlaceholder && !t.quote.startsWith('TODO')
+  );
+
   return (
     <section className={`home-proof section-pad ${className}`.trim()} aria-label="Client feedback and verified track record">
       <div className="site-container">
@@ -63,48 +67,46 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
         )}
 
         {/* Testimonial Cards */}
-        <div className="home-proof__quotes">
-          {testimonials.map((t) => (
-            <article key={t.id} className="home-quote">
-              <div className="home-quote__top">
-                <span className="home-quote__badge">{t.badge}</span>
-                {showMetrics && t.metric && (
-                  <div className="home-quote__metric">
-                    <strong>{t.metric}</strong>
-                    {t.metricLabel && <span>{t.metricLabel}</span>}
-                  </div>
-                )}
-              </div>
-              <blockquote className="home-quote__text">
-                {t.isPlaceholder || t.quote.startsWith('TODO') ? (
-                  <span className="opacity-75 italic text-[0.95rem]">{t.quote}</span>
-                ) : (
-                  `“${t.quote}”`
-                )}
-              </blockquote>
-              <div className="home-quote__author">
-                <div className="home-quote__author-details">
-                  <strong>{t.author}</strong>
-                  <span>
-                    {t.role} · {t.company}
-                  </span>
-                  {t.location && (
-                    <small>
-                      <MapPin aria-hidden="true" /> {t.location}
-                    </small>
+        {activeTestimonials.length > 0 && (
+          <div className="home-proof__quotes">
+            {activeTestimonials.map((t) => (
+              <article key={t.id} className="home-quote">
+                <div className="home-quote__top">
+                  <span className="home-quote__badge">{t.badge}</span>
+                  {showMetrics && t.metric && (
+                    <div className="home-quote__metric">
+                      <strong>{t.metric}</strong>
+                      {t.metricLabel && <span>{t.metricLabel}</span>}
+                    </div>
                   )}
                 </div>
-                <Link
-                  to={`/work/${t.projectSlug}`}
-                  className="text-link"
-                  aria-label={`Read ${t.projectTitle} case study`}
-                >
-                  Case study <ArrowUpRight aria-hidden="true" />
-                </Link>
-              </div>
-            </article>
-          ))}
-        </div>
+                <blockquote className="home-quote__text">
+                  “{t.quote}”
+                </blockquote>
+                <div className="home-quote__author">
+                  <div className="home-quote__author-details">
+                    <strong>{t.author}</strong>
+                    <span>
+                      {t.company && !t.role.includes(t.company) ? `${t.role} · ${t.company}` : t.role}
+                    </span>
+                    {t.location && (
+                      <small>
+                        <MapPin aria-hidden="true" /> {t.location}
+                      </small>
+                    )}
+                  </div>
+                  <Link
+                    to={`/work/${t.projectSlug}`}
+                    className="text-link"
+                    aria-label={`Read ${t.projectTitle} case study`}
+                  >
+                    Case study <ArrowUpRight aria-hidden="true" />
+                  </Link>
+                </div>
+              </article>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

@@ -20,18 +20,17 @@ export interface EngagementPillar {
 }
 
 /**
- * Pricing & Engagement Models Data Source
+ * Pricing & Engagement Models
  * 
- * NOTE: As per guidelines, all starting rates and prices are left as clearly marked
- * TODO placeholders. The owner should specify actual pricing/starting rates.
+ * Note: Starting rates are set to "Custom quote" pending owner pricing decisions.
  */
 export const pricingTiers: PricingTier[] = [
   {
     id: 'web',
     number: '01',
     name: 'Bespoke Websites & Digital Fronts',
-    startingPriceInr: 'TODO: [Set starting INR rate, e.g. ₹XX,XXX]',
-    startingPriceUsd: 'TODO: [Set starting USD rate, e.g. $XXX]',
+    startingPriceInr: 'Custom quote',
+    startingPriceUsd: '',
     badge: '1–2 Week Delivery',
     tagline: 'Brand-led web experiences, product stories, and editorial storefronts.',
     turnaround: '1–2 weeks sprint',
@@ -45,14 +44,14 @@ export const pricingTiers: PricingTier[] = [
     ],
     goodFor: 'Established businesses, creative brands, and engineering firms upgrading their digital presence.',
     actionText: 'Plan a website build',
-    isPlaceholder: true
+    isPlaceholder: false
   },
   {
     id: 'platform',
     number: '02',
     name: 'Web Applications & SaaS MVPs',
-    startingPriceInr: 'TODO: [Set starting INR rate, e.g. ₹XX,XXX]',
-    startingPriceUsd: 'TODO: [Set starting USD rate, e.g. $X,XXX]',
+    startingPriceInr: 'Custom quote',
+    startingPriceUsd: '',
     badge: '2–4 Week Delivery',
     tagline: 'Full-stack platforms, client portals, and custom operational tools.',
     turnaround: '2–4 weeks sprint',
@@ -66,14 +65,14 @@ export const pricingTiers: PricingTier[] = [
     ],
     goodFor: 'Founders launching new products or teams replacing tangled spreadsheets with purpose-built tools.',
     actionText: 'Shape your platform',
-    isPlaceholder: true
+    isPlaceholder: false
   },
   {
     id: 'ai',
     number: '03',
     name: 'Applied AI & Systems Automation',
-    startingPriceInr: 'TODO: [Set starting INR rate, e.g. ₹XX,XXX]',
-    startingPriceUsd: 'TODO: [Set starting USD rate, e.g. $X,XXX]',
+    startingPriceInr: 'Custom quote',
+    startingPriceUsd: '',
     badge: '3–5 Week Delivery',
     tagline: 'Custom AI workflows, local LLMs, and guarded system integrations.',
     turnaround: '3–5 weeks sprint',
@@ -87,14 +86,14 @@ export const pricingTiers: PricingTier[] = [
     ],
     goodFor: 'Organizations looking to embed practical AI into daily workflows without risking sensitive data.',
     actionText: 'Explore AI solutions',
-    isPlaceholder: true
+    isPlaceholder: false
   },
   {
     id: 'retainer',
     number: '04',
     name: 'Engineering Retainer & Continuous Sprints',
-    startingPriceInr: 'TODO: [Set monthly INR retainer, e.g. ₹XX,XXX / mo]',
-    startingPriceUsd: 'TODO: [Set monthly USD retainer, e.g. $XXX / mo]',
+    startingPriceInr: 'Custom quote',
+    startingPriceUsd: '',
     badge: 'Monthly Partnership',
     tagline: 'Dedicated senior engineering capacity for continuous velocity and support.',
     turnaround: 'Ongoing monthly sprints',
@@ -108,7 +107,7 @@ export const pricingTiers: PricingTier[] = [
     ],
     goodFor: 'Growing platforms requiring dependable senior engineering without full-time agency overhead.',
     actionText: 'Discuss a retainer',
-    isPlaceholder: true
+    isPlaceholder: false
   }
 ];
 

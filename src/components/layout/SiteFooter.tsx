@@ -3,7 +3,7 @@ import { ArrowUpRight, MapPin, Phone, MessageSquare } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Logo } from '../brand/Logo';
 import { companyConfig } from '../../data/company';
-import { studioSocialLinks, StudioSocialLink } from '../../data/socialLinks';
+import { studioSocialLinks, StudioSocialLink, isConfiguredSocialLink } from '../../data/socialLinks';
 import { GithubIcon, LinkedinIcon, XIcon } from '../ui/Icons';
 
 const renderSocialIcon = (id: StudioSocialLink['id']) => {
@@ -19,6 +19,7 @@ const renderSocialIcon = (id: StudioSocialLink['id']) => {
 
 export const SiteFooter: React.FC = () => {
   const year = new Date().getFullYear();
+  const configuredSocials = studioSocialLinks.filter(isConfiguredSocialLink);
 
   return (
     <footer className="site-footer">
@@ -28,24 +29,25 @@ export const SiteFooter: React.FC = () => {
             <Logo variant="horizontal" theme="dark" size="md" className="site-footer__logo" />
             <p>Digital products, websites, and software made with care for the details and the people using them.</p>
             <span><MapPin aria-hidden="true" /> Vadodara, India · Working worldwide</span>
-            <div className="site-footer__socials" aria-label="Studio social profiles">
-              {studioSocialLinks.map((link) => (
-                <a
-                  key={link.id}
-                  href={link.isPlaceholder ? '#' : link.url}
-                  target={link.isPlaceholder ? undefined : '_blank'}
-                  rel={link.isPlaceholder ? undefined : 'noreferrer'}
-                  onClick={link.isPlaceholder ? (e) => e.preventDefault() : undefined}
-                  className="site-footer__social-link"
-                  aria-label={link.label}
-                  title={`${link.label}${link.isPlaceholder ? ' (TODO: Configure studio URL in src/data/socialLinks.ts)' : ''}`}
-                >
-                  {renderSocialIcon(link.id)}
-                  <span>{link.label}</span>
-                  <ArrowUpRight aria-hidden="true" />
-                </a>
-              ))}
-            </div>
+            {configuredSocials.length > 0 && (
+              <div className="site-footer__socials" aria-label="Studio social profiles">
+                {configuredSocials.map((link) => (
+                  <a
+                    key={link.id}
+                    href={link.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="site-footer__social-link"
+                    aria-label={link.label}
+                    title={link.label}
+                  >
+                    {renderSocialIcon(link.id)}
+                    <span>{link.label}</span>
+                    <ArrowUpRight aria-hidden="true" />
+                  </a>
+                ))}
+              </div>
+            )}
           </div>
 
           <div className="site-footer__nav-block">
@@ -80,7 +82,7 @@ export const SiteFooter: React.FC = () => {
         </div>
 
         <div className="site-footer__bottom">
-          <span className="site-footer__copyright">&copy; {year} QAVIRONEL TECHNOLOGIES</span>
+          <span className="site-footer__copyright">{`© ${year} QAVIRONEL TECHNOLOGIES`}</span>
           <span>Design and engineering, working together.</span>
           <div>
             <Link to="/privacy">Privacy</Link>

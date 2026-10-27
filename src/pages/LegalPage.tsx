@@ -52,7 +52,7 @@ export const LegalPage: React.FC = () => {
           '@context': 'https://schema.org',
           '@type': 'WebPage',
           name: activeTab === 'terms' ? 'Terms of Service & IP Governance' : 'Privacy Policy & AI Confidentiality',
-          url: activeTab === 'terms' ? 'https://qavironel.com/terms' : 'https://qavironel.com/privacy'
+          url: `${companyConfig.siteUrl}${activeTab === 'terms' ? '/terms' : '/privacy'}`
         }}
       />
       <div className="bg-[#FAFAFA] dark:bg-[#0A0A0A] text-[#0A0A0A] dark:text-[#FAFAFA] pt-28 sm:pt-36 pb-28 selection:bg-[#0A0A0A] selection:text-white dark:selection:bg-white dark:selection:text-black transition-colors duration-300 min-h-screen">

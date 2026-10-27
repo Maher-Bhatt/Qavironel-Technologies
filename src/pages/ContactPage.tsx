@@ -20,7 +20,7 @@ export const ContactPage: React.FC = () => (
         '@context': 'https://schema.org',
         '@type': 'ContactPage',
         name: 'Contact Qavironel Technologies',
-        url: 'https://qavironel.com/contact',
+        url: `${companyConfig.siteUrl}/contact`,
         mainEntity: { '@type': 'ContactPoint', contactType: 'project inquiries', email: companyConfig.email, availableLanguage: ['English', 'Hindi', 'Gujarati'] }
       }}
     />

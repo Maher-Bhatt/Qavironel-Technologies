@@ -5,7 +5,7 @@ import { Logo } from '../brand/Logo';
 import { ThemeToggle } from '../ui/ThemeToggle';
 import { isAudioEnabled, toggleAudio } from '../../utils/soundEffects';
 import { companyConfig } from '../../data/company';
-import { studioSocialLinks, StudioSocialLink } from '../../data/socialLinks';
+import { studioSocialLinks, StudioSocialLink, isConfiguredSocialLink } from '../../data/socialLinks';
 import { GithubIcon, LinkedinIcon, XIcon } from '../ui/Icons';
 
 const navItems = [
@@ -29,6 +29,8 @@ export const SiteHeader: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [soundOn, setSoundOn] = useState(isAudioEnabled);
   const location = useLocation();
+
+  const configuredSocials = studioSocialLinks.filter(isConfiguredSocialLink);
 
   useEffect(() => setMenuOpen(false), [location.pathname]);
 
@@ -68,23 +70,24 @@ export const SiteHeader: React.FC = () => {
         </nav>
 
         <div className="site-header__actions">
-          {/* Header Social Links */}
-          <div className="site-header__socials site-header__socials--desktop" aria-label="Studio social profiles">
-            {studioSocialLinks.map((link) => (
-              <a
-                key={link.id}
-                href={link.isPlaceholder ? '#' : link.url}
-                target={link.isPlaceholder ? undefined : '_blank'}
-                rel={link.isPlaceholder ? undefined : 'noreferrer'}
-                onClick={link.isPlaceholder ? (e) => e.preventDefault() : undefined}
-                className="site-header__social-btn"
-                aria-label={link.label}
-                title={`${link.label}${link.isPlaceholder ? ' (TODO: Configure studio URL in src/data/socialLinks.ts)' : ''}`}
-              >
-                {renderSocialIcon(link.id)}
-              </a>
-            ))}
-          </div>
+          {/* Header Social Links (rendered only when valid URLs are configured) */}
+          {configuredSocials.length > 0 && (
+            <div className="site-header__socials site-header__socials--desktop" aria-label="Studio social profiles">
+              {configuredSocials.map((link) => (
+                <a
+                  key={link.id}
+                  href={link.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="site-header__social-btn"
+                  aria-label={link.label}
+                  title={link.label}
+                >
+                  {renderSocialIcon(link.id)}
+                </a>
+              ))}
+            </div>
+          )}
 
           <ThemeToggle variant="icon" className="site-header__theme" />
           <button
@@ -167,23 +170,24 @@ export const SiteHeader: React.FC = () => {
               {soundOn ? <Volume2 aria-hidden="true" /> : <VolumeX aria-hidden="true" />}
               <span>Interface sounds: {soundOn ? 'Enabled' : 'Muted'}</span>
             </button>
-            <div className="site-header__mobile-socials">
-              {studioSocialLinks.map((link) => (
-                <a
-                  key={link.id}
-                  href={link.isPlaceholder ? '#' : link.url}
-                  target={link.isPlaceholder ? undefined : '_blank'}
-                  rel={link.isPlaceholder ? undefined : 'noreferrer'}
-                  onClick={link.isPlaceholder ? (e) => e.preventDefault() : undefined}
-                  tabIndex={menuOpen ? 0 : -1}
-                  aria-label={link.label}
-                  title={`${link.label}${link.isPlaceholder ? ' (TODO: Configure studio URL in src/data/socialLinks.ts)' : ''}`}
-                >
-                  {renderSocialIcon(link.id)}
-                  <span>{link.label}</span>
-                </a>
-              ))}
-            </div>
+            {configuredSocials.length > 0 && (
+              <div className="site-header__mobile-socials">
+                {configuredSocials.map((link) => (
+                  <a
+                    key={link.id}
+                    href={link.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    tabIndex={menuOpen ? 0 : -1}
+                    aria-label={link.label}
+                    title={link.label}
+                  >
+                    {renderSocialIcon(link.id)}
+                    <span>{link.label}</span>
+                  </a>
+                ))}
+              </div>
+            )}
             <p>Independent digital studio · Vadodara, India</p>
           </div>
         </div>

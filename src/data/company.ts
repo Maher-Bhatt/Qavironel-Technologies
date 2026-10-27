@@ -5,7 +5,8 @@ export const companyConfig = {
   shortName: 'Qavironel',
   tagline: 'Ideas. Engineered.',
   eyebrow: 'Independent Product & Engineering Studio',
-  siteUrl: 'https://qavironel.com',
+  // NOTE FOR OWNER: change back to https://qavironel.com once custom domain is purchased
+  siteUrl: 'https://qavironel-technologies.vercel.app',
   description: 'Qavironel Technologies is an independent design and engineering studio based in Vadodara, India. We work directly with founders and teams to shape ideas into useful websites, digital products, and practical AI tools.',
   foundedLocation: 'Vadodara, Gujarat, India · Working worldwide',
   email: 'qavironeltechnologies@gmail.com',
@@ -19,9 +20,9 @@ export const companyConfig = {
   portfolioOrigin: 'An independent design and engineering practice focused on considered digital products, clear collaboration, and dependable software.'
 };
 
-import { studioSocialLinks, StudioSocialLink } from './socialLinks';
+import { studioSocialLinks, StudioSocialLink, isConfiguredSocialLink } from './socialLinks';
 
-export { studioSocialLinks, type StudioSocialLink };
+export { studioSocialLinks, isConfiguredSocialLink, type StudioSocialLink };
 export type SocialLink = StudioSocialLink;
 export const socialLinks: StudioSocialLink[] = studioSocialLinks;
 

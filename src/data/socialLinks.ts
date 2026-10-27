@@ -2,37 +2,39 @@ export interface StudioSocialLink {
   id: 'linkedin' | 'github' | 'x';
   label: string;
   url: string;
-  isPlaceholder: boolean;
+  isPlaceholder?: boolean;
 }
+
+export const isConfiguredSocialLink = (link: StudioSocialLink): boolean => {
+  return !link.isPlaceholder && Boolean(link.url) && !link.url.startsWith('TODO') && link.url.startsWith('http');
+};
 
 /**
  * Studio-Level Social Profiles (Single Source of Truth)
  *
  * NOTE FOR THE OWNER:
- * Replace the placeholder values below with your verified studio profile URLs:
- * 1. LinkedIn: Replace with your official company page (e.g. https://www.linkedin.com/company/qavironel-technologies)
- * 2. GitHub: Replace with your studio organization (e.g. https://github.com/qavironel-technologies)
- * 3. X: Replace with your official X/Twitter profile (e.g. https://x.com/qavironel)
+ * To enable official studio links in the header and footer, supply the verified URLs below
+ * and change `isPlaceholder: true` to `false` (or remove `isPlaceholder`).
  *
- * Individual team member links (Maher, Anurag, Dhyani, etc.) are kept separate in src/data/company.ts.
+ * Unconfigured / placeholder links are automatically hidden from the site UI to avoid dead links.
  */
 export const studioSocialLinks: StudioSocialLink[] = [
   {
     id: 'linkedin',
     label: 'LinkedIn',
-    url: 'TODO: https://www.linkedin.com/company/your-studio-handle',
+    url: '',
     isPlaceholder: true,
   },
   {
     id: 'github',
     label: 'GitHub',
-    url: 'TODO: https://github.com/your-studio-org',
+    url: '',
     isPlaceholder: true,
   },
   {
     id: 'x',
     label: 'X (Twitter)',
-    url: 'TODO: https://x.com/your-studio-handle',
+    url: '',
     isPlaceholder: true,
   },
 ];

@@ -5,6 +5,7 @@ import { SEO } from '../components/seo/SEO';
 import { ImageLightbox } from '../components/work/ImageLightbox';
 import { ScrollAutoplayVideo } from '../components/media/ScrollAutoplayVideo';
 import { projects } from '../data/projects';
+import { companyConfig } from '../data/company';
 import { ProjectGalleryItem } from '../types';
 import { openBookingModal } from '../utils/modalEvents';
 

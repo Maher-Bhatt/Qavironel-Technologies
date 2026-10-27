@@ -131,16 +131,16 @@ export const BookingModal: React.FC<BookingModalProps> = ({
             className={`relative w-full ${activeTab === 'call' ? 'max-w-4xl' : 'max-w-2xl'} bg-white dark:bg-zinc-950 rounded-2xl md:rounded-3xl shadow-2xl border border-black/10 dark:border-white/10 z-10 flex flex-col max-h-[92vh] overflow-hidden transition-all duration-300`}
           >
             {/* Modal Header */}
-            <div className="p-5 sm:p-6 pb-4 border-b border-black/[0.08] dark:border-white/10 flex items-center justify-between shrink-0 bg-white dark:bg-zinc-950">
-              <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-[#0A0A0A] text-white dark:bg-white dark:text-[#0A0A0A] flex items-center justify-center">
+            <div className="p-4 sm:p-6 pb-3 sm:pb-4 border-b border-black/[0.08] dark:border-white/10 flex items-center justify-between shrink-0 bg-white dark:bg-zinc-950">
+              <div className="flex items-center gap-2.5 sm:gap-3">
+                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#0A0A0A] text-white dark:bg-white dark:text-[#0A0A0A] flex items-center justify-center shrink-0">
                   <Sparkles className="w-4 h-4 text-white dark:text-black" />
                 </div>
                 <div>
-                  <h2 id="booking-modal-title" className="font-sans font-bold text-lg sm:text-xl text-[#0A0A0A] dark:text-white">
+                  <h2 id="booking-modal-title" className="font-sans font-bold text-base sm:text-xl text-[#0A0A0A] dark:text-white leading-tight">
                     Talk through your project
                   </h2>
-                  <p className="text-xs text-zinc-500 dark:text-zinc-400">
+                  <p className="text-[11px] sm:text-xs text-zinc-500 dark:text-zinc-400">
                     Connect with the people who will shape and build it
                   </p>
                 </div>
@@ -153,14 +153,14 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                   onClose();
                 }}
                 aria-label="Close dialog"
-                className="p-2 rounded-xl text-zinc-500 hover:text-black dark:text-zinc-400 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-white/10 transition-colors cursor-pointer"
+                className="p-1.5 sm:p-2 rounded-xl text-zinc-500 hover:text-black dark:text-zinc-400 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-white/10 transition-colors cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             {/* Tab Switcher */}
-            <div role="tablist" aria-label="Booking options" className="px-5 sm:px-6 pt-4 pb-2 border-b border-black/[0.08] dark:border-white/10 bg-[#F9FAFB] dark:bg-[#0A0A0A] flex gap-2 shrink-0">
+            <div role="tablist" aria-label="Booking options" className="px-3 sm:px-6 pt-3 sm:pt-4 pb-2 border-b border-black/[0.08] dark:border-white/10 bg-[#F9FAFB] dark:bg-[#0A0A0A] flex gap-2 shrink-0">
               <button
                 type="button"
                 role="tab"
@@ -171,14 +171,15 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                   playTabSound();
                   setActiveTab('call');
                 }}
-                className={`flex-1 py-2.5 px-3 rounded-xl text-xs font-mono font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer ${
+                className={`flex-1 py-2 sm:py-2.5 px-2 sm:px-3 rounded-xl text-[0.68rem] sm:text-xs font-mono font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 sm:gap-2 cursor-pointer ${
                   activeTab === 'call'
                     ? 'bg-[#0A0A0A] text-white dark:bg-white dark:text-[#0A0A0A] shadow-xs'
                     : 'text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white'
                 }`}
               >
-                <CalendarIcon className="w-3.5 h-3.5" />
-                <span>Schedule Strategy Call</span>
+                <CalendarIcon className="w-3.5 h-3.5 shrink-0" />
+                <span className="hidden sm:inline">Schedule Strategy Call</span>
+                <span className="sm:hidden">Schedule Call</span>
               </button>
 
               <button
@@ -191,14 +192,15 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                   playTabSound();
                   setActiveTab('quotation');
                 }}
-                className={`flex-1 py-2.5 px-3 rounded-xl text-xs font-mono font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer ${
+                className={`flex-1 py-2 sm:py-2.5 px-2 sm:px-3 rounded-xl text-[0.68rem] sm:text-xs font-mono font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 sm:gap-2 cursor-pointer ${
                   activeTab === 'quotation'
                     ? 'bg-[#0A0A0A] text-white dark:bg-white dark:text-[#0A0A0A] shadow-xs'
                     : 'text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white'
                 }`}
               >
-                <FileText className="w-3.5 h-3.5" />
-                <span>Request Scope Quote</span>
+                <FileText className="w-3.5 h-3.5 shrink-0" />
+                <span className="hidden sm:inline">Request Scope Quote</span>
+                <span className="sm:hidden">Request Quote</span>
               </button>
             </div>
 
@@ -207,7 +209,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
               id="booking-tabpanel"
               role="tabpanel"
               aria-labelledby={activeTab === 'call' ? 'booking-tab-call' : 'booking-tab-quotation'}
-              className="p-5 sm:p-6 overflow-y-auto flex-1 overscroll-contain bg-white dark:bg-zinc-950"
+              className="p-4 sm:p-6 overflow-y-auto flex-1 overscroll-contain bg-white dark:bg-zinc-950"
               style={{ WebkitOverflowScrolling: 'touch' }}
             >
               {activeTab === 'call' ? (
@@ -218,9 +220,9 @@ export const BookingModal: React.FC<BookingModalProps> = ({
             </div>
 
             {/* Modal Footer Security Badge */}
-            <div className="py-2.5 px-6 border-t border-black/[0.08] dark:border-white/10 bg-[#F9FAFB] dark:bg-[#0A0A0A] flex items-center justify-between text-[11px] font-mono text-zinc-500 dark:text-zinc-400 shrink-0">
+            <div className="py-2.5 px-4 sm:px-6 border-t border-black/[0.08] dark:border-white/10 bg-[#F9FAFB] dark:bg-[#0A0A0A] flex flex-wrap items-center justify-between gap-1 text-[10px] sm:text-[11px] font-mono text-zinc-500 dark:text-zinc-400 shrink-0">
               <span className="flex items-center gap-1.5">
-                <ShieldCheck className="w-3.5 h-3.5 text-black dark:text-white" />
+                <ShieldCheck className="w-3.5 h-3.5 text-black dark:text-white shrink-0" />
                 Project details handled with care
               </span>
               <span>Qavironel Technologies</span>
@@ -231,3 +233,5 @@ export const BookingModal: React.FC<BookingModalProps> = ({
     </AnimatePresence>
   );
 };
+
+export default BookingModal;

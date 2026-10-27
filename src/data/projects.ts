@@ -3,15 +3,15 @@ import { Project } from '../types';
 export const projects: Project[] = [
   {
     slug: 'kalki',
-    title: 'K.A.L.K.I.',
-    eyebrow: 'Desktop assistant · Local and cloud AI',
+    title: 'KALKI 2.0',
+    eyebrow: 'Desktop assistant · Local & cloud AI (K.A.L.K.I.)',
     category: 'AI & Software',
     categoryLabel: 'Software · Applied AI',
     status: 'Active Open Source · Live on Microsoft Store',
     featured: true,
     order: 1,
     year: '2025–2026',
-    summary: 'A desktop assistant that brings voice input, model selection, local memory, and guarded system tools into one workspace. K.A.L.K.I. is available on the Microsoft Store and GitHub.',
+    summary: 'A local-first desktop assistant that brings voice input, model selection, local memory, and guarded system tools into one workspace. Published on the Microsoft Store as KALKI 2.0 (K.A.L.K.I.) and open source on GitHub.',
     audience: 'People who want a desktop assistant with voice controls, local tools, and a choice of AI providers.',
     challenge: 'Desktop assistants can be easy to use but limited in control, or flexible but difficult to set up. K.A.L.K.I. brings voice, model choice, and system tools into a single interface while keeping sensitive actions behind explicit controls.',
     objectives: [
@@ -281,7 +281,7 @@ export const projects: Project[] = [
   {
     slug: 'civic-sathi',
     title: 'Civic Sathi',
-    eyebrow: 'Civic services · Product prototype',
+    eyebrow: 'Civic services · Smart India Hackathon 2026',
     category: 'Product Lab',
     categoryLabel: 'Prototype · Civic technology',
     status: 'SIH 2026 National Finalist Platform',

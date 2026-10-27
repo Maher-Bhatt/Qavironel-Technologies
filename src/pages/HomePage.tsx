@@ -1,14 +1,17 @@
 import React, { lazy, Suspense } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowDown, ArrowRight, ArrowUpRight } from 'lucide-react';
+import { ArrowDown, ArrowRight, ArrowUpRight, CheckCircle2, MapPin, Phone, ShieldCheck } from 'lucide-react';
 import { SEO } from '../components/seo/SEO';
 import { RevealHeadline } from '../components/ui/RevealHeadline';
 import { ProjectVideoPreview } from '../components/work/ProjectVideoPreview';
 import { projects } from '../data/projects';
-import { companyConfig } from '../data/company';
+import { companyConfig, teamMembers } from '../data/company';
+import { TestimonialsSection } from '../components/testimonials/TestimonialsSection';
+import { pricingTiers, engagementPillars } from '../data/pricing';
+import { GithubIcon, LinkedinIcon } from '../components/ui/Icons';
 
 const projectIntros: Record<string, string> = {
-  kalki: 'A desktop assistant bringing voice, model choice, and guarded system actions into one local-first workspace.',
+  kalki: 'A local-first desktop assistant bringing voice, model choice, and guarded system actions into one workspace.',
   ztees: 'A streetwear storefront shaped around product drops and direct ordering.',
   'classic-infrastructure': 'A clearer digital home for an infrastructure team and its field work.',
   'civic-sathi': 'A civic platform for reporting, reviewing, and following local issues.',
@@ -32,6 +35,7 @@ const QavironelMarkSculpture = lazy(() => import('../components/3d/QavironelMark
 
 export const HomePage: React.FC = () => {
   const selectedProjects = [...projects].filter((project) => project.featured).sort((a, b) => a.order - b.order);
+  const founder = teamMembers.find((member) => member.name === 'Maher Bhatt') ?? teamMembers[0];
 
   return (
     <>
@@ -50,6 +54,7 @@ export const HomePage: React.FC = () => {
       />
 
       <div className="site-page home-page">
+        {/* HERO SECTION */}
         <section className="home-hero">
           <div className="site-container home-hero__topline">
             <span>Independent digital studio</span>
@@ -84,9 +89,9 @@ export const HomePage: React.FC = () => {
                   <img src="/videos/ztees-video-poster.webp" alt="" fetchPriority="high" />
                   <span><i>01 / Commerce</i><strong>Ztees</strong><ArrowUpRight aria-hidden="true" /></span>
                 </Link>
-                <Link to="/work/kalki" className="studio-artifact studio-artifact--kalki" aria-label="Explore the K.A.L.K.I. desktop software project">
+                <Link to="/work/kalki" className="studio-artifact studio-artifact--kalki" aria-label="Explore the KALKI 2.0 desktop software project">
                   <img src="/videos/kalki-video-poster.webp" alt="" />
-                  <span><i>02 / Desktop software</i><strong>K.A.L.K.I.</strong><ArrowUpRight aria-hidden="true" /></span>
+                  <span><i>02 / Desktop software</i><strong>KALKI 2.0</strong><ArrowUpRight aria-hidden="true" /></span>
                 </Link>
                 <Link to="/work/civic-sathi" className="studio-artifact studio-artifact--civic" aria-label="Explore the Civic Sathi civic technology project">
                   <img src="/videos/civic-sathi-video-poster.webp" alt="" />
@@ -99,12 +104,45 @@ export const HomePage: React.FC = () => {
           <a className="site-container home-hero__scroll" href="#selected-work"><span>Scroll to selected work</span><ArrowDown aria-hidden="true" /></a>
         </section>
 
+        {/* FOUNDER & STUDIO STATEMENT SECTION */}
         <section className="home-statement section-pad">
           <div className="site-container home-statement__grid">
             <p className="site-eyebrow">A small team, close to the work</p>
             <div>
               <h2>Good work starts with a clear view of the problem.</h2>
               <p>We stay involved from the first useful question through the design, the build, and the details that make something easier to use.</p>
+              
+              {/* Founder Note: Direct personal trust & accountability */}
+              <div className="home-founder-note">
+                <div className="home-founder-note__portrait">
+                  <img src={founder.image} alt="Maher Bhatt, Founder & Systems Engineer at Qavironel Technologies" loading="lazy" />
+                  <span className="home-founder-note__badge">FOUNDER</span>
+                </div>
+                <div className="home-founder-note__body">
+                  <span className="home-founder-note__kicker">Direct Senior Engineering</span>
+                  <h3>“When you hire Qavironel, you work directly with the people building your system. No account managers, no junior delegation.”</h3>
+                  <p>
+                    I founded Qavironel in Vadodara to give ambitious teams an engineering partner who cares about craft and clarity. My co-founder Anurag Pandey and I personally review, engineer, and ship every system — ensuring architectural integrity, defense-in-depth, and launch-day reliability.
+                  </p>
+                  <div className="home-founder-note__footer">
+                    <div>
+                      <strong>Maher Bhatt</strong>
+                      <span>Founder & Systems Engineer · Vadodara, India</span>
+                    </div>
+                    <div className="home-founder-note__socials">
+                      <a href={companyConfig.githubOrg} target="_blank" rel="noreferrer" aria-label="Maher Bhatt on GitHub">
+                        <GithubIcon />
+                        <span>GitHub</span>
+                      </a>
+                      <a href={companyConfig.linkedinUrl} target="_blank" rel="noreferrer" aria-label="Maher Bhatt on LinkedIn">
+                        <LinkedinIcon />
+                        <span>LinkedIn</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               <div className="discipline-index">
                 {disciplines.map(([number, title, description]) => (
                   <article key={number}><span>{number} / {title}</span><p>{description}</p></article>
@@ -115,6 +153,7 @@ export const HomePage: React.FC = () => {
           </div>
         </section>
 
+        {/* SELECTED WORK SECTION */}
         <section id="selected-work" className="home-work section-pad">
           <div className="site-container">
             <div className="section-heading section-heading--spread">
@@ -137,20 +176,111 @@ export const HomePage: React.FC = () => {
           </div>
         </section>
 
+        {/* SOCIAL PROOF: VERIFIED CLIENT REVIEWS & PARTNERS */}
+        <TestimonialsSection />
+
+        {/* CAPABILITIES SECTION */}
         <section className="home-capabilities section-pad">
           <div className="site-container home-capabilities__grid">
-            <div className="home-capabilities__lead"><p className="site-eyebrow">What we bring together</p><h2>One team, from first question to working software.</h2><p>Bring us one part of the project or the whole challenge. We’ll help find the right scope.</p><Link to="/services" className="text-link">See how we can help <ArrowUpRight aria-hidden="true" /></Link></div>
+            <div className="home-capabilities__lead">
+              <p className="site-eyebrow">What we bring together</p>
+              <h2>One team, from first question to working software.</h2>
+              <p>Bring us one part of the project or the whole challenge. We’ll help find the right scope.</p>
+              <Link to="/services" className="text-link">See how we can help <ArrowUpRight aria-hidden="true" /></Link>
+            </div>
             <div className="capability-list">
               {[
                 ['01', 'Websites & commerce', 'Brand-led sites, product stories, and thoughtful storefronts.'],
                 ['02', 'Digital products', 'Useful apps and platforms shaped around how people work.'],
                 ['03', 'Software & applied AI', 'Custom systems and AI features with clear boundaries.'],
                 ['04', 'Product design', 'Journeys and interfaces that make complex work easier to follow.']
-              ].map(([number, title, copy]) => <Link key={number} to="/services" className="capability-row"><span>{number}</span><div><h3>{title}</h3><p>{copy}</p></div><ArrowUpRight aria-hidden="true" /></Link>)}
+              ].map(([number, title, copy]) => (
+                <Link key={number} to="/services" className="capability-row">
+                  <span>{number}</span>
+                  <div><h3>{title}</h3><p>{copy}</p></div>
+                  <ArrowUpRight aria-hidden="true" />
+                </Link>
+              ))}
             </div>
           </div>
         </section>
 
+        {/* PRICING & ENGAGEMENT TRANSPARENCY SECTION */}
+        <section className="home-pricing section-pad" aria-label="Pricing and engagement options">
+          <div className="site-container">
+            <div className="section-heading section-heading--spread">
+              <div>
+                <p className="site-eyebrow">Transparent engagement & pricing</p>
+                <h2>Clear starting points.<br /><em>Fixed commitments.</em></h2>
+              </div>
+              <div>
+                <p>No vague agency markups or surprise invoices. Every project is planned with a fixed scope, clear milestone gates, and 100% intellectual property handover.</p>
+                <Link to="/contact" className="text-link">Request a detailed quote <ArrowUpRight aria-hidden="true" /></Link>
+              </div>
+            </div>
+
+            {/* Pricing Tiers Grid */}
+            <div className="home-pricing__grid">
+              {pricingTiers.map((tier) => (
+                <article key={tier.id} className="home-pricing-card">
+                  <div className="home-pricing-card__header">
+                    <span className="home-pricing-card__number">{tier.number}</span>
+                    <span className="home-pricing-card__badge">{tier.badge}</span>
+                  </div>
+                  <h3>{tier.name}</h3>
+                  <div className="home-pricing-card__price">
+                    {tier.startingPriceInr.startsWith('TODO') ? (
+                      <div className="home-pricing-card__placeholder">
+                        <span className="home-pricing-card__placeholder-tag">Starting Rate: Custom quote</span>
+                        <small>{tier.startingPriceInr}</small>
+                      </div>
+                    ) : (
+                      <>
+                        <strong>{tier.startingPriceInr}</strong>
+                        <span>starts at / ~{tier.startingPriceUsd}</span>
+                      </>
+                    )}
+                  </div>
+                  <p className="home-pricing-card__tagline">{tier.tagline}</p>
+                  
+                  <div className="home-pricing-card__scope">
+                    <span className="home-pricing-card__scope-label">What’s included:</span>
+                    <ul>
+                      {tier.scope.slice(0, 4).map((item) => (
+                        <li key={item}>
+                          <CheckCircle2 aria-hidden="true" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="home-pricing-card__footer">
+                    <Link to="/contact" className="button button--dark w-full justify-between">
+                      <span>{tier.actionText}</span>
+                      <ArrowRight aria-hidden="true" />
+                    </Link>
+                  </div>
+                </article>
+              ))}
+            </div>
+
+            {/* Engagement Guarantees */}
+            <div className="home-pricing__pillars">
+              {engagementPillars.map((pillar) => (
+                <div key={pillar.number} className="home-pricing__pillar">
+                  <span>{pillar.number}</span>
+                  <div>
+                    <h4>{pillar.title}</h4>
+                    <p>{pillar.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* FIELDNOTE SECTION */}
         <section className="home-fieldnote section-pad">
           <div className="site-container home-fieldnote__grid">
             <div className="home-fieldnote__visual" aria-label="Ztees storefront and shop management screens">
@@ -167,15 +297,44 @@ export const HomePage: React.FC = () => {
           </div>
         </section>
 
+        {/* METHOD SECTION */}
         <section className="home-method section-pad">
           <div className="site-container">
-            <div className="section-heading section-heading--spread"><div><p className="site-eyebrow">How we work</p><h2>Work in the open.<br /><em>Make it together.</em></h2></div><p>We share decisions and progress as we go, so you know what’s taking shape and where your input is needed.</p></div>
-            <div className="method-list">{methods.map(([number, title, description]) => <article key={number}><span>{number}</span><h3>{title}</h3><p>{description}</p></article>)}</div>
+            <div className="section-heading section-heading--spread">
+              <div><p className="site-eyebrow">How we work</p><h2>Work in the open.<br /><em>Make it together.</em></h2></div>
+              <p>We share decisions and progress as we go, so you know what’s taking shape and where your input is needed.</p>
+            </div>
+            <div className="method-list">
+              {methods.map(([number, title, description]) => (
+                <article key={number}>
+                  <span>{number}</span>
+                  <h3>{title}</h3>
+                  <p>{description}</p>
+                </article>
+              ))}
+            </div>
           </div>
         </section>
 
+        {/* CTA SECTION */}
         <section className="home-cta">
-          <div className="site-container home-cta__inner"><div><p className="site-eyebrow site-eyebrow--light">Have a project in mind?</p><h2>Let’s find the<br /><em>useful next step.</em></h2></div><div><p>Bring the early idea or the complicated brief. We’ll help make the first decision a good one.</p><Link to="/contact" className="button button--paper">Start a conversation <ArrowUpRight aria-hidden="true" /></Link><a href={`mailto:${companyConfig.email}`}>{companyConfig.email}</a></div></div>
+          <div className="site-container home-cta__inner">
+            <div>
+              <p className="site-eyebrow site-eyebrow--light">Have a project in mind?</p>
+              <h2>Let’s find the<br /><em>useful next step.</em></h2>
+            </div>
+            <div>
+              <p>Bring the early idea or the complicated brief. We’ll help make the first decision a good one.</p>
+              <Link to="/contact" className="button button--paper">Start a conversation <ArrowUpRight aria-hidden="true" /></Link>
+              <div className="home-cta__contacts">
+                <a href={`mailto:${companyConfig.email}`}>{companyConfig.email}</a>
+                <a href={`tel:${companyConfig.phone.replace(/\s+/g, '')}`} className="home-cta__phone">
+                  <Phone aria-hidden="true" />
+                  <span>Call direct: {companyConfig.phone}</span>
+                </a>
+              </div>
+            </div>
+          </div>
         </section>
       </div>
     </>

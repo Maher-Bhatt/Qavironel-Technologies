@@ -10,26 +10,22 @@ import { PageTransition } from './components/layout/PageTransition';
 import { SectionRevealObserver } from './components/layout/SectionRevealObserver';
 import { setupGlobalSoundListeners } from './utils/soundEffects';
 
-// Route Code Splitting
-const HomePage = lazy(() => import('./pages/HomePage').then(m => ({ default: m.HomePage })));
-const WorkPage = lazy(() => import('./pages/WorkPage').then(m => ({ default: m.WorkPage })));
-const CaseStudyPage = lazy(() => import('./pages/CaseStudyPage').then(m => ({ default: m.CaseStudyPage })));
-const ServicesPage = lazy(() => import('./pages/ServicesPage').then(m => ({ default: m.ServicesPage })));
-const AboutPage = lazy(() => import('./pages/AboutPage').then(m => ({ default: m.AboutPage })));
-const ContactPage = lazy(() => import('./pages/ContactPage').then(m => ({ default: m.ContactPage })));
-const LegalPage = lazy(() => import('./pages/LegalPage').then(m => ({ default: m.LegalPage })));
-const NotFoundPage = lazy(() => import('./pages/NotFoundPage').then(m => ({ default: m.NotFoundPage })));
+// Direct Page Imports: Eliminates the 3-second chunk suspension delay across route transitions
+import { HomePage } from './pages/HomePage';
+import { WorkPage } from './pages/WorkPage';
+import { CaseStudyPage } from './pages/CaseStudyPage';
+import { ServicesPage } from './pages/ServicesPage';
+import { AboutPage } from './pages/AboutPage';
+import { ContactPage } from './pages/ContactPage';
+import { LegalPage } from './pages/LegalPage';
+import { NotFoundPage } from './pages/NotFoundPage';
+
+// Lazy dialog modals that load on-demand without blocking page paint
 const BookingModal = lazy(() => import('./components/booking/BookingModal').then(m => ({ default: m.BookingModal })));
 
 // Custom Hooks Abstraction
 import { useScrollToTop } from './hooks/useScrollToTop';
 import { useBookingModalEvent } from './hooks/useBookingModalEvent';
-
-const PageFallback: React.FC = () => (
-  <div className="min-h-[60vh] flex items-center justify-center">
-    <div className="w-6 h-6 border-2 border-black/20 dark:border-white/20 border-t-black dark:border-t-white rounded-full animate-spin" />
-  </div>
-);
 
 export const App: React.FC = () => {
   const [isBookingOpen, setIsBookingOpen] = useState(false);
@@ -39,6 +35,7 @@ export const App: React.FC = () => {
   useScrollToTop();
   useBookingModalEvent(setIsBookingOpen, setBookingTab);
   useEffect(() => setupGlobalSoundListeners(), []);
+
   return (
     <MotionConfig reducedMotion="user">
       <SmoothScrollProvider>
@@ -46,22 +43,20 @@ export const App: React.FC = () => {
           <SiteHeader />
           <SectionRevealObserver />
           <main className="app-shell__main">
-            <Suspense fallback={<PageFallback />}>
-              <AnimatePresence mode="wait">
-                <Routes location={location} key={location.pathname}>
-                  <Route path="/" element={<PageTransition><HomePage /></PageTransition>} />
-                  <Route path="/work" element={<PageTransition><WorkPage /></PageTransition>} />
-                  <Route path="/work/socialsafe" element={<Navigate to="/work" replace />} />
-                  <Route path="/work/:slug" element={<PageTransition><CaseStudyPage /></PageTransition>} />
-                  <Route path="/services" element={<PageTransition><ServicesPage /></PageTransition>} />
-                  <Route path="/about" element={<PageTransition><AboutPage /></PageTransition>} />
-                  <Route path="/contact" element={<PageTransition><ContactPage /></PageTransition>} />
-                  <Route path="/privacy" element={<PageTransition><LegalPage /></PageTransition>} />
-                  <Route path="/terms" element={<PageTransition><LegalPage /></PageTransition>} />
-                  <Route path="*" element={<PageTransition><NotFoundPage /></PageTransition>} />
-                </Routes>
-              </AnimatePresence>
-            </Suspense>
+            <AnimatePresence mode="wait">
+              <Routes location={location} key={location.pathname}>
+                <Route path="/" element={<PageTransition><HomePage /></PageTransition>} />
+                <Route path="/work" element={<PageTransition><WorkPage /></PageTransition>} />
+                <Route path="/work/socialsafe" element={<Navigate to="/work" replace />} />
+                <Route path="/work/:slug" element={<PageTransition><CaseStudyPage /></PageTransition>} />
+                <Route path="/services" element={<PageTransition><ServicesPage /></PageTransition>} />
+                <Route path="/about" element={<PageTransition><AboutPage /></PageTransition>} />
+                <Route path="/contact" element={<PageTransition><ContactPage /></PageTransition>} />
+                <Route path="/privacy" element={<PageTransition><LegalPage /></PageTransition>} />
+                <Route path="/terms" element={<PageTransition><LegalPage /></PageTransition>} />
+                <Route path="*" element={<PageTransition><NotFoundPage /></PageTransition>} />
+              </Routes>
+            </AnimatePresence>
           </main>
           <SiteFooter />
           {isBookingOpen && (

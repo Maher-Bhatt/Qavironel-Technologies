@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 interface RevealHeadlineProps {
   children: string;
   className?: string;
-  as?: 'h1' | 'h2' | 'h3';
+  as?: 'h1' | 'h2' | 'h3' | 'h4' | 'p' | 'div';
   delay?: number;
   highlightWord?: string | string[];
 }
@@ -28,7 +28,7 @@ export const RevealHeadline: React.FC<RevealHeadlineProps> = ({
   return (
     <Component className={className}>
       {lines.map((line, lineIdx) => {
-        const words = line.split(' ');
+        const words = line.split(' ').filter(Boolean);
         return (
           <span key={lineIdx} className="block">
             <motion.span
@@ -46,12 +46,14 @@ export const RevealHeadline: React.FC<RevealHeadlineProps> = ({
                   word.toLowerCase().includes(hw)
                 );
                 return (
-                  <span key={wordIdx}>
-                    <span className={isHighlight ? 'reveal-headline__highlight' : ''}>
+                  <React.Fragment key={wordIdx}>
+                    <span
+                      className={`inline-block ${isHighlight ? 'reveal-headline__highlight' : ''}`}
+                    >
                       {word}
                     </span>
-                    {wordIdx < words.length - 1 && ' '}
-                  </span>
+                    {wordIdx < words.length - 1 ? ' ' : null}
+                  </React.Fragment>
                 );
               })}
             </motion.span>
@@ -61,5 +63,5 @@ export const RevealHeadline: React.FC<RevealHeadlineProps> = ({
     </Component>
   );
 };
-export default RevealHeadline;
 
+export default RevealHeadline;

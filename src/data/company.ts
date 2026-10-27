@@ -19,6 +19,12 @@ export const companyConfig = {
   portfolioOrigin: 'An independent design and engineering practice focused on considered digital products, clear collaboration, and dependable software.'
 };
 
+import { studioSocialLinks, StudioSocialLink } from './socialLinks';
+
+export { studioSocialLinks, type StudioSocialLink };
+export type SocialLink = StudioSocialLink;
+export const socialLinks: StudioSocialLink[] = studioSocialLinks;
+
 export const teamMembers: TeamMember[] = [
   {
     name: 'Maher Bhatt',

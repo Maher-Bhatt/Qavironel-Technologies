@@ -45,7 +45,7 @@ export const ImageLightbox: React.FC<ImageLightboxProps> = ({ item, onClose }) =
   return (
     <div 
       data-lenis-prevent="true"
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 sm:p-8 backdrop-blur-md animate-fade-in"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-3 sm:p-8 backdrop-blur-md animate-fade-in"
       role="dialog"
       aria-modal="true"
       aria-label="Expanded project screenshot"
@@ -53,7 +53,7 @@ export const ImageLightbox: React.FC<ImageLightboxProps> = ({ item, onClose }) =
     >
       <div 
         data-lenis-prevent="true"
-        className="relative max-w-5xl max-h-[90vh] flex flex-col items-center bg-[#0A0A0A] border border-white/10 rounded-2xl p-2 sm:p-4 shadow-2xl"
+        className="relative max-w-5xl max-h-[90vh] w-full flex flex-col items-center bg-[#0A0A0A] border border-white/10 rounded-2xl p-2 sm:p-4 shadow-2xl"
         onClick={(e) => e.stopPropagation()}
         onWheel={(e) => e.stopPropagation()}
       >
@@ -61,22 +61,22 @@ export const ImageLightbox: React.FC<ImageLightboxProps> = ({ item, onClose }) =
           ref={closeButtonRef}
           type="button"
           onClick={onClose}
-          className="absolute -top-4 -right-4 sm:top-4 sm:right-4 z-10 p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/20 backdrop-blur-md transition-colors shadow-lg cursor-pointer focus:outline-none focus:ring-2 focus:ring-white"
+          className="absolute top-2 right-2 sm:top-4 sm:right-4 z-10 p-2 sm:p-2.5 rounded-full bg-black/60 sm:bg-white/10 hover:bg-white/20 text-white border border-white/20 backdrop-blur-md transition-colors shadow-lg cursor-pointer focus:outline-none focus:ring-2 focus:ring-white"
           aria-label="Close preview"
         >
           <X className="w-5 h-5" />
         </button>
 
-        <div className="overflow-hidden flex items-center justify-center max-h-[75vh] rounded-xl">
+        <div className="overflow-hidden flex items-center justify-center max-h-[75vh] w-full rounded-xl">
           <img
             src={item.src}
             alt={item.alt}
-            className="max-h-[75vh] w-auto object-contain rounded-xl"
+            className="max-h-[75vh] max-w-full w-auto object-contain rounded-xl"
           />
         </div>
 
         {item.caption && (
-          <div className="mt-4 px-4 py-2 text-center text-xs sm:text-sm text-zinc-300 font-mono max-w-2xl">
+          <div className="mt-3 sm:mt-4 px-3 sm:px-4 py-1.5 sm:py-2 text-center text-[11px] sm:text-sm text-zinc-300 font-mono max-w-2xl">
             {item.caption}
           </div>
         )}
@@ -85,3 +85,4 @@ export const ImageLightbox: React.FC<ImageLightboxProps> = ({ item, onClose }) =
   );
 };
 
+export default ImageLightbox;

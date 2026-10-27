@@ -26,10 +26,11 @@ export const NotFoundPage: React.FC = () => {
           <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
             <Link
               to="/"
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-black hover:bg-zinc-800 text-white dark:bg-white dark:hover:bg-zinc-200 dark:text-black text-xs font-mono uppercase font-bold tracking-wider transition-colors shadow-xs"
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-black hover:bg-zinc-800 !text-white dark:bg-white dark:hover:bg-zinc-200 dark:!text-black text-xs font-mono uppercase font-bold tracking-wider transition-colors shadow-xs"
+              style={{ color: 'var(--paper-clean, #ffffff)' }}
             >
-              <ArrowLeft className="w-3.5 h-3.5" />
-              <span>Back to home</span>
+              <ArrowLeft className="w-3.5 h-3.5 !text-white dark:!text-black shrink-0" />
+              <span className="!text-white dark:!text-black font-bold">Back to home</span>
             </Link>
             <Link
               to="/work"
